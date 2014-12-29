@@ -225,7 +225,7 @@ namespace System.Windows.Forms {
 		public virtual bool ContainsKey (string key)
 		{
 			for (int i = 0; i < count; i++) {
-				if (string.Compare (nodes [i].Name, key, true, CultureInfo.InvariantCulture) == 0)
+				if (string.Compare (nodes [i].Name, key, true) == 0)
 					return true;
 			}
 			return false;
@@ -249,7 +249,7 @@ namespace System.Windows.Forms {
 		public virtual int IndexOfKey (string key)
 		{
 			for (int i = 0; i < count; i++) {
-				if (string.Compare (nodes [i].Name, key, true, CultureInfo.InvariantCulture) == 0)
+				if (string.Compare (nodes [i].Name, key, true) == 0)
 					return i;
 			}
 			return -1;
@@ -540,7 +540,7 @@ namespace System.Windows.Forms {
 			for (int i = 0; i < nodes.Count; i++) {
 				TreeNode thisNode = nodes [i];
 				
-				if (string.Compare (thisNode.Name, key, true, CultureInfo.InvariantCulture) == 0) 
+				if (string.Compare (thisNode.Name, key, true) == 0) 
 					results.Add (thisNode);
 
 			}

@@ -96,7 +96,7 @@ namespace System.Windows.Forms.VisualStyles
 		[DllImport ("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
 		public extern static Int32 GetThemeFont (IntPtr hTheme, IntPtr hdc, int iPartId, int iStateId, int iPropId, [MarshalAs (UnmanagedType.LPStruct)] out LOGFONT lf);
 
-		[DllImport ("gdi32", CharSet = CharSet.Auto)]
+		[DllImport ("gdi32", CharSet = CharSet.Unicode)]
 		public static extern IntPtr CreateFontIndirect ([In, MarshalAs (UnmanagedType.LPStruct)] LOGFONT lplf);
 
 		[DllImport ("uxtheme", ExactSpelling = true, CharSet = CharSet.Unicode)]
@@ -161,7 +161,7 @@ namespace System.Windows.Forms.VisualStyles
 		#endregion
 
 		#region LOGFONT Type
-		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Auto)]
+		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 		public class LOGFONT
 		{
 			public int lfHeight = 0;

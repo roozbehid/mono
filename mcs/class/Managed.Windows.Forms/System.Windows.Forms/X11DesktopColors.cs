@@ -197,7 +197,7 @@ namespace System.Windows.Forms {
 			if (!File.Exists(full_kdegloabals_filename)) 
 				return false;
 			
-			StreamReader sr = new StreamReader(full_kdegloabals_filename);
+			StreamReader sr = new StreamReader(File.OpenRead(full_kdegloabals_filename));
 			
 			string line = sr.ReadLine();
 			
@@ -240,7 +240,8 @@ namespace System.Windows.Forms {
 				line = sr.ReadLine();
 			}
 			
-			sr.Close();
+            //sr.Close();
+            sr.Dispose();
 			
 			return true;
 		}

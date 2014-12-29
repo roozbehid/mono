@@ -236,7 +236,7 @@ namespace System.Windows.Forms
 		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
 		public Version Version {
 			get { 
-				Assembly ass = WebHost.GetType().Assembly;
+				Assembly ass = WebHost.GetType().GetTypeInfo().Assembly;
 				return ass.GetName().Version;
 			}
 		}

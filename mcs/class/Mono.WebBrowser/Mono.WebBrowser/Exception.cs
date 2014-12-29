@@ -36,17 +36,17 @@ namespace Mono.WebBrowser
 
 		static Exception ()
 		{
-			messages.Insert ((int) ErrorCodes.Other, String.Intern ("A critical error occurred."));
-			messages.Insert ((int) ErrorCodes.GluezillaInit, String.Intern ("An error occurred while initializing gluezilla. Please make sure you have libgluezilla installed."));
-			messages.Insert ((int) ErrorCodes.EngineNotSupported, String.Intern ("Browser engine not supported at this time: "));
-			messages.Insert ((int) ErrorCodes.ServiceManager, String.Intern ("Error obtaining a handle to the service manager."));
-			messages.Insert ((int) ErrorCodes.IOService, String.Intern ("Error obtaining a handle to the io service."));
-			messages.Insert ((int) ErrorCodes.DirectoryService, String.Intern ("Error obtaining a handle to the directory service."));
-			messages.Insert ((int) ErrorCodes.PrefService, String.Intern ("Error obtaining a handle to the preferences service."));
-			messages.Insert ((int) ErrorCodes.StreamNotOpen, String.Intern ("Stream is not open for writing. Call OpenStream before appending."));
-			messages.Insert ((int) ErrorCodes.Navigation, String.Intern ("An error occurred while initializing the navigation object."));
-			messages.Insert ((int) ErrorCodes.AccessibilityService, String.Intern ("Error obtaining a handle to the accessibility service."));
-			messages.Insert ((int) ErrorCodes.DocumentEncoderService, String.Intern ("Error obtaining a handle to the document encoder service."));
+			messages.Insert ((int) ErrorCodes.Other, ("A critical error occurred."));
+			messages.Insert ((int) ErrorCodes.GluezillaInit,  ("An error occurred while initializing gluezilla. Please make sure you have libgluezilla installed."));
+			messages.Insert ((int) ErrorCodes.EngineNotSupported,  ("Browser engine not supported at this time: "));
+			messages.Insert ((int) ErrorCodes.ServiceManager,  ("Error obtaining a handle to the service manager."));
+			messages.Insert ((int) ErrorCodes.IOService,  ("Error obtaining a handle to the io service."));
+			messages.Insert ((int) ErrorCodes.DirectoryService,  ("Error obtaining a handle to the directory service."));
+			messages.Insert ((int) ErrorCodes.PrefService, ("Error obtaining a handle to the preferences service."));
+			messages.Insert ((int) ErrorCodes.StreamNotOpen,  ("Stream is not open for writing. Call OpenStream before appending."));
+			messages.Insert ((int) ErrorCodes.Navigation,  ("An error occurred while initializing the navigation object."));
+			messages.Insert ((int) ErrorCodes.AccessibilityService,  ("Error obtaining a handle to the accessibility service."));
+			messages.Insert ((int) ErrorCodes.DocumentEncoderService, ("Error obtaining a handle to the document encoder service."));
 		}
 
 

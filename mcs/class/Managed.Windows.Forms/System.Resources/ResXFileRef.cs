@@ -45,7 +45,7 @@ namespace System.Resources {
 #else
 		public
 #endif
-		class Converter : TypeConverter {
+		class Converter : System.Windows.Forms.TypeConverter {
 			public Converter() {
 			}
 
@@ -74,10 +74,10 @@ namespace System.Resources {
 					if (parts.Length > 2) {
 						encoding = Encoding.GetEncoding (parts [2]);
 					} else {
-						encoding = Encoding.Default;
+						encoding = Encoding.UTF8;
 					}
 
-					using (TextReader reader = new StreamReader(parts [0], encoding)) {
+					using (TextReader reader = new StreamReader(new MemoryStream(encoding.GetBytes(parts [0])), encoding)) {
 						return reader.ReadToEnd();
 					}
 				}
@@ -98,8 +98,8 @@ namespace System.Resources {
 				if (type == typeof (MemoryStream))
 					return new MemoryStream (buffer);
 
-				return Activator.CreateInstance(type, BindingFlags.CreateInstance
-					| BindingFlags.Public | BindingFlags.Instance, null, 
+				return Activator.CreateInstance(type, /*BindingFlags.CreateInstance
+					|*/ BindingFlags.Public | BindingFlags.Instance, null, 
 					new object[] { new MemoryStream (buffer) }, culture);
 			}
 

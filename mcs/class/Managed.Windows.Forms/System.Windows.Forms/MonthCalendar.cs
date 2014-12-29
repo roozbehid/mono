@@ -1620,7 +1620,7 @@ namespace System.Windows.Forms {
 		// convert a Day enum into a DayOfWeek enum
 		internal DayOfWeek GetDayOfWeek (Day day) {
 			if (day == Day.Default) {
-				return Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+				return CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
 			} else {
 				return (DayOfWeek) DayOfWeek.Parse (typeof (DayOfWeek), day.ToString ());
 			}

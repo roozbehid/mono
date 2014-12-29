@@ -39,7 +39,7 @@ using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Timers;
+using System.Threading;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
@@ -64,7 +64,7 @@ namespace System.Windows.Forms
 		private Rectangle thumb_pos = new Rectangle ();	 /* Current position and size of the thumb */
 		private Rectangle thumb_area = new Rectangle (); /* Area where the thumb can scroll */
 		internal bool thumb_pressed = false;		 
-		private System.Timers.Timer holdclick_timer = new System.Timers.Timer ();
+		private Timer holdclick_timer = new Timer ();
 		internal int thumb_mouseclick;		
 		private bool mouse_clickmove;
 		private bool is_moving_right; // which way the thumb should move when mouse is down (right=up, left=down) 
@@ -225,7 +225,7 @@ namespace System.Windows.Forms
 			KeyDown += new KeyEventHandler (OnKeyDownTB);
 			LostFocus += new EventHandler (OnLostFocusTB);
 			GotFocus += new EventHandler (OnGotFocusTB);
-			holdclick_timer.Elapsed += new ElapsedEventHandler (OnFirstClickTimer);
+			holdclick_timer.Tick += new  EventHandler (OnFirstClickTimer);
 
 			SetStyle (ControlStyles.UserPaint | ControlStyles.Opaque | ControlStyles.UseTextForAccessibility, false);
 		}
@@ -858,7 +858,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		private void OnFirstClickTimer (Object source, ElapsedEventArgs e)
+		private void OnFirstClickTimer (Object source, object e)
 		{						
 			Point pnt;
 			pnt = PointToClient (MousePosition);			

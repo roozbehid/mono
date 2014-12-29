@@ -72,10 +72,10 @@ namespace System.Windows.Forms.Design
 			return (int)this.visibility;
 		}
 
-		public override bool IsDefaultAttribute ()
-		{
-			return this.visibility == ToolStripItemDesignerAvailability.None;
-		}
+		//public override bool IsDefaultAttribute ()
+		//{
+		//	return this.visibility == ToolStripItemDesignerAvailability.None;
+		//}
 		#endregion
 	}
 }

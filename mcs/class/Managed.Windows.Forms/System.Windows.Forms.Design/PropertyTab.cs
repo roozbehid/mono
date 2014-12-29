@@ -83,7 +83,7 @@ namespace System.Windows.Forms.Design
 
 		public virtual PropertyDescriptor GetDefaultProperty (object component)
 		{
-			return TypeDescriptor.GetDefaultProperty(component);
+            return null;//return TypeDescriptor.GetDefaultProperty(component);
 		}
 
 		public virtual PropertyDescriptorCollection GetProperties (object component)

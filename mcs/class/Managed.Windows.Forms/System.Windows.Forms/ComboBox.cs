@@ -748,7 +748,7 @@ namespace System.Windows.Forms
 				}
 
 				// don't set the index if value exactly matches text of selected item
-				if (SelectedItem == null || string.Compare (value, GetItemText (SelectedItem), false, CultureInfo.CurrentCulture) != 0)
+				if (SelectedItem == null || string.Compare (value, GetItemText (SelectedItem), false) != 0)
 				{
 					// find exact match using case-sensitive comparison, and if does
 					// not result in any match then use case-insensitive comparison
@@ -858,7 +858,7 @@ namespace System.Windows.Forms
 				i = -1;
 			do {
 				i++;
-				if (string.Compare (s, 0, GetItemText (Items [i]), 0, s.Length, true) == 0)
+				if (string.Compare (s, GetItemText (Items [i]),  true) == 0)
 					return i;
 				if (i == (Items.Count - 1))
 					i = -1;
@@ -890,7 +890,7 @@ namespace System.Windows.Forms
 				i = -1;
 			do {
 				i++;
-				if (string.Compare (s, GetItemText (Items [i]), ignoreCase, CultureInfo.CurrentCulture) == 0)
+				if (string.Compare (s, GetItemText (Items [i]), ignoreCase) == 0)
 					return i;
 				if (i == (Items.Count - 1))
 					i = -1;
@@ -1550,7 +1550,7 @@ namespace System.Windows.Forms
 			
 			for (int i = 0; i < Items.Count; i++) 
 			{
-				if (String.Compare (GetItemText (Items[i]), 0, search, 0, search.Length, true) == 0)
+				if (String.Compare (GetItemText (Items[i]),search, true) == 0)
 					return i;
 			}
 
@@ -1570,7 +1570,7 @@ namespace System.Windows.Forms
 
 			for (int i = 0; i < Items.Count; i++) {
 				int index = (i + start_index) % Items.Count;
-				if (String.Compare (GetItemText (Items [index]), 0, search, 0, search.Length, true) == 0)
+				if (String.Compare (GetItemText (Items [index]),  search,  true) == 0)
 					return index;
 			}
 

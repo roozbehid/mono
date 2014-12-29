@@ -35,6 +35,7 @@ using System.Runtime.InteropServices;
 using System.Data;
 using System.Xml;
 using System.Runtime.Serialization;
+using System.Reflection;
 
 namespace System.Windows.Forms
 {
@@ -993,6 +994,7 @@ namespace System.Windows.Forms
 			add { Events.AddHandler (SelectionForeColorChangedEvent, value); }
 			remove { Events.RemoveHandler (SelectionForeColorChangedEvent, value); }
 		}
+
 		#endregion	// Events
 	}
 }

@@ -1897,8 +1897,7 @@ namespace System.Windows.Forms {
 					return -1;
 
 				for (int i = 0; i < this.Count; i++) {
-					if (string.Compare (this[i].Name, key, true, 
-						System.Globalization.CultureInfo.InvariantCulture) == 0) {
+					if (string.Compare (this[i].Name, key, true) == 0) {
 						return i;
 					}
 				}

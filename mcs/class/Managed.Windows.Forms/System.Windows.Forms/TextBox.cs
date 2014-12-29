@@ -1036,7 +1036,7 @@ namespace System.Windows.Forms {
 		public TextBoxAutoCompleteSourceConverter(Type type)
 			: base(type)
 		{ }
-
+        /*
 		public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
 		{
 			StandardValuesCollection stdv = base.GetStandardValues(context);
@@ -1047,6 +1047,6 @@ namespace System.Windows.Forms {
 				return value != AutoCompleteSource.ListItems;
 			});
 			return new StandardValuesCollection(arr2);
-		}
+		}*/
 	}
 }

@@ -175,7 +175,7 @@ namespace System.Windows.Forms
 			MethodInfo init_method;
 			Assembly mwf_providers = null;
 			try {
-				mwf_providers = Assembly.Load (UIA_WINFORMS_ASSEMBLY);
+				mwf_providers = Assembly.Load (new AssemblyName(UIA_WINFORMS_ASSEMBLY));
 			} catch { }
 			
 			if (mwf_providers == null)
@@ -184,7 +184,7 @@ namespace System.Windows.Forms
 			const string UIA_WINFORMS_TYPE     = "Mono.UIAutomation.Winforms.Global";
 			const string UIA_WINFORMS_METHOD   = "Initialize";
 			try {
-				Type global_type = mwf_providers.GetType (UIA_WINFORMS_TYPE, false);
+				Type global_type = mwf_providers.GetType (UIA_WINFORMS_TYPE);
 				if (global_type != null) {
 					init_method = global_type.GetMethod (UIA_WINFORMS_METHOD, 
 					                                     BindingFlags.Static | 
@@ -253,7 +253,7 @@ namespace System.Windows.Forms
 		public static string CompanyName {
 			get {
 				string company = string.Empty;
-
+                /*
 				Assembly assembly = Assembly.GetEntryAssembly ();
 				
 				if (assembly == null)
@@ -281,17 +281,18 @@ namespace System.Windows.Forms
 				if (company == null || company.Length == 0)
 					if (assembly.EntryPoint != null)
 						company = assembly.EntryPoint.DeclaringType.FullName;
-				
+				*/
 				return company;
 			}
 		}
 
 		public static CultureInfo CurrentCulture {
 			get {
-				return Thread.CurrentThread.CurrentUICulture;
+                return CultureInfo.CurrentUICulture;//Thread.CurrentThread.CurrentUICulture;
 			}
 			set {
-				Thread.CurrentThread.CurrentUICulture = value;
+                //Thread.CurrentThread.CurrentUICulture = value;
+                CultureInfo.CurrentUICulture = value;
 			}
 		}
 
@@ -325,7 +326,7 @@ namespace System.Windows.Forms
 		public static string ProductName {
 			get {
 				string name = string.Empty;
-				
+				/*
 				Assembly assembly = Assembly.GetEntryAssembly ();
 				
 				if (assembly == null)
@@ -353,7 +354,7 @@ namespace System.Windows.Forms
 						if (name == null || name.Length == 0)
 							name = assembly.EntryPoint.DeclaringType.FullName;
 					}
-
+                    */
 				return name;
 			}
 		}
@@ -361,7 +362,7 @@ namespace System.Windows.Forms
 		public static string ProductVersion {
 			get {
 				String version = string.Empty;
-
+                /*
 				Assembly assembly = Assembly.GetEntryAssembly ();
 				
 				if (assembly == null)
@@ -391,7 +392,7 @@ namespace System.Windows.Forms
 				// the assembly version
 				if (version == null || version.Length == 0)
 					version = assembly.GetName ().Version.ToString ();
-
+                    */
 				return version;
 			}
 		}
@@ -557,8 +558,8 @@ namespace System.Windows.Forms
 			//FIXME: ClickOnce stuff using the Update or UpdateAsync methods.
 			//FIXME: SecurityPermission: Restart () requires IsUnrestricted permission.
 
-			if (Assembly.GetEntryAssembly () == null)
-				throw new NotSupportedException ("The method 'Restart' is not supported by this application type.");
+			//if (Assembly.GetEntryAssembly () == null)
+			//	throw new NotSupportedException ("The method 'Restart' is not supported by this application type.");
 
 			string mono_path = null;
 

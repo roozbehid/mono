@@ -78,7 +78,7 @@ namespace System.Windows.Forms {
 				ovls[i] = reader.ReadInt16 ();
 			}
 
-			byte [] decoded_buffer = decoded.GetBuffer ();
+            byte[] decoded_buffer = decoded.ToArray();
 			int bmp_offset = 28;
 			// FileSize field from the bitmap file header
 			int filesize = decoded_buffer [bmp_offset + 2] + (decoded_buffer [bmp_offset + 3] << 8) +
@@ -290,7 +290,7 @@ namespace System.Windows.Forms {
 		static MemoryStream GetRLEStream (MemoryStream input, int start)
 		{
 			MemoryStream result = new MemoryStream ();
-			byte [] ibuffer = input.GetBuffer ();
+			byte [] ibuffer = input.ToArray();
 			result.Write (ibuffer, 0, start);
 			input.Position = start;
 

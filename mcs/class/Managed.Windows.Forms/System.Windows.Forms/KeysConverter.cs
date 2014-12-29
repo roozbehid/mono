@@ -114,7 +114,7 @@ namespace System.Windows.Forms {
 			}
 			return base.ConvertTo (context, culture, value, destinationType);
 		}
-
+        /*
 		public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) {
 			Keys [] stdVal = new Keys [] { Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7,
 			Keys.D8, Keys.D9, Keys.Alt, Keys.Back, Keys.Control, Keys.Delete, Keys.End, Keys.Return, Keys.F1,
@@ -132,7 +132,7 @@ namespace System.Windows.Forms {
 		public override bool GetStandardValuesSupported(ITypeDescriptorContext context) {
 			return true;
 		}
-
+        */
 		#endregion	// Public Instance Methods
 	}
 }

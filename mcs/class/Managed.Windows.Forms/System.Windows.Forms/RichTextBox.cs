@@ -329,7 +329,8 @@ namespace System.Windows.Forms {
 
 				InsertRTFFromStream(data, 0, 1);
 
-				data.Close();
+				//data.Close();
+                data.Dispose();
 
 				Invalidate();
 			}
@@ -388,7 +389,8 @@ namespace System.Windows.Forms {
 					reuse_line = true;
 
 				InsertRTFFromStream(data, cursor_x, cursor_y, out x, out y, out chars);
-				data.Close();
+                //data.Close();
+                data.Dispose();
 
 				int nl_length = document.LineEndingLength (XplatUI.RunningOnUnix ? LineEnding.Rich : LineEnding.Hard);
 				document.CharIndexToLineTag(sel_start + chars + (y - document.selection_start.line.line_no) * nl_length, 
@@ -956,7 +958,7 @@ namespace System.Windows.Forms {
 					throw new IOException("Not enough memory to load document");
 				}
 
-				StreamReader sr = new StreamReader (data, Encoding.Default, true);
+				StreamReader sr = new StreamReader (data, Encoding.UTF8, true);
 				int charsRead = sr.Read (buffer, 0, buffer.Length);
 				while (charsRead > 0) {
 					sb.Append (buffer, 0, charsRead);
@@ -1000,7 +1002,8 @@ namespace System.Windows.Forms {
 #endif
 			finally {
 				if (data != null) {
-					data.Close();
+                    //data.Close();
+                    data.Dispose();
 				}
 			}
 		}
@@ -1098,7 +1101,8 @@ namespace System.Windows.Forms {
 
 //			finally {
 				if (data != null) {
-					data.Close();
+                //data.Close();
+                data.Dispose();
 				}
 //			}
 		}

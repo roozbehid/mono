@@ -51,10 +51,10 @@ namespace System.Windows.Forms {
 			SerializationInfoEnumerator	en;
 			SerializationEntry		e;
 
-			en = info.GetEnumerator();
+            en = null; //info.GetEnumerator();
 
 			while (en.MoveNext()) {
-				e = en.Current;
+				e = (SerializationEntry)en.Current;
 				switch(e.Name) {
 					case "Font": font = (Font)e.Value; break;
 					case "ForeColor": fore_color = (Color)e.Value; break;

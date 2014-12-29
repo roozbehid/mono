@@ -35,6 +35,7 @@ using System.Windows.Forms.Design;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Globalization;
+using System.Reflection;
 
 namespace System.Windows.Forms.PropertyGridInternal
 {
@@ -278,11 +279,11 @@ namespace System.Windows.Forms.PropertyGridInternal
 			}
 		}
 
-		PropertyDescriptor ITypeDescriptorContext.PropertyDescriptor {
+		System.ComponentModel.PropertyDescriptor ITypeDescriptorContext.PropertyDescriptor {
 			get {
 				if (ParentEntry != null && ParentEntry.PropertyDescriptor != null)
-					return ParentEntry.PropertyDescriptor; 
-				return PropertyDescriptor;
+                    return null;//ParentEntry.PropertyDescriptor; 
+                return null;//PropertyDescriptor;
 			}
 		}
 		#endregion
@@ -572,8 +573,8 @@ namespace System.Windows.Forms.PropertyGridInternal
 		private bool IsValueType (GridEntry item)
 		{
 			if (item != null && item.PropertyDescriptor != null && 
-			    (item.PropertyDescriptor.PropertyType.IsValueType ||
-			     item.PropertyDescriptor.PropertyType.IsPrimitive))
+			    (item.PropertyDescriptor.PropertyType.GetTypeInfo().IsValueType ||
+			     item.PropertyDescriptor.PropertyType.GetTypeInfo().IsPrimitive))
 				return true;
 			return false;
 		}
@@ -643,7 +644,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 				if (PropertyDescriptor == null || PropertyOwner == null)
 					return true;
 				else if (PropertyDescriptor.IsReadOnly && 
-					 (EditorStyle != UITypeEditorEditStyle.Modal || PropertyDescriptor.PropertyType.IsValueType) && 
+					 (EditorStyle != UITypeEditorEditStyle.Modal || PropertyDescriptor.PropertyType.GetTypeInfo().IsValueType) && 
 					 !this.ShouldCreateParentInstance)
 					return true;
 				else if (PropertyDescriptor.IsReadOnly && 

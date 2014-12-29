@@ -66,9 +66,9 @@ namespace System.Windows.Forms
 			return dockingBehavior.GetHashCode();
 		}
 
-		public override bool IsDefaultAttribute()
-		{
-			return Default.Equals(this);
-		}
+		//public override bool IsDefaultAttribute()
+		//{
+		//	return Default.Equals(this);
+		//}
 	}
 }

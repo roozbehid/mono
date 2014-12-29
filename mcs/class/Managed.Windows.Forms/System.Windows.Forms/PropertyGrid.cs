@@ -1432,6 +1432,11 @@ namespace System.Windows.Forms
 				}
 				property_grid.RefreshToolbar (this);
 			}
+
+            internal void InsertTab(int v, PropertyTab properties_tab, object component)
+            {
+                throw new NotImplementedException();
+            }
 		}
 		#endregion	// PropertyTabCollection Class
 

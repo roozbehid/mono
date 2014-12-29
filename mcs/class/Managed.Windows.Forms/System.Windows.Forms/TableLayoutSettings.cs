@@ -67,7 +67,7 @@ namespace System.Windows.Forms
 
 		private TableLayoutSettings (SerializationInfo serializationInfo, StreamingContext context)
 		{
-			TypeConverter converter = TypeDescriptor.GetConverter (this);
+			TypeConverter converter = TypeDescriptor.GetConverter (this.GetType());
 			string text = serializationInfo.GetString ("SerializedString");
 			if (!string.IsNullOrEmpty (text) && (converter != null)) {
 				TableLayoutSettings settings = converter.ConvertFromInvariantString (text) as TableLayoutSettings;

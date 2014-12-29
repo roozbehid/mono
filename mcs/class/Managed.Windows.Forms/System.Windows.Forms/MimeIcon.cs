@@ -54,7 +54,7 @@ namespace System.Windows.Forms
 	
 	internal class ResourceImageLoader
 	{
-		static Assembly assembly = typeof (ResourceImageLoader).Assembly;
+		static Assembly assembly = typeof (ResourceImageLoader).GetTypeInfo().Assembly;
 		
 		static internal Bitmap Get (string name)
 		{

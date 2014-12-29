@@ -74,7 +74,7 @@ namespace System.Resources {
 			if (assemblyNames != null) {
 				foreach (AssemblyName assem in assemblyNames) {
 						Assembly myAssembly = Assembly.Load (assem);
-						result = myAssembly.GetType (typeString, false);
+						result = myAssembly.GetType (typeString);
 						if (result != null)
 							return result;
 					}

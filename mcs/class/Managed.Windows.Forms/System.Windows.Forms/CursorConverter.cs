@@ -92,7 +92,7 @@ namespace System.Windows.Forms
 				c = (Cursor)value;
 
 				si = new SerializationInfo(typeof(Cursor), new FormatterConverter());
-				((ISerializable)c).GetObjectData(si, new StreamingContext(StreamingContextStates.Remoting));
+				((ISerializable)c).GetObjectData(si, new StreamingContext());
 
 				return (byte[])si.GetValue("CursorData", typeof(byte[]));
 			} else if (destinationType == typeof (InstanceDescriptor)) {
@@ -105,7 +105,7 @@ namespace System.Windows.Forms
 			}
 			return base.ConvertTo (context, culture, value, destinationType);
 		}
-
+        /*
 		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
 		{
 			PropertyInfo[] props = typeof (Cursors).GetProperties();
@@ -121,6 +121,6 @@ namespace System.Windows.Forms
 		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
 		{
 			return true;
-		}
+		}*/
 	}
 }

@@ -34,6 +34,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
 using System.Drawing.Text;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms.Theming;
 
@@ -3649,7 +3650,7 @@ namespace System.Windows.Forms
 							Math.Max(client_rectangle.Bottom - date_cell_size.Height, 0),
 							Math.Max(client_rectangle.Width - today_offset, 0),
 							date_cell_size.Height);
-					dc.DrawString ("Today: " + DateTime.Now.ToShortDateString(), mc.bold_font, GetControlForeBrush (mc.ForeColor), today_rect, text_format);
+					dc.DrawString ("Today: " + DateTime.Now.ToString("yyyy-MM-dd"), mc.bold_font, GetControlForeBrush (mc.ForeColor), today_rect, text_format);
 					text_format.Dispose ();
 				}				
 			}

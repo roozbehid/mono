@@ -873,7 +873,7 @@ namespace System.Windows.Forms {
 				if (class_name != null)
 					return class_name;
 
-				class_name = string.Format ("Mono.WinForms.{0}.{1}", System.Threading.Thread.GetDomainID ().ToString (), classStyle);
+				class_name = string.Format ("Mono.WinForms.{0}.{1}", 1588485/*System.Threading.Thread.GetDomainID ().ToString ()*/, classStyle);
 
 				WNDCLASS wndClass;
 
@@ -1022,7 +1022,7 @@ namespace System.Windows.Forms {
 
 			ms = new MemoryStream();
 			image.Save(ms, ImageFormat.Bmp);
-			buffer = ms.GetBuffer();
+			buffer = ms.ToArray();
 
 			// Filter out the file header
 			retbuf = new byte[buffer.Length];
@@ -1077,8 +1077,8 @@ namespace System.Windows.Forms {
 		internal override int CaretWidth {
 			get { 
 				// Supported on 2k, XP, 2k3 +
-				if (Environment.OSVersion.Version.Major < 5)
-					throw new NotSupportedException ();
+				//if (Environment.OSVersion.Version.Major < 5)
+				//	throw new NotSupportedException ();
 					
 				return GetSystemParametersInfoInt (SPIAction.SPI_GETCARETWIDTH);
 			}
@@ -1087,8 +1087,8 @@ namespace System.Windows.Forms {
 		internal override int FontSmoothingContrast {
 			get {
 				// Supported on XP, 2k3 +
-				if (Environment.OSVersion.Version.Major < 5 || (Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 0))
-					throw new NotSupportedException ();
+				//if (Environment.OSVersion.Version.Major < 5 || (Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 0))
+				//	throw new NotSupportedException ();
 					
 				return GetSystemParametersInfoInt (SPIAction.SPI_GETFONTSMOOTHINGCONTRAST);
 			}
@@ -1097,8 +1097,8 @@ namespace System.Windows.Forms {
 		internal override int FontSmoothingType {
 			get {
 				// Supported on XP, 2k3 +
-				if (Environment.OSVersion.Version.Major < 5 || (Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 0))
-					throw new NotSupportedException ();
+				//if (Environment.OSVersion.Version.Major < 5 || (Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 0))
+				//	throw new NotSupportedException ();
 
 				return GetSystemParametersInfoInt (SPIAction.SPI_GETFONTSMOOTHINGTYPE);
 			}
@@ -1119,8 +1119,8 @@ namespace System.Windows.Forms {
 		internal override bool IsDropShadowEnabled {
 			get {
 				// Supported on XP, 2k3 +
-				if (Environment.OSVersion.Version.Major < 5 || (Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 0))
-					throw new NotSupportedException ();
+				//if (Environment.OSVersion.Version.Major < 5 || (Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor == 0))
+				//	throw new NotSupportedException ();
 
 				return GetSystemParametersInfoBool (SPIAction.SPI_GETDROPSHADOW);
 			}

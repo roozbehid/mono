@@ -138,7 +138,7 @@ namespace System.Windows.Forms {
 		#endregion	// Subclass DockPaddingEdges
 
 		#region Subclass DockPaddingEdgesConverter
-		public class DockPaddingEdgesConverter : System.ComponentModel.TypeConverter {
+		public class DockPaddingEdgesConverter : TypeConverter {
 			// Public Constructors
 			public DockPaddingEdgesConverter() {
 			}

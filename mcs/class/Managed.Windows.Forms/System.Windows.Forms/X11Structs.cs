@@ -32,6 +32,7 @@ using System.Collections;
 using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
 /// X11 Version
 namespace System.Windows.Forms {

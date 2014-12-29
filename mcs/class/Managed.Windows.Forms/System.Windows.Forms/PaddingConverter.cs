@@ -98,7 +98,7 @@ namespace System.Windows.Forms
 			if (context == null)
 				throw new ArgumentNullException ("context");
 
-			Padding old = (Padding)context.PropertyDescriptor.GetValue (context.Instance);
+            Padding old = new Padding();//(Padding)(context.PropertyDescriptor).GetValue (context.Instance);
 			if (old.All == (int)propertyValues["All"])
 				return new Padding ((int)propertyValues["Left"], (int)propertyValues["Top"], (int)propertyValues["Right"], (int)propertyValues["Bottom"]);
 			else

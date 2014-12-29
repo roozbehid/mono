@@ -39,6 +39,7 @@ using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Xml;
+using System.Xml.XPath;
 
 namespace System.Windows.Forms
 {
@@ -3048,7 +3049,7 @@ namespace System.Windows.Forms
 				case FSEntry.FSEntryType.Directory:
 					SubItems.Add (String.Empty);
 					SubItems.Add ("Directory");
-					SubItems.Add (fsEntry.LastAccessTime.ToShortDateString () + " " + fsEntry.LastAccessTime.ToShortTimeString ());	
+					SubItems.Add (fsEntry.LastAccessTime.ToString("yyyy-MM-dd") + " " + fsEntry.LastAccessTime.ToString("yyyy-MM-dd"));	
 					break;
 				case FSEntry.FSEntryType.File:
 					long fileLen = 1;
@@ -3061,17 +3062,17 @@ namespace System.Windows.Forms
 					
 					SubItems.Add (fileLen.ToString () + " KB");
 					SubItems.Add ("File");
-					SubItems.Add (fsEntry.LastAccessTime.ToShortDateString () + " " + fsEntry.LastAccessTime.ToShortTimeString ());	
+					SubItems.Add (fsEntry.LastAccessTime.ToString("yyyy-MM-dd") + " " + fsEntry.LastAccessTime.ToString("yyyy-MM-dd"));	
 					break;
 				case FSEntry.FSEntryType.Device:
 					SubItems.Add (String.Empty);
 					SubItems.Add ("Device");
-					SubItems.Add (fsEntry.LastAccessTime.ToShortDateString () + " " + fsEntry.LastAccessTime.ToShortTimeString ());	
+					SubItems.Add (fsEntry.LastAccessTime.ToString("yyyy-MM-dd") + " " + fsEntry.LastAccessTime.ToString("yyyy-MM-dd"));	
 					break;
 				case FSEntry.FSEntryType.RemovableDevice:
 					SubItems.Add (String.Empty);
 					SubItems.Add ("RemovableDevice");
-					SubItems.Add (fsEntry.LastAccessTime.ToShortDateString () + " " + fsEntry.LastAccessTime.ToShortTimeString ());	
+					SubItems.Add (fsEntry.LastAccessTime.ToString("yyyy-MM-dd") + " " + fsEntry.LastAccessTime.ToString("yyyy-MM-dd"));	
 					break;
 				default:
 					break;
@@ -3816,7 +3817,7 @@ namespace System.Windows.Forms
 		{
 			if (File.Exists (recently_used_path) && new FileInfo (recently_used_path).Length > 0) {
 				XmlDocument xml_doc = new XmlDocument ();
-				xml_doc.Load (recently_used_path);
+				xml_doc.Load (File.OpenRead(recently_used_path));
 				
 				XmlNode grand_parent_node = xml_doc.SelectSingleNode ("RecentFiles");
 				
@@ -3875,7 +3876,7 @@ namespace System.Windows.Forms
 					}
 					
 					try {
-						xml_doc.Save (recently_used_path);
+						xml_doc.Save (File.OpenWrite(recently_used_path));
 					} catch (Exception) {
 					}
 				}
@@ -3919,7 +3920,7 @@ namespace System.Windows.Forms
 				xml_doc.AppendChild (recentFiles_element);
 				
 				try {
-					xml_doc.Save (recently_used_path);
+					xml_doc.Save (File.OpenWrite(recently_used_path));
 				} catch (Exception) {
 				}
 			}
@@ -3959,7 +3960,7 @@ namespace System.Windows.Forms
 				string[] files = Directory.GetFiles (full_kde_recent_document_dir, "*.desktop");
 				
 				foreach (string file_name in files) {
-					StreamReader sr = new StreamReader (file_name);
+					StreamReader sr = new StreamReader (File.OpenRead(file_name));
 					
 					string line = sr.ReadLine ();
 					
@@ -3983,7 +3984,8 @@ namespace System.Windows.Forms
 						line = sr.ReadLine ();
 					}
 					
-					sr.Close ();
+                    //sr.Close ();
+                    sr.Dispose();
 				}
 			}
 			
@@ -4229,7 +4231,7 @@ namespace System.Windows.Forms
 		
 		public override ArrayList GetMyComputerContent ()
 		{
-			string[] logical_drives = Directory.GetLogicalDrives ();
+            string[] logical_drives = new string[0];//Directory.GetLogicalDrives ();
 			
 			ArrayList my_computer_content_arraylist = new ArrayList ();
 			
@@ -4597,7 +4599,7 @@ namespace System.Windows.Forms
 			removable_devices.Clear ();
 			
 			try {
-				StreamReader sr = new StreamReader ("/proc/mounts");
+				StreamReader sr = new StreamReader (File.OpenRead("/proc/mounts"));
 				
 				string line = sr.ReadLine ();
 				
@@ -4610,7 +4612,8 @@ namespace System.Windows.Forms
  					line = sr.ReadLine ();
  				}
 				
-				sr.Close ();
+                //sr.Close ();
+                sr.Dispose();
 				
 				block_devices.Sort (mountComparer);
 				network_devices.Sort (mountComparer);

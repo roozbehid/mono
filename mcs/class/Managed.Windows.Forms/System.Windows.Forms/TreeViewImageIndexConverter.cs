@@ -51,9 +51,9 @@ namespace System.Windows.Forms {
 			if (value != null && value is string) {
 				indexStr = (string)value;
 
-				if (indexStr.Equals ("(default)", StringComparison.InvariantCultureIgnoreCase))
+				if (indexStr.Equals ("(default)", StringComparison.OrdinalIgnoreCase))
 					return -1;
-				else if (indexStr.Equals ("(none)", StringComparison.InvariantCultureIgnoreCase))
+				else if (indexStr.Equals ("(none)", StringComparison.OrdinalIgnoreCase))
 					return -2;
 					
 				return Int32.Parse (indexStr);
@@ -77,12 +77,12 @@ namespace System.Windows.Forms {
 			} else
 				return base.ConvertTo (context, culture, value, destinationType);
 		}
-
+        /*
 		public override StandardValuesCollection GetStandardValues (System.ComponentModel.ITypeDescriptorContext context)
 		{
 			int[] stdVal = new int[] { -1, -2 };
 			return new TypeConverter.StandardValuesCollection (stdVal);
-		}
+		}*/
 		#endregion
 	}
 }

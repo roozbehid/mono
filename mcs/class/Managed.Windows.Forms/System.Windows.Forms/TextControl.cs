@@ -1145,7 +1145,7 @@ namespace System.Windows.Forms {
 			int best_index = -1;
 
 			for (int i = 0; i < needles.Length; i++) {
-				int index = haystack.IndexOf (needles [i], start_index,	StringComparison.InvariantCultureIgnoreCase);
+				int index = haystack.IndexOf (needles [i], start_index,	StringComparison.OrdinalIgnoreCase);
 
 				if (index > -1) {
 					if (term_found > -1) {

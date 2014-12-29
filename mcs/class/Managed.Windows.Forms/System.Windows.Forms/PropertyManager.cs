@@ -59,7 +59,7 @@ namespace System.Windows.Forms {
 			data_source = new_data_source;
 
 			if (property_name != null) {
-				prop_desc = TypeDescriptor.GetProperties (data_source).Find (property_name, true);
+				prop_desc =(PropertyDescriptor) TypeDescriptor.GetProperties (data_source).Find (property_name, true);
 
 				if (prop_desc == null)
 					return;

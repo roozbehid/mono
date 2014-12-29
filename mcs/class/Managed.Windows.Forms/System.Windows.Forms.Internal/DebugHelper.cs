@@ -38,7 +38,7 @@ namespace System.Windows.Forms
 	internal class DebugHelper
 	{
 		static DebugHelper () {
-			Debug.AutoFlush = true;
+			//Debug.AutoFlush = true;
 		}
 		
 		struct Data {
@@ -56,7 +56,7 @@ namespace System.Windows.Forms
 		internal static void DumpCallers () {
             StackTrace trace = new StackTrace(true);
 			int count = trace.FrameCount;
-			Debug.Indent ();
+			//Debug.Indent ();
 			for (int i = 1; i < count; i++) {
             	StackFrame parentFrame = trace.GetFrame(i);
             	MethodBase parentMethod = parentFrame.GetMethod();
@@ -68,14 +68,14 @@ namespace System.Windows.Forms
 				              );				
 			}
 			
-			Debug.Unindent ();
+			//Debug.Unindent ();
 		}
 
 		[Conditional("DEBUG")]
 		internal static void DumpCallers (int count) {
             StackTrace trace = new StackTrace(true);
 			int c = (count > trace.FrameCount ? trace.FrameCount : count);
-			Debug.Indent ();
+			//Debug.Indent ();
 			for (int i = 1; i < c; i++) {
             	StackFrame parentFrame = trace.GetFrame(i);
             	MethodBase parentMethod = parentFrame.GetMethod();
@@ -87,7 +87,7 @@ namespace System.Windows.Forms
 				              );				
 			}
 			
-			Debug.Unindent ();
+			//Debug.Unindent ();
 		}
 
 		[Conditional("DEBUG")]
@@ -96,7 +96,7 @@ namespace System.Windows.Forms
 			StackTrace trace = new StackTrace();
 			methods.Push (new Data (trace.GetFrame(1).GetMethod(), null));
 			Print ();
-			Debug.Indent ();
+			//Debug.Indent ();
 		}
 
 		[Conditional("DEBUG")]
@@ -105,7 +105,7 @@ namespace System.Windows.Forms
 			StackTrace trace = new StackTrace();
 			methods.Push (new Data (trace.GetFrame(1).GetMethod(), args));
 			Print ();
-			Debug.Indent ();
+			//Debug.Indent ();
 		}
 
 		[Conditional("DEBUG")]
@@ -113,7 +113,7 @@ namespace System.Windows.Forms
 		{
 			if (methods.Count > 0) {
 				methods.Pop ();
-				Debug.Unindent ();
+				//Debug.Unindent ();
 			}
 		}
 
@@ -178,13 +178,13 @@ namespace System.Windows.Forms
 
 			for (int i = 0; i < pi.Length; i++) {
 				if (pi[i].Name == parameterName) {
-					Debug.Indent ();
+					//Debug.Indent ();
 					Debug.Write (parameterName + "=");
 					if (pi[i].ParameterType == typeof(IntPtr))
 						Debug.WriteLine (String.Format ("0x{0:x}", ((IntPtr)data.args[i]).ToInt32()));
 					else
 						Debug.WriteLine (data.args[i]);
-					Debug.Unindent ();
+					//Debug.Unindent ();
 				}
 			}			
 		}
@@ -200,13 +200,13 @@ namespace System.Windows.Forms
 
 			for (int i = 0; i < pi.Length; i++) {
 				if (pi[i].Name == parameterName) {
-					Debug.Indent ();
+					//Debug.Indent ();
 					Debug.Write (parameterName + "=");
 					if (pi[i].ParameterType == typeof(IntPtr))
 						Debug.WriteLine (String.Format ("0x{0:x}", data.args[i]));
 					else
 						Debug.WriteLine (data.args[i]);
-					Debug.Unindent ();
+					//Debug.Unindent ();
 				}
 			}			
 		}
@@ -232,13 +232,13 @@ namespace System.Windows.Forms
 		[Conditional("DEBUG")]
 		internal static void Indent ()
 		{
-			Debug.Indent ();
+			//Debug.Indent ();
 		}
 
 		[Conditional("DEBUG")]
 		internal static void Unindent ()
 		{
-			Debug.Unindent ();
+			//Debug.Unindent ();
 		}
 		
 		[Conditional("TRACE")]

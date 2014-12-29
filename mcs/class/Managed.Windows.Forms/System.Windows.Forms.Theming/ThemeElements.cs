@@ -24,6 +24,7 @@
 //	Everaldo Canuto  <ecanuto@novell.com>
 
 using System;
+using System.Runtime;
 using System.Drawing;
 using System.Reflection;
 
@@ -58,12 +59,12 @@ namespace System.Windows.Forms.Theming
 					return new ThemeElementsVisualStyles ();
 				else
 					return new ThemeElementsDefault ();
-			Assembly ass = Assembly.GetExecutingAssembly ();
+			Assembly ass = typeof(ThemeElements).GetTypeInfo().Assembly;
 			string iname = typeof(ThemeElements).FullName;
 			string assemblyname = iname + themeName;
 			Type type = ass.GetType (assemblyname, false, true);
 			if (type != null) {
-				object o = ass.CreateInstance (type.FullName);
+				object o = Activator.CreateInstance (type);
 				if (o != null)
 					return (ThemeElementsDefault) o;
 			}

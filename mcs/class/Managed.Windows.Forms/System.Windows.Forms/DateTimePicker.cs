@@ -1044,15 +1044,15 @@ namespace System.Windows.Forms {
 		{
 			switch (this.format) {
 			case DateTimePickerFormat.Long:
-				return Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.LongDatePattern;
+				return CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern;
 			case DateTimePickerFormat.Short:
-				return Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern;
+				return CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
 			case DateTimePickerFormat.Time:
-				return Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.LongTimePattern;
+				return CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
 			case DateTimePickerFormat.Custom:
 				return this.custom_format == null ? String.Empty : this.custom_format;
 			default:
-				return Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.LongDatePattern;
+				return CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern;
 			}
 		}
 

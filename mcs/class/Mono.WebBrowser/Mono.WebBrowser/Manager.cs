@@ -38,7 +38,7 @@ namespace Mono.WebBrowser
 		public static IWebBrowser GetNewInstance (Platform platform)
 		{
 			string browserEngine = Environment.GetEnvironmentVariable ("MONO_BROWSER_ENGINE");
-
+#if false
 #if NET_2_0			
 			if (browserEngine == "webkit") {
 				Assembly ass;
@@ -54,6 +54,7 @@ namespace Mono.WebBrowser
 #endif
 			if (browserEngine == null || browserEngine == "mozilla")
 				return new Mono.Mozilla.WebBrowser (platform);
+#endif
 			throw new Exception (Mono.WebBrowser.Exception.ErrorCodes.EngineNotSupported, browserEngine);
 		}
 

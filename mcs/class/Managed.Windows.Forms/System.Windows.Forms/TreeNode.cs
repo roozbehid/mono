@@ -80,10 +80,10 @@ namespace System.Windows.Forms
 			SerializationEntry		e;
 			int				children;
 
-			en = serializationInfo.GetEnumerator();
+			en = (SerializationInfoEnumerator)serializationInfo.GetEnumerator();
 			children = 0;
 			while (en.MoveNext()) {
-				e = en.Current;
+				e = (SerializationEntry)en.Current;
 				switch(e.Name) {
 					case "Text": Text = (string)e.Value; break;
 					case "PropBag": prop_bag = (OwnerDrawPropertyBag)e.Value; break;

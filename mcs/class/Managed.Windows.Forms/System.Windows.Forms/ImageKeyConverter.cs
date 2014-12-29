@@ -75,7 +75,7 @@ namespace System.Windows.Forms
 			else
 				return base.ConvertTo (context, culture, value, destinationType);
 		}
-
+        /*
 		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
 		{
 			string[] stdVal = new string[] { string.Empty };
@@ -90,7 +90,7 @@ namespace System.Windows.Forms
 		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
 		{
 			return true;
-		}
+		}*/
 		#endregion Public Methods
 	}
 }

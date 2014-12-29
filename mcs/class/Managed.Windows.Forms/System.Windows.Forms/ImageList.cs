@@ -399,7 +399,7 @@ namespace System.Windows.Forms
 				if (key1 == null || key2 == null || key1.Length != key2.Length)
 					return false;
 
-				return string.Compare(key1, key2, true, CultureInfo.InvariantCulture) == 0;
+				return string.Compare(key1, key2, true) == 0;
 			}
 			#endregion // ImageCollection Private Static Methods
 

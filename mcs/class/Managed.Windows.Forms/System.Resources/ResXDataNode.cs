@@ -121,7 +121,7 @@ namespace System.Resources
 				throw new ArgumentException ("name");
 
 			Type type = (value == null) ? typeof (object) : value.GetType ();
-			if ((value != null) && !type.IsSerializable) {
+			if ((value != null) && !type.GetTypeInfo().IsSerializable) {
 				throw new InvalidOperationException (String.Format ("'{0}' of type '{1}' cannot be added" 
 				                                                    + " because it is not serializable", 
 				                                                    name, type));

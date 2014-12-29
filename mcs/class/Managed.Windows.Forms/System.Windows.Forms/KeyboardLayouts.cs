@@ -25,6 +25,7 @@
 //
 
 using System;
+using System.Reflection;
 using System.Resources;
 
 namespace System.Windows.Forms {
@@ -38,11 +39,11 @@ namespace System.Windows.Forms {
 		public void LoadLayouts ()
 		{
 			ResourceManager	rm;
-			rm = new ResourceManager ("keyboards", System.Reflection.Assembly.GetExecutingAssembly());
-			keyboard_layouts = (KeyboardLayout []) rm.GetObject ("keyboard_table");
+			rm = new ResourceManager ("keyboards", this.GetType().GetTypeInfo().Assembly /*System.Reflection.Assembly.GetExecutingAssembly()*/);
+			//keyboard_layouts = (KeyboardLayout []) rm.GetObject ("keyboard_table");
 
-			vkey_table = (int [][]) rm.GetObject ("vkey_table");
-			scan_table = (short [][]) rm.GetObject ("scan_table");
+			//vkey_table = (int [][]) rm.GetObject ("vkey_table");
+			//scan_table = (short [][]) rm.GetObject ("scan_table");
 		}
 
 		public KeyboardLayout [] Layouts {

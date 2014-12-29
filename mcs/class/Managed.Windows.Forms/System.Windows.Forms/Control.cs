@@ -1138,9 +1138,9 @@ namespace System.Windows.Forms
 			data.Args = args;
 			data.Result = result;
 
-			if (!ExecutionContext.IsFlowSuppressed ()) {
+            //if (!ExecutionContext.IsFlowSuppressed ()) { // TODO: investigate
 				data.Context = ExecutionContext.Capture ();
-			}
+		//	}
 
 			XplatUI.SendAsyncMethod (data);
 			return result;
@@ -2603,7 +2603,7 @@ namespace System.Windows.Forms
 		[Localizable(true)]
 		[MWFCategory("Appearance")]
 		public virtual Font Font {
-			[return: MarshalAs (UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof (Font))]
+			//[return: MarshalAs (UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof (Font))]
 			get {
 				if (font != null)
 					return font;
@@ -2618,7 +2618,7 @@ namespace System.Windows.Forms
 				return DefaultFont;
 			}
 
-			[param:MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(Font))]
+			//[param:MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(Font))]
 			set {
 				if (font != null && font == value) {
 					return;
@@ -2916,7 +2916,7 @@ namespace System.Windows.Forms
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string ProductName {
 			get {
-				Type t = typeof (AssemblyProductAttribute);
+                /*Type t = typeof (AssemblyProductAttribute);
 				Assembly assembly = GetType().Module.Assembly;
 				object [] attrs = assembly.GetCustomAttributes (t, false);
 				AssemblyProductAttribute a = null;
@@ -2927,7 +2927,8 @@ namespace System.Windows.Forms
 				if (a == null) {
 					return GetType ().Namespace;
 				}
-				return a.Product;
+				return a.Product;*/
+                return "";
 			}
 		}
 
@@ -2936,12 +2937,13 @@ namespace System.Windows.Forms
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string ProductVersion {
 			get {
-				Type t = typeof (AssemblyVersionAttribute);
+                /*Type t = typeof (AssemblyVersionAttribute);
 				Assembly assembly = GetType().Module.Assembly;
 				object [] attrs = assembly.GetCustomAttributes (t, false);
 				if (attrs == null || attrs.Length < 1)
 					return "1.0.0.0";
-				return ((AssemblyVersionAttribute)attrs [0]).Version;
+				return ((AssemblyVersionAttribute)attrs [0]).Version;*/
+                return "";
 			}
 		}
 

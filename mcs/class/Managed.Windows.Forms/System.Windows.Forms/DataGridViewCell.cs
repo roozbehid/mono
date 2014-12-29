@@ -30,6 +30,7 @@ using System;
 using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace System.Windows.Forms {
 

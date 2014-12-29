@@ -271,7 +271,7 @@ namespace System.Windows.Forms.CarbonInternal {
 		}
 
 		internal string DataString {
-			get { return Encoding.Default.GetString (this.data); }
+			get { return Encoding.UTF8.GetString (this.data); }
 		}
 		
 		internal byte[] DataArray {

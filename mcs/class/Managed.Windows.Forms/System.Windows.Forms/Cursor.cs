@@ -155,7 +155,7 @@ namespace System.Windows.Forms {
 		}
 
 		public Cursor(Type type, string resource) {
-			using (Stream s = type.Assembly.GetManifestResourceStream (type, resource)) {
+			using (Stream s = type.GetTypeInfo().Assembly.GetManifestResourceStream (resource)) {
 				if (s != null) {
 					CreateCursor (s);
 					return;
@@ -163,12 +163,12 @@ namespace System.Windows.Forms {
 			}
 
 			// Try a different way, previous failed
-			using (Stream s = Assembly.GetExecutingAssembly ().GetManifestResourceStream (resource)) {
-				if (s != null) {
-					CreateCursor (s);
-					return;
-				}
-			}
+			//using (Stream s = Assembly.GetExecutingAssembly ().GetManifestResourceStream (resource)) {
+			//	if (s != null) {
+			//		CreateCursor (s);
+			//		return;
+			//	}
+			//}
 			throw new FileNotFoundException ("Resource name was not found: `" + resource + "'");
 		}
 		#endregion	// Public Constructors
@@ -562,10 +562,12 @@ namespace System.Windows.Forms {
 				}
 				
 				cursor_data[j] = curdata;
-				cih_reader.Close();
+                //cih_reader.Close();
+                cih_reader.Dispose();
 			}			
 
-			reader.Close();
+            //reader.Close();
+            reader.Dispose();
 		}
 
 		private Bitmap ToBitmap(bool xor, bool transparent)

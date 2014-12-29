@@ -87,7 +87,7 @@ namespace System.Windows.Forms {
 			get
 			{
 				if (encoding == null)
-					encoding = Encoding.GetEncoding(new CultureInfo(lcid).TextInfo.ANSICodePage);
+                    encoding = Encoding.UTF8;//Encoding.GetEncoding(new CultureInfo(lcid).TextInfo.ANSICodePage);
 				return encoding;
 			}
 		}

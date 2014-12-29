@@ -86,7 +86,7 @@ namespace System.Windows.Forms {
 			s = (SelectionRange)value;
 
 
-			return s.Start.ToShortDateString() + culture.TextInfo.ListSeparator + s.End.ToShortDateString();
+			return s.Start.ToString("yyyy-MM-dd") + culture.TextInfo.ListSeparator + s.End.ToString("yyyy-MM-dd");
 		}
 
 		public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues) {

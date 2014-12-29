@@ -268,7 +268,7 @@ namespace System.Windows.Forms
 
 			while (true) {
 				string item_text = items [i].ToString ();
-				if (String.Compare (prefix, 0, item_text, 0, 1, true) == 0)
+				if (String.Compare (prefix, item_text, true) == 0)
 					return i;
 
 				if (i + 1 >= items.Count)
@@ -331,7 +331,7 @@ namespace System.Windows.Forms
 
 					if (sorted) {
 						for (int i=typed_to_index; i >= 0; i--) {
-							int difference = string.Compare(prefix, 0, items[i].ToString(), 0, prefix.Length, true);
+							int difference = string.Compare(prefix,  items[i].ToString(), true);
 
 							if (difference == 0) {
 								found = true;
@@ -344,7 +344,7 @@ namespace System.Windows.Forms
 						}
 					} else {
 						for (int i=0; i < items.Count; i++) {
-							if (0 == string.Compare(prefix, 0, items[i].ToString(), 0, prefix.Length, true)) {
+							if (0 == string.Compare(prefix, items[i].ToString(), true)) {
 								found = true;
 								typed_to_index = i;
 								break;
@@ -380,7 +380,7 @@ namespace System.Windows.Forms
 
 					if (sorted) {
 						for (int i=typed_to_index; i < items.Count; i++) {
-							int difference = string.Compare(prefix, 0, items[i].ToString(), 0, prefix.Length, true);
+							int difference = string.Compare(prefix,  items[i].ToString(), true);
 
 							if (difference == 0) {
 								found = true;
@@ -393,7 +393,7 @@ namespace System.Windows.Forms
 						}
 					} else {
 						for (int i=0; i < items.Count; i++) {
-							if (0 == string.Compare(prefix, 0, items[i].ToString(), 0, prefix.Length, true)) {
+							if (0 == string.Compare(prefix, items[i].ToString(), true)) {
 								found = true;
 								typed_to_index = i;
 								break;

@@ -32,6 +32,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace System.Resources
 {
@@ -241,7 +242,7 @@ namespace System.Resources
 			if (name == null)
 				throw new ArgumentNullException ("name");
 
-			if (value != null && !value.GetType ().IsSerializable)
+			if (value != null && !value.GetType ().GetTypeInfo().IsSerializable)
 					throw new InvalidOperationException (String.Format ("The element '{0}' of type '{1}' is not serializable.", name, value.GetType ().Name));
 
 			if (written)
@@ -261,7 +262,7 @@ namespace System.Resources
 				return;
 			}
 
-			TypeConverter converter = TypeDescriptor.GetConverter (value);
+			var converter = System.Windows.Forms.TypeDescriptor.GetConverter (value);
 			if (value is ResXFileRef) {
 				ResXFileRef fileRef = ProcessFileRefBasePath ((ResXFileRef) value);	
 				string str = (string) converter.ConvertToInvariantString (fileRef);
@@ -291,8 +292,9 @@ namespace System.Resources
 								     e.Message);
 			}
 
-			WriteBytes (name, null, ms.GetBuffer (), 0, (int) ms.Length, comment);
-			ms.Close ();
+			WriteBytes (name, null, ms.ToArray (), 0, (int) ms.Length, comment);
+            //ms.Close ();
+            ms.Dispose();
 		}
 		
 		public void AddResource (string name, string value)
@@ -515,7 +517,7 @@ namespace System.Resources
 			if (value == null)
 				throw new ArgumentNullException ("value");
 
-			if (!value.GetType ().IsSerializable)
+			if (!value.GetType ().GetTypeInfo().IsSerializable)
 				throw new InvalidOperationException (String.Format ("The element '{0}' of type '{1}' is not serializable.", name, value.GetType ().Name));
 
 			if (written)
@@ -526,7 +528,7 @@ namespace System.Resources
 
 			Type type = value.GetType ();
 			
-			TypeConverter converter = TypeDescriptor.GetConverter (value);
+			var converter = System.Windows.Forms.TypeDescriptor.GetConverter (value);
 			if (converter != null && converter.CanConvertTo (typeof (string)) && converter.CanConvertFrom (typeof (string))) {
 				string str = (string)converter.ConvertToInvariantString (value);
 				writer.WriteStartElement ("metadata");
@@ -579,16 +581,17 @@ namespace System.Resources
 				writer.WriteAttributeString ("type", type.AssemblyQualifiedName);
 				writer.WriteAttributeString ("mimetype", ByteArraySerializedObjectMimeType);
 				writer.WriteStartElement ("value");
-				WriteNiceBase64 (ms.GetBuffer (), 0, ms.GetBuffer ().Length);
+				WriteNiceBase64 (ms.ToArray (), 0, ms.ToArray().Length);
 			} else {
 				writer.WriteAttributeString ("mimetype", BinSerializedObjectMimeType);
 				writer.WriteStartElement ("value");
-				writer.WriteBase64 (ms.GetBuffer (), 0, ms.GetBuffer ().Length);
+				writer.WriteBase64 (ms.ToArray(), 0, ms.ToArray().Length);
 			}
 
 			writer.WriteEndElement ();
 			writer.WriteEndElement ();
-			ms.Close ();
+            //ms.Close ();
+            ms.Dispose();
 		}
 
 		public void Close ()

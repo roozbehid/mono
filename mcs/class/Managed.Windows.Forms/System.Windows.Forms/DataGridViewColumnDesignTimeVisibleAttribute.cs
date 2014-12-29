@@ -62,9 +62,9 @@ namespace System.Windows.Forms {
 			return base.GetHashCode ();
 		}
 
-		public override bool IsDefaultAttribute () {
-			return this.Equals(Default);
-		}
+		//public override bool IsDefaultAttribute () {
+		//	return this.Equals(Default);
+		//}
 
 	}
 

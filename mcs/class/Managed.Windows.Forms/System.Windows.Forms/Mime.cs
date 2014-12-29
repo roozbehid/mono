@@ -588,7 +588,8 @@ namespace System.Windows.Forms
 					}
 				}
 				
-				file_stream.Close ();
+                //file_stream.Close ();
+                file_stream.Dispose();
 			} catch (Exception) {
 				return false;
 			}
@@ -677,8 +678,8 @@ namespace System.Windows.Forms
 			if (Directory.Exists ("/usr/local/share/mime"))
 				shared_mime_paths.Add ("/usr/local/share/mime/");
 			
-			if (Directory.Exists (System.Environment.GetFolderPath (Environment.SpecialFolder.Personal) + "/.local/share/mime"))
-				shared_mime_paths.Add (System.Environment.GetFolderPath (Environment.SpecialFolder.Personal) + "/.local/share/mime/");
+			if (Directory.Exists (Environment.GetFolderPath (Environment.SpecialFolder.Personal) + "/.local/share/mime"))
+				shared_mime_paths.Add (Environment.GetFolderPath (Environment.SpecialFolder.Personal) + "/.local/share/mime/");
 			
 			if (shared_mime_paths.Count == 0)
 				return;
@@ -700,8 +701,10 @@ namespace System.Windows.Forms
 						MakeMatches ();
 					}
 					
-					br.Close ();
-					fs.Close ();
+                    //br.Close ();
+                    br.Dispose();
+                    //fs.Close ();
+                    fs.Dispose();
 				} catch (Exception ) {
 				}
 			}
@@ -876,7 +879,7 @@ namespace System.Windows.Forms
 					continue;
 				
 				try {
-					StreamReader sr = new StreamReader (path + "/globs");
+					StreamReader sr = new StreamReader (File.OpenRead(path + "/globs"));
 					
 					while (sr.Peek () != -1) {
 						string line = sr.ReadLine ().Trim ();
@@ -903,7 +906,8 @@ namespace System.Windows.Forms
 						}
 					}
 					
-					sr.Close ();
+                    //sr.Close ();
+                    sr.Dispose();
 				} catch (Exception ) {
 				}
 			}
@@ -916,7 +920,7 @@ namespace System.Windows.Forms
 					continue;
 				
 				try {
-					StreamReader sr = new StreamReader (path + "/subclasses");
+					StreamReader sr = new StreamReader (File.OpenRead(path + "/subclasses"));
 					
 					while (sr.Peek () != -1) {
 						string line = sr.ReadLine ().Trim ();
@@ -929,7 +933,8 @@ namespace System.Windows.Forms
 						Mime.SubClasses.Add (split [0], split [1]);
 					}
 					
-					sr.Close ();
+                    //sr.Close ();
+                    sr.Dispose();
 				} catch (Exception ) {
 				}
 			}
@@ -942,7 +947,7 @@ namespace System.Windows.Forms
 					continue;
 				
 				try {
-					StreamReader sr = new StreamReader (path + "/aliases");
+					StreamReader sr = new StreamReader (File.OpenRead(path + "/aliases"));
 					
 					while (sr.Peek () != -1) {
 						string line = sr.ReadLine ().Trim ();
@@ -955,7 +960,8 @@ namespace System.Windows.Forms
 						Mime.Aliases.Add (split [0], split [1]);
 					}
 					
-					sr.Close ();
+                    //sr.Close ();
+                    sr.Dispose();
 				} catch (Exception ) {
 				}
 			}
