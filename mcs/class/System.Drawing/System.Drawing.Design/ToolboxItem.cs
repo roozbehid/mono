@@ -175,7 +175,7 @@ namespace System.Drawing.Design
 		protected virtual IComponent[] CreateComponentsCore (IDesignerHost host, IDictionary defaultValues)
 		{
 			IComponent[] components = CreateComponentsCore (host);
-			foreach (Component c in components) {
+			foreach (var c in components) {
 				IComponentInitializer initializer = host.GetDesigner (c) as IComponentInitializer;
 				initializer.InitializeNewComponent (defaultValues);
 			}
@@ -277,19 +277,19 @@ namespace System.Drawing.Design
 			if (type == null)
 				return;
 
-			AssemblyName = type.Assembly.GetName();
+            AssemblyName = new AssemblyName("System.Drawing");//type.Assembly.GetName();
 			DisplayName = type.Name;
 			TypeName = type.FullName;
 			
 			// seems to be a right place to create the bitmap
 			System.Drawing.Image image = null;
-			foreach (object attribute in type.GetCustomAttributes(true)) {
-				ToolboxBitmapAttribute tba = attribute as ToolboxBitmapAttribute;
-				if (tba != null) {
-					image = tba.GetImage (type);
-					break;
-				}
-			}
+			//foreach (object attribute in type.GetCustomAttributes(true)) {
+			//	ToolboxBitmapAttribute tba = attribute as ToolboxBitmapAttribute;
+			//	if (tba != null) {
+			//		image = tba.GetImage (type);
+			//		break;
+			//	}
+			//}
 			//fallback: check for image even if not attribute
 			if (image == null)
 				image = ToolboxBitmapAttribute.GetImageFromResource (type, null, false);
@@ -300,7 +300,7 @@ namespace System.Drawing.Design
 					Bitmap = new Bitmap (image);
 			}
 
-			Filter = type.GetCustomAttributes (typeof (ToolboxItemFilterAttribute), true);
+			//Filter = type.GetCustomAttributes (typeof (ToolboxItemFilterAttribute), true);
 		}
 			
 		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)

@@ -39,7 +39,7 @@ namespace System.Drawing.Printing
 {
 	[DefaultEvent ("PrintPage"), DefaultProperty ("DocumentName")]
 	[ToolboxItemFilter ("System.Drawing.Printing", ToolboxItemFilterType.Allow)]
-	public class PrintDocument : System.ComponentModel.Component
+	public class PrintDocument : System.ComponentModel.IComponent
 	{
 		private PageSettings defaultpagesettings;
 		private PrinterSettings printersettings;
@@ -196,6 +196,25 @@ namespace System.Drawing.Printing
 				QueryPageSettings(this, e);
 		}
 
+        public event EventHandler Disposed;
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ISite Site
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
 		[SRDescription ("Raised when printing begins")]
 		public event PrintEventHandler BeginPrint;
 
@@ -207,5 +226,6 @@ namespace System.Drawing.Printing
 
 		[SRDescription ("Raised before printing of a new page begins")]
 		public event QueryPageSettingsEventHandler QueryPageSettings;
+
 	}
 }

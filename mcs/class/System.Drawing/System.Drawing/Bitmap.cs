@@ -41,6 +41,7 @@ using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Security.Permissions;
+using System.Reflection;
 
 namespace System.Drawing
 {
@@ -135,8 +136,9 @@ namespace System.Drawing
 			if (resource == null)
 				throw new ArgumentException ("resource");
 
-			Stream s = type.Assembly.GetManifestResourceStream (type, resource);
-			if (s == null) {
+            Stream s = type.GetTypeInfo().Assembly.GetManifestResourceStream(resource);
+            if (s == null)
+            {
 				string msg = Locale.GetText ("Resource '{0}' was not found.", resource);
 				throw new FileNotFoundException (msg);
 			}
@@ -171,7 +173,8 @@ namespace System.Drawing
 
 		#endregion
 		// methods
-		public Color GetPixel (int x, int y) {
+        public Color GetPixel(int x, int y)
+        {
 			
 			int argb;				
 			
@@ -184,10 +187,12 @@ namespace System.Drawing
 		public void SetPixel (int x, int y, Color color)
 		{
 			Status s = GDIPlus.GdipBitmapSetPixel (nativeObject, x, y, color.ToArgb ());
-			if (s == Status.InvalidParameter) {
+            if (s == Status.InvalidParameter)
+            {
 				// check is done in case of an error only to avoid another
 				// unmanaged call for normal (successful) calls
-				if ((this.PixelFormat & PixelFormat.Indexed) != 0) {
+                if ((this.PixelFormat & PixelFormat.Indexed) != 0)
+                {
 					string msg = Locale.GetText ("SetPixel cannot be called on indexed bitmaps.");
 #if NET_2_0
 					throw new InvalidOperationException (msg);

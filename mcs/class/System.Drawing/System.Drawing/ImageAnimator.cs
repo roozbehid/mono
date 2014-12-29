@@ -122,7 +122,7 @@ namespace System.Drawing {
 
 			if (ht.ContainsKey (image)) {
 				AnimateEventArgs evtArgs = (AnimateEventArgs) ht [image];
-				evtArgs.RunThread.Abort ();
+                //evtArgs.RunThread.Abort (); // TODO: find a replacement
 				ht.Remove (image);
 			}
 		}
@@ -176,7 +176,7 @@ namespace System.Drawing {
 				}
 			}
 			catch (ThreadAbortException) {
-				Thread.ResetAbort (); // we're going to finish anyway
+				//Thread.ResetAbort (); // we're going to finish anyway  // TODO: find a replacement
 			}
 		}
 	}

@@ -118,7 +118,7 @@ namespace System.Drawing {
 				case KnownColor.Window:
 				case KnownColor.WindowFrame:
 				case KnownColor.WindowText:
-					return KnownColors.GetName (kc).ToLower (CultureInfo.InvariantCulture);
+					return KnownColors.GetName (kc).ToLower ();
 
 				case KnownColor.ActiveCaptionText:
 					return "captiontext";

@@ -442,7 +442,7 @@ namespace System.Drawing
 				if (systemFontName == null)
 					return false;
 
-				return StringComparer.InvariantCulture.Compare (systemFontName, string.Empty) != 0;
+				return StringComparer.Ordinal.Compare (systemFontName, string.Empty) != 0;
 			}
 		}
 #endif
@@ -645,8 +645,8 @@ namespace System.Drawing
 			}
 
 			Type st = logFont.GetType ();
-			if (!st.IsLayoutSequential)
-				throw new ArgumentException ("logFont", Locale.GetText ("Layout must be sequential."));
+			//if (!st.IsLayoutSequential)
+			//	throw new ArgumentException ("logFont", Locale.GetText ("Layout must be sequential."));
 
 			// note: there is no exception if 'logFont' isn't big enough
 			Type lf = typeof (LOGFONT);

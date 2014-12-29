@@ -39,6 +39,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Reflection;
 
 namespace System.Drawing
 {
@@ -233,7 +234,7 @@ namespace System.Drawing
 			if (resource == null)
 				throw new ArgumentException ("resource");
 
-			using (Stream s = type.Assembly.GetManifestResourceStream (type, resource)) {
+			using (Stream s = type.GetTypeInfo().Assembly.GetManifestResourceStream (resource)) {
 				if (s == null) {
 					string msg = Locale.GetText ("Resource '{0}' was not found.", resource);
 					throw new FileNotFoundException (msg);
@@ -265,7 +266,7 @@ namespace System.Drawing
 
 		internal Icon (string resourceName, bool undisposable)
 		{
-			using (Stream s = typeof (Icon).Assembly.GetManifestResourceStream (resourceName)) {
+			using (Stream s = typeof (Icon).GetTypeInfo().Assembly.GetManifestResourceStream (resourceName)) {
 				if (s == null) {
 					string msg = Locale.GetText ("Resource '{0}' was not found.", resourceName);
 					throw new FileNotFoundException (msg);
@@ -866,10 +867,12 @@ Console.WriteLine ("\tbih.biClrImportant: {0}", bih.biClrImportant);
 				}
 				
 				imageData [j] = iidata;
-				bihReader.Close();
+                //bihReader.Close();
+                bihReader.Dispose();
 			}			
 
-			reader.Close();
+            //reader.Close();
+            reader.Dispose();
 		}
 	}
 }

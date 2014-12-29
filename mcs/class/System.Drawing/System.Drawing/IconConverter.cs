@@ -84,7 +84,7 @@ namespace System.Drawing {
 				//came here means destType is byte array ;
 				MemoryStream ms = new MemoryStream ();
 				((Icon) value).Save (ms);
-				return ms.GetBuffer ();
+                return new byte[0]; //ms.GetBuffer (); // TODO: find better replacement
 			}else
 				return new NotSupportedException ("IconConverter can not convert from " + value.GetType ());				
 		}

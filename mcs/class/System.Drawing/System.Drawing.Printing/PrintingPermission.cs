@@ -168,7 +168,7 @@ namespace System.Drawing.Printing {
 		{
 			SecurityElement se = new SecurityElement ("IPermission");
 			Type type = this.GetType ();
-			se.AddAttribute ("class", type.FullName + ", " + type.Assembly.ToString ().Replace ('\"', '\''));
+			se.AddAttribute ("class", type.FullName + ", " + type.AssemblyQualifiedName.ToString ().Replace ('\"', '\''));
 			se.AddAttribute ("version", version.ToString ());
 			return se;
 		}
@@ -244,7 +244,7 @@ namespace System.Drawing.Printing {
 			string value = se.Attribute ("Unrestricted");
 			if (value == null)
 				return false;
-			return (String.Compare (value, Boolean.TrueString, true, CultureInfo.InvariantCulture) == 0);
+			return (String.Compare (value, Boolean.TrueString, true) == 0);
 		}
 
 		internal static void ThrowInvalidPermission (IPermission target, Type expected) 

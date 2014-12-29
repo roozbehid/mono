@@ -36,7 +36,6 @@ using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
 using System.Drawing.Text;
-using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
 namespace System.Drawing
@@ -357,7 +356,7 @@ namespace System.Drawing
 					values [i] = fonts [i].Name;
 				}
 				
-				return new TypeConverter.StandardValuesCollection (values);
+				return new StandardValuesCollection (values);
 			}
 
 			public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
@@ -377,10 +376,10 @@ namespace System.Drawing
 		{
 			public FontUnitConverter () : base (typeof (GraphicsUnit)) {}
 			
-			public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-			{
-				return base.GetStandardValues (context);
-			}
+			//public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
+			//{
+			//	return base.GetStandardValues (context);
+			//}
 				
 		}
 	}

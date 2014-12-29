@@ -35,7 +35,6 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Drawing.Imaging;
-using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
 namespace System.Drawing
@@ -99,25 +98,25 @@ namespace System.Drawing
 					return ImageFormat.Wmf;
 			} else {
 				// case #3, this is probably a short format
-				if (String.Compare (strFormat, "Bmp", true, CultureInfo.InvariantCulture) == 0)
+				if (String.Compare (strFormat, "Bmp", true) == 0)
 					return ImageFormat.Bmp;
-				else if (String.Compare (strFormat, "Emf", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Emf", true) == 0)
 					return ImageFormat.Emf;
-				else if (String.Compare (strFormat, "Exif", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Exif", true) == 0)
 					return ImageFormat.Exif;
-				else if (String.Compare (strFormat, "Gif", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Gif", true) == 0)
 					return ImageFormat.Gif;
-				else if (String.Compare (strFormat, "Icon", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Icon", true) == 0)
 					return ImageFormat.Icon;
-				else if (String.Compare (strFormat, "Jpeg", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Jpeg", true) == 0)
 					return ImageFormat.Jpeg;
-				else if (String.Compare (strFormat, "MemoryBmp", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "MemoryBmp", true) == 0)
 					return ImageFormat.MemoryBmp;
-				else if (String.Compare (strFormat, "Png", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Png", true) == 0)
 					return ImageFormat.Png;
-				else if (String.Compare (strFormat, "Tiff", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Tiff", true) == 0)
 					return ImageFormat.Tiff;
-				else if (String.Compare (strFormat, "Wmf", true, CultureInfo.InvariantCulture) == 0)
+				else if (String.Compare (strFormat, "Wmf", true) == 0)
 					return ImageFormat.Wmf;
 			}
 			// last case, this is an unknown string
@@ -178,7 +177,7 @@ namespace System.Drawing
 			list [7] = ImageFormat.Tiff;
 			list [8] = ImageFormat.Exif;
 			list [9] = ImageFormat.Icon;
-			return new TypeConverter.StandardValuesCollection (list);
+			return new StandardValuesCollection (list);
 		}
 
 		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
