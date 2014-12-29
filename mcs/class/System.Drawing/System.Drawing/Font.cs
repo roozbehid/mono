@@ -263,7 +263,41 @@ namespace System.Drawing
 				newSize = lf.lfHeight;
 			}
 
-			return (new Font (newObject, lf.lfFaceName, newStyle, newSize));
+            string lfFaceName = String.Concat(
+                                lf.lfFaceName1,
+                                lf.lfFaceName2,
+                                lf.lfFaceName3,
+                                lf.lfFaceName4,
+                                lf.lfFaceName5,
+                                lf.lfFaceName6,
+                                lf.lfFaceName7,
+                                lf.lfFaceName8,
+                                lf.lfFaceName9,
+                                lf.lfFaceName10,
+                                lf.lfFaceName11,
+                                lf.lfFaceName12,
+                                lf.lfFaceName13,
+                                lf.lfFaceName14,
+                                lf.lfFaceName15,
+                                lf.lfFaceName16,
+                                lf.lfFaceName17,
+                                lf.lfFaceName18,
+                                lf.lfFaceName19,
+                                lf.lfFaceName20,
+                                lf.lfFaceName21,
+                                lf.lfFaceName22,
+                                lf.lfFaceName23,
+                                lf.lfFaceName24,
+                                lf.lfFaceName25,
+                                lf.lfFaceName26,
+                                lf.lfFaceName27,
+                                lf.lfFaceName28,
+                                lf.lfFaceName29,
+                                lf.lfFaceName30,
+                                lf.lfFaceName31,
+                                lf.lfFaceName32);
+
+			return (new Font (newObject, lfFaceName, newStyle, newSize));
 		}
 
 		public IntPtr ToHfont ()

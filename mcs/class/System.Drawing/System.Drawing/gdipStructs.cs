@@ -81,7 +81,7 @@ namespace System.Drawing
     		internal int to;
 	}
 
-	[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Ansi)]
+	[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
 	internal struct LOGFONT
 	{
 		internal int    lfHeight;
@@ -97,9 +97,41 @@ namespace System.Drawing
 		internal byte   lfClipPrecision;
 		internal byte   lfQuality;
 		internal byte   lfPitchAndFamily;
-		[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]
-		internal string lfFaceName;
-	}  
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst=32)]  // TODO: investigate why this doesn't work
+        //internal byte[] lfFaceName;
+        internal char lfFaceName1;
+        internal char lfFaceName2;
+        internal char lfFaceName3;
+        internal char lfFaceName4;
+        internal char lfFaceName5;
+        internal char lfFaceName6;
+        internal char lfFaceName7;
+        internal char lfFaceName8;
+        internal char lfFaceName9;
+        internal char lfFaceName10;
+        internal char lfFaceName11;
+        internal char lfFaceName12;
+        internal char lfFaceName13;
+        internal char lfFaceName14;
+        internal char lfFaceName15;
+        internal char lfFaceName16;
+        internal char lfFaceName17;
+        internal char lfFaceName18;
+        internal char lfFaceName19;
+        internal char lfFaceName20;
+        internal char lfFaceName21;
+        internal char lfFaceName22;
+        internal char lfFaceName23;
+        internal char lfFaceName24;
+        internal char lfFaceName25;
+        internal char lfFaceName26;
+        internal char lfFaceName27;
+        internal char lfFaceName28;
+        internal char lfFaceName29;
+        internal char lfFaceName30;
+        internal char lfFaceName31;
+        internal char lfFaceName32;
+    }  
 	
 	[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
 	internal struct GdipImageCodecInfo	/*Size 76 bytes*/
