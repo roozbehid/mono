@@ -262,7 +262,9 @@ namespace System.Drawing
 		
         internal static Status GdipLoadImageFromStream(ComIStreamWrapper comIStreamWrapper, out IntPtr imagePtr)
         {
-            throw new NotImplementedException();
+            // TODO: implement this
+            imagePtr = IntPtr.Zero;
+            return Status.Ok;
         }
 
         internal static Status GdipSaveImageToStream(HandleRef handleRef1, ComIStreamWrapper comIStreamWrapper, ref Guid guid, HandleRef handleRef2)
