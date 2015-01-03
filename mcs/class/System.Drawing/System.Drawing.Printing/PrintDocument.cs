@@ -196,24 +196,12 @@ namespace System.Drawing.Printing
 				QueryPageSettings(this, e);
 		}
 
-        public event EventHandler Disposed;
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+		public event EventHandler Disposed;
+		public void Dispose() {
+			throw new NotImplementedException();
+		}
 
-        public ISite Site
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+		public ISite Site { get; set; }
 
 		[SRDescription ("Raised when printing begins")]
 		public event PrintEventHandler BeginPrint;
@@ -226,6 +214,5 @@ namespace System.Drawing.Printing
 
 		[SRDescription ("Raised before printing of a new page begins")]
 		public event QueryPageSettingsEventHandler QueryPageSettings;
-
 	}
 }

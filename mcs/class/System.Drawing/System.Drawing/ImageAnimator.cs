@@ -122,7 +122,7 @@ namespace System.Drawing {
 
 			if (ht.ContainsKey (image)) {
 				AnimateEventArgs evtArgs = (AnimateEventArgs) ht [image];
-                //evtArgs.RunThread.Abort (); // TODO: find a replacement
+				//evtArgs.RunThread.Abort (); // TODO: find a replacement
 				ht.Remove (image);
 			}
 		}

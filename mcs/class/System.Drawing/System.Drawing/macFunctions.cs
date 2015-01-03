@@ -53,15 +53,15 @@ namespace System.Drawing {
 #endif
 
 		static MacSupport () {
-            // TODO: find replacement
-            //foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies ()) {
-            //	if (String.Equals (asm.GetName ().Name, "System.Windows.Forms")) {
-            //		Type driver_type = asm.GetType ("System.Windows.Forms.XplatUICarbon");
-            //		if (driver_type != null) {
-            //			hwnd_delegate = (Delegate) driver_type.GetField ("HwndDelegate", BindingFlags.NonPublic | BindingFlags.Static).GetValue (null);
-            //		}
-            //	}
-            //}
+			// TODO: find replacement
+			//foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies ()) {
+			//	if (String.Equals (asm.GetName ().Name, "System.Windows.Forms")) {
+			//		Type driver_type = asm.GetType ("System.Windows.Forms.XplatUICarbon");
+			//		if (driver_type != null) {
+			//			hwnd_delegate = (Delegate) driver_type.GetField ("HwndDelegate", BindingFlags.NonPublic | BindingFlags.Static).GetValue (null);
+			//		}
+			//	}
+			//}
 		}
 
 		internal static CocoaContext GetCGContextForNSView (IntPtr handle) {

@@ -277,7 +277,7 @@ namespace System.Drawing.Design
 			if (type == null)
 				return;
 
-            AssemblyName = new AssemblyName("System.Drawing");//type.Assembly.GetName();
+			AssemblyName = type.GetTypeInfo().Assembly.GetName();
 			DisplayName = type.Name;
 			TypeName = type.FullName;
 			

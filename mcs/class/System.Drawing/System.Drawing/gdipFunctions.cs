@@ -99,7 +99,7 @@ namespace System.Drawing
 
 		static GDIPlus ()
 		{
-            int platform = 2;//(int) Environment.OSVersion.Platform;
+			int platform = (int) System.Windows.Forms.Environment.OSVersion.Platform;
 			if ((platform == 4) || (platform == 6) || (platform == 128)) {
 				if (Environment.GetEnvironmentVariable ("not_supported_MONO_MWF_USE_NEW_X11_BACKEND") != null || Environment.GetEnvironmentVariable ("MONO_MWF_MAC_FORCE_X11") != null) {
 					UseX11Drawable = true;
@@ -190,7 +190,7 @@ namespace System.Drawing
 				pts[i] = (RectangleF) Marshal.PtrToStructure (pos, typeof (RectangleF));
 			
 			Marshal.FreeHGlobal (prt);			
-		}// TODO:
+		}
 		
 		// Copies an array of Points to unmanaged memory
 		static public IntPtr FromPointToUnManagedMemory (PointF [] pts)
@@ -260,34 +260,29 @@ namespace System.Drawing
 			}
 		}
 		
-        internal static Status GdipLoadImageFromStream(ComIStreamWrapper comIStreamWrapper, out IntPtr imagePtr)
-        {
-            // TODO: implement this
-            imagePtr = IntPtr.Zero;
-            return Status.Ok;
-        }
+		internal static Status GdipLoadImageFromStream(ComIStreamWrapper comIStreamWrapper, out IntPtr imagePtr) {
+			// TODO: implement this
+			imagePtr = IntPtr.Zero;
+			return Status.Ok;
+		}
 
-        internal static Status GdipSaveImageToStream(HandleRef handleRef1, ComIStreamWrapper comIStreamWrapper, ref Guid guid, HandleRef handleRef2)
-        {
+		internal static Status GdipSaveImageToStream(HandleRef handleRef1, ComIStreamWrapper comIStreamWrapper, ref Guid guid, HandleRef handleRef2) {
             throw new NotImplementedException();
         }
 
-        internal static Status GdipCreateMetafileFromStream(ComIStreamWrapper comIStreamWrapper, out IntPtr nativeObject)
-        {
-            throw new NotImplementedException();
-        }
-        internal static Status GdipRecordMetafileStream(ComIStreamWrapper comIStreamWrapper, IntPtr referenceHdc, EmfType type, ref RectangleF frameRect, MetafileFrameUnit frameUnit, string description, out IntPtr nativeObject)
-        {
+        internal static Status GdipCreateMetafileFromStream(ComIStreamWrapper comIStreamWrapper, out IntPtr nativeObject) {
             throw new NotImplementedException();
         }
 
-        internal static Status GdipRecordMetafileStreamI(ComIStreamWrapper comIStreamWrapper, IntPtr referenceHdc, EmfType type, ref Rectangle frameRect, MetafileFrameUnit frameUnit, string description, out IntPtr nativeObject)
-        {
+        internal static Status GdipRecordMetafileStream(ComIStreamWrapper comIStreamWrapper, IntPtr referenceHdc, EmfType type, ref RectangleF frameRect, MetafileFrameUnit frameUnit, string description, out IntPtr nativeObject) {
             throw new NotImplementedException();
         }
 
-        internal static Status GdipGetMetafileHeaderFromStream(ComIStreamWrapper comIStreamWrapper, IntPtr header)
-        {
+        internal static Status GdipRecordMetafileStreamI(ComIStreamWrapper comIStreamWrapper, IntPtr referenceHdc, EmfType type, ref Rectangle frameRect, MetafileFrameUnit frameUnit, string description, out IntPtr nativeObject) {
+            throw new NotImplementedException();
+        }
+
+        internal static Status GdipGetMetafileHeaderFromStream(ComIStreamWrapper comIStreamWrapper, IntPtr header) {
             throw new NotImplementedException();
         }
 
@@ -303,7 +298,6 @@ namespace System.Drawing
 		static internal extern Status GdipCloneBrush (IntPtr brush, out IntPtr clonedBrush);
 		[DllImport("gdiplus.dll")]
 		static internal extern Status GdipDeleteBrush (IntPtr brush);
-
 		[DllImport("gdiplus.dll")]
 		static internal extern Status GdipGetBrushType (IntPtr brush, out BrushType type);
 
@@ -1930,8 +1924,7 @@ namespace System.Drawing
 			
 			public void StreamCloseImpl ()
 			{
-                //stream.Close ();
-                stream.Dispose();
+				stream.Dispose();
 			}
 
 			public StreamCloseDelegate CloseDelegate {
