@@ -3984,8 +3984,7 @@ namespace System.Windows.Forms
 						line = sr.ReadLine ();
 					}
 					
-                    //sr.Close ();
-                    sr.Dispose();
+					sr.Dispose();
 				}
 			}
 			
@@ -4231,7 +4230,7 @@ namespace System.Windows.Forms
 		
 		public override ArrayList GetMyComputerContent ()
 		{
-            string[] logical_drives = new string[0];//Directory.GetLogicalDrives ();
+			string[] logical_drives = new string[0]; // TODO: see if we can implement this
 			
 			ArrayList my_computer_content_arraylist = new ArrayList ();
 			
@@ -4612,8 +4611,7 @@ namespace System.Windows.Forms
  					line = sr.ReadLine ();
  				}
 				
-                //sr.Close ();
-                sr.Dispose();
+				sr.Dispose();
 				
 				block_devices.Sort (mountComparer);
 				network_devices.Sort (mountComparer);

@@ -114,25 +114,6 @@ namespace System.Windows.Forms {
 			}
 			return base.ConvertTo (context, culture, value, destinationType);
 		}
-        /*
-		public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) {
-			Keys [] stdVal = new Keys [] { Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7,
-			Keys.D8, Keys.D9, Keys.Alt, Keys.Back, Keys.Control, Keys.Delete, Keys.End, Keys.Return, Keys.F1,
-			Keys.F10, Keys.F11, Keys.F12, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9,
-			Keys.Home, Keys.Insert, Keys.Next, Keys.PageUp, Keys.Shift };
-
-			return new TypeConverter.StandardValuesCollection (stdVal);
-		}
-
-		public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) {
-			
-			return false;
-		}
-
-		public override bool GetStandardValuesSupported(ITypeDescriptorContext context) {
-			return true;
-		}
-        */
 		#endregion	// Public Instance Methods
 	}
 }

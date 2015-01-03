@@ -179,13 +179,6 @@ namespace System.Windows.Forms
 			sb.Append (Environment.NewLine + Environment.NewLine);
 			sb.Append ("Loaded assemblies:" + Environment.NewLine + Environment.NewLine);
 
-			//foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies ()) {
-			//	AssemblyName an = a.GetName ();
-			//	sb.AppendFormat ("Name:\t{0}" + Environment.NewLine, an.Name);
-			//	sb.AppendFormat ("Version:\t{0}" + Environment.NewLine, an.Version);
-			//	sb.AppendFormat ("Location:\t{0}" + Environment.NewLine, an.CodeBase);
-			//	sb.Append (Environment.NewLine);
-			//}
 			textBoxDetails.Text = sb.ToString ();
 		}
 

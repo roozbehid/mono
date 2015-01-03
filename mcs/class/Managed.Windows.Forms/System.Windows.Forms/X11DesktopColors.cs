@@ -240,8 +240,7 @@ namespace System.Windows.Forms {
 				line = sr.ReadLine();
 			}
 			
-            //sr.Close();
-            sr.Dispose();
+			sr.Dispose();
 			
 			return true;
 		}

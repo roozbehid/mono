@@ -78,7 +78,7 @@ namespace System.Windows.Forms {
 				ovls[i] = reader.ReadInt16 ();
 			}
 
-            byte[] decoded_buffer = decoded.ToArray();
+			byte[] decoded_buffer = decoded.ToArray();
 			int bmp_offset = 28;
 			// FileSize field from the bitmap file header
 			int filesize = decoded_buffer [bmp_offset + 2] + (decoded_buffer [bmp_offset + 3] << 8) +

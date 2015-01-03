@@ -52,7 +52,7 @@ namespace System.Windows.Forms {
 
 		private DataSourceUpdateMode datasource_update_mode;
 		private ControlUpdateMode control_update_mode;
-        private object datasource_null_value = null;//Convert.DBNull;
+        private object datasource_null_value = DBNull.Value;
 		private object null_value;
 		private IFormatProvider format_info;
 		private string format_string;
@@ -378,7 +378,7 @@ namespace System.Windows.Forms {
 			if (is_null_desc != null) {
 				bool is_null = (bool) is_null_desc.GetValue (manager.Current);
 				if (is_null) {
-                    data = null;/*Convert.DBNull*/;
+					data = null;
 					return;
 				}
 			}
@@ -500,12 +500,12 @@ namespace System.Windows.Forms {
 			OnParse (e);
 			if (data_type.IsInstanceOfType (e.Value))
 				return e.Value;
-			//if (e.Value == Convert.DBNull)
-			//	return e.Value;
+			if (e.Value == DBNull.Value)
+				return e.Value;
 			if (e.Value == null) {
 				bool nullable = data_type.GetTypeInfo().IsGenericType && !data_type.GetTypeInfo().ContainsGenericParameters &&
 					data_type.GetGenericTypeDefinition () == typeof (Nullable<>);
-				return data_type.GetTypeInfo().IsValueType && !nullable ? (object)null/*Convert.DBNull*/ : null;
+				return data_type.GetTypeInfo().IsValueType && !nullable ? DBNull.Value : null;
 			}
 
 			return ConvertData (e.Value, data_type);
@@ -520,7 +520,7 @@ namespace System.Windows.Forms {
 				return e.Value;
 
 			if (formatting_enabled) {
-				if ((e.Value == null || e.Value == null/*Convert.DBNull*/) && null_value != null)
+				if ((e.Value == null || e.Value == DBNull.Value) && null_value != null)
 					return null_value;
 				
 				if (e.Value is IFormattable && data_type == typeof (string)) {
@@ -530,7 +530,7 @@ namespace System.Windows.Forms {
 			}
 
 			if (e.Value == null && data_type == typeof (object))
-                return null;/*Convert.DBNull*/;
+				return DBNull.Value;
 
 			return ConvertData (data, data_type);
 		}

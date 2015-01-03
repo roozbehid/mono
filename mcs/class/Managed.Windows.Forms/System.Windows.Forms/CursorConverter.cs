@@ -105,22 +105,5 @@ namespace System.Windows.Forms
 			}
 			return base.ConvertTo (context, culture, value, destinationType);
 		}
-        /*
-		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			PropertyInfo[] props = typeof (Cursors).GetProperties();
-			
-			ArrayList vals = new ArrayList ();
-
-			for (int i = 0; i < props.Length; i++) {
-				vals.Add (props [i].GetValue (null, null));
-			}
-			return new StandardValuesCollection (vals);
-		}
-
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			return true;
-		}*/
 	}
 }

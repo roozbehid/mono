@@ -282,8 +282,8 @@ namespace System.Windows.Forms.PropertyGridInternal
 		System.ComponentModel.PropertyDescriptor ITypeDescriptorContext.PropertyDescriptor {
 			get {
 				if (ParentEntry != null && ParentEntry.PropertyDescriptor != null)
-                    return null;//ParentEntry.PropertyDescriptor; 
-                return null;//PropertyDescriptor;
+					return null;
+				return null;
 			}
 		}
 		#endregion

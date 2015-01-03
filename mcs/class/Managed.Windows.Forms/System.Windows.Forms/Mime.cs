@@ -588,8 +588,7 @@ namespace System.Windows.Forms
 					}
 				}
 				
-                //file_stream.Close ();
-                file_stream.Dispose();
+				file_stream.Dispose();
 			} catch (Exception) {
 				return false;
 			}
@@ -701,10 +700,8 @@ namespace System.Windows.Forms
 						MakeMatches ();
 					}
 					
-                    //br.Close ();
-                    br.Dispose();
-                    //fs.Close ();
-                    fs.Dispose();
+					br.Dispose();
+					fs.Dispose();
 				} catch (Exception ) {
 				}
 			}
@@ -906,8 +903,7 @@ namespace System.Windows.Forms
 						}
 					}
 					
-                    //sr.Close ();
-                    sr.Dispose();
+					sr.Dispose();
 				} catch (Exception ) {
 				}
 			}
@@ -933,8 +929,7 @@ namespace System.Windows.Forms
 						Mime.SubClasses.Add (split [0], split [1]);
 					}
 					
-                    //sr.Close ();
-                    sr.Dispose();
+					sr.Dispose();
 				} catch (Exception ) {
 				}
 			}
@@ -960,8 +955,7 @@ namespace System.Windows.Forms
 						Mime.Aliases.Add (split [0], split [1]);
 					}
 					
-                    //sr.Close ();
-                    sr.Dispose();
+					sr.Dispose();
 				} catch (Exception ) {
 				}
 			}

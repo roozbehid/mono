@@ -253,45 +253,16 @@ namespace System.Windows.Forms
 		public static string CompanyName {
 			get {
 				string company = string.Empty;
-                /*
-				Assembly assembly = Assembly.GetEntryAssembly ();
-				
-				if (assembly == null)
-					assembly = Assembly.GetCallingAssembly ();
 
-				AssemblyCompanyAttribute[] attrs = (AssemblyCompanyAttribute[])
-					assembly.GetCustomAttributes (typeof(AssemblyCompanyAttribute), true);
-				if (attrs != null && attrs.Length > 0)
-					company = attrs [0].Company;
-
-				// If there is no [AssemblyCompany], return the outermost namespace
-				// on Main ()
-				if (company == null || company.Length == 0)
-					if (assembly.EntryPoint != null) {
-						company = assembly.EntryPoint.DeclaringType.Namespace;
-
-						if (company != null) {
-							int firstDot = company.IndexOf ('.');
-							if (firstDot >= 0)
-								company = company.Substring (0, firstDot);
-						}
-					}
-
-				// If that doesn't work, return the name of class containing Main ()
-				if (company == null || company.Length == 0)
-					if (assembly.EntryPoint != null)
-						company = assembly.EntryPoint.DeclaringType.FullName;
-				*/
 				return company;
 			}
 		}
 
 		public static CultureInfo CurrentCulture {
 			get {
-                return CultureInfo.CurrentUICulture;//Thread.CurrentThread.CurrentUICulture;
+                return CultureInfo.CurrentUICulture;
 			}
 			set {
-                //Thread.CurrentThread.CurrentUICulture = value;
                 CultureInfo.CurrentUICulture = value;
 			}
 		}
@@ -326,35 +297,7 @@ namespace System.Windows.Forms
 		public static string ProductName {
 			get {
 				string name = string.Empty;
-				/*
-				Assembly assembly = Assembly.GetEntryAssembly ();
-				
-				if (assembly == null)
-					assembly = Assembly.GetCallingAssembly ();
 
-				AssemblyProductAttribute[] attrs = (AssemblyProductAttribute[])
-					assembly.GetCustomAttributes (typeof(AssemblyProductAttribute), true);
-
-				if (attrs != null && attrs.Length > 0)
-					name = attrs [0].Product;
-
-				// If there is no [AssemblyProduct], .NET returns the name of 
-				// the innermost namespace and if that fails, resorts to the 
-				// name of the class containing Main ()
-				if (name == null || name.Length == 0)
-					if (assembly.EntryPoint != null) {
-						name = assembly.EntryPoint.DeclaringType.Namespace;
-
-						if (name != null) {
-							int lastDot = name.LastIndexOf ('.');
-							if (lastDot >= 0 && lastDot < name.Length - 1)
-								name = name.Substring (lastDot + 1);
-						}
-
-						if (name == null || name.Length == 0)
-							name = assembly.EntryPoint.DeclaringType.FullName;
-					}
-                    */
 				return name;
 			}
 		}
@@ -362,37 +305,7 @@ namespace System.Windows.Forms
 		public static string ProductVersion {
 			get {
 				String version = string.Empty;
-                /*
-				Assembly assembly = Assembly.GetEntryAssembly ();
-				
-				if (assembly == null)
-					assembly = Assembly.GetCallingAssembly ();
 
-				AssemblyInformationalVersionAttribute infoVersion =
-					Attribute.GetCustomAttribute (assembly,
-					typeof (AssemblyInformationalVersionAttribute))
-					as AssemblyInformationalVersionAttribute;
-					
-				if (infoVersion != null)
-					version = infoVersion.InformationalVersion;
-
-				// If [AssemblyFileVersion] is present it is used
-				// before resorting to assembly version
-				if (version == null || version.Length == 0) {
-					AssemblyFileVersionAttribute fileVersion =
-						Attribute.GetCustomAttribute (assembly,
-						typeof (AssemblyFileVersionAttribute))
-						as AssemblyFileVersionAttribute;
-					if (fileVersion != null)
-						version = fileVersion.Version;
-				}
-
-				// If neither [AssemblyInformationalVersionAttribute]
-				// nor [AssemblyFileVersion] are present, then use
-				// the assembly version
-				if (version == null || version.Length == 0)
-					version = assembly.GetName ().Version.ToString ();
-                    */
 				return version;
 			}
 		}

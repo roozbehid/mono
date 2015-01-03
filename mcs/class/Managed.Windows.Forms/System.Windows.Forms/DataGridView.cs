@@ -6261,11 +6261,6 @@ namespace System.Windows.Forms {
 			PrepareEditingRow (false, true);
 		}
 		
-        private bool IsColumnAlreadyBound(object name)
-        {
-            throw new NotImplementedException();
-        }
-
 		private void MoveCurrentCell (int x, int y, bool select, bool isControl, bool isShift, bool scroll)
 		{
 			if (x == -1 || y == -1)

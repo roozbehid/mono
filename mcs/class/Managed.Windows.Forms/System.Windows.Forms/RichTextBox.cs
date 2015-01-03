@@ -329,8 +329,7 @@ namespace System.Windows.Forms {
 
 				InsertRTFFromStream(data, 0, 1);
 
-				//data.Close();
-                data.Dispose();
+				data.Dispose();
 
 				Invalidate();
 			}
@@ -389,8 +388,7 @@ namespace System.Windows.Forms {
 					reuse_line = true;
 
 				InsertRTFFromStream(data, cursor_x, cursor_y, out x, out y, out chars);
-                //data.Close();
-                data.Dispose();
+				data.Dispose();
 
 				int nl_length = document.LineEndingLength (XplatUI.RunningOnUnix ? LineEnding.Rich : LineEnding.Hard);
 				document.CharIndexToLineTag(sel_start + chars + (y - document.selection_start.line.line_no) * nl_length, 
@@ -1002,8 +1000,7 @@ namespace System.Windows.Forms {
 #endif
 			finally {
 				if (data != null) {
-                    //data.Close();
-                    data.Dispose();
+					data.Dispose();
 				}
 			}
 		}
@@ -1101,8 +1098,7 @@ namespace System.Windows.Forms {
 
 //			finally {
 				if (data != null) {
-                //data.Close();
-                data.Dispose();
+					data.Dispose();
 				}
 //			}
 		}

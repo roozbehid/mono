@@ -1138,9 +1138,9 @@ namespace System.Windows.Forms
 			data.Args = args;
 			data.Result = result;
 
-            //if (!ExecutionContext.IsFlowSuppressed ()) { // TODO: investigate
+			//if (!ExecutionContext.IsFlowSuppressed ()) { // TODO: investigate
 				data.Context = ExecutionContext.Capture ();
-		//	}
+			//}
 
 			XplatUI.SendAsyncMethod (data);
 			return result;
@@ -2916,19 +2916,7 @@ namespace System.Windows.Forms
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string ProductName {
 			get {
-                /*Type t = typeof (AssemblyProductAttribute);
-				Assembly assembly = GetType().Module.Assembly;
-				object [] attrs = assembly.GetCustomAttributes (t, false);
-				AssemblyProductAttribute a = null;
-				// On MS we get a NullRefException if product attribute is not
-				// set. 
-				if (attrs != null && attrs.Length > 0)
-					a = (AssemblyProductAttribute) attrs [0];
-				if (a == null) {
-					return GetType ().Namespace;
-				}
-				return a.Product;*/
-                return "";
+				return "";
 			}
 		}
 
@@ -2937,13 +2925,7 @@ namespace System.Windows.Forms
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public string ProductVersion {
 			get {
-                /*Type t = typeof (AssemblyVersionAttribute);
-				Assembly assembly = GetType().Module.Assembly;
-				object [] attrs = assembly.GetCustomAttributes (t, false);
-				if (attrs == null || attrs.Length < 1)
-					return "1.0.0.0";
-				return ((AssemblyVersionAttribute)attrs [0]).Version;*/
-                return "";
+				return "";
 			}
 		}
 

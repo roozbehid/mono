@@ -422,7 +422,7 @@ namespace System.Windows.Forms {
 
 				assembly = new AssemblyName();
 				assembly.Name = "XplatUIWin32.FuncPtrInterface";
-                assembly_builder = null;//AppDomain.CurrentDomain.DefineDynamicAssembly(assembly, AssemblyBuilderAccess.Run);
+				assembly_builder = AssemblyBuilder.DefineDynamicAssembly(assembly, AssemblyBuilderAccess.Run);
 
 				MethodArguments = new object[6];
 				GetDataMethod = CreateFuncPtrInterface(assembly_builder, "GetData", typeof(uint), 3);
@@ -1045,10 +1045,10 @@ namespace System.Windows.Forms {
 			if (param_count > 1) ig.Emit (OpCodes.Ldarg_2);
 			if (param_count > 0) ig.Emit (OpCodes.Ldarg_1);
 			ig.Emit (OpCodes.Ldarg_0);
-			ig.EmitCalli (OpCodes.Calli, CallingConvention.StdCall, ret_type, param_types);
+			ig.EmitCalli (OpCodes.Calli, CallingConventions.Standard, ret_type, param_types, null);
 			ig.Emit (OpCodes.Ret);
 
-			Type t = tb.CreateType ();
+			Type t = tb.CreateTypeInfo ().AsType ();
 			MethodInfo m = t.GetMethod (MethodName);
 
 			return m;

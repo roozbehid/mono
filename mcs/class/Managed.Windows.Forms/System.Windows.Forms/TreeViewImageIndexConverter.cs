@@ -77,12 +77,6 @@ namespace System.Windows.Forms {
 			} else
 				return base.ConvertTo (context, culture, value, destinationType);
 		}
-        /*
-		public override StandardValuesCollection GetStandardValues (System.ComponentModel.ITypeDescriptorContext context)
-		{
-			int[] stdVal = new int[] { -1, -2 };
-			return new TypeConverter.StandardValuesCollection (stdVal);
-		}*/
 		#endregion
 	}
 }

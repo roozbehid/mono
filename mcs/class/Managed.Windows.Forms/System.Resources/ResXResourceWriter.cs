@@ -32,7 +32,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace System.Resources
 {
@@ -293,8 +292,7 @@ namespace System.Resources
 			}
 
 			WriteBytes (name, null, ms.ToArray (), 0, (int) ms.Length, comment);
-            //ms.Close ();
-            ms.Dispose();
+			ms.Dispose();
 		}
 		
 		public void AddResource (string name, string value)
@@ -590,8 +588,7 @@ namespace System.Resources
 
 			writer.WriteEndElement ();
 			writer.WriteEndElement ();
-            //ms.Close ();
-            ms.Dispose();
+			ms.Dispose();
 		}
 
 		public void Close ()

@@ -39,7 +39,6 @@ using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Threading;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
@@ -225,7 +224,7 @@ namespace System.Windows.Forms
 			KeyDown += new KeyEventHandler (OnKeyDownTB);
 			LostFocus += new EventHandler (OnLostFocusTB);
 			GotFocus += new EventHandler (OnGotFocusTB);
-			holdclick_timer.Tick += new  EventHandler (OnFirstClickTimer);
+			holdclick_timer.Tick += new EventHandler (OnFirstClickTimer);
 
 			SetStyle (ControlStyles.UserPaint | ControlStyles.Opaque | ControlStyles.UseTextForAccessibility, false);
 		}

@@ -62,7 +62,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 			if (obj == null)
 				return null;
 
-            return null;//TypeDescriptor.GetDefaultProperty (obj);
+			return null;
 		}
 
 		public override string HelpKeyword {

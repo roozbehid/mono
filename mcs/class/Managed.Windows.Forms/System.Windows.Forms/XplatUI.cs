@@ -133,7 +133,7 @@ namespace System.Windows.Forms {
 
 		public static bool RunningOnUnix {
 			get {
-                int p = 5;//(int) Environment.OSVersion.Platform;
+				int p = (int) Environment.OSVersion.Platform;
 				
 				return (p == 4 || p == 6 || p == 128);
 			}
@@ -148,7 +148,7 @@ namespace System.Windows.Forms {
 		// and try to register same class name we fail.
 		internal static string GetDefaultClassName (Type type)
 		{
-			return "SWFClass" + 1588485/*Thread.GetDomainID ().ToString ()*/ + "." + type.ToString ();
+			return "SWFClass" + 1 + "." + type.ToString ();
 		}
 
 		static public Size Border3DSize {

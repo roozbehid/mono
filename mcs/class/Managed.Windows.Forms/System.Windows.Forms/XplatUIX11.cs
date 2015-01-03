@@ -1308,8 +1308,7 @@ namespace System.Windows.Forms {
 						memory_stream.Position = 0;
 						BinaryFormatter formatter = new BinaryFormatter ();
 						Clipboard.Item = formatter.Deserialize (memory_stream);
-                        //memory_stream.Close ();
-                        memory_stream.Dispose();
+						memory_stream.Dispose();
 					}
 				}
 
@@ -1902,8 +1901,7 @@ namespace System.Windows.Forms {
 							memory_stream.Position = 0;
 							for (int i = 0; i < buflen; i++)
 								Marshal.WriteByte (buffer, i, (byte)memory_stream.ReadByte ());
-							//memory_stream.Close ();
-                            memory_stream.Dispose();
+							memory_stream.Dispose();
 
 							XChangeProperty (DisplayHandle, xevent.SelectionRequestEvent.requestor, (IntPtr)xevent.SelectionRequestEvent.property, (IntPtr)xevent.SelectionRequestEvent.target,
 									8, PropertyMode.Replace, buffer, buflen);

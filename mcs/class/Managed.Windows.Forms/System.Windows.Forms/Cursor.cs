@@ -162,13 +162,6 @@ namespace System.Windows.Forms {
 				}
 			}
 
-			// Try a different way, previous failed
-			//using (Stream s = Assembly.GetExecutingAssembly ().GetManifestResourceStream (resource)) {
-			//	if (s != null) {
-			//		CreateCursor (s);
-			//		return;
-			//	}
-			//}
 			throw new FileNotFoundException ("Resource name was not found: `" + resource + "'");
 		}
 		#endregion	// Public Constructors
@@ -562,12 +555,10 @@ namespace System.Windows.Forms {
 				}
 				
 				cursor_data[j] = curdata;
-                //cih_reader.Close();
-                cih_reader.Dispose();
+				cih_reader.Dispose();
 			}			
 
-            //reader.Close();
-            reader.Dispose();
+			reader.Dispose();
 		}
 
 		private Bitmap ToBitmap(bool xor, bool transparent)

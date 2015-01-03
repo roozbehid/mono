@@ -109,8 +109,6 @@ namespace System.Windows.Forms {
 			get { return cellValue; }
 		}
 
-        public bool Handled { get; internal set; }
-
 		public void Paint (Rectangle clipBounds, DataGridViewPaintParts paintParts) {
 			if (rowIndex < -1 || rowIndex >= dataGridView.Rows.Count)
 				throw new InvalidOperationException("Invalid \"RowIndex.\"");

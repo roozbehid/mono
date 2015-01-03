@@ -39,11 +39,7 @@ namespace System.Windows.Forms {
 		public void LoadLayouts ()
 		{
 			ResourceManager	rm;
-			rm = new ResourceManager ("keyboards", this.GetType().GetTypeInfo().Assembly /*System.Reflection.Assembly.GetExecutingAssembly()*/);
-			//keyboard_layouts = (KeyboardLayout []) rm.GetObject ("keyboard_table");
-
-			//vkey_table = (int [][]) rm.GetObject ("vkey_table");
-			//scan_table = (short [][]) rm.GetObject ("scan_table");
+			rm = new ResourceManager ("keyboards", this.GetType().GetTypeInfo().Assembly);
 		}
 
 		public KeyboardLayout [] Layouts {

@@ -198,8 +198,7 @@ namespace System.Resources
 				header.Verify ();
 			} finally {
 				if (fileName != null) {
-                    //stream.Close ();
-                    stream.Dispose();
+					stream.Dispose();
 					stream = null;
 				}
 				xmlReader = null;
@@ -332,8 +331,7 @@ namespace System.Resources
 		public void Close ()
 		{
 			if (reader != null) {
-                //reader.Close ();
-                reader.Dispose();
+				reader.Dispose();
 				reader = null;
 			}
 		}

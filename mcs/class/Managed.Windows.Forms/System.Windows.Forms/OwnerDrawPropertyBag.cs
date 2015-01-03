@@ -51,7 +51,7 @@ namespace System.Windows.Forms {
 			SerializationInfoEnumerator	en;
 			SerializationEntry		e;
 
-            en = null; //info.GetEnumerator();
+			en = null; //info.GetEnumerator();
 
 			while (en.MoveNext()) {
 				e = (SerializationEntry)en.Current;

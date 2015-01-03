@@ -97,8 +97,6 @@ namespace System.Windows.Forms {
 			get { return rowState; }
 		}
 
-        public bool Handled { get; internal set; }
-
 		public void DrawFocus (Rectangle bounds, bool cellsPaintSelectionBackground) {
 			if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
 				throw new InvalidOperationException ("Invalid RowIndex.");
