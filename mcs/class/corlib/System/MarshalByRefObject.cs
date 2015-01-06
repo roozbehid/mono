@@ -30,7 +30,9 @@
 //
 
 using System.Threading;
+#if !DISABLE_REMOTING
 using System.Runtime.Remoting;
+#endif
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
 
@@ -53,7 +55,7 @@ namespace System
 		}
 
 #if DISABLE_REMOTING
-		internal ServerIdentity ObjectIdentity {
+		internal object ObjectIdentity {
 			get { throw new NotSupportedException (); }
 			set { throw new NotSupportedException (); }
 		}
@@ -82,7 +84,13 @@ namespace System
 #endif
 
 		[SecurityPermission (SecurityAction.LinkDemand, Infrastructure = true)]
-		public virtual ObjRef CreateObjRef (Type requestedType)
+		public virtual
+#if DISABLE_REMOTING
+		object
+#else
+		ObjRef
+#endif
+		CreateObjRef (Type requestedType)
 		{
 #if DISABLE_REMOTING
 			throw new NotSupportedException ();

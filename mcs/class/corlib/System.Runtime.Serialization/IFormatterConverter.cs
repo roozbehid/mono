@@ -36,7 +36,6 @@ namespace System.Runtime.Serialization {
 	[System.Runtime.InteropServices.ComVisibleAttribute (true)]
 	public interface IFormatterConverter {
 		object Convert (object value, Type type);
-		object Convert (object value, TypeCode typeCode);
 		
 		bool        ToBoolean  (object value);
 		byte        ToByte     (object value);

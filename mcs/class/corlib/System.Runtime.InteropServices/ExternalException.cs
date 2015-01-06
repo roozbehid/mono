@@ -51,10 +51,6 @@ namespace System.Runtime.InteropServices
 			HResult = -2147467259;
 		}
 
-		protected ExternalException(SerializationInfo info, StreamingContext context)
-			: base (info, context) {
-		}
-
 		public ExternalException (string message, Exception inner)
 			: base (message, inner)
 		{

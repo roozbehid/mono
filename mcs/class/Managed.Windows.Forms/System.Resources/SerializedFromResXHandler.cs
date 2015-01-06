@@ -31,10 +31,8 @@ using System.Reflection;
 using System.ComponentModel.Design;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Text;
-using System.Runtime.Serialization.Formatters.Soap;
 
 namespace System.Resources {
 	internal class SerializedFromResXHandler : ResXDataNodeHandler, IWritableHandler {
@@ -96,35 +94,7 @@ namespace System.Resources {
 
 		object DeserializeObject (ITypeResolutionService typeResolver)
 		{
-			try {
-				if (mime_type == ResXResourceWriter.SoapSerializedObjectMimeType) {
-					//FIXME: theres a test in the suite to check that a type converter converts from invariant string
-					//do i need to take the string culture into consideration here?
-					SoapFormatter soapF = new SoapFormatter ();
-					if (binder == null)
-						binder = new CustomBinder (typeResolver);
-					soapF.Binder = binder;
-					byte [] data = Convert.FromBase64String (dataString);
-					using (MemoryStream s = new MemoryStream (data)) {
-						return soapF.Deserialize (s);
-					}
-				} else if (mime_type == ResXResourceWriter.BinSerializedObjectMimeType) {
-					BinaryFormatter binF = new BinaryFormatter ();
-					if (binder == null)
-						binder = new CustomBinder (typeResolver);
-					binF.Binder = binder;
-					byte [] data = Convert.FromBase64String (dataString);
-					using (MemoryStream s = new MemoryStream (data)) {
-						return binF.Deserialize (s);
-					}
-				} else // invalid mime_type
-					return null; 
-			} catch (SerializationException ex) { 
-				if (ex.Message.StartsWith ("Couldn't find assembly"))
-					throw new ArgumentException (ex.Message);
-				else
-					throw ex;
-			}
+			return null;
 		}
 
 		sealed class CustomBinder : SerializationBinder 

@@ -28,7 +28,6 @@
 
 using System.ComponentModel;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
 using System.Reflection;
@@ -46,7 +45,7 @@ namespace System.Resources
 		private string		filename;
 		private Stream		stream;
 		private TextWriter	textwriter;
-		private XmlTextWriter	writer;
+		private XmlWriter	writer;
 		private bool		written;
 		private string		base_path;
 		#endregion	// Local Variables
@@ -101,8 +100,7 @@ namespace System.Resources
 			if (textwriter == null)
 				textwriter = new StreamWriter (stream, Encoding.UTF8);
 
-			writer = new XmlTextWriter (textwriter);
-			writer.Formatting = Formatting.Indented;
+			writer = XmlWriter.Create (textwriter, new XmlWriterSettings () { Indent = true });
 			writer.WriteStartDocument ();
 			writer.WriteStartElement ("root");
 			writer.WriteRaw (schema);
@@ -280,19 +278,6 @@ namespace System.Resources
 				WriteBytes (name, value.GetType (), b, comment);
 				return;
 			}
-			
-			MemoryStream ms = new MemoryStream ();
-			BinaryFormatter fmt = new BinaryFormatter ();
-			try {
-				fmt.Serialize (ms, value);
-			} catch (Exception e) {
-				throw new InvalidOperationException ("Cannot add a " + value.GetType () +
-								     "because it cannot be serialized: " +
-								     e.Message);
-			}
-
-			WriteBytes (name, null, ms.ToArray (), 0, (int) ms.Length, comment);
-			ms.Dispose();
 		}
 		
 		public void AddResource (string name, string value)
@@ -561,34 +546,6 @@ namespace System.Resources
 				writer.WriteEndElement ();
 				return;
 			}
-
-			MemoryStream ms = new MemoryStream ();
-			BinaryFormatter fmt = new BinaryFormatter ();
-			try {
-				fmt.Serialize (ms, value);
-			} catch (Exception e) {
-				throw new InvalidOperationException ("Cannot add a " + value.GetType () +
-								     "because it cannot be serialized: " +
-								     e.Message);
-			}
-
-			writer.WriteStartElement ("metadata");
-			writer.WriteAttributeString ("name", name);
-
-			if (type != null) {
-				writer.WriteAttributeString ("type", type.AssemblyQualifiedName);
-				writer.WriteAttributeString ("mimetype", ByteArraySerializedObjectMimeType);
-				writer.WriteStartElement ("value");
-				WriteNiceBase64 (ms.ToArray (), 0, ms.ToArray().Length);
-			} else {
-				writer.WriteAttributeString ("mimetype", BinSerializedObjectMimeType);
-				writer.WriteStartElement ("value");
-				writer.WriteBase64 (ms.ToArray(), 0, ms.ToArray().Length);
-			}
-
-			writer.WriteEndElement ();
-			writer.WriteEndElement ();
-			ms.Dispose();
 		}
 
 		public void Close ()
@@ -598,7 +555,7 @@ namespace System.Resources
 			}
 
 			if (writer != null) {
-				writer.Close ();
+				writer.Dispose ();
 				stream = null;
 				filename = null;
 				textwriter = null;

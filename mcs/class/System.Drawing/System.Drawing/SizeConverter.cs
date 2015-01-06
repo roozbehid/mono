@@ -32,6 +32,7 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
+using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
 namespace System.Drawing {

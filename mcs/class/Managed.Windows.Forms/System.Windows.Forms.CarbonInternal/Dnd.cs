@@ -34,7 +34,6 @@ using System.Collections;
 using System.Windows.Forms;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace System.Windows.Forms.CarbonInternal {
 	internal delegate void DragTrackingDelegate (short message, IntPtr window, IntPtr data, IntPtr dragref);
@@ -184,20 +183,7 @@ namespace System.Windows.Forms.CarbonInternal {
 				// implement me
 				throw new NotSupportedException ("Implement me.");
 			} else if (data is ISerializable) {
-				MemoryStream stream = new MemoryStream ();
-				BinaryFormatter bf = new BinaryFormatter ();
-
-				bf.Serialize (stream, data);
-
-				dataptr = Marshal.AllocHGlobal ((int) stream.Length);
-				stream.Seek (0, 0);
-
-				for (int i = 0; i < stream.Length; i++) {
-					Marshal.WriteByte (dataptr, i, (byte) stream.ReadByte ());
-				}
-				
-				type = (IntPtr) typeMonoSerializedObject;
-				size = (int) stream.Length;
+				throw new NotImplementedException ("BinaryFormatter not implemented.");
 			} else {
 				dataptr = (IntPtr) GCHandle.Alloc (data);
 
@@ -310,17 +296,7 @@ namespace System.Windows.Forms.CarbonInternal {
 		}
 
 		internal DataObject DeserializeObject (ArrayList flavorlist) {
-			DataObject data = new DataObject ();
-			MemoryStream stream = new MemoryStream (this.DataArray);
-			BinaryFormatter bf = new BinaryFormatter ();
-
-			if (stream.Length == 0)
-				return data;
-
-			stream.Seek (0, 0);
-			data.SetData (bf.Deserialize (stream));
-
-			return data;
+			throw new NotImplementedException ("BinaryFormatter not implemented.");
 		}
 
 		internal DataObject ConvertToObject (ArrayList flavorlist) {

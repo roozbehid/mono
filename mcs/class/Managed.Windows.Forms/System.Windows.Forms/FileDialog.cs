@@ -3936,7 +3936,7 @@ namespace System.Windows.Forms
 			// GNOME
 			if (File.Exists (recently_used_path)) {
 				try {
-					XmlTextReader xtr = new XmlTextReader (recently_used_path);
+					XmlReader xtr = XmlReader.Create (recently_used_path);
 					while (xtr.Read ()) {
 						if (xtr.NodeType == XmlNodeType.Element && xtr.Name.ToUpper () == "URI") {
 							xtr.Read ();
@@ -3949,7 +3949,7 @@ namespace System.Windows.Forms
 								}
 						}
 					}
-					xtr.Close ();
+					xtr.Dispose ();
 				} catch (Exception) {
 					
 				}
@@ -4838,11 +4838,11 @@ namespace System.Windows.Forms
 			private void Open (string filename)
 			{
 				try {
-					XmlTextReader xtr = new XmlTextReader (filename);
+					XmlReader xtr = XmlReader.Create (filename);
 					
 					ReadConfig (xtr);
 					
-					xtr.Close ();
+					xtr.Dispose ();
 				} catch (Exception) {
 				}
 			}
@@ -4850,12 +4850,11 @@ namespace System.Windows.Forms
 			public void Flush ()
 			{
 				try {
-					XmlTextWriter xtw = new XmlTextWriter (full_file_name, null);
-					xtw.Formatting = Formatting.Indented;
+					XmlWriter xtw = XmlWriter.Create (File.OpenWrite (full_file_name), new XmlWriterSettings { Indent = true });
 					
 					WriteConfig (xtw);
 					
-					xtw.Close ();
+					xtw.Dispose ();
 
 					if (!XplatUI.RunningOnUnix)
 						File.SetAttributes (full_file_name, FileAttributes.Hidden);
@@ -4892,7 +4891,7 @@ namespace System.Windows.Forms
 				}
 			}
 			
-			private void ReadConfig (XmlTextReader xtr)
+			private void ReadConfig (XmlReader xtr)
 			{
 				if (!CheckForMWFConfig (xtr))
 					return;
@@ -4914,7 +4913,7 @@ namespace System.Windows.Forms
 				}
 			}
 			
-			private bool CheckForMWFConfig (XmlTextReader xtr)
+			private bool CheckForMWFConfig (XmlReader xtr)
 			{
 				if (xtr.Read ()) {
 					if (xtr.NodeType == XmlNodeType.Element) {
@@ -4926,7 +4925,7 @@ namespace System.Windows.Forms
 				return false;
 			}
 			
-			private void WriteConfig (XmlTextWriter xtw)
+			private void WriteConfig (XmlWriter xtw)
 			{
 				if (classes_hashtable.Count == 0)
 					return;
@@ -4993,7 +4992,7 @@ namespace System.Windows.Forms
 					}
 				}
 				
-				public void ReadXml (XmlTextReader xtr)
+				public void ReadXml (XmlReader xtr)
 				{
 					while (xtr.Read ()) {
 						switch (xtr.NodeType) {
@@ -5017,7 +5016,7 @@ namespace System.Windows.Forms
 					}
 				}
 				
-				public void WriteXml (XmlTextWriter xtw)
+				public void WriteXml (XmlWriter xtw)
 				{
 					if (classvalues_hashtable.Count == 0)
 						return;
@@ -5058,7 +5057,7 @@ namespace System.Windows.Forms
 					return value;
 				}
 				
-				public void ReadXml (XmlTextReader xtr)
+				public void ReadXml (XmlReader xtr)
 				{
 					string type;
 					string single_value;
@@ -5066,7 +5065,7 @@ namespace System.Windows.Forms
 					type = xtr.GetAttribute ("type");
 					
 					if (type == "byte_array" || type.IndexOf ("-array") == -1) {
-						single_value = xtr.ReadString ();
+						throw new NotImplementedException ("Reading from element is not supported.");
 						
 						if (type == "string") {
 							value = single_value;
@@ -5090,14 +5089,15 @@ namespace System.Windows.Forms
 					}
 				}
 				
-				private void ReadXmlArrayValues (XmlTextReader xtr, string type)
+				private void ReadXmlArrayValues (XmlReader xtr, string type)
 				{
 					ArrayList al = new ArrayList ();
 					
 					while (xtr.Read ()) {
 						switch (xtr.NodeType) {
 							case XmlNodeType.Element:
-								string single_value = xtr.ReadString ();
+								string single_value;
+								throw new NotImplementedException ("Reading from element is not supported.");
 								
 								if (type == "int-array") {
 									int int_val = Int32.Parse (single_value);
@@ -5124,7 +5124,7 @@ namespace System.Windows.Forms
 					}
 				}
 				
-				public void WriteXml (XmlTextWriter xtw)
+				public void WriteXml (XmlWriter xtw)
 				{
 					xtw.WriteStartElement ("value");
 					xtw.WriteAttributeString ("name", name);
@@ -5136,7 +5136,7 @@ namespace System.Windows.Forms
 					xtw.WriteEndElement ();
 				}
 				
-				private void WriteSingleContent (XmlTextWriter xtw)
+				private void WriteSingleContent (XmlWriter xtw)
 				{
 					string type_string = String.Empty;
 					
@@ -5160,7 +5160,7 @@ namespace System.Windows.Forms
 						xtw.WriteString (value.ToString ());
 				}
 				
-				private void WriteArrayContent (XmlTextWriter xtw)
+				private void WriteArrayContent (XmlWriter xtw)
 				{
 					string type_string = String.Empty;
 					string type_name = String.Empty;

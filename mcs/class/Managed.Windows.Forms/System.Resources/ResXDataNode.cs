@@ -30,7 +30,6 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Reflection;
 using System.ComponentModel.Design;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Text;
 

@@ -61,7 +61,7 @@ namespace System.Windows.Forms.Layout
 
 			TableLayoutSettings settings = value as TableLayoutSettings;
 			StringWriter sw = new StringWriter ();
-			XmlTextWriter xw = new XmlTextWriter (sw);
+			XmlWriter xw = XmlWriter.Create (sw);
 			xw.WriteStartDocument ();
 			List<ControlInfo> list = settings.GetControls ();
 			xw.WriteStartElement ("TableLayoutSettings");
@@ -103,7 +103,7 @@ namespace System.Windows.Forms.Layout
 
 			xw.WriteEndElement ();
 			xw.WriteEndDocument ();
-			xw.Close ();
+			xw.Dispose ();
 
 			return sw.ToString ();
 

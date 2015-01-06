@@ -35,6 +35,7 @@ using System.Text;
 using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
+using System.ComponentModel.Design.Serialization;
 using System.Drawing.Text;
 using System.Reflection;
 

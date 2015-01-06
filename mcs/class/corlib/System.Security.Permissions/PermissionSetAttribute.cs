@@ -30,11 +30,7 @@
 
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Security.Policy;
 using System.Text;
-
-using Mono.Security.Cryptography;
-using Mono.Xml;
 
 namespace System.Security.Permissions {
 
@@ -86,72 +82,6 @@ namespace System.Security.Permissions {
 		public override IPermission CreatePermission ()
 		{
 			return null; 	  // Not used, used for inheritance from SecurityAttribute
-		}
-
-		private PermissionSet CreateFromXml (string xml) 
-		{
-#if !NET_2_1
-			SecurityParser sp = new SecurityParser ();
-			try {
-				sp.LoadXml (xml);
-			}
-			catch (Mono.Xml.SmallXmlParserException xe) {
-				throw new XmlSyntaxException (xe.Line, xe.ToString ());
-			}
-			SecurityElement se = sp.ToXml ();
-
-			string className = se.Attribute ("class");
-			if (className == null)
-				return null;
-
-			PermissionState state = PermissionState.None;
-			if (CodeAccessPermission.IsUnrestricted (se))
-				state = PermissionState.Unrestricted;
-
-			if (className.EndsWith ("NamedPermissionSet")) {
-				NamedPermissionSet nps = new NamedPermissionSet (se.Attribute ("Name"), state);
-				nps.FromXml (se);
-				return (PermissionSet) nps;
-			}
-			else if (className.EndsWith ("PermissionSet")) {
-				PermissionSet ps = new PermissionSet (state);
-				ps.FromXml (se);
-				return ps;
-			}
-#endif
-			return null;
-		}
-
-		public PermissionSet CreatePermissionSet ()
-		{
-			PermissionSet pset = null;
-#if !NET_2_1
-			if (this.Unrestricted)
-				pset = new PermissionSet (PermissionState.Unrestricted);
-			else {
-				pset = new PermissionSet (PermissionState.None);
-				if (name != null) {
-					return PolicyLevel.CreateAppDomainLevel ().GetNamedPermissionSet (name);
-				}
-				else if (file != null) {
-					Encoding e = ((isUnicodeEncoded) ? System.Text.Encoding.Unicode : System.Text.Encoding.ASCII);
-					using (StreamReader sr = new StreamReader (file, e)) {
-						pset = CreateFromXml (sr.ReadToEnd ());
-					}
-				}
-				else if (xml != null) {
-					pset = CreateFromXml (xml);
-				}
-				else if (hex != null) {
-					// Unicode isn't supported
-					//Encoding e = ((isUnicodeEncoded) ? System.Text.Encoding.Unicode : System.Text.Encoding.ASCII);
-					Encoding e = System.Text.Encoding.ASCII;
-					byte[] bin = CryptoConvert.FromHex (hex);
-					pset = CreateFromXml (e.GetString (bin, 0, bin.Length));
-				}
-			}
-#endif
-			return pset;
 		}
 	}
 }		    

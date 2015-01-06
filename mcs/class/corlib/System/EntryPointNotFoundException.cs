@@ -55,11 +55,6 @@ namespace System
 			HResult = Result;
 		}
 
-		protected EntryPointNotFoundException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-
 		public EntryPointNotFoundException (string message, Exception inner)
 			:base (message, inner)
 		{

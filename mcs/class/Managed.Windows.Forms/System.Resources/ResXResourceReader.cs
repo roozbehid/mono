@@ -36,7 +36,6 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.IO;
 using System.Resources;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
 using System.Reflection;
 using System.Drawing;
@@ -58,7 +57,7 @@ namespace System.Resources
 		private TextReader reader;
 		private Hashtable hasht;
 		private ITypeResolutionService typeresolver;
-		private XmlTextReader xmlReader;
+		private XmlReader xmlReader;
 		private string basepath;
 		private bool useResXDataNodes;
 		private AssemblyName [] assemblyNames;
@@ -154,17 +153,16 @@ namespace System.Resources
 
 			try {
 				xmlReader = null;
+				var settings = new XmlReaderSettings { IgnoreWhitespace = true };
 				if (stream != null) {
-					xmlReader = new XmlTextReader (stream);
+					xmlReader = XmlReader.Create (stream, settings);
 				} else if (reader != null) {
-					xmlReader = new XmlTextReader (reader);
+					xmlReader = XmlReader.Create (reader, settings);
 				}
 
 				if (xmlReader == null) {
 					throw new InvalidOperationException ("ResourceReader is closed.");
 				}
-
-				xmlReader.WhitespaceHandling = WhitespaceHandling.None;
 
 				ResXHeader header = new ResXHeader ();
 				try {
@@ -192,7 +190,7 @@ namespace System.Resources
 					throw ex;
 				} catch (Exception ex) {
 					XmlException xex = new XmlException (ex.Message, ex, 
-						xmlReader.LineNumber, xmlReader.LinePosition);
+						((IXmlLineInfo)xmlReader).LineNumber, ((IXmlLineInfo)xmlReader).LinePosition);
 					throw new ArgumentException ("Invalid ResX input.", xex);
 				}
 				header.Verify ();
@@ -227,7 +225,7 @@ namespace System.Resources
 			string value = null;
 			xmlReader.ReadStartElement ();
 			if (xmlReader.NodeType == XmlNodeType.Element) {
-				value = xmlReader.ReadElementString ();
+				throw new NotImplementedException ("Reading from element is not supported.");
 			} else {
 				value = xmlReader.Value.Trim ();
 			}
@@ -259,17 +257,7 @@ namespace System.Resources
 					break;
 
 				if (xmlReader.NodeType == XmlNodeType.Element) {
-					if (xmlReader.Name.Equals ("value")) {
-						xmlReader.WhitespaceHandling = WhitespaceHandling.Significant;
-						value = xmlReader.ReadString ();
-						xmlReader.WhitespaceHandling = WhitespaceHandling.None;
-					} else if (xmlReader.Name.Equals ("comment")) {
-						xmlReader.WhitespaceHandling = WhitespaceHandling.Significant;
-						comment = xmlReader.ReadString ();
-						xmlReader.WhitespaceHandling = WhitespaceHandling.None;
-						if (xmlReader.NodeType == XmlNodeType.EndElement && xmlReader.LocalName == (meta ? "metadata" : "data"))
-							break;
-					}
+					throw new NotImplementedException ("Reading from element is not supported.");
 				}
 				else
 					value = xmlReader.Value.Trim ();
@@ -280,7 +268,7 @@ namespace System.Resources
 		private void ParseDataNode (bool meta)
 		{
 			Hashtable hashtable = ((meta && ! useResXDataNodes) ? hashtm : hasht);
-			Point pos = new Point (xmlReader.LineNumber, xmlReader.LinePosition);
+			Point pos = new Point (((IXmlLineInfo)xmlReader).LineNumber, ((IXmlLineInfo)xmlReader).LinePosition);
 			string name = GetAttribute ("name");
 			string type_name = GetAttribute ("type");
 			string mime_type = GetAttribute ("mimetype");

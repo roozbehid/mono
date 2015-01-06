@@ -90,9 +90,11 @@ namespace System.Diagnostics {
 			debug_info = fNeedFileInfo;
 			frames = l.ToArray ();
 		}
-		
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static StackFrame [] get_trace (Exception e, int skipFrames, bool fNeedFileInfo);
+
+		StackFrame [] get_trace (Exception e, int skipFrames, bool fNeedFileInfo)
+		{
+			return new StackFrame [0];
+		}
 
 		public StackTrace (Exception e)
 			: this (e, METHODS_TO_SKIP, false)
@@ -200,14 +202,14 @@ namespace System.Diagnostics {
 					sb.AppendFormat ("{0}.{1}", method.DeclaringType.FullName, method.Name);
 					/* Append parameter information */
 					sb.Append ("(");
-					ParameterInfo[] p = method.GetParametersInternal ();
+					ParameterInfo[] p = method.GetParameters ();
 					for (int j = 0; j < p.Length; ++j) {
 						if (j > 0)
 							sb.Append (", ");
-						Type pt = p[j].ParameterType;
+						var pt = p[j].ParameterType.GetTypeInfo ();
 						bool byref = pt.IsByRef;
 						if (byref)
-							pt = pt.GetElementType ();
+							pt = pt.GetElementType ().GetTypeInfo ();
 						if (pt.IsClass && pt.Namespace != String.Empty) {
 							sb.Append (pt.Namespace);
 							sb.Append (".");
@@ -227,7 +229,7 @@ namespace System.Diagnostics {
 				if (debug_info) {
 					// we were asked for debugging informations
 					// but that doesn't mean we have the debug information available
-					string fname = frame.GetSecureFileName ();
+					string fname = "";
 					if (fname != "<filename unknown>")
 						sb.AppendFormat (debuginfo, fname, frame.GetFileLineNumber ());
 				}

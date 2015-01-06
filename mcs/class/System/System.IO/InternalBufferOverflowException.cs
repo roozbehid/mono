@@ -47,11 +47,6 @@ namespace System.IO {
 		{
 		}
 
-		protected InternalBufferOverflowException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-
 		public InternalBufferOverflowException (string message, Exception inner)
 			: base (message, inner)
 		{

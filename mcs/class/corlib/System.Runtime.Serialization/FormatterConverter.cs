@@ -45,11 +45,6 @@ namespace System.Runtime.Serialization {
 			return System.Convert.ChangeType (value, type);
 		}
 
-		public object Convert (object value, TypeCode typeCode)
-		{
-			return System.Convert.ChangeType (value, typeCode);
-		}
-
 		public bool ToBoolean (object value)
 		{
 			if (value == null)

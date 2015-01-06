@@ -175,12 +175,7 @@ namespace System.Security.Permissions {
 
 		public override IPermission CreatePermission ()
 		{
-#if NET_2_1
 			return null;
-#else
-			// looks like permission is internal
-			return new HostProtectionPermission (_resources);
-#endif
 		}
 	}
 }

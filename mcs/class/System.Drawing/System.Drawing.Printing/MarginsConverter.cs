@@ -33,6 +33,7 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.ComponentModel.Design.Serialization;
 using System.Text.RegularExpressions;
 using System.Reflection;
 
@@ -107,29 +108,6 @@ namespace System.Drawing.Printing {
 			}
 
 			return base.ConvertTo(context, culture, value, destinationType);
-		}
-		
-		public override bool GetCreateInstanceSupported(ITypeDescriptorContext context)
-		{
-			return true;
-		}
-		
-		public override object CreateInstance(ITypeDescriptorContext context, System.Collections.IDictionary propertyValues)
-		{
-			try
-			{
-				Margins margins = new Margins();
-				margins.Left = int.Parse(propertyValues["Left"].ToString());
-				margins.Right = int.Parse(propertyValues["Right"].ToString());
-				margins.Top = int.Parse(propertyValues["Top"].ToString());
-				margins.Bottom = int.Parse(propertyValues["Bottom"].ToString());
-				return margins;
-			}
-			catch (Exception)
-			{
-				// in case of error, return null
-				return null;
-			}
 		}
 		#endregion
 	}

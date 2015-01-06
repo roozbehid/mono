@@ -34,8 +34,6 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using Mono.Xml;
-
 namespace System.Security {
 
 	[ComVisible (true)]
@@ -326,23 +324,6 @@ namespace System.Security {
 			sb.Replace ("&quot;", "\"");
 			sb.Replace ("&apos;", "'");
 			return sb.ToString ();
-		}
-
-		public static SecurityElement FromString (string xml)
-		{
-			if (xml == null)
-				throw new ArgumentNullException ("xml");
-			if (xml.Length == 0)
-				throw new XmlSyntaxException (Locale.GetText ("Empty string."));
-
-			try {
-				SecurityParser sp = new SecurityParser ();
-				sp.LoadXml (xml);
-				return sp.ToXml ();
-			} catch (Exception e) {
-				string msg = Locale.GetText ("Invalid XML.");
-				throw new XmlSyntaxException (msg, e);
-			}
 		}
 
 		public static bool IsValidAttributeName (string name)

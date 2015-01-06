@@ -61,10 +61,5 @@ namespace System
 		{
 			HResult = Result;
 		}
-
-		protected ApplicationException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
 	}
 }

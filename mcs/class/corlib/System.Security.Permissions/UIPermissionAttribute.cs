@@ -60,12 +60,7 @@ namespace System.Security.Permissions {
 		// Methods
 		public override IPermission CreatePermission ()
 		{
-			UIPermission perm = null;
-			if (this.Unrestricted)
-				perm = new UIPermission (PermissionState.Unrestricted);
-			else
-				perm = new UIPermission (window, clipboard);
-			return perm;
+			return null;
 		}
 	}
 }

@@ -34,6 +34,7 @@
 //
 
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 
 namespace System.Runtime.Serialization
@@ -57,7 +58,7 @@ namespace System.Runtime.Serialization
 		/* used by the runtime */
 		private SerializationInfo (Type type)
 		{
-			assemblyName = type.Assembly.FullName;
+			assemblyName = type.GetTypeInfo().Assembly.FullName;
 			fullTypeName = type.FullName;
 			converter = new FormatterConverter ();
 #if NET_4_0
@@ -70,7 +71,7 @@ namespace System.Runtime.Serialization
 		{
 			int len = data.Length;
 
-			assemblyName = type.Assembly.FullName;
+			assemblyName = type.GetTypeInfo().Assembly.FullName;
 			fullTypeName = type.FullName;
 			converter = new FormatterConverter ();
 #if NET_4_0
@@ -94,7 +95,7 @@ namespace System.Runtime.Serialization
 				throw new ArgumentNullException ("converter", "Null argument");
 			
 			this.converter = converter;
-			assemblyName = type.Assembly.FullName;
+			assemblyName = type.GetTypeInfo().Assembly.FullName;
 			fullTypeName = type.FullName;
 #if NET_4_0
 			objectType = type;
@@ -200,7 +201,7 @@ namespace System.Runtime.Serialization
 				throw new ArgumentNullException ("type is null.");
 
 			fullTypeName = type.FullName;
-			assemblyName = type.Assembly.FullName;
+			assemblyName = type.GetTypeInfo().Assembly.FullName;
 #if NET_4_0
 			objectType = type;
 			isAssemblyNameSetExplicit = false;

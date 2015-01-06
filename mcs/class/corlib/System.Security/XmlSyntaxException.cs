@@ -61,10 +61,5 @@ namespace System.Security {
 			: base (message, inner) 
 		{
 		}
-
-		internal XmlSyntaxException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
 	}
 }

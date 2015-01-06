@@ -36,7 +36,6 @@ using System.Threading;
 using System.Collections;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace System.Windows.Forms {
 
@@ -104,15 +103,7 @@ namespace System.Windows.Forms {
 
 			public void GetData (X11Dnd dnd, IDataObject data, ref XEvent xevent)
 			{
-				MemoryStream stream = dnd.GetData (ref xevent);
-				BinaryFormatter bf = new BinaryFormatter ();
-
-				if (stream.Length == 0)
-					return;
-
-				stream.Seek (0, 0);
-				object obj = bf.Deserialize (stream);
-				data.SetData (obj);
+				throw new NotImplementedException ("BinaryFormatter not implemented.");
 			}
 
 			public void SetData (X11Dnd dnd, object data, ref XEvent xevent)
@@ -120,19 +111,7 @@ namespace System.Windows.Forms {
 				if (data == null)
 					return;
 
-				MemoryStream stream = new MemoryStream ();
-				BinaryFormatter bf = new BinaryFormatter ();
-
-				bf.Serialize (stream, data);
-
-				IntPtr buffer = Marshal.AllocHGlobal ((int) stream.Length);
-				stream.Seek (0, 0);
-
-				for (int i = 0; i < stream.Length; i++) {
-					Marshal.WriteByte (buffer, i, (byte) stream.ReadByte ());
-				}
-
-				dnd.SetProperty (ref xevent, buffer, (int) stream.Length);
+				throw new NotImplementedException ("BinaryFormatter not implemented.");
 			}
 		}
 

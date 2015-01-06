@@ -37,7 +37,6 @@ namespace System
 {
 	[Serializable]
 	[ComVisible (true)]
-	[StructLayout (LayoutKind.Sequential)]
 	public class SystemException : Exception
 	{
 		const int Result = unchecked ((int)0x80131501);
@@ -53,11 +52,6 @@ namespace System
 			: base (message)
 		{
 			HResult = Result;
-		}
-
-		protected SystemException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
 		}
 
 		public SystemException (string message, Exception innerException)

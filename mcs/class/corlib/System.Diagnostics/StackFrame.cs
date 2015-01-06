@@ -59,10 +59,18 @@ namespace System.Diagnostics {
 		#pragma warning restore 649
 		#endregion
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static bool get_frame_info (int skip, bool needFileInfo, out MethodBase method,
+		bool get_frame_info (int skip, bool needFileInfo, out MethodBase method,
 						   out int iloffset, out int native_offset,
-						   out string file, out int line, out int column);
+						   out string file, out int line, out int column)
+		{
+			method = null;
+			iloffset = 0;
+			native_offset = 0;
+			file = "";
+			line = 0;
+			column = 0;
+			return false;
+		}
 
                 public StackFrame ()
 		{
@@ -128,12 +136,6 @@ namespace System.Diagnostics {
                 
                 public virtual string GetFileName()
                 {
-#if !NET_2_1
-			if (SecurityManager.SecurityEnabled && (fileName != null) && (fileName.Length > 0)) {
-				string fn = Path.GetFullPath (fileName);
-				new FileIOPermission (FileIOPermissionAccess.PathDiscovery, fn).Demand ();
-			}
-#endif
                         return fileName;
                 }
 

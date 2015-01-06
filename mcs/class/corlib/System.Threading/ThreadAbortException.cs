@@ -44,17 +44,5 @@ namespace System.Threading
 		{
 			HResult = unchecked ((int) 0x80131530);
 		}
-
-		private ThreadAbortException (SerializationInfo info, StreamingContext sc) : base (info, sc)
-		{
-		}
-
-#if !NET_2_1
-		public object ExceptionState {
-			get {
-				return Thread.CurrentThread.GetAbortExceptionState ();
-			}
-		}
-#endif
 	}
 }

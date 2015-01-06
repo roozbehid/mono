@@ -50,7 +50,6 @@ namespace System.Windows.Forms {
 		private string	image_location;
 		private Image	initial_image;
 		private bool	wait_on_load;
-		private WebClient image_download;
 		private bool image_from_url;
 		private int	no_update;
 		#endregion	// Fields
@@ -331,14 +330,6 @@ namespace System.Windows.Forms {
 		#endregion	// ISupportInitialize Interface
 
 		#region Private Properties
-		private WebClient ImageDownload {
-			get { 
-				if (image_download == null)
-					image_download = new WebClient ();
-					
-				return image_download;
-			}
-		}
 		#endregion
 		
 		#region Private Methods
@@ -413,33 +404,11 @@ namespace System.Windows.Forms {
 				Invalidate ();
 			}
 		}
-
-		void ImageDownload_DownloadDataCompleted (object sender, DownloadDataCompletedEventArgs e)
-		{
-			if (e.Error != null && !e.Cancelled)
-				Image = error_image;
-			else if (e.Error == null && !e.Cancelled)
-				using (MemoryStream ms = new MemoryStream (e.Result))
-					Image = Image.FromStream (ms);
-					
-			ImageDownload.DownloadProgressChanged -= new DownloadProgressChangedEventHandler (ImageDownload_DownloadProgressChanged);
-			ImageDownload.DownloadDataCompleted -= new DownloadDataCompletedEventHandler (ImageDownload_DownloadDataCompleted);
-			image_download = null;
-			
-			OnLoadCompleted (e);
-		}
-
-		private void ImageDownload_DownloadProgressChanged (object sender, DownloadProgressChangedEventArgs e)
-		{
-			OnLoadProgressChanged (new ProgressChangedEventArgs (e.ProgressPercentage, e.UserState));
-		}
 		#endregion	// Private Methods
 
 		#region Public Instance Methods
 		public void CancelAsync ()
 		{
-			if (image_download != null)
-				image_download.CancelAsync ();
 		}
 		
 		public void Load ()
@@ -455,8 +424,7 @@ namespace System.Windows.Forms {
 			image_location = url;
 			
 			if (url.Contains ("://"))
-				using (Stream s = ImageDownload.OpenRead (url))
-					ChangeImage (Image.FromStream (s), true);
+				throw new NotImplementedException("Download from url not implemented.");
 			else
 				ChangeImage (Image.FromFile (url), true);
 		}
@@ -479,9 +447,6 @@ namespace System.Windows.Forms {
 
 			image_location = url;
 			ChangeImage (InitialImage, true);
-			
-			if (ImageDownload.IsBusy)
-				ImageDownload.CancelAsync ();
 
 			Uri uri = null;
 			try {
@@ -489,10 +454,6 @@ namespace System.Windows.Forms {
 			} catch (UriFormatException) {
 				uri = new Uri (Path.GetFullPath (url));
 			}
-
-			ImageDownload.DownloadProgressChanged += new DownloadProgressChangedEventHandler (ImageDownload_DownloadProgressChanged);
-			ImageDownload.DownloadDataCompleted += new DownloadDataCompletedEventHandler (ImageDownload_DownloadDataCompleted);
-			ImageDownload.DownloadDataAsync (uri);
 		}
 
 		public override string ToString() {
