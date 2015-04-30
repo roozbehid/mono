@@ -58,7 +58,7 @@ namespace System.Windows.Forms
 		
 		static internal Bitmap Get (string name)
 		{
-			Stream stream = assembly.GetManifestResourceStream ("resources/" + name);
+			Stream stream = assembly.GetManifestResourceStream ("System.Windows.Forms.resources." + name);
 
 			if (stream == null) {
 				Console.WriteLine ("Failed to read {0}", name);
@@ -70,7 +70,7 @@ namespace System.Windows.Forms
 		
 		static internal Icon GetIcon (string name)
 		{
-			Stream stream = assembly.GetManifestResourceStream ("resources/" + name);
+			Stream stream = assembly.GetManifestResourceStream ("System.Windows.Forms.resources." + name);
 
 			if (stream == null) {
 				Console.WriteLine ("Failed to read {0}", name);

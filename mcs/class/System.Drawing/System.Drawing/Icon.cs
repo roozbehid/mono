@@ -266,7 +266,7 @@ namespace System.Drawing
 
 		internal Icon (string resourceName, bool undisposable)
 		{
-			using (Stream s = typeof (Icon).GetTypeInfo().Assembly.GetManifestResourceStream ("resources/" + resourceName)) {
+			using (Stream s = typeof (Icon).GetTypeInfo().Assembly.GetManifestResourceStream ("System.Drawing.resources." + resourceName)) {
 				if (s == null) {
 					string msg = Locale.GetText ("Resource '{0}' was not found.", resourceName);
 					throw new FileNotFoundException (msg);
