@@ -502,10 +502,13 @@ namespace System.Windows.Forms {
 				// Make this non-blocking, so it doesn't
 				// deadlock if too many wakes are sent
 				// before the wake_receive end is polled
-				wake.Blocking = false;
+				//wake.Blocking = false;
 
+				try{
 				wake_receive = listen.Accept();
-
+				}catch(Exception ex){
+					Console.WriteLine("wake_receive accept: " + ex.Message);
+				}
 				#if __MonoCS__
 				pollfds = new Pollfd [2];
 				pollfds [0] = new Pollfd ();

@@ -122,10 +122,11 @@ namespace System.Windows.Forms {
 			if (initialized)
 				return;
 
-			KeyboardLayouts layouts = new KeyboardLayouts ();
-			KeyboardLayout layout = DetectLayout (layouts);
-			lcid = layout.Lcid;
-			CreateConversionArray (layouts, layout);
+			//KeyboardLayouts layouts = new KeyboardLayouts ();
+			Console.WriteLine("layouts.count=");// + layouts.Layouts.Length);
+			//KeyboardLayout layout = layouts.Layouts[0];//DetectLayout (layouts);
+			lcid = 1031;//layout.Lcid;
+			//CreateConversionArray (layouts, layout);
 			SetupXIM ();
 			initialized = true;
 		}
@@ -221,11 +222,11 @@ namespace System.Windows.Forms {
 			if (xim == IntPtr.Zero)
 				return;
 
-			if (!xic_table.ContainsKey ((long) window))
-				CreateXicForWindow (window);
-			IntPtr xic = GetXic (window);
-			if (xic != IntPtr.Zero)
-				XSetICFocus (xic);
+			//if (!xic_table.ContainsKey ((long) window))
+			//	CreateXicForWindow (window);
+		//	IntPtr xic = GetXic (window);
+			//if (xic != IntPtr.Zero)
+			//	XSetICFocus (xic);
 		}
 
 		private bool have_Xutf8ResetIC = true;
@@ -236,17 +237,17 @@ namespace System.Windows.Forms {
 			if (xim == IntPtr.Zero)
 				return;
 
-			IntPtr xic = GetXic (window);
-			if (xic != IntPtr.Zero) {
-				if (have_Xutf8ResetIC) {
-					try {
-						Xutf8ResetIC (xic);
-					} catch (EntryPointNotFoundException) {
-						have_Xutf8ResetIC = false;
-					}
-				}
-				XUnsetICFocus (xic);
-			}
+			//IntPtr xic = GetXic (window);
+			//if (xic != IntPtr.Zero) {
+			//	if (have_Xutf8ResetIC) {
+			//		try {
+			//			Xutf8ResetIC (xic);
+			//		} catch (EntryPointNotFoundException) {
+			//			have_Xutf8ResetIC = false;
+			//		}
+			//	}
+			//	XUnsetICFocus (xic);
+			//}
 		}
 
 		public bool ResetKeyState(IntPtr hwnd, ref MSG msg) {
