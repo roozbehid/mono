@@ -35,6 +35,7 @@ using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace System.Drawing
 {
@@ -679,8 +680,8 @@ namespace System.Drawing
 			}
 
 			Type st = logFont.GetType ();
-			//if (!st.IsLayoutSequential)
-			//	throw new ArgumentException ("logFont", Locale.GetText ("Layout must be sequential."));
+			if (!st.GetTypeInfo().IsLayoutSequential)
+				throw new ArgumentException ("logFont", Locale.GetText ("Layout must be sequential."));
 
 			// note: there is no exception if 'logFont' isn't big enough
 			Type lf = typeof (LOGFONT);
