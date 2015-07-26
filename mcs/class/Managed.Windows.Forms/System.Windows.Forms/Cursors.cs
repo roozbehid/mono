@@ -128,7 +128,7 @@ namespace System.Windows.Forms {
 		public static Cursor HSplit {
 			get {
 				if (hsplit == null) {
-					hsplit = new Cursor(typeof(Splitter), "System.Windows.Forms.resources.SplitterNS.cur");
+					hsplit = new Cursor(typeof(Splitter), "SplitterNS.cur");
 					hsplit.name = "HSplit";
 				}
 				return hsplit;
@@ -283,7 +283,7 @@ namespace System.Windows.Forms {
 			get {
 				if (size_nesw == null) {
 					if (XplatUI.RunningOnUnix) {
-						size_nesw = new Cursor(typeof(Cursor), "System.Windows.Forms.resources.NESW.cur");
+						size_nesw = new Cursor(typeof(Cursor), "NESW.cur");
 						size_nesw.name = "SizeNESW";
 					} else {
 						size_nesw = new Cursor(StdCursor.SizeNESW);
@@ -308,7 +308,7 @@ namespace System.Windows.Forms {
 			get {
 				if (size_nwse == null) {
 					if (XplatUI.RunningOnUnix) {
-						size_nwse = new Cursor(typeof(Cursor), "System.Windows.Forms.resources.NWSE.cur");
+						size_nwse = new Cursor(typeof(Cursor), "NWSE.cur");
 						size_nwse.name = "SizeNWSE";
 					} else {
 						size_nwse = new Cursor(StdCursor.SizeNWSE);
@@ -342,7 +342,7 @@ namespace System.Windows.Forms {
 		public static Cursor VSplit {
 			get {
 				if (vsplit == null) {
-					vsplit = new Cursor(typeof(Cursor), "System.Windows.Forms.resources.SplitterWE.cur");
+					vsplit = new Cursor(typeof(Cursor), "SplitterWE.cur");
 					vsplit.name = "VSplit";
 				}
 				return vsplit;

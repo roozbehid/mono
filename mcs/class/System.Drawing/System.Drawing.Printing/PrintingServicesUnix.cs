@@ -915,10 +915,10 @@ namespace System.Drawing.Printing
 		[DllImport("libcups")]
 		static extern void cupsFreeOptions (int number_options, IntPtr options);
 
-		[DllImport("libgdiplus.so", CharSet=CharSet.Ansi)]
+		[DllImport("gdiplus.dll", CharSet=CharSet.Ansi)]
 		static extern int GdipGetPostScriptGraphicsContext (string filename, int with, int height, double dpix, double dpiy, ref IntPtr graphics);
 
-		[DllImport("libgdiplus.so")]
+		[DllImport("gdiplus.dll")]
 		static extern int GdipGetPostScriptSavePage (IntPtr graphics);
 
 		#endregion

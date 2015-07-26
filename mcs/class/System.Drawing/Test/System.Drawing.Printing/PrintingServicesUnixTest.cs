@@ -38,7 +38,7 @@ namespace MonoTests.System.Drawing.Printing {
 	[TestFixture]
 	public class PrintingServicesUnixTest {
 
-		[DllImport ("libgdiplus.so")]
+		[DllImport ("gdiplus.dll")]
 		static extern Status GdipGetPostScriptSavePage (IntPtr graphics);
 
 		[Test]
