@@ -23,8 +23,8 @@
 // 	Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -33,8 +33,8 @@ namespace System.Windows.Forms
 	{
 		ListView listview_owner;
 		bool appears_after_item;
-		Rectangle bounds;
-		Color? color;
+		Rectangle_ bounds;
+		Color_? color;
 		int index = 0;
 
 		internal ListViewInsertionMark (ListView listview)
@@ -58,13 +58,13 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get {
 				return bounds;
 			}
 		}
 
-		public Color Color {
+		public Color_ Color {
 			get {
 				return color == null ? listview_owner.ForeColor : color.Value;
 			}
@@ -92,24 +92,24 @@ namespace System.Windows.Forms
 		void UpdateBounds ()
 		{
 			if (index < 0 || index >= listview_owner.Items.Count) {
-				bounds = Rectangle.Empty;
+				bounds = Rectangle_.Empty;
 				return;
 			}
 
-			Rectangle item_bounds = listview_owner.Items [index].Bounds;
+			Rectangle_ item_bounds = listview_owner.Items [index].Bounds;
 			int x_origin = (appears_after_item ? item_bounds.Right : item_bounds.Left) - 2;
 			int height = item_bounds.Height + ThemeEngine.Current.ListViewVerticalSpacing;
 
-			bounds = new Rectangle (x_origin, item_bounds.Top, 7, height);
+			bounds = new Rectangle_ (x_origin, item_bounds.Top, 7, height);
 		}
 
-		public int NearestIndex (Point pt)
+		public int NearestIndex (Point_ pt)
 		{
 			double distance = Double.MaxValue;
 			int nearest = -1;
 
 			for (int i = 0; i < listview_owner.Items.Count; i++) {
-				Point pos = listview_owner.GetItemLocation (i);
+				Point_ pos = listview_owner.GetItemLocation (i);
 				double d = Math.Pow (pos.X - pt.X, 2) + Math.Pow (pos.Y - pt.Y, 2);
 				if (d < distance) {
 					distance = d;
@@ -123,29 +123,29 @@ namespace System.Windows.Forms
 			return nearest;
 		}
 
-		internal PointF [] TopTriangle {
+		internal PointF_ [] TopTriangle {
 			get {
-				PointF p1 = new PointF (bounds.X, bounds.Y);
-				PointF p2 = new PointF (bounds.Right, bounds.Y);
-				PointF p3 = new PointF (bounds.X + (bounds.Right - bounds.X) / 2, bounds.Y + 5);
+				PointF_ p1 = new PointF_ (bounds.X, bounds.Y);
+				PointF_ p2 = new PointF_ (bounds.Right, bounds.Y);
+				PointF_ p3 = new PointF_ (bounds.X + (bounds.Right - bounds.X) / 2, bounds.Y + 5);
 
-				return new PointF [] {p1, p2, p3};
+				return new PointF_ [] {p1, p2, p3};
 			}
 		}
 
-		internal PointF [] BottomTriangle {
+		internal PointF_ [] BottomTriangle {
 			get {
-				PointF p1 = new PointF (bounds.X, bounds.Bottom);
-				PointF p2 = new PointF (bounds.Right, bounds.Bottom);
-				PointF p3 = new PointF (bounds.X + (bounds.Right - bounds.X) / 2, bounds.Bottom - 5);
+				PointF_ p1 = new PointF_ (bounds.X, bounds.Bottom);
+				PointF_ p2 = new PointF_ (bounds.Right, bounds.Bottom);
+				PointF_ p3 = new PointF_ (bounds.X + (bounds.Right - bounds.X) / 2, bounds.Bottom - 5);
 
-				return new PointF [] {p1, p2, p3};
+				return new PointF_ [] {p1, p2, p3};
 			}
 		}
 
-		internal Rectangle Line {
+		internal Rectangle_ Line {
 			get {
-				return new Rectangle (bounds.X + 2, bounds.Y + 2, 2, bounds.Height - 5);
+				return new Rectangle_ (bounds.X + 2, bounds.Y + 2, 2, bounds.Height - 5);
 			}
 		}
 	}

@@ -27,10 +27,10 @@
 //
 
 // NOT COMPLETE
-
 using System;
 using System.Collections;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Design;
 using System.ComponentModel;
@@ -62,7 +62,7 @@ namespace System.Windows.Forms.PropertyGridInternal {
 		private Font bold_font;
 		private Brush inactive_text_brush;
 		private ListBox dropdown_list;
-		private Point last_click;
+		private Point_ last_click;
 		private Padding dropdown_form_padding;
 		#endregion
 
@@ -145,7 +145,7 @@ namespace System.Windows.Forms.PropertyGridInternal {
 
 		private void InvalidateItemLabel (GridEntry item)
 		{
-			Invalidate (new Rectangle (0, ((GridEntry)item).Top, SplitterLocation, row_height));
+			Invalidate (new Rectangle_ (0, ((GridEntry)item).Top, SplitterLocation, row_height));
 		}
 
 		private void InvalidateItem (GridEntry item)
@@ -153,11 +153,11 @@ namespace System.Windows.Forms.PropertyGridInternal {
 			if (item == null)
 				return;
 
-			Rectangle rect = new Rectangle (0, item.Top, Width, row_height);
+			Rectangle_ rect = new Rectangle_ (0, item.Top, Width, row_height);
 			Invalidate (rect);
 
 			if (item.Expanded) {
-				rect = new Rectangle (0, item.Top + row_height, Width,
+				rect = new Rectangle_ (0, item.Top + row_height, Width,
 						      Height - (item.Top + row_height));
 				Invalidate (rect);
 			}
@@ -502,7 +502,7 @@ namespace System.Windows.Forms.PropertyGridInternal {
 
 				if (old_splitter_location != SplitterLocation) {
 					int x = old_splitter_location > SplitterLocation ? SplitterLocation : old_splitter_location;
-					Invalidate (new Rectangle (x, 0, Width - x - (vbar.Visible ? vbar.Width : 0), Height));
+					Invalidate (new Rectangle_ (x, 0, Width - x - (vbar.Visible ? vbar.Width : 0), Height));
 					UpdateItem (this.SelectedGridItem);
 				}
 			}
@@ -592,7 +592,7 @@ namespace System.Windows.Forms.PropertyGridInternal {
 			}
 		}
 
-		private void DrawGridItemLabel (GridEntry grid_item, PaintEventArgs pevent, int depth, Rectangle rect) {
+		private void DrawGridItemLabel (GridEntry grid_item, PaintEventArgs pevent, int depth, Rectangle_ rect) {
 			Font font = this.Font;
 			Brush brush;
 
@@ -602,13 +602,13 @@ namespace System.Windows.Forms.PropertyGridInternal {
 
 				pevent.Graphics.DrawString (grid_item.Label, font, brush, rect.X + 1, rect.Y + ENTRY_SPACING);
 				if (grid_item == this.SelectedGridItem) {
-					SizeF size = pevent.Graphics.MeasureString (grid_item.Label, font);
-					ControlPaint.DrawFocusRectangle (pevent.Graphics, new Rectangle (rect.X + 1, rect.Y+ENTRY_SPACING, (int)size.Width, (int)size.Height));
+					SizeF_ size = pevent.Graphics.MeasureString (grid_item.Label, font);
+					ControlPaint.DrawFocusRectangle (pevent.Graphics, new Rectangle_ (rect.X + 1, rect.Y+ENTRY_SPACING, (int)size.Width, (int)size.Height));
 				}
 			}
 			else {
 				if (grid_item == this.SelectedGridItem) {
-					Rectangle highlight = rect;
+					Rectangle_ highlight = rect;
 					if (depth > 1) {
 						highlight.X -= V_INDENT;
 						highlight.Width += V_INDENT;
@@ -622,11 +622,11 @@ namespace System.Windows.Forms.PropertyGridInternal {
 				}
 			}
 			pevent.Graphics.DrawString (grid_item.Label, font, brush,
-						    new Rectangle (rect.X + 1, rect.Y + ENTRY_SPACING, rect.Width - ENTRY_SPACING, rect.Height - ENTRY_SPACING),
+						    new Rectangle_ (rect.X + 1, rect.Y + ENTRY_SPACING, rect.Width - ENTRY_SPACING, rect.Height - ENTRY_SPACING),
 						    string_format);
 		}
 
-		private void DrawGridItemValue (GridEntry grid_item, PaintEventArgs pevent, int depth, Rectangle rect) 
+		private void DrawGridItemValue (GridEntry grid_item, PaintEventArgs pevent, int depth, Rectangle_ rect) 
 		{
 			if (grid_item.PropertyDescriptor == null)
 				return; 
@@ -636,7 +636,7 @@ namespace System.Windows.Forms.PropertyGridInternal {
 				pevent.Graphics.DrawRectangle (Pens.Black, SplitterLocation + ENTRY_SPACING, 
 							       rect.Y + 2, VALUE_PAINT_WIDTH + 1, row_height - ENTRY_SPACING*2);
 				grid_item.PaintValue (pevent.Graphics, 
-						      new Rectangle (SplitterLocation + ENTRY_SPACING + 1, 
+						      new Rectangle_ (SplitterLocation + ENTRY_SPACING + 1, 
 								     rect.Y + ENTRY_SPACING + 1,
 								     VALUE_PAINT_WIDTH, row_height - (ENTRY_SPACING*2 +1)));
 				xLoc += VALUE_PAINT_INDENT;
@@ -672,10 +672,10 @@ namespace System.Windows.Forms.PropertyGridInternal {
 
 				DrawGridItemLabel (grid_item, pevent,
 						   depth,
-						  new Rectangle (depth * V_INDENT, yLoc, SplitterLocation - depth * V_INDENT, row_height));
+						  new Rectangle_ (depth * V_INDENT, yLoc, SplitterLocation - depth * V_INDENT, row_height));
 				DrawGridItemValue (grid_item, pevent,
 						  depth,
-						  new Rectangle (SplitterLocation + ENTRY_SPACING , yLoc, 
+						  new Rectangle_ (SplitterLocation + ENTRY_SPACING , yLoc, 
 								 ClientRectangle.Width - SplitterLocation - ENTRY_SPACING - (vbar.Visible ? vbar.Width : 0), 
 								 row_height));
 
@@ -699,8 +699,8 @@ namespace System.Windows.Forms.PropertyGridInternal {
 			yLoc += row_height;
 		}
 
-		private Rectangle DrawPlusMinus (Graphics g, int x, int y, bool expanded, bool category) {
-			Rectangle bounds = new Rectangle (x, y, 8, 8);
+		private Rectangle_ DrawPlusMinus (Graphics g, int x, int y, bool expanded, bool category) {
+			Rectangle_ bounds = new Rectangle_ (x, y, 8, 8);
 			if (!category) g.FillRectangle (Brushes.White, bounds);
 			Pen pen = ThemeEngine.Current.ResPool.GetPen (property_grid.ViewForeColor);
 			g.DrawRectangle (pen, bounds);
@@ -943,13 +943,13 @@ namespace System.Windows.Forms.PropertyGridInternal {
 		internal void ExpandItem (GridEntry item)
 		{
 			UpdateItem (this.SelectedGridItem);
-			Invalidate (new Rectangle (0, item.Top, Width, Height - item.Top));
+			Invalidate (new Rectangle_ (0, item.Top, Width, Height - item.Top));
 		}
 
 		internal void CollapseItem (GridEntry item)
 		{
 			UpdateItem (this.SelectedGridItem);
-			Invalidate (new Rectangle (0, item.Top, Width, Height - item.Top));
+			Invalidate (new Rectangle_ (0, item.Top, Width, Height - item.Top));
 		}
 
 		private void ShowDropDownControl (Control control, bool resizeable) 
@@ -972,9 +972,9 @@ namespace System.Windows.Forms.PropertyGridInternal {
 			dropdown_form.Controls.Add (control);
 			dropdown_form.Width = Math.Max (ClientRectangle.Width - SplitterLocation - (vbar.Visible ? vbar.Width : 0), 
 							control.Width);
-			dropdown_form.Location = PointToScreen (new Point (grid_textbox.Right - dropdown_form.Width, grid_textbox.Location.Y + row_height));
+			dropdown_form.Location = PointToScreen (new Point_ (grid_textbox.Right - dropdown_form.Width, grid_textbox.Location.Y + row_height));
 			RepositionInScreenWorkingArea (dropdown_form);
-			Point location = dropdown_form.Location;
+			Point_ location = dropdown_form.Location;
 
 			Form owner = FindForm ();
 			owner.AddOwnedForm (dropdown_form);
@@ -1010,7 +1010,7 @@ namespace System.Windows.Forms.PropertyGridInternal {
 
 		private void RepositionInScreenWorkingArea (Form form)
 		{
-			Rectangle workingArea = Screen.FromControl (form).WorkingArea;
+			Rectangle_ workingArea = Screen.FromControl (form).WorkingArea;
 			if (!workingArea.Contains (form.Bounds)) {
 				int x, y;
 				x = form.Location.X;
@@ -1020,11 +1020,11 @@ namespace System.Windows.Forms.PropertyGridInternal {
 					x = workingArea.X;
 
 				if (form.Location.Y + form.Size.Height > workingArea.Height) {
-					Point aboveTextBox = PointToScreen (new Point (grid_textbox.Right - form.Width, grid_textbox.Location.Y));
+					Point_ aboveTextBox = PointToScreen (new Point_ (grid_textbox.Right - form.Width, grid_textbox.Location.Y));
 					y = aboveTextBox.Y - form.Size.Height;
 				}
 
-				form.Location = new Point (x, y);
+				form.Location = new Point_ (x, y);
 			}
 		}
 

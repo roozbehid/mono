@@ -22,10 +22,10 @@
 // Authors:
 //	Peter Bartok	pbartok@novell.com
 //
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -71,9 +71,9 @@ namespace System.Windows.Forms {
 			set { base.AutoValidate = value; }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size(150, 150);
+				return new Size_(150, 150);
 			}
 		}
 
@@ -199,9 +199,9 @@ namespace System.Windows.Forms {
 			set { InternalBorderStyle = value; }
 		}
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
-			Size retsize = Size.Empty;
+			Size_ retsize = Size_.Empty;
 
 			// Add up the requested sizes for Docked controls
 			foreach (Control child in Controls) {

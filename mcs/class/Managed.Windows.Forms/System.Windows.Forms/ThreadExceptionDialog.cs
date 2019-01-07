@@ -26,8 +26,8 @@
 // Copyright (C) Novell Inc., 2004
 
 // COMPLETE - BUT DISABLED TEXTBOX
-
 using System;
+
 using System.Drawing;
 using System.Text;
 using System.Reflection;
@@ -64,9 +64,9 @@ namespace System.Windows.Forms
 			// 
 			// helpText
 			// 
-			this.helpText.Location = new System.Drawing.Point(60, 8);
+			this.helpText.Location = new System.Drawing.Point_(60, 8);
 			this.helpText.Name = "helpText";
-			this.helpText.Size = new System.Drawing.Size(356, 40);
+			this.helpText.Size = new System.Drawing.Size_(356, 40);
 			this.helpText.TabIndex = 0;
 			this.helpText.Text = "An unhandled exception has occurred in you application. If you click Ignore the a" +
 				"pplication will ignore this error and attempt to continue. If you click Abort, t" +
@@ -75,9 +75,9 @@ namespace System.Windows.Forms
 			// buttonAbort
 			// 
 			this.buttonAbort.DialogResult = System.Windows.Forms.DialogResult.Abort;
-			this.buttonAbort.Location = new System.Drawing.Point(332, 112);
+			this.buttonAbort.Location = new System.Drawing.Point_(332, 112);
 			this.buttonAbort.Name = "buttonAbort";
-			this.buttonAbort.Size = new System.Drawing.Size(85, 23);
+			this.buttonAbort.Size = new System.Drawing.Size_(85, 23);
 			this.buttonAbort.TabIndex = 4;
 			this.buttonAbort.Text = "&Abort";
 			this.buttonAbort.Click += new System.EventHandler(this.buttonAbort_Click);
@@ -85,36 +85,36 @@ namespace System.Windows.Forms
 			// buttonIgnore
 			// 
 			this.buttonIgnore.DialogResult = System.Windows.Forms.DialogResult.Ignore;
-			this.buttonIgnore.Location = new System.Drawing.Point(236, 112);
+			this.buttonIgnore.Location = new System.Drawing.Point_(236, 112);
 			this.buttonIgnore.Name = "buttonIgnore";
-			this.buttonIgnore.Size = new System.Drawing.Size(85, 23);
+			this.buttonIgnore.Size = new System.Drawing.Size_(85, 23);
 			this.buttonIgnore.TabIndex = 3;
 			this.buttonIgnore.Text = "&Ignore";
 			// 
 			// buttonDetails
 			// 
-			this.buttonDetails.Location = new System.Drawing.Point(140, 112);
+			this.buttonDetails.Location = new System.Drawing.Point_(140, 112);
 			this.buttonDetails.Name = "buttonDetails";
-			this.buttonDetails.Size = new System.Drawing.Size(85, 23);
+			this.buttonDetails.Size = new System.Drawing.Size_(85, 23);
 			this.buttonDetails.TabIndex = 2;
 			this.buttonDetails.Text = "Show &Details";
 			this.buttonDetails.Click += new System.EventHandler(this.buttonDetails_Click);
 			// 
 			// labelException
 			// 
-			this.labelException.Location = new System.Drawing.Point(60, 64);
+			this.labelException.Location = new System.Drawing.Point_(60, 64);
 			this.labelException.Name = "labelException";
-			this.labelException.Size = new System.Drawing.Size(356, 32);
+			this.labelException.Size = new System.Drawing.Size_(356, 32);
 			this.labelException.TabIndex = 1;
 			// 
 			// textBoxDetails
 			// 
-			this.textBoxDetails.Location = new System.Drawing.Point(8, 168);
+			this.textBoxDetails.Location = new System.Drawing.Point_(8, 168);
 			this.textBoxDetails.Multiline = true;
 			this.textBoxDetails.Name = "textBoxDetails";
 			this.textBoxDetails.ReadOnly = true;
 			this.textBoxDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.textBoxDetails.Size = new System.Drawing.Size(408, 196);
+			this.textBoxDetails.Size = new System.Drawing.Size_(408, 196);
 			this.textBoxDetails.TabIndex = 5;
 			this.textBoxDetails.TabStop = false;
 			this.textBoxDetails.Text = "";
@@ -122,9 +122,9 @@ namespace System.Windows.Forms
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(8, 148);
+			this.label1.Location = new System.Drawing.Point_(8, 148);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(100, 16);
+			this.label1.Size = new System.Drawing.Size_(100, 16);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Exception details";
 			// 
@@ -132,7 +132,7 @@ namespace System.Windows.Forms
 			// 
 			this.AcceptButton = this.buttonIgnore;
 			this.CancelButton = this.buttonAbort;
-			this.ClientSize = new System.Drawing.Size(428, 374);
+			this.ClientSize = new System.Drawing.Size_(428, 374);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.textBoxDetails);
 			this.Controls.Add(this.labelException);

@@ -26,8 +26,8 @@
 // Based on work done by:
 //   Dennis Hayes (dennish@Raytek.com)
 //   Aleksey Ryabchuk (ryabchuk@yahoo.com)
-
 using System.IO;
+
 using System.Drawing;
 using System.Collections;
 using System.Drawing.Imaging;
@@ -40,8 +40,8 @@ namespace System.Windows.Forms {
 	public sealed class ImageListStreamer : ISerializable {
 		readonly ImageList.ImageCollection imageCollection;
 		Image [] images;
-		Size image_size;
-		Color back_color;
+		Size_ image_size;
+		Color_ back_color;
 
 		internal ImageListStreamer (ImageList.ImageCollection imageCollection)
 		{
@@ -70,7 +70,7 @@ namespace System.Windows.Forms {
 			ushort cx = reader.ReadUInt16 ();
 			ushort cy = reader.ReadUInt16 ();
 			uint bkcolor = reader.ReadUInt32 ();
-			back_color = Color.FromArgb ((int) bkcolor);
+			back_color = Color_.FromArgb ((int) bkcolor);
 			reader.ReadUInt16 ();	// flags
 
 			short [] ovls = new short [4];
@@ -108,9 +108,9 @@ namespace System.Windows.Forms {
 				Bitmap newbmp = new Bitmap (bmp);
 				for (int y = 0; y < height; y++) {
 					for (int x = 0; x < width; x++) {
-						Color mcolor = mask.GetPixel (x, y);
+						Color_ mcolor = mask.GetPixel (x, y);
 						if (mcolor.B != 0) {
-							newbmp.SetPixel (x, y, Color.Transparent);
+							newbmp.SetPixel (x, y, Color_.Transparent);
 						}
 					}
 				}
@@ -120,15 +120,15 @@ namespace System.Windows.Forms {
 				mask = null;
 			}
 			images = new Image [nimages];
-			image_size = new Size (cx, cy);
-			Rectangle dest_rect = new Rectangle (0, 0, cx, cy);
+			image_size = new Size_ (cx, cy);
+			Rectangle_ dest_rect = new Rectangle_ (0, 0, cx, cy);
 			if (grow * bmp.Width > cx) // Some images store a wrong 'grow' factor
 				grow = (ushort) (bmp.Width / cx);
 
 			for (int r = 0 ; r < nimages ; r++) {
 				int col = r % grow;
 				int row = r / grow;
-				Rectangle area = new Rectangle (col * cx, row * cy, cx, cy);
+				Rectangle_ area = new Rectangle_ (col * cx, row * cy, cx, cy);
 				Bitmap b = new Bitmap (cx, cy);
 				using (Graphics g = Graphics.FromImage (b)) {
 					g.DrawImage (bmp, dest_rect, area, GraphicsUnit.Pixel);
@@ -202,7 +202,7 @@ namespace System.Windows.Forms {
 
 		unsafe Bitmap Get1bppMask (Bitmap main)
 		{
-			Rectangle rect = new Rectangle (0, 0, main.Width, main.Height);
+			Rectangle_ rect = new Rectangle_ (0, 0, main.Width, main.Height);
 			Bitmap result = new Bitmap (main.Width, main.Height, PixelFormat.Format1bppIndexed);
 			BitmapData dresult = result.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format1bppIndexed);
 
@@ -215,7 +215,7 @@ namespace System.Windows.Forms {
 				current = (Bitmap) images [idx];
 				// Hack for newly added images.
 				// Probably has to be done somewhere else.
-				Color c1 = current.GetPixel (0, 0);
+				Color_ c1 = current.GetPixel (0, 0);
 				if (c1.A != 0 && c1 == back_color)
 					current.MakeTransparent (back_color);
 				//
@@ -243,7 +243,7 @@ namespace System.Windows.Forms {
 					if (imgidx >= images.Length)
 						break;
 					current = (Bitmap) images [imgidx];
-					Color color = current.GetPixel (localx, localy);
+					Color_ color = current.GetPixel (localx, localy);
 					if (color.A == 0) {
 						int ptridx = yidx + (x >> 3);
 						scan [ptridx] |= (byte) (0x80 >> (x & 7));
@@ -321,7 +321,7 @@ namespace System.Windows.Forms {
 			get { return images; }
 		}
 
-		internal Size ImageSize {
+		internal Size_ ImageSize {
 			get { return image_size; }
 		}
 
@@ -329,7 +329,7 @@ namespace System.Windows.Forms {
 			get { return ColorDepth.Depth32Bit; }
 		}
 
-		internal Color BackColor {
+		internal Color_ BackColor {
 			get { return back_color; }
 		}
 	}

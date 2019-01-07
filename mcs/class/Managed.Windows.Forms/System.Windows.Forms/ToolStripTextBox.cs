@@ -245,7 +245,7 @@ namespace System.Windows.Forms
 
 		#region Protected Properties
 		protected internal override Padding DefaultMargin { get { return new Padding (1, 0, 1, 0); } }
-		protected override Size DefaultSize { get { return new Size (100, 22); } }
+		protected override Size_ DefaultSize { get { return new Size_ (100, 22); } }
 		#endregion
 
 		#region Public Methods
@@ -279,12 +279,12 @@ namespace System.Windows.Forms
 			this.TextBox.DeselectAll ();
 		}
 		
-		public char GetCharFromPosition (Point pt)
+		public char GetCharFromPosition (Point_ pt)
 		{
 			return this.TextBox.GetCharFromPosition (pt);
 		}
 		
-		public int GetCharIndexFromPosition (Point pt)
+		public int GetCharIndexFromPosition (Point_ pt)
 		{
 			return this.TextBox.GetCharIndexFromPosition (pt);
 		}
@@ -304,12 +304,12 @@ namespace System.Windows.Forms
 			return this.TextBox.GetLineFromCharIndex (index);
 		}
 		
-		public Point GetPositionFromCharIndex (int index)
+		public Point_ GetPositionFromCharIndex (int index)
 		{
 			return this.TextBox.GetPositionFromCharIndex (index);
 		}
 		
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
 			return base.GetPreferredSize (constrainingSize);
 		}
@@ -527,7 +527,7 @@ namespace System.Windows.Forms
 
 					if (tsr is ToolStripProfessionalRenderer)
 						using (Pen p = new Pen ((tsr as ToolStripProfessionalRenderer).ColorTable.ButtonSelectedBorder))
-							e.Graphics.DrawRectangle (p, new Rectangle (0, 0, this.Width - 1, this.Height - 1));
+							e.Graphics.DrawRectangle (p, new Rectangle_ (0, 0, this.Width - 1, this.Height - 1));
 				}
 			}
 			

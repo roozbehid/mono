@@ -24,8 +24,8 @@
 //
 
 // NOT COMPLETE
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -52,8 +52,8 @@ namespace System.Windows.Forms {
 		FormBorderStyle			form_border_style;
 		private bool			is_active;
 		private bool		        autoscale;
-		private Size			clientsize_set;
-		private Size		        autoscale_base_size;
+		private Size_			clientsize_set;
+		private Size_		        autoscale_base_size;
 		private bool			allow_transparency;
 		private static Icon		default_icon;
 		internal bool			is_modal;
@@ -76,15 +76,15 @@ namespace System.Windows.Forms {
 		private bool			key_preview;
 		private MainMenu		menu;
 		private	Icon			icon;
-		private Size			maximum_size;
-		private Size			minimum_size;
+		private Size_			maximum_size;
+		private Size_			minimum_size;
 		private SizeGripStyle		size_grip_style;
 		private SizeGrip		size_grip;
-		private Rectangle		maximized_bounds;
-		private Rectangle		default_maximized_bounds;
+		private Rectangle_		maximized_bounds;
+		private Rectangle_		default_maximized_bounds;
 		private double			opacity;
 		internal ApplicationContext	context;
-		Color				transparency_key;
+		Color_				transparency_key;
 		private bool			is_loaded;
 		internal int			is_changing_visible_state;
 		internal bool			has_been_visible;
@@ -160,12 +160,12 @@ namespace System.Windows.Forms {
 			this.OnFormClosed (new FormClosedEventArgs (reason));
 		}
 		
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
-			Size retsize = Size.Empty;
+			Size_ retsize = Size_.Empty;
 			
 			foreach (Control child in Controls) {
-				Size child_preferred_size;
+				Size_ child_preferred_size;
 				if (child.AutoSize)
 					child_preferred_size = child.PreferredSize;
 				else
@@ -188,7 +188,7 @@ namespace System.Windows.Forms {
 					retsize.Height = child_bottom + child.Margin.Bottom;
 			}
 
-			if (retsize == Size.Empty) { // no child controls
+			if (retsize == Size_.Empty) { // no child controls
 				retsize.Height += this.Padding.Top;
 				retsize.Width += this.Padding.Left;
 			}
@@ -199,7 +199,7 @@ namespace System.Windows.Forms {
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected override Rectangle GetScaledBounds (Rectangle bounds, SizeF factor, BoundsSpecified specified)
+		protected override Rectangle_ GetScaledBounds (Rectangle_ bounds, SizeF_ factor, BoundsSpecified specified)
 		{
 			if ((specified & BoundsSpecified.Width) == BoundsSpecified.Width) {
 				int border = Size.Width - ClientSize.Width;
@@ -219,7 +219,7 @@ namespace System.Windows.Forms {
 		}
 		
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}
@@ -277,7 +277,7 @@ namespace System.Windows.Forms {
 		
 		private new void UpdateSizeGripVisible ()
 		{
-			// Following link explains when to show size grip:
+			// Following link explains when to show Size_ grip:
 			// http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=138687&SiteID=1
 			// if SizeGripStyle.Auto, only shown if form is shown using ShowDialog and is sizable
 			// if SizeGripStyle.Show, only shown if form is sizable
@@ -386,10 +386,10 @@ namespace System.Windows.Forms {
 		#region Public Constructor & Destructor
 		public Form ()
 		{
-			SizeF current_scale = GetAutoScaleSize (Font);
+			SizeF_ current_scale = GetAutoScaleSize (Font);
 
 			autoscale = true;
-			autoscale_base_size = new Size ((int)Math.Round (current_scale.Width), (int)Math.Round(current_scale.Height));
+			autoscale_base_size = new Size_ ((int)Math.Round (current_scale.Width), (int)Math.Round(current_scale.Height));
 			allow_transparency = false;
 			closing = false;
 			is_modal = false;
@@ -401,9 +401,9 @@ namespace System.Windows.Forms {
 			opacity = 1D;
 			menu = null;
 			icon = default_icon;
-			minimum_size = Size.Empty;
-			maximum_size = Size.Empty;
-			clientsize_set = Size.Empty;
+            minimum_size = Size_.Empty;
+            maximum_size = Size_.Empty;
+            clientsize_set = Size_.Empty;
 			control_box = true;
 			minimize_box = true;
 			maximize_box = true;
@@ -412,12 +412,12 @@ namespace System.Windows.Forms {
 			is_visible = false;
 			is_toplevel = true;
 			size_grip_style = SizeGripStyle.Auto;
-			maximized_bounds = Rectangle.Empty;
-			default_maximized_bounds = Rectangle.Empty;
+			maximized_bounds = Rectangle_.Empty;
+			default_maximized_bounds = Rectangle_.Empty;
 			owned_forms = new Form.ControlCollection(this);
-			transparency_key = Color.Empty;
+			transparency_key = Color_.Empty;
 			CreateDockPadding ();
-			InternalClientSize = new Size (this.Width - (SystemInformation.FrameBorderSize.Width * 2), this.Height - (SystemInformation.FrameBorderSize.Height * 2) - SystemInformation.CaptionHeight);
+			InternalClientSize = new Size_ (this.Width - (SystemInformation.FrameBorderSize.Width * 2), this.Height - (SystemInformation.FrameBorderSize.Height * 2) - SystemInformation.CaptionHeight);
 			restore_bounds = Bounds;
 		}
 		#endregion	// Public Constructor & Destructor
@@ -518,7 +518,7 @@ namespace System.Windows.Forms {
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		[Localizable(true)]
 		[Browsable(false)]
-		public virtual Size AutoScaleBaseSize {
+		public virtual Size_ AutoScaleBaseSize {
 			get {
 				return autoscale_base_size;
 			}
@@ -585,11 +585,11 @@ namespace System.Windows.Forms {
 			set { base.AutoValidate = value; }
 		}
 
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get {
 				/* we don't let parents override our
-				 default background color for forms.
-				 this fixes the default color for mdi
+				 default background Color_ for forms.
+				 this fixes the default Color_ for mdi
 				 children. */
 				if (background_color.IsEmpty)
 					return DefaultBackColor;
@@ -617,7 +617,7 @@ namespace System.Windows.Forms {
 		// new property so we can change the DesignerSerializationVisibility
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		[Localizable(true)]
-		public new Size ClientSize {
+		public new Size_ ClientSize {
 			get { return base.ClientSize; }
 			set {
 				is_clientsize_set = true;
@@ -642,9 +642,9 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Rectangle DesktopBounds {
+		public Rectangle_ DesktopBounds {
 			get {
-				return new Rectangle(Location, Size);
+				return new Rectangle_(Location, Size);
 			}
 
 			set {
@@ -654,7 +654,7 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Point DesktopLocation {
+		public Point_ DesktopLocation {
 			get {
 				return Location;
 			}
@@ -700,7 +700,7 @@ namespace System.Windows.Forms {
 					window_manager.UpdateBorderStyle (value);
 				}
 
-				Size current_client_size = ClientSize;
+				Size_ current_client_size = ClientSize;
 				UpdateStyles();
 				
 				if (this.IsHandleCreated) {
@@ -846,7 +846,7 @@ namespace System.Windows.Forms {
 		[Localizable(true)]
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[MWFCategory("Layout")]
-		public override Size MaximumSize {
+		public override Size_ MaximumSize {
 			get {
 				return maximum_size;
 			}
@@ -954,11 +954,11 @@ namespace System.Windows.Forms {
 							XplatUI.SetMenu (window.Handle, menu);
 						}
 
-						if (clientsize_set != Size.Empty) {
+						if (clientsize_set != Size_.Empty) {
 							SetClientSizeCore(clientsize_set.Width, clientsize_set.Height);
 						} else {
-							UpdateBounds (bounds.X, bounds.Y, bounds.Width, bounds.Height, ClientSize.Width, ClientSize.Height - 
-								ThemeEngine.Current.CalcMenuBarSize (DeviceContext, menu, ClientSize.Width));
+							UpdateBounds (bounds.X, bounds.Y, bounds.Width, bounds.Height, ClientSize.Width, ClientSize.Height -
+                                ThemeEngine.Current.CalcMenuBarSize (DeviceContext, menu, ClientSize.Width));
 						}
 					} else
 						UpdateBounds ();
@@ -1028,7 +1028,7 @@ namespace System.Windows.Forms {
 		[Localizable(true)]
 		[RefreshProperties(RefreshProperties.Repaint)]
 		[MWFCategory("Layout")]
-		public override Size MinimumSize {
+		public override Size_ MinimumSize {
 			get {
 				return minimum_size;
 			}
@@ -1046,7 +1046,7 @@ namespace System.Windows.Forms {
 					}
 					
 					if ((Size.Width < value.Width) || (Size.Height < value.Height)) {
-						Size = new Size(Math.Max(Size.Width, value.Width), Math.Max(Size.Height, value.Height));
+						Size = new Size_(Math.Max(Size.Width, value.Width), Math.Max(Size.Height, value.Height));
 					}
   
 
@@ -1143,7 +1143,7 @@ namespace System.Windows.Forms {
 
 		[Browsable (false)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public Rectangle RestoreBounds {
+		public Rectangle_ RestoreBounds {
 			get { return restore_bounds; }
 		}
 		
@@ -1190,7 +1190,7 @@ namespace System.Windows.Forms {
 		// new property so we can set the DesignerSerializationVisibility
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[Localizable(false)]
-		public new Size Size {
+		public new Size_ Size {
 			get { return base.Size; }
 			set { base.Size = value; }
 		}
@@ -1274,7 +1274,7 @@ namespace System.Windows.Forms {
 		}
 
 		[MWFCategory("Window Style")]
-		public Color TransparencyKey {
+		public Color_ TransparencyKey {
 			get {
 				return transparency_key;
 			}
@@ -1291,7 +1291,7 @@ namespace System.Windows.Forms {
 
 		internal bool ShouldSerializeTransparencyKey ()
 		{
-			return this.TransparencyKey != Color.Empty;
+			return this.TransparencyKey != Color_.Empty;
 		}
 
 		[DefaultValue(FormWindowState.Normal)]
@@ -1511,7 +1511,7 @@ namespace System.Windows.Forms {
 				if ((VisibleInternal && (is_changing_visible_state == 0 || is_unix)) || this.IsRecreating)
 					cp.Style |= (int)WindowStyles.WS_VISIBLE;
 
-				if (opacity < 1.0 || TransparencyKey != Color.Empty) {
+				if (opacity < 1.0 || TransparencyKey != Color_.Empty) {
 					cp.ExStyle |= (int)WindowExStyles.WS_EX_LAYERED;
 				}
 
@@ -1533,15 +1533,15 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size (300, 300);
+				return new Size_ (300, 300);
 			}
 		}
 
-		protected Rectangle MaximizedBounds {
+		protected Rectangle_ MaximizedBounds {
 			get {
-				if (maximized_bounds != Rectangle.Empty) {
+				if (maximized_bounds != Rectangle_.Empty) {
 					return maximized_bounds;
 				}
 				return default_maximized_bounds;
@@ -1566,7 +1566,7 @@ namespace System.Windows.Forms {
 		#region Public Static Methods
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete ("This method has been deprecated.  Use AutoScaleDimensions instead")]
-		public static SizeF GetAutoScaleSize (Font font)
+		public static SizeF_ GetAutoScaleSize (Font font)
 		{
 			return XplatUI.GetAutoScaleSize(font);
 		}
@@ -1623,11 +1623,11 @@ namespace System.Windows.Forms {
 		}
 
 		public void SetDesktopBounds(int x, int y, int width, int height) {
-			DesktopBounds = new Rectangle(x, y, width, height);
+			DesktopBounds = new Rectangle_(x, y, width, height);
 		}
 
 		public void SetDesktopLocation(int x, int y) {
-			DesktopLocation = new Point(x, y);
+			DesktopLocation = new Point_(x, y);
 		}
 
 		public void Show (IWin32Window owner)
@@ -1654,7 +1654,7 @@ namespace System.Windows.Forms {
 		}
 
 		public DialogResult ShowDialog(IWin32Window owner) {
-			Rectangle	area;
+			Rectangle_	area;
 			bool		confined;
 			IntPtr		capture_window;
 
@@ -1802,8 +1802,8 @@ namespace System.Windows.Forms {
 		[Obsolete ("This method has been deprecated")] // XXX what to use instead?
 		protected void ApplyAutoScaling()
 		{
-			SizeF current_size_f = GetAutoScaleSize (Font);
-			Size current_size = new Size ((int)Math.Round (current_size_f.Width), (int)Math.Round (current_size_f.Height));
+			SizeF_ current_size_f = GetAutoScaleSize (Font);
+			Size_ current_size = new Size_ ((int)Math.Round (current_size_f.Width), (int)Math.Round (current_size_f.Height));
 			float	dx;
 			float	dy;
 
@@ -1867,7 +1867,7 @@ namespace System.Windows.Forms {
 			}
 
 			if (owner != null) {
-				this.Location = new Point(ctl.Left + ctl.Width / 2 - w /2, ctl.Top + ctl.Height / 2 - h / 2);
+				this.Location = new Point_(ctl.Left + ctl.Width / 2 - w /2, ctl.Top + ctl.Height / 2 - h / 2);
 			}
 		}
 
@@ -1893,13 +1893,13 @@ namespace System.Windows.Forms {
 				h = DefaultSize.Height;
 			}
 
-			Rectangle workingArea;
+			Rectangle_ workingArea;
 			if (Owner == null) {
 				workingArea = Screen.FromPoint (MousePosition).WorkingArea;
 			} else {
 				workingArea = Screen.FromControl (Owner).WorkingArea;
 			}
-			this.Location = new Point (workingArea.Left + workingArea.Width / 2 - w / 2,
+			this.Location = new Point_ (workingArea.Left + workingArea.Width / 2 - w / 2,
 				workingArea.Top + workingArea.Height / 2 - h / 2);
 		}
 
@@ -2044,8 +2044,8 @@ namespace System.Windows.Forms {
 			base.OnFontChanged (e);
 			
 			if (!autoscale_base_size_set) {
-				SizeF sizef = Form.GetAutoScaleSize (Font);
-				autoscale_base_size = new Size ((int)Math.Round (sizef.Width), (int)Math.Round (sizef.Height));
+				SizeF_ sizef = Form.GetAutoScaleSize (Font);
+				autoscale_base_size = new Size_ ((int)Math.Round (sizef.Width), (int)Math.Round (sizef.Height));
 			}
 		}
 
@@ -2214,7 +2214,7 @@ namespace System.Windows.Forms {
 					return true;
 				case Keys.Alt | Keys.OemMinus:
 				case Keys.Alt | Keys.Subtract:
-					(this.WindowManager as MdiWindowManager).ShowPopup (Point.Empty);
+					(this.WindowManager as MdiWindowManager).ShowPopup (Point_.Empty);
 					return true;
 				}
 			}
@@ -2302,7 +2302,7 @@ namespace System.Windows.Forms {
 
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		protected override void SetBoundsCore(int x, int y, int width, int height, BoundsSpecified specified) {
-			Size min_size;
+			Size_ min_size;
 			
 			if (WindowState == FormWindowState.Minimized)
 				min_size = SystemInformation.MinimizedWindowSize;
@@ -2333,7 +2333,7 @@ namespace System.Windows.Forms {
 			int restore_y = (specified & BoundsSpecified.Y) == BoundsSpecified.Y ? y : restore_bounds.Y;
 			int restore_w = (specified & BoundsSpecified.Width) == BoundsSpecified.Width ? width : restore_bounds.Width;
 			int restore_h = (specified & BoundsSpecified.Height) == BoundsSpecified.Height ? height : restore_bounds.Height;
-			restore_bounds = new Rectangle (restore_x, restore_y, restore_w, restore_h);
+			restore_bounds = new Rectangle_ (restore_x, restore_y, restore_w, restore_h);
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -2350,11 +2350,11 @@ namespace System.Windows.Forms {
 				y = maximum_size.Height;
 			}
 
-			Rectangle ClientRect = new Rectangle(0, 0, x, y);
-			Rectangle WindowRect;
+			Rectangle_ ClientRect = new Rectangle_(0, 0, x, y);
+			Rectangle_ WindowRect;
 			CreateParams cp = this.CreateParams;
 
-			clientsize_set = new Size(x, y);
+			clientsize_set = new Size_(x, y);
 
 			if (XplatUI.CalculateWindowRect(ref ClientRect, cp, cp.menu, out WindowRect)) {
 				SetBounds(bounds.X, bounds.Y, WindowRect.Width, WindowRect.Height, BoundsSpecified.Size);
@@ -2623,11 +2623,11 @@ namespace System.Windows.Forms {
 		{
 			// When a form is minimized/restored:
 			// * Win32: X and Y are set to negative values/restored, 
-			//   size remains the same.
-			// * X11: Location and Size remain the same.
+			//   Size_ remains the same.
+			// * X11: Location and Size_ remain the same.
 			// 
 			// In both cases we have to fire Resize explicitly here, 
-			// because of the unmodified Size due to which Control
+			// because of the unmodified Size_ due to which Control
 			// doesn't fire it.
 			// 
 			if (window_state != FormWindowState.Minimized && WindowState != FormWindowState.Minimized)
@@ -2705,7 +2705,7 @@ namespace System.Windows.Forms {
 
 				XplatUI.ScreenToMenu (ActiveMenu.Wnd.window.Handle, ref x, ref y);
 
-				// If point is under menu return HTMENU, it prevents Win32 to return HTMOVE.
+				// If Point_ is under menu return HTMENU, it prevents Win32 to return HTMOVE.
 				if ((x > 0) && (y > 0) && (x < ActiveMenu.Rect.Width) && (y < ActiveMenu.Rect.Height)) {
 					m.Result = new IntPtr ((int)HitTest.HTMENU);
 					return;
@@ -2772,17 +2772,17 @@ namespace System.Windows.Forms {
 		{
 			if (ActiveMenu != null) {
 				PaintEventArgs pe = XplatUI.PaintEventStart (ref m, Handle, false);
-				Point pnt = XplatUI.GetMenuOrigin (window.Handle);
+				Point_ pnt = XplatUI.GetMenuOrigin (window.Handle);
 
-				// The entire menu has to be in the clip rectangle because the 
+				// The entire menu has to be in the clip Rectangle_ because the 
 				// control buttons are right-aligned and otherwise they would
 				// stay painted when the window gets resized.
-				Rectangle clip = new Rectangle (pnt.X, pnt.Y, ClientSize.Width, 0);
+				Rectangle_ clip = new Rectangle_ (pnt.X, pnt.Y, ClientSize.Width, 0);
 				clip = Rectangle.Union (clip, pe.ClipRectangle);
 				pe.SetClip (clip);
 				pe.Graphics.SetClip (clip);
 
-				ActiveMenu.Draw (pe, new Rectangle (pnt.X, pnt.Y, ClientSize.Width, 0));
+				ActiveMenu.Draw (pe, new Rectangle_ (pnt.X, pnt.Y, ClientSize.Width, 0));
 
 				if (ActiveMaximizedMdiChild != null)
 					ActiveMaximizedMdiChild.DrawMaximizedButtons (ActiveMenu, pe);
@@ -2814,20 +2814,20 @@ namespace System.Windows.Forms {
 			if (m.LParam != IntPtr.Zero) {
 				mmi = (MINMAXINFO)Marshal.PtrToStructure (m.LParam, typeof (MINMAXINFO));
 
-				default_maximized_bounds = new Rectangle (mmi.ptMaxPosition.x, mmi.ptMaxPosition.y, mmi.ptMaxSize.x, mmi.ptMaxSize.y);
-				if (maximized_bounds != Rectangle.Empty) {
+				default_maximized_bounds = new Rectangle_ (mmi.ptMaxPosition.x, mmi.ptMaxPosition.y, mmi.ptMaxSize.x, mmi.ptMaxSize.y);
+				if (maximized_bounds != Rectangle_.Empty) {
 					mmi.ptMaxPosition.x = maximized_bounds.Left;
 					mmi.ptMaxPosition.y = maximized_bounds.Top;
 					mmi.ptMaxSize.x = maximized_bounds.Width;
 					mmi.ptMaxSize.y = maximized_bounds.Height;
 				}
 
-				if (minimum_size != Size.Empty) {
+				if (minimum_size != Size_.Empty) {
 					mmi.ptMinTrackSize.x = minimum_size.Width;
 					mmi.ptMinTrackSize.y = minimum_size.Height;
 				}
 
-				if (maximum_size != Size.Empty) {
+				if (maximum_size != Size_.Empty) {
 					mmi.ptMaxTrackSize.x = maximum_size.Width;
 					mmi.ptMaxTrackSize.y = maximum_size.Height;
 				}
@@ -3034,7 +3034,7 @@ namespace System.Windows.Forms {
 		}
 
 		[SettingsBindable (true)]
-		public new Point Location {
+		public new Point_ Location {
 			get {
 				return base.Location;
 			}
@@ -3178,7 +3178,7 @@ namespace System.Windows.Forms {
 			base.OnLayout (levent);
 			
 			if (AutoSize) {
-				Size new_size = GetPreferredSizeCore (Size.Empty);
+				Size_ new_size = GetPreferredSizeCore (Size_.Empty);
 				if (AutoSizeMode == AutoSizeMode.GrowOnly) {
 					new_size.Width = Math.Max (new_size.Width, Width);
 					new_size.Height = Math.Max (new_size.Height, Height);

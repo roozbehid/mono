@@ -24,9 +24,9 @@
 //	Ivan N. Zlatev <contact@i-nz.net>
 //
 
-
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -279,27 +279,27 @@ namespace System.Windows.Forms {
 			return string.Format ("DataGridViewComboBoxCell {{ ColumnIndex={0}, RowIndex={1} }}", ColumnIndex, RowIndex);
 		}
 
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
 			object o = FormattedValue;
-			Size s = Size.Empty;
+			Size_ s = Size_.Empty;
 
 			if (o != null)
 				s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 
-			return new Rectangle (1, (OwningRow.Height - s.Height) / 2, s.Width - 3, s.Height);
+			return new Rectangle_ (1, (OwningRow.Height - s.Height) / 2, s.Width - 3, s.Height);
 		}
 
-		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
-			Size error_icon = new Size (12, 11);
-			return new Rectangle (new Point (Size.Width - error_icon.Width - 23, (Size.Height - error_icon.Height) / 2), error_icon);
+			Size_ error_icon = new Size_ (12, 11);
+			return new Rectangle_ (new Point_ (Size.Width - error_icon.Width - 23, (Size.Height - error_icon.Height) / 2), error_icon);
 		}
 
 		protected override object GetFormattedValue (object value, int rowIndex, ref DataGridViewCellStyle cellStyle, TypeConverter valueTypeConverter, TypeConverter formattedValueTypeConverter, DataGridViewDataErrorContexts context)
@@ -307,17 +307,17 @@ namespace System.Windows.Forms {
 			return base.GetFormattedValue (value, rowIndex, ref cellStyle, valueTypeConverter, formattedValueTypeConverter, context);
 		}
 
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected override Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
 			object o = FormattedValue;
 
 			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				Size_ s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height = Math.Max (s.Height, 22);
 				s.Width += 25;
 				return s;
 			} else
-				return new Size (39, 22);
+				return new Size_ (39, 22);
 		}
 
 		protected override void OnDataGridViewChanged () {
@@ -368,26 +368,26 @@ namespace System.Windows.Forms {
 			base.OnMouseMove (e);
 		}
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates elementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates elementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			// The internal paint routines are overridden instead of
 			// doing the custom paint logic here
 			base.Paint (graphics, clipBounds, cellBounds, rowIndex, elementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 		}
 
-		internal override void PaintPartContent (Graphics graphics, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
+		internal override void PaintPartContent (Graphics graphics, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
 		{
-			Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
+			Color_ color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 			TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter | TextFormatFlags.TextBoxControl;
 	
-			Rectangle text_area = ContentBounds;
+			Rectangle_ text_area = ContentBounds;
 			text_area.X += cellBounds.X;
 			text_area.Y += cellBounds.Y;
 
-			Rectangle button_area = CalculateButtonArea (cellBounds);
+			Rectangle_ button_area = CalculateButtonArea (cellBounds);
 
 			// The background of the dropdown button should be gray, not
-			// the background color of the cell.
+			// the background Color_ of the cell.
 			graphics.FillRectangle (SystemBrushes.Control, button_area);
 			ThemeEngine.Current.CPDrawComboButton (graphics, button_area, ButtonState.Normal);
 
@@ -395,9 +395,9 @@ namespace System.Windows.Forms {
 				TextRenderer.DrawText (graphics, formattedValue.ToString (), cellStyle.Font, text_area, color, flags);
 		}
 		
-		private Rectangle CalculateButtonArea (Rectangle cellBounds)
+		private Rectangle_ CalculateButtonArea (Rectangle_ cellBounds)
 		{
-			Rectangle button_area, text_area;
+			Rectangle_ button_area, text_area;
 			int border = ThemeEngine.Current.Border3DSize.Width;
 			const int button_width = 16;
 

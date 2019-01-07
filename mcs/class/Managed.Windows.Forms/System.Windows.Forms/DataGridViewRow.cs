@@ -22,8 +22,8 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Collections;
@@ -513,11 +513,11 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected internal virtual void DrawFocus (Graphics graphics, Rectangle clipBounds, Rectangle bounds, int rowIndex, DataGridViewElementStates rowState, DataGridViewCellStyle cellStyle, bool cellsPaintSelectionBackground)
+		protected internal virtual void DrawFocus (Graphics graphics, Rectangle_ clipBounds, Rectangle_ bounds, int rowIndex, DataGridViewElementStates rowState, DataGridViewCellStyle cellStyle, bool cellsPaintSelectionBackground)
 		{
 		}
 
-		protected internal virtual void Paint (Graphics graphics, Rectangle clipBounds, Rectangle rowBounds, int rowIndex, DataGridViewElementStates rowState, bool isFirstDisplayedRow, bool isLastVisibleRow)
+		protected internal virtual void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ rowBounds, int rowIndex, DataGridViewElementStates rowState, bool isFirstDisplayedRow, bool isLastVisibleRow)
 		{
 			DataGridViewCellStyle style;
 			
@@ -545,11 +545,11 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected internal virtual void PaintCells (Graphics graphics, Rectangle clipBounds, Rectangle rowBounds, int rowIndex, DataGridViewElementStates rowState, bool isFirstDisplayedRow, bool isLastVisibleRow, DataGridViewPaintParts paintParts)
+		protected internal virtual void PaintCells (Graphics graphics, Rectangle_ clipBounds, Rectangle_ rowBounds, int rowIndex, DataGridViewElementStates rowState, bool isFirstDisplayedRow, bool isLastVisibleRow, DataGridViewPaintParts paintParts)
 		{
 			List<DataGridViewColumn> sortedColumns = DataGridView.Columns.ColumnDisplayIndexSortedArrayList;
 			
-			Rectangle bounds = rowBounds;
+			Rectangle_ bounds = rowBounds;
 			
 			// If row headers are visible, adjust our starting point
 			if (DataGridView.RowHeadersVisible) {
@@ -602,7 +602,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected internal virtual void PaintHeader (Graphics graphics, Rectangle clipBounds, Rectangle rowBounds, int rowIndex, DataGridViewElementStates rowState, bool isFirstDisplayedRow, bool isLastVisibleRow, DataGridViewPaintParts paintParts)
+		protected internal virtual void PaintHeader (Graphics graphics, Rectangle_ clipBounds, Rectangle_ rowBounds, int rowIndex, DataGridViewElementStates rowState, bool isFirstDisplayedRow, bool isLastVisibleRow, DataGridViewPaintParts paintParts)
 		{
 			rowBounds.Width = DataGridView.RowHeadersWidth;
 			graphics.FillRectangle (Brushes.White, rowBounds);
@@ -663,7 +663,7 @@ namespace System.Windows.Forms
 				this.dataGridViewRow = owner;
 			}
 
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get { throw new NotImplementedException(); }
 			}
 

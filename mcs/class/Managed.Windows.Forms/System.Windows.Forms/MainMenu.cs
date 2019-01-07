@@ -25,8 +25,8 @@
 //
 
 // COMPLETE
-
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -120,13 +120,13 @@ namespace System.Windows.Forms
 			Draw (pe, Rect);
 		}
 
-		internal void Draw (Rectangle rect) 
+		internal void Draw (Rectangle_ rect) 
 		{
 			if (Wnd.IsHandleCreated) {
-				Point pt = XplatUI.GetMenuOrigin (Wnd.window.Handle);
+				Point_ pt = XplatUI.GetMenuOrigin (Wnd.window.Handle);
 				Message m = Message.Create (Wnd.window.Handle, (int)Msg.WM_PAINT, IntPtr.Zero, IntPtr.Zero);
 				PaintEventArgs pevent = XplatUI.PaintEventStart (ref m, Wnd.window.Handle, false);
-				pevent.Graphics.SetClip (new Rectangle (rect.X + pt.X, rect.Y + pt.Y, rect.Width, rect.Height));
+				pevent.Graphics.SetClip (new Rectangle_ (rect.X + pt.X, rect.Y + pt.Y, rect.Width, rect.Height));
 				Draw (pevent, Rect);
 				XplatUI.PaintEventEnd (ref m, Wnd.window.Handle, false);
 			}
@@ -137,7 +137,7 @@ namespace System.Windows.Forms
 			Draw (pe, Rect);
 		}
 
-		internal void Draw (PaintEventArgs pe, Rectangle rect)
+		internal void Draw (PaintEventArgs pe, Rectangle_ rect)
 		{
 			if (!Wnd.IsHandleCreated)
 				return;
@@ -175,7 +175,7 @@ namespace System.Windows.Forms
 			if (form == null)
 				return;
 
-			Rectangle clip = Rect;
+			Rectangle_ clip = Rect;
 			Height = 0; /* need this so the theme code will re-layout the menu items
 				       (why is the theme code doing the layout?  argh) */
 

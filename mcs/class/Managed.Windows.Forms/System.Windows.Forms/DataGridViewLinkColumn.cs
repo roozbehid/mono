@@ -23,11 +23,11 @@
 //	olivier Dufour	olivier.duff@free.fr
 //
 //
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -61,7 +61,7 @@ namespace System.Windows.Forms
 
 		#region Public Properties
 
-		public Color ActiveLinkColor {
+		public Color_ ActiveLinkColor {
 			get {
 				DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
 				if (template == null)
@@ -123,7 +123,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color LinkColor {
+		public Color_ LinkColor {
 			get	{
 				DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
 				if (template == null)
@@ -221,7 +221,7 @@ namespace System.Windows.Forms
 		}
 
 		//If the TrackVisitedState property is set to false, the VisitedLinkColor property is ignored.
-		public Color VisitedLinkColor {
+		public Color_ VisitedLinkColor {
 			get {
 				DataGridViewLinkCell template = CellTemplate as DataGridViewLinkCell;
 				if (template == null)

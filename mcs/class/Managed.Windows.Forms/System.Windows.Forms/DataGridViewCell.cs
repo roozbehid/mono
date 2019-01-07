@@ -25,8 +25,8 @@
 //
 
 
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -85,7 +85,7 @@ namespace System.Windows.Forms {
 		}
 
 		[Browsable (false)]
-		public Rectangle ContentBounds {
+		public Rectangle_ ContentBounds {
 			get { 
 				return GetContentBounds (RowIndex);
 			}
@@ -125,7 +125,7 @@ namespace System.Windows.Forms {
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public Rectangle ErrorIconBounds {
+		public Rectangle_ ErrorIconBounds {
 			get {
 				if (this is DataGridViewTopLeftHeaderCell)
 					return GetErrorIconBounds (null, null, RowIndex);
@@ -237,12 +237,12 @@ namespace System.Windows.Forms {
 		}
 
 		[Browsable (false)]
-		public Size PreferredSize {
+		public Size_ PreferredSize {
 			get { 
 				if (DataGridView == null)
-					return new Size (-1, -1);
+					return new Size_ (-1, -1);
 					
-				return GetPreferredSize (Hwnd.GraphicsContext, InheritedStyle, RowIndex, Size.Empty); 
+				return GetPreferredSize (Hwnd.GraphicsContext, InheritedStyle, RowIndex, Size_.Empty); 
 			}
 		}
 
@@ -339,10 +339,10 @@ namespace System.Windows.Forms {
 		}
 
 		[Browsable (false)]
-		public Size Size {
+		public Size_ Size {
 			get {
 				if (DataGridView == null)
-					return new Size (-1, -1);
+					return new Size_ (-1, -1);
 					
 				return GetSize (RowIndex);
 			}
@@ -464,10 +464,10 @@ namespace System.Windows.Forms {
 		{
 		}
 
-		public Rectangle GetContentBounds (int rowIndex)
+		public Rectangle_ GetContentBounds (int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 			
 			return GetContentBounds (Hwnd.GraphicsContext, InheritedStyle, rowIndex);
 		}
@@ -636,7 +636,7 @@ namespace System.Windows.Forms {
 			if (maxWidth < 1)
 				throw new ArgumentOutOfRangeException ("maxWidth is less than 1.");
 
-			return TextRenderer.MeasureText (graphics, text, font, new Size (maxWidth, 0), flags).Height;
+			return TextRenderer.MeasureText (graphics, text, font, new Size_ (maxWidth, 0), flags).Height;
 		}
 
 		[MonoTODO ("does not use widthTruncated parameter")]
@@ -644,11 +644,11 @@ namespace System.Windows.Forms {
 		public static int MeasureTextHeight (Graphics graphics, string text, Font font, int maxWidth, TextFormatFlags flags, out bool widthTruncated)
 		{
 			widthTruncated = false;
-			return TextRenderer.MeasureText (graphics, text, font, new Size (maxWidth, 0), flags).Height;
+			return TextRenderer.MeasureText (graphics, text, font, new Size_ (maxWidth, 0), flags).Height;
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public static Size MeasureTextPreferredSize (Graphics graphics, string text, Font font, float maxRatio, TextFormatFlags flags)
+		public static Size_ MeasureTextPreferredSize (Graphics graphics, string text, Font font, float maxRatio, TextFormatFlags flags)
 		{
 			if (graphics == null)
 				throw new ArgumentNullException ("Graphics argument null");
@@ -663,9 +663,9 @@ namespace System.Windows.Forms {
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public static Size MeasureTextSize (Graphics graphics, string text, Font font, TextFormatFlags flags)
+		public static Size_ MeasureTextSize (Graphics graphics, string text, Font font, TextFormatFlags flags)
 		{
-			return TextRenderer.MeasureText (graphics, text, font, Size.Empty, flags);
+			return TextRenderer.MeasureText (graphics, text, font, Size_.Empty, flags);
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
@@ -678,7 +678,7 @@ namespace System.Windows.Forms {
 			if (maxHeight < 1)
 				throw new ArgumentOutOfRangeException ("maxHeight is less than 1.");
 
-			return TextRenderer.MeasureText (graphics, text, font, new Size (0, maxHeight), flags).Width;
+			return TextRenderer.MeasureText (graphics, text, font, new Size_ (0, maxHeight), flags).Width;
 		}
 
 		public virtual object ParseFormattedValue (object formattedValue, DataGridViewCellStyle cellStyle, TypeConverter formattedValueTypeConverter, TypeConverter valueTypeConverter)
@@ -707,7 +707,7 @@ namespace System.Windows.Forms {
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public virtual void PositionEditingControl (bool setLocation, bool setSize, Rectangle cellBounds, Rectangle cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow)
+		public virtual void PositionEditingControl (bool setLocation, bool setSize, Rectangle_ cellBounds, Rectangle_ cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow)
 		{
 			if (DataGridView.EditingControl != null) {
 				if (setLocation && setSize)
@@ -720,7 +720,7 @@ namespace System.Windows.Forms {
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public virtual Rectangle PositionEditingPanel (Rectangle cellBounds, Rectangle cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow) {
+		public virtual Rectangle_ PositionEditingPanel (Rectangle_ cellBounds, Rectangle_ cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow) {
 			throw new NotImplementedException();
 		}
 
@@ -728,9 +728,9 @@ namespace System.Windows.Forms {
 			return String.Format("{0} {{ ColumnIndex={1}, RowIndex={2} }}", this.GetType().Name, ColumnIndex, RowIndex);
 		}
 
-		protected virtual Rectangle BorderWidths (DataGridViewAdvancedBorderStyle advancedBorderStyle)
+		protected virtual Rectangle_ BorderWidths (DataGridViewAdvancedBorderStyle advancedBorderStyle)
 		{
-			Rectangle r = Rectangle.Empty;
+			Rectangle_ r = Rectangle_.Empty;
 
 			r.X = BorderToWidth (advancedBorderStyle.Left);
 			r.Y = BorderToWidth (advancedBorderStyle.Top);
@@ -853,13 +853,13 @@ namespace System.Windows.Forms {
 			return GetClipboardContent (rowIndex, firstCell, lastCell, inFirstRow, inLastRow, format);
 		}
 
-		protected virtual Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex) {
-			return Rectangle.Empty;
+		protected virtual Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex) {
+			return Rectangle_.Empty;
 		}
 
-		protected virtual Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected virtual Rectangle_ GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
-			return Rectangle.Empty;
+			return Rectangle_.Empty;
 		}
 
 		protected internal virtual string GetErrorText (int rowIndex)
@@ -910,17 +910,17 @@ namespace System.Windows.Forms {
 			return Convert.ChangeType (value, FormattedValueType);
 		}
 
-		protected virtual Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected virtual Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
-			return new Size (-1, -1);
+			return new Size_ (-1, -1);
 		}
 
-		protected virtual Size GetSize (int rowIndex)
+		protected virtual Size_ GetSize (int rowIndex)
 		{
 			if (RowIndex == -1)
-				throw new InvalidOperationException ("Getting the Size property of a cell in a shared row is not a valid operation.");
+				throw new InvalidOperationException ("Getting the Size_ property of a cell in a shared row is not a valid operation.");
 
-			return new Size (OwningColumn.Width, OwningRow.Height);
+			return new Size_ (OwningColumn.Width, OwningRow.Height);
 		}
 
 		protected virtual object GetValue (int rowIndex) {
@@ -1145,12 +1145,12 @@ namespace System.Windows.Forms {
 			OnMouseUp (e);
 		}
 
-		internal void PaintInternal (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		internal void PaintInternal (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			Paint (graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 		}
 			
-		protected virtual void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected virtual void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			if ((paintParts & DataGridViewPaintParts.Background) == DataGridViewPaintParts.Background)
 				PaintPartBackground (graphics, cellBounds, cellStyle);
@@ -1167,7 +1167,7 @@ namespace System.Windows.Forms {
 					PaintErrorIcon (graphics, clipBounds, cellBounds, ErrorText);
 		}
 
-		protected virtual void PaintBorder (Graphics graphics, Rectangle clipBounds, Rectangle bounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
+		protected virtual void PaintBorder (Graphics graphics, Rectangle_ clipBounds, Rectangle_ bounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
 		{
 			Pen pen = new Pen (DataGridView.GridColor);
 
@@ -1227,29 +1227,29 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected virtual void PaintErrorIcon (Graphics graphics, Rectangle clipBounds, Rectangle cellValueBounds, string errorText)
+		protected virtual void PaintErrorIcon (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellValueBounds, string errorText)
 		{
-			Rectangle error_bounds = GetErrorIconBounds (graphics, null, RowIndex);
+			Rectangle_ error_bounds = GetErrorIconBounds (graphics, null, RowIndex);
 			
 			if (error_bounds.IsEmpty)
 				return;
 
-			Point loc = error_bounds.Location;
+			Point_ loc = error_bounds.Location;
 			loc.X += cellValueBounds.Left;
 			loc.Y += cellValueBounds.Top;
 
-			graphics.FillRectangle (Brushes.Red, new Rectangle (loc.X + 1, loc.Y + 2, 10, 7));
-			graphics.FillRectangle (Brushes.Red, new Rectangle (loc.X + 2, loc.Y + 1, 8, 9));
-			graphics.FillRectangle (Brushes.Red, new Rectangle (loc.X + 4, loc.Y, 4, 11));
-			graphics.FillRectangle (Brushes.Red, new Rectangle (loc.X, loc.Y + 4, 12, 3));
+			graphics.FillRectangle (Brushes.Red, new Rectangle_ (loc.X + 1, loc.Y + 2, 10, 7));
+			graphics.FillRectangle (Brushes.Red, new Rectangle_ (loc.X + 2, loc.Y + 1, 8, 9));
+			graphics.FillRectangle (Brushes.Red, new Rectangle_ (loc.X + 4, loc.Y, 4, 11));
+			graphics.FillRectangle (Brushes.Red, new Rectangle_ (loc.X, loc.Y + 4, 12, 3));
 
-			graphics.FillRectangle (Brushes.White, new Rectangle (loc.X + 5, loc.Y + 2, 2, 4));
-			graphics.FillRectangle (Brushes.White, new Rectangle (loc.X + 5, loc.Y + 7, 2, 2));
+			graphics.FillRectangle (Brushes.White, new Rectangle_ (loc.X + 5, loc.Y + 2, 2, 4));
+			graphics.FillRectangle (Brushes.White, new Rectangle_ (loc.X + 5, loc.Y + 7, 2, 2));
 		}
 
-		internal virtual void PaintPartBackground (Graphics graphics, Rectangle cellBounds, DataGridViewCellStyle style)
+		internal virtual void PaintPartBackground (Graphics graphics, Rectangle_ cellBounds, DataGridViewCellStyle style)
 		{
-			Color color = style.BackColor;
+			Color_ color = style.BackColor;
 			graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (color), cellBounds);
 		}
 
@@ -1258,12 +1258,12 @@ namespace System.Windows.Forms {
 			return ThemeEngine.Current.ResPool.GetPen (DataGridView.GridColor);
 		}
 
-		internal virtual void PaintPartContent (Graphics graphics, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
+		internal virtual void PaintPartContent (Graphics graphics, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
 		{
 			if (IsInEditMode)
 				return;
 				
-			Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
+			Color_ color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 
 			TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter | TextFormatFlags.TextBoxControl;
 			flags |= AlignmentToFlags (style.Alignment);
@@ -1275,7 +1275,7 @@ namespace System.Windows.Forms {
 				TextRenderer.DrawText (graphics, formattedValue.ToString (), cellStyle.Font, cellBounds, color, flags);
 		}
 		
-		private void PaintPartFocus (Graphics graphics, Rectangle cellBounds)
+		private void PaintPartFocus (Graphics graphics, Rectangle_ cellBounds)
 		{
 			cellBounds.Width--;
 			cellBounds.Height--;
@@ -1284,7 +1284,7 @@ namespace System.Windows.Forms {
 				ControlPaint.DrawFocusRectangle (graphics, cellBounds);
 		}
 
-		internal virtual void PaintPartSelectionBackground (Graphics graphics, Rectangle cellBounds, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle)
+		internal virtual void PaintPartSelectionBackground (Graphics graphics, Rectangle_ cellBounds, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle)
 		{
 			if ((cellState & DataGridViewElementStates.Selected) != DataGridViewElementStates.Selected)
 				return;
@@ -1292,11 +1292,11 @@ namespace System.Windows.Forms {
 			if (RowIndex >= 0 && IsInEditMode && EditType != null)
 				return;
 				
-			Color color = cellStyle.SelectionBackColor;
+			Color_ color = cellStyle.SelectionBackColor;
 			graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (color), cellBounds);
 		}
 
-		internal void PaintWork (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		internal void PaintWork (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			object value;
 			object formattedvalue;
@@ -1356,11 +1356,11 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal virtual Rectangle InternalErrorIconsBounds {
+		internal virtual Rectangle_ InternalErrorIconsBounds {
 			get { return GetErrorIconBounds (null, null, -1); }
 		}
 
-		internal void InternalPaint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts) {
+		internal void InternalPaint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts) {
 			Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 		}
 
@@ -1429,7 +1429,7 @@ namespace System.Windows.Forms {
 			return flags;
 		}
 
-		internal Rectangle AlignInRectangle (Rectangle outer, Size inner, DataGridViewContentAlignment align)
+		internal Rectangle_ AlignInRectangle (Rectangle_ outer, Size_ inner, DataGridViewContentAlignment align)
 		{
 			int x = 0;
 			int y = 0;
@@ -1447,7 +1447,7 @@ namespace System.Windows.Forms {
 			else if (align == DataGridViewContentAlignment.BottomCenter || align == DataGridViewContentAlignment.BottomRight || align == DataGridViewContentAlignment.BottomLeft)
 				y = Math.Max (outer.Bottom - inner.Height, outer.Y);
 
-			return new Rectangle (x, y, Math.Min (inner.Width, outer.Width), Math.Min (inner.Height, outer.Height));
+			return new Rectangle_ (x, y, Math.Min (inner.Width, outer.Width), Math.Min (inner.Height, outer.Height));
 		}
 
 		[ComVisibleAttribute(true)]
@@ -1462,7 +1462,7 @@ namespace System.Windows.Forms {
 				this.dataGridViewCell = owner;
 			}
 
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get { throw new NotImplementedException(); }
 			}
 

@@ -22,8 +22,8 @@
 // Authors:
 //	Chris Toshok (toshok@novell.com)
 //
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.PropertyGridInternal

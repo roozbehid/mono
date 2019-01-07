@@ -26,10 +26,10 @@
 //
 // Copyright (C) 2004-2006  Novell, Inc. (http://www.novell.com)
 //
-
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Drawing.Imaging;
@@ -48,7 +48,7 @@ namespace System.Windows.Forms
 		private bool size_specified = false;
 		private ToolBarItem current_item;
 		internal ToolBarItem[] items;
-		internal Size default_size;
+		internal Size_ default_size;
 		#endregion Instance Variables
 
 		#region Events
@@ -171,7 +171,7 @@ namespace System.Windows.Forms
 			get { return ImeMode.Disable; }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.ToolBarDefaultSize; }
 		}
 
@@ -220,7 +220,7 @@ namespace System.Windows.Forms
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return background_color; }
 			set {
 				if (value == background_color)
@@ -262,26 +262,26 @@ namespace System.Windows.Forms
 			get { return buttons; }
 		}
 
-		Size button_size;
+		Size_ button_size;
 
 		[Localizable (true)]
 		[RefreshProperties (RefreshProperties.All)]
-		public Size ButtonSize {
+		public Size_ ButtonSize {
 			get {
 				if (!button_size.IsEmpty)
 					return button_size; 
 				
 				if (buttons.Count == 0)
-					return new Size (39, 36);
+					return new Size_ (39, 36);
 					
-				Size result = CalcButtonSize ();
+				Size_ result = CalcButtonSize ();
 				if (result.IsEmpty)
-					return new Size (24, 22);
+					return new Size_ (24, 22);
 				else
 					return result;
 			}
 			set {
-				size_specified = value != Size.Empty;
+                size_specified = value != Size_.Empty;
 				if (button_size == value)
 					return;
 
@@ -347,7 +347,7 @@ namespace System.Windows.Forms
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return foreground_color; }
 			set {
 				if (value == foreground_color)
@@ -375,10 +375,10 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public Size ImageSize {
+		public Size_ ImageSize {
 			get {
 				if (ImageList == null)
-					return Size.Empty;
+					return Size_.Empty;
 
 				return ImageList.ImageSize;
 			}
@@ -495,7 +495,7 @@ namespace System.Windows.Forms
 			base.CreateHandle ();
 			default_size = CalcButtonSize ();
 			
-			// In win32 the recalculate size only happens for not flat style
+			// In win32 the recalculate Size_ only happens for not flat style
 			if (appearance != ToolBarAppearance.Flat)
 				Redraw (true);
 		}
@@ -570,7 +570,7 @@ namespace System.Windows.Forms
 
 		internal void ShowDropDownMenu (ToolBarItem item)
 		{
-			Point loc = new Point (item.Rectangle.X + 1, item.Rectangle.Bottom + 1);
+			Point_ loc = new Point_ (item.Rectangle.X + 1, item.Rectangle.Bottom + 1);
 			((ContextMenu) item.Button.DropDownMenu).Show (this, loc);
 
 			item.DDPressed = false;
@@ -595,7 +595,7 @@ namespace System.Windows.Forms
 			LayoutToolBar ();
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			specified &= ~BoundsSpecified.Height;
 			
@@ -783,7 +783,7 @@ namespace System.Windows.Forms
 			if ((!Enabled) || ((me.Button & MouseButtons.Left) == 0))
 				return;
 
-			Point loc = new Point (me.X, me.Y);
+			Point_ loc = new Point_ (me.X, me.Y);
 
 			if (ItemAtPoint (loc) == null)
 				return;
@@ -800,7 +800,7 @@ namespace System.Windows.Forms
 					// Mark the DropDown rect as pressed.
 					// We don't redraw the dropdown rect.
 					if (item.Button.Style == ToolBarButtonStyle.DropDownButton) {
-						Rectangle rect = item.Rectangle;
+						Rectangle_ rect = item.Rectangle;
 						if (DropDownArrows) {
 							rect.Width = ThemeEngine.Current.ToolBarDropDownWidth;
 							rect.X = item.Rectangle.Right - rect.Width;
@@ -827,7 +827,7 @@ namespace System.Windows.Forms
 			if ((!Enabled) || ((me.Button & MouseButtons.Left) == 0))
 				return;
 
-			Point loc = new Point (me.X, me.Y);
+			Point_ loc = new Point_ (me.X, me.Y);
 
 			// draw the normal button
 			// Make a copy in case the list is modified during enumeration
@@ -835,7 +835,7 @@ namespace System.Windows.Forms
 			foreach (ToolBarItem item in items) {
 				if (item.Button.Enabled && item.Rectangle.Contains (loc)) {
 					if (item.Button.Style == ToolBarButtonStyle.DropDownButton) {
-						Rectangle ddRect = item.Rectangle;
+						Rectangle_ ddRect = item.Rectangle;
 						ddRect.Width = ThemeEngine.Current.ToolBarDropDownWidth;
 						ddRect.X = item.Rectangle.Right - ddRect.Width;
 						if (ddRect.Contains (loc)) {
@@ -856,7 +856,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		private ToolBarItem ItemAtPoint (Point pt)
+		private ToolBarItem ItemAtPoint (Point_ pt)
 		{
 			foreach (ToolBarItem item in items)
 				if (item.Rectangle.Contains (pt)) 
@@ -929,7 +929,7 @@ namespace System.Windows.Forms
 				TipDownTimer.Start ();
 			}
 
-			Point loc = new Point (me.X, me.Y);
+			Point_ loc = new Point_ (me.X, me.Y);
 
 			if (Capture) {
 				// If the button was pressed and we leave, release the 
@@ -1017,10 +1017,10 @@ namespace System.Windows.Forms
 
 		internal const int text_padding = 3;
 
-		private Size CalcButtonSize ()
+		private Size_ CalcButtonSize ()
 		{
 			if (Buttons.Count == 0)
-				return Size.Empty;
+				return Size_.Empty;
 
 			string longest_text = Buttons [0].Text;
 			for (int i = 1; i < Buttons.Count; i++) {
@@ -1028,14 +1028,14 @@ namespace System.Windows.Forms
 					longest_text = Buttons[i].Text;
 			}
 
-			Size size = Size.Empty;
+			Size_ size = Size_.Empty;
 			if (longest_text != null && longest_text.Length > 0) {
-				SizeF sz = TextRenderer.MeasureString (longest_text, Font);
-				if (sz != SizeF.Empty)
-					size = new Size ((int) Math.Ceiling (sz.Width) + 2 * text_padding, (int) Math.Ceiling (sz.Height));
+				SizeF_ sz = TextRenderer.MeasureString (longest_text, Font);
+				if (sz != SizeF_.Empty)
+					size = new Size_ ((int) Math.Ceiling (sz.Width) + 2 * text_padding, (int) Math.Ceiling (sz.Height));
 			}
 
-			Size img_size = ImageList == null ? new Size (16, 16) : ImageSize;
+			Size_ img_size = ImageList == null ? new Size_ (16, 16) : ImageSize;
 
 			Theme theme = ThemeEngine.Current;
 			int imgWidth = img_size.Width + 2 * theme.ToolBarImageGripWidth; 
@@ -1055,10 +1055,10 @@ namespace System.Windows.Forms
 		}
 
 		// Flat toolbars disregard specified sizes.  Normal toolbars grow the
-		// button size to be at least large enough to show the image.
-		private Size AdjustedButtonSize {
+		// button Size_ to be at least large enough to show the image.
+		private Size_ AdjustedButtonSize {
 			get {
-				Size size;
+				Size_ size;
 
 				if (default_size.IsEmpty || Appearance == ToolBarAppearance.Normal) 
 					size = ButtonSize;
@@ -1087,7 +1087,7 @@ namespace System.Windows.Forms
 			int x = theme.ToolBarGripWidth;
 			int y = theme.ToolBarGripWidth;
 
-			Size adjusted_size = AdjustedButtonSize;
+			Size_ adjusted_size = AdjustedButtonSize;
 			
 			int calculated_size = (Vertical ? adjusted_size.Width : adjusted_size.Height) + theme.ToolBarGripWidth;
 			
@@ -1115,7 +1115,7 @@ namespace System.Windows.Forms
 					if (y + item.Rectangle.Height < Height || is_separator || !Wrappable) {
 						if (item.Location.X != x || item.Location.Y != y)
 							changed = true;
-						item.Location = new Point (x, y);
+						item.Location = new Point_ (x, y);
 						y += item.Rectangle.Height;
 						if (is_separator)
 							separator_index = i;
@@ -1129,14 +1129,14 @@ namespace System.Windows.Forms
 						x += calculated_size; 
 						if (item.Location.X != x || item.Location.Y != y)
 							changed = true;
-						item.Location = new Point (x, y);
+						item.Location = new Point_ (x, y);
 						y += item.Rectangle.Height;
 					}
 				} else {
 					if (x + item.Rectangle.Width < Width || is_separator || !Wrappable) {
 						if (item.Location.X != x || item.Location.Y != y)
 							changed = true;
-						item.Location = new Point (x, y);
+						item.Location = new Point_ (x, y);
 						x += item.Rectangle.Width;
 						if (is_separator)
 							separator_index = i;
@@ -1150,7 +1150,7 @@ namespace System.Windows.Forms
 						y += calculated_size; 
 						if (item.Location.X != x || item.Location.Y != y)
 							changed = true;
-						item.Location = new Point (x, y);
+						item.Location = new Point_ (x, y);
 						x += item.Rectangle.Width;
 					}
 				}
@@ -1429,9 +1429,9 @@ namespace System.Windows.Forms
 		
 		private ToolBar       toolbar;    // Parent toolbar
 		private ToolBarButton button;     // Associated toolBar button 
-		private Rectangle     bounds;     // Toolbar button bounds
-		private Rectangle     image_rect; // Image button bounds
-		private Rectangle     text_rect;  // Text button bounds
+		private Rectangle_     bounds;     // Toolbar button bounds
+		private Rectangle_     image_rect; // Image button bounds
+		private Rectangle_     text_rect;  // Text button bounds
 
 		private bool dd_pressed = false;  // to check for a mouse down on dropdown rect
 		private bool inside     = false;  // to handle the mouse move event with mouse pressed
@@ -1456,13 +1456,13 @@ namespace System.Windows.Forms
 			get { return this.button; }
 		}
 		
-		public Rectangle Rectangle {
+		public Rectangle_ Rectangle {
 			get { 
 				if (!button.Visible || toolbar == null)
-					return Rectangle.Empty;
+					return Rectangle_.Empty;
 
 				if (button.Style == ToolBarButtonStyle.DropDownButton && toolbar.DropDownArrows) {
-					Rectangle result = bounds;
+					Rectangle_ result = bounds;
 					result.Width += ThemeEngine.Current.ToolBarDropDownWidth;
 					return result;
 				}
@@ -1472,38 +1472,38 @@ namespace System.Windows.Forms
 			set { this.bounds = value; }
 		}
 
-		public Point Location {
+		public Point_ Location {
 			get { return bounds.Location; }
 			set { bounds.Location = value; }
 		}
 
-		public Rectangle ImageRectangle {
+		public Rectangle_ ImageRectangle {
 			get {
-				Rectangle result = image_rect;
+				Rectangle_ result = image_rect;
 				result.X += bounds.X;
 				result.Y += bounds.Y;
 				return result; 
 			}
 		}
 		
-		public Rectangle TextRectangle {
+		public Rectangle_ TextRectangle {
 			get { 
-				Rectangle result = text_rect;
+				Rectangle_ result = text_rect;
 				result.X += bounds.X;
 				result.Y += bounds.Y;
 				return result; 
 			}
 		}
 
-		private Size TextSize {
+		private Size_ TextSize {
 			get {
 				StringFormat text_format = new StringFormat ();
 				text_format.HotkeyPrefix = HotkeyPrefix.Hide;
 
-				SizeF sz = TextRenderer.MeasureString (button.Text, toolbar.Font, SizeF.Empty, text_format);
-				if (sz == SizeF.Empty)
-					return Size.Empty;
-				return new Size ((int) Math.Ceiling (sz.Width) + 2 * ToolBar.text_padding, (int) Math.Ceiling (sz.Height));
+				SizeF_ sz = TextRenderer.MeasureString (button.Text, toolbar.Font, SizeF_.Empty, text_format);
+				if (sz == SizeF_.Empty)
+					return Size_.Empty;
+				return new Size_ ((int) Math.Ceiling (sz.Width) + 2 * ToolBar.text_padding, (int) Math.Ceiling (sz.Height));
 			}
 		}
 		
@@ -1537,22 +1537,22 @@ namespace System.Windows.Forms
 
 		#region Methods
 		
-		public Size CalculateSize ()
+		public Size_ CalculateSize ()
 		{
 			Theme theme = ThemeEngine.Current;
 
 			int ht = toolbar.ButtonSize.Height + 2 * theme.ToolBarGripWidth;
 
 			if (button.Style == ToolBarButtonStyle.Separator)
-				return new Size (theme.ToolBarSeparatorWidth, ht);
+				return new Size_ (theme.ToolBarSeparatorWidth, ht);
 
-			Size size;
+			Size_ size;
 			if (TextSize.IsEmpty && (button.Image == null))
 				size = toolbar.default_size;
 			else
 				size = TextSize;
 			
-			Size image_size = (toolbar.ImageSize == Size.Empty) ? new Size (16, 16) : toolbar.ImageSize;
+			Size_ image_size = (toolbar.ImageSize == Size_.Empty) ? new Size_ (16, 16) : toolbar.ImageSize;
 
 			int image_width = image_size.Width + 2 * theme.ToolBarImageGripWidth; 
 			int image_height = image_size.Height + 2 * theme.ToolBarImageGripWidth; 
@@ -1576,8 +1576,8 @@ namespace System.Windows.Forms
 			if (toolbar == null || !button.Visible)
 				return false;
 
-			Size psize = toolbar.ButtonSize;
-			Size size = psize;
+			Size_ psize = toolbar.ButtonSize;
+			Size_ size = psize;
 			if ((!toolbar.SizeSpecified) || (button.Style == ToolBarButtonStyle.Separator)) {
 				size = CalculateSize ();
 
@@ -1592,24 +1592,24 @@ namespace System.Windows.Forms
 			return Layout (size);
 		}
 
-		public bool Layout (Size size)
+		public bool Layout (Size_ size)
 		{
 			if (toolbar == null || !button.Visible)
 				return false;
 
 			bounds.Size = size;
 
-			Size image_size = (toolbar.ImageSize == Size.Empty) ? new Size (16, 16) : toolbar.ImageSize;
+			Size_ image_size = (toolbar.ImageSize == Size_.Empty) ? new Size_ (16, 16) : toolbar.ImageSize;
 			int grip = ThemeEngine.Current.ToolBarImageGripWidth;
 
-			Rectangle new_image_rect, new_text_rect;
+			Rectangle_ new_image_rect, new_text_rect;
 			
 			if (toolbar.TextAlign == ToolBarTextAlign.Underneath) {
-				new_image_rect = new Rectangle ((bounds.Size.Width - image_size.Width) / 2 - grip, 0, image_size.Width + 2 + grip, image_size.Height + 2 * grip);
-				new_text_rect = new Rectangle (0, new_image_rect.Height, bounds.Size.Width, bounds.Size.Height - new_image_rect.Height - 2 * grip);
+				new_image_rect = new Rectangle_ ((bounds.Size.Width - image_size.Width) / 2 - grip, 0, image_size.Width + 2 + grip, image_size.Height + 2 * grip);
+				new_text_rect = new Rectangle_ (0, new_image_rect.Height, bounds.Size.Width, bounds.Size.Height - new_image_rect.Height - 2 * grip);
 			} else {
-				new_image_rect = new Rectangle (0, 0, image_size.Width + 2 * grip, image_size.Height + 2 * grip);
-				new_text_rect = new Rectangle (new_image_rect.Width, 0, bounds.Size.Width - new_image_rect.Width, bounds.Size.Height - 2 * grip);
+				new_image_rect = new Rectangle_ (0, 0, image_size.Width + 2 * grip, image_size.Height + 2 * grip);
+				new_text_rect = new Rectangle_ (new_image_rect.Width, 0, bounds.Size.Width - new_image_rect.Width, bounds.Size.Height - 2 * grip);
 			}
 
 			bool changed = false;

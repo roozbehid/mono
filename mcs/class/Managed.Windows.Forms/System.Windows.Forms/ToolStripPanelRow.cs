@@ -37,7 +37,7 @@ namespace System.Windows.Forms
 	[ToolboxItem (false)]
 	public class ToolStripPanelRow : Component, IComponent, IDisposable, IBounds
 	{
-		private Rectangle bounds;
+		private Rectangle_ bounds;
 		internal List<Control> controls;
 		private LayoutEngine layout_engine;
 		private Padding margin;
@@ -47,7 +47,7 @@ namespace System.Windows.Forms
 		#region Public Constructors
 		public ToolStripPanelRow (ToolStripPanel parent)
 		{
-			this.bounds = Rectangle.Empty;
+			this.bounds = Rectangle_.Empty;
 			this.controls = new List<Control> ();
 			this.layout_engine = new DefaultLayout ();
 			this.parent = parent;
@@ -55,7 +55,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Properties
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get { return this.bounds; }
 		}
 
@@ -65,7 +65,7 @@ namespace System.Windows.Forms
 			get { return this.controls.ToArray (); }
 		}
 
-		public Rectangle DisplayRectangle {
+		public Rectangle_ DisplayRectangle {
 			get { return this.Bounds; }
 		}
 
@@ -128,7 +128,7 @@ namespace System.Windows.Forms
 			base.Dispose (disposing);
 		}
 		
-		protected void OnBoundsChanged (Rectangle oldBounds, Rectangle newBounds)
+		protected void OnBoundsChanged (Rectangle_ oldBounds, Rectangle_ newBounds)
 		{
 		}
 		
@@ -159,8 +159,8 @@ namespace System.Windows.Forms
 					this.bounds.Height = height;
 			} else {
 				foreach (ToolStrip ts in this.controls)
-					if (ts.GetPreferredSize (Size.Empty).Width > height)
-						height = ts.GetPreferredSize (Size.Empty).Width;
+					if (ts.GetPreferredSize (Size_.Empty).Width > height)
+						height = ts.GetPreferredSize (Size_.Empty).Width;
 
 				if (height != this.bounds.Width)
 					this.bounds.Width = height;
@@ -175,10 +175,10 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Private/Internal Methods
-		internal void SetBounds (Rectangle bounds)
+		internal void SetBounds (Rectangle_ bounds)
 		{
 			if (this.bounds != bounds) {
-				Rectangle old_bounds = this.bounds;
+				Rectangle_ old_bounds = this.bounds;
 				this.bounds = bounds;
 				this.OnBoundsChanged (old_bounds, bounds);
 				this.OnLayout (new LayoutEventArgs (null, "Bounds"));
@@ -188,14 +188,14 @@ namespace System.Windows.Forms
 		private bool Layout (object container, LayoutEventArgs args)
 		{
 			ToolStripPanelRow tspr = (ToolStripPanelRow)container;
-			Point position = tspr.DisplayRectangle.Location;
+			Point_ position = tspr.DisplayRectangle.Location;
 			foreach (ToolStrip ts in tspr.Controls)
 			{
 				if (Orientation == Orientation.Horizontal) {
 					if (ts.Stretch)
 						ts.Width = this.bounds.Width - ts.Margin.Horizontal - this.Padding.Horizontal;
 					else
-						ts.Width = ts.GetToolStripPreferredSize (Size.Empty).Width;
+						ts.Width = ts.GetToolStripPreferredSize (Size_.Empty).Width;
 						
 					position.X += ts.Margin.Left;
 					ts.Location = position;
@@ -203,9 +203,9 @@ namespace System.Windows.Forms
 					position.X += (ts.Width + ts.Margin.Left);
 				} else {
 					if (ts.Stretch)
-						ts.Size = new Size (ts.GetToolStripPreferredSize (Size.Empty).Width, this.bounds.Height - ts.Margin.Vertical - this.Padding.Vertical);
+						ts.Size = new Size_ (ts.GetToolStripPreferredSize (Size_.Empty).Width, this.bounds.Height - ts.Margin.Vertical - this.Padding.Vertical);
 					else
-						ts.Size = ts.GetToolStripPreferredSize (Size.Empty);
+						ts.Size = ts.GetToolStripPreferredSize (Size_.Empty);
 
 					position.Y += ts.Margin.Top;
 					ts.Location = position;

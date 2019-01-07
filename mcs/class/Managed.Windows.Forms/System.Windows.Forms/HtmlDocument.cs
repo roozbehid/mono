@@ -22,8 +22,8 @@
 // Authors:
 //	Andreia Gaita	<avidigal@novell.com>
 
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Globalization;
@@ -102,7 +102,7 @@ namespace System.Windows.Forms
 			return null;
 		}
 
-		public HtmlElement GetElementFromPoint (Point point) 
+		public HtmlElement GetElementFromPoint (Point_ point) 
 		{
 			Mono.WebBrowser.DOM.IElement elem = document.GetElement (point.X, point.Y);
 			if (elem != null)
@@ -186,7 +186,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public Color ActiveLinkColor {
+		public Color_ ActiveLinkColor {
 			get { return ParseColor(document.ActiveLinkColor); }
 			set { document.ActiveLinkColor = value.ToArgb().ToString(); }
 		}
@@ -197,7 +197,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return ParseColor(document.BackColor); }
 			set { document.BackColor = value.ToArgb().ToString(); }
 		}
@@ -233,7 +233,7 @@ namespace System.Windows.Forms
 			get { return webHost.Window.Document == document; }
 		}
 		
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get { return ParseColor(document.ForeColor); }
 			set { document.ForeColor = value.ToArgb().ToString(); }
 		}
@@ -246,7 +246,7 @@ namespace System.Windows.Forms
 			get { return new HtmlElementCollection (owner, webHost, document.Images); } 	
 		}
 		
-		public Color LinkColor {
+		public Color_ LinkColor {
 			get { return ParseColor(document.LinkColor); }
 			set { document.LinkColor = value.ToArgb().ToString(); }
 		}
@@ -286,7 +286,7 @@ namespace System.Windows.Forms
 			get { return new Uri (document.Url); } 
 		}
 		
-		public Color VisitedLinkColor {
+		public Color_ VisitedLinkColor {
 			get { return ParseColor(document.VisitedLinkColor); }
 			set { document.VisitedLinkColor =  value.ToArgb().ToString(); }
 		}
@@ -516,11 +516,11 @@ namespace System.Windows.Forms
 
 
 		#region Internal and Private
-		private Color ParseColor (string color) {
+		private Color_ ParseColor (string color) {
 			if (color.IndexOf ("#") >= 0) {
-				return Color.FromArgb (int.Parse (color.Substring (color.IndexOf ("#") + 1), NumberStyles.HexNumber));
+				return Color_.FromArgb (int.Parse (color.Substring (color.IndexOf ("#") + 1), NumberStyles.HexNumber));
 			}
-			return Color.FromName (color);
+			return Color_.FromName (color);
 		}
 		
 		internal string DocType {

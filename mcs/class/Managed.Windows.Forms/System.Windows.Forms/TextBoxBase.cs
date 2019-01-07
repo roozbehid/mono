@@ -27,9 +27,9 @@
 // NOT COMPLETE
 #undef Debug
 #undef DebugClick
-
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Text;
@@ -175,9 +175,9 @@ namespace System.Windows.Forms
 			return s.ToUpper();
 		}
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
-			return new Size (Width, Height);
+			return new Size_ (Width, Height);
 		}
 
 		internal override void HandleClick (int clicks, MouseEventArgs me)
@@ -246,7 +246,7 @@ namespace System.Windows.Forms
 		}
 
 		[DispId(-501)]
-		public override System.Drawing.Color BackColor {
+		public override Color_ BackColor {
 			get {
 				return base.BackColor;
 			}
@@ -258,7 +258,7 @@ namespace System.Windows.Forms
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override System.Drawing.Image BackgroundImage {
+		public override Image BackgroundImage {
 			get {
 				return base.BackgroundImage;
 			}
@@ -299,7 +299,7 @@ namespace System.Windows.Forms
 		}
 
 		[DispId(-513)]
-		public override System.Drawing.Color ForeColor {
+		public override Color_ ForeColor {
 			get {
 				return base.ForeColor;
 			}
@@ -700,9 +700,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		protected override System.Drawing.Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size(100, 20);
+				return new Size_(100, 20);
 			}
 		}
 
@@ -844,12 +844,12 @@ namespace System.Windows.Forms
 			SelectionLength = 0;
 		}
 
-		public virtual char GetCharFromPosition (Point pt)
+		public virtual char GetCharFromPosition (Point_ pt)
 		{
 			return GetCharFromPositionInternal (pt);
 		}
 		
-		internal virtual char GetCharFromPositionInternal (Point p)
+		internal virtual char GetCharFromPositionInternal (Point_ p)
 		{
 			int index;
 			LineTag tag = document.FindCursor (p.X, p.Y, out index);
@@ -877,7 +877,7 @@ namespace System.Windows.Forms
 			return tag.Line.text [index];
 		}
 
-		public virtual int GetCharIndexFromPosition (Point pt)
+		public virtual int GetCharIndexFromPosition (Point_ pt)
 		{
 			int line_index;
 			LineTag tag = document.FindCursor (pt.X, pt.Y, out line_index);
@@ -904,7 +904,7 @@ namespace System.Windows.Forms
 			return document.LineTagToCharIndex (tag.Line, line_index);
 		}
 
-		public virtual Point GetPositionFromCharIndex (int index)
+		public virtual Point_ GetPositionFromCharIndex (int index)
 		{
 			int pos;
 			Line line;
@@ -912,7 +912,7 @@ namespace System.Windows.Forms
 
 			document.CharIndexToLineTag (index, out line, out tag, out pos);
 
-			return new Point ((int) (line.widths [pos] +
+			return new Point_ ((int) (line.widths [pos] +
 							  line.X + document.viewport_x),
 					line.Y + document.viewport_y + tag.Shift);
 		}
@@ -1469,7 +1469,7 @@ namespace System.Windows.Forms
 						// If the specified has Height, we need to store that in the
 						// ExplicitBounds because we are going to override it
 						if ((specified & BoundsSpecified.Height) != 0) {
-							Rectangle r = ExplicitBounds;
+							Rectangle_ r = ExplicitBounds;
 							r.Height = height;
 							ExplicitBounds = r;
 							specified &= ~BoundsSpecified.Height;
@@ -1756,7 +1756,7 @@ namespace System.Windows.Forms
 			pevent.Handled = true;
 		}
 
-		internal void Draw (Graphics g, Rectangle clippingArea)
+		internal void Draw (Graphics g, Rectangle_ clippingArea)
 		{
 			ThemeEngine.Current.TextBoxBaseFillBackground (this, g, clippingArea);
 			
@@ -1780,7 +1780,7 @@ namespace System.Windows.Forms
 			TimeSpan interval = DateTime.Now - click_last;
 			if (interval.TotalMilliseconds > SystemInformation.DoubleClickTime)
 				return false;
-			Size dcs = SystemInformation.DoubleClickSize;
+			Size_ dcs = SystemInformation.DoubleClickSize;
 			if (e.X < click_point_x - dcs.Width / 2 || e.X > click_point_x + dcs.Width / 2)
 				return false;
 			if (e.Y < click_point_y - dcs.Height / 2 || e.Y > click_point_y + dcs.Height / 2)
@@ -1926,22 +1926,22 @@ namespace System.Windows.Forms
 			int vmod = hscroll.Visible ? hscroll.Height : 0;
 
 			if (GetInheritedRtoL () == RightToLeft.Yes) {
-				hscroll.Bounds = new Rectangle (ClientRectangle.Left + hmod, 
+				hscroll.Bounds = new Rectangle_ (ClientRectangle.Left + hmod, 
 					Math.Max(0, ClientRectangle.Height - hscroll.Height), 
 					ClientSize.Width, 
 					hscroll.Height);
 
-				vscroll.Bounds = new Rectangle (ClientRectangle.Left, 
+				vscroll.Bounds = new Rectangle_ (ClientRectangle.Left, 
 					ClientRectangle.Top, 
 					vscroll.Width, 
 					Math.Max(0, ClientSize.Height - (vmod)));
 			} else {
-				hscroll.Bounds = new Rectangle (ClientRectangle.Left, 
+				hscroll.Bounds = new Rectangle_ (ClientRectangle.Left, 
 					Math.Max(0, ClientRectangle.Height - hscroll.Height), 
 					Math.Max(0, ClientSize.Width - hmod), 
 					hscroll.Height);
 
-				vscroll.Bounds = new Rectangle (
+				vscroll.Bounds = new Rectangle_ (
 					Math.Max(0, ClientRectangle.Right - vscroll.Width), 
 					ClientRectangle.Top, 
 					vscroll.Width, 
@@ -2141,9 +2141,9 @@ namespace System.Windows.Forms
 
 			if (vscroll.Visible) {
 				if (GetInheritedRtoL () == RightToLeft.Yes) {
-					XplatUI.ScrollWindow (this.Handle, new Rectangle (vscroll.Width, 0, ClientSize.Width - vscroll.Width, ClientSize.Height), old_viewport_x - this.hscroll.Value, 0, false);
+					XplatUI.ScrollWindow (this.Handle, new Rectangle_ (vscroll.Width, 0, ClientSize.Width - vscroll.Width, ClientSize.Height), old_viewport_x - this.hscroll.Value, 0, false);
 				} else {
-					XplatUI.ScrollWindow (this.Handle, new Rectangle (0, 0, ClientSize.Width - vscroll.Width, ClientSize.Height), old_viewport_x - this.hscroll.Value, 0, false);
+					XplatUI.ScrollWindow (this.Handle, new Rectangle_ (0, 0, ClientSize.Width - vscroll.Width, ClientSize.Height), old_viewport_x - this.hscroll.Value, 0, false);
 				}
 			} else {
 				XplatUI.ScrollWindow(this.Handle, ClientRectangle, old_viewport_x - this.hscroll.Value, 0, false);
@@ -2175,7 +2175,7 @@ namespace System.Windows.Forms
 				document.CaretLostFocus ();
 
 			if (hscroll.Visible) {
-				XplatUI.ScrollWindow(this.Handle, new Rectangle(0, 0, ClientSize.Width, ClientSize.Height - hscroll.Height), 0, old_viewport_y - this.vscroll.Value, false);
+				XplatUI.ScrollWindow(this.Handle, new Rectangle_(0, 0, ClientSize.Width, ClientSize.Height - hscroll.Height), 0, old_viewport_y - this.vscroll.Value, false);
 			} else {
 				XplatUI.ScrollWindow(this.Handle, ClientRectangle, 0, old_viewport_y - this.vscroll.Value, false);
 			}
@@ -2244,7 +2244,7 @@ namespace System.Windows.Forms
 			for (int i = 1; i <= document.Lines; i++) {
 				line = document.GetLine(i);
 				if (LineTag.FormatText(line, 1, line.text.Length, Font, ForeColor,
-						Color.Empty, FormatSpecified.Font | FormatSpecified.Color))
+						Color_.Empty, FormatSpecified.Font | FormatSpecified.Color))
 					document.RecalculateDocument (CreateGraphicsInternal (), line.LineNo, line.LineNo, false);
 			}
 			document.ResumeRecalc (false);
@@ -2255,7 +2255,7 @@ namespace System.Windows.Forms
 
 		private void ScrollTimerTickHandler (object sender, EventArgs e)
 		{
-			Point pt = Cursor.Position;
+			Point_ pt = Cursor.Position;
 
 			pt = PointToClient (pt);
 
@@ -2285,7 +2285,7 @@ namespace System.Windows.Forms
 		/// <summary>Ensure the caret is always visible</summary>
 		internal void CaretMoved (object sender, EventArgs e)
 		{
-			Point	pos;
+			Point_	pos;
 			int	height;
 
 			if (!IsHandleCreated || canvas_width < 1 || canvas_height < 1)
@@ -2421,7 +2421,7 @@ namespace System.Windows.Forms
 			return true;
 		}
 
-		internal virtual Color ChangeBackColor (Color backColor)
+		internal virtual Color_ ChangeBackColor (Color_ backColor)
 		{
 			return backColor;
 		}
@@ -2434,16 +2434,16 @@ namespace System.Windows.Forms
 
 		#region Private Classes
 		internal class LinkRectangle {
-			private Rectangle link_area_rectangle;
+			private Rectangle_ link_area_rectangle;
 			private LineTag link_tag;
 
-			public LinkRectangle (Rectangle rect)
+			public LinkRectangle (Rectangle_ rect)
 			{
 				link_tag = null;
 				link_area_rectangle = rect;
 			}
 
-			public Rectangle LinkAreaRectangle {
+			public Rectangle_ LinkAreaRectangle {
 				get { return link_area_rectangle; }
 				set { link_area_rectangle = value; }
 			}

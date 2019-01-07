@@ -26,8 +26,8 @@
 // Authors:
 //	George Giolfan (georgegiolfan@yahoo.com)
 //
-
 using HRESULT = System.Int32;
+
 using System.Drawing;
 namespace System.Windows.Forms.VisualStyles
 {
@@ -35,28 +35,28 @@ namespace System.Windows.Forms.VisualStyles
 	{
 		#region UxTheme
 		HRESULT UxThemeCloseThemeData (IntPtr hTheme);
-		HRESULT UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds);
-		HRESULT UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, Rectangle clipRectangle);
-		HRESULT UxThemeDrawThemeEdge (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds,Edges edges, EdgeStyle style, EdgeEffects effects, out Rectangle result);
-		HRESULT UxThemeDrawThemeParentBackground (IDeviceContext dc, Rectangle bounds, Control childControl);
-		HRESULT UxThemeDrawThemeText (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, String text, TextFormatFlags textFlags, Rectangle bounds);
-		HRESULT UxThemeGetThemeBackgroundContentRect (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, out Rectangle result);
-		HRESULT UxThemeGetThemeBackgroundExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle contentBounds, out Rectangle result);
-		HRESULT UxThemeGetThemeBackgroundRegion (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, out Region result);
+		HRESULT UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds);
+		HRESULT UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, Rectangle_ clipRectangle);
+		HRESULT UxThemeDrawThemeEdge (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds,Edges edges, EdgeStyle style, EdgeEffects effects, out Rectangle_ result);
+		HRESULT UxThemeDrawThemeParentBackground (IDeviceContext dc, Rectangle_ bounds, Control childControl);
+		HRESULT UxThemeDrawThemeText (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, String text, TextFormatFlags textFlags, Rectangle_ bounds);
+		HRESULT UxThemeGetThemeBackgroundContentRect (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, out Rectangle_ result);
+		HRESULT UxThemeGetThemeBackgroundExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ contentBounds, out Rectangle_ result);
+		HRESULT UxThemeGetThemeBackgroundRegion (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, out Region result);
 		HRESULT UxThemeGetThemeBool (IntPtr hTheme, int iPartId, int iStateId, BooleanProperty prop, out bool result);
-		HRESULT UxThemeGetThemeColor (IntPtr hTheme, int iPartId, int iStateId, ColorProperty prop, out Color result);
+		HRESULT UxThemeGetThemeColor (IntPtr hTheme, int iPartId, int iStateId, ColorProperty prop, out Color_ result);
 		HRESULT UxThemeGetThemeEnumValue (IntPtr hTheme, int iPartId, int iStateId, EnumProperty prop, out int result);
 		HRESULT UxThemeGetThemeFilename (IntPtr hTheme, int iPartId, int iStateId, FilenameProperty prop, out string result);
 		HRESULT UxThemeGetThemeInt (IntPtr hTheme, int iPartId, int iStateId, IntegerProperty prop, out int result);
 		HRESULT UxThemeGetThemeMargins (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, MarginProperty prop, out Padding result);
-		HRESULT UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, ThemeSizeType type, out Size result);
-		HRESULT UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, ThemeSizeType type, out Size result);
-		HRESULT UxThemeGetThemePosition (IntPtr hTheme, int iPartId, int iStateId, PointProperty prop, out Point result);
+		HRESULT UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, ThemeSizeType type, out Size_ result);
+		HRESULT UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, ThemeSizeType type, out Size_ result);
+		HRESULT UxThemeGetThemePosition (IntPtr hTheme, int iPartId, int iStateId, PointProperty prop, out Point_ result);
 		HRESULT UxThemeGetThemeString (IntPtr hTheme, int iPartId, int iStateId, StringProperty prop, out string result);
-		HRESULT UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, Rectangle bounds, out Rectangle result);
-		HRESULT UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, out Rectangle result);
+		HRESULT UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, Rectangle_ bounds, out Rectangle_ result);
+		HRESULT UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, out Rectangle_ result);
 		HRESULT UxThemeGetThemeTextMetrics (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, out TextMetrics result);
-		HRESULT UxThemeHitTestThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, HitTestOptions options, Rectangle backgroundRectangle, IntPtr hrgn, Point pt, out HitTestCode result);
+		HRESULT UxThemeHitTestThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, HitTestOptions options, Rectangle_ backgroundRectangle, IntPtr hrgn, Point_ pt, out HitTestCode result);
 		bool UxThemeIsAppThemed ();
 		bool UxThemeIsThemeActive ();
 		bool UxThemeIsThemeBackgroundPartiallyTransparent (IntPtr hTheme, int iPartId, int iStateId);
@@ -67,7 +67,7 @@ namespace System.Windows.Forms.VisualStyles
 		string VisualStyleInformationAuthor { get; }
 		string VisualStyleInformationColorScheme { get; }
 		string VisualStyleInformationCompany { get; }
-		Color VisualStyleInformationControlHighlightHot { get; }
+		Color_ VisualStyleInformationControlHighlightHot { get; }
 		string VisualStyleInformationCopyright { get; }
 		string VisualStyleInformationDescription { get; }
 		string VisualStyleInformationDisplayName { get; }
@@ -76,12 +76,12 @@ namespace System.Windows.Forms.VisualStyles
 		int VisualStyleInformationMinimumColorDepth { get; }
 		string VisualStyleInformationSize { get; }
 		bool VisualStyleInformationSupportsFlatMenus { get; }
-		Color VisualStyleInformationTextControlBorder { get; }
+		Color_ VisualStyleInformationTextControlBorder { get; }
 		string VisualStyleInformationUrl { get; }
 		string VisualStyleInformationVersion { get; }
 		#endregion
 		#region VisualStyleRenderer
-		void VisualStyleRendererDrawBackgroundExcludingArea (IntPtr theme, IDeviceContext dc, int part, int state, Rectangle bounds, Rectangle excludedArea);
+		void VisualStyleRendererDrawBackgroundExcludingArea (IntPtr theme, IDeviceContext dc, int part, int state, Rectangle_ bounds, Rectangle_ excludedArea);
 		#endregion
 	}
 }

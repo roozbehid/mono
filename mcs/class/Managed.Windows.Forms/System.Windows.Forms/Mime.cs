@@ -250,13 +250,13 @@ namespace System.Windows.Forms
 			}
 			
 			// check global patterns, aka file extensions...
-			// this should be done for zero size files also,
-			// for example zero size file trash.ccc~ should return
+			// this should be done for zero Size_ files also,
+			// for example zero Size_ file trash.ccc~ should return
 			// application/x-trash instead of application/x-zerosize
 			if (CheckGlobalPatterns ())
 				return;
 			
-			// if file size is zero, no other checks are needed
+			// if file Size_ is zero, no other checks are needed
 			if (is_zero_file)
 				return;
 			

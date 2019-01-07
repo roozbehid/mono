@@ -44,7 +44,7 @@ namespace System.Windows.Forms
 	public class GroupBox : Control
 	{
 		private FlatStyle flat_style;
-		private Rectangle display_rectangle = new Rectangle ();
+		private Rectangle_ display_rectangle = new Rectangle_ ();
 
 		#region Events
 		[Browsable (true)]
@@ -183,11 +183,11 @@ namespace System.Windows.Forms
 			get { return base.CreateParams; }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.GroupBoxDefaultSize;}
 		}
 
-		public override Rectangle DisplayRectangle {
+		public override Rectangle_ DisplayRectangle {
 			get {
 				display_rectangle.X = Padding.Left;
 				display_rectangle.Y = Font.Height + Padding.Top;
@@ -264,7 +264,7 @@ namespace System.Windows.Forms
 			return base.ProcessMnemonic (charCode);
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}
@@ -303,9 +303,9 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Internal Methods
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
-			Size retsize = new Size (Padding.Left, Padding.Top);
+			Size_ retsize = new Size_ (Padding.Left, Padding.Top);
 
 			foreach (Control child in Controls) {
 				if (child.Dock == DockStyle.Fill) {

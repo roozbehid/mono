@@ -24,8 +24,8 @@
 //	Gert Driesen (drieseng@users.sourceforge.net)
 //
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Resources;
@@ -64,21 +64,21 @@ namespace System.Windows.Forms {
 		public FolderBrowserDialog ()
 		{
 			form = new DialogForm (this);
-			Size formConfigSize = Size.Empty;
-			Point formConfigLocation = Point.Empty;
+			Size_ formConfigSize = Size_.Empty;
+			Point_ formConfigLocation = Point_.Empty;
 			
 			object formWidth = MWFConfig.GetValue (folderbrowserdialog_string, width_string);
 			
 			object formHeight = MWFConfig.GetValue (folderbrowserdialog_string, height_string);
 			
 			if (formHeight != null && formWidth != null)
-				formConfigSize = new Size ((int)formWidth, (int)formHeight);
+				formConfigSize = new Size_ ((int)formWidth, (int)formHeight);
 			
 			object formLocationX = MWFConfig.GetValue (folderbrowserdialog_string, x_string);
 			object formLocationY = MWFConfig.GetValue (folderbrowserdialog_string, y_string);
 			
 			if (formLocationX != null && formLocationY != null)
-				formConfigLocation = new Point ((int)formLocationX, (int)formLocationY);
+				formConfigLocation = new Point_ ((int)formLocationX, (int)formLocationY);
 			
 			newFolderButton = new Button ();
 			folderBrowserTreeView = new FolderBrowserTreeView (this);
@@ -91,8 +91,8 @@ namespace System.Windows.Forms {
 			form.CancelButton = cancelButton;
 			
 			form.SuspendLayout ();
-			form.ClientSize = new Size (322, 324);
-			form.MinimumSize = new Size (310, 254);
+			form.ClientSize = new Size_ (322, 324);
+			form.MinimumSize = new Size_ (310, 254);
 			form.Text = "Browse For Folder";
 			form.SizeGripStyle = SizeGripStyle.Show;
 
@@ -102,8 +102,8 @@ namespace System.Windows.Forms {
 			// descriptionLabel
 			descriptionLabel.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left)
 				| AnchorStyles.Right)));
-			descriptionLabel.Location = new Point (15, 14);
-			descriptionLabel.Size = new Size (292, 40);
+			descriptionLabel.Location = new Point_ (15, 14);
+			descriptionLabel.Size = new Size_ (292, 40);
 			descriptionLabel.TabIndex = 0;
 			descriptionLabel.Text = string.Empty;
 			
@@ -112,9 +112,9 @@ namespace System.Windows.Forms {
 				| AnchorStyles.Left)
 				| AnchorStyles.Right)));
 			folderBrowserTreeView.ImageIndex = -1;
-			folderBrowserTreeView.Location = new Point (15, 60);
+			folderBrowserTreeView.Location = new Point_ (15, 60);
 			folderBrowserTreeView.SelectedImageIndex = -1;
-			folderBrowserTreeView.Size = new Size (292, 212);
+			folderBrowserTreeView.Size = new Size_ (292, 212);
 			folderBrowserTreeView.TabIndex = 3;
 			folderBrowserTreeView.ShowLines = false;
 			folderBrowserTreeView.ShowPlusMinus = true;
@@ -126,8 +126,8 @@ namespace System.Windows.Forms {
 			// newFolderButton
 			newFolderButton.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Left)));
 			newFolderButton.FlatStyle = FlatStyle.System;
-			newFolderButton.Location = new Point (15, 285);
-			newFolderButton.Size = new Size (105, 23);
+			newFolderButton.Location = new Point_ (15, 285);
+			newFolderButton.Size = new Size_ (105, 23);
 			newFolderButton.TabIndex = 4;
 			newFolderButton.Text = "Make New Folder";
 			newFolderButton.Enabled = true;
@@ -135,8 +135,8 @@ namespace System.Windows.Forms {
 			// okButton
 			okButton.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
 			okButton.FlatStyle = FlatStyle.System;
-			okButton.Location = new Point (135, 285);
-			okButton.Size = new Size (80, 23);
+			okButton.Location = new Point_ (135, 285);
+			okButton.Size = new Size_ (80, 23);
 			okButton.TabIndex = 1;
 			okButton.Text = "OK";
 			
@@ -144,8 +144,8 @@ namespace System.Windows.Forms {
 			cancelButton.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
 			cancelButton.DialogResult = DialogResult.Cancel;
 			cancelButton.FlatStyle = FlatStyle.System;
-			cancelButton.Location = new Point (227, 285);
-			cancelButton.Size = new Size (80, 23);
+			cancelButton.Location = new Point_ (227, 285);
+			cancelButton.Size = new Size_ (80, 23);
 			cancelButton.TabIndex = 2;
 			cancelButton.Text = "Cancel";
 			
@@ -157,11 +157,11 @@ namespace System.Windows.Forms {
 			
 			form.ResumeLayout (false);
 			
-			if (formConfigSize != Size.Empty) {
+			if (formConfigSize != Size_.Empty) {
 				form.Size = formConfigSize;
 			}
 			
-			if (formConfigLocation != Point.Empty) {
+			if (formConfigLocation != Point_.Empty) {
 				form.Location = formConfigLocation;
 			}
 			
@@ -642,14 +642,14 @@ namespace System.Windows.Forms {
 			private void SetupImageList ()
 			{
 				imageList.ColorDepth = ColorDepth.Depth32Bit;
-				imageList.ImageSize = new Size (16, 16);
+				imageList.ImageSize = new Size_ (16, 16);
 				imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesRecentDocuments, 16));
 				imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesDesktop, 16));
 				imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesPersonal, 16));
 				imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesMyComputer, 16));
 				imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesMyNetwork, 16));
 				imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.NormalFolder, 16));
-				imageList.TransparentColor = Color.Transparent;
+				imageList.TransparentColor = Color_.Transparent;
 			}
 			
 			private int NodeImageIndex (string path)

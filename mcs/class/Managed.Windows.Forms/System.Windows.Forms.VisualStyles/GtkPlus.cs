@@ -26,7 +26,6 @@
 // Authors:
 //	George Giolfan (georgegiolfan@yahoo.com)
 //
-
 using gpointer = System.IntPtr;
 using gboolean = System.Boolean;
 using gint = System.Int32;
@@ -70,6 +69,7 @@ using GtkAllocation = System.Windows.Forms.VisualStyles.GtkPlus.GdkRectangle;
 using GInitiallyUnowned = System.Windows.Forms.VisualStyles.GtkPlus.GObject;
 
 using System.Collections;
+
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Reflection;
@@ -278,63 +278,63 @@ namespace System.Windows.Forms.VisualStyles
 		#endregion
 		#region Controls
 		#region Button
-		public void ButtonPaint (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, bool @default, GtkPlusState state)
+		public void ButtonPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, bool @default, GtkPlusState state)
 		{
 			button_painter.Configure (@default, state);
 			Paint (WidgetType.Button, bounds, dc, clippingArea, button_painter);
 		}
 		#endregion
 		#region CheckBox
-		public void CheckBoxPaint (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state, GtkPlusToggleButtonValue value)
+		public void CheckBoxPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state, GtkPlusToggleButtonValue value)
 		{
 			check_box_painter.Configure (state, value);
 			Paint (WidgetType.CheckBox, bounds, dc, clippingArea, check_box_painter);
 		}
-		Size GetGtkCheckButtonIndicatorSize (WidgetType widgetType)
+		Size_ GetGtkCheckButtonIndicatorSize (WidgetType widgetType)
 		{
 			int indicator_size = GetWidgetStyleInteger (widgets [(int)widgetType], "indicator-size");
-			return new Size (indicator_size, indicator_size);
+			return new Size_ (indicator_size, indicator_size);
 		}
-		public Size CheckBoxGetSize ()
+		public Size_ CheckBoxGetSize ()
 		{
 			return GetGtkCheckButtonIndicatorSize (WidgetType.CheckBox);
 		}
 		#endregion
 		#region ComboBox
-		public void ComboBoxPaintDropDownButton (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state)
+		public void ComboBoxPaintDropDownButton (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state)
 		{
 			combo_box_drop_down_button_painter.Configure (state);
 			Paint (WidgetType.ComboBox, bounds, dc, clippingArea, combo_box_drop_down_button_painter);
 		}
-		public void ComboBoxPaintBorder (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
+		public void ComboBoxPaintBorder (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea)
 		{
 			Paint (WidgetType.ComboBox, bounds, dc, clippingArea, combo_box_border_painter);
 		}
 		#endregion
 		#region GroupBox
-		public void GroupBoxPaint (IDeviceContext dc, Rectangle bounds, Rectangle excludedArea, GtkPlusState state)
+		public void GroupBoxPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ excludedArea, GtkPlusState state)
 		{
 			group_box_painter.Configure (state);
 			PaintExcludingArea (WidgetType.GroupBox, bounds, dc, excludedArea, group_box_painter);
 		}
 		#endregion
 		#region Header
-		public void HeaderPaint (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state)
+		public void HeaderPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state)
 		{
 			header_painter.Configure (state);
 			Paint (WidgetType.TreeView, bounds, dc, clippingArea, header_painter);
 		}
 		#endregion
 		#region ProgressBar
-		public void ProgressBarPaintBar (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
+		public void ProgressBarPaintBar (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea)
 		{
 			Paint (WidgetType.ProgressBar, bounds, dc, clippingArea, progress_bar_bar_painter);
 		}
-		public void ProgressBarPaintChunk (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
+		public void ProgressBarPaintChunk (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea)
 		{
 			Paint (WidgetType.ProgressBar, bounds, dc, clippingArea, progress_bar_chunk_painter);
 		}
-		public Rectangle ProgressBarGetBackgroundContentRectagle (Rectangle bounds)
+		public Rectangle_ ProgressBarGetBackgroundContentRectagle (Rectangle_ bounds)
 		{
 			GtkStyle style = (GtkStyle)Marshal.PtrToStructure (gtk_widget_get_style (widgets [(int)WidgetType.ProgressBar]), typeof(GtkStyle));
 			bounds.Inflate (-style.xthickness, -style.ythickness);
@@ -342,92 +342,92 @@ namespace System.Windows.Forms.VisualStyles
 		}
 		#endregion
 		#region RadioButton
-		public void RadioButtonPaint (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state, GtkPlusToggleButtonValue value)
+		public void RadioButtonPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state, GtkPlusToggleButtonValue value)
 		{
 			radio_button_painter.Configure (state, value);
 			Paint (WidgetType.RadioButton, bounds, dc, clippingArea, radio_button_painter);
 		}
-		public Size RadioButtonGetSize ()
+		public Size_ RadioButtonGetSize ()
 		{
 			return GetGtkCheckButtonIndicatorSize (WidgetType.RadioButton);
 		}
 		#endregion
 		#region ScrollBar
-		public void ScrollBarPaintArrowButton (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state, bool horizontal, bool upOrLeft)
+		public void ScrollBarPaintArrowButton (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state, bool horizontal, bool upOrLeft)
 		{
 			scroll_bar_arrow_button_painter.Configure (state, horizontal, upOrLeft);
 			Paint (horizontal ? WidgetType.HScrollBar : WidgetType.VScrollBar, bounds, dc, clippingArea, scroll_bar_arrow_button_painter);
 		}
-		public void ScrollBarPaintThumbButton (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state, bool horizontal)
+		public void ScrollBarPaintThumbButton (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state, bool horizontal)
 		{
 			scroll_bar_thumb_button_painter.Configure (state, horizontal);
 			Paint (horizontal ? WidgetType.HScrollBar : WidgetType.VScrollBar, bounds, dc, clippingArea, scroll_bar_thumb_button_painter);
 		}
-		public void ScrollBarPaintTrack (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state, bool horizontal, bool upOrLeft)
+		public void ScrollBarPaintTrack (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state, bool horizontal, bool upOrLeft)
 		{
 			scroll_bar_track_painter.Configure (state, upOrLeft);
 			Paint (horizontal ? WidgetType.HScrollBar : WidgetType.VScrollBar, bounds, dc, clippingArea, scroll_bar_track_painter);
 		}
 		#endregion
 		#region StatusBar
-		public void StatusBarPaintGripper (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
+		public void StatusBarPaintGripper (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea)
 		{
 			Paint (WidgetType.StatusBar, bounds, dc, clippingArea, status_bar_gripper_painter);
 		}
 		#endregion
 		#region TabControl
-		public void TabControlPaintPane (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
+		public void TabControlPaintPane (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea)
 		{
 			Paint (WidgetType.TabControl, bounds, dc, clippingArea, tab_control_pane_painter);
 		}
-		public void TabControlPaintTabItem (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state)
+		public void TabControlPaintTabItem (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state)
 		{
 			tab_control_tab_item_painter.Configure (state);
 			Paint (WidgetType.TabControl, bounds, dc, clippingArea, tab_control_tab_item_painter);
 		}
 		#endregion
 		#region TextBox
-		public void TextBoxPaint (IDeviceContext dc, Rectangle bounds, Rectangle excludedArea, GtkPlusState state)
+		public void TextBoxPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ excludedArea, GtkPlusState state)
 		{
 			text_box_painter.Configure (state);
 			PaintExcludingArea (WidgetType.TextBox, bounds, dc, excludedArea, text_box_painter);
 		}
 		#endregion
 		#region ToolBar
-		public void ToolBarPaint (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
+		public void ToolBarPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea)
 		{
 			Paint (WidgetType.ToolBar, bounds, dc, clippingArea, tool_bar_painter);
 		}
-		public void ToolBarPaintButton (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state)
+		public void ToolBarPaintButton (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state)
 		{
 			tool_bar_button_painter.Configure (state);
 			Paint (WidgetTypeNotNeeded, bounds, dc, clippingArea, tool_bar_button_painter);
 		}
-		public void ToolBarPaintCheckedButton (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea)
+		public void ToolBarPaintCheckedButton (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea)
 		{
 			Paint (WidgetTypeNotNeeded, bounds, dc, clippingArea, tool_bar_checked_button_painter);
 		}
 		#endregion
 		#region TrackBar
-		public void TrackBarPaintTrack (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, bool horizontal)
+		public void TrackBarPaintTrack (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, bool horizontal)
 		{
 			Paint (horizontal ? WidgetType.HorizontalTrackBar : WidgetType.VerticalTrackBar, bounds, dc, clippingArea, track_bar_track_painter);
 		}
-		public void TrackBarPaintThumb (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, GtkPlusState state, bool horizontal)
+		public void TrackBarPaintThumb (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, GtkPlusState state, bool horizontal)
 		{
 			track_bar_thumb_painter.Configure (state, horizontal);
 			Paint (horizontal ? WidgetType.HorizontalTrackBar : WidgetType.VerticalTrackBar, bounds, dc, clippingArea, track_bar_thumb_painter);
 		}
 		#endregion
 		#region TreeView
-		public void TreeViewPaintGlyph (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, bool closed)
+		public void TreeViewPaintGlyph (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, bool closed)
 		{
 			tree_view_glyph_painter.Configure (closed);
 			Paint (WidgetType.TreeView, bounds, dc, clippingArea, tree_view_glyph_painter);
 		}
 		#endregion
 		#region UpDown
-		public void UpDownPaint (IDeviceContext dc, Rectangle bounds, Rectangle clippingArea, bool up, GtkPlusState state)
+		public void UpDownPaint (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clippingArea, bool up, GtkPlusState state)
 		{
 			up_down_painter.Configure (up, state);
 			Paint (WidgetType.UpDown, bounds, dc, clippingArea, up_down_painter);
@@ -435,17 +435,17 @@ namespace System.Windows.Forms.VisualStyles
 		#endregion
 		#endregion
 		#region Painting
-		void Paint (WidgetType widgetType, Rectangle bounds, IDeviceContext dc, Rectangle clippingArea, Painter painter)
+		void Paint (WidgetType widgetType, Rectangle_ bounds, IDeviceContext dc, Rectangle_ clippingArea, Painter painter)
 		{
-			Paint (widgetType, bounds, dc, TransparencyType.Alpha, Color.Black, DeviceContextType.Native, clippingArea, painter, Rectangle.Empty);
+			Paint (widgetType, bounds, dc, TransparencyType.Alpha, Color_.Black, DeviceContextType.Native, clippingArea, painter, Rectangle_.Empty);
 		}
-		void PaintExcludingArea (WidgetType widgetType, Rectangle bounds, IDeviceContext dc, Rectangle excludedArea, Painter painter)
+		void PaintExcludingArea (WidgetType widgetType, Rectangle_ bounds, IDeviceContext dc, Rectangle_ excludedArea, Painter painter)
 		{
-			Paint (widgetType, bounds, dc, TransparencyType.Alpha, Color.Black, DeviceContextType.Native, bounds, painter, excludedArea);
+			Paint (widgetType, bounds, dc, TransparencyType.Alpha, Color_.Black, DeviceContextType.Native, bounds, painter, excludedArea);
 		}
-		void Paint (WidgetType widgetType, Rectangle bounds, IDeviceContext dc, TransparencyType transparencyType, Color background, DeviceContextType deviceContextType, Rectangle clippingArea, Painter painter, Rectangle excludedArea)
+		void Paint (WidgetType widgetType, Rectangle_ bounds, IDeviceContext dc, TransparencyType transparencyType, Color_ background, DeviceContextType deviceContextType, Rectangle_ clippingArea, Painter painter, Rectangle_ excludedArea)
 		{
-			Rectangle painted_area = Rectangle.Intersect (bounds, clippingArea);
+			Rectangle_ painted_area = Rectangle.Intersect (bounds, clippingArea);
 			if (painted_area.Width == 0 || painted_area.Height == 0)
 				return;
 			painted_area.Offset (-bounds.X, -bounds.Y);
@@ -555,7 +555,7 @@ namespace System.Windows.Forms.VisualStyles
 			bitmap.Dispose ();
 			g_object_unref (pixbuf);
 		}
-		void Paint (GdkDrawablePointer drawable, GdkGCPointer gc, Rectangle rectangle, WidgetType widgetType, out GdkPixbufPointer pixbuf, out IntPtr pixelData, out int rowstride, Rectangle clippingArea, Painter painter, Rectangle excludedArea)
+		void Paint (GdkDrawablePointer drawable, GdkGCPointer gc, Rectangle_ rectangle, WidgetType widgetType, out GdkPixbufPointer pixbuf, out IntPtr pixelData, out int rowstride, Rectangle_ clippingArea, Painter painter, Rectangle_ excludedArea)
 		{
 			gdk_draw_rectangle (drawable, gc, true, clippingArea.X, clippingArea.Y, clippingArea.Width, clippingArea.Height);
 			painter.Paint (styles [(int)widgetType], drawable, new GdkRectangle(clippingArea), widgets [(int)widgetType], 0, 0, rectangle.Width, rectangle.Height, this);
@@ -1342,7 +1342,7 @@ namespace System.Windows.Forms.VisualStyles
 			public guint16 red;
 			public guint16 green;
 			public guint16 blue;
-			public GdkColor (Color value)
+			public GdkColor (Color_ value)
 			{
 				pixel = 0;
 				red = (guint16)(value.R << 8);
@@ -1355,7 +1355,7 @@ namespace System.Windows.Forms.VisualStyles
 			public gint y;
 			public gint width;
 			public gint height;
-			public GdkRectangle (Rectangle value)
+			public GdkRectangle (Rectangle_ value)
 			{
 				x = value.X;
 				y = value.Y;

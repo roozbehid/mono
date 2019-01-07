@@ -24,8 +24,8 @@
 //	Chris toshok <toshok@ximian.com>
 //
 //
-
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -51,7 +51,7 @@ namespace System.Windows.Forms
 		int editing_row;
 		CheckState editing_state;
 		CheckState model_state;
-		Size checkbox_size;
+		Size_ checkbox_size;
 
 		#endregion	// Local Variables
 
@@ -71,7 +71,7 @@ namespace System.Windows.Forms
 			true_value = true;
 			allow_null = true;
 			is_default = isDefault;
-			checkbox_size = new Size (ThemeEngine.Current.DataGridMinimumColumnCheckBoxWidth, ThemeEngine.Current.DataGridMinimumColumnCheckBoxHeight);
+			checkbox_size = new Size_ (ThemeEngine.Current.DataGridMinimumColumnCheckBoxWidth, ThemeEngine.Current.DataGridMinimumColumnCheckBoxHeight);
 		}
 		#endregion
 
@@ -174,7 +174,7 @@ namespace System.Windows.Forms
 			base.ConcedeFocus ();
 		}
 
-		protected internal override void Edit (CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string displayText,  bool cellIsVisible)
+		protected internal override void Edit (CurrencyManager source, int rowNum, Rectangle_ bounds, bool readOnly, string displayText,  bool cellIsVisible)
 		{
 			editing_row = rowNum;
 			model_state = FromValueToState (GetColumnValueAtRow (source, rowNum));
@@ -220,25 +220,25 @@ namespace System.Windows.Forms
 			return checkbox_size.Height;
 		}
 
-		protected internal override Size GetPreferredSize (Graphics g, object value)
+		protected internal override Size_ GetPreferredSize (Graphics g, object value)
 		{
 			return checkbox_size;
 		}
 
-		protected internal override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum)
+		protected internal override void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum)
 		{
 			Paint (g, bounds, source, rowNum, false);
 		}
 
-		protected internal override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, bool alignToRight)
+		protected internal override void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum, bool alignToRight)
 		{
 			Paint (g, bounds, source, rowNum, ThemeEngine.Current.ResPool.GetSolidBrush (DataGridTableStyle.BackColor),
 				ThemeEngine.Current.ResPool.GetSolidBrush (DataGridTableStyle.ForeColor), alignToRight);
 		}
 
-		protected internal override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, Brush backBrush, Brush foreBrush, bool alignToRight)
+		protected internal override void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum, Brush backBrush, Brush foreBrush, bool alignToRight)
 		{
-			Rectangle rect = new Rectangle ();			
+			Rectangle_ rect = new Rectangle_ ();			
 			ButtonState state;
 			CheckState check_state;
 
@@ -355,7 +355,7 @@ namespace System.Windows.Forms
 
 		private void NextState (int row, int column)
 		{
-			grid.ColumnStartedEditing (new Rectangle());
+			grid.ColumnStartedEditing (new Rectangle_());
 
 			editing_state = GetNextState (editing_state);
 

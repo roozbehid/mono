@@ -23,9 +23,9 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //	Daniel Nauck    (dna(at)mono-project(dot)de)
 //
-
 using System;
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -106,8 +106,8 @@ namespace System.Windows.Forms {
 		}
 
 		[Browsable(false)]
-		public Size Size {
-			get { return new Size(Horizontal, Vertical); }
+		public Size_ Size {
+			get { return new Size_(Horizontal, Vertical); }
 		}
 
 		[RefreshProperties(RefreshProperties.All)]

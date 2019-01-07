@@ -75,7 +75,7 @@ namespace System.Windows.Forms {
 				}
 			}
 
-			static public Point MousePosition {
+			static public Point_ MousePosition {
 				get {
 					return driver.MousePosition;
 				}
@@ -87,11 +87,11 @@ namespace System.Windows.Forms {
 		#region Constructor & Destructor
 		static XplatUI ()
 		{
-			// Compose name with current domain id because on Win32 we register class name
-			// and name must be unique to process. If we load MWF into multiple appdomains
-			// and try to register same class name we fail.
-//			default_class_name = "SWFClass" + System.Threading.Thread.GetDomainID ().ToString ();
-
+            // Compose name with current domain id because on Win32 we register class name
+            // and name must be unique to process. If we load MWF into multiple appdomains
+            // and try to register same class name we fail.
+            //			default_class_name = "SWFClass" + System.Threading.Thread.GetDomainID ().ToString ();
+            Console.WriteLine("XplatUI constructor");
 			if (RunningOnUnix) {
 				//if (Environment.GetEnvironmentVariable ("not_supported_MONO_MWF_USE_NEW_X11_BACKEND") != null) {
 				//        driver=XplatUIX11_new.GetInstance ();
@@ -114,8 +114,10 @@ namespace System.Windows.Forms {
 					Marshal.FreeHGlobal (buf);
 				}
 			} else {
-				driver=XplatUIWin32.GetInstance ();
-			}
+                //driver=XplatUIWin32.GetInstance ();
+                
+                driver = XplatUINanoX.GetInstance();
+            }
 
 			driver.InitializeDriver ();
 
@@ -133,9 +135,10 @@ namespace System.Windows.Forms {
 
 		public static bool RunningOnUnix {
 			get {
-				int p = (int) Environment.OSVersion.Platform;
-				
-				return (p == 4 || p == 6 || p == 128);
+                ///int p = (int) Environment.OSVersion.Platform;
+
+                ////return (p == 4 || p == 6 || p == 128);
+                return false;
 			}
 		}
 
@@ -151,19 +154,19 @@ namespace System.Windows.Forms {
 			return "SWFClass" + 1 + "." + type.ToString ();
 		}
 
-		static public Size Border3DSize {
+		static public Size_ Border3DSize {
 			get {
 				return driver.Border3DSize;
 			}
 		}
 
-		static public Size BorderSize {
+		static public Size_ BorderSize {
 			get {
 				return driver.BorderSize;
 			}
 		}
 
-		static public Size CaptionButtonSize {
+		static public Size_ CaptionButtonSize {
 			get {
 				return driver.CaptionButtonSize;
 			}
@@ -178,13 +181,13 @@ namespace System.Windows.Forms {
 		public static int CaretBlinkTime { get { return driver.CaretBlinkTime; } }
 		public static int CaretWidth { get { return driver.CaretWidth; } }
 		
-		static public Size CursorSize {
+		static public Size_ CursorSize {
 			get {
 				return driver.CursorSize;
 			}
 		}
 
-		static public Size DoubleClickSize {
+		static public Size_ DoubleClickSize {
 			get {
 				return driver.DoubleClickSize;
 			}
@@ -202,13 +205,13 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		static public Size DragSize {
+		static public Size_ DragSize {
 			get {
 				return driver.DragSize;
 			}
 		}
 
-		static public Size FixedFrameBorderSize {
+		static public Size_ FixedFrameBorderSize {
 			get {
 				return driver.FixedFrameBorderSize;
 			}
@@ -217,7 +220,7 @@ namespace System.Windows.Forms {
 		public static int FontSmoothingContrast { get { return driver.FontSmoothingContrast; } }
 		public static int FontSmoothingType { get { return driver.FontSmoothingType; } }
 
-		public static Size FrameBorderSize {
+		public static Size_ FrameBorderSize {
 			get {
 				return driver.FrameBorderSize;
 			}
@@ -231,7 +234,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		static public Size IconSize {
+		static public Size_ IconSize {
 			get {
 				return driver.IconSize;
 			}
@@ -265,7 +268,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		static public Size MaxWindowTrackSize {
+		static public Size_ MaxWindowTrackSize {
 			get {
 				return driver.MaxWindowTrackSize;
 			}
@@ -277,9 +280,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		static public Size MenuBarButtonSize { get { return driver.MenuBarButtonSize; } }
+		static public Size_ MenuBarButtonSize { get { return driver.MenuBarButtonSize; } }
 
-		public static Size MenuButtonSize {
+		public static Size_ MenuButtonSize {
 			get {
 				return driver.MenuButtonSize;
 			}
@@ -287,37 +290,37 @@ namespace System.Windows.Forms {
 
 		static public int MenuShowDelay { get { return driver.MenuShowDelay; } }
 		
-		static public Size MinimizedWindowSize {
+		static public Size_ MinimizedWindowSize {
 			get {
 				return driver.MinimizedWindowSize;
 			}
 		}
 
-		static public Size MinimizedWindowSpacingSize {
+		static public Size_ MinimizedWindowSpacingSize {
 			get {
 				return driver.MinimizedWindowSpacingSize;
 			}
 		}
 
-		static public Size MinimumWindowSize {
+		static public Size_ MinimumWindowSize {
 			get {
 				return driver.MinimumWindowSize;
 			}
 		}
 
-		static public Size MinimumFixedToolWindowSize {
+		static public Size_ MinimumFixedToolWindowSize {
 			get { return driver.MinimumFixedToolWindowSize; }
 		}
 
-		static public Size MinimumSizeableToolWindowSize {
+		static public Size_ MinimumSizeableToolWindowSize {
 			get { return driver.MinimumSizeableToolWindowSize; }
 		}
 
-		static public Size MinimumNoBorderWindowSize {
+		static public Size_ MinimumNoBorderWindowSize {
 			get { return driver.MinimumNoBorderWindowSize; }
 		}
 
-		static public Size MinWindowTrackSize {
+		static public Size_ MinWindowTrackSize {
 			get {
 				return driver.MinWindowTrackSize;
 			}
@@ -327,7 +330,7 @@ namespace System.Windows.Forms {
 			get { return driver.MouseSpeed; }
 		}
 		
-		static public Size SmallIconSize {
+		static public Size_ SmallIconSize {
 			get {
 				return driver.SmallIconSize;
 			}
@@ -351,7 +354,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		static public Size MouseHoverSize {
+		static public Size_ MouseHoverSize {
 			get {
 				return driver.MouseHoverSize;
 			}
@@ -393,7 +396,7 @@ namespace System.Windows.Forms {
 			get { return driver.SizingBorderWidth; }
 		}
 		
-		public static Size SmallCaptionButtonSize {
+		public static Size_ SmallCaptionButtonSize {
 			get { return driver.SmallCaptionButtonSize; }
 		}
 		
@@ -415,13 +418,13 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		static public Rectangle VirtualScreen {
+		static public Rectangle_ VirtualScreen {
 			get {
 				return driver.VirtualScreen;
 			}
 		}
 
-		static public Rectangle WorkingArea {
+		static public Rectangle_ WorkingArea {
 			get {
 				return driver.WorkingArea;
 			}
@@ -445,7 +448,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public static Size ToolWindowCaptionButtonSize {
+		public static Size_ ToolWindowCaptionButtonSize {
 			get {
 				return driver.ToolWindowCaptionButtonSize;
 			}
@@ -483,7 +486,7 @@ namespace System.Windows.Forms {
 			driver.BeginMoveResize (handle);
 		}
 
-		internal static bool CalculateWindowRect (ref Rectangle ClientRect, CreateParams cp, Menu menu, out Rectangle WindowRect)
+		internal static bool CalculateWindowRect (ref Rectangle_ ClientRect, CreateParams cp, Menu menu, out Rectangle_ WindowRect)
 		{
 			DriverDebug ("CalculateWindowRect ({0}, {1}, {2}): Called", ClientRect, cp, menu);
 			return driver.CalculateWindowRect (ref ClientRect, cp, menu, out WindowRect);
@@ -567,7 +570,7 @@ namespace System.Windows.Forms {
 			return driver.ClipboardRetrieve (handle, type, converter);
 		}
 
-		internal static IntPtr DefineCursor (Bitmap bitmap, Bitmap mask, Color cursor_pixel, Color mask_pixel, int xHotSpot, int yHotSpot)
+		internal static IntPtr DefineCursor (Bitmap bitmap, Bitmap mask, Color_ cursor_pixel, Color_ mask_pixel, int xHotSpot, int yHotSpot)
 		{
 			DriverDebug ("DefineCursor (...): Called");
 			return driver.DefineCursor (bitmap, mask, cursor_pixel, mask_pixel, xHotSpot, yHotSpot);
@@ -616,25 +619,25 @@ namespace System.Windows.Forms {
 			driver.DoEvents ();
 		}
 
-		internal static void DrawReversibleRectangle (IntPtr handle, Rectangle rect, int line_width)
+		internal static void DrawReversibleRectangle (IntPtr handle, Rectangle_ rect, int line_width)
 		{
 			DriverDebug ("DrawReversibleRectangle ({0}, {1}, {2}): Called", Window (handle), rect, line_width);
 			driver.DrawReversibleRectangle (handle, rect, line_width);
 		}
 
-		internal static void FillReversibleRectangle (Rectangle rectangle, Color backColor)
+		internal static void FillReversibleRectangle (Rectangle_ rectangle, Color_ backColor)
 		{
 			DriverDebug ("FillReversibleRectangle ({0}, {1}): Called", rectangle, backColor);
 			driver.FillReversibleRectangle (rectangle, backColor);
 		}
 
-		internal static void DrawReversibleFrame (Rectangle rectangle, Color backColor, FrameStyle style)
+		internal static void DrawReversibleFrame (Rectangle_ rectangle, Color_ backColor, FrameStyle style)
 		{
 			DriverDebug ("DrawReversibleFrame ({0}, {1}, {2}): Called", rectangle, backColor, style);
 			driver.DrawReversibleFrame (rectangle, backColor, style);
 		}
 
-		internal static void DrawReversibleLine (Point start, Point end, Color backColor)
+		internal static void DrawReversibleLine (Point_ start, Point_ end, Color_ backColor)
 		{
 			DriverDebug ("DrawReversibleLine ({0}, {1}, {2}): Called", start, end, backColor);
 			driver.DrawReversibleLine (start, end, backColor);
@@ -663,7 +666,7 @@ namespace System.Windows.Forms {
 			return driver.GetActive ();
 		}
 
-		internal static SizeF GetAutoScaleSize (Font font)
+		internal static SizeF_ GetAutoScaleSize (Font font)
 		{
 			DriverDebug ("GetAutoScaleSize ({0}): Called", font);
 			return driver.GetAutoScaleSize (font);
@@ -687,7 +690,7 @@ namespace System.Windows.Forms {
 			driver.GetCursorPos (handle, out x, out y);
 		}
 
-		internal static void GetDisplaySize (out Size size) 
+		internal static void GetDisplaySize (out Size_ size) 
 		{
 			DriverDebug ("GetDisplaySize (): Called");
 			driver.GetDisplaySize (out size);
@@ -705,7 +708,7 @@ namespace System.Windows.Forms {
 			return driver.GetFontMetrics (g, font, out ascent, out descent);
 		}
 			
-		internal static Point GetMenuOrigin (IntPtr handle)
+		internal static Point_ GetMenuOrigin (IntPtr handle)
 		{
 			DriverDebug ("GetMenuOrigin ({0}): Called", Window (handle));
 			return driver.GetMenuOrigin (handle);
@@ -751,7 +754,7 @@ namespace System.Windows.Forms {
 			return driver.GetWindowState (handle);
 		}
 
-		internal static void GrabInfo (out IntPtr handle, out bool GrabConfined, out Rectangle GrabArea)
+		internal static void GrabInfo (out IntPtr handle, out bool GrabConfined, out Rectangle_ GrabArea)
 		{
 			DriverDebug ("GrabInfo (): Called");
 			driver.GrabInfo (out handle, out GrabConfined, out GrabArea);
@@ -768,7 +771,7 @@ namespace System.Windows.Forms {
 			driver.HandleException (e);
 		}
 
-		internal static void Invalidate (IntPtr handle, Rectangle rc, bool clear)
+		internal static void Invalidate (IntPtr handle, Rectangle_ rc, bool clear)
 		{
 			DriverDebug ("Invalidate ({0}, {1}, {2}): Called", Window (handle), rc, clear);
 			driver.Invalidate (handle, rc, clear);
@@ -899,7 +902,7 @@ namespace System.Windows.Forms {
 			driver.ScreenToMenu (handle, ref x, ref y);
 		}
 
-		internal static void ScrollWindow (IntPtr handle, Rectangle rectangle, int XAmount, int YAmount, bool with_children)
+		internal static void ScrollWindow (IntPtr handle, Rectangle_ rectangle, int XAmount, int YAmount, bool with_children)
 		{
 			DriverDebug ("ScrollWindow ({0}, {1}, {2}, {3}, {4}): Called", Window (handle), rectangle, XAmount, YAmount, with_children);
 			driver.ScrollWindow (handle, rectangle, XAmount, YAmount, with_children);
@@ -1033,7 +1036,7 @@ namespace System.Windows.Forms {
 			return driver.SetVisible (handle, visible, activate);
 		}
 
-		internal static void SetWindowMinMax (IntPtr handle, Rectangle maximized, Size min, Size max)
+		internal static void SetWindowMinMax (IntPtr handle, Rectangle_ maximized, Size_ min, Size_ max)
 		{
 			#if DriverDebug || DriverDebugState
 				Console.WriteLine ("SetWindowMinMax ({0}, {1}, {2}, {3}): Called", Window (handle), maximized, min, max);
@@ -1067,7 +1070,7 @@ namespace System.Windows.Forms {
 			return driver.GetWindowTransparency (handle);
 		}
 
-		internal static void SetWindowTransparency (IntPtr handle, double transparency, Color key) 
+		internal static void SetWindowTransparency (IntPtr handle, double transparency, Color_ key) 
 		{
 			DriverDebug ("SetWindowTransparency ({0}): Called", Window (handle));
 			driver.SetWindowTransparency (handle, transparency, key);
@@ -1176,7 +1179,7 @@ namespace System.Windows.Forms {
 						      Graphics dest_dc,
 						      object offscreen_drawable,
 						      Graphics offscreen_dc,
-						      Rectangle r)
+						      Rectangle_ r)
 		{
 			DriverDebug ("BlitFromOffscreen ({0}): Called", Window (dest_handle));
 			driver.BlitFromOffscreen (dest_handle, dest_dc, offscreen_drawable, offscreen_dc, r);

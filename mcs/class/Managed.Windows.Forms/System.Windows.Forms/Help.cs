@@ -25,8 +25,8 @@
 //
 
 // NOT COMPLETE
-
 using System;
+
 using System.Drawing;
 using System.Diagnostics;
 using System.IO;
@@ -71,7 +71,7 @@ namespace System.Windows.Forms
 		}
 
 		[MonoTODO ("Stub, does nothing")]
-		public static void ShowPopup (Control parent, string caption, Point location)
+		public static void ShowPopup (Control parent, string caption, Point_ location)
 		{
 		}
 		#endregion	// Public Static Methods

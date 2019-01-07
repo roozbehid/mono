@@ -29,6 +29,7 @@
 #if NET_2_0
 using System;
 using System.Collections.Generic;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.Layout
@@ -66,13 +67,13 @@ namespace System.Windows.Forms.Layout
 			if (parent.Controls.Count == 0) return false;
 
 			// Use DisplayRectangle so that parent.Padding is honored.
-			Rectangle parentDisplayRectangle = parent.DisplayRectangle;
-			Point currentLocation;
+			Rectangle_ parentDisplayRectangle = parent.DisplayRectangle;
+            Drawing.Point_ currentLocation;
 
-			// Set our starting point based on flow direction
+			// Set our starting Point_ based on flow direction
 			switch (settings.FlowDirection) {
 				case FlowDirection.BottomUp:
-					currentLocation = new Point (parentDisplayRectangle.Left, parentDisplayRectangle.Bottom);
+					currentLocation = new Point_ (parentDisplayRectangle.Left, parentDisplayRectangle.Bottom);
 					break;
 				case FlowDirection.LeftToRight:
 				case FlowDirection.TopDown:
@@ -80,7 +81,7 @@ namespace System.Windows.Forms.Layout
 					currentLocation = parentDisplayRectangle.Location;
 					break;
 				case FlowDirection.RightToLeft:
-					currentLocation = new Point (parentDisplayRectangle.Right, parentDisplayRectangle.Top);
+					currentLocation = new Point_ (parentDisplayRectangle.Right, parentDisplayRectangle.Top);
 					break;
 			}
 
@@ -94,7 +95,7 @@ namespace System.Windows.Forms.Layout
 
 				// Resize any AutoSize controls to their preferred size
 				if (c.AutoSize == true) {
-					Size new_size = c.GetPreferredSize (c.Size);
+					Size_ new_size = c.GetPreferredSize (c.Size);
 					c.SetBoundsInternal (c.Left, c.Top, new_size.Width, new_size.Height, BoundsSpecified.None);
 				}
 
@@ -332,13 +333,13 @@ namespace System.Windows.Forms.Layout
 				tsi.SetPlacement (ToolStripItemPlacement.Main);
 				
 			// Use DisplayRectangle so that parent.Padding is honored.
-			Rectangle parentDisplayRectangle = parent.DisplayRectangle;
-			Point currentLocation;
+			Rectangle_ parentDisplayRectangle = parent.DisplayRectangle;
+            Drawing.Point_ currentLocation;
 
-			// Set our starting point based on flow direction
+			// Set our starting Point_ based on flow direction
 			switch (settings.FlowDirection) {
 				case FlowDirection.BottomUp:
-					currentLocation = new Point (parentDisplayRectangle.Left, parentDisplayRectangle.Bottom);
+					currentLocation = new Point_ (parentDisplayRectangle.Left, parentDisplayRectangle.Bottom);
 					break;
 				case FlowDirection.LeftToRight:
 				case FlowDirection.TopDown:
@@ -346,7 +347,7 @@ namespace System.Windows.Forms.Layout
 					currentLocation = parentDisplayRectangle.Location;
 					break;
 				case FlowDirection.RightToLeft:
-					currentLocation = new Point (parentDisplayRectangle.Right, parentDisplayRectangle.Top);
+					currentLocation = new Point_ (parentDisplayRectangle.Right, parentDisplayRectangle.Top);
 					break;
 			}
 
@@ -360,7 +361,7 @@ namespace System.Windows.Forms.Layout
 
 				// Resize any AutoSize controls to their preferred size
 				if (c.AutoSize == true)
-					c.SetBounds (new Rectangle (c.Location, c.GetPreferredSize (c.Size)));
+					c.SetBounds (new Rectangle_ (c.Location, c.GetPreferredSize (c.Size)));
 
 				switch (settings.FlowDirection) {
 					case FlowDirection.BottomUp:
@@ -378,7 +379,7 @@ namespace System.Windows.Forms.Layout
 
 						// Offset the right margin and set the control to our point
 						currentLocation.Offset (0, c.Margin.Bottom * -1);
-						c.Location = new Point (currentLocation.X + c.Margin.Left, currentLocation.Y - c.Height);
+						c.Location = new Point_(currentLocation.X + c.Margin.Left, currentLocation.Y - c.Height);
 
 						// Update our location pointer
 						currentLocation.Y -= (c.Height + c.Margin.Top);
@@ -399,7 +400,7 @@ namespace System.Windows.Forms.Layout
 
 						// Offset the left margin and set the control to our point
 						currentLocation.Offset (c.Margin.Left, 0);
-						c.Location = new Point (currentLocation.X, currentLocation.Y + c.Margin.Top);
+						c.Location = new Point_(currentLocation.X, currentLocation.Y + c.Margin.Top);
 
 						// Update our location pointer
 						currentLocation.X += c.Width + c.Margin.Right;
@@ -419,7 +420,7 @@ namespace System.Windows.Forms.Layout
 
 						// Offset the right margin and set the control to our point
 						currentLocation.Offset (c.Margin.Right * -1, 0);
-						c.Location = new Point (currentLocation.X - c.Width, currentLocation.Y + c.Margin.Top);
+						c.Location = new Point_(currentLocation.X - c.Width, currentLocation.Y + c.Margin.Top);
 
 						// Update our location pointer
 						currentLocation.X -= (c.Width + c.Margin.Left);
@@ -439,7 +440,7 @@ namespace System.Windows.Forms.Layout
 
 						// Offset the top margin and set the control to our point
 						currentLocation.Offset (0, c.Margin.Top);
-						c.Location = new Point (currentLocation.X + c.Margin.Left, currentLocation.Y);
+						c.Location = new Point_(currentLocation.X + c.Margin.Left, currentLocation.Y);
 
 						// Update our location pointer
 						currentLocation.Y += c.Height + c.Margin.Bottom;

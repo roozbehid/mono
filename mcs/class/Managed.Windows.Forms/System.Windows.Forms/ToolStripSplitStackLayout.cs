@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.Windows.Forms.Layout;
 
@@ -43,7 +43,7 @@ namespace System.Windows.Forms
 				if (ts.Items == null)
 					return false;
 					
-				Rectangle ts_rect = ts.DisplayRectangle;
+				Rectangle_ ts_rect = ts.DisplayRectangle;
 					
 				if (ts.Orientation == Orientation.Horizontal)					
 					LayoutHorizontalToolStrip (ts, ts_rect);
@@ -57,13 +57,13 @@ namespace System.Windows.Forms
 				int y = ts.DisplayRectangle.Top;
 
 				foreach (ToolStrip tsi in ts.Controls) {
-					Rectangle new_bounds = new Rectangle ();
+					Rectangle_ new_bounds = new Rectangle_ ();
 
 					x += tsi.Margin.Left;
 
-					new_bounds.Location = new Point (x, y + tsi.Margin.Top);
+					new_bounds.Location = new Point_ (x, y + tsi.Margin.Top);
 					new_bounds.Height = ts.DisplayRectangle.Height - tsi.Margin.Vertical;
-					new_bounds.Width = tsi.GetToolStripPreferredSize (new Size (0, new_bounds.Height)).Width;
+					new_bounds.Width = tsi.GetToolStripPreferredSize (new Size_ (0, new_bounds.Height)).Width;
 
 					tsi.Width = new_bounds.Width + 12;
 
@@ -74,13 +74,13 @@ namespace System.Windows.Forms
 			return false;
 		}
 		
-		private void LayoutHorizontalToolStrip (ToolStrip ts, Rectangle bounds)
+		private void LayoutHorizontalToolStrip (ToolStrip ts, Rectangle_ bounds)
 		{
 			//if (!ts.Visible) return;
 			
 			ToolStripItemOverflow[] overflow = new ToolStripItemOverflow[ts.Items.Count];
 			ToolStripItemPlacement[] placement = new ToolStripItemPlacement[ts.Items.Count];
-			Size proposedSize = new Size (0, bounds.Height);
+			Size_ proposedSize = new Size_ (0, bounds.Height);
 			int[] widths = new int[ts.Items.Count];
 			int total_width = 0;
 			int toolstrip_width = bounds.Width;
@@ -104,7 +104,7 @@ namespace System.Windows.Forms
 			// This is needed for a button set to Overflow = Always
 			if (need_overflow) {
 				ts.OverflowButton.Visible = true;
-				ts.OverflowButton.SetBounds (new Rectangle (ts.Width - 16, 0, 16, ts.Height));
+				ts.OverflowButton.SetBounds (new Rectangle_ (ts.Width - 16, 0, 16, ts.Height));
 				toolstrip_width -= ts.OverflowButton.Width;
 			} else
 				ts.OverflowButton.Visible = false;
@@ -114,7 +114,7 @@ namespace System.Windows.Forms
 				// from our available width				
 				if (can_overflow && !ts.OverflowButton.Visible) {
 					ts.OverflowButton.Visible = true;
-					ts.OverflowButton.SetBounds (new Rectangle (ts.Width - 16, 0, 16, ts.Height));
+					ts.OverflowButton.SetBounds (new Rectangle_ (ts.Width - 16, 0, 16, ts.Height));
 					toolstrip_width -= ts.OverflowButton.Width;
 				}					
 				
@@ -146,8 +146,8 @@ namespace System.Windows.Forms
 			}
 
 			i = 0;
-			Point start_layout_pointer = new Point (ts.DisplayRectangle.Left, ts.DisplayRectangle.Top);
-			Point end_layout_pointer = new Point (ts.DisplayRectangle.Right, ts.DisplayRectangle.Top);
+			Point_ start_layout_pointer = new Point_ (ts.DisplayRectangle.Left, ts.DisplayRectangle.Top);
+			Point_ end_layout_pointer = new Point_ (ts.DisplayRectangle.Right, ts.DisplayRectangle.Top);
 			int button_height = ts.DisplayRectangle.Height;
 			
 			// Now we should know where everything goes, so lay everything out
@@ -156,10 +156,10 @@ namespace System.Windows.Forms
 				
 				if (placement[i] == ToolStripItemPlacement.Main) {
 					if (tsi.Alignment == ToolStripItemAlignment.Left) {
-						tsi.SetBounds (new Rectangle (start_layout_pointer.X + tsi.Margin.Left, start_layout_pointer.Y + tsi.Margin.Top, widths[i] - tsi.Margin.Horizontal, button_height - tsi.Margin.Vertical));
+						tsi.SetBounds (new Rectangle_ (start_layout_pointer.X + tsi.Margin.Left, start_layout_pointer.Y + tsi.Margin.Top, widths[i] - tsi.Margin.Horizontal, button_height - tsi.Margin.Vertical));
 						start_layout_pointer.X += widths[i];
 					} else {
-						tsi.SetBounds (new Rectangle (end_layout_pointer.X - tsi.Margin.Right - tsi.Width, end_layout_pointer.Y + tsi.Margin.Top, widths[i] - tsi.Margin.Horizontal, button_height - tsi.Margin.Vertical));
+						tsi.SetBounds (new Rectangle_ (end_layout_pointer.X - tsi.Margin.Right - tsi.Width, end_layout_pointer.Y + tsi.Margin.Top, widths[i] - tsi.Margin.Horizontal, button_height - tsi.Margin.Vertical));
 						end_layout_pointer.X -= widths[i];
 					}			
 				}
@@ -168,13 +168,13 @@ namespace System.Windows.Forms
 			}			
 		}
 
-		private void LayoutVerticalToolStrip (ToolStrip ts, Rectangle bounds)
+		private void LayoutVerticalToolStrip (ToolStrip ts, Rectangle_ bounds)
 		{
 			if (!ts.Visible) return;
 
 			ToolStripItemOverflow[] overflow = new ToolStripItemOverflow[ts.Items.Count];
 			ToolStripItemPlacement[] placement = new ToolStripItemPlacement[ts.Items.Count];
-			Size proposedSize = new Size (bounds.Width, 0);
+			Size_ proposedSize = new Size_ (bounds.Width, 0);
 			int[] heights = new int[ts.Items.Count];
 			int total_height = 0;
 			int toolstrip_height = bounds.Height;
@@ -198,7 +198,7 @@ namespace System.Windows.Forms
 				// from our available width				
 				if (can_overflow && !ts.OverflowButton.Visible) {
 					ts.OverflowButton.Visible = true;
-					ts.OverflowButton.SetBounds (new Rectangle (0, ts.Height - 16,  ts.Width, 16));
+					ts.OverflowButton.SetBounds (new Rectangle_ (0, ts.Height - 16,  ts.Width, 16));
 					toolstrip_height -= ts.OverflowButton.Height;
 				}
 
@@ -230,8 +230,8 @@ namespace System.Windows.Forms
 			}
 
 			i = 0;
-			Point start_layout_pointer = new Point (ts.DisplayRectangle.Left, ts.DisplayRectangle.Top);
-			Point end_layout_pointer = new Point (ts.DisplayRectangle.Left, ts.DisplayRectangle.Bottom);
+			Point_ start_layout_pointer = new Point_ (ts.DisplayRectangle.Left, ts.DisplayRectangle.Top);
+			Point_ end_layout_pointer = new Point_ (ts.DisplayRectangle.Left, ts.DisplayRectangle.Bottom);
 			int button_width = ts.DisplayRectangle.Width;
 
 			// Now we should know where everything goes, so lay everything out
@@ -240,10 +240,10 @@ namespace System.Windows.Forms
 
 				if (placement[i] == ToolStripItemPlacement.Main) {
 					if (tsi.Alignment == ToolStripItemAlignment.Left) {
-						tsi.SetBounds (new Rectangle (start_layout_pointer.X + tsi.Margin.Left, start_layout_pointer.Y + tsi.Margin.Top, button_width - tsi.Margin.Horizontal, heights[i] - tsi.Margin.Vertical));
+						tsi.SetBounds (new Rectangle_ (start_layout_pointer.X + tsi.Margin.Left, start_layout_pointer.Y + tsi.Margin.Top, button_width - tsi.Margin.Horizontal, heights[i] - tsi.Margin.Vertical));
 						start_layout_pointer.Y += heights[i];
 					} else {
-						tsi.SetBounds (new Rectangle (end_layout_pointer.X + tsi.Margin.Left, end_layout_pointer.Y - tsi.Margin.Bottom - tsi.Height, button_width - tsi.Margin.Horizontal, heights[i] - tsi.Margin.Vertical));
+						tsi.SetBounds (new Rectangle_ (end_layout_pointer.X + tsi.Margin.Left, end_layout_pointer.Y - tsi.Margin.Bottom - tsi.Height, button_width - tsi.Margin.Horizontal, heights[i] - tsi.Margin.Vertical));
 						start_layout_pointer.Y += heights[i];
 					}
 				}

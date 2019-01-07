@@ -51,10 +51,10 @@ namespace System.Windows.Forms
 		private int small_change;
 		internal int scrollbutton_height;
 		internal int scrollbutton_width;
-		private Rectangle first_arrow_area = new Rectangle ();		// up or left
-		private Rectangle second_arrow_area = new Rectangle ();		// down or right
-		private Rectangle thumb_pos = new Rectangle ();
-		private Rectangle thumb_area = new Rectangle ();
+		private Rectangle_ first_arrow_area = new Rectangle_ ();		// up or left
+		private Rectangle_ second_arrow_area = new Rectangle_ ();		// down or right
+		private Rectangle_ thumb_pos = new Rectangle_ ();
+		private Rectangle_ thumb_area = new Rectangle_ ();
 		internal ButtonState firstbutton_state = ButtonState.Normal;
 		internal ButtonState secondbutton_state = ButtonState.Normal;
 		private bool firstbutton_pressed = false;
@@ -72,7 +72,7 @@ namespace System.Windows.Forms
 		internal bool implicit_control;
 		private int lastclick_pos;		// Position of the last button-down event
 		private int thumbclick_offset;		// Position of the last button-down event relative to the thumb edge
-		private Rectangle dirty;
+		private Rectangle_ dirty;
 
 		internal ThumbMoving thumb_moving = ThumbMoving.None;
 		bool first_button_entered;
@@ -245,7 +245,7 @@ namespace System.Windows.Forms
 		}
 
 		#region Internal & Private Properties
-		internal Rectangle FirstArrowArea {
+		internal Rectangle_ FirstArrowArea {
 			get {
 				return this.first_arrow_area;
 			}
@@ -255,7 +255,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Rectangle SecondArrowArea {
+		internal Rectangle_ SecondArrowArea {
 			get {
 				return this.second_arrow_area;
 			}
@@ -272,7 +272,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Rectangle ThumbPos {
+		internal Rectangle_ ThumbPos {
 			get {
 				return thumb_pos;
 			}
@@ -339,7 +339,7 @@ namespace System.Windows.Forms
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[Browsable (false)]
-		public override Color BackColor
+		public override Color_ BackColor
 		{
 			get { return base.BackColor; }
 			set {
@@ -399,7 +399,7 @@ namespace System.Windows.Forms
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[Browsable (false)]
-		public override Color ForeColor
+		public override Color_ ForeColor
 		{
 			get { return base.ForeColor; }
 			set {
@@ -596,7 +596,7 @@ namespace System.Windows.Forms
 					OnValueChanged (EventArgs.Empty);
 
 					if (IsHandleCreated) {
-						Rectangle thumb_rect = thumb_pos;
+						Rectangle_ thumb_rect = thumb_pos;
 
 						UpdateThumbPos ((vert ? thumb_area.Y : thumb_area.X) + (int)(((float)(position - minimum)) * pixel_per_pos), false, false);
 
@@ -609,7 +609,7 @@ namespace System.Windows.Forms
 		#endregion //Public Properties
 
 		#region Public Methods
-		protected override Rectangle GetScaledBounds (Rectangle bounds, SizeF factor, BoundsSpecified specified)
+		protected override Rectangle_ GetScaledBounds (Rectangle_ bounds, SizeF_ factor, BoundsSpecified specified)
 		{
 			// Basically, we want to keep our small edge and scale the long edge
 			// ie: if we are vertical, don't scale our width
@@ -849,10 +849,10 @@ namespace System.Windows.Forms
 
 			case TimerType.RepeatThumbArea:
 			{
-				Point pnt, pnt_screen;
-				Rectangle thumb_area_screen = thumb_area;
+				Point_ pnt, pnt_screen;
+				Rectangle_ thumb_area_screen = thumb_area;
 
-				pnt_screen = PointToScreen (new Point (thumb_area.X, thumb_area.Y));
+				pnt_screen = PointToScreen (new Point_ (thumb_area.X, thumb_area.Y));
 				thumb_area_screen.X = pnt_screen.X;
 				thumb_area_screen.Y = pnt_screen.Y;
 
@@ -904,7 +904,7 @@ namespace System.Windows.Forms
 			InvalidateDirty ();
 		}
 
-		private void MoveThumb (Rectangle original_thumbpos, int value)
+		private void MoveThumb (Rectangle_ original_thumbpos, int value)
 		{
 			/* so, the reason this works can best be
 			 * described by the following 1 dimensional
@@ -920,7 +920,7 @@ namespace System.Windows.Forms
 			 * <-----------------------------|          |---------------------->
 			 *
 			 * that can be done with the scrolling api by
-			 * extending the rectangle to encompass both
+			 * extending the Rectangle_ to encompass both
 			 * positions:
 			 *
 			 *               start of range          end of range
@@ -938,7 +938,7 @@ namespace System.Windows.Forms
 			 *
 			 * It's clear that in both cases (left to
 			 * right, right to left) we need to extend the
-			 * size of the scroll rectangle to encompass
+			 * Size_ of the scroll Rectangle_ to encompass
 			 * both.  In the right to left case, we also
 			 * need to decrement the X coordinate.
 			 *
@@ -1027,7 +1027,7 @@ namespace System.Windows.Forms
 						thumb_edge = thumb_area.Bottom - thumb_size;
 
 					if (thumb_edge != thumb_pos.Y) {
-						Rectangle thumb_rect = thumb_pos;
+						Rectangle_ thumb_rect = thumb_pos;
 
 						UpdateThumbPos (thumb_edge, false, true);
 
@@ -1045,7 +1045,7 @@ namespace System.Windows.Forms
 						thumb_edge = thumb_area.Right - thumb_size;
 
 					if (thumb_edge != thumb_pos.X) {
-						Rectangle thumb_rect = thumb_pos;
+						Rectangle_ thumb_rect = thumb_pos;
 
 						UpdateThumbPos (thumb_edge, false, true);
 
@@ -1112,7 +1112,7 @@ namespace System.Windows.Forms
 							SendWMScroll(ScrollBarCommands.SB_PAGEDOWN);
 							LargeIncrement ();
 							thumb_moving = ThumbMoving.Forward;
-							Dirty (new Rectangle (0, thumb_pos.Y + thumb_pos.Height,
+							Dirty (new Rectangle_ (0, thumb_pos.Y + thumb_pos.Height,
 										      ClientRectangle.Width,
 										      ClientRectangle.Height -	(thumb_pos.Y + thumb_pos.Height) -
 										      scrollbutton_height));
@@ -1120,7 +1120,7 @@ namespace System.Windows.Forms
 							SendWMScroll(ScrollBarCommands.SB_PAGEUP);
 							LargeDecrement ();
 							thumb_moving = ThumbMoving.Backwards;
-							Dirty (new Rectangle (0,  scrollbutton_height,
+							Dirty (new Rectangle_ (0,  scrollbutton_height,
 										      ClientRectangle.Width,
 										      thumb_pos.Y - scrollbutton_height));
 						}
@@ -1132,7 +1132,7 @@ namespace System.Windows.Forms
 							SendWMScroll(ScrollBarCommands.SB_PAGEDOWN);
 							thumb_moving = ThumbMoving.Forward;
 							LargeIncrement ();
-							Dirty (new Rectangle (thumb_pos.X + thumb_pos.Width, 0,
+							Dirty (new Rectangle_ (thumb_pos.X + thumb_pos.Width, 0,
 										      ClientRectangle.Width -  (thumb_pos.X + thumb_pos.Width) -
 										      scrollbutton_width,
 										      ClientRectangle.Height));
@@ -1140,7 +1140,7 @@ namespace System.Windows.Forms
 							SendWMScroll(ScrollBarCommands.SB_PAGEUP);
 							thumb_moving = ThumbMoving.Backwards;
 							LargeDecrement ();
-							Dirty (new Rectangle (scrollbutton_width,  0,
+							Dirty (new Rectangle_ (scrollbutton_width,  0,
 										      thumb_pos.X - scrollbutton_width,
 										      ClientRectangle.Height));
 						}
@@ -1448,12 +1448,12 @@ namespace System.Windows.Forms
 
 		private void ClearDirty ()
 		{
-			dirty = Rectangle.Empty;
+			dirty = Rectangle_.Empty;
 		}
 
-		private void Dirty (Rectangle r)
+		private void Dirty (Rectangle_ r)
 		{
-			if (dirty == Rectangle.Empty) {
+			if (dirty == Rectangle_.Empty) {
 				dirty = r;
 				return;
 			}
@@ -1464,23 +1464,23 @@ namespace System.Windows.Forms
 		{
 			if (thumb_moving == ThumbMoving.Forward) {
 				if (vert) {
-					Dirty (new Rectangle (0, thumb_pos.Y + thumb_pos.Height,
+					Dirty (new Rectangle_ (0, thumb_pos.Y + thumb_pos.Height,
 								      ClientRectangle.Width,
 								      ClientRectangle.Height -	(thumb_pos.Y + thumb_pos.Height) -
 								      scrollbutton_height));
 				} else {
-					Dirty (new Rectangle (thumb_pos.X + thumb_pos.Width, 0,
+					Dirty (new Rectangle_ (thumb_pos.X + thumb_pos.Width, 0,
 								      ClientRectangle.Width -  (thumb_pos.X + thumb_pos.Width) -
 								      scrollbutton_width,
 								      ClientRectangle.Height));
 				}
 			} else if (thumb_moving == ThumbMoving.Backwards) {
 				if (vert) {
-					Dirty(new Rectangle (0,	 scrollbutton_height,
+					Dirty(new Rectangle_ (0,	 scrollbutton_height,
 								      ClientRectangle.Width,
 								      thumb_pos.Y - scrollbutton_height));
 				} else {
-					Dirty (new Rectangle (scrollbutton_width,  0,
+					Dirty (new Rectangle_ (scrollbutton_width,  0,
 								      thumb_pos.X - scrollbutton_width,
 								      ClientRectangle.Height));
 				}
@@ -1491,7 +1491,7 @@ namespace System.Windows.Forms
 		{
 			Invalidate (dirty);
 			Update();
-			dirty = Rectangle.Empty;
+			dirty = Rectangle_.Empty;
 		}
 
 		void OnMouseEnter (object sender, EventArgs e)
@@ -1606,11 +1606,11 @@ namespace System.Windows.Forms
 			SmallDecrement ();
 		}
 
-		internal Rectangle UIAThumbArea {
+		internal Rectangle_ UIAThumbArea {
 			get { return thumb_area; }
 		}
 
-		internal Rectangle UIAThumbPosition {
+		internal Rectangle_ UIAThumbPosition {
 			get { return thumb_pos; }
 		}
 

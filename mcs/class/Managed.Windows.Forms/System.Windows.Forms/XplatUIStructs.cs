@@ -25,8 +25,8 @@
 // *** When you make some changes to this file, dont forget to update Tests/TestHelper class ***
 
 // NOT COMPLETE
-
 using System;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -424,19 +424,20 @@ namespace System.Windows.Forms
 #else
 	internal
 #endif
-	struct POINT {
+	struct POINT
+    {
 		public int x;
 		public int y;
 
-		public POINT (int x, int y)
+		public POINT(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
 		}
 
-		public Point ToPoint ()
+		public Point_ ToPoint ()
 		{
-			return new Point (x, y);
+			return new Point_ (x, y);
 		}
 
 		public override string ToString ()
@@ -452,7 +453,10 @@ namespace System.Windows.Forms
 	internal
 #endif
 	struct MSG {
-		internal IntPtr	hwnd;
+        internal IntPtr dummy_next;
+        internal IntPtr dummy_prev;
+        internal IntPtr	hwnd;
+        [MarshalAs(UnmanagedType.U4)]
 		internal Msg	message;
 		internal IntPtr	wParam; 
 		internal IntPtr	lParam;

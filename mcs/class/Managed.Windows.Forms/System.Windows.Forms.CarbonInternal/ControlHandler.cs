@@ -23,8 +23,8 @@
 //	Geoff Norton  <gnorton@novell.com>
 //
 //
-
 using System;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -194,9 +194,9 @@ namespace System.Windows.Forms.CarbonInternal {
 
 					g = Graphics.FromHwnd(hwnd.whole_window);
 					if (hwnd.border_static)
-						ControlPaint.DrawBorder3D(g, new Rectangle(0, 0, hwnd.Width, hwnd.Height), Border3DStyle.SunkenOuter);
+						ControlPaint.DrawBorder3D(g, new Rectangle_(0, 0, hwnd.Width, hwnd.Height), Border3DStyle.SunkenOuter);
 					else
-						ControlPaint.DrawBorder3D(g, new Rectangle(0, 0, hwnd.Width, hwnd.Height), Border3DStyle.Sunken);
+						ControlPaint.DrawBorder3D(g, new Rectangle_(0, 0, hwnd.Width, hwnd.Height), Border3DStyle.Sunken);
 					g.Dispose();
 					break;
 				}
@@ -205,7 +205,7 @@ namespace System.Windows.Forms.CarbonInternal {
 					Graphics g;
 
 					g = Graphics.FromHwnd(hwnd.whole_window);
-					ControlPaint.DrawBorder(g, new Rectangle(0, 0, hwnd.Width, hwnd.Height), Color.Black, ButtonBorderStyle.Solid);
+					ControlPaint.DrawBorder(g, new Rectangle_(0, 0, hwnd.Width, hwnd.Height), Color_.Black, ButtonBorderStyle.Solid);
 					g.Dispose();
 					break;
 				}

@@ -25,10 +25,10 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Windows.Forms.Layout;
 
@@ -70,7 +70,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Methods
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
 			return base.GetToolStripPreferredSize (constrainingSize);
 		}
@@ -93,8 +93,8 @@ namespace System.Windows.Forms
 			foreach (ToolStripItem tsi in this.DisplayedItems) {
 				if (!tsi.Available)
 					continue;
-				if (tsi.GetPreferredSize (Size.Empty).Width > widest)
-					widest = tsi.GetPreferredSize (Size.Empty).Width;
+				if (tsi.GetPreferredSize (Size_.Empty).Width > widest)
+					widest = tsi.GetPreferredSize (Size_.Empty).Width;
 			}
 
 			int x = this.Padding.Left;
@@ -112,13 +112,13 @@ namespace System.Windows.Forms
 				if (tsi is ToolStripSeparator)
 					height = 7;
 				else
-					height = tsi.GetPreferredSize (Size.Empty).Height;
+					height = tsi.GetPreferredSize (Size_.Empty).Height;
 
-				tsi.SetBounds (new Rectangle (x, y, widest, height));
+				tsi.SetBounds (new Rectangle_ (x, y, widest, height));
 				y += tsi.Height + tsi.Margin.Bottom;
 			}
 
-			this.Size = new Size (widest + this.Padding.Horizontal, y + this.Padding.Bottom);// + 2);
+			this.Size = new Size_ (widest + this.Padding.Horizontal, y + this.Padding.Bottom);// + 2);
 		}
 
 		protected override void SetDisplayedItems ()

@@ -22,8 +22,8 @@
 // Authors:
 //	Andreia Gaita	<avidigal@novell.com>
 
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using Mono.WebBrowser.DOM;
@@ -91,16 +91,16 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Rectangle ClientRectangle {
-			get { return new Rectangle (0, 0, this.element.ClientWidth, this.element.ClientHeight); }
+		public Rectangle_ ClientRectangle {
+			get { return new Rectangle_ (0, 0, this.element.ClientWidth, this.element.ClientHeight); }
 		}
 		
-		public Rectangle OffsetRectangle {
-			get { return new Rectangle (this.element.OffsetLeft, this.element.OffsetTop, this.element.OffsetWidth, this.element.OffsetHeight); }
+		public Rectangle_ OffsetRectangle {
+			get { return new Rectangle_ (this.element.OffsetLeft, this.element.OffsetTop, this.element.OffsetWidth, this.element.OffsetHeight); }
 		}
 
-		public Rectangle ScrollRectangle {
-			get { return new Rectangle (this.element.ScrollLeft, this.element.ScrollTop, this.element.ScrollWidth, this.element.ScrollHeight); }
+		public Rectangle_ ScrollRectangle {
+			get { return new Rectangle_ (this.element.ScrollLeft, this.element.ScrollTop, this.element.ScrollWidth, this.element.ScrollHeight); }
 		}
 
 		public int ScrollLeft {

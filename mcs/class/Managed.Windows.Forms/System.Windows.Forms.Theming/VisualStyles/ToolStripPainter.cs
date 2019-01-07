@@ -116,8 +116,8 @@ namespace System.Windows.Forms.Theming.VisualStyles
 			}
 			new VisualStyleRenderer (element).DrawBackground (e.Graphics, e.GripDisplayStyle == ToolStripGripDisplayStyle.Vertical ?
 				// GetPartSize seems to return useless values.
-				new Rectangle (2, 0, 5, 20) :
-				new Rectangle (0, 2, 20, 5));
+				new Rectangle_ (2, 0, 5, 20) :
+				new Rectangle_ (0, 2, 20, 5));
 		}
 		public override void OnRenderOverflowButtonBackground (ToolStripItemRenderEventArgs e)
 		{

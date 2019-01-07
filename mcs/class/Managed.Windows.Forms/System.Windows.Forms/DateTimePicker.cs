@@ -26,8 +26,8 @@
 // TODO:
 //		- wire in all events from monthcalendar
 
-
 using System;
+
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -62,10 +62,10 @@ namespace System.Windows.Forms {
 		
 		#region Local variables
 		
-		protected static readonly Color DefaultMonthBackColor = ThemeEngine.Current.ColorWindow;
-		protected static readonly Color DefaultTitleBackColor = ThemeEngine.Current.ColorActiveCaption;
-		protected static readonly Color DefaultTitleForeColor = ThemeEngine.Current.ColorActiveCaptionText;
-		protected static readonly Color DefaultTrailingForeColor = SystemColors.GrayText;
+		protected static readonly Color_ DefaultMonthBackColor = ThemeEngine.Current.ColorWindow;
+		protected static readonly Color_ DefaultTitleBackColor = ThemeEngine.Current.ColorActiveCaption;
+		protected static readonly Color_ DefaultTitleForeColor = ThemeEngine.Current.ColorActiveCaptionText;
+		protected static readonly Color_ DefaultTrailingForeColor = SystemColors.GrayText;
 		
 		internal MonthCalendar			month_calendar;
 		bool							is_checked;
@@ -154,7 +154,7 @@ namespace System.Windows.Forms {
 		
 			// initialise the month calendar
 			month_calendar = new MonthCalendar (this);
-			month_calendar.CalendarDimensions = new Size (1, 1);
+			month_calendar.CalendarDimensions = new Size_ (1, 1);
 			month_calendar.MaxSelectionCount = 1;
 			month_calendar.ForeColor = Control.DefaultForeColor;
 			month_calendar.BackColor = DefaultMonthBackColor;
@@ -210,7 +210,7 @@ namespace System.Windows.Forms {
 		
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color BackColor {
+		public override Color_ BackColor {
 			set {
 				base.BackColor = value;
 			}
@@ -252,7 +252,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color CalendarForeColor {
+		public Color_ CalendarForeColor {
 			set {
 				month_calendar.ForeColor = value;
 			}
@@ -261,7 +261,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color CalendarMonthBackground {
+		public Color_ CalendarMonthBackground {
 			set {
 				month_calendar.BackColor = value;
 			}
@@ -270,7 +270,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color CalendarTitleBackColor {
+		public Color_ CalendarTitleBackColor {
 			set {
 				month_calendar.TitleBackColor = value;
 			}
@@ -279,7 +279,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color CalendarTitleForeColor {
+		public Color_ CalendarTitleForeColor {
 			set {
 				month_calendar.TitleForeColor = value;
 			}
@@ -288,7 +288,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color CalendarTrailingForeColor {
+		public Color_ CalendarTrailingForeColor {
 			set {
 				month_calendar.TrailingForeColor = value;
 			}
@@ -363,7 +363,7 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			set {
 				base.ForeColor = value;
 			}
@@ -785,11 +785,11 @@ namespace System.Windows.Forms {
 			}
 		}
 		
-		// specify the default size for this control
-		protected override Size DefaultSize {
+		// specify the default Size_ for this control
+		protected override Size_ DefaultSize {
 			get {
 				// todo actually measure this properly
-				return new Size (200, PreferredHeight);
+				return new Size_ (200, PreferredHeight);
 			}
 		}
 		
@@ -842,7 +842,7 @@ namespace System.Windows.Forms {
 		protected override void OnFontChanged(EventArgs e) {
 			// FIXME - do we need to update/invalidate/recalc our stuff?
 			month_calendar.Font = Font;
-			Size = new Size (Size.Width, PreferredHeight);
+			Size = new Size_ (Size.Width, PreferredHeight);
 
 			base.OnFontChanged (e);
 		}
@@ -897,32 +897,32 @@ namespace System.Windows.Forms {
 		#region internal / private properties
 		
 		// this is the region that the date and the check box is drawn on
-		internal Rectangle date_area_rect {
+		internal Rectangle_ date_area_rect {
 			get {
 				return ThemeEngine.Current.DateTimePickerGetDateArea (this);
 			}
 		}
 
-		internal Rectangle CheckBoxRect {
+		internal Rectangle_ CheckBoxRect {
 			get {
-				Rectangle retval = new Rectangle (check_box_space, ClientSize.Height / 2 - check_box_size / 2, 
+				Rectangle_ retval = new Rectangle_ (check_box_space, ClientSize.Height / 2 - check_box_size / 2, 
 						check_box_size, check_box_size);
 				return retval;
 			}
 		}
 		
-		// the rectangle for the drop down arrow
-		internal Rectangle drop_down_arrow_rect {
+		// the Rectangle_ for the drop down arrow
+		internal Rectangle_ drop_down_arrow_rect {
 			get {
 				return ThemeEngine.Current.DateTimePickerGetDropDownButtonArea (this);
 			}
 		}
 		
 		// the part of the date that is currently hilighted
-		internal Rectangle hilight_date_area {
+		internal Rectangle_ hilight_date_area {
 			get {
 				// TODO: put hilighted part calculation in here
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 			}
 		}	
 
@@ -955,7 +955,7 @@ namespace System.Windows.Forms {
 		// calculates the maximum width 
 		internal Single CalculateMaxWidth(string format, Graphics gr, StringFormat string_format)
 		{
-			SizeF size;
+			SizeF_ size;
 			float result = 0;
 			string text;
 			Font font = this.Font;
@@ -1129,17 +1129,17 @@ namespace System.Windows.Forms {
 			formats.CopyTo (part_data);
 		}
 
-		private Point CalculateDropDownLocation (Rectangle parent_control_rect, Size child_size, bool align_left)
+		private Point_ CalculateDropDownLocation (Rectangle_ parent_control_rect, Size_ child_size, bool align_left)
 		{
 			// default bottom left
-			Point location = new Point(parent_control_rect.Left + 5, parent_control_rect.Bottom);
+			Point_ location = new Point_(parent_control_rect.Left + 5, parent_control_rect.Bottom);
 			// now adjust the alignment
 			if (!align_left) {
 				location.X = parent_control_rect.Right - child_size.Width;				
 			}
 			
-			Point screen_location = PointToScreen (location);			
-			Rectangle working_area = Screen.FromControl(this).WorkingArea;
+			Point_ screen_location = PointToScreen (location);			
+			Rectangle_ working_area = Screen.FromControl(this).WorkingArea;
 			// now adjust if off the right side of the screen			
 			if (screen_location.X < working_area.X) {
 				screen_location.X = working_area.X;
@@ -1158,7 +1158,7 @@ namespace System.Windows.Forms {
 		}
 		
 		// actually draw this control
-		internal void Draw (Rectangle clip_rect, Graphics dc)
+		internal void Draw (Rectangle_ clip_rect, Graphics dc)
 		{			
 			ThemeEngine.Current.DrawDateTimePicker (dc, clip_rect, this);
 		}			
@@ -1169,9 +1169,9 @@ namespace System.Windows.Forms {
 			EndDateEdit (true);
 			// ensure the right date is set for the month_calendar
 			month_calendar.SetDate (this.date_value);
-			// get a rectangle that has the dimensions of the text area,
+			// get a Rectangle_ that has the dimensions of the text area,
 			// but the height of the dtp control.
-			Rectangle align_area = this.date_area_rect;
+			Rectangle_ align_area = this.date_area_rect;
 			align_area.Y = this.ClientRectangle.Y;
 			align_area.Height = this.ClientRectangle.Height;
 
@@ -1616,7 +1616,7 @@ namespace System.Windows.Forms {
 			if (selected_index != -1)
 			{
 				part_data [selected_index].Selected = false;
-				Rectangle invalidate_rect = Rectangle.Ceiling (part_data [selected_index].drawing_rectangle);
+				Rectangle_ invalidate_rect = Rectangle.Ceiling (part_data [selected_index].drawing_rectangle);
 				invalidate_rect.Inflate (2, 2);
 				Invalidate (invalidate_rect);
 				OnUIASelectionChanged ();
@@ -1805,7 +1805,7 @@ namespace System.Windows.Forms {
 			internal string value;
 			internal bool is_literal;
 			bool is_selected;
-			internal RectangleF drawing_rectangle;
+			internal RectangleF_ drawing_rectangle;
 			internal DateTimePart date_time_part;
 			DateTimePicker owner;
 

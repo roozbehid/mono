@@ -25,8 +25,8 @@
 //
 
 // COMPLETE
-
 using System;
+
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -87,7 +87,7 @@ namespace System.Windows.Forms
 		private bool explicit_item_height = false;
 		private int top_index = 0;
 		private int last_visible_index = 0;
-		private Rectangle items_area;
+		private Rectangle_ items_area;
 		private int focused_item = -1;
 		private ObjectCollection items;
 		private IntegerCollection custom_tab_offsets;
@@ -245,7 +245,7 @@ namespace System.Windows.Forms
 		#endregion UIA Framework Events 
 
 		#region Public Properties
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor; }
 			set {
 				if (base.BackColor == value)
@@ -312,8 +312,8 @@ namespace System.Windows.Forms
 			get { return custom_tab_offsets; }
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (120, 96); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (120, 96); }
 		}
 
 		[RefreshProperties(RefreshProperties.Repaint)]
@@ -348,7 +348,7 @@ namespace System.Windows.Forms
 			set { base.Font = value; }
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set {
 				if (base.ForeColor == value)
@@ -406,7 +406,7 @@ namespace System.Windows.Forms
 		public virtual int ItemHeight {
 			get {
 				if (item_height == -1) {
-					SizeF sz = TextRenderer.MeasureString ("The quick brown Fox", Font);
+					SizeF_ sz = TextRenderer.MeasureString ("The quick brown Fox", Font);
 					item_height = (int) sz.Height;
 				}
 				return item_height;
@@ -823,12 +823,12 @@ namespace System.Windows.Forms
 			return ItemHeight;
 		}
 
-		public Rectangle GetItemRectangle (int index)
+		public Rectangle_ GetItemRectangle (int index)
 		{
 			if (index < 0 || index >= Items.Count)
 				throw new  ArgumentOutOfRangeException ("GetItemRectangle index out of range.");
 
-			Rectangle rect = new Rectangle ();
+			Rectangle_ rect = new Rectangle_ ();
 
 			if (MultiColumn) {
 				int col = index / RowCount;
@@ -867,7 +867,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected override Rectangle GetScaledBounds (Rectangle bounds, SizeF factor, BoundsSpecified specified)
+		protected override Rectangle_ GetScaledBounds (Rectangle_ bounds, SizeF_ factor, BoundsSpecified specified)
 		{
 			bounds.Height = requested_height;
 
@@ -882,7 +882,7 @@ namespace System.Windows.Forms
 			return SelectedIndices.Contains (index);
 		}
 
-		public int IndexFromPoint (Point p)
+		public int IndexFromPoint (Point_ p)
 		{
 			return IndexFromPoint (p.X, p.Y);
 		}
@@ -958,7 +958,7 @@ namespace System.Windows.Forms
 			if (explicit_item_height) {
 				base.Refresh ();
 			} else {
-				SizeF sz = TextRenderer.MeasureString ("The quick brown Fox", Font);
+				SizeF_ sz = TextRenderer.MeasureString ("The quick brown Fox", Font);
 				item_height = (int) sz.Height;
 				if (IntegralHeight)
 					UpdateListBoxBounds ();
@@ -1057,7 +1057,7 @@ namespace System.Windows.Forms
 			base.ResetForeColor ();
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}
@@ -1197,7 +1197,7 @@ namespace System.Windows.Forms
 			this.Invalidate ();
 		}
 
-		private Size canvas_size;
+		private Size_ canvas_size;
 
 		private void LayoutListBox ()
 		{
@@ -1236,7 +1236,7 @@ namespace System.Windows.Forms
 				height = Items.Count * ItemHeight;
 				width = 0;
 				for (int i = 0; i < Items.Count; i++) {
-					SizeF sz = TextRenderer.MeasureString (GetItemText (Items[i]), Font);
+					SizeF_ sz = TextRenderer.MeasureString (GetItemText (Items[i]), Font);
 					int t = (int)sz.Width;
 					
 					if (this is CheckedListBox)
@@ -1248,7 +1248,7 @@ namespace System.Windows.Forms
 				break;
 			}
 
-			canvas_size = new Size (width, height);
+			canvas_size = new Size_ (width, height);
 		}
 
 		private void LayoutMultiColumn ()
@@ -1257,23 +1257,23 @@ namespace System.Windows.Forms
 			row_count = Math.Max (1, usable_height / ItemHeight);
 
 			int cols = (int) Math.Ceiling ((float)Items.Count / (float) row_count);
-			Size sz = new Size (cols * ColumnWidthInternal, row_count * ItemHeight);
+			Size_ sz = new Size_ (cols * ColumnWidthInternal, row_count * ItemHeight);
 			if (!ScrollAlwaysVisible && sz.Width > ClientRectangle.Width && row_count > 1) {
 				usable_height = ClientRectangle.Height - hscrollbar.Height;
 				row_count = Math.Max (1, usable_height / ItemHeight);
 				cols = (int) Math.Ceiling ((float)Items.Count / (float) row_count);
-				sz = new Size (cols * ColumnWidthInternal, row_count * ItemHeight);
+				sz = new Size_ (cols * ColumnWidthInternal, row_count * ItemHeight);
 			}
 			canvas_size = sz;
 		}
 
-		internal void Draw (Rectangle clip, Graphics dc)
+		internal void Draw (Rectangle_ clip, Graphics dc)
 		{
 			Theme theme = ThemeEngine.Current;
 
 			if (hscrollbar.Visible && vscrollbar.Visible) {
 				// Paint the dead space in the bottom right corner
-				Rectangle rect = new Rectangle (hscrollbar.Right, vscrollbar.Bottom, vscrollbar.Width, hscrollbar.Height);
+				Rectangle_ rect = new Rectangle_ (hscrollbar.Right, vscrollbar.Bottom, vscrollbar.Width, hscrollbar.Height);
 				if (rect.IntersectsWith (clip))
 					dc.FillRectangle (theme.ResPool.GetSolidBrush (theme.ColorControl), rect);
 			}
@@ -1284,7 +1284,7 @@ namespace System.Windows.Forms
 				return;
 
 			for (int i = top_index; i <= last_visible_index; i++) {
-				Rectangle rect = GetItemDisplayRectangle (i, top_index);
+				Rectangle_ rect = GetItemDisplayRectangle (i, top_index);
 
 				if (!clip.IntersectsWith (rect))
 					continue;
@@ -1302,17 +1302,17 @@ namespace System.Windows.Forms
 					rect.Width += hscrollbar.Value;
 				}
 
-				Color fore_color = !Enabled ? ThemeEngine.Current.ColorGrayText :
+				Color_ fore_color = !Enabled ? ThemeEngine.Current.ColorGrayText :
 					(state & DrawItemState.Selected) != 0 ? ThemeEngine.Current.ColorHighlightText : ForeColor;
 				OnDrawItem (new DrawItemEventArgs (dc, Font, rect, i, state, fore_color, BackColor));
 			}
 		}
 
 		// Converts a GetItemRectangle to a one that we can display
-		internal Rectangle GetItemDisplayRectangle (int index, int first_displayble)
+		internal Rectangle_ GetItemDisplayRectangle (int index, int first_displayble)
 		{
-			Rectangle item_rect;
-			Rectangle first_item_rect = GetItemRectangle (first_displayble);
+			Rectangle_ item_rect;
+			Rectangle_ first_item_rect = GetItemRectangle (first_displayble);
 			item_rect = GetItemRectangle (index);
 			item_rect.X -= first_item_rect.X;
 			item_rect.Y -= first_item_rect.Y;
@@ -1348,7 +1348,7 @@ namespace System.Windows.Forms
 					XplatUI.ScrollWindow (Handle, items_area, old_offset - hbar_offset, 0, false);
 
 					// Invalidate the previous selection border, to keep it properly updated.
-					Rectangle selection_border_area = new Rectangle (items_area.Width - (hbar_offset - old_offset) - 3, 0, 
+					Rectangle_ selection_border_area = new Rectangle_ (items_area.Width - (hbar_offset - old_offset) - 3, 0, 
 							3, items_area.Height);
 					Invalidate (selection_border_area);
 				}
@@ -1386,7 +1386,7 @@ namespace System.Windows.Forms
 
 		private int LastVisibleItem ()
 		{
-			Rectangle item_rect;
+			Rectangle_ item_rect;
 			int top_y = items_area.Y + items_area.Height;
 			int i = 0;
 
@@ -1717,7 +1717,7 @@ namespace System.Windows.Forms
 		{
 			if (!IsHandleCreated)
 				return;
-			Rectangle bounds = GetItemDisplayRectangle (index, top_index);
+			Rectangle_ bounds = GetItemDisplayRectangle (index, top_index);
 			if (ClientRectangle.IntersectsWith (bounds))
 				Invalidate (bounds);
 		}
@@ -1731,7 +1731,7 @@ namespace System.Windows.Forms
 		int anchor = -1;
 		int[] prev_selection;
 		bool button_pressed = false;
-		Point button_pressed_loc = new Point (-1, -1);
+		Point_ button_pressed_loc = new Point_ (-1, -1);
 
 		private void SelectExtended (int index)
 		{
@@ -1818,14 +1818,14 @@ namespace System.Windows.Forms
 			}
 
 			button_pressed = true;
-			button_pressed_loc = new Point (e.X, e.Y);
+			button_pressed_loc = new Point_ (e.X, e.Y);
 			FocusedItem = index;
 		}
 
 		private void OnMouseMoveLB (object sender, MouseEventArgs e)
 		{
 			// Don't take into account MouseMove events generated with MouseDown
-			if (!button_pressed || button_pressed_loc == new Point (e.X, e.Y))
+			if (!button_pressed || button_pressed_loc == new Point_ (e.X, e.Y))
 				return;
 
 			int index = IndexAtClientPoint (e.X, e.Y);
@@ -1927,13 +1927,13 @@ namespace System.Windows.Forms
 		internal void RepositionScrollBars ()
 		{
 			if (vscrollbar.is_visible) {
-				vscrollbar.Size = new Size (vscrollbar.Width, items_area.Height);
-				vscrollbar.Location = new Point (items_area.Width, 0);
+				vscrollbar.Size = new Size_ (vscrollbar.Width, items_area.Height);
+				vscrollbar.Location = new Point_ (items_area.Width, 0);
 			}
 
 			if (hscrollbar.is_visible) {
-				hscrollbar.Size = new Size (items_area.Width, hscrollbar.Height);
-				hscrollbar.Location = new Point (0, items_area.Height);
+				hscrollbar.Size = new Size_ (items_area.Width, hscrollbar.Height);
+				hscrollbar.Location = new Point_ (0, items_area.Height);
 			}
 		}
 

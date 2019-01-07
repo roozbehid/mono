@@ -22,8 +22,8 @@
 // Authors:
 //	Peter Bartok	pbartok@novell.com
 //
-
 using System;
+
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -55,7 +55,7 @@ namespace System.Windows.Forms {
 			internal ushort		xHotspot;	// Hotspot X
 			internal ushort		yHotspot;	// Hotspot Y
 			internal ushort		bitCount;	// Bits per pixel
-			internal uint		sizeInBytes;	// size of (CursorInfoHeader + ANDBitmap + ORBitmap)
+			internal uint		sizeInBytes;	// Size_ of (CursorInfoHeader + ANDBitmap + ORBitmap)
 			internal uint		fileOffset;	// position in file 
 		}; 
 
@@ -90,7 +90,7 @@ namespace System.Windows.Forms {
 		private int		id;
 
 		internal IntPtr		handle;
-		private Size		size;
+		private Size_		size;
 		private Bitmap		shape;
 		private Bitmap		mask;
 		private Bitmap		cursor;
@@ -107,7 +107,7 @@ namespace System.Windows.Forms {
 			InitFromStream(stream);
 			this.shape = ToBitmap(true, false);
 			this.mask = ToBitmap(false, false);
-			handle = XplatUI.DefineCursor(shape, mask, Color.FromArgb(255, 255, 255), Color.FromArgb(255, 255, 255), cursor_dir.idEntries[id].xHotspot, cursor_dir.idEntries[id].yHotspot);
+			handle = XplatUI.DefineCursor(shape, mask, Color_.FromArgb(255, 255, 255), Color_.FromArgb(255, 255, 255), cursor_dir.idEntries[id].xHotspot, cursor_dir.idEntries[id].yHotspot);
 			this.shape.Dispose();
 			this.shape = null;
 			this.mask.Dispose();
@@ -167,12 +167,12 @@ namespace System.Windows.Forms {
 		#endregion	// Public Constructors
 
 		#region Public Static Properties
-		public static Rectangle Clip {
+		public static Rectangle_ Clip {
 			get {
 				IntPtr		handle;
 				bool		confined;
-				Rectangle	rect;
-				Size		size;
+				Rectangle_	rect;
+				Size_		size;
 
 				XplatUI.GrabInfo (out handle, out confined, out rect);
 				if (handle != IntPtr.Zero) {
@@ -188,7 +188,7 @@ namespace System.Windows.Forms {
 			}
 
 			[MonoTODO ("Stub, does nothing")]
-			[MonoInternalNote ("First need to add ability to set cursor clip rectangle to XplatUI drivers to implement this property")]
+			[MonoInternalNote ("First need to add ability to set cursor clip Rectangle_ to XplatUI drivers to implement this property")]
 			set {
 				;
 			}
@@ -214,13 +214,13 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public static Point Position {
+		public static Point_ Position {
 			get {
 				int x;
 				int y;
 
 				XplatUI.GetCursorPos (IntPtr.Zero, out x, out y);
-				return new Point (x, y);
+				return new Point_ (x, y);
 			}
 
 			set {
@@ -237,16 +237,16 @@ namespace System.Windows.Forms {
 		}
 
 		[MonoTODO ("Implemented for Win32, X11 always returns 0,0")]
-		public Point HotSpot {
+		public Point_ HotSpot {
 			get {
 				int cursor_w, cursor_h, hot_x, hot_y;
 				XplatUI.GetCursorInfo (Handle, out cursor_w, out cursor_h, out hot_x, out hot_y);
 
-				return new Point (hot_x, hot_y);
+				return new Point_ (hot_x, hot_y);
 			}
 		}
 
-		public Size Size {
+		public Size_ Size {
 			get {
 				return size;
 			}
@@ -328,24 +328,24 @@ namespace System.Windows.Forms {
 			GC.SuppressFinalize (this);
 		}
 
-		public void Draw (Graphics g, Rectangle targetRect)
+		public void Draw (Graphics g, Rectangle_ targetRect)
 		{
 			if (cursor == null && std_cursor != (StdCursor) (-1)) 
 				cursor = XplatUI.DefineStdCursorBitmap (std_cursor);
 
 			if (cursor != null) {
-				// Size of the targetRect is not considered at all
+				// Size_ of the targetRect is not considered at all
 				g.DrawImage (cursor, targetRect.X, targetRect.Y);
 			}
 		}
 
-		public void DrawStretched (Graphics g, Rectangle targetRect)
+		public void DrawStretched (Graphics g, Rectangle_ targetRect)
 		{
 			if (cursor == null && std_cursor != (StdCursor)(-1)) 
 				cursor = XplatUI.DefineStdCursorBitmap (std_cursor);
 
 			if (cursor != null) {
-				g.DrawImage (cursor, targetRect, new Rectangle(0, 0, cursor.Width, cursor.Height), GraphicsUnit.Pixel);
+				g.DrawImage (cursor, targetRect, new Rectangle_(0, 0, cursor.Width, cursor.Height), GraphicsUnit.Pixel);
 			}
 		}
 
@@ -530,7 +530,7 @@ namespace System.Windows.Forms {
 					curdata.cursorColors[i] = cih_reader.ReadUInt32 ();
 				}
 
-				//XOR mask is immediately after ColorTable and its size is 
+				//XOR mask is immediately after ColorTable and its Size_ is 
 				//icon height* no. of bytes per line
 				
 				//cursor height is half of BITMAPINFOHEADER.biHeight, since it contains
@@ -583,9 +583,9 @@ namespace System.Windows.Forms {
 				// The AND mask is 1bit - very straightforward
 				bmp = new Bitmap(cih.biWidth, biHeight, PixelFormat.Format1bppIndexed);
 				pal = bmp.Palette;
-				pal.Entries[0] = Color.FromArgb(0, 0, 0);
-				pal.Entries[1] = Color.FromArgb(unchecked((int)0xffffffffff));
-				bits = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, bmp.PixelFormat);
+				pal.Entries[0] = Color_.FromArgb(0, 0, 0);
+				pal.Entries[1] = Color_.FromArgb(unchecked((int)0xffffffffff));
+				bits = bmp.LockBits(new Rectangle_(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, bmp.PixelFormat);
 
 				for (int y = 0; y < biHeight; y++) {
 					Marshal.Copy(ci.cursorAND, bits.Stride * y, (IntPtr)(bits.Scan0.ToInt64() + bits.Stride * (biHeight - 1 - y)), bits.Stride);
@@ -629,12 +629,12 @@ namespace System.Windows.Forms {
 				if (cih.biBitCount < 24) {
 					pal = bmp.Palette;				// Managed palette
 					for (int i = 0; i < ci.cursorColors.Length; i++) 
-						pal.Entries[i] = Color.FromArgb((int)ci.cursorColors[i] | unchecked((int)0xff000000));
+						pal.Entries[i] = Color_.FromArgb((int)ci.cursorColors[i] | unchecked((int)0xff000000));
 					bmp.Palette = pal;
 				}
 
 				bytesPerLine = (int)((((cih.biWidth * cih.biBitCount) + 31) & ~31) >> 3);
-				bits = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, bmp.PixelFormat);
+				bits = bmp.LockBits(new Rectangle_(0, 0, bmp.Width, bmp.Height), ImageLockMode.WriteOnly, bmp.PixelFormat);
 
 				for (int y = 0; y < biHeight; y++) 
 					Marshal.Copy(ci.cursorXOR, bytesPerLine * y, (IntPtr)(bits.Scan0.ToInt64() + bits.Stride * (biHeight - 1 - y)), bytesPerLine);
@@ -649,7 +649,7 @@ namespace System.Windows.Forms {
 					for (int x = 0; x < cih.biWidth / 8; x++) {
 						for (int bit = 7; bit >= 0; bit--) {
 							if (((ci.cursorAND[y * cih.biWidth / 8 +x] >> bit) & 1) != 0) 
-								bmp.SetPixel(x*8 + 7-bit, biHeight - y - 1, Color.Transparent);
+								bmp.SetPixel(x*8 + 7-bit, biHeight - y - 1, Color_.Transparent);
 						}
 					}
 				}

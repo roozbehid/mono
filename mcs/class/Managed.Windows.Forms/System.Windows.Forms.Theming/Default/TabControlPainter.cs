@@ -38,40 +38,40 @@ namespace System.Windows.Forms.Theming.Default
 
 		#region private
 
-		private Size	defaultItemSize;
-		private Point	defaultPadding;
+		private Size_	defaultItemSize;
+		private Point_	defaultPadding;
 		private int		minimumTabWidth;
-		private Rectangle selectedTabDelta;
+		private Rectangle_ selectedTabDelta;
 
-		private Point	tabPanelOffset;
+		private Point_	tabPanelOffset;
 		
 		private int		selectedSpacing;
 
-		private Size	rowSpacingNormal;
-		private Size	rowSpacingButtons;
-		private Size	rowSpacingFlatButtons;
+		private Size_	rowSpacingNormal;
+		private Size_	rowSpacingButtons;
+		private Size_	rowSpacingFlatButtons;
 		private int		scrollerWidth;
-		private Point	focusRectSpacing;
-		private Rectangle tabPageSpacing;
+		private Point_	focusRectSpacing;
+		private Rectangle_ tabPageSpacing;
 		private int		colSpacing;
 		private int		flatButtonSpacing;
 
-		private Point	imagePadding;
+		private Point_	imagePadding;
 
 		private StringFormat defaultFormatting;
 
-		private Rectangle borderThickness;
+		private Rectangle_ borderThickness;
 
 		#endregion
 
 		#region Properties
 
-		public virtual Size DefaultItemSize {
+		public virtual Size_ DefaultItemSize {
 			get { return defaultItemSize; }
 			set { defaultItemSize = value; }
 		}
 
-		public virtual Point DefaultPadding {
+		public virtual Point_ DefaultPadding {
 			get { return defaultPadding; }
 			set { defaultPadding = value; }
 		}
@@ -81,12 +81,12 @@ namespace System.Windows.Forms.Theming.Default
 			set { minimumTabWidth = value; }
 		}
 
-		public virtual Rectangle SelectedTabDelta {
+		public virtual Rectangle_ SelectedTabDelta {
 			get { return selectedTabDelta; }
 			set { selectedTabDelta = value; }
 		}
 
-		public virtual Point TabPanelOffset {
+		public virtual Point_ TabPanelOffset {
 			get { return tabPanelOffset; }
 			set { tabPanelOffset = value; }
 		}
@@ -96,22 +96,22 @@ namespace System.Windows.Forms.Theming.Default
 			set { selectedSpacing = value; }
 		}
 
-		public virtual Size RowSpacingNormal { 
+		public virtual Size_ RowSpacingNormal { 
 			get { return rowSpacingNormal; }
 			set { rowSpacingNormal = value; }
 		}
 
-		public virtual Size RowSpacingButtons { 
+		public virtual Size_ RowSpacingButtons { 
 			get { return rowSpacingButtons; }
 			set { rowSpacingButtons = value; }
 		}
 
-		public virtual Size RowSpacingFlatButtons { 
+		public virtual Size_ RowSpacingFlatButtons { 
 			get { return rowSpacingFlatButtons; }
 			set { rowSpacingFlatButtons = value; }
 		}
 
-		public virtual Point FocusRectSpacing {
+		public virtual Point_ FocusRectSpacing {
 			get { return focusRectSpacing; }
 			set { focusRectSpacing = value; }
 		}
@@ -126,12 +126,12 @@ namespace System.Windows.Forms.Theming.Default
 			set { flatButtonSpacing = value; }
 		}
 
-		public virtual Rectangle TabPageSpacing {
+		public virtual Rectangle_ TabPageSpacing {
 			get { return tabPageSpacing; }
 			set { tabPageSpacing = value; }
 		}
 
-		public virtual Point ImagePadding {
+		public virtual Point_ ImagePadding {
 			get { return imagePadding; }
 			set { imagePadding = value; }
 		}
@@ -141,7 +141,7 @@ namespace System.Windows.Forms.Theming.Default
 			set { defaultFormatting = value; }
 		}
 
-		public virtual Rectangle BorderThickness {
+		public virtual Rectangle_ BorderThickness {
 			get { return borderThickness; }
 			set { borderThickness = value; }
 		}
@@ -151,7 +151,7 @@ namespace System.Windows.Forms.Theming.Default
 			set { scrollerWidth = value; }
 		}
 
-		public virtual Size RowSpacing (System.Windows.Forms.TabControl tab) {
+		public virtual Size_ RowSpacing (System.Windows.Forms.TabControl tab) {
 			switch (tab.Appearance) {
 				case TabAppearance.Normal:
 					return rowSpacingNormal;
@@ -167,25 +167,25 @@ namespace System.Windows.Forms.Theming.Default
 
 		public TabControlPainter ()
 		{
-			defaultItemSize = new Size (42, 16);
-			defaultPadding = new Point (6, 3);
-			selectedTabDelta = new Rectangle (2, 2, 4, 3);
+			defaultItemSize = new Size_ (42, 16);
+			defaultPadding = new Point_ (6, 3);
+			selectedTabDelta = new Rectangle_ (2, 2, 4, 3);
 			selectedSpacing = 0;
 
-			rowSpacingNormal = new Size (0, 0);
-			rowSpacingButtons = new Size (3, 3);
-			rowSpacingFlatButtons = new Size (9, 3);
+			rowSpacingNormal = new Size_ (0, 0);
+			rowSpacingButtons = new Size_ (3, 3);
+			rowSpacingFlatButtons = new Size_ (9, 3);
 			
 			colSpacing = 0;
 
 			minimumTabWidth = 42;
 			scrollerWidth = 17;
-			focusRectSpacing = new Point (2, 2);
-			tabPanelOffset = new Point (4, 0);
+			focusRectSpacing = new Point_ (2, 2);
+			tabPanelOffset = new Point_ (4, 0);
 			flatButtonSpacing = 8;
-			tabPageSpacing = new Rectangle (4, 2, 3, 4);
+			tabPageSpacing = new Rectangle_ (4, 2, 3, 4);
 
-			imagePadding = new Point (2, 3);
+			imagePadding = new Point_ (2, 3);
 
 			defaultFormatting = new StringFormat();
 			// Horizontal Alignment is handled in the Draw method
@@ -194,43 +194,43 @@ namespace System.Windows.Forms.Theming.Default
 			defaultFormatting.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.NoClip;
 			defaultFormatting.HotkeyPrefix = HotkeyPrefix.Show;
 
-			borderThickness = new Rectangle (1, 1, 2, 2);
+			borderThickness = new Rectangle_ (1, 1, 2, 2);
 		}
 
-		public virtual Rectangle GetLeftScrollRect (System.Windows.Forms.TabControl tab)
+		public virtual Rectangle_ GetLeftScrollRect (System.Windows.Forms.TabControl tab)
 		{
 			switch (tab.Alignment) {
 				case TabAlignment.Top:
-					return new Rectangle (tab.ClientRectangle.Right - (scrollerWidth * 2), tab.ClientRectangle.Top + 1, scrollerWidth, scrollerWidth);
+					return new Rectangle_ (tab.ClientRectangle.Right - (scrollerWidth * 2), tab.ClientRectangle.Top + 1, scrollerWidth, scrollerWidth);
 				default:
-					Rectangle panel_rect = GetTabPanelRect (tab);
-					return new Rectangle (tab.ClientRectangle.Right - (scrollerWidth * 2), panel_rect.Bottom + 2, scrollerWidth, scrollerWidth);
+					Rectangle_ panel_rect = GetTabPanelRect (tab);
+					return new Rectangle_ (tab.ClientRectangle.Right - (scrollerWidth * 2), panel_rect.Bottom + 2, scrollerWidth, scrollerWidth);
 			}
 		}
 
-		public virtual Rectangle GetRightScrollRect (System.Windows.Forms.TabControl tab)
+		public virtual Rectangle_ GetRightScrollRect (System.Windows.Forms.TabControl tab)
 		{
 			switch (tab.Alignment) {
 				case TabAlignment.Top:
-					return new Rectangle (tab.ClientRectangle.Right - (scrollerWidth), tab.ClientRectangle.Top + 1, scrollerWidth, scrollerWidth);
+					return new Rectangle_ (tab.ClientRectangle.Right - (scrollerWidth), tab.ClientRectangle.Top + 1, scrollerWidth, scrollerWidth);
 				default:
-					Rectangle panel_rect = GetTabPanelRect (tab);
-					return new Rectangle (tab.ClientRectangle.Right - (scrollerWidth), panel_rect.Bottom + 2, scrollerWidth, scrollerWidth);
+					Rectangle_ panel_rect = GetTabPanelRect (tab);
+					return new Rectangle_ (tab.ClientRectangle.Right - (scrollerWidth), panel_rect.Bottom + 2, scrollerWidth, scrollerWidth);
 			}
 		}
 
-		public Rectangle GetDisplayRectangle (System.Windows.Forms.TabControl tab)
+		public Rectangle_ GetDisplayRectangle (System.Windows.Forms.TabControl tab)
 		{
-			Rectangle ext = GetTabPanelRect (tab);
+			Rectangle_ ext = GetTabPanelRect (tab);
 			// Account for border size
-			return new Rectangle (ext.Left + tabPageSpacing.X, ext.Top + tabPageSpacing.Y, 
+			return new Rectangle_ (ext.Left + tabPageSpacing.X, ext.Top + tabPageSpacing.Y, 
 				ext.Width - tabPageSpacing.X - tabPageSpacing.Width, ext.Height - tabPageSpacing.Y - tabPageSpacing.Height);
 		}
 		
-		public Rectangle GetTabPanelRect (System.Windows.Forms.TabControl tab)
+		public Rectangle_ GetTabPanelRect (System.Windows.Forms.TabControl tab)
 		{	
 			// Offset the tab page (panel) from the top corner
-			Rectangle res = tab.ClientRectangle;
+			Rectangle_ res = tab.ClientRectangle;
 
 			if (tab.TabCount == 0)
 				return res;
@@ -257,7 +257,7 @@ namespace System.Windows.Forms.Theming.Default
 			return res;
 		}
 
-		public virtual void Draw (Graphics dc, Rectangle area, TabControl tab)
+		public virtual void Draw (Graphics dc, Rectangle_ area, TabControl tab)
 		{
 			DrawBackground (dc, area, tab);
 
@@ -283,7 +283,7 @@ namespace System.Windows.Forms.Theming.Default
 						continue;
 					if (counter != tab.TabPages[i].Row)
 						continue;
-					Rectangle rect = tab.GetTabRect (i);
+					Rectangle_ rect = tab.GetTabRect (i);
 					if (!rect.IntersectsWith (area))
 						continue;
 					DrawTab (dc, tab.TabPages[i], tab, rect, false);
@@ -291,20 +291,20 @@ namespace System.Windows.Forms.Theming.Default
 			}
 
 			if (tab.SelectedIndex != -1 && tab.SelectedIndex >= tab.SliderPos) {
-				Rectangle rect = tab.GetTabRect (tab.SelectedIndex);
+				Rectangle_ rect = tab.GetTabRect (tab.SelectedIndex);
 				if (rect.IntersectsWith (area))
 					DrawTab (dc, tab.TabPages[tab.SelectedIndex], tab, rect, true);
 			}
 
 			if (tab.ShowSlider) {
-				Rectangle right = GetRightScrollRect (tab);
-				Rectangle left = GetLeftScrollRect (tab);
+				Rectangle_ right = GetRightScrollRect (tab);
+				Rectangle_ left = GetLeftScrollRect (tab);
 				DrawScrollButton (dc, right, area, ScrollButton.Right, tab.RightSliderState);
 				DrawScrollButton (dc, left, area, ScrollButton.Left, tab.LeftSliderState);
 			}
 		}
 
-		protected virtual void DrawScrollButton (Graphics dc, Rectangle bounds, Rectangle clippingArea, ScrollButton button, PushButtonState state)
+		protected virtual void DrawScrollButton (Graphics dc, Rectangle_ bounds, Rectangle_ clippingArea, ScrollButton button, PushButtonState state)
 		{
 			ControlPaint.DrawScrollButton (dc, bounds, button, GetButtonState (state));
 		}
@@ -319,11 +319,11 @@ namespace System.Windows.Forms.Theming.Default
 			}
 		}
 
-		protected virtual void DrawBackground (Graphics dc, Rectangle area, TabControl tab)
+		protected virtual void DrawBackground (Graphics dc, Rectangle_ area, TabControl tab)
 		{
 			Brush brush = SystemBrushes.Control;
 			dc.FillRectangle (brush, area);
-			Rectangle panel_rect = GetTabPanelRect (tab);
+			Rectangle_ panel_rect = GetTabPanelRect (tab);
 
 			if (tab.Appearance == TabAppearance.Normal) {
 				ControlPaint.DrawBorder3D (dc, panel_rect, Border3DStyle.RaisedInner, Border3DSide.Left | Border3DSide.Top);
@@ -331,9 +331,9 @@ namespace System.Windows.Forms.Theming.Default
 			}
 		}
 
-		protected virtual int DrawTab (Graphics dc, System.Windows.Forms.TabPage page, System.Windows.Forms.TabControl tab, Rectangle bounds, bool is_selected)
+		protected virtual int DrawTab (Graphics dc, System.Windows.Forms.TabPage page, System.Windows.Forms.TabControl tab, Rectangle_ bounds, bool is_selected)
 		{
-			Rectangle interior;
+			Rectangle_ interior;
 			int res = bounds.Width;
 
 			dc.FillRectangle (ResPool.GetSolidBrush (tab.BackColor), bounds);
@@ -418,8 +418,8 @@ namespace System.Windows.Forms.Theming.Default
 				}
 			}
 
-			Point padding = tab.Padding;
-			interior = new Rectangle (bounds.Left + padding.X - 1, // substract a little offset
+			Point_ padding = tab.Padding;
+			interior = new Rectangle_ (bounds.Left + padding.X - 1, // substract a little offset
 				bounds.Top + padding.Y,
 				bounds.Width - (padding.X * 2), 
 				bounds.Height - (padding.Y * 2));
@@ -444,10 +444,10 @@ namespace System.Windows.Forms.Theming.Default
 						defaultFormatting);
 					dc.ResetTransform ();
 				} else {
-					Rectangle str_rect = interior;
+					Rectangle_ str_rect = interior;
 
 					if (is_selected) {
-						// Reduce the interior size to match the inner size of non-selected tabs
+						// Reduce the interior Size_ to match the inner Size_ of non-selected tabs
 						str_rect.X += selectedTabDelta.X;
 						str_rect.Y += selectedTabDelta.Y;
 						str_rect.Width -= selectedTabDelta.Width;
@@ -464,12 +464,12 @@ namespace System.Windows.Forms.Theming.Default
 						else {
 							image_x = str_rect.X + (str_rect.Width - tab.ImageList.ImageSize.Width) / 2;
 							if (page.Text != null) {
-								SizeF textSize = dc.MeasureString(page.Text, page.Font, str_rect.Size);
+								SizeF_ textSize = dc.MeasureString(page.Text, page.Font, str_rect.Size);
 								image_x -= (int)(textSize.Width / 2);
 							}
 						}
 						int image_y = str_rect.Y + (str_rect.Height - tab.ImageList.ImageSize.Height) / 2;
-						tab.ImageList.Draw (dc, new Point (image_x, image_y), page.ImageIndex);
+						tab.ImageList.Draw (dc, new Point_ (image_x, image_y), page.ImageIndex);
 						str_rect.X += tab.ImageList.ImageSize.Width + 2;
 						str_rect.Width -= tab.ImageList.ImageSize.Width + 2;
 					}
@@ -492,7 +492,7 @@ namespace System.Windows.Forms.Theming.Default
 
 			// TabControl ignores the value of ShowFocusCues
 			if (page.Parent.Focused && is_selected) {
-				Rectangle focus_rect = bounds;
+				Rectangle_ focus_rect = bounds;
 				focus_rect.Inflate (-2, -2);
 				ThemeEngine.Current.CPDrawFocusRectangle (dc, focus_rect, tab.BackColor, tab.ForeColor);
 			}

@@ -25,9 +25,9 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -60,7 +60,7 @@ namespace System.Windows.Forms
 			
 			Bitmap b = new Bitmap(normalImage.Width, normalImage.Height);
 			using (Graphics g = Graphics.FromImage(b))
-				g.DrawImage(normalImage, new Rectangle (0, 0, normalImage.Width, normalImage.Height), 0, 0, normalImage.Width, normalImage.Height, GraphicsUnit.Pixel, ia);
+				g.DrawImage(normalImage, new Rectangle_ (0, 0, normalImage.Width, normalImage.Height), 0, 0, normalImage.Width, normalImage.Height, GraphicsUnit.Pixel, ia);
 			
 			return b;
 		}
@@ -194,13 +194,13 @@ namespace System.Windows.Forms
 		{
 			if (e.Item.BackColor != Control.DefaultBackColor) {
 				// Only paint the BackColor if it's not the default one,
-				// to avoid painting a solid background color over the parent ToolStrip gradient.
-				Rectangle item_bounds = new Rectangle (0, 0, e.Item.Width, e.Item.Height);
+				// to avoid painting a solid background Color_ over the parent ToolStrip gradient.
+				Rectangle_ item_bounds = new Rectangle_ (0, 0, e.Item.Width, e.Item.Height);
 				e.Graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (e.Item.BackColor), item_bounds);
 			}
 
 			if (e.Item.BackgroundImage != null) {
-				Rectangle item_bounds = new Rectangle (0, 0, e.Item.Width, e.Item.Height);
+				Rectangle_ item_bounds = new Rectangle_ (0, 0, e.Item.Width, e.Item.Height);
 				DrawBackground (e.Graphics, item_bounds, e.Item.BackgroundImage, e.Item.BackgroundImageLayout);
 			}
 
@@ -226,7 +226,7 @@ namespace System.Windows.Forms
 				need_dispose = true;
 			}
 				
-			if (e.Item.ImageTransparentColor != Color.Empty) {
+			if (e.Item.ImageTransparentColor != Color_.Empty) {
 				ImageAttributes ia = new ImageAttributes ();
 				ia.SetColorKey (e.Item.ImageTransparentColor, e.Item.ImageTransparentColor);
 				e.Graphics.DrawImage (i, e.ImageRectangle, 0, 0, i.Width, i.Height, GraphicsUnit.Pixel, ia);
@@ -492,7 +492,7 @@ namespace System.Windows.Forms
 			return b;
 		}
 
-		private void DrawBackground (Graphics g, Rectangle bounds, Image image, ImageLayout layout)
+		private void DrawBackground (Graphics g, Rectangle_ bounds, Image image, ImageLayout layout)
 		{
 			// Center and Tile don't matter if the image is larger than the control
 			if (layout == ImageLayout.Center || layout == ImageLayout.Tile)
@@ -517,7 +517,7 @@ namespace System.Windows.Forms
 					}
 					break;
 				case ImageLayout.Center:
-					Rectangle r = new Rectangle ((bounds.Size.Width - image.Size.Width) / 2, (bounds.Size.Height - image.Size.Height) / 2, image.Width, image.Height);
+					Rectangle_ r = new Rectangle_ ((bounds.Size.Width - image.Size.Width) / 2, (bounds.Size.Height - image.Size.Height) / 2, image.Width, image.Height);
 					g.DrawImageUnscaledAndClipped (image, r);
 					break;
 				case ImageLayout.Stretch:
@@ -525,11 +525,11 @@ namespace System.Windows.Forms
 					break;
 				case ImageLayout.Zoom:
 					if (((float)image.Height / (float)image.Width) < ((float)bounds.Height / (float)bounds.Width)) {
-						Rectangle rzoom = new Rectangle (0, 0, bounds.Width, (int)((float)bounds.Width * ((float)image.Height / (float)image.Width)));
+						Rectangle_ rzoom = new Rectangle_ (0, 0, bounds.Width, (int)((float)bounds.Width * ((float)image.Height / (float)image.Width)));
 						rzoom.Y = (bounds.Height - rzoom.Height)/ 2;
 						g.DrawImage (image, rzoom);
 					} else {
-						Rectangle rzoom = new Rectangle (0, 0, (int)((float)bounds.Height * ((float)image.Width / (float)image.Height)), bounds.Height);
+						Rectangle_ rzoom = new Rectangle_ (0, 0, (int)((float)bounds.Height * ((float)image.Width / (float)image.Height)), bounds.Height);
 						rzoom.X = (bounds.Width - rzoom.Width) / 2;
 						g.DrawImage (image, rzoom);
 					}
@@ -552,7 +552,7 @@ namespace System.Windows.Forms
 			g.DrawLine (p, x + 3, y + 1, x + 3, y + 2);
 		}
 
-		private void DrawSizingGrip (Graphics g, Rectangle rect)
+		private void DrawSizingGrip (Graphics g, Rectangle_ rect)
 		{
 			DrawGripBox (g, rect.Right - 5, rect.Bottom - 5);
 			DrawGripBox (g, rect.Right - 9, rect.Bottom - 5);
@@ -565,7 +565,7 @@ namespace System.Windows.Forms
 		private void DrawGripBox (Graphics g, int x, int y)
 		{
 			g.DrawRectangle (Pens.White, x + 1, y + 1, 1, 1);
-			g.DrawRectangle (ThemeEngine.Current.ResPool.GetPen (Color.FromArgb (172, 168, 153)), x, y, 1, 1);
+			g.DrawRectangle (ThemeEngine.Current.ResPool.GetPen (Color_.FromArgb (172, 168, 153)), x, y, 1, 1);
 		}
 		#endregion
 	}

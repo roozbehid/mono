@@ -28,12 +28,12 @@
 // COMPLETE
 
 //#define ExternalExceptionHandler
-
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Collections;
 using System.Diagnostics;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -210,14 +210,14 @@ namespace System.Windows.Forms
 			DefWndProc(ref m);
 		}
 
-		internal static IntPtr WndProc(IntPtr hWnd, Msg msg, IntPtr wParam, IntPtr lParam)
+		internal static Int32 WndProc(Int32 hWnd, Msg msg, Int32 wParam, Int32 lParam)
 		{
 			IntPtr result = IntPtr.Zero;
 			Message	m = new Message();
-			m.HWnd = hWnd;
+			m.HWnd = (IntPtr)hWnd;
 			m.Msg = (int)msg;
-			m.WParam = wParam;
-			m.LParam = lParam;
+			m.WParam = (IntPtr)wParam;
+			m.LParam = (IntPtr)lParam;
 			m.Result = IntPtr.Zero;
 					
 #if debug
@@ -228,12 +228,12 @@ namespace System.Windows.Forms
 			try {
 			object current = null;
 			lock (window_collection) {
-				current = window_collection[hWnd];
+				current = window_collection[(IntPtr)hWnd];
 			}
 
 			window = current as NativeWindow;
 			if (current == null)
-				window = EnsureCreated (window, hWnd);
+				window = EnsureCreated (window,(IntPtr) hWnd);
 
 			if (window != null) {
 				window.WndProc (ref m);
@@ -242,7 +242,7 @@ namespace System.Windows.Forms
 				ArrayList windows = (ArrayList) current;
 				lock (windows) {
 					if (windows.Count > 0) {
-						window = EnsureCreated ((NativeWindow)windows[0], hWnd);
+						window = EnsureCreated ((NativeWindow)windows[0],(IntPtr) hWnd);
 						window.WndProc (ref m);
 						// the first one is the control's one. all others are synthetic,
 						// so we want only the result from the control
@@ -263,8 +263,8 @@ namespace System.Windows.Forms
 						var control = ((Control.ControlNativeWindow)window).Owner;
 						control.Hide ();
 						var redCross = new Control (control.Parent, string.Empty);
-						redCross.BackColor = Color.White;
-						redCross.ForeColor = Color.Red;
+						redCross.BackColor = Color_.White;
+						redCross.ForeColor = Color_.Red;
 						redCross.Bounds = control.Bounds;
 						redCross.Paint += HandleRedCrossPaint;
 					}
@@ -278,7 +278,7 @@ namespace System.Windows.Forms
 				Console.WriteLine("NativeWindow.cs: Message {0}, result {1}", msg, m.Result);
 			#endif
 
-			return result;
+			return (Int32)result;
 		}
 
 		private static void HandleRedCrossPaint (object sender, PaintEventArgs e)
@@ -289,16 +289,16 @@ namespace System.Windows.Forms
 				e.Graphics.DrawRectangle (pen, paintRect.Left + 1,
 					paintRect.Top + 1, paintRect.Width - 1, paintRect.Height - 1);
 				// NOTE: .NET's drawing of the red cross seems to have a bug
-				// that draws the bottom and right of the rectangle only 1 pixel
-				// wide. We would get a nicer rectangle using the following code,
+				// that draws the bottom and right of the Rectangle_ only 1 pixel
+				// wide. We would get a nicer Rectangle_ using the following code,
 				// but that runs into a problem with libgdiplus.
 				//var paintRect = control.DisplayRectangle;
 				//paintRect.Inflate (-1, -1);
 				//e.Graphics.DrawRectangle (pen, paintRect);
 				e.Graphics.DrawLine (pen, paintRect.Location,
 					paintRect.Location + paintRect.Size);
-				e.Graphics.DrawLine (pen, new Point (paintRect.Left, paintRect.Bottom),
-					new Point (paintRect.Right, paintRect.Top));
+				e.Graphics.DrawLine (pen, new Point_ (paintRect.Left, paintRect.Bottom),
+					new Point_ (paintRect.Right, paintRect.Top));
 			}
 		}
 

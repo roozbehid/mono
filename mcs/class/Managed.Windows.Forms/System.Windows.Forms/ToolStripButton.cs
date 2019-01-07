@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Windows.Forms.Design;
@@ -139,9 +139,9 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Methods
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
-			Size retval = base.GetPreferredSize (constrainingSize);
+			Size_ retval = base.GetPreferredSize (constrainingSize);
 			
 			if (retval.Width < 23)
 				retval.Width = 23;
@@ -195,19 +195,19 @@ namespace System.Windows.Forms
 			base.OnPaint (e);
 
 			if (this.Owner != null) {
-				Color font_color = this.Enabled ? this.ForeColor : SystemColors.GrayText;
+				Color_ font_color = this.Enabled ? this.ForeColor : SystemColors.GrayText;
 				Image draw_image = this.Enabled ? this.Image : ToolStripRenderer.CreateDisabledImage (this.Image);
 
 				this.Owner.Renderer.DrawButtonBackground (new System.Windows.Forms.ToolStripItemRenderEventArgs (e.Graphics, this));
 
-				Rectangle text_layout_rect;
-				Rectangle image_layout_rect;
+				Rectangle_ text_layout_rect;
+				Rectangle_ image_layout_rect;
 
 				this.CalculateTextAndImageRectangles (out text_layout_rect, out image_layout_rect);
 
-				if (text_layout_rect != Rectangle.Empty)
+				if (text_layout_rect != Rectangle_.Empty)
 					this.Owner.Renderer.DrawItemText (new System.Windows.Forms.ToolStripItemTextRenderEventArgs (e.Graphics, this, this.Text, text_layout_rect, font_color, this.Font, this.TextAlign));
-				if (image_layout_rect != Rectangle.Empty)
+				if (image_layout_rect != Rectangle_.Empty)
 					this.Owner.Renderer.DrawItemImage (new System.Windows.Forms.ToolStripItemImageRenderEventArgs (e.Graphics, this, draw_image, image_layout_rect));
 
 				return;

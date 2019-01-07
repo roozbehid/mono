@@ -36,7 +36,7 @@ namespace System.Windows.Forms {
 		private bool		disposed;
 		
 		#region Public Constructors
-		public PaintEventArgs (Graphics graphics, Rectangle clipRect)
+		public PaintEventArgs (Graphics graphics, Rectangle_ clipRect)
 		{
 			if (graphics == null)
 				throw new ArgumentNullException ("graphics");
@@ -47,7 +47,7 @@ namespace System.Windows.Forms {
 		#endregion	// Public Constructors
 
 		#region Public Instance Properties
-		public Rectangle ClipRectangle {
+		public Rectangle_ ClipRectangle {
 			get {
 				return this.clip_rectangle;
 			}
@@ -76,7 +76,7 @@ namespace System.Windows.Forms {
 			return res;
 		}
 
-		internal void SetClip (Rectangle clip)
+		internal void SetClip (Rectangle_ clip)
 		{
 			clip_rectangle = clip;
 		}

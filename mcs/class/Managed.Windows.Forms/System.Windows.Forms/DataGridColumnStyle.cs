@@ -55,7 +55,7 @@ namespace System.Windows.Forms
 
 			#region Public Instance Properties
 			[MonoTODO ("Not implemented, will throw NotImplementedException")]
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get {
 					throw new NotImplementedException ();
 				}
@@ -395,19 +395,19 @@ namespace System.Windows.Forms
 			return new DataGridColumnHeaderAccessibleObject (this);
 		}
 
-		protected internal virtual void Edit (CurrencyManager source, int rowNum,  Rectangle bounds,  bool readOnly)
+		protected internal virtual void Edit (CurrencyManager source, int rowNum,  Rectangle_ bounds,  bool readOnly)
 		{
 			Edit (source, rowNum, bounds, readOnly, string.Empty);
 		}
 
-		protected internal virtual void Edit (CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string displayText)
+		protected internal virtual void Edit (CurrencyManager source, int rowNum, Rectangle_ bounds, bool readOnly, string displayText)
 		{
 			string instantText = displayText;
 			Edit (source, rowNum, bounds, readOnly, instantText, true);
 		}
 
 		protected internal abstract void Edit (CurrencyManager source,
-			int rowNum, Rectangle bounds, bool readOnly,
+			int rowNum, Rectangle_ bounds, bool readOnly,
 			string displayText,
 			bool cellIsVisible);
 
@@ -430,7 +430,7 @@ namespace System.Windows.Forms
 
 		protected internal abstract int GetPreferredHeight (Graphics g, object value);
 
-		protected internal abstract Size GetPreferredSize (Graphics g,  object value);
+		protected internal abstract Size_ GetPreferredSize (Graphics g,  object value);
 
 		void IDataGridColumnStyleEditingNotificationService.ColumnStartedEditing (Control editingControl)
 		{
@@ -443,10 +443,10 @@ namespace System.Windows.Forms
 				grid.InvalidateColumn (this);
 		}
 
-		protected internal abstract void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum);
-		protected internal abstract void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, bool alignToRight);
+		protected internal abstract void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum);
+		protected internal abstract void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum, bool alignToRight);
 		
-		protected internal virtual void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum,
+		protected internal virtual void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum,
 			Brush backBrush,  Brush foreBrush, bool alignToRight) {}
 
 		protected internal virtual void ReleaseHostedControl () {}
@@ -498,18 +498,18 @@ namespace System.Windows.Forms
 		virtual internal void OnMouseDown (MouseEventArgs e, int row, int column) {}
 		virtual internal void OnKeyDown (KeyEventArgs ke, int row, int column) {}
 		
-		internal void PaintHeader (Graphics g, Rectangle bounds, int colNum)
+		internal void PaintHeader (Graphics g, Rectangle_ bounds, int colNum)
 		{
 			ThemeEngine.Current.DataGridPaintColumnHeader (g, bounds, grid, colNum);
 		}
 		
-		internal void PaintNewRow (Graphics g, Rectangle bounds, Brush backBrush, Brush foreBrush)
+		internal void PaintNewRow (Graphics g, Rectangle_ bounds, Brush backBrush, Brush foreBrush)
 		{
 			g.FillRectangle (backBrush, bounds);
 			PaintGridLine (g, bounds);
 		}
 		
-		internal void PaintGridLine (Graphics g, Rectangle bounds)
+		internal void PaintGridLine (Graphics g, Rectangle_ bounds)
 		{
 			if (table_style.CurrentGridLineStyle != DataGridLineStyle.Solid) {
 				return;

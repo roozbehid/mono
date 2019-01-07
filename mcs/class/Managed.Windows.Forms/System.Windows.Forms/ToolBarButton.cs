@@ -25,9 +25,9 @@
 //	Ravindra (rkumar@novell.com)
 //	Mike Kestner <mkestner@novell.com>
 //	Everaldo Canuto <ecanuto@novell.com>
-
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Drawing.Imaging;
@@ -210,14 +210,14 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Rectangle Rectangle {
+		public Rectangle_ Rectangle {
 			get {
 				if (Visible && Parent != null && Parent.items != null)
 					foreach (ToolBarItem item in Parent.items)
 						if (item.Button == this)
 							return item.Rectangle;
 					
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 			}
 		}
 

@@ -26,7 +26,7 @@
 
 // This is an internal class that allows us to use a textbox as a child control
 // for things such as UpDown controls, and the ComboBox that will not have their
-// size altered by scaling
+// Size_ altered by scaling
 
 namespace System.Windows.Forms {
 

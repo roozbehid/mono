@@ -24,8 +24,8 @@
 //
 //
 
-
 using System;
+
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -38,7 +38,7 @@ namespace System.Windows.Forms.CarbonInternal {
 			// FIXME
 			return new Bitmap (16, 16);
                 }
-                internal static IntPtr DefineCursor (Bitmap bitmap, Bitmap mask, Color cursor_pixel, Color mask_pixel, int xHotSpot, int yHotSpot) {
+                internal static IntPtr DefineCursor (Bitmap bitmap, Bitmap mask, Color_ cursor_pixel, Color_ mask_pixel, int xHotSpot, int yHotSpot) {
 			CarbonCursor cc = new CarbonCursor (bitmap, mask, cursor_pixel, mask_pixel, xHotSpot, yHotSpot);
 
 			return (IntPtr) GCHandle.Alloc (cc);
@@ -63,14 +63,14 @@ namespace System.Windows.Forms.CarbonInternal {
 	internal struct CarbonCursor {
 		private Bitmap bmp;
 		private Bitmap mask;
-		private Color cursor_color;
-		private Color mask_color;
+		private Color_ cursor_color;
+		private Color_ mask_color;
 		private int hot_x;
 		private int hot_y;
 		private StdCursor id;
 		private bool standard;
 
-                public CarbonCursor (Bitmap bitmap, Bitmap mask, Color cursor_pixel, Color mask_pixel, int xHotSpot, int yHotSpot) {
+                public CarbonCursor (Bitmap bitmap, Bitmap mask, Color_ cursor_pixel, Color_ mask_pixel, int xHotSpot, int yHotSpot) {
 			this.id = StdCursor.Default;
 			this.bmp = bitmap;
 			this.mask = mask;
@@ -85,8 +85,8 @@ namespace System.Windows.Forms.CarbonInternal {
 			this.id = id;
 			this.bmp = null;
 			this.mask = null;
-			this.cursor_color = Color.Black;
-			this.mask_color = Color.Black;
+			this.cursor_color = Color_.Black;
+			this.mask_color = Color_.Black;
 			this.hot_x = 0;
 			this.hot_y = 0;
 			standard = true;
@@ -110,13 +110,13 @@ namespace System.Windows.Forms.CarbonInternal {
 			}
 		}
 
-		public Color CursorColor {
+		public Color_ CursorColor {
 			get {
 				return cursor_color;
 			}
 		}
 
-		public Color MaskColor {
+		public Color_ MaskColor {
 			get {
 				return mask_color;
 			}

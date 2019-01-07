@@ -27,10 +27,10 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //	Ivan N. Zlatev (contact@i-nz.net)
 //
-
 using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -51,9 +51,9 @@ namespace System.Windows.Forms
 		private Orientation orientation;
 
 		private int splitter_increment;
-		private Rectangle splitter_rectangle;
-		private Rectangle splitter_rectangle_moving;
-		private Rectangle splitter_rectangle_before_move;
+		private Rectangle_ splitter_rectangle;
+		private Rectangle_ splitter_rectangle_moving;
+		private Rectangle_ splitter_rectangle_before_move;
 		private bool splitter_fixed;
 		private bool splitter_dragging;
 		private int splitter_prev_move;
@@ -158,7 +158,7 @@ namespace System.Windows.Forms
 			fixed_panel = FixedPanel.None;
 			orientation = Orientation.Vertical;
 
-			splitter_rectangle = new Rectangle (50, 0, 4, this.Height);
+			splitter_rectangle = new Rectangle_ (50, 0, 4, this.Height);
 			splitter_increment = 1;
 			splitter_prev_move = -1;
 			restore_cursor = null;
@@ -171,7 +171,7 @@ namespace System.Windows.Forms
 
 			panel1 = new SplitterPanel (this);
 			panel2 = new SplitterPanel (this);
-			panel1.Size = new Size (50, 50);
+			panel1.Size = new Size_ (50, 50);
 			UpdateSplitter ();
 
 			this.Controls.Add (panel2);
@@ -192,7 +192,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		new public Size AutoScrollMargin {
+		new public Size_ AutoScrollMargin {
 			get { return base.AutoScrollMargin; }
 			set { base.AutoScrollMargin = value; }
 		}
@@ -200,7 +200,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		new public Size AutoScrollMinSize {
+		new public Size_ AutoScrollMinSize {
 			get { return base.AutoScrollMinSize; }
 			set { base.AutoScrollMinSize = value; }
 		}
@@ -208,7 +208,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[DefaultValue ("{X=0,Y=0}")]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Point AutoScrollOffset {
+		public override Point_ AutoScrollOffset {
 			get { return base.AutoScrollOffset; }
 			set { base.AutoScrollOffset = value; }
 		}
@@ -216,7 +216,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		new public Point AutoScrollPosition {
+		new public Point_ AutoScrollPosition {
 			get { return base.AutoScrollPosition; }
 			set { base.AutoScrollPosition = value; }
 		}
@@ -429,7 +429,7 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable (false)]
-		public Rectangle SplitterRectangle { get { return splitter_rectangle; } }
+		public Rectangle_ SplitterRectangle { get { return splitter_rectangle; } }
 
 		[Localizable (true)]
 		[DefaultValue (4)]
@@ -470,7 +470,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Protected Properties
-		protected override Size DefaultSize { get { return new Size (150, 100); } }
+		protected override Size_ DefaultSize { get { return new Size_ (150, 100); } }
 		#endregion
 
 		#region Public Methods
@@ -599,7 +599,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}
@@ -622,7 +622,7 @@ namespace System.Windows.Forms
 		
 		#region Private Methods
 
-		private bool SplitterHitTest (Point location)
+		private bool SplitterHitTest (Point_ location)
 		{
 			if (location.X >= splitter_rectangle.X &&
 				location.X <= splitter_rectangle.X + splitter_rectangle.Width &&
@@ -633,18 +633,18 @@ namespace System.Windows.Forms
 			return false;				   
 		}
 
-		private void SplitterBeginMove (Point location)
+		private void SplitterBeginMove (Point_ location)
 		{
 			splitter_prev_move = orientation == Orientation.Vertical ? location.X : location.Y;
 			splitter_rectangle_moving = splitter_rectangle;
 			splitter_rectangle_before_move = splitter_rectangle;
 		}
 
-		private void SplitterMove (Point location)
+		private void SplitterMove (Point_ location)
 		{
 			int currentMove = orientation == Orientation.Vertical ? location.X : location.Y;
 			int delta = currentMove - splitter_prev_move;
-			Rectangle prev_location = splitter_rectangle_moving;
+			Rectangle_ prev_location = splitter_rectangle_moving;
 			bool moved = false;
 
 			if (orientation == Orientation.Vertical) {
@@ -696,7 +696,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		private void SplitterEndMove (Point location, bool cancel)
+		private void SplitterEndMove (Point_ location, bool cancel)
 		{
 			if (!cancel) {
 				// Prevent updating the splitter distance if the user changes it in e.g. the
@@ -737,24 +737,24 @@ namespace System.Windows.Forms
 
 			if (panel1_collapsed) {
 				panel2.Size = this.Size;
-				panel2.Location = new Point (0, 0);
+				panel2.Location = new Point_ (0, 0);
 			} else if (panel2_collapsed) {
 				panel1.Size = this.Size;
-				panel1.Location = new Point (0, 0);
+				panel1.Location = new Point_ (0, 0);
 			} else {
-				panel1.Location = new Point (0, 0);
+				panel1.Location = new Point_ (0, 0);
 				if (orientation == Orientation.Vertical) {
 					splitter_rectangle.Y = 0;
 					panel1.InternalHeight = panel2.InternalHeight = this.Height;
 					panel1.InternalWidth = Math.Max (this.SplitterDistance, panel1_min_size);
-					panel2.Location = new Point (this.SplitterWidth + this.SplitterDistance, 0);
+					panel2.Location = new Point_ (this.SplitterWidth + this.SplitterDistance, 0);
 					panel2.InternalWidth = Math.Max (this.Width - (this.SplitterWidth + this.SplitterDistance), panel2_min_size);
 					fixed_none_ratio = (double) this.Width / (double)this.SplitterDistance;
 				} else if (orientation == Orientation.Horizontal) {
 					splitter_rectangle.X = 0;
 					panel1.InternalWidth = panel2.InternalWidth = this.Width;
 					panel1.InternalHeight =  Math.Max (this.SplitterDistance, panel1_min_size);
-					panel2.Location = new Point (0, this.SplitterWidth + this.SplitterDistance);
+					panel2.Location = new Point_ (0, this.SplitterWidth + this.SplitterDistance);
 					panel2.InternalHeight =  Math.Max (this.Height - (this.SplitterWidth + this.SplitterDistance), panel2_min_size);
 					fixed_none_ratio = (double) this.Height / (double)this.SplitterDistance;
 				}
@@ -771,14 +771,14 @@ namespace System.Windows.Forms
 
 			if (panel1_collapsed) {
 				panel2.Size = this.Size;
-				panel2.Location = new Point (0, 0);
+				panel2.Location = new Point_ (0, 0);
 			} else if (panel2_collapsed) {
 				panel1.Size = this.Size;
-				panel1.Location = new Point (0, 0);
+				panel1.Location = new Point_ (0, 0);
 			} else {
-				panel1.Location = new Point (0, 0);
+				panel1.Location = new Point_ (0, 0);
 				if (orientation == Orientation.Vertical) {
-					panel1.Location = new Point (0, 0);
+					panel1.Location = new Point_ (0, 0);
 					panel1.InternalHeight = panel2.InternalHeight = this.Height;
 					splitter_rectangle.Height = this.Height;
 	
@@ -786,18 +786,18 @@ namespace System.Windows.Forms
 						splitter_rectangle.X = Math.Max ((int)Math.Floor (((double)this.Width) / fixed_none_ratio), panel1_min_size); //set distance
 						panel1.InternalWidth = this.SplitterDistance;
 						panel2.InternalWidth = this.Width - (this.SplitterWidth + this.SplitterDistance);
-						panel2.Location = new Point (this.SplitterWidth + this.SplitterDistance, 0);
+						panel2.Location = new Point_ (this.SplitterWidth + this.SplitterDistance, 0);
 					} else if (fixed_panel == FixedPanel.Panel1) {
 						panel1.InternalWidth = this.SplitterDistance;
 						panel2.InternalWidth = Math.Max (this.Width - (this.SplitterWidth + this.SplitterDistance), panel2_min_size);
-						panel2.Location = new Point (this.SplitterWidth + this.SplitterDistance, 0);
+						panel2.Location = new Point_ (this.SplitterWidth + this.SplitterDistance, 0);
 					} else if (fixed_panel == FixedPanel.Panel2) {
 						splitter_rectangle.X = Math.Max (this.Width - (this.SplitterWidth + panel2.Width), panel1_min_size); //set distance
 						panel1.InternalWidth = this.SplitterDistance;
-						panel2.Location = new Point (this.SplitterWidth + this.SplitterDistance, 0);
+						panel2.Location = new Point_ (this.SplitterWidth + this.SplitterDistance, 0);
 					}
 				} else if (orientation == Orientation.Horizontal) {
-					panel1.Location = new Point (0, 0);
+					panel1.Location = new Point_ (0, 0);
 					panel1.InternalWidth = panel2.InternalWidth = this.Width;
 					splitter_rectangle.Width = this.Width;
 
@@ -805,15 +805,15 @@ namespace System.Windows.Forms
 						splitter_rectangle.Y = Math.Max ((int) Math.Floor ((double)this.Height / fixed_none_ratio), panel1_min_size); //set distance
 						panel1.InternalHeight = this.SplitterDistance;
 						panel2.InternalHeight = this.Height - (this.SplitterWidth + this.SplitterDistance);
-						panel2.Location = new Point (0, this.SplitterWidth + this.SplitterDistance);
+						panel2.Location = new Point_ (0, this.SplitterWidth + this.SplitterDistance);
 					} else if (fixed_panel == FixedPanel.Panel1) {
 						panel1.InternalHeight = this.SplitterDistance;
 						panel2.InternalHeight = Math.Max (this.Height - (this.SplitterWidth + this.SplitterDistance), panel2_min_size);
-						panel2.Location = new Point (0, this.SplitterWidth + this.SplitterDistance);
+						panel2.Location = new Point_ (0, this.SplitterWidth + this.SplitterDistance);
 					} else if (fixed_panel == FixedPanel.Panel2) {
 						splitter_rectangle.Y =  Math.Max (this.Height - (this.SplitterWidth + panel2.Height), panel1_min_size); //set distance
 						panel1.InternalHeight = this.SplitterDistance;
-						panel2.Location = new Point (0, this.SplitterWidth + this.SplitterDistance);
+						panel2.Location = new Point_ (0, this.SplitterWidth + this.SplitterDistance);
 					}
 				}
 			}

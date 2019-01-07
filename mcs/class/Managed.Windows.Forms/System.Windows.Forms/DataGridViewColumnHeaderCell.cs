@@ -23,8 +23,8 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 
@@ -132,35 +132,35 @@ namespace System.Windows.Forms {
 			
 		}
 
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
 			object o = GetValue (-1);
 			
 			if (o == null || o.ToString () == string.Empty)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 				
-			Size s = Size.Empty;
+			Size_ s = Size_.Empty;
 
 			if (o != null)
 				s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 
-			return new Rectangle (3, (DataGridView.ColumnHeadersHeight - s.Height) / 2, s.Width, s.Height);
+			return new Rectangle_ (3, (DataGridView.ColumnHeadersHeight - s.Height) / 2, s.Width, s.Height);
 		}
 
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected override Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
 			object o = header_text;
 
 			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				Size_ s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height = Math.Max (s.Height, 18);
 				s.Width += 25;
 				return s;
 			} else
-				return new Size (19, 12);
+				return new Size_ (19, 12);
 		}
 
 		protected override object GetValue (int rowIndex) {
@@ -173,7 +173,7 @@ namespace System.Windows.Forms {
 			return null;
 		}
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates dataGridViewElementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts) {
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates dataGridViewElementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts) {
 			// Prepaint
 			DataGridViewPaintParts pre = DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground;
 			pre = pre & paintParts;
@@ -182,18 +182,18 @@ namespace System.Windows.Forms {
 
 			// Paint content
 			if ((paintParts & DataGridViewPaintParts.ContentForeground) == DataGridViewPaintParts.ContentForeground) {
-				Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
+				Color_ color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 
 				TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter | TextFormatFlags.TextBoxControl;
 
-				Rectangle contentbounds = cellBounds;
+				Rectangle_ contentbounds = cellBounds;
 				contentbounds.Height -= 2;
 				contentbounds.Width -= 2;
 
 				if (formattedValue != null)
 					TextRenderer.DrawText (graphics, formattedValue.ToString (), cellStyle.Font, contentbounds, color, flags);
 					
-				Point loc = new Point (cellBounds.Right - 14, cellBounds.Y + ((cellBounds.Height - 4) / 2));
+				Point_ loc = new Point_ (cellBounds.Right - 14, cellBounds.Y + ((cellBounds.Height - 4) / 2));
 				
 				if (sortGlyphDirection == SortOrder.Ascending) {
 					using (Pen p = new Pen (color)) {
@@ -225,7 +225,7 @@ namespace System.Windows.Forms {
 			base.Paint (graphics, clipBounds, cellBounds, rowIndex, dataGridViewElementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, post);
 		}
 
-		protected override void PaintBorder (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
+		protected override void PaintBorder (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
 		{
 			if (ThemeEngine.Current.DataGridViewColumnHeaderCellDrawBorder (this, graphics, cellBounds))
 				return;
@@ -249,7 +249,7 @@ namespace System.Windows.Forms {
 			}
 		}
 		
-		internal override void PaintPartBackground (Graphics graphics, Rectangle cellBounds, DataGridViewCellStyle style)
+		internal override void PaintPartBackground (Graphics graphics, Rectangle_ cellBounds, DataGridViewCellStyle style)
 		{
 			if (ThemeEngine.Current.DataGridViewColumnHeaderCellDrawBackground (this, graphics, cellBounds))
 				return;
@@ -266,7 +266,7 @@ namespace System.Windows.Forms {
 			public DataGridViewColumnHeaderCellAccessibleObject (DataGridViewColumnHeaderCell owner) : base (owner) {
 			}
 
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get { return base.Bounds; }
 			}
 

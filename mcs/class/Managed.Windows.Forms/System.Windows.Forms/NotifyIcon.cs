@@ -23,10 +23,10 @@
 //	Peter Bartok	pbartok@novell.com
 //
 //
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Text;
 
@@ -61,7 +61,7 @@ namespace System.Windows.Forms {
 			public NotifyIconWindow(NotifyIcon owner) {
 				this.owner = owner;
 				is_visible = false;
-				rect = new Rectangle(0, 0, 1, 1);
+				rect = new Rectangle_(0, 0, 1, 1);
 
 				FormBorderStyle = FormBorderStyle.None;
 
@@ -177,9 +177,9 @@ namespace System.Windows.Forms {
 				}
 				x = this.ClientRectangle.Width / 2 - size / 2;
 				y = this.ClientRectangle.Height / 2 - size / 2;
-				rect = new Rectangle(x, y, size, size);
+				rect = new Rectangle_(x, y, size, size);
 
-				Bounds = new Rectangle (0, 0, size, size);
+				Bounds = new Rectangle_ (0, 0, size, size);
 			}
 
 			internal override void OnPaintInternal (PaintEventArgs e) {
@@ -189,7 +189,7 @@ namespace System.Windows.Forms {
 					e.Graphics.FillRectangle(ThemeEngine.Current.ResPool.GetSolidBrush(SystemColors.Menu), rect);
 					e.Graphics.DrawImage(owner.icon_bitmap,
 							     rect,
-							     new Rectangle (0, 0, owner.icon_bitmap.Width, owner.icon_bitmap.Height),
+							     new Rectangle_ (0, 0, owner.icon_bitmap.Width, owner.icon_bitmap.Height),
 							     GraphicsUnit.Pixel);
 
 				}
@@ -299,7 +299,7 @@ namespace System.Windows.Forms {
 
 			private void Recalculate () 
 			{
-				Rectangle rect = ThemeEngine.Current.BalloonWindowRect (this);
+				Rectangle_ rect = ThemeEngine.Current.BalloonWindowRect (this);
 				
 				Left = rect.Left;
 				Top = rect.Top;
@@ -472,11 +472,11 @@ namespace System.Windows.Forms {
 			if ((e.Button & MouseButtons.Right) == MouseButtons.Right) {
 				if (context_menu != null) {
 					XplatUI.SetForegroundWindow (window.Handle);
-					context_menu.Show (window, new Point(e.X, e.Y));
+					context_menu.Show (window, new Point_(e.X, e.Y));
 				}
 				else if (context_menu_strip != null) {
 					XplatUI.SetForegroundWindow (window.Handle);
-					context_menu_strip.Show (window, new Point (e.X, e.Y), ToolStripDropDownDirection.AboveLeft);
+					context_menu_strip.Show (window, new Point_ (e.X, e.Y), ToolStripDropDownDirection.AboveLeft);
 				}
 			}
 

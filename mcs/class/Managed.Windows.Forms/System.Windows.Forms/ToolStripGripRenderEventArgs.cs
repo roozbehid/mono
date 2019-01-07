@@ -32,20 +32,20 @@ namespace System.Windows.Forms
 {
 	public class ToolStripGripRenderEventArgs : ToolStripRenderEventArgs
 	{
-		private Rectangle grip_bounds;
+		private Rectangle_ grip_bounds;
 		private ToolStripGripDisplayStyle grip_display_style;
 		private ToolStripGripStyle grip_style;
 		
 		public ToolStripGripRenderEventArgs (Graphics g, ToolStrip toolStrip) 
 			: base (g, toolStrip)
 		{
-			this.grip_bounds = new Rectangle (2, 0, 3, 25);
+			this.grip_bounds = new Rectangle_ (2, 0, 3, 25);
 			this.grip_display_style = ToolStripGripDisplayStyle.Vertical;
 			this.grip_style = ToolStripGripStyle.Visible;
 		}
 
 		// There seems to be no public way to set these properties  :/
-		internal ToolStripGripRenderEventArgs (Graphics g, ToolStrip toolStrip, Rectangle gripBounds, ToolStripGripDisplayStyle displayStyle, ToolStripGripStyle gripStyle)
+		internal ToolStripGripRenderEventArgs (Graphics g, ToolStrip toolStrip, Rectangle_ gripBounds, ToolStripGripDisplayStyle displayStyle, ToolStripGripStyle gripStyle)
 			: base (g, toolStrip)
 		{
 			this.grip_bounds = gripBounds;
@@ -54,7 +54,7 @@ namespace System.Windows.Forms
 		}
 
 		#region Public Properties
-		public Rectangle GripBounds {
+		public Rectangle_ GripBounds {
 			get { return this.grip_bounds; }
 		}
 

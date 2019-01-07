@@ -22,9 +22,9 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //	Everaldo Canuto  <ecanuto@novell.com>
-
 using System;
 using System.Runtime;
+
 using System.Drawing;
 using System.Reflection;
 
@@ -72,17 +72,17 @@ namespace System.Windows.Forms.Theming
 		}
 
 		#region Buttons
-		public static void DrawButton (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, ButtonThemeState state, Color_ backColor, Color_ foreColor)
 		{
 			theme.ButtonPainter.Draw (g, bounds, state, backColor, foreColor);
 		}
 
-		public static void DrawFlatButton (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor, FlatButtonAppearance appearance)
+		public static void DrawFlatButton (Graphics g, Rectangle_ bounds, ButtonThemeState state, Color_ backColor, Color_ foreColor, FlatButtonAppearance appearance)
 		{
 			theme.ButtonPainter.DrawFlat (g, bounds, state, backColor, foreColor, appearance);
 		}
 
-		public static void DrawPopupButton (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor)
+		public static void DrawPopupButton (Graphics g, Rectangle_ bounds, ButtonThemeState state, Color_ backColor, Color_ foreColor)
 		{
 			theme.ButtonPainter.DrawPopup (g, bounds, state, backColor, foreColor);
 		}

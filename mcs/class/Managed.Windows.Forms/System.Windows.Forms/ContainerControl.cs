@@ -42,7 +42,7 @@ namespace System.Windows.Forms {
 		// This is an internal hack that allows some container controls
 		// to not auto select their child when they are activated
 		internal bool 		auto_select_child = true;
-		private SizeF		auto_scale_dimensions;
+		private SizeF_		auto_scale_dimensions;
 		private AutoScaleMode	auto_scale_mode;
 		private bool		auto_scale_mode_set;
 		private bool		auto_scale_pending;
@@ -55,7 +55,7 @@ namespace System.Windows.Forms {
 			active_control = null;
 			unvalidated_control = null;
 			ControlRemoved += new ControlEventHandler(OnControlRemoved);
-			auto_scale_dimensions = SizeF.Empty;
+			auto_scale_dimensions = SizeF_.Empty;
 			auto_scale_mode = AutoScaleMode.Inherit;
 		}
 		#endregion	// Public Constructors
@@ -331,7 +331,7 @@ namespace System.Windows.Forms {
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
 		[Localizable (true)]
-		public SizeF AutoScaleDimensions {
+		public SizeF_ AutoScaleDimensions {
 			get {
 				return auto_scale_dimensions;
 			}
@@ -345,12 +345,12 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected SizeF AutoScaleFactor {
+		protected SizeF_ AutoScaleFactor {
 			get {
 				if (auto_scale_dimensions.IsEmpty)
-					return new SizeF (1f, 1f);
+					return new SizeF_ (1f, 1f);
 
-				return new SizeF(CurrentAutoScaleDimensions.Width / auto_scale_dimensions.Width,
+				return new SizeF_(CurrentAutoScaleDimensions.Width / auto_scale_dimensions.Width,
 					CurrentAutoScaleDimensions.Height / auto_scale_dimensions.Height);
 			}
 		}
@@ -371,7 +371,7 @@ namespace System.Windows.Forms {
 					auto_scale_mode = value;
 
 					if (auto_scale_mode_set)
-						auto_scale_dimensions = SizeF.Empty;
+						auto_scale_dimensions = SizeF_.Empty;
 
 					auto_scale_mode_set = true;
 
@@ -396,17 +396,18 @@ namespace System.Windows.Forms {
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public SizeF CurrentAutoScaleDimensions {
+		public SizeF_ CurrentAutoScaleDimensions {
 			get {
 				switch(auto_scale_mode) {
 					case AutoScaleMode.Dpi:
 						return TextRenderer.GetDpi ();
 
 					case AutoScaleMode.Font:
-						Size s = TextRenderer.MeasureText ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", Font);
+						Size_ s = TextRenderer.MeasureText ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", Font);
+                        ///s.Width = 390; s.Height = 13;
 						int width = (int)Math.Round ((float)s.Width / 62f);
 						
-						return new SizeF (width, s.Height);
+						return new SizeF_ (width, s.Height);
 				}
 
 				return auto_scale_dimensions;
@@ -458,13 +459,13 @@ namespace System.Windows.Forms {
 			// PerformDelayedAutoScale after ResumeLayout
 			auto_scale_pending = false;
 
-			SizeF factor = AutoScaleFactor;
+			SizeF_ factor = AutoScaleFactor;
 			if (AutoScaleMode == AutoScaleMode.Inherit) {
 				ContainerControl cc = FindContainer (this.Parent);
 				if (cc != null)
 					factor = cc.AutoScaleFactor;
 			}
-			if (factor != new SizeF (1F, 1F)) {
+			if (factor != new SizeF_ (1F, 1F)) {
 				is_auto_scaling = true;
 				SuspendLayout ();
 				Scale (factor);

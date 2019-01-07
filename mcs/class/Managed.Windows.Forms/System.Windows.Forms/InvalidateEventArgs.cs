@@ -33,13 +33,13 @@ namespace System.Windows.Forms {
 		private Rectangle	invalidated_rectangle;
 
 		#region Public Constructors
-		public InvalidateEventArgs(System.Drawing.Rectangle invalidRect) {
+		public InvalidateEventArgs(Rectangle_ invalidRect) {
 			this.invalidated_rectangle=invalidRect;
 		}
 		#endregion	// Public Constructors
 
 		#region Public Instance Properties
-		public Rectangle InvalidRect {
+		public Rectangle_ InvalidRect {
 			get {
 				return this.invalidated_rectangle;
 			}

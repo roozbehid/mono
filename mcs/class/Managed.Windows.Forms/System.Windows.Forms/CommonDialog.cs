@@ -100,7 +100,7 @@ namespace System.Windows.Forms {
 
 		#region Internal Methods
 		internal virtual void InitFormsSize(Form form) {
-			// Override this to set a default size for the form
+			// Override this to set a default Size_ for the form
 			form.Width = 200;
 			form.Height = 200;
 		}

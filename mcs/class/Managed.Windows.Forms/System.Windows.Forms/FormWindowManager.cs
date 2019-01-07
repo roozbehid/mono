@@ -24,8 +24,8 @@
 //
 //
 
-
 using System;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -75,9 +75,9 @@ namespace System.Windows.Forms
 			base.HandleTitleBarDoubleClick (x, y);
 		}
 
-		internal override Rectangle MaximizedBounds {
+		internal override Rectangle_ MaximizedBounds {
 			get {
-				Rectangle result = base.MaximizedBounds;
+				Rectangle_ result = base.MaximizedBounds;
 				int bw = ThemeEngine.Current.ManagedWindowBorderWidth (this);
 				result.Inflate (bw, bw);
 				return result;

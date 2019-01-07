@@ -23,8 +23,8 @@
 //	Jonathan Pobst	monkey@jpobst.com
 //
 //
-
 using System;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Text;
@@ -34,7 +34,7 @@ namespace System.Windows.Forms
 {
 	internal class TextBoxTextRenderer
 	{
-		private static Size max_size;
+		private static Size_ max_size;
 		private static bool use_textrenderer;
 		private static StringFormat sf_nonprinting;
 		private static StringFormat sf_printing;
@@ -55,7 +55,7 @@ namespace System.Windows.Forms
 				use_textrenderer = true;
 
 			// windows 2000 doesn't draw with gdi if bounds are In32.MaxValue
-			max_size = new Size (Int16.MaxValue, Int16.MaxValue);
+			max_size = new Size_ (Int16.MaxValue, Int16.MaxValue);
 			
 			sf_nonprinting = new StringFormat (StringFormat.GenericTypographic);
 			sf_nonprinting.Trimming = StringTrimming.None;
@@ -68,7 +68,7 @@ namespace System.Windows.Forms
 			measure_cache = new Hashtable ();
 		}
 		
-		public static void DrawText (Graphics g, string text, Font font, Color color, float x, float y, bool showNonPrint)
+		public static void DrawText (Graphics g, string text, Font font, Color_ color, float x, float y, bool showNonPrint)
 		{
 			if (!use_textrenderer) {
 				if (showNonPrint)
@@ -77,13 +77,13 @@ namespace System.Windows.Forms
 					g.DrawString (text, font, ThemeEngine.Current.ResPool.GetSolidBrush (color), x, y, sf_printing);
 			} else {
 				if (showNonPrint)
-					TextRenderer.DrawTextInternal (g, text, font, new Rectangle (new Point ((int)x, (int)y), max_size), color, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
+					TextRenderer.DrawTextInternal (g, text, font, new Rectangle_ (new Point_ ((int)x, (int)y), max_size), color, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
 				else
-					TextRenderer.DrawTextInternal (g, text, font, new Rectangle (new Point ((int)x, (int)y), max_size), color, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
+					TextRenderer.DrawTextInternal (g, text, font, new Rectangle_ (new Point_ ((int)x, (int)y), max_size), color, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
 			}
 		}
 		
-		public static SizeF MeasureText (Graphics g, string text, Font font)
+		public static SizeF_ MeasureText (Graphics g, string text, Font font)
 		{
 			// Due to the way the TextBox currently works, it measures each
 			// character one at a time.  And it does this alot.  So here we
@@ -95,14 +95,14 @@ namespace System.Windows.Forms
 				string key = font.GetHashCode ().ToString () + "|" + text;
 				
 				if (measure_cache.ContainsKey (key)) {
-					return (SizeF)measure_cache[key];
+					return (SizeF_)measure_cache[key];
 				} else {
-					SizeF size;
+					SizeF_ size;
 					
 					if (!use_textrenderer)
 						size = g.MeasureString (text, font, 10000, sf_nonprinting);
 					else
-						size = TextRenderer.MeasureTextInternal (g, text, font, Size.Empty, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
+						size = TextRenderer.MeasureTextInternal (g, text, font, Size_.Empty, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
 				
 					measure_cache[key] = size;
 				
@@ -113,7 +113,7 @@ namespace System.Windows.Forms
 			if (!use_textrenderer)
 				return g.MeasureString (text, font, 10000, sf_nonprinting);
 			else
-				return TextRenderer.MeasureTextInternal (g, text, font, Size.Empty, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
+				return TextRenderer.MeasureTextInternal (g, text, font, Size_.Empty, TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix, false);
 		}
 	}
 }

@@ -26,8 +26,8 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -50,24 +50,24 @@ namespace System.Windows.Forms
 		private bool available;
 		private bool auto_size;
 		private bool auto_tool_tip;
-		private Color back_color;
+		private Color_ back_color;
 		private Image background_image;
 		private ImageLayout background_image_layout;
-		private Rectangle bounds;
+		private Rectangle_ bounds;
 		private bool can_select;
 		private ToolStripItemDisplayStyle display_style;
 		private DockStyle dock;
 		private bool double_click_enabled;
 		private bool enabled;
-		private Size explicit_size;
+		private Size_ explicit_size;
 		private Font font;
-		private Color fore_color;
+		private Color_ fore_color;
 		private Image image;
 		private ContentAlignment image_align;
 		private int image_index;
 		private string image_key;
 		private ToolStripItemImageScaling image_scaling;
-		private Color image_transparent_color;
+		private Color_ image_transparent_color;
 		private bool is_disposed;
 		internal bool is_pressed;
 		private bool is_selected;
@@ -92,7 +92,7 @@ namespace System.Windows.Forms
 
 		private EventHandler frame_handler;	// For animating images
 		private ToolStrip parent;
-		private Size text_size;
+		private Size_ text_size;
 		#endregion
 
 		#region Public Constructors
@@ -113,19 +113,19 @@ namespace System.Windows.Forms
 			this.auto_size = true;
 			this.auto_tool_tip = this.DefaultAutoToolTip;
 			this.available = true;
-			this.back_color = Color.Empty;
+			this.back_color = Color_.Empty;
 			this.background_image_layout = ImageLayout.Tile;
 			this.can_select = true;
 			this.display_style = this.DefaultDisplayStyle;
 			this.dock = DockStyle.None;
 			this.enabled = true;
-			this.fore_color = Color.Empty;
+			this.fore_color = Color_.Empty;
 			this.image = image;
 			this.image_align = ContentAlignment.MiddleCenter;
 			this.image_index = -1;
 			this.image_key = string.Empty;
 			this.image_scaling = ToolStripItemImageScaling.SizeToFit;
-			this.image_transparent_color = Color.Empty;
+			this.image_transparent_color = Color_.Empty;
 			this.margin = this.DefaultMargin;
 			this.merge_action = MergeAction.Append;
 			this.merge_index = -1;
@@ -275,9 +275,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public virtual Color BackColor {
+		public virtual Color_ BackColor {
 			get {
-				if (back_color != Color.Empty)
+				if (back_color != Color_.Empty)
 					return back_color;
 
 				if (Parent != null)
@@ -319,7 +319,7 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable (false)]
-		public virtual Rectangle Bounds {
+		public virtual Rectangle_ Bounds {
 			get { return this.bounds; }
 		}
 
@@ -329,16 +329,16 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable (false)]
-		public Rectangle ContentRectangle {
+		public Rectangle_ ContentRectangle {
 			get {
 				// ToolStripLabels don't have a border
 				if (this is ToolStripLabel || this is ToolStripStatusLabel)
-					return new Rectangle (0, 0, this.bounds.Width, this.bounds.Height);
+					return new Rectangle_ (0, 0, this.bounds.Width, this.bounds.Height);
 
 				if (this is ToolStripDropDownButton && (this as ToolStripDropDownButton).ShowDropDownArrow)
-					return new Rectangle (2, 2, this.bounds.Width - 13, this.bounds.Height - 4);
+					return new Rectangle_ (2, 2, this.bounds.Width - 13, this.bounds.Height - 4);
 
-				return new Rectangle (2, 2, this.bounds.Width - 4, this.bounds.Height - 4);
+				return new Rectangle_ (2, 2, this.bounds.Width - 4, this.bounds.Height - 4);
 			}
 		}
 
@@ -423,9 +423,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public virtual Color ForeColor {
+		public virtual Color_ ForeColor {
 			get { 
-				if (fore_color != Color.Empty)
+				if (fore_color != Color_.Empty)
 					return fore_color;
 					
 				if (Parent != null)
@@ -448,7 +448,7 @@ namespace System.Windows.Forms
 		public int Height {
 			get { return this.Size.Height; }
 			set { 
-				this.Size = new Size (this.Size.Width, value); 
+				this.Size = new Size_ (this.Size.Width, value); 
 				this.explicit_size.Height = value;
 				
 				if (this.Visible) {
@@ -561,7 +561,7 @@ namespace System.Windows.Forms
 		}
 
 		[Localizable (true)]
-		public Color ImageTransparentColor {
+		public Color_ ImageTransparentColor {
 			get { return this.image_transparent_color; }
 			set { this.image_transparent_color = value; }
 		}
@@ -699,9 +699,9 @@ namespace System.Windows.Forms
 		public virtual bool Selected { get { return this.is_selected; } }
 
 		[Localizable (true)]
-		public virtual Size Size {
+		public virtual Size_ Size {
 			get { 
-				if (!this.AutoSize && this.explicit_size != Size.Empty) 
+				if (!this.AutoSize && this.explicit_size != Size_.Empty) 
 					return this.explicit_size; 
 					
 				return this.bounds.Size; 
@@ -823,7 +823,7 @@ namespace System.Windows.Forms
 		public int Width {
 			get { return this.Size.Width; }
 			set { 
-				this.Size = new Size (value, this.Size.Height); 
+				this.Size = new Size_ (value, this.Size.Height); 
 				this.explicit_size.Width = value;
 				
 				if (this.Visible) {
@@ -840,7 +840,7 @@ namespace System.Windows.Forms
 		protected virtual ToolStripItemDisplayStyle DefaultDisplayStyle { get { return ToolStripItemDisplayStyle.ImageAndText; } }
 		protected internal virtual Padding DefaultMargin { get { return new Padding (0, 1, 0, 2); } }
 		protected virtual Padding DefaultPadding { get { return new Padding (); } }
-		protected virtual Size DefaultSize { get { return new Size (23, 23); } }
+		protected virtual Size_ DefaultSize { get { return new Size_ (23, 23); } }
 		protected internal virtual bool DismissWhenClicked { get { return true; } }
 		[Browsable (false)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
@@ -870,7 +870,7 @@ namespace System.Windows.Forms
 			return this.parent; 
 		}
 
-		public virtual Size GetPreferredSize (Size constrainingSize)
+		public virtual Size_ GetPreferredSize (Size_ constrainingSize)
 		{
 			return this.CalculatePreferredSize (constrainingSize);
 		}
@@ -881,7 +881,7 @@ namespace System.Windows.Forms
 				parent.Invalidate (this.bounds);
 		}
 
-		public void Invalidate (Rectangle r)
+		public void Invalidate (Rectangle_ r)
 		{
 			if (parent != null)
 				parent.Invalidate (r);
@@ -893,7 +893,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public virtual void ResetBackColor () { this.BackColor = Color.Empty; }
+		public virtual void ResetBackColor () { this.BackColor = Color_.Empty; }
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		public virtual void ResetDisplayStyle () { this.display_style = this.DefaultDisplayStyle; }
@@ -902,7 +902,7 @@ namespace System.Windows.Forms
 		public virtual void ResetFont () { this.font = null; }
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public virtual void ResetForeColor () { this.ForeColor = Color.Empty; }
+		public virtual void ResetForeColor () { this.ForeColor = Color_.Empty; }
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		public virtual void ResetImage () { this.image = null; }
@@ -1199,7 +1199,7 @@ namespace System.Windows.Forms
 		
 		protected virtual void OnParentChanged (ToolStrip oldParent, ToolStrip newParent)
 		{
-			this.text_size = TextRenderer.MeasureText (this.Text == null ? string.Empty : this.text, this.Font, Size.Empty, TextFormatFlags.HidePrefix);
+			this.text_size = TextRenderer.MeasureText (this.Text == null ? string.Empty : this.text, this.Font, Size_.Empty, TextFormatFlags.HidePrefix);
 			
 			if (oldParent != null)
 				oldParent.PerformLayout ();
@@ -1279,7 +1279,7 @@ namespace System.Windows.Forms
 			return true;
 		}
 		
-		protected internal virtual void SetBounds (Rectangle bounds)
+		protected internal virtual void SetBounds (Rectangle_ bounds)
 		{
 			if (this.bounds != bounds) {
 				this.bounds = bounds;
@@ -1480,7 +1480,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Internal Methods
-		internal Rectangle AlignInRectangle (Rectangle outer, Size inner, ContentAlignment align)
+		internal Rectangle_ AlignInRectangle (Rectangle_ outer, Size_ inner, ContentAlignment align)
 		{
 			int x = 0;
 			int y = 0;
@@ -1498,24 +1498,24 @@ namespace System.Windows.Forms
 			else if (align == ContentAlignment.BottomCenter || align == ContentAlignment.BottomRight || align == ContentAlignment.BottomLeft)
 				y = outer.Bottom - inner.Height;
 
-			return new Rectangle (x, y, Math.Min (inner.Width, outer.Width), Math.Min (inner.Height, outer.Height));
+			return new Rectangle_ (x, y, Math.Min (inner.Width, outer.Width), Math.Min (inner.Height, outer.Height));
 		}
 
 		internal void CalculateAutoSize ()
 		{
-			this.text_size = TextRenderer.MeasureText (this.Text == null ? string.Empty: this.text, this.Font, Size.Empty, TextFormatFlags.HidePrefix);
+			this.text_size = TextRenderer.MeasureText (this.Text == null ? string.Empty: this.text, this.Font, Size_.Empty, TextFormatFlags.HidePrefix);
 
 			// If our text is rotated, flip the width and height
 			ToolStripTextDirection direction = this.TextDirection;
 			
 			if (direction == ToolStripTextDirection.Vertical270 || direction == ToolStripTextDirection.Vertical90)
-				this.text_size = new Size (this.text_size.Height, this.text_size.Width);
+				this.text_size = new Size_ (this.text_size.Height, this.text_size.Width);
 			
 			if (!this.auto_size || this is ToolStripControlHost)
 				return;
 			//this.text_size.Width += 6;
 
-			Size final_size = this.CalculatePreferredSize (Size.Empty);
+			Size_ final_size = this.CalculatePreferredSize (Size_.Empty);
 
 			if (final_size != this.Size) {
 				this.bounds.Width = final_size.Width;
@@ -1524,21 +1524,21 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal virtual Size CalculatePreferredSize (Size constrainingSize)
+		internal virtual Size_ CalculatePreferredSize (Size_ constrainingSize)
 		{
 			if (!this.auto_size)
 				return this.explicit_size;
 				
-			Size preferred_size = this.DefaultSize;
+			Size_ preferred_size = this.DefaultSize;
 
 			switch (this.display_style) {
 				case ToolStripItemDisplayStyle.Text:
 					int width = text_size.Width + this.padding.Horizontal;
 					int height = text_size.Height + this.padding.Vertical;
-					preferred_size = new Size (width, height);
+					preferred_size = new Size_ (width, height);
 					break;
 				case ToolStripItemDisplayStyle.Image:
-					if (this.GetImageSize () == Size.Empty)
+					if (this.GetImageSize () == Size_.Empty)
 						preferred_size = this.DefaultSize;
 					else {
 						switch (this.image_scaling) {
@@ -1558,8 +1558,8 @@ namespace System.Windows.Forms
 					int width2 = text_size.Width + this.padding.Horizontal;
 					int height2 = text_size.Height + this.padding.Vertical;
 
-					if (this.GetImageSize () != Size.Empty) {
-						Size image_size = this.GetImageSize ();
+					if (this.GetImageSize () != Size_.Empty) {
+						Size_ image_size = this.GetImageSize ();
 						
 						if (this.image_scaling == ToolStripItemImageScaling.SizeToFit && this.parent != null)
 							image_size = this.parent.ImageScalingSize;
@@ -1582,7 +1582,7 @@ namespace System.Windows.Forms
 						}
 					}
 
-					preferred_size = new Size (width2, height2);
+					preferred_size = new Size_ (width2, height2);
 					break;
 			}
 
@@ -1594,15 +1594,15 @@ namespace System.Windows.Forms
 			return preferred_size;
 		}
 
-		internal void CalculateTextAndImageRectangles (out Rectangle text_rect, out Rectangle image_rect)
+		internal void CalculateTextAndImageRectangles (out Rectangle_ text_rect, out Rectangle_ image_rect)
 		{
 			this.CalculateTextAndImageRectangles (this.ContentRectangle, out text_rect, out image_rect);
 		}
 		
-		internal void CalculateTextAndImageRectangles (Rectangle contentRectangle, out Rectangle text_rect, out Rectangle image_rect)
+		internal void CalculateTextAndImageRectangles (Rectangle_ contentRectangle, out Rectangle_ text_rect, out Rectangle_ image_rect)
 		{
-			text_rect = Rectangle.Empty;
-			image_rect = Rectangle.Empty;
+			text_rect = Rectangle_.Empty;
+			image_rect = Rectangle_.Empty;
 				
 			switch (this.display_style) {
 				case ToolStripItemDisplayStyle.None:
@@ -1623,8 +1623,8 @@ namespace System.Windows.Forms
 					else if (this.text == string.Empty && this.Image != null)
 						image_rect = AlignInRectangle (contentRectangle, GetImageSize (), this.image_align);
 					else {
-						Rectangle text_area;
-						Rectangle image_area;
+						Rectangle_ text_area;
+						Rectangle_ image_area;
 
 						switch (this.text_image_relation) {
 							case TextImageRelation.Overlay:
@@ -1632,15 +1632,15 @@ namespace System.Windows.Forms
 								image_rect = AlignInRectangle (contentRectangle, GetImageSize (), this.image_align);
 								break;
 							case TextImageRelation.ImageAboveText:
-								text_area = new Rectangle (contentRectangle.Left, contentRectangle.Bottom - text_size.Height, contentRectangle.Width, text_size.Height);
-								image_area = new Rectangle (contentRectangle.Left, contentRectangle.Top, contentRectangle.Width, contentRectangle.Height - text_area.Height);
+								text_area = new Rectangle_ (contentRectangle.Left, contentRectangle.Bottom - text_size.Height, contentRectangle.Width, text_size.Height);
+								image_area = new Rectangle_ (contentRectangle.Left, contentRectangle.Top, contentRectangle.Width, contentRectangle.Height - text_area.Height);
 
 								text_rect = AlignInRectangle (text_area, this.text_size, this.text_align);
 								image_rect = AlignInRectangle (image_area, GetImageSize (), this.image_align);
 								break;
 							case TextImageRelation.TextAboveImage:
-								text_area = new Rectangle (contentRectangle.Left, contentRectangle.Top, contentRectangle.Width, text_size.Height);
-								image_area = new Rectangle (contentRectangle.Left, text_area.Bottom, contentRectangle.Width, contentRectangle.Height - text_area.Height);
+								text_area = new Rectangle_ (contentRectangle.Left, contentRectangle.Top, contentRectangle.Width, text_size.Height);
+								image_area = new Rectangle_ (contentRectangle.Left, text_area.Bottom, contentRectangle.Width, contentRectangle.Height - text_area.Height);
 
 								text_rect = AlignInRectangle (text_area, this.text_size, this.text_align);
 								image_rect = AlignInRectangle (image_area, GetImageSize (), this.image_align);
@@ -1678,15 +1678,15 @@ namespace System.Windows.Forms
 			return null;
 		}
 
-		private void LayoutTextBeforeOrAfterImage (Rectangle totalArea, bool textFirst, Size textSize, Size imageSize, ContentAlignment textAlign, ContentAlignment imageAlign, out Rectangle textRect, out Rectangle imageRect)
+		private void LayoutTextBeforeOrAfterImage (Rectangle_ totalArea, bool textFirst, Size_ textSize, Size_ imageSize, ContentAlignment textAlign, ContentAlignment imageAlign, out Rectangle_ textRect, out Rectangle_ imageRect)
 		{
 			int element_spacing = 0;	// Spacing between the Text and the Image
 			int total_width = textSize.Width + element_spacing + imageSize.Width;
 			int excess_width = totalArea.Width - total_width;
 			int offset = 0;
 			
-			Rectangle final_text_rect;
-			Rectangle final_image_rect;
+			Rectangle_ final_text_rect;
+			Rectangle_ final_image_rect;
 
 			HorizontalAlignment h_text = GetHorizontalAlignment (textAlign);
 			HorizontalAlignment h_image = GetHorizontalAlignment (imageAlign);
@@ -1701,11 +1701,11 @@ namespace System.Windows.Forms
 				offset += (int)(2 * (excess_width / 3));
 				
 			if (textFirst) {
-				final_text_rect = new Rectangle (totalArea.Left + offset, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
-				final_image_rect = new Rectangle (final_text_rect.Right + element_spacing, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
+				final_text_rect = new Rectangle_ (totalArea.Left + offset, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
+				final_image_rect = new Rectangle_ (final_text_rect.Right + element_spacing, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
 			} else {
-				final_image_rect = new Rectangle (totalArea.Left + offset, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
-				final_text_rect = new Rectangle (final_image_rect.Right + element_spacing, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
+				final_image_rect = new Rectangle_ (totalArea.Left + offset, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
+				final_text_rect = new Rectangle_ (final_image_rect.Right + element_spacing, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
 			}
 			
 			textRect = final_text_rect;
@@ -1732,9 +1732,9 @@ namespace System.Windows.Forms
 			return HorizontalAlignment.Left;
 		}
 		
-		internal Size GetImageSize ()
+		internal Size_ GetImageSize ()
 		{
-			// Get the actual size of our internal image -or-
+			// Get the actual Size_ of our internal image -or-
 			// Get the ImageList.ImageSize if we are using ImageLists
 			if (this.image_scaling == ToolStripItemImageScaling.None) {
 				if (this.image != null)
@@ -1746,7 +1746,7 @@ namespace System.Windows.Forms
 			} else {
 				// If we have an image and a parent, return ImageScalingSize
 				if (this.Parent == null)
-					return Size.Empty;
+					return Size_.Empty;
 					
 				if (this.image != null)
 					return this.Parent.ImageScalingSize;
@@ -1756,7 +1756,7 @@ namespace System.Windows.Forms
 						return this.Parent.ImageScalingSize;
 			}
 			
-			return Size.Empty;
+			return Size_.Empty;
 		}
 		
 		internal string GetToolTip ()
@@ -1903,7 +1903,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Point Location {
+		internal Point_ Location {
 			get { return this.bounds.Location; }
 			set {
 				if (this.bounds.Location != value) {
@@ -1995,9 +1995,9 @@ namespace System.Windows.Forms
 			}
 
 			#region Public Properties
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get {
-					return owner_item.Visible ? owner_item.Bounds : Rectangle.Empty;
+					return owner_item.Visible ? owner_item.Bounds : Rectangle_.Empty;
 				}
 			}
 

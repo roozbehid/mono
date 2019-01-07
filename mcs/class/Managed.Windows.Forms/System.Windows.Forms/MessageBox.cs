@@ -31,8 +31,8 @@
 
 
 // NOT COMPLETE
-
 using System;
+
 using System.Drawing;
 using System.Globalization;
 using System.Resources;
@@ -54,7 +54,7 @@ namespace System.Windows.Forms
 			string			msgbox_text;
 			bool			size_known	= false;
 			Icon			icon_image;
-			RectangleF		text_rect;
+			RectangleF_		text_rect;
 			MessageBoxButtons	msgbox_buttons;
 			MessageBoxDefaultButton	msgbox_default;
 			bool			buttons_placed	= false;
@@ -200,7 +200,7 @@ namespace System.Windows.Forms
 
 			internal override void OnPaintInternal (PaintEventArgs e)
 			{
-				e.Graphics.DrawString (msgbox_text, this.Font, ThemeEngine.Current.ResPool.GetSolidBrush (Color.Black), text_rect);
+				e.Graphics.DrawString (msgbox_text, this.Font, ThemeEngine.Current.ResPool.GetSolidBrush (Color_.Black), text_rect);
 				if (icon_image != null) {
 					e.Graphics.DrawIcon(icon_image, space_border, space_border);
 				}
@@ -221,11 +221,11 @@ namespace System.Windows.Forms
 					if (new_max_width < max_width)
 						max_width = new_max_width;
 				}
-				// First we have to know the size of text + image
+				// First we have to know the Size_ of text + image
 				int iconImageWidth = 0;
 				if (icon_image != null)
 					iconImageWidth = icon_image.Width + 10;
-				Drawing.SizeF tsize = TextRenderer.MeasureText (msgbox_text, this.Font, new Size (max_width - iconImageWidth, int.MaxValue), TextFormatFlags.WordBreak);
+				SizeF_ tsize = TextRenderer.MeasureText (msgbox_text, this.Font, new Size_ (max_width - iconImageWidth, int.MaxValue), TextFormatFlags.WordBreak);
 				text_rect = new RectangleF ();
 				text_rect.Height = tsize.Height;
 
@@ -233,14 +233,14 @@ namespace System.Windows.Forms
 					tsize.Width += iconImageWidth;
 					if(icon_image.Height > tsize.Height) {
 						// Place text middle-right
-						text_rect.Location = new Point (icon_image.Width + space_image_text + space_border, (int)((icon_image.Height/2)-(tsize.Height/2)) + space_border);
+						text_rect.Location = new Point_ (icon_image.Width + space_image_text + space_border, (int)((icon_image.Height/2)-(tsize.Height/2)) + space_border);
 					} else {
-						text_rect.Location = new Point (icon_image.Width + space_image_text + space_border, 2 + space_border);
+						text_rect.Location = new Point_ (icon_image.Width + space_image_text + space_border, 2 + space_border);
 					}
 					if (tsize.Height < icon_image.Height)
 						tsize.Height = icon_image.Height;
 				} else {
-					text_rect.Location = new Point (space_border + button_space, space_border);
+					text_rect.Location = new Point_ (space_border + button_space, space_border);
 				}
 				tsize.Height += space_border * 2;
 				text_rect.Height += space_border;
@@ -284,17 +284,17 @@ namespace System.Windows.Forms
 				tb_width = (button_width + button_space) * buttoncount;  
 
 				// The form caption can also make us bigger
-				SizeF caption = TextRenderer.MeasureString (Text, new Font (DefaultFont, FontStyle.Bold));
+				SizeF_ caption = TextRenderer.MeasureString (Text, new Font (DefaultFont, FontStyle.Bold));
 				
-				// Use the bigger of the caption size (plus some arbitrary borders/close button)
+				// Use the bigger of the caption Size_ (plus some arbitrary borders/close button)
 				// or the text size, up to 60% of the screen (max_size)
-				Size new_size = new SizeF (Math.Min (Math.Max (caption.Width + 40, tsize.Width), max_width), tsize.Height).ToSize ();
+				Size_ new_size = new SizeF_ (Math.Min (Math.Max (caption.Width + 40, tsize.Width), max_width), tsize.Height).ToSize ();
 				
-				// Now we choose the good size for the form
+				// Now we choose the good Size_ for the form
 				if (new_size.Width > tb_width)
-					this.ClientSize = new Size (new_size.Width + (space_border * 2), Height = new_size.Height + (space_border * 4));
+					this.ClientSize = new Size_ (new_size.Width + (space_border * 2), Height = new_size.Height + (space_border * 4));
 				else
-					this.ClientSize = new Size (tb_width + (space_border * 2), Height = new_size.Height + (space_border * 4));
+					this.ClientSize = new Size_ (tb_width + (space_border * 2), Height = new_size.Height + (space_border * 4));
 
 				text_rect.Width = new_size.Width - iconImageWidth;
 
@@ -551,18 +551,18 @@ namespace System.Windows.Forms
 				get { return msgbox_text; }
 			}
 
-			internal Rectangle UIAMessageRectangle {
+			internal Rectangle_ UIAMessageRectangle {
 				get { 
-					return new Rectangle ((int) text_rect.X,
+					return new Rectangle_ ((int) text_rect.X,
 					                      (int) text_rect.Y, 
 					                      (int) text_rect.Width, 
 					                      (int) text_rect.Height); 
 				}
 			}
 
-			internal Rectangle UIAIconRectangle {
+			internal Rectangle_ UIAIconRectangle {
 				get { 
-					return new Rectangle (space_border, 
+					return new Rectangle_ (space_border, 
 					                      space_border, 
 							      icon_image == null ? -1 : icon_image.Width, 
 							      icon_image == null ? -1 : icon_image.Height);

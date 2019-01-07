@@ -28,9 +28,9 @@
 // public static int GetIconIndexForFile( string full_filename )
 // public static int GetIconIndexForMimeType( string mime_type )
 // to get the image index in MimeIconEngine.SmallIcons and MimeIconEngine.LargeIcons
-
 using System;
 using System.Reflection;
+
 using System.Drawing;
 using System.Collections;
 using System.IO;
@@ -70,7 +70,7 @@ namespace System.Windows.Forms
 		
 		static internal Icon GetIcon (string name)
 		{
-			Stream stream = assembly.GetManifestResourceStream ("System.Windows.Forms.resources." + name);
+			Stream stream = assembly.GetManifestResourceStream ("resources/" + name);
 
 			if (stream == null) {
 				Console.WriteLine ("Failed to read {0}", name);
@@ -97,9 +97,9 @@ namespace System.Windows.Forms
 		static MimeIconEngine ()
 		{
 			SmallIcons.ColorDepth = ColorDepth.Depth32Bit;
-			SmallIcons.TransparentColor = Color.Transparent;
+			SmallIcons.TransparentColor = Color_.Transparent;
 			LargeIcons.ColorDepth = ColorDepth.Depth32Bit;
-			LargeIcons.TransparentColor = Color.Transparent;
+			LargeIcons.TransparentColor = Color_.Transparent;
 			
 			string session =  Environment.GetEnvironmentVariable ("DESKTOP_SESSION");
 			
@@ -116,8 +116,8 @@ namespace System.Windows.Forms
 				session = String.Empty;
 			
 			if (Mime.MimeAvailable && session == "GNOME") {
-				SmallIcons.ImageSize = new Size (24, 24);
-				LargeIcons.ImageSize = new Size (48, 48);
+				SmallIcons.ImageSize = new Size_ (24, 24);
+				LargeIcons.ImageSize = new Size_ (48, 48);
 				
 				platformMimeHandler = new GnomeHandler ();
 				if (platformMimeHandler.Start () == MimeExtensionHandlerStatus.OK) {
@@ -129,8 +129,8 @@ namespace System.Windows.Forms
 					platformMimeHandler.Start ();
 				}
 			} else {
-				SmallIcons.ImageSize = new Size (16, 16);
-				LargeIcons.ImageSize = new Size (48, 48);
+				SmallIcons.ImageSize = new Size_ (16, 16);
+				LargeIcons.ImageSize = new Size_ (48, 48);
 				
 				platformMimeHandler = new PlatformDefaultHandler ();
 				platformMimeHandler.Start ();
@@ -194,7 +194,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public static Image GetIconForMimeTypeAndSize (string mime_type, Size size)
+		public static Image GetIconForMimeTypeAndSize (string mime_type, Size_ size)
 		{
 			lock (lock_object) {
 				object oindex = GetIconIndex (mime_type);
@@ -207,8 +207,8 @@ namespace System.Windows.Forms
 		
 		internal static void AddIconByImage (string mime_type, Image image)
 		{
-			int index = SmallIcons.Images.Add (image, Color.Transparent);
-			LargeIcons.Images.Add (image, Color.Transparent);
+			int index = SmallIcons.Images.Add (image, Color_.Transparent);
+			LargeIcons.Images.Add (image, Color_.Transparent);
 			
 			MimeIconIndex.Add (mime_type, index);
 		}
@@ -360,8 +360,8 @@ namespace System.Windows.Forms
 			}
 
 			if (image != null) {
-				index = MimeIconEngine.SmallIcons.Images.Add (image, Color.Transparent);
-				MimeIconEngine.LargeIcons.Images.Add (image, Color.Transparent);
+				index = MimeIconEngine.SmallIcons.Images.Add (image, Color_.Transparent);
+				MimeIconEngine.LargeIcons.Images.Add (image, Color_.Transparent);
 				MimeIconEngine.MimeIconIndex.Add (internal_mime_type, index);
 			}
 		}
@@ -372,8 +372,8 @@ namespace System.Windows.Forms
 			
 			Image image = GnomeUtil.GetIcon (filename, mime_type, 48);
 			if (image != null) {
-				index = MimeIconEngine.SmallIcons.Images.Add (image, Color.Transparent);
-				MimeIconEngine.LargeIcons.Images.Add (image, Color.Transparent);
+				index = MimeIconEngine.SmallIcons.Images.Add (image, Color_.Transparent);
+				MimeIconEngine.LargeIcons.Images.Add (image, Color_.Transparent);
 				MimeIconEngine.MimeIconIndex.Add (mime_type, index);
 			}
 			
@@ -386,8 +386,8 @@ namespace System.Windows.Forms
 			
 			Image image = GnomeUtil.GetIcon (mime_type, 48);
 			if (image != null) {
-				index = MimeIconEngine.SmallIcons.Images.Add (image, Color.Transparent);
-				MimeIconEngine.LargeIcons.Images.Add (image, Color.Transparent);
+				index = MimeIconEngine.SmallIcons.Images.Add (image, Color_.Transparent);
+				MimeIconEngine.LargeIcons.Images.Add (image, Color_.Transparent);
 				MimeIconEngine.MimeIconIndex.Add (mime_type, index);
 			}
 			

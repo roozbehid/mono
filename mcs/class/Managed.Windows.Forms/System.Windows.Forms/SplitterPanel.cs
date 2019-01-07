@@ -25,10 +25,10 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -109,7 +109,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		new public Point Location {
+		new public Point_ Location {
 			get { return base.Location; }
 			set { base.Location = value; }
 		}
@@ -117,7 +117,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		new public Size MaximumSize {
+		new public Size_ MaximumSize {
 			get { return base.MaximumSize; }
 			set { base.MaximumSize = value; }
 		}
@@ -125,7 +125,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		new public Size MinimumSize {
+		new public Size_ MinimumSize {
 			get { return base.MinimumSize; }
 			set { base.MinimumSize = value; }
 		}
@@ -149,7 +149,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		new public Size Size {
+		new public Size_ Size {
 			get { return base.Size; }
 			set { base.Size = value; }
 		}

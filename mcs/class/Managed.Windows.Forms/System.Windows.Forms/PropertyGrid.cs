@@ -51,13 +51,13 @@ namespace System.Windows.Forms
 		private const string UNCATEGORIZED_CATEGORY_LABEL = "Misc";
 		private AttributeCollection browsable_attributes = null;
 		private bool can_show_commands = false;
-		private Color commands_back_color;
-		private Color commands_fore_color;
+		private Color_ commands_back_color;
+		private Color_ commands_fore_color;
 		private bool commands_visible;
 		private bool commands_visible_if_available;
-		private Point context_menu_default_location;
+		private Point_ context_menu_default_location;
 		private bool large_buttons;
-		private Color line_color;
+		private Color_ line_color;
 		private PropertySort property_sort;
 		private PropertyTabCollection property_tabs;
 		private GridEntry selected_grid_item;
@@ -86,10 +86,10 @@ namespace System.Windows.Forms
 		private MenuItem reset_menuitem;
 		private MenuItem description_menuitem;
 
-		private Color category_fore_color;
-		private Color commands_active_link_color;
-		private Color commands_disabled_link_color;
-		private Color commands_link_color;
+		private Color_ category_fore_color;
+		private Color_ commands_active_link_color;
+		private Color_ commands_disabled_link_color;
+		private Color_ commands_link_color;
 		#endregion	// Private Members
 		
 		#region Contructors
@@ -119,7 +119,7 @@ namespace System.Windows.Forms
 			help_title_label.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			help_title_label.Name = "help_title_label";
 			help_title_label.Font = new Font(this.Font,FontStyle.Bold);
-			help_title_label.Location = new Point(2,2);
+			help_title_label.Location = new Point_(2,2);
 			help_title_label.Height = 17;
 			help_title_label.Width = help_panel.Width - 4;
 
@@ -129,7 +129,7 @@ namespace System.Windows.Forms
 			help_description_label.AutoEllipsis = true;
 			help_description_label.AutoSize = false;
 			help_description_label.Font = this.Font;
-			help_description_label.Location = new Point(2,help_title_label.Top+help_title_label.Height);
+			help_description_label.Location = new Point_(2,help_title_label.Top+help_title_label.Height);
 			help_description_label.Width = help_panel.Width - 4;
 			help_description_label.Height = help_panel.Height - help_description_label.Top - 2;
 
@@ -145,7 +145,7 @@ namespace System.Windows.Forms
 			propertypages_toolbarbutton = new PropertyToolBarButton ();
 			separator_toolbarbutton = new PropertyToolBarSeparator ();
 			ContextMenu context_menu = new ContextMenu();
-			context_menu_default_location = Point.Empty;
+			context_menu_default_location = Point_.Empty;
 
 			categorized_image = new Bitmap (typeof (PropertyGrid), "propertygrid-categorized.png");
 			alphabetical_image = new Bitmap (typeof (PropertyGrid), "propertygrid-alphabetical.png");
@@ -153,16 +153,16 @@ namespace System.Windows.Forms
 
 			toolbar_imagelist = new ImageList();
 			toolbar_imagelist.ColorDepth = ColorDepth.Depth32Bit;
-			toolbar_imagelist.ImageSize = new System.Drawing.Size(16, 16);
-			toolbar_imagelist.TransparentColor = System.Drawing.Color.Transparent;
+			toolbar_imagelist.ImageSize = new System.Drawing.Size_(16, 16);
+			toolbar_imagelist.TransparentColor = System.Drawing.Color_.Transparent;
 
 			toolbar.Appearance = ToolBarAppearance.Flat;
 			toolbar.AutoSize = false;
 			
 			toolbar.ImageList = toolbar_imagelist;
-			toolbar.Location = new System.Drawing.Point(0, 0);
+			toolbar.Location = new System.Drawing.Point_(0, 0);
 			toolbar.ShowToolTips = true;
-			toolbar.Size = new System.Drawing.Size(256, 27);
+			toolbar.Size = new System.Drawing.Size_(256, 27);
 			toolbar.TabIndex = 0;
 
 			toolbar.Items.AddRange (new ToolStripItem [] {categorized_toolbarbutton,
@@ -206,7 +206,7 @@ namespace System.Windows.Forms
 			this.Controls.Add(splitter);
 			this.Controls.Add(help_panel);
 			this.Name = "PropertyGrid";
-			this.Size = new System.Drawing.Size(256, 400);
+			this.Size = new System.Drawing.Size_(256, 400);
 		}
 		#endregion	// Constructors
 
@@ -245,7 +245,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get {
 				return base.BackColor;
 			}
@@ -284,7 +284,7 @@ namespace System.Windows.Forms
 		}
 
 		[DefaultValue(typeof(Color), "ControlText")]
-		public Color CategoryForeColor {
+		public Color_ CategoryForeColor {
 			get {
 				return category_fore_color;
 			}
@@ -296,7 +296,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color CommandsBackColor {
+		public Color_ CommandsBackColor {
 			get {
 				return commands_back_color;
 			}
@@ -309,7 +309,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color CommandsForeColor {
+		public Color_ CommandsForeColor {
 			get {
 				return commands_fore_color;
 			}
@@ -322,7 +322,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color CommandsActiveLinkColor {
+		public Color_ CommandsActiveLinkColor {
 			get {
 				return commands_active_link_color;
 			}
@@ -331,7 +331,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public Color CommandsDisabledLinkColor {
+		public Color_ CommandsDisabledLinkColor {
 			get {
 				return commands_disabled_link_color;
 			}
@@ -340,7 +340,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color CommandsLinkColor {
+		public Color_ CommandsLinkColor {
 			get {
 				return commands_link_color;
 			}
@@ -375,7 +375,7 @@ namespace System.Windows.Forms
 		[BrowsableAttribute(false)]
 		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
 		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-		public Point ContextMenuDefaultLocation {
+		public Point_ ContextMenuDefaultLocation {
 			get {
 				return context_menu_default_location;
 			}
@@ -392,7 +392,7 @@ namespace System.Windows.Forms
 		
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get {
 				return base.ForeColor;
 			}
@@ -402,7 +402,7 @@ namespace System.Windows.Forms
 		}
 
 		[DefaultValue ("Color [Control]")]
-		public Color HelpBackColor {
+		public Color_ HelpBackColor {
 			get {
 				return help_panel.BackColor;
 			}
@@ -412,7 +412,7 @@ namespace System.Windows.Forms
 		}
 
 		[DefaultValue ("Color [ControlText]")]
-		public Color HelpForeColor {
+		public Color_ HelpForeColor {
 			get {
 				return help_panel.ForeColor;
 			}
@@ -451,7 +451,7 @@ namespace System.Windows.Forms
 		}
 
 		[DefaultValue ("Color [InactiveBorder]")]
-		public Color LineColor {
+		public Color_ LineColor {
 			get {
 				return line_color;
 			}
@@ -681,7 +681,7 @@ namespace System.Windows.Forms
 		}
 
 		[DefaultValue ("Color [Window]")]
-		public Color ViewBackColor {
+		public Color_ ViewBackColor {
 			get { return property_grid_view.BackColor; }
 			set {
 				if (property_grid_view.BackColor == value) {
@@ -693,7 +693,7 @@ namespace System.Windows.Forms
 		}
 
 		[DefaultValue ("Color [WindowText]")]
-		public Color ViewForeColor {
+		public Color_ ViewForeColor {
 			get { return property_grid_view.ForeColor; }
 			set {
 				if (property_grid_view.ForeColor == value) {
@@ -721,7 +721,7 @@ namespace System.Windows.Forms
 
 		#region Protected Instance Properties
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return base.DefaultSize; }
 		}
 
@@ -1280,15 +1280,15 @@ namespace System.Windows.Forms
 		{
 		}
 
-		[MonoTODO ("Stub, does nothing")]
-		void ComponentModel.Com2Interop.IComPropertyBrowser.LoadState (Microsoft.Win32.RegistryKey optRoot)
-		{
-		}
+		//[MonoTODO ("Stub, does nothing")]
+		//void ComponentModel.Com2Interop.IComPropertyBrowser.LoadState (Microsoft.Win32.RegistryKey optRoot)
+		//{
+		//}
 
-		[MonoTODO ("Stub, does nothing")]
-		void ComponentModel.Com2Interop.IComPropertyBrowser.SaveState (Microsoft.Win32.RegistryKey optRoot)
-		{
-		}
+		//[MonoTODO ("Stub, does nothing")]
+		//void ComponentModel.Com2Interop.IComPropertyBrowser.SaveState (Microsoft.Win32.RegistryKey optRoot)
+		//{
+		//}
 
 		static object ComComponentNameChangedEvent = new object ();
 		event ComponentRenameEventHandler ComponentModel.Com2Interop.IComPropertyBrowser.ComComponentNameChanged {
@@ -1585,7 +1585,7 @@ namespace System.Windows.Forms
 		#endregion	// Private Helper Methods
 
 #region Internal helper classes
-		// as we can not change the color for BorderStyle.FixedSingle and we need the correct
+		// as we can not change the Color_ for BorderStyle.FixedSingle and we need the correct
 		// ClientRectangle so that the ScrollBar doesn't draw over the border we need this class
 		internal class BorderHelperControl : Control {
 
@@ -1606,7 +1606,7 @@ namespace System.Windows.Forms
 					Control control = Controls [0];
 					
 					if (control.Location.X != 1 || control.Location.Y != 1)
-						control.Location = new Point (1, 1);
+						control.Location = new Point_ (1, 1);
 					
 					control.Width = ClientRectangle.Width - 2;
 					control.Height = ClientRectangle.Height - 2;

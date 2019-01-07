@@ -38,12 +38,12 @@ namespace System.Windows.Forms
 		private bool is_prefix_search;
 		private bool is_text_search;
 		private int start_index;
-		private Point starting_point;
+		private Point_ starting_point;
 		private string text;
 
 		#region Public Constructors
 		public SearchForVirtualItemEventArgs (bool isTextSearch, bool isPrefixSearch,
-			bool includeSubItemsInSearch, string text, Point startingPoint, 
+			bool includeSubItemsInSearch, string text, Point_ startingPoint, 
 			SearchDirectionHint direction, int startIndex) : base ()
 		{
 			this.is_text_search = isTextSearch;
@@ -83,7 +83,7 @@ namespace System.Windows.Forms
 			get { return this.start_index; }
 		}
 		
-		public Point StartingPoint {
+		public Point_ StartingPoint {
 			get { return this.starting_point; }
 		}
 		

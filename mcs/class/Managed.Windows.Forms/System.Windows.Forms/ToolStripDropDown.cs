@@ -79,7 +79,7 @@ namespace System.Windows.Forms
 
 					if (this.IsHandleCreated) {
 						if (value) 
-							XplatUI.SetWindowTransparency (Handle, Opacity, Color.Empty);
+							XplatUI.SetWindowTransparency (Handle, Opacity, Color_.Empty);
 						else
 							UpdateStyles (); // Remove the WS_EX_LAYERED style
 					}
@@ -174,8 +174,8 @@ namespace System.Windows.Forms
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new Rectangle GripRectangle {
-			get { return Rectangle.Empty; }
+		public new Rectangle_ GripRectangle {
+			get { return Rectangle_.Empty; }
 		}
 
 		[Browsable (false)]
@@ -194,7 +194,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Point Location {
+		public new Point_ Location {
 			get { return base.Location; }
 			set { base.Location = value; }
 		}
@@ -214,7 +214,7 @@ namespace System.Windows.Forms
 					
 					if (this.IsHandleCreated) {
 						UpdateStyles ();
-						XplatUI.SetWindowTransparency (Handle, opacity, Color.Empty);
+						XplatUI.SetWindowTransparency (Handle, opacity, Color_.Empty);
 					}
 			}
 		}
@@ -324,8 +324,8 @@ namespace System.Windows.Forms
 			get { return true; }
 		}
 
-		protected internal override Size MaxItemSize {
-			get { return new Size (Screen.PrimaryScreen.Bounds.Width - 2, Screen.PrimaryScreen.Bounds.Height - 34); }
+		protected internal override Size_ MaxItemSize {
+			get { return new Size_ (Screen.PrimaryScreen.Bounds.Width - 2, Screen.PrimaryScreen.Bounds.Height - 34); }
 		}
 
 		protected virtual bool TopMost {
@@ -380,12 +380,12 @@ namespace System.Windows.Forms
 			Show (Location, DefaultDropDownDirection);
 		}
 		
-		public void Show (Point screenLocation)
+		public void Show (Point_ screenLocation)
 		{
 			Show (screenLocation, DefaultDropDownDirection);
 		}
 		
-		public void Show (Control control, Point position)
+		public void Show (Control control, Point_ position)
 		{
 			if (control == null)
 				throw new ArgumentNullException ("control");
@@ -396,15 +396,15 @@ namespace System.Windows.Forms
 		
 		public void Show (int x, int y)
 		{
-			Show (new Point (x, y), DefaultDropDownDirection);
+			Show (new Point_ (x, y), DefaultDropDownDirection);
 		}
 		
-		public void Show (Point position, ToolStripDropDownDirection direction)
+		public void Show (Point_ position, ToolStripDropDownDirection direction)
 		{
 			this.PerformLayout ();
 			
-			Point show_point = position;
-			Point max_screen = new Point (SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
+			Point_ show_point = position;
+			Point_ max_screen = new Point_ (SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height);
 			
 			if (this is ContextMenuStrip) {
 				// If we are going to go offscreen, adjust our direction so we don't...
@@ -522,10 +522,10 @@ namespace System.Windows.Forms
 			if (control == null)
 				throw new ArgumentNullException ("control");
 
-			Show (control, new Point (x, y));
+			Show (control, new Point_ (x, y));
 		}
 		
-		public void Show (Control control, Point position, ToolStripDropDownDirection direction)
+		public void Show (Control control, Point_ position, ToolStripDropDownDirection direction)
 		{
 			if (control == null)
 				throw new ArgumentNullException ("control");
@@ -594,7 +594,7 @@ namespace System.Windows.Forms
 					
 				tsi.SetPlacement (ToolStripItemPlacement.Main);
 				
-				widest = Math.Max (widest, tsi.GetPreferredSize (Size.Empty).Width + tsi.Margin.Horizontal);
+				widest = Math.Max (widest, tsi.GetPreferredSize (Size_.Empty).Width + tsi.Margin.Horizontal);
 			}
 			
 			// Add any padding our dropdown has set
@@ -611,7 +611,7 @@ namespace System.Windows.Forms
 
 				int height = 0;
 
-				Size preferred_size = tsi.GetPreferredSize (Size.Empty);
+				Size_ preferred_size = tsi.GetPreferredSize (Size_.Empty);
 
 				if (preferred_size.Height > 22)
 					height = preferred_size.Height;
@@ -620,11 +620,11 @@ namespace System.Windows.Forms
 				else
 					height = 22;
 
-				tsi.SetBounds (new Rectangle (x, y, preferred_size.Width, height));
+				tsi.SetBounds (new Rectangle_ (x, y, preferred_size.Width, height));
 				y += height + tsi.Margin.Bottom;
 			}
 
-			this.Size = new Size (widest, y + this.Padding.Bottom);
+			this.Size = new Size_ (widest, y + this.Padding.Bottom);
 			this.SetDisplayedItems ();
 			this.OnLayoutCompleted (EventArgs.Empty);
 			this.Invalidate ();
@@ -693,7 +693,7 @@ namespace System.Windows.Forms
 			return base.ProcessMnemonic (charCode);
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}

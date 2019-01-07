@@ -71,19 +71,19 @@ namespace System.Windows.Forms.VisualStyles
 			return (int)S.S_OK;
 #endif
 		}
-		public int UxThemeDrawThemeParentBackground (IDeviceContext dc, Rectangle bounds, Control childControl)
+		public int UxThemeDrawThemeParentBackground (IDeviceContext dc, Rectangle_ bounds, Control childControl)
 		{
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, Rectangle clipRectangle)
+		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, Rectangle_ clipRectangle)
 		{
-			return (int)(DrawBackground ((ThemeHandle)(int)hTheme, dc, iPartId, iStateId, bounds, clipRectangle, Rectangle.Empty) ? S.S_OK : S.S_FALSE);
+			return (int)(DrawBackground ((ThemeHandle)(int)hTheme, dc, iPartId, iStateId, bounds, clipRectangle, Rectangle_.Empty) ? S.S_OK : S.S_FALSE);
 		}
-		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds)
+		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds)
 		{
 			return UxThemeDrawThemeBackground (hTheme, dc, iPartId, iStateId, bounds, bounds);
 		}
-		bool DrawBackground (ThemeHandle themeHandle, IDeviceContext dc, int part, int state, Rectangle bounds, Rectangle clipRectangle, Rectangle excludedArea) {
+		bool DrawBackground (ThemeHandle themeHandle, IDeviceContext dc, int part, int state, Rectangle_ bounds, Rectangle_ clipRectangle, Rectangle_ excludedArea) {
 			GtkPlusState gtk_plus_state;
 			GtkPlusToggleButtonValue gtk_plus_toggle_button_value;
 			switch (themeHandle) {
@@ -751,20 +751,20 @@ namespace System.Windows.Forms.VisualStyles
 			}
 			return true;
 		}
-		public int UxThemeDrawThemeEdge (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, Edges edges, EdgeStyle style, EdgeEffects effects, out Rectangle result)
+		public int UxThemeDrawThemeEdge (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, Edges edges, EdgeStyle style, EdgeEffects effects, out Rectangle_ result)
 		{
-			result = Rectangle.Empty;
+			result = Rectangle_.Empty;
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeDrawThemeText (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string text, TextFormatFlags textFlags, Rectangle bounds)
+		public int UxThemeDrawThemeText (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string text, TextFormatFlags textFlags, Rectangle_ bounds)
 		{
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeGetThemeBackgroundContentRect (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, out Rectangle result)
+		public int UxThemeGetThemeBackgroundContentRect (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, out Rectangle_ result)
 		{
 			return (int)(GetBackgroundContentRectangle ((ThemeHandle)(int)hTheme, iPartId, iStateId, bounds, out result) ? S.S_OK : S.S_FALSE);
 		}
-		bool GetBackgroundContentRectangle (ThemeHandle handle, int part, int state, Rectangle bounds, out Rectangle result)
+		bool GetBackgroundContentRectangle (ThemeHandle handle, int part, int state, Rectangle_ bounds, out Rectangle_ result)
 		{
 			switch (handle) {
 			case ThemeHandle.PROGRESS:
@@ -776,15 +776,15 @@ namespace System.Windows.Forms.VisualStyles
 				}
 				break;
 			}
-			result = Rectangle.Empty;
+			result = Rectangle_.Empty;
 			return false;
 		}
-		public int UxThemeGetThemeBackgroundExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle contentBounds, out Rectangle result)
+		public int UxThemeGetThemeBackgroundExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ contentBounds, out Rectangle_ result)
 		{
-			result = Rectangle.Empty;
+			result = Rectangle_.Empty;
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeGetThemeBackgroundRegion (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, out Region result)
+		public int UxThemeGetThemeBackgroundRegion (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, out Region result)
 		{
 			result = null;
 			return (int)S.S_FALSE;
@@ -794,9 +794,9 @@ namespace System.Windows.Forms.VisualStyles
 			result = false;
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeGetThemeColor (IntPtr hTheme, int iPartId, int iStateId, ColorProperty prop, out Color result)
+		public int UxThemeGetThemeColor (IntPtr hTheme, int iPartId, int iStateId, ColorProperty prop, out Color_ result)
 		{
-			result = Color.Black;
+			result = Color_.Black;
 			return (int)S.S_FALSE;
 		}
 		public int UxThemeGetThemeEnumValue (IntPtr hTheme, int iPartId, int iStateId, EnumProperty prop, out int result)
@@ -840,15 +840,15 @@ namespace System.Windows.Forms.VisualStyles
 			result = Padding.Empty;
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, ThemeSizeType type, out Size result)
+		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, ThemeSizeType type, out Size_ result)
 		{
 			return (int)(GetPartSize ((ThemeHandle)(int)hTheme, dc, iPartId, iStateId, bounds, true, type, out result) ? S.S_OK : S.S_FALSE);
 		}
-		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, ThemeSizeType type, out Size result)
+		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, ThemeSizeType type, out Size_ result)
 		{
-			return (int)(GetPartSize ((ThemeHandle)(int)hTheme, dc, iPartId, iStateId, Rectangle.Empty, false, type, out result) ? S.S_OK : S.S_FALSE);
+			return (int)(GetPartSize ((ThemeHandle)(int)hTheme, dc, iPartId, iStateId, Rectangle_.Empty, false, type, out result) ? S.S_OK : S.S_FALSE);
 		}
-		bool GetPartSize (ThemeHandle themeHandle, IDeviceContext dc, int part, int state, Rectangle bounds, bool rectangleSpecified, ThemeSizeType type, out Size result)
+		bool GetPartSize (ThemeHandle themeHandle, IDeviceContext dc, int part, int state, Rectangle_ bounds, bool rectangleSpecified, ThemeSizeType type, out Size_ result)
 		{
 			switch (themeHandle) {
 			#region BUTTON
@@ -867,7 +867,7 @@ namespace System.Windows.Forms.VisualStyles
 			case ThemeHandle.HEADER:
 				switch ((HEADERPARTS)part) {
 				case HEADERPARTS.HP_HEADERITEM:
-					result = new Size (0, ThemeWin32Classic.ListViewGetHeaderHeight ());
+					result = new Size_ (0, ThemeWin32Classic.ListViewGetHeaderHeight ());
 					return true;
 				}
 				break;
@@ -876,10 +876,10 @@ namespace System.Windows.Forms.VisualStyles
 			case ThemeHandle.TRACKBAR:
 				switch ((TRACKBARPARTS)part) {
 				case TRACKBARPARTS.TKP_TRACK:
-					result = new Size (0, ThemeWin32Classic.TrackBarHorizontalTrackHeight);
+					result = new Size_ (0, ThemeWin32Classic.TrackBarHorizontalTrackHeight);
 					return true;
 				case TRACKBARPARTS.TKP_TRACKVERT:
-					result = new Size (ThemeWin32Classic.TrackBarVerticalTrackWidth, 0);
+					result = new Size_ (ThemeWin32Classic.TrackBarVerticalTrackWidth, 0);
 					return true;
 				case TRACKBARPARTS.TKP_THUMB:
 				case TRACKBARPARTS.TKP_THUMBVERT:
@@ -894,12 +894,12 @@ namespace System.Windows.Forms.VisualStyles
 				break;
 			#endregion
 			}
-			result = Size.Empty;
+			result = Size_.Empty;
 			return false;
 		}
-		public int UxThemeGetThemePosition (IntPtr hTheme, int iPartId, int iStateId, PointProperty prop, out Point result)
+		public int UxThemeGetThemePosition (IntPtr hTheme, int iPartId, int iStateId, PointProperty prop, out Point_ result)
 		{
-			result = Point.Empty;
+			result = Point_.Empty;
 			return (int)S.S_FALSE;
 		}
 		public int UxThemeGetThemeString (IntPtr hTheme, int iPartId, int iStateId, StringProperty prop, out string result)
@@ -907,14 +907,14 @@ namespace System.Windows.Forms.VisualStyles
 			result = null;
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, Rectangle bounds, out Rectangle result)
+		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, Rectangle_ bounds, out Rectangle_ result)
 		{
-			result = Rectangle.Empty;
+			result = Rectangle_.Empty;
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, out Rectangle result)
+		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, out Rectangle_ result)
 		{
-			result = Rectangle.Empty;
+			result = Rectangle_.Empty;
 			return (int)S.S_FALSE;
 		}
 		public int UxThemeGetThemeTextMetrics (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, out TextMetrics result)
@@ -922,7 +922,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = new TextMetrics ();
 			return (int)S.S_FALSE;
 		}
-		public int UxThemeHitTestThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, HitTestOptions options, Rectangle backgroundRectangle, IntPtr hrgn, Point pt, out HitTestCode result)
+		public int UxThemeHitTestThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, HitTestOptions options, Rectangle_ backgroundRectangle, IntPtr hrgn, Point_ pt, out HitTestCode result)
 		{
 			result = HitTestCode.Bottom;
 			return (int)S.S_FALSE;
@@ -1102,9 +1102,9 @@ namespace System.Windows.Forms.VisualStyles
 				return null;
 			}
 		}
-		public Color VisualStyleInformationControlHighlightHot {
+		public Color_ VisualStyleInformationControlHighlightHot {
 			get {
-				return Color.Black;
+				return Color_.Black;
 			}
 		}
 		public string VisualStyleInformationCopyright {
@@ -1148,9 +1148,9 @@ namespace System.Windows.Forms.VisualStyles
 				return false;
 			}
 		}
-		public Color VisualStyleInformationTextControlBorder {
+		public Color_ VisualStyleInformationTextControlBorder {
 			get {
-				return Color.Black;
+				return Color_.Black;
 			}
 		}
 		public string VisualStyleInformationUrl {
@@ -1165,7 +1165,7 @@ namespace System.Windows.Forms.VisualStyles
 		}
 		#endregion
 		#region VisualStyleRenderer
-		public void VisualStyleRendererDrawBackgroundExcludingArea (IntPtr theme, IDeviceContext dc, int part, int state, Rectangle bounds, Rectangle excludedArea)
+		public void VisualStyleRendererDrawBackgroundExcludingArea (IntPtr theme, IDeviceContext dc, int part, int state, Rectangle_ bounds, Rectangle_ excludedArea)
 		{
 			DrawBackground ((ThemeHandle)(int)theme, dc, part, state, bounds, bounds, excludedArea);
 		}

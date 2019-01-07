@@ -22,11 +22,11 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 //	Kazuki Oikawa (kazuki@panicode.com)
-
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
@@ -52,7 +52,7 @@ namespace System.Windows.Forms {
 		private TreeNode pre_selected_node;
 		private TreeNode focused_node;
 		internal TreeNode highlighted_node;
-		private Rectangle mouse_rect;
+		private Rectangle_ mouse_rect;
 		private bool select_mmove;
 
 		private ImageList image_list;
@@ -96,7 +96,7 @@ namespace System.Windows.Forms {
 		private bool update_needed;
 		
 		private Pen dash;
-		private Color line_color;
+		private Color_ line_color;
 		private StringFormat string_format;
 
 		private int drag_begin_x = -1;
@@ -153,7 +153,7 @@ namespace System.Windows.Forms {
 		#endregion	// Public Constructors
 
 		#region Public Instance Properties
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor;}
 			set {
 				base.BackColor = value;
@@ -199,7 +199,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set { base.ForeColor = value; }
 		}
@@ -400,7 +400,7 @@ namespace System.Windows.Forms {
 						return;
 				}
 
-				Rectangle invalid = Rectangle.Empty;
+				Rectangle_ invalid = Rectangle_.Empty;
 
 				if (selected_node != null) {
 					invalid = Bloat (selected_node.Bounds);
@@ -422,7 +422,7 @@ namespace System.Windows.Forms {
 					invalid.Width = ViewportRectangle.Width;
 				}
 
-				if (invalid != Rectangle.Empty)
+				if (invalid != Rectangle_.Empty)
 					Invalidate (invalid);
 
 				// We ensure its visible after we update because
@@ -437,7 +437,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		private Rectangle Bloat (Rectangle rect)
+		private Rectangle_ Bloat (Rectangle_ rect)
 		{
 			rect.Y--;
 			rect.X--;
@@ -569,10 +569,10 @@ namespace System.Windows.Forms {
 		}
 
 		[DefaultValue ("Color [Black]")]
-		public Color LineColor {
+		public Color_ LineColor {
 			get {
-				if (line_color == Color.Empty) {
-					Color res = ControlPaint.Dark (BackColor);
+				if (line_color == Color_.Empty) {
+					Color_ res = ControlPaint.Dark (BackColor);
 					if (res == BackColor)
 						res = ControlPaint.Light (BackColor);
 					return res;
@@ -654,8 +654,8 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (121, 97); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (121, 97); }
 		}
 
 		#endregion	// Protected Instance Properties
@@ -754,7 +754,7 @@ namespace System.Windows.Forms {
 				SetVScrollValue (vbar.Maximum - VisibleCount + 1);
 		}
 
-		public TreeNode GetNodeAt (Point pt) {
+		public TreeNode GetNodeAt (Point_ pt) {
 			return GetNodeAt (pt.Y);
 		}
 
@@ -775,7 +775,7 @@ namespace System.Windows.Forms {
 			return root_node.GetNodeCount (includeSubTrees);
 		}
 
-		public TreeViewHitTestInfo HitTest (Point pt)
+		public TreeViewHitTestInfo HitTest (Point_ pt)
 		{
 			return HitTest (pt.X, pt.Y);
 		}
@@ -1180,9 +1180,9 @@ namespace System.Windows.Forms {
 			return null;
 		}
 
-	        internal Rectangle ViewportRectangle {
+	        internal Rectangle_ ViewportRectangle {
 			get {
-				Rectangle res = ClientRectangle;
+				Rectangle_ res = ClientRectangle;
 
 				if (vbar != null && vbar.Visible)
 					res.Width -= vbar.Width;
@@ -1357,7 +1357,7 @@ namespace System.Windows.Forms {
 				
 			// We need to update the current node so the plus/minus block gets update too
 			int top = Math.Max (node.Bounds.Top - 1, 0);
-			Rectangle invalid = new Rectangle (0, top,
+			Rectangle_ invalid = new Rectangle_ (0, top,
 					Width, Height - top);
 			Invalidate (invalid);
 		}
@@ -1377,7 +1377,7 @@ namespace System.Windows.Forms {
 				return;
 			}
 
-			Rectangle invalid = new Rectangle (0, node.Bounds.Top - 1, Width,
+			Rectangle_ invalid = new Rectangle_ (0, node.Bounds.Top - 1, Width,
 					node.Bounds.Height + 1);
 			Invalidate (invalid);
 		}
@@ -1398,7 +1398,7 @@ namespace System.Windows.Forms {
 			if (checkboxes)
 				l -= 19;
 
-			Invalidate (new Rectangle (l, node.Bounds.Top, 8, node.Bounds.Height));
+			Invalidate (new Rectangle_ (l, node.Bounds.Top, 8, node.Bounds.Height));
 		}
 
 		internal override void OnPaintInternal (PaintEventArgs pe)
@@ -1412,15 +1412,15 @@ namespace System.Windows.Forms {
 			dash.DashStyle = DashStyle.Dot;
 		}
 
-		private void Draw (Rectangle clip, Graphics dc)
+		private void Draw (Rectangle_ clip, Graphics dc)
 		{
 			dc.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (BackColor), clip);
 
 			if (dash == null)
 				CreateDashPen ();
 
-			Rectangle viewport = ViewportRectangle;
-			Rectangle original_clip = clip;
+			Rectangle_ viewport = ViewportRectangle;
+			Rectangle_ original_clip = clip;
 			if (clip.Bottom > viewport.Bottom)
 				clip.Height = viewport.Bottom - clip.Top;
 
@@ -1440,7 +1440,7 @@ namespace System.Windows.Forms {
 			}
 
 			if (hbar.Visible && vbar.Visible) {
-				Rectangle corner = new Rectangle (hbar.Right, vbar.Bottom, vbar.Width, hbar.Height);
+				Rectangle_ corner = new Rectangle_ (hbar.Right, vbar.Bottom, vbar.Width, hbar.Height);
 				if (original_clip.IntersectsWith (corner))
 					dc.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (ThemeEngine.Current.ColorControl),
 							corner);
@@ -1451,25 +1451,25 @@ namespace System.Windows.Forms {
 		{
 			if (node.Checked) {
 				if (StateImageList.Images[1] != null)
-					dc.DrawImage (StateImageList.Images[1], new Rectangle (x, y, 16, 16));
+					dc.DrawImage (StateImageList.Images[1], new Rectangle_ (x, y, 16, 16));
 			} else {
 				if (StateImageList.Images[0] != null)
-					dc.DrawImage (StateImageList.Images[0], new Rectangle (x, y, 16, 16));
+					dc.DrawImage (StateImageList.Images[0], new Rectangle_ (x, y, 16, 16));
 			}
 		}
 
 		private void DrawNodeCheckBox (TreeNode node, Graphics dc, int x, int middle)
 		{
-			Pen pen = ThemeEngine.Current.ResPool.GetSizedPen(Color.Black, 2);
+			Pen pen = ThemeEngine.Current.ResPool.GetSizedPen(Color_.Black, 2);
 				dc.DrawRectangle (pen, x + 3, middle - 4, 11, 11);
 
 			if (node.Checked) {
-				Pen check_pen = ThemeEngine.Current.ResPool.GetPen(Color.Black);
+				Pen check_pen = ThemeEngine.Current.ResPool.GetPen(Color_.Black);
 				
 				int check_size = 5;
 				int lineWidth = 3;
 				
-				Rectangle rect = new Rectangle (x + 4, middle - 3, check_size, check_size);
+				Rectangle_ rect = new Rectangle_ (x + 4, middle - 3, check_size, check_size);
 				
 				for (int i = 0; i < lineWidth; i++) {
 					dc.DrawLine (check_pen, rect.Left + 1, rect.Top + lineWidth + i, rect.Left + 3, rect.Top + 5 + i);
@@ -1478,7 +1478,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		private void DrawNodeLines (TreeNode node, Graphics dc, Rectangle clip, Pen dash, int x, int y,	int middle)
+		private void DrawNodeLines (TreeNode node, Graphics dc, Rectangle_ clip, Pen dash, int x, int y,	int middle)
 		{
 			int ladjust = 9;
 			int radjust = 0;
@@ -1517,7 +1517,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		private void DrawNodeImage (TreeNode node, Graphics dc, Rectangle clip, int x, int y)
+		private void DrawNodeImage (TreeNode node, Graphics dc, Rectangle_ clip, int x, int y)
 		{
 			if (!RectsIntersect (clip, x, y, ImageList.ImageSize.Width, ImageList.ImageSize.Height))
 				return;
@@ -1636,7 +1636,7 @@ namespace System.Windows.Forms {
 			return (int)TextRenderer.MeasureString (node.Text, font, 0, string_format).Width + 3;
 		}
 
-		private void DrawSelectionAndFocus(TreeNode node, Graphics dc, Rectangle r)
+		private void DrawSelectionAndFocus(TreeNode node, Graphics dc, Rectangle_ r)
 		{
 			if (Focused && focused_node == node && !full_row_select) {
 				ControlPaint.DrawFocusRectangle (dc, r, ForeColor, BackColor);
@@ -1648,15 +1648,15 @@ namespace System.Windows.Forms {
 
 			if (Focused && node == highlighted_node) {
 				// Use the node's BackColor if is not empty, and is not actually the selected one (yet)
-				Color back_color = node != selected_node && node.BackColor != Color.Empty ? node.BackColor :
+				Color_ back_color = node != selected_node && node.BackColor != Color_.Empty ? node.BackColor :
 					ThemeEngine.Current.ColorHighlight;
 				dc.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (back_color), r);
 
 			} else if (!hide_selection && node == highlighted_node) {
 				dc.FillRectangle (SystemBrushes.Control, r);
 			} else {
-				// If selected_node is not the current highlighted one, use the color of the TreeView
-				Color back_color = node == selected_node ? BackColor : node.BackColor;
+				// If selected_node is not the current highlighted one, use the Color_ of the TreeView
+				Color_ back_color = node == selected_node ? BackColor : node.BackColor;
 				dc.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (back_color), r);
 			}
 		}
@@ -1670,7 +1670,7 @@ namespace System.Windows.Forms {
 			Font font = node.NodeFont;
 			if (node.NodeFont == null)
 				font = Font;
-			Color text_color = (Focused && node == highlighted_node ?
+			Color_ text_color = (Focused && node == highlighted_node ?
 					ThemeEngine.Current.ColorHighlightText : node.ForeColor);
 			if (text_color.IsEmpty)
 				text_color = ForeColor;
@@ -1679,14 +1679,14 @@ namespace System.Windows.Forms {
 					node.Bounds, string_format);
 		}
 
-		private void DrawTreeNode (TreeNode node, Graphics dc, Rectangle clip)
+		private void DrawTreeNode (TreeNode node, Graphics dc, Rectangle_ clip)
 		{
 			int child_count = node.nodes.Count;
 			int y = node.GetY ();
 			int middle = y + (ActualItemHeight / 2);
 
 			if (full_row_select && !show_lines) {
-				Rectangle r = new Rectangle (1, y, ViewportRectangle.Width - 2, ActualItemHeight);
+				Rectangle_ r = new Rectangle_ (1, y, ViewportRectangle.Width - 2, ActualItemHeight);
 				DrawSelectionAndFocus (node, dc, r);
 			}
 
@@ -1701,7 +1701,7 @@ namespace System.Windows.Forms {
 					DrawNodeState (node, dc, CheckBoxLeft (node) - 3, y);
 
 				if (!checkboxes && node.StateImage != null)
-					dc.DrawImage (node.StateImage, new Rectangle (CheckBoxLeft (node) - 3, y, 16, 16));
+					dc.DrawImage (node.StateImage, new Rectangle_ (CheckBoxLeft (node) - 3, y, 16, 16));
 
 				if (show_lines)
 					DrawNodeLines (node, dc, clip, dash, node.GetLinesX (), y, middle);
@@ -1719,7 +1719,7 @@ namespace System.Windows.Forms {
 					tree_node_state |= TreeNodeStates.Checked;
 				if (node == focused_node)
 					tree_node_state |= TreeNodeStates.Focused;
-				Rectangle node_bounds = node.Bounds;
+				Rectangle_ node_bounds = node.Bounds;
 				if (draw_mode == TreeViewDrawMode.OwnerDrawText) {
 					node_bounds.X += 3;
 					node_bounds.Y += 1;
@@ -1786,7 +1786,7 @@ namespace System.Windows.Forms {
 				*/
 
 				if (!vbar_bounds_set) {
-					vbar.Bounds = new Rectangle (ClientRectangle.Width - vbar.Width, 0, vbar.Width,
+					vbar.Bounds = new Rectangle_ (ClientRectangle.Width - vbar.Width, 0, vbar.Width,
 							ClientRectangle.Height -
 							(horz ? SystemInformation.VerticalScrollBarWidth : 0));
 					vbar_bounds_set = true;
@@ -1819,7 +1819,7 @@ namespace System.Windows.Forms {
 				*/
 
 				if (!hbar_bounds_set) {
-					hbar.Bounds = new Rectangle (0, ClientRectangle.Height - hbar.Height,
+					hbar.Bounds = new Rectangle_ (0, ClientRectangle.Height - hbar.Height,
 							ClientRectangle.Width - (vert ? SystemInformation.VerticalScrollBarWidth : 0),
 							hbar.Height);
 					hbar_bounds_set = true;
@@ -1841,12 +1841,12 @@ namespace System.Windows.Forms {
 			}
 
 			if (vbar.Visible) {
-				vbar.Bounds = new Rectangle (ClientRectangle.Width - vbar.Width, 0, vbar.Width,
+				vbar.Bounds = new Rectangle_ (ClientRectangle.Width - vbar.Width, 0, vbar.Width,
 						ClientRectangle.Height - (hbar.Visible ? SystemInformation.HorizontalScrollBarHeight : 0));
 			}
 
 			if (hbar.Visible) {
-				hbar.Bounds = new Rectangle (0, ClientRectangle.Height - hbar.Height,
+				hbar.Bounds = new Rectangle_ (0, ClientRectangle.Height - hbar.Height,
 						ClientRectangle.Width - (vbar.Visible ? SystemInformation.VerticalScrollBarWidth : 0), hbar.Height);
 			}
 		}
@@ -1908,7 +1908,7 @@ namespace System.Windows.Forms {
 			// If node Bottom is less than 0, the node is above and not visible,
 			// and we need to scroll the entire viewport
 			int node_bottom = node.Bounds.Bottom >= 0 ? node.Bounds.Bottom : 0;
-			Rectangle below = new Rectangle (0, node_bottom, ViewportRectangle.Width,
+			Rectangle_ below = new Rectangle_ (0, node_bottom, ViewportRectangle.Width,
 					ViewportRectangle.Height - node_bottom);
 
 			int amount = count_to_next * ActualItemHeight;
@@ -1917,7 +1917,7 @@ namespace System.Windows.Forms {
 				XplatUI.ScrollWindow (Handle, below, 0, amount, false);
 
 			if (show_plus_minus) {
-				Invalidate (new Rectangle (0, node.GetY (), Width, ActualItemHeight));
+				Invalidate (new Rectangle_ (0, node.GetY (), Width, ActualItemHeight));
 			}
 		}
 
@@ -1928,7 +1928,7 @@ namespace System.Windows.Forms {
 				return;
 			}
 
-			Rectangle below = new Rectangle (0, node.Bounds.Bottom, ViewportRectangle.Width,
+			Rectangle_ below = new Rectangle_ (0, node.Bounds.Bottom, ViewportRectangle.Width,
 					ViewportRectangle.Height - node.Bounds.Bottom);
 
 			int amount = count_to_next * ActualItemHeight;
@@ -1937,7 +1937,7 @@ namespace System.Windows.Forms {
 				XplatUI.ScrollWindow (Handle, below, 0, -amount, false);
 
 			if (show_plus_minus) {
-				Invalidate (new Rectangle (0, node.GetY (), Width, ActualItemHeight));
+				Invalidate (new Rectangle_ (0, node.GetY (), Width, ActualItemHeight));
 			}
 		}
 
@@ -2023,7 +2023,7 @@ namespace System.Windows.Forms {
 				if (label_edit && e.Clicks == 1 && highlighted_node == old_highlighted && e.Button == MouseButtons.Left) {
 					BeginEdit (node);
 				} else if (highlighted_node != focused_node) {
-					Size ds = SystemInformation.DragSize;
+					Size_ ds = SystemInformation.DragSize;
 					mouse_rect.X = e.X - ds.Width;
 					mouse_rect.Y = e.Y - ds.Height;
 					mouse_rect.Width = ds.Width * 2;
@@ -2071,7 +2071,7 @@ namespace System.Windows.Forms {
 			TreeViewCancelEventArgs ce = new TreeViewCancelEventArgs (highlighted_node, false, TreeViewAction.ByMouse);
 			OnBeforeSelect (ce);
 
-			Rectangle invalid;
+			Rectangle_ invalid;
 			if (!ce.Cancel) {
 				TreeNode prev_focused_node = focused_node;
 				TreeNode prev_highlighted_node = highlighted_node;
@@ -2160,7 +2160,7 @@ namespace System.Windows.Forms {
 		}
 
 		
-		private bool RectsIntersect (Rectangle r, int left, int top, int width, int height)
+		private bool RectsIntersect (Rectangle_ r, int left, int top, int width, int height)
 		{
 			return !((r.Left > left + width) || (r.Right < left) ||
 					(r.Top > top + height) || (r.Bottom < top));
@@ -2169,10 +2169,10 @@ namespace System.Windows.Forms {
 		// Return true if message was handled, false to send it to base
 		private bool WmContextMenu (ref Message m)
 		{
-			Point pt;
+			Point_ pt;
 			TreeNode tn;
 			
-			pt = new Point (LowOrder ((int)m.LParam.ToInt32 ()), HighOrder ((int)m.LParam.ToInt32 ()));
+			pt = new Point_ (LowOrder ((int)m.LParam.ToInt32 ()), HighOrder ((int)m.LParam.ToInt32 ()));
 
 			// This means it's a keyboard menu request
 			if (pt.X == -1 || pt.Y == -1) {
@@ -2181,7 +2181,7 @@ namespace System.Windows.Forms {
 				if (tn == null)
 					return false;
 				
-				pt = new Point (tn.Bounds.Left, tn.Bounds.Top + (tn.Bounds.Height / 2));
+				pt = new Point_ (tn.Bounds.Left, tn.Bounds.Top + (tn.Bounds.Height / 2));
 			} else {
 				pt = PointToClient (pt);
 				

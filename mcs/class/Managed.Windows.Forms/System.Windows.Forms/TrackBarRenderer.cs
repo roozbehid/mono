@@ -38,7 +38,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawBottomPointingThumb(Graphics g, Rectangle bounds, TrackBarThumbState state)
+		public static void DrawBottomPointingThumb(Graphics g, Rectangle_ bounds, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -64,7 +64,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawHorizontalThumb (Graphics g, Rectangle bounds, TrackBarThumbState state)
+		public static void DrawHorizontalThumb (Graphics g, Rectangle_ bounds, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -90,7 +90,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawHorizontalTicks(Graphics g, Rectangle bounds, int numTicks, EdgeStyle edgeStyle)
+		public static void DrawHorizontalTicks(Graphics g, Rectangle_ bounds, int numTicks, EdgeStyle edgeStyle)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -105,12 +105,12 @@ namespace System.Windows.Forms
 			
 			for(int i = 0; i < numTicks; i++)
 			{
-				vsr.DrawEdge(g, new Rectangle((int)Math.Round(x), bounds.Top, 5, bounds.Height), Edges.Left, edgeStyle, EdgeEffects.None);
+				vsr.DrawEdge(g, new Rectangle_((int)Math.Round(x), bounds.Top, 5, bounds.Height), Edges.Left, edgeStyle, EdgeEffects.None);
 				x += delta;
 			}
 		}
 		
-		public static void DrawHorizontalTrack(Graphics g, Rectangle bounds)
+		public static void DrawHorizontalTrack(Graphics g, Rectangle_ bounds)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -120,7 +120,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawLeftPointingThumb (Graphics g, Rectangle bounds, TrackBarThumbState state)
+		public static void DrawLeftPointingThumb (Graphics g, Rectangle_ bounds, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -146,7 +146,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawRightPointingThumb (Graphics g, Rectangle bounds, TrackBarThumbState state)
+		public static void DrawRightPointingThumb (Graphics g, Rectangle_ bounds, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -172,7 +172,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawTopPointingThumb (Graphics g, Rectangle bounds, TrackBarThumbState state)
+		public static void DrawTopPointingThumb (Graphics g, Rectangle_ bounds, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -198,7 +198,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawVerticalThumb (Graphics g, Rectangle bounds, TrackBarThumbState state)
+		public static void DrawVerticalThumb (Graphics g, Rectangle_ bounds, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -224,7 +224,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawVerticalTicks (Graphics g, Rectangle bounds, int numTicks, EdgeStyle edgeStyle)
+		public static void DrawVerticalTicks (Graphics g, Rectangle_ bounds, int numTicks, EdgeStyle edgeStyle)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -238,12 +238,12 @@ namespace System.Windows.Forms
 			double delta = (double)(bounds.Height - 2) / (double)(numTicks - 1);
 
 			for (int i = 0; i < numTicks; i++) {
-				vsr.DrawEdge (g, new Rectangle (bounds.Left, (int)Math.Round (y), bounds.Width, 5), Edges.Top, edgeStyle, EdgeEffects.None);
+				vsr.DrawEdge (g, new Rectangle_ (bounds.Left, (int)Math.Round (y), bounds.Width, 5), Edges.Top, edgeStyle, EdgeEffects.None);
 				y += delta;
 			}
 		}
 
-		public static void DrawVerticalTrack (Graphics g, Rectangle bounds)
+		public static void DrawVerticalTrack (Graphics g, Rectangle_ bounds)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -253,7 +253,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static Size GetBottomPointingThumbSize(Graphics g, TrackBarThumbState state)
+		public static Size_ GetBottomPointingThumbSize(Graphics g, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -279,7 +279,7 @@ namespace System.Windows.Forms
 			return vsr.GetPartSize (g, ThemeSizeType.Draw);
 		}
 
-		public static Size GetLeftPointingThumbSize (Graphics g, TrackBarThumbState state)
+		public static Size_ GetLeftPointingThumbSize (Graphics g, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -305,7 +305,7 @@ namespace System.Windows.Forms
 			return vsr.GetPartSize (g, ThemeSizeType.Draw);
 		}
 
-		public static Size GetRightPointingThumbSize (Graphics g, TrackBarThumbState state)
+		public static Size_ GetRightPointingThumbSize (Graphics g, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -331,7 +331,7 @@ namespace System.Windows.Forms
 			return vsr.GetPartSize (g, ThemeSizeType.Draw);
 		}
 
-		public static Size GetTopPointingThumbSize (Graphics g, TrackBarThumbState state)
+		public static Size_ GetTopPointingThumbSize (Graphics g, TrackBarThumbState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();

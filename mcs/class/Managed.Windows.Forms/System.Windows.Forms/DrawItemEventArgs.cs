@@ -22,8 +22,8 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -32,14 +32,14 @@ namespace System.Windows.Forms {
 
 		Graphics graphics;
 		Font font;
-		Rectangle rect;
+		Rectangle_ rect;
 		int index;
 		DrawItemState state;
-		Color fore_color;
-		Color back_color;
+		Color_ fore_color;
+		Color_ back_color;
 
 		public DrawItemEventArgs (Graphics graphics, Font font,
-				Rectangle rect, int index, DrawItemState state) :
+				Rectangle_ rect, int index, DrawItemState state) :
 			this (graphics, font, rect, index, state,
 					Control.DefaultForeColor, Control.DefaultBackColor)
 		{
@@ -47,8 +47,8 @@ namespace System.Windows.Forms {
 		}
 
 		public DrawItemEventArgs (Graphics graphics, Font font,
-				Rectangle rect, int index, DrawItemState state,
-				Color foreColor, Color backColor)
+				Rectangle_ rect, int index, DrawItemState state,
+				Color_ foreColor, Color_ backColor)
 		{
 			this.graphics = graphics;
 			this.font = font;
@@ -67,7 +67,7 @@ namespace System.Windows.Forms {
 			get { return font; }
 		}
 
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get { return rect; }
 		}
 
@@ -79,11 +79,11 @@ namespace System.Windows.Forms {
 			get { return state; }
 		}
 
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return back_color; }
 		}
 
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get { return fore_color; }
 		}
 

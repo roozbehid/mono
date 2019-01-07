@@ -28,8 +28,8 @@
 
 
 #undef TABLE_DEBUG
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.Layout
@@ -50,7 +50,7 @@ namespace System.Windows.Forms.Layout
 		// There are 3 steps to doing a table layout:
 		// 1) Figure out which row/column each control goes into
 		// 2) Figure out the sizes of each row/column
-		// 3) Size and position each control
+		// 3) Size_ and position each control
 		public override bool Layout (object container, LayoutEventArgs args)
 		{
 			TableLayoutPanel panel = container as TableLayoutPanel;
@@ -71,7 +71,7 @@ namespace System.Windows.Forms.Layout
 			CalculateColumnRowSizes (panel, panel.actual_positions.GetLength (0), panel.actual_positions.GetLength (1));
 			
 			// STEP 3:
-			// - Size and position each control
+			// - Size_ and position each control
 			LayoutControls(panel);
 
 #if TABLE_DEBUG
@@ -233,7 +233,7 @@ namespace System.Windows.Forms.Layout
 
 			int border_width = TableLayoutPanel.GetCellBorderWidth (panel.CellBorderStyle);
 				
-			Rectangle parentDisplayRectangle = panel.DisplayRectangle;
+			Rectangle_ parentDisplayRectangle = panel.DisplayRectangle;
 
 			TableLayoutColumnStyleCollection col_styles = new TableLayoutColumnStyleCollection (panel);
 			
@@ -502,7 +502,7 @@ namespace System.Windows.Forms.Layout
 			int columns = panel.actual_positions.GetLength(0);
 			int rows = panel.actual_positions.GetLength(1);
 
-			Point current_pos = new Point (panel.DisplayRectangle.Left + border_width, panel.DisplayRectangle.Top + border_width);
+			Point_ current_pos = new Point_ (panel.DisplayRectangle.Left + border_width, panel.DisplayRectangle.Top + border_width);
 
 			for (int y = 0; y < rows; y++)
 			{
@@ -511,7 +511,7 @@ namespace System.Windows.Forms.Layout
 					Control c = panel.actual_positions[x,y];
 					
 					if(c != null && c != dummy_control) {
-						Size preferred;
+						Size_ preferred;
 						
 						if (c.AutoSize)
 							preferred = c.PreferredSize;

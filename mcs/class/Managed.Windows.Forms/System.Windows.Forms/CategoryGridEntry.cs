@@ -22,8 +22,8 @@
 // Authors:
 //	Jonathan Chambers (jonathan.chambers@ansys.com)
 //
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.PropertyGridInternal

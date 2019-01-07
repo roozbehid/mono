@@ -24,8 +24,8 @@
 //
 //
 
-
 using System;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -37,14 +37,14 @@ namespace System.Windows.Forms {
 		internal Form form;
 
 		// moving windows
-		internal Point start;
+		internal Point_ start;
 		internal State state;
-		protected Point clicked_point;
+		protected Point_ clicked_point;
 		private FormPos sizing_edge;
-		internal Rectangle virtual_position;
+		internal Rectangle_ virtual_position;
 
-		private Rectangle normal_bounds;
-		private Rectangle iconic_bounds;
+		private Rectangle_ normal_bounds;
+		private Rectangle_ iconic_bounds;
 		
 
 		public enum State {
@@ -96,7 +96,7 @@ namespace System.Windows.Forms {
 				return title_buttons;
 			}
 		}
-		internal Rectangle NormalBounds {
+		internal Rectangle_ NormalBounds {
 			get {
 				return normal_bounds;
 			}
@@ -104,17 +104,17 @@ namespace System.Windows.Forms {
 				normal_bounds = value;
 			}
 		}
-		internal Size IconicSize {
+		internal Size_ IconicSize {
 			get {
 				return SystemInformation.MinimizedWindowSize;
 			}
 		}
 		
-		internal Rectangle IconicBounds {
+		internal Rectangle_ IconicBounds {
 			get {
-				if (iconic_bounds == Rectangle.Empty)
-					return Rectangle.Empty;
-				Rectangle result = iconic_bounds;
+				if (iconic_bounds == Rectangle_.Empty)
+					return Rectangle_.Empty;
+				Rectangle_ result = iconic_bounds;
 				result.Y = Form.Parent.ClientRectangle.Bottom - iconic_bounds.Y;
 				return result;
 			}
@@ -124,7 +124,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal virtual Rectangle MaximizedBounds {
+		internal virtual Rectangle_ MaximizedBounds {
 			get {
 				return Form.Parent.ClientRectangle;
 			}
@@ -140,10 +140,10 @@ namespace System.Windows.Forms {
 
 			switch (new_window_state) {
 			case FormWindowState.Minimized:
-				if (IconicBounds == Rectangle.Empty) {
-					Size size = IconicSize;
-					Point location = new Point (0, Form.Parent.ClientSize.Height - size.Height);
-					IconicBounds = new Rectangle (location, size);
+				if (IconicBounds == Rectangle_.Empty) {
+					Size_ size = IconicSize;
+					Point_ location = new Point_ (0, Form.Parent.ClientSize.Height - size.Height);
+					IconicBounds = new Rectangle_ (location, size);
 				}
 				form.Bounds = IconicBounds;
 				break;
@@ -242,27 +242,27 @@ namespace System.Windows.Forms {
 		{
 			PaintEventArgs pe = XplatUI.PaintEventStart (ref m, form.Handle, false);
 
-			Rectangle clip;
+			Rectangle_ clip;
 			
 			if (form.ActiveMenu != null) {
-				Point pnt;
+				Point_ pnt;
 
 				pnt = GetMenuOrigin ();
 
-				// The entire menu has to be in the clip rectangle because the 
+				// The entire menu has to be in the clip Rectangle_ because the 
 				// control buttons are right-aligned and otherwise they would
 				// stay painted when the window gets resized.
-				clip = new Rectangle (pnt.X, pnt.Y, form.ClientSize.Width, 0);
+				clip = new Rectangle_ (pnt.X, pnt.Y, form.ClientSize.Width, 0);
 				clip = Rectangle.Union (clip, pe.ClipRectangle);
 				pe.SetClip (clip);
 				pe.Graphics.SetClip (clip);
 
-				form.ActiveMenu.Draw (pe, new Rectangle (pnt.X, pnt.Y, form.ClientSize.Width, 0));
+				form.ActiveMenu.Draw (pe, new Rectangle_ (pnt.X, pnt.Y, form.ClientSize.Width, 0));
 			}
 			if (HasBorders || IsMinimized && !(Form.IsMdiChild && IsMaximized)) {
 				// clip region is not correct on win32.
 				// use the entire form's area.
-				clip = new Rectangle (0, 0, form.Width, form.Height);
+				clip = new Rectangle_ (0, 0, form.Width, form.Height);
 				ThemeEngine.Current.DrawManagedWindowDecorations (pe.Graphics, clip, this);
 			}
 			XplatUI.PaintEventEnd (ref m, form.Handle, false);
@@ -397,7 +397,7 @@ namespace System.Windows.Forms {
 		{
 			// toolwindows stay in screencoords we just have to make sure
 			// they obey the working area
-			Rectangle working = SystemInformation.WorkingArea;
+			Rectangle_ working = SystemInformation.WorkingArea;
 
 			if (x > working.Right)
 				x = working.Right;
@@ -425,7 +425,7 @@ namespace System.Windows.Forms {
 			if (!ShowIcon)
 				return false;
 
-			Rectangle icon = ThemeEngine.Current.ManagedWindowGetTitleBarIconArea (this);
+			Rectangle_ icon = ThemeEngine.Current.ManagedWindowGetTitleBarIconArea (this);
 			return icon.Contains (x, y);
 		}
 
@@ -600,7 +600,7 @@ namespace System.Windows.Forms {
 
 			if (!TitleButtons.AnyPushedTitleButtons && !IsMaximized) {
 				state = State.Moving;
-				clicked_point = new Point (x, y);
+				clicked_point = new Point_ (x, y);
 				if (form.Parent != null) {
 					form.CaptureWithConfine (form.Parent);
 				} else {
@@ -632,7 +632,7 @@ namespace System.Windows.Forms {
 	
 		protected virtual void HandleWindowMove (Message m)
 		{
-			Point move = MouseMove (Cursor.Position);
+			Point_ move = MouseMove (Cursor.Position);
 
 			UpdateVP (virtual_position.X + move.X, virtual_position.Y + move.Y,
 					virtual_position.Width, virtual_position.Height);
@@ -640,7 +640,7 @@ namespace System.Windows.Forms {
 
 		private void HandleSizing (Message m)
 		{
-			Rectangle pos = virtual_position;
+			Rectangle_ pos = virtual_position;
 			int mw;
 			int mh;
 			if (IsToolWindow) {
@@ -648,7 +648,7 @@ namespace System.Windows.Forms {
 				mw = 2 * (border_width + Theme.ManagedWindowSpacingAfterLastTitleButton) + ThemeEngine.Current.ManagedWindowButtonSize (this).Width;
 				mh = 2 * border_width + TitleBarHeight;
 			} else {
-				Size minimum_size = SystemInformation.MinWindowTrackSize;
+				Size_ minimum_size = SystemInformation.MinWindowTrackSize;
 				mw = minimum_size.Width;
 				mh = minimum_size.Height;
 			}
@@ -738,12 +738,12 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected void UpdateVP (Rectangle r)
+		protected void UpdateVP (Rectangle_ r)
 		{
 			UpdateVP (r.X, r.Y, r.Width, r.Height);
 		}
 
-		protected void UpdateVP (Point loc, int w, int h)
+		protected void UpdateVP (Point_ loc, int w, int h)
 		{
 			UpdateVP (loc.X, loc.Y, w, h);
 		}
@@ -800,7 +800,7 @@ namespace System.Windows.Forms {
 			return true;
 		}
 		
-		protected void DrawTitleButton (Graphics dc, TitleButton button, Rectangle clip)
+		protected void DrawTitleButton (Graphics dc, TitleButton button, Rectangle_ clip)
 		{
 			if (!button.Rectangle.IntersectsWith (clip))
 				return;
@@ -812,12 +812,12 @@ namespace System.Windows.Forms {
 		{
 		}
 
-		protected Point MouseMove (Point pos)
+		protected Point_ MouseMove (Point_ pos)
 		{
-			return new Point (pos.X - start.X, pos.Y - start.Y);
+			return new Point_ (pos.X - start.X, pos.Y - start.Y);
 		}
 
-		protected virtual void DrawVirtualPosition (Rectangle virtual_position)
+		protected virtual void DrawVirtualPosition (Rectangle_ virtual_position)
 		{
 			form.Bounds = virtual_position;
 			start = Cursor.Position;
@@ -843,9 +843,9 @@ namespace System.Windows.Forms {
 			y += MenuHeight;
 		}
 		
-		internal Point GetMenuOrigin ()
+		internal Point_ GetMenuOrigin ()
 		{
-			return new Point (BorderWidth, BorderWidth + TitleBarHeight);
+			return new Point_ (BorderWidth, BorderWidth + TitleBarHeight);
 		}
 		
 		protected FormPos FormPosForCoords (int x, int y)
@@ -897,7 +897,7 @@ namespace System.Windows.Forms {
 	}
 	internal class TitleButton
 	{
-		public Rectangle Rectangle;
+		public Rectangle_ Rectangle;
 		public ButtonState State;
 		public CaptionButton Caption;
 		private EventHandler Clicked;

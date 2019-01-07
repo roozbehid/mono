@@ -22,13 +22,13 @@
 // Authors:
 //	Andreia Gaita	<avidigal@novell.com>
 
-
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -248,7 +248,7 @@ namespace System.Windows.Forms
 			set { webBrowserShortcutsEnabled = value; }
 		}
 		
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return base.DefaultSize; }
 		}
 
@@ -376,18 +376,7 @@ namespace System.Windows.Forms
 		public void GoSearch ()
 		{
 			string url = "http://www.google.com";
-			try {
-				Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey (@"Software\Microsoft\Internet Explorer\Main\Search Page");
-				if (reg != null) {
-					object searchUrl = reg.GetValue ("Default_Search_URL");
-					if (searchUrl != null && searchUrl is string) {
-						Uri uri;
-						if (System.Uri.TryCreate (searchUrl as string, UriKind.Absolute, out uri))
-							url = uri.ToString ();
-					}
-				}
-			} catch {
-			}
+
 			Navigate (url);
 		}
 

@@ -44,9 +44,9 @@
 
 
 #undef Debug
-
 using System;
 using System.Collections;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Text;
@@ -331,9 +331,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal Point Caret {
+		internal Point_ Caret {
 			get {
-				return new Point((int)caret.tag.Line.widths[caret.pos] + caret.line.X, caret.line.Y);
+				return new Point_((int)caret.tag.Line.widths[caret.pos] + caret.line.X, caret.line.Y);
 			}
 		}
 
@@ -871,7 +871,7 @@ namespace System.Windows.Forms {
 				// Lineheight changed, invalidate the rest of the document
 				if ((line.Y - viewport_y) >=0 ) {
 					// We formatted something that's in view, only draw parts of the screen
-					owner.Invalidate(new Rectangle(
+					owner.Invalidate(new Rectangle_(
 						offset_x, 
 						line.Y - viewport_y + offset_y, 
 						viewport_width, 
@@ -883,7 +883,7 @@ namespace System.Windows.Forms {
 			} else {
 				switch(line.alignment) {
 					case HorizontalAlignment.Left: {
-						owner.Invalidate(new Rectangle(
+						owner.Invalidate(new Rectangle_(
 							line.X + ((int)line.widths[pos] - viewport_x - 1) + offset_x, 
 							line.Y - viewport_y + offset_y, 
 							viewport_width, 
@@ -892,7 +892,7 @@ namespace System.Windows.Forms {
 					}
 
 					case HorizontalAlignment.Center: {
-						owner.Invalidate(new Rectangle(
+						owner.Invalidate(new Rectangle_(
 							line.X + offset_x, 
 							line.Y - viewport_y + offset_y, 
 							viewport_width, 
@@ -901,7 +901,7 @@ namespace System.Windows.Forms {
 					}
 
 					case HorizontalAlignment.Right: {
-						owner.Invalidate(new Rectangle(
+						owner.Invalidate(new Rectangle_(
 							line.X + offset_x, 
 							line.Y - viewport_y + offset_y, 
 							(int)line.widths[pos + 1] - viewport_x + line.X, 
@@ -942,7 +942,7 @@ namespace System.Windows.Forms {
 				// Lineheight changed, invalidate the rest of the document
 				if ((line.Y - viewport_y) >=0 ) {
 					// We formatted something that's in view, only draw parts of the screen
-					owner.Invalidate(new Rectangle(
+					owner.Invalidate(new Rectangle_(
 						offset_x, 
 						line.Y - viewport_y + offset_y, 
 						viewport_width, 
@@ -957,7 +957,7 @@ namespace System.Windows.Forms {
 				int y = Math.Min (start_line_top - viewport_y, line.Y - viewport_y) + offset_y;
 				int h = Math.Max (end_line_bottom - y, end_line.Y + end_line.height - y);
 
-				owner.Invalidate (new Rectangle (x, y, w, h));
+				owner.Invalidate (new Rectangle_ (x, y, w, h));
 			}
 		}
 
@@ -1053,7 +1053,7 @@ namespace System.Windows.Forms {
 
 				// we've found a link - index_found -> link_end
 				// now we just make all the tags as containing link and
-				// point them to the text for the whole link
+				// Point_ them to the text for the whole link
 
 				current_line = start_line;
 
@@ -1165,7 +1165,7 @@ namespace System.Windows.Forms {
 
 
 
-		private void InvalidateLinks (Rectangle clip)
+		private void InvalidateLinks (Rectangle_ clip)
 		{
 			for (int i = (owner.list_links.Count - 1); i >= 0; i--) {
 				TextBoxBase.LinkRectangle link = (TextBoxBase.LinkRectangle) owner.list_links [i];
@@ -1679,7 +1679,7 @@ namespace System.Windows.Forms {
 		}
 
 		// UIA: Used via reflection by TextProviderBehavior
-		internal void GetVisibleLineIndexes (Rectangle clip, out int start, out int end)
+		internal void GetVisibleLineIndexes (Rectangle_ clip, out int start, out int end)
 		{
 			if (multiline) {
 				/* Expand the region slightly to be sure to
@@ -1694,7 +1694,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal void Draw (Graphics g, Rectangle clip)
+		internal void Draw (Graphics g, Rectangle_ clip)
 		{
 			Line line;		// Current line being drawn
 			LineTag	tag;		// Current tag being drawn
@@ -1702,8 +1702,8 @@ namespace System.Windows.Forms {
 			int end;		// Last line to draw
 			StringBuilder text;	// String representing the current line
 			int line_no;
-			Color tag_color;
-			Color current_color;
+			Color_ tag_color;
+			Color_ current_color;
 
 			// First, figure out from what line to what line we need to draw
 			GetVisibleLineIndexes (clip, out start, out end);
@@ -1715,7 +1715,7 @@ namespace System.Windows.Forms {
 			/// We draw the single border ourself
 			///
 			if (owner.actual_border_style == BorderStyle.FixedSingle) {
-				ControlPaint.DrawBorder (g, owner.ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
+				ControlPaint.DrawBorder (g, owner.ClientRectangle, Color_.Black, ButtonBorderStyle.Solid);
 			}
 
 			/// Make sure that we aren't drawing one more line then we need to
@@ -1803,7 +1803,7 @@ namespace System.Windows.Forms {
 						continue;
 					}
 
-					if (tag.BackColor != Color.Empty) {
+					if (tag.BackColor != Color_.Empty) {
 						g.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (tag.BackColor), 
 								offset_x + tag.X + line.X - viewport_x,
 								line_y + tag.Shift, tag.Width, line.height);
@@ -1813,8 +1813,8 @@ namespace System.Windows.Forms {
 					current_color = tag_color;
 
 					if (!owner.Enabled) {
-						Color a = tag.Color;
-						Color b = ThemeEngine.Current.ColorWindowText;
+						Color_ a = tag.Color;
+						Color_ b = ThemeEngine.Current.ColorWindowText;
 
 						if ((a.R == b.R) && (a.G == b.G) && (a.B == b.B))
 							tag_color = ThemeEngine.Current.ColorGrayText;
@@ -1837,7 +1837,7 @@ namespace System.Windows.Forms {
 							tag_pos = tag.End;
 						}
 
-						Rectangle text_size;
+						Rectangle_ text_size;
 
 						tag.Draw (g, current_color,
 								offset_x + line.X - viewport_x,
@@ -1968,7 +1968,7 @@ namespace System.Windows.Forms {
 			Insert (line, pos, update_caret, s, line.FindTag (pos));
 		}
 
-		// Insert text at the given position; use formatting at insertion point for inserted text
+		// Insert text at the given position; use formatting at insertion Point_ for inserted text
 		internal void Insert (Line line, int pos, bool update_caret, string s, LineTag tag)
 		{
 			int break_index;
@@ -2498,12 +2498,12 @@ namespace System.Windows.Forms {
 
 		// Adds a line of text, with given font.
 		// Bumps any line at that line number that already exists down
-		internal void Add (int LineNo, string Text, Font font, Color color, LineEnding ending)
+		internal void Add (int LineNo, string Text, Font font, Color_ color, LineEnding ending)
 		{
 			Add (LineNo, Text, alignment, font, color, ending);
 		}
 
-		internal void Add (int LineNo, string Text, HorizontalAlignment align, Font font, Color color, LineEnding ending)
+		internal void Add (int LineNo, string Text, HorizontalAlignment align, Font font, Color_ color, LineEnding ending)
 		{
 			Line	add;
 			Line	line;
@@ -2668,7 +2668,7 @@ namespace System.Windows.Forms {
 
 		// Invalidates the start line until the end of the viewstate
 		internal void InvalidateLinesAfter (Line start) {
-			owner.Invalidate (new Rectangle (0, start.Y - viewport_y, viewport_width, viewport_height - start.Y));
+			owner.Invalidate (new Rectangle_ (0, start.Y - viewport_y, viewport_width, viewport_height - start.Y));
 		}
 
 		// Invalidate a section of the document to trigger redraw
@@ -2722,7 +2722,7 @@ namespace System.Windows.Forms {
 				#if Debug
 					Console.WriteLine("Invaliding backwards from {0}:{1} to {2}:{3}   {4}",
 							l1.line_no, p1, l2.line_no, p2,
-							new Rectangle(
+							new Rectangle_(
 								(int)l1.widths[p1] + l1.X - viewport_x, 
 								l1.Y - viewport_y, 
 								(int)l1.widths[p2], 
@@ -2731,7 +2731,7 @@ namespace System.Windows.Forms {
 						);
 				#endif
 
-				owner.Invalidate(new Rectangle (
+				owner.Invalidate(new Rectangle_ (
 					offset_x + (int)l1.widths[p1] + l1.X - viewport_x, 
 					offset_y + l1.Y - viewport_y,
 					endpoint - (int) l1.widths [p1] + 1, 
@@ -2746,7 +2746,7 @@ namespace System.Windows.Forms {
 
 			// Three invalidates:
 			// First line from start
-			owner.Invalidate(new Rectangle(
+			owner.Invalidate(new Rectangle_(
 				offset_x + (int)l1.widths[p1] + l1.X - viewport_x, 
 				offset_y + l1.Y - viewport_y, 
 				viewport_width, 
@@ -2758,7 +2758,7 @@ namespace System.Windows.Forms {
 				int	y;
 
 				y = GetLine(l1.line_no + 1).Y;
-				owner.Invalidate(new Rectangle(
+				owner.Invalidate(new Rectangle_(
 					offset_x, 
 					offset_y + y - viewport_y, 
 					viewport_width, 
@@ -2771,7 +2771,7 @@ namespace System.Windows.Forms {
 			
 
 			// Last line to end
-			owner.Invalidate(new Rectangle(
+			owner.Invalidate(new Rectangle_(
 				offset_x + (int)l2.widths[0] + l2.X - viewport_x, 
 				offset_y + l2.Y - viewport_y, 
 				(int)l2.widths[p2] + 1, 
@@ -3533,7 +3533,7 @@ namespace System.Windows.Forms {
 		/// <param name="start_pos">1-based start position on start_line</param>
 		/// <param name="end_pos">1-based end position on end_line </param>
 		internal void FormatText (Line start_line, int start_pos, Line end_line, int end_pos, Font font,
-				Color color, Color back_color, FormatSpecified specified)
+				Color_ color, Color_ back_color, FormatSpecified specified)
 		{
 			Line    l;
 
@@ -4075,7 +4075,7 @@ namespace System.Windows.Forms {
 			get { return false; }
 		}
 
-		public override SizeF SizeOfPosition (Graphics dc, int pos)
+		public override SizeF_ SizeOfPosition (Graphics dc, int pos)
 		{
 			return picture.Size;
 		}
@@ -4085,12 +4085,12 @@ namespace System.Windows.Forms {
 			return (int) (picture.Height + 0.5F);
 		}
 
-		public override void Draw (Graphics dc, Color color, float xoff, float y, int start, int end)
+		public override void Draw (Graphics dc, Color_ color, float xoff, float y, int start, int end)
 		{
 			picture.DrawImage (dc, xoff + Line.widths [start], y, false);
 		}
 
-		public override void Draw (Graphics dc, Color color, float xoff, float y, int start, int end, string text)
+		public override void Draw (Graphics dc, Color_ color, float xoff, float y, int start, int end, string text)
 		{
 			picture.DrawImage (dc, xoff + + Line.widths [start], y, false);
 		}
@@ -4492,7 +4492,7 @@ namespace System.Windows.Forms {
 			return ret;
 		}
 
-		// Insert multi-line text at the given position; use formatting at insertion point for inserted text
+		// Insert multi-line text at the given position; use formatting at insertion Point_ for inserted text
 		internal void Insert(Line line, int pos, Line insert, bool select)
 		{
 			Line	current;

@@ -59,7 +59,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Properties
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return control.BackColor; }
 			set { control.BackColor = value;
 			}
@@ -147,7 +147,7 @@ namespace System.Windows.Forms
 			set { control.Font = value; }
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return control.ForeColor; }
 			set { control.ForeColor = value; }
 		}
@@ -179,7 +179,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Color ImageTransparentColor {
+		public new Color_ ImageTransparentColor {
 			get { return base.ImageTransparentColor; }
 			set { base.ImageTransparentColor = value; }
 		}
@@ -208,7 +208,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Size Size {
+		public override Size_ Size {
 			get { return base.Size; }
 			set { control.Size = value; base.Size = value;  if (this.Owner != null) this.Owner.PerformLayout (); }
 		}
@@ -246,10 +246,10 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Protected Properties
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
 				if (control == null)
-					return new Size (23, 23);
+					return new Size_ (23, 23);
 
 				return control.Size;
 			}
@@ -263,7 +263,7 @@ namespace System.Windows.Forms
 			control.Focus ();
 		}
 
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
 			return control.GetPreferredSize (constrainingSize);
 		}
@@ -325,7 +325,7 @@ namespace System.Windows.Forms
 		
 		protected virtual void OnHostedControlResize (EventArgs e)
 		{
-			// Since the control size has been just adjusted, only update the location
+			// Since the control Size_ has been just adjusted, only update the location
 			if (control != null)
 				control.Location = AlignInRectangle (this.Bounds, control.Size, this.control_align).Location;
 		}

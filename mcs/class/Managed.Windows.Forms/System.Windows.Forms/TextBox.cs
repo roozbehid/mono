@@ -25,11 +25,11 @@
 //
 
 // NOT COMPLETE
-
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -181,7 +181,7 @@ namespace System.Windows.Forms {
 					auto_complete_listbox = new AutoCompleteListBox (this);
 
 				// Show or update auto complete listbox contents
-				auto_complete_listbox.Location = PointToScreen (new Point (0, Height));
+				auto_complete_listbox.Location = PointToScreen (new Point_ (0, Height));
 				auto_complete_listbox.ShowListBox ();
 			}
 
@@ -351,9 +351,9 @@ namespace System.Windows.Forms {
 			Invalidate ();	// Make sure we refresh
 		}
 
-		internal override Color ChangeBackColor (Color backColor)
+		internal override Color_ ChangeBackColor (Color_ backColor)
 		{
-			if (backColor == Color.Empty) {
+			if (backColor == Color_.Empty) {
 				if (!ReadOnly)
 					backColor = SystemColors.Window;
 
@@ -774,7 +774,7 @@ namespace System.Windows.Forms {
 			int highlighted_index = -1;
 			bool user_defined_size;
 			bool resizing;
-			Rectangle resizer_bounds;
+			Rectangle_ resizer_bounds;
 
 			const int DefaultDropDownItems = 7;
 
@@ -877,17 +877,17 @@ namespace System.Windows.Forms {
 				return owner.auto_complete_matches.Count - 1;
 			}
 
-			Rectangle GetItemBounds (int index)
+			Rectangle_ GetItemBounds (int index)
 			{
 				int pos = index - top_item;
-				Rectangle bounds = new Rectangle (0, pos * item_height, Width, item_height);
+				Rectangle_ bounds = new Rectangle_ (0, pos * item_height, Width, item_height);
 				if (vscroll.Visible)
 					bounds.Width -= vscroll.Width;
 
 				return bounds;
 			}
 
-			int GetItemAt (Point loc)
+			int GetItemAt (Point_ loc)
 			{
 				if (loc.Y > (last_item - top_item) * item_height + item_height)
 					return -1;
@@ -908,12 +908,12 @@ namespace System.Windows.Forms {
 					vscroll.Visible = true;
 					vscroll.Maximum = owner.auto_complete_matches.Count - 1;
 					vscroll.LargeChange = page_size;
-					vscroll.Location = new Point (Width - vscroll.Width, 0);
+					vscroll.Location = new Point_ (Width - vscroll.Width, 0);
 					vscroll.Height = Height - item_height;
 				} else
 					vscroll.Visible = false;
 
-				resizer_bounds = new Rectangle (Width - item_height, Height - item_height,
+				resizer_bounds = new Rectangle_ (Width - item_height, Height - item_height,
 						item_height, item_height);
 			}
 
@@ -932,7 +932,7 @@ namespace System.Windows.Forms {
 					// This should call the Layout routine for us
 					int height = owner.auto_complete_matches.Count > DefaultDropDownItems ? 
 						DefaultDropDownItems * item_height : (owner.auto_complete_matches.Count + 1) * item_height;
-					Size = new Size (owner.Width, height);
+					Size = new Size_ (owner.Width, height);
 				} else
 					LayoutListBox ();
 
@@ -970,10 +970,10 @@ namespace System.Windows.Forms {
 				base.OnMouseMove (args);
 
 				if (resizing) {
-					Point mouse_loc = Control.MousePosition;
-					Point ctrl_loc = PointToScreen (Point.Empty);
+					Point_ mouse_loc = Control.MousePosition;
+					Point_ ctrl_loc = PointToScreen (Point_.Empty);
 
-					Size new_size = new Size (mouse_loc.X - ctrl_loc.X, mouse_loc.Y - ctrl_loc.Y);
+					Size_ new_size = new Size_ (mouse_loc.X - ctrl_loc.X, mouse_loc.Y - ctrl_loc.Y);
 					if (new_size.Height < item_height)
 						new_size.Height = item_height;
 					if (new_size.Width < item_height)
@@ -1013,7 +1013,7 @@ namespace System.Windows.Forms {
 				int y = 0;
 				int last = GetLastVisibleItem ();
 				for (int i = top_item; i <= last; i++) {
-					Rectangle item_bounds = GetItemBounds (i);
+					Rectangle_ item_bounds = GetItemBounds (i);
 					if (!item_bounds.IntersectsWith (args.ClipRectangle))
 						continue;
 

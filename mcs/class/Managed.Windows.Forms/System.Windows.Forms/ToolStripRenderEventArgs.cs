@@ -32,19 +32,19 @@ namespace System.Windows.Forms
 {
 	public class ToolStripRenderEventArgs : EventArgs
 	{
-		private Rectangle affected_bounds;
-		private Color back_color;
-		private Rectangle connected_area;
+		private Rectangle_ affected_bounds;
+		private Color_ back_color;
+		private Rectangle_ connected_area;
 		private Graphics graphics;
 		private ToolStrip tool_strip;
 
 		#region Public Constructors
 		public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip)
-			: this (g, toolStrip, new Rectangle (0, 0, 100, 25), SystemColors.Control)
+			: this (g, toolStrip, new Rectangle_ (0, 0, 100, 25), SystemColors.Control)
 		{
 		}
 		
-		public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip, Rectangle affectedBounds, Color backColor)
+		public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip, Rectangle_ affectedBounds, Color_ backColor)
 		{
 			this.graphics = g;
 			this.tool_strip = toolStrip;
@@ -54,15 +54,15 @@ namespace System.Windows.Forms
 		#endregion
 		
 		#region Public Properties
-		public Rectangle AffectedBounds {
+		public Rectangle_ AffectedBounds {
 			get { return this.affected_bounds; }
 		}
 
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return this.back_color; }
 		}
 
-		public Rectangle ConnectedArea {
+		public Rectangle_ ConnectedArea {
 			get { return this.connected_area; }
 		}
 
@@ -76,7 +76,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Internal Properties
-		internal Rectangle InternalConnectedArea {
+		internal Rectangle_ InternalConnectedArea {
 			set { this.connected_area = value; }
 		}
 		#endregion

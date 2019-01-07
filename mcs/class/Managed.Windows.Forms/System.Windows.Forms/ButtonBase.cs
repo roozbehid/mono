@@ -132,7 +132,7 @@ namespace System.Windows.Forms {
 			set { base.AutoSize = value; }
 		}
 
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor; }
 			set { base.BackColor = value; }
 		}
@@ -431,7 +431,7 @@ namespace System.Windows.Forms {
 			get { return ImeMode.Disable; }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.ButtonBaseDefaultSize; }
 		}
 
@@ -448,7 +448,7 @@ namespace System.Windows.Forms {
 
 		#region Public Methods
 		// The base calls into GetPreferredSizeCore, which we will override in our subclasses
-		public override Size GetPreferredSize (Size proposedSize)
+		public override Size_ GetPreferredSize (Size_ proposedSize)
 		{
 			return base.GetPreferredSize (proposedSize);
 		}

@@ -143,7 +143,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Color ImageTransparentColor {
+		public new Color_ ImageTransparentColor {
 			get { return base.ImageTransparentColor; }
 			set { base.ImageTransparentColor = value; }
 		}
@@ -199,13 +199,13 @@ namespace System.Windows.Forms
 
 		#region Protected Properties
 		protected internal override Padding DefaultMargin { get { return new Padding(); } }
-		protected override Size DefaultSize { get { return new Size(6, 6); } }
+		protected override Size_ DefaultSize { get { return new Size_(6, 6); } }
 		#endregion
 
 		#region Public Methods
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
-			return new Size(6, 6);
+			return new Size_(6, 6);
 		}
 		#endregion
 
@@ -241,7 +241,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		protected internal override void SetBounds (Rectangle rect)
+		protected internal override void SetBounds (Rectangle_ rect)
 		{
 			base.SetBounds (rect);
 		}

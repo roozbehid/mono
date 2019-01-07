@@ -25,10 +25,10 @@
 // Integration into MWF:
 //	Peter Bartok		<pbartok@novell.com>
 //
-
 using System;
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -45,8 +45,8 @@ namespace System.Windows.Forms
 			private const int	InitialRepeatDelay = 50;
 			private UpDownBase	owner;
 			private Timer		tmrRepeat;
-			private Rectangle	top_button_rect;
-			private Rectangle	bottom_button_rect;
+			private Rectangle_	top_button_rect;
+			private Rectangle_	bottom_button_rect;
 			private int		mouse_pressed;
 			private int		mouse_x;
 			private int		mouse_y;
@@ -90,8 +90,8 @@ namespace System.Windows.Forms
 				top_button_height = ClientSize.Height / 2;
 				bottom_button_height = ClientSize.Height - top_button_height;
 
-				top_button_rect = new Rectangle(0, 0, ClientSize.Width, top_button_height);
-				bottom_button_rect = new Rectangle(0, top_button_height, ClientSize.Width, bottom_button_height);
+				top_button_rect = new Rectangle_(0, 0, ClientSize.Width, top_button_height);
+				bottom_button_rect = new Rectangle_(0, top_button_height, ClientSize.Width, bottom_button_height);
 			}
 
 			private void redraw (Graphics graphics)
@@ -360,7 +360,7 @@ namespace System.Windows.Forms
 			txtView.AcceptsReturn = true;
 			txtView.AutoSize = false;
 			txtView.BorderStyle = BorderStyle.None;
-			txtView.Location = new System.Drawing.Point(17, 17);
+			txtView.Location = new System.Drawing.Point_(17, 17);
 			txtView.TabIndex = TabIndex;
 
 			spnSpinner.Width = 16;
@@ -453,7 +453,7 @@ namespace System.Windows.Forms
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public new Size AutoScrollMargin {
+		public new Size_ AutoScrollMargin {
 			get { return base.AutoScrollMargin; }
 			set { base.AutoScrollMargin = value; }
 		}
@@ -461,7 +461,7 @@ namespace System.Windows.Forms
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public new Size AutoScrollMinSize {
+		public new Size_ AutoScrollMinSize {
 			get { return base.AutoScrollMinSize; }
 			set { base.AutoScrollMinSize = value; }
 		}
@@ -474,7 +474,7 @@ namespace System.Windows.Forms
 			set { base.AutoSize = value; }
 		}
 
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get {
 				return base.BackColor;
 			}
@@ -548,7 +548,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get {
 				return base.ForeColor;
 			}
@@ -568,14 +568,14 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Size MaximumSize {
+		public override Size_ MaximumSize {
 			get { return base.MaximumSize; }
-			set { base.MaximumSize = new Size (value.Width, 0); }
+			set { base.MaximumSize = new Size_ (value.Width, 0); }
 		}
 		
-		public override Size MinimumSize {
+		public override Size_ MinimumSize {
 			get { return base.MinimumSize; }
-			set { base.MinimumSize = new Size (value.Width, 0); }
+			set { base.MinimumSize = new Size_ (value.Width, 0); }
 		}
 
 		[Browsable(false)]
@@ -676,9 +676,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size(120, this.PreferredHeight);
+				return new Size_(120, this.PreferredHeight);
 			}
 		}
 

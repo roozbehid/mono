@@ -27,12 +27,12 @@
 // NOT COMPLETE
 
 using Accessibility;
-using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 namespace System.Windows.Forms {
+
+using System.Drawing;
 	[ComVisible(true)]
 	public class AccessibleObject : IReflect, IAccessible {
 		#region Private Variables
@@ -68,7 +68,7 @@ namespace System.Windows.Forms {
 		#endregion	// Private Constructors
 
 		#region Public Instance Properties
-		public virtual Rectangle Bounds {
+		public virtual System.Drawing.Rectangle_ Bounds {
 			get {
 				return owner.Bounds;
 			}
@@ -382,10 +382,10 @@ namespace System.Windows.Forms {
 
 		internal static Control FindHittestControl(Control parent, int x, int y) {
 			Control	child;
-			Point	child_point;
-			Point	hittest_point;
+			Point_	child_point;
+			Point_	hittest_point;
 
-			hittest_point = new Point(x, y);
+			hittest_point = new Point_(x, y);
 
 			child_point = parent.PointToClient(hittest_point);
 			if (parent.ClientRectangle.Contains(child_point)) {

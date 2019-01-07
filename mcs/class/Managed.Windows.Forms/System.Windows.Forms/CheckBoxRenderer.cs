@@ -40,29 +40,29 @@ namespace System.Windows.Forms
 		#endregion
 		
 		#region Public Static Methods
-		public static void DrawCheckBox (Graphics g, Point glyphLocation, CheckBoxState state)
+		public static void DrawCheckBox (Graphics g, Point_ glyphLocation, CheckBoxState state)
 		{
-			DrawCheckBox (g, glyphLocation, Rectangle.Empty, String.Empty, null, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, false, state);
+			DrawCheckBox (g, glyphLocation, Rectangle_.Empty, String.Empty, null, TextFormatFlags.HorizontalCenter, null, Rectangle_.Empty, false, state);
 		}
 
-		public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, bool focused, CheckBoxState state)
+		public static void DrawCheckBox (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string checkBoxText, Font font, bool focused, CheckBoxState state)
 		{
-			DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, focused, state);
+			DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, TextFormatFlags.HorizontalCenter, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, TextFormatFlags flags, bool focused, CheckBoxState state)
+		public static void DrawCheckBox (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string checkBoxText, Font font, TextFormatFlags flags, bool focused, CheckBoxState state)
 		{
-			DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, flags, null, Rectangle.Empty, focused, state);
+			DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, flags, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, Image image, Rectangle imageBounds, bool focused, CheckBoxState state)
+		public static void DrawCheckBox (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string checkBoxText, Font font, Image image, Rectangle_ imageBounds, bool focused, CheckBoxState state)
 		{
 			DrawCheckBox (g, glyphLocation, textBounds, checkBoxText, font, TextFormatFlags.HorizontalCenter, image, imageBounds, focused, state);
 		}
 
-		public static void DrawCheckBox (Graphics g, Point glyphLocation, Rectangle textBounds, string checkBoxText, Font font, TextFormatFlags flags, Image image, Rectangle imageBounds, bool focused, CheckBoxState state)
+		public static void DrawCheckBox (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string checkBoxText, Font font, TextFormatFlags flags, Image image, Rectangle_ imageBounds, bool focused, CheckBoxState state)
 		{
-			Rectangle bounds = new Rectangle (glyphLocation, GetGlyphSize (g, state));
+			Rectangle_ bounds = new Rectangle_ (glyphLocation, GetGlyphSize (g, state));
 
 			if (Application.RenderWithVisualStyles || always_use_visual_styles == true) {
 				VisualStyleRenderer vsr = GetCheckBoxRenderer (state);
@@ -129,7 +129,7 @@ namespace System.Windows.Forms
 			return vsr.IsBackgroundPartiallyTransparent ();
 		}
 
-		public static void DrawParentBackground (Graphics g, Rectangle bounds, Control childControl)
+		public static void DrawParentBackground (Graphics g, Rectangle_ bounds, Control childControl)
 		{
 			if (!VisualStyleRenderer.IsSupported)
 				return;
@@ -139,10 +139,10 @@ namespace System.Windows.Forms
 			vsr.DrawParentBackground (g, bounds, childControl);
 		}
 
-		public static Size GetGlyphSize (Graphics g, CheckBoxState state)
+		public static Size_ GetGlyphSize (Graphics g, CheckBoxState state)
 		{
 			if (!VisualStyleRenderer.IsSupported)
-				return new Size (13, 13);
+				return new Size_ (13, 13);
 
 			VisualStyleRenderer vsr = GetCheckBoxRenderer (state);
 

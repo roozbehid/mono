@@ -22,10 +22,10 @@
 // Authors:
 //	Andreia Gaita	<avidigal@novell.com>
 
-
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.WebBrowserDialogs
@@ -118,7 +118,7 @@ namespace System.Windows.Forms.WebBrowserDialogs
 			ctl.Checked = check;
 
 			if (width == -1 && height == -1) {
-				SizeF s = TextRenderer.MeasureString (text, ctl.Font);
+				SizeF_ s = TextRenderer.MeasureString (text, ctl.Font);
 				ctl.Width += (int) ((float) s.Width / 62f);
 				if (s.Height > ctl.Height)
 					ctl.Height = (int) s.Height;

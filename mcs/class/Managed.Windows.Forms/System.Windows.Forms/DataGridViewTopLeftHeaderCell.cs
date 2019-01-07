@@ -43,43 +43,43 @@ namespace System.Windows.Forms
 			return new DataGridViewTopLeftHeaderCellAccessibleObject (this);
 		}
 
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
-			Size s = new Size (36, 13);
-			return new Rectangle (2, (DataGridView.ColumnHeadersHeight - s.Height) / 2, s.Width, s.Height);
+			Size_ s = new Size_ (36, 13);
+			return new Rectangle_ (2, (DataGridView.ColumnHeadersHeight - s.Height) / 2, s.Width, s.Height);
 		}
 
-		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
-			Size error_icon = new Size (12, 11);
-			return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
+			Size_ error_icon = new Size_ (12, 11);
+			return new Rectangle_ (new Point_ (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
 		}
 
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected override Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
 			object o = Value;
 
 			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				Size_ s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height = Math.Max (s.Height, 17);
 				s.Width += 29;
 				return s;
 			} else
-				return new Size (39, 17);
+				return new Size_ (39, 17);
 		}
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates  cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates  cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			base.Paint (graphics, clipBounds, cellBounds, rowIndex,  cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 		}
 	
-		protected override void PaintBorder (Graphics graphics, Rectangle clipBounds, Rectangle bounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
+		protected override void PaintBorder (Graphics graphics, Rectangle_ clipBounds, Rectangle_ bounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
 		{
 			base.PaintBorder (graphics, clipBounds, bounds, cellStyle, advancedBorderStyle);
 		}
@@ -90,7 +90,7 @@ namespace System.Windows.Forms
 			{
 			}
 
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get { throw new NotImplementedException (); }
 			}
 

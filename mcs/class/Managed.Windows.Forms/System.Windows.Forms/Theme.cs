@@ -23,8 +23,8 @@
 //	Jordi Mas i Hernandez, jordi@ximian.com
 //	Peter Dennis Bartok, pbartok@novell.com
 //
-
 using System.Collections;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Reflection;
@@ -46,10 +46,10 @@ namespace System.Windows.Forms
 	}
 	
 	internal struct CPColor {
-		internal Color Dark;
-		internal Color DarkDark;
-		internal Color Light;
-		internal Color LightLight;
+		internal Color_ Dark;
+		internal Color_ DarkDark;
+		internal Color_ Light;
+		internal Color_ LightLight;
 		
 		internal static CPColor Empty;
 	}
@@ -67,7 +67,7 @@ namespace System.Windows.Forms
 		
 		public SystemResPool () {}
 		
-		public Pen GetPen (Color color)
+		public Pen GetPen (Color_ color)
 		{
 			int hash = color.ToArgb ();
 
@@ -82,7 +82,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public Pen GetDashPen (Color color, DashStyle dashStyle)
+		public Pen GetDashPen (Color_ color, DashStyle dashStyle)
 		{
 			string hash = color.ToString() + dashStyle;
 
@@ -98,7 +98,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public Pen GetSizedPen (Color color, int size)
+		public Pen GetSizedPen (Color_ color, int size)
 		{
 			string hash = color.ToString () + size;
 			
@@ -113,7 +113,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public SolidBrush GetSolidBrush (Color color)
+		public SolidBrush GetSolidBrush (Color_ color)
 		{
 			int hash = color.ToArgb ();
 
@@ -128,7 +128,7 @@ namespace System.Windows.Forms
 			}
 		}		
 		
-		public HatchBrush GetHatchBrush (HatchStyle hatchStyle, Color foreColor, Color backColor)
+		public HatchBrush GetHatchBrush (HatchStyle hatchStyle, Color_ foreColor, Color_ backColor)
 		{
 			string hash = ((int)hatchStyle).ToString () + foreColor.ToString () + backColor.ToString ();
 
@@ -162,7 +162,7 @@ namespace System.Windows.Forms
 			return image;
 		}
 		
-		public CPColor GetCPColor (Color color)
+		public CPColor GetCPColor (Color_ color)
 		{
 			lock (cpcolors) {
 				object tmp = cpcolors [color];
@@ -188,8 +188,8 @@ namespace System.Windows.Forms
 	{
 		protected Array syscolors;
 		Font default_font;
-		protected Color defaultWindowBackColor;
-		protected Color defaultWindowForeColor;
+		protected Color_ defaultWindowBackColor;
+		protected Color_ defaultWindowForeColor;
 		internal SystemResPool ResPool = new SystemResPool ();
 		private MethodInfo update;
 
@@ -197,7 +197,7 @@ namespace System.Windows.Forms
 		{
 		}
 
-		private void SetSystemColors (KnownColor kc, Color value)
+		private void SetSystemColors (KnownColor kc, Color_ value)
 		{
 			if (update == null) {
 				Type known_colors = Type.GetType ("System.Drawing.KnownColors, " + Consts.AssemblySystem_Drawing);
@@ -214,142 +214,142 @@ namespace System.Windows.Forms
 		}
 
 		/* Default properties */
-		public virtual Color ColorScrollBar {
+		public virtual Color_ ColorScrollBar {
 			get { return SystemColors.ScrollBar; }
 			set { SetSystemColors (KnownColor.ScrollBar, value); }
 		}
 
-		public virtual Color ColorDesktop {
+		public virtual Color_ ColorDesktop {
 			get { return SystemColors.Desktop;}
 			set { SetSystemColors (KnownColor.Desktop, value); }
 		}
 
-		public virtual Color ColorActiveCaption {
+		public virtual Color_ ColorActiveCaption {
 			get { return SystemColors.ActiveCaption;}
 			set { SetSystemColors (KnownColor.ActiveCaption, value); }
 		}
 
-		public virtual Color ColorInactiveCaption {
+		public virtual Color_ ColorInactiveCaption {
 			get { return SystemColors.InactiveCaption;}
 			set { SetSystemColors (KnownColor.InactiveCaption, value); }
 		}
 
-		public virtual Color ColorMenu {
+		public virtual Color_ ColorMenu {
 			get { return SystemColors.Menu;}
 			set { SetSystemColors (KnownColor.Menu, value); }
 		}
 
-		public virtual Color ColorWindow {
+		public virtual Color_ ColorWindow {
 			get { return SystemColors.Window;}
 			set { SetSystemColors (KnownColor.Window, value); }
 		}
 
-		public virtual Color ColorWindowFrame {
+		public virtual Color_ ColorWindowFrame {
 			get { return SystemColors.WindowFrame;}
 			set { SetSystemColors (KnownColor.WindowFrame, value); }
 		}
 
-		public virtual Color ColorMenuText {
+		public virtual Color_ ColorMenuText {
 			get { return SystemColors.MenuText;}
 			set { SetSystemColors (KnownColor.MenuText, value); }
 		}
 
-		public virtual Color ColorWindowText {
+		public virtual Color_ ColorWindowText {
 			get { return SystemColors.WindowText;}
 			set { SetSystemColors (KnownColor.WindowText, value); }
 		}
 
-		public virtual Color ColorActiveCaptionText {
+		public virtual Color_ ColorActiveCaptionText {
 			get { return SystemColors.ActiveCaptionText;}
 			set { SetSystemColors (KnownColor.ActiveCaptionText, value); }
 		}
 
-		public virtual Color ColorActiveBorder {
+		public virtual Color_ ColorActiveBorder {
 			get { return SystemColors.ActiveBorder;}
 			set { SetSystemColors (KnownColor.ActiveBorder, value); }
 		}
 
-		public virtual Color ColorInactiveBorder{
+		public virtual Color_ ColorInactiveBorder{
 			get { return SystemColors.InactiveBorder;}
 			set { SetSystemColors (KnownColor.InactiveBorder, value); }
 		}
 
-		public virtual Color ColorAppWorkspace {
+		public virtual Color_ ColorAppWorkspace {
 			get { return SystemColors.AppWorkspace;}
 			set { SetSystemColors (KnownColor.AppWorkspace, value); }
 		}
 
-		public virtual Color ColorHighlight {
+		public virtual Color_ ColorHighlight {
 			get { return SystemColors.Highlight;}
 			set { SetSystemColors (KnownColor.Highlight, value); }
 		}
 
-		public virtual Color ColorHighlightText {
+		public virtual Color_ ColorHighlightText {
 			get { return SystemColors.HighlightText;}
 			set { SetSystemColors (KnownColor.HighlightText, value); }
 		}
 
-		public virtual Color ColorControl {
+		public virtual Color_ ColorControl {
 			get { return SystemColors.Control;}
 			set { SetSystemColors (KnownColor.Control, value); }
 		}
 
-		public virtual Color ColorControlDark {
+		public virtual Color_ ColorControlDark {
 			get { return SystemColors.ControlDark;}
 			set { SetSystemColors (KnownColor.ControlDark, value); }
 		}
 
-		public virtual Color ColorGrayText {
+		public virtual Color_ ColorGrayText {
 			get { return SystemColors.GrayText;}
 			set { SetSystemColors (KnownColor.GrayText, value); }
 		}
 
-		public virtual Color ColorControlText {
+		public virtual Color_ ColorControlText {
 			get { return SystemColors.ControlText;}
 			set { SetSystemColors (KnownColor.ControlText, value); }
 		}
 
-		public virtual Color ColorInactiveCaptionText {
+		public virtual Color_ ColorInactiveCaptionText {
 			get { return SystemColors.InactiveCaptionText;}
 			set { SetSystemColors (KnownColor.InactiveCaptionText, value); }
 		}
 
-		public virtual Color ColorControlLight {
+		public virtual Color_ ColorControlLight {
 			get { return SystemColors.ControlLight;}
 			set { SetSystemColors (KnownColor.ControlLight, value); }
 		}
 
-		public virtual Color ColorControlDarkDark {
+		public virtual Color_ ColorControlDarkDark {
 			get { return SystemColors.ControlDarkDark;}
 			set { SetSystemColors (KnownColor.ControlDarkDark, value); }
 		}
 
-		public virtual Color ColorControlLightLight {
+		public virtual Color_ ColorControlLightLight {
 			get { return SystemColors.ControlLightLight;}
 			set { SetSystemColors (KnownColor.ControlLightLight, value); }
 		}
 
-		public virtual Color ColorInfoText {
+		public virtual Color_ ColorInfoText {
 			get { return SystemColors.InfoText;}
 			set { SetSystemColors (KnownColor.InfoText, value); }
 		}
 
-		public virtual Color ColorInfo {
+		public virtual Color_ ColorInfo {
 			get { return SystemColors.Info;}
 			set { SetSystemColors (KnownColor.Info, value); }
 		}
 
-		public virtual Color ColorHotTrack {
+		public virtual Color_ ColorHotTrack {
 			get { return SystemColors.HotTrack;}
 			set { SetSystemColors (KnownColor.HotTrack, value);}
 		}
 
-		public virtual Color DefaultControlBackColor {
+		public virtual Color_ DefaultControlBackColor {
 			get { return ColorControl; }
 			set { ColorControl = value; }
 		}
 
-		public virtual Color DefaultControlForeColor {
+		public virtual Color_ DefaultControlForeColor {
 			get { return ColorControlText; }
 			set { ColorControlText = value; }
 		}
@@ -358,20 +358,20 @@ namespace System.Windows.Forms
 			get { return default_font ?? (default_font = SystemFonts.DefaultFont); }
 		}
 
-		public virtual Color DefaultWindowBackColor {
+		public virtual Color_ DefaultWindowBackColor {
 			get { return defaultWindowBackColor; }
 		}
 
-		public virtual Color DefaultWindowForeColor {
+		public virtual Color_ DefaultWindowForeColor {
 			get { return defaultWindowForeColor; }
 		}
 
-		public virtual Color GetColor (XplatUIWin32.GetSysColorIndex idx)
+		public virtual Color_ GetColor (XplatUIWin32.GetSysColorIndex idx)
 		{
-			return (Color) syscolors.GetValue ((int)idx);
+			return (Color_) syscolors.GetValue ((int)idx);
 		}
 
-		public virtual void SetColor (XplatUIWin32.GetSysColorIndex idx, Color color)
+		public virtual void SetColor (XplatUIWin32.GetSysColorIndex idx, Color_ color)
 		{
 			syscolors.SetValue (color, (int) idx);
 		}
@@ -391,31 +391,31 @@ namespace System.Windows.Forms
 
 		public virtual int BorderMultiplierFactor { get { return 1; } }
 		
-		public virtual Size BorderSizableSize {
+		public virtual Size_ BorderSizableSize {
 			get {
-				return new Size (3, 3);
+				return new Size_ (3, 3);
 			}
 		}
 
-		public virtual Size Border3DSize {
+		public virtual Size_ Border3DSize {
 			get {
 				return XplatUI.Border3DSize;
 			}
 		}
 
-		public virtual Size BorderStaticSize {
+		public virtual Size_ BorderStaticSize {
 			get {
-				return new Size(1, 1);
+				return new Size_(1, 1);
 			}
 		}
 
-		public virtual Size BorderSize {
+		public virtual Size_ BorderSize {
 			get {
 				return XplatUI.BorderSize;
 			}
 		}
 
-		public virtual Size CaptionButtonSize {
+		public virtual Size_ CaptionButtonSize {
 			get {
 				return XplatUI.CaptionButtonSize;
 			}
@@ -427,9 +427,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public virtual Size DoubleClickSize {
+		public virtual Size_ DoubleClickSize {
 			get {
-				return new Size(4, 4);
+				return new Size_(4, 4);
 			}
 		}
 
@@ -439,13 +439,13 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public virtual Size FixedFrameBorderSize {
+		public virtual Size_ FixedFrameBorderSize {
 			get {
 				return XplatUI.FixedFrameBorderSize;
 			}
 		}
 
-		public virtual Size FrameBorderSize {
+		public virtual Size_ FrameBorderSize {
 			get {
 				return XplatUI.FrameBorderSize;
 			}
@@ -471,9 +471,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public virtual Size IconSpacingSize {
+		public virtual Size_ IconSpacingSize {
 			get {
-				return new Size(75, 75);
+				return new Size_(75, 75);
 			}
 		}
 
@@ -483,19 +483,19 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public virtual Size MenuBarButtonSize {
+		public virtual Size_ MenuBarButtonSize {
 			get { return XplatUI.MenuBarButtonSize; }
 		}
 		
-		public virtual Size MenuButtonSize {
+		public virtual Size_ MenuButtonSize {
 			get {
 				return XplatUI.MenuButtonSize;
 			}
 		}
 
-		public virtual Size MenuCheckSize {
+		public virtual Size_ MenuCheckSize {
 			get {
-				return new Size(13, 13);
+				return new Size_(13, 13);
 			}
 		}
 
@@ -523,7 +523,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public virtual Size ToolWindowCaptionButtonSize {
+		public virtual Size_ ToolWindowCaptionButtonSize {
 			get {
 				return XplatUI.ToolWindowCaptionButtonSize;
 			}
@@ -566,7 +566,7 @@ namespace System.Windows.Forms
 			else return value;
 		}
 
-		[MonoInternalNote ("Figure out where to point for My Network Places")]
+		[MonoInternalNote ("Figure out where to Point_ for My Network Places")]
 		public virtual string Places(UIIcon index) {
 			switch (index) {
 				case UIIcon.PlacesRecentDocuments: {
@@ -603,7 +603,7 @@ namespace System.Windows.Forms
 		//
 		// This routine fetches images embedded as assembly resources (not
 		// resgen resources).  It optionally scales the image to fit the
-		// specified size x dimension (it adjusts y automatically to fit that).
+		// specified Size_ x dimension (it adjusts y automatically to fit that).
 		//
 		private Image GetSizedResourceImage(string name, int width)
 		{
@@ -697,26 +697,26 @@ namespace System.Windows.Forms
 		#endregion	// OwnerDraw Support
 
 		#region Button
-		public abstract Size CalculateButtonAutoSize (Button button);
-		public abstract void CalculateButtonTextAndImageLayout (Graphics g, ButtonBase b, out Rectangle textRectangle, out Rectangle imageRectangle);
-		public abstract void DrawButton (Graphics g, Button b, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle);
-		public abstract void DrawFlatButton (Graphics g, ButtonBase b, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle);
-		public abstract void DrawPopupButton (Graphics g, Button b, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle);
+		public abstract Size_ CalculateButtonAutoSize (Button button);
+		public abstract void CalculateButtonTextAndImageLayout (Graphics g, ButtonBase b, out Rectangle_ textRectangle, out Rectangle_ imageRectangle);
+		public abstract void DrawButton (Graphics g, Button b, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle);
+		public abstract void DrawFlatButton (Graphics g, ButtonBase b, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle);
+		public abstract void DrawPopupButton (Graphics g, Button b, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle);
 		#endregion	// Button
 
 		#region ButtonBase
 		// Drawing
-		public abstract void DrawButtonBase(Graphics dc, Rectangle clip_area, ButtonBase button);
+		public abstract void DrawButtonBase(Graphics dc, Rectangle_ clip_area, ButtonBase button);
 
 		// Sizing
-		public abstract Size ButtonBaseDefaultSize{get;}
+		public abstract Size_ ButtonBaseDefaultSize{get;}
 		#endregion	// ButtonBase
 
 		#region CheckBox
-		public abstract Size CalculateCheckBoxAutoSize (CheckBox checkBox);
-		public abstract void CalculateCheckBoxTextAndImageLayout (ButtonBase b, Point offset, out Rectangle glyphArea, out Rectangle textRectangle, out Rectangle imageRectangle);
-		public abstract void DrawCheckBox (Graphics g, CheckBox cb, Rectangle glyphArea, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle);
-		public abstract void DrawCheckBox (Graphics dc, Rectangle clip_area, CheckBox checkbox);
+		public abstract Size_ CalculateCheckBoxAutoSize (CheckBox checkBox);
+		public abstract void CalculateCheckBoxTextAndImageLayout (ButtonBase b, Point_ offset, out Rectangle_ glyphArea, out Rectangle_ textRectangle, out Rectangle_ imageRectangle);
+		public abstract void DrawCheckBox (Graphics g, CheckBox cb, Rectangle_ glyphArea, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle);
+		public abstract void DrawCheckBox (Graphics dc, Rectangle_ clip_area, CheckBox checkbox);
 
 		#endregion	// CheckBox
 		
@@ -728,11 +728,11 @@ namespace System.Windows.Forms
 		#region ComboBox
 		// Drawing
 		public abstract void DrawComboBoxItem (ComboBox ctrl, DrawItemEventArgs e);
-		public abstract void DrawFlatStyleComboButton (Graphics graphics, Rectangle rectangle, ButtonState state);
-		public abstract void ComboBoxDrawNormalDropDownButton (ComboBox comboBox, Graphics g, Rectangle clippingArea, Rectangle area, ButtonState state);
+		public abstract void DrawFlatStyleComboButton (Graphics graphics, Rectangle_ rectangle, ButtonState state);
+		public abstract void ComboBoxDrawNormalDropDownButton (ComboBox comboBox, Graphics g, Rectangle_ clippingArea, Rectangle_ area, ButtonState state);
 		public abstract bool ComboBoxNormalDropDownButtonHasTransparentBackground (ComboBox comboBox, ButtonState state);
 		public abstract bool ComboBoxDropDownButtonHasHotElementStyle (ComboBox comboBox);
-		public abstract void ComboBoxDrawBackground (ComboBox comboBox, Graphics g, Rectangle clippingArea, FlatStyle style);
+		public abstract void ComboBoxDrawBackground (ComboBox comboBox, Graphics g, Rectangle_ clippingArea, FlatStyle style);
 		public abstract bool CombBoxBackgroundHasHotElementStyle (ComboBox comboBox);
 		#endregion	// ComboBox
 
@@ -746,47 +746,47 @@ namespace System.Windows.Forms
 		public abstract int DataGridMinimumColumnCheckBoxWidth { get; }
 		
 		// Default colours
-		public abstract Color DataGridAlternatingBackColor { get; }
-		public abstract Color DataGridBackColor { get; }
-		public abstract Color DataGridBackgroundColor { get; }
-		public abstract Color DataGridCaptionBackColor { get; }
-		public abstract Color DataGridCaptionForeColor { get; }
-		public abstract Color DataGridGridLineColor { get; }
-		public abstract Color DataGridHeaderBackColor { get; }
-		public abstract Color DataGridHeaderForeColor { get; }
-		public abstract Color DataGridLinkColor { get; }
-		public abstract Color DataGridLinkHoverColor { get; }
-		public abstract Color DataGridParentRowsBackColor { get; }
-		public abstract Color DataGridParentRowsForeColor { get; }
-		public abstract Color DataGridSelectionBackColor { get; }
-		public abstract Color DataGridSelectionForeColor { get; }
+		public abstract Color_ DataGridAlternatingBackColor { get; }
+		public abstract Color_ DataGridBackColor { get; }
+		public abstract Color_ DataGridBackgroundColor { get; }
+		public abstract Color_ DataGridCaptionBackColor { get; }
+		public abstract Color_ DataGridCaptionForeColor { get; }
+		public abstract Color_ DataGridGridLineColor { get; }
+		public abstract Color_ DataGridHeaderBackColor { get; }
+		public abstract Color_ DataGridHeaderForeColor { get; }
+		public abstract Color_ DataGridLinkColor { get; }
+		public abstract Color_ DataGridLinkHoverColor { get; }
+		public abstract Color_ DataGridParentRowsBackColor { get; }
+		public abstract Color_ DataGridParentRowsForeColor { get; }
+		public abstract Color_ DataGridSelectionBackColor { get; }
+		public abstract Color_ DataGridSelectionForeColor { get; }
 		// Paint		
 		public abstract void DataGridPaint (PaintEventArgs pe, DataGrid grid);
-		public abstract void DataGridPaintCaption (Graphics g, Rectangle clip, DataGrid grid);
-		public abstract void DataGridPaintColumnHeaders (Graphics g, Rectangle clip, DataGrid grid);
-		public abstract void DataGridPaintColumnHeader (Graphics g, Rectangle bounds, DataGrid grid, int col);
-		public abstract void DataGridPaintRowContents (Graphics g, int row, Rectangle row_rect, bool is_newrow, Rectangle clip, DataGrid grid);
-		public abstract void DataGridPaintRowHeader (Graphics g, Rectangle bounds, int row, DataGrid grid);
-		public abstract void DataGridPaintRowHeaderArrow (Graphics g, Rectangle bounds, DataGrid grid);
-		public abstract void DataGridPaintRowHeaderStar (Graphics g, Rectangle bounds, DataGrid grid);
-		public abstract void DataGridPaintParentRows (Graphics g, Rectangle bounds, DataGrid grid);
-		public abstract void DataGridPaintParentRow (Graphics g, Rectangle bounds, DataGridDataSource row, DataGrid grid);
-		public abstract void DataGridPaintRows (Graphics g, Rectangle cells, Rectangle clip, DataGrid grid);
-		public abstract void DataGridPaintRow (Graphics g, int row, Rectangle row_rect, bool is_newrow, Rectangle clip, DataGrid grid);
-		public abstract void DataGridPaintRelationRow (Graphics g, int row, Rectangle row_rect, bool is_newrow, Rectangle clip, DataGrid grid);
+		public abstract void DataGridPaintCaption (Graphics g, Rectangle_ clip, DataGrid grid);
+		public abstract void DataGridPaintColumnHeaders (Graphics g, Rectangle_ clip, DataGrid grid);
+		public abstract void DataGridPaintColumnHeader (Graphics g, Rectangle_ bounds, DataGrid grid, int col);
+		public abstract void DataGridPaintRowContents (Graphics g, int row, Rectangle_ row_rect, bool is_newrow, Rectangle_ clip, DataGrid grid);
+		public abstract void DataGridPaintRowHeader (Graphics g, Rectangle_ bounds, int row, DataGrid grid);
+		public abstract void DataGridPaintRowHeaderArrow (Graphics g, Rectangle_ bounds, DataGrid grid);
+		public abstract void DataGridPaintRowHeaderStar (Graphics g, Rectangle_ bounds, DataGrid grid);
+		public abstract void DataGridPaintParentRows (Graphics g, Rectangle_ bounds, DataGrid grid);
+		public abstract void DataGridPaintParentRow (Graphics g, Rectangle_ bounds, DataGridDataSource row, DataGrid grid);
+		public abstract void DataGridPaintRows (Graphics g, Rectangle_ cells, Rectangle_ clip, DataGrid grid);
+		public abstract void DataGridPaintRow (Graphics g, int row, Rectangle_ row_rect, bool is_newrow, Rectangle_ clip, DataGrid grid);
+		public abstract void DataGridPaintRelationRow (Graphics g, int row, Rectangle_ row_rect, bool is_newrow, Rectangle_ clip, DataGrid grid);
 		
 		#endregion // Datagrid
 
 		#region DataGridView
 		#region DataGridViewHeaderCell
 		#region DataGridViewRowHeaderCell
-		public abstract bool DataGridViewRowHeaderCellDrawBackground (DataGridViewRowHeaderCell cell, Graphics g, Rectangle bounds);
+		public abstract bool DataGridViewRowHeaderCellDrawBackground (DataGridViewRowHeaderCell cell, Graphics g, Rectangle_ bounds);
 		public abstract bool DataGridViewRowHeaderCellDrawSelectionBackground (DataGridViewRowHeaderCell cell);
-		public abstract bool DataGridViewRowHeaderCellDrawBorder (DataGridViewRowHeaderCell cell, Graphics g, Rectangle bounds);
+		public abstract bool DataGridViewRowHeaderCellDrawBorder (DataGridViewRowHeaderCell cell, Graphics g, Rectangle_ bounds);
 		#endregion
 		#region DataGridViewColumnHeaderCell
-		public abstract bool DataGridViewColumnHeaderCellDrawBackground (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle bounds);
-		public abstract bool DataGridViewColumnHeaderCellDrawBorder (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle bounds);
+		public abstract bool DataGridViewColumnHeaderCellDrawBackground (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle_ bounds);
+		public abstract bool DataGridViewColumnHeaderCellDrawBorder (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle_ bounds);
 		#endregion
 		public abstract bool DataGridViewHeaderCellHasPressedStyle (DataGridView dataGridView);
 		public abstract bool DataGridViewHeaderCellHasHotStyle (DataGridView dataGridView);
@@ -794,23 +794,23 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region DateTimePicker
-		public abstract void DrawDateTimePicker(Graphics dc, Rectangle clip_rectangle, DateTimePicker dtp);
+		public abstract void DrawDateTimePicker(Graphics dc, Rectangle_ clip_rectangle, DateTimePicker dtp);
 		public abstract bool DateTimePickerBorderHasHotElementStyle { get; }
-		public abstract Rectangle DateTimePickerGetDropDownButtonArea (DateTimePicker dateTimePicker);
-		public abstract Rectangle DateTimePickerGetDateArea (DateTimePicker dateTimePicker);
+		public abstract Rectangle_ DateTimePickerGetDropDownButtonArea (DateTimePicker dateTimePicker);
+		public abstract Rectangle_ DateTimePickerGetDateArea (DateTimePicker dateTimePicker);
 		public abstract bool DateTimePickerDropDownButtonHasHotElementStyle { get; }
 		#endregion 	// DateTimePicker
 
 		#region GroupBox
 		// Drawing
-		public abstract void DrawGroupBox (Graphics dc,  Rectangle clip_area, GroupBox box);
+		public abstract void DrawGroupBox (Graphics dc,  Rectangle_ clip_area, GroupBox box);
 
 		// Sizing
-		public abstract Size GroupBoxDefaultSize{get;}
+		public abstract Size_ GroupBoxDefaultSize{get;}
 		#endregion	// GroupBox
 
 		#region HScrollBar
-		public abstract Size HScrollBarDefaultSize{get;}	// Default size of the scrollbar
+		public abstract Size_ HScrollBarDefaultSize{get;}	// Default Size_ of the scrollbar
 		#endregion	// HScrollBar
 
 		#region ListBox
@@ -820,20 +820,20 @@ namespace System.Windows.Forms
 		
 		#region ListView
 		// Drawing
-		public abstract void DrawListViewItems (Graphics dc, Rectangle clip_rectangle, ListView control);
-		public abstract void DrawListViewHeader (Graphics dc, Rectangle clip_rectangle, ListView control);
+		public abstract void DrawListViewItems (Graphics dc, Rectangle_ clip_rectangle, ListView control);
+		public abstract void DrawListViewHeader (Graphics dc, Rectangle_ clip_rectangle, ListView control);
 		public abstract void DrawListViewHeaderDragDetails (Graphics dc, ListView control, ColumnHeader drag_column, int target_x);
 		public abstract bool ListViewHasHotHeaderStyle { get; }
 
 		// Sizing
 		public abstract int ListViewGetHeaderHeight (ListView listView, Font font);
-		public abstract Size ListViewCheckBoxSize { get; }
+		public abstract Size_ ListViewCheckBoxSize { get; }
 		public abstract int ListViewColumnHeaderHeight { get; }
 		public abstract int ListViewDefaultColumnWidth { get; }
 		public abstract int ListViewVerticalSpacing { get; }
 		public abstract int ListViewEmptyColumnWidth { get; }
 		public abstract int ListViewHorizontalSpacing { get; }
-		public abstract Size ListViewDefaultSize { get; }
+		public abstract Size_ ListViewDefaultSize { get; }
 		public abstract int ListViewGroupHeight { get; }
 		public abstract int ListViewItemPaddingWidth { get; }
 		public abstract int ListViewTileWidthFactor { get; }
@@ -844,60 +844,60 @@ namespace System.Windows.Forms
 		public abstract void CalcItemSize (Graphics dc, MenuItem item, int y, int x, bool menuBar);
 		public abstract void CalcPopupMenuSize (Graphics dc, Menu menu);
 		public abstract int CalcMenuBarSize (Graphics dc, Menu menu, int width);
-		public abstract void DrawMenuBar (Graphics dc, Menu menu, Rectangle rect);
+		public abstract void DrawMenuBar (Graphics dc, Menu menu, Rectangle_ rect);
 		public abstract void DrawMenuItem (MenuItem item, DrawItemEventArgs e);
-		public abstract void DrawPopupMenu (Graphics dc, Menu menu, Rectangle cliparea, Rectangle rect);
+		public abstract void DrawPopupMenu (Graphics dc, Menu menu, Rectangle_ cliparea, Rectangle_ rect);
 		#endregion 	// Menus
 
 		#region MonthCalendar
-		public abstract void DrawMonthCalendar(Graphics dc, Rectangle clip_rectangle, MonthCalendar month_calendar);
+		public abstract void DrawMonthCalendar(Graphics dc, Rectangle_ clip_rectangle, MonthCalendar month_calendar);
 		#endregion 	// MonthCalendar
 
 		#region Panel
 		// Sizing
-		public abstract Size PanelDefaultSize{get;}
+		public abstract Size_ PanelDefaultSize{get;}
 		#endregion	// Panel
 
 		#region PictureBox
 		// Drawing
-		public abstract void DrawPictureBox (Graphics dc, Rectangle clip, PictureBox pb);
+		public abstract void DrawPictureBox (Graphics dc, Rectangle_ clip, PictureBox pb);
 
 		// Sizing
-		public abstract Size PictureBoxDefaultSize{get;}
+		public abstract Size_ PictureBoxDefaultSize{get;}
 		#endregion	// PictureBox
 
 		#region PrintPreviewControl
 		public abstract int PrintPreviewControlPadding{get;}
-		public abstract Size PrintPreviewControlGetPageSize (PrintPreviewControl preview);
-		public abstract void PrintPreviewControlPaint (PaintEventArgs pe, PrintPreviewControl preview, Size page_image_size);
+		//public abstract Size_ PrintPreviewControlGetPageSize (PrintPreviewControl preview);
+		//public abstract void PrintPreviewControlPaint (PaintEventArgs pe, PrintPreviewControl preview, Size_ page_image_size);
 		#endregion      // PrintPreviewControl
 
 		#region ProgressBar
 		// Drawing
-		public abstract void DrawProgressBar (Graphics dc, Rectangle clip_rectangle, ProgressBar progress_bar);
+		public abstract void DrawProgressBar (Graphics dc, Rectangle_ clip_rectangle, ProgressBar progress_bar);
 
 		// Sizing
-		public abstract Size ProgressBarDefaultSize{get;}
+		public abstract Size_ ProgressBarDefaultSize{get;}
 		#endregion	// ProgressBar
 
 		#region RadioButton
 		// Drawing
-		public abstract Size CalculateRadioButtonAutoSize (RadioButton rb);
-		public abstract void CalculateRadioButtonTextAndImageLayout (ButtonBase b, Point offset, out Rectangle glyphArea, out Rectangle textRectangle, out Rectangle imageRectangle);
-		public abstract void DrawRadioButton (Graphics g, RadioButton rb, Rectangle glyphArea, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle);
-		public abstract void DrawRadioButton (Graphics dc, Rectangle clip_rectangle, RadioButton radio_button);
+		public abstract Size_ CalculateRadioButtonAutoSize (RadioButton rb);
+		public abstract void CalculateRadioButtonTextAndImageLayout (ButtonBase b, Point_ offset, out Rectangle_ glyphArea, out Rectangle_ textRectangle, out Rectangle_ imageRectangle);
+		public abstract void DrawRadioButton (Graphics g, RadioButton rb, Rectangle_ glyphArea, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle);
+		public abstract void DrawRadioButton (Graphics dc, Rectangle_ clip_rectangle, RadioButton radio_button);
 
 		// Sizing
-		public abstract Size RadioButtonDefaultSize{get;}
+		public abstract Size_ RadioButtonDefaultSize{get;}
 		#endregion	// RadioButton
 
 		#region ScrollBar
 		// Drawing
-		//public abstract void DrawScrollBar (Graphics dc, Rectangle area, ScrollBar bar, ref Rectangle thumb_pos, ref Rectangle first_arrow_area, ref Rectangle second_arrow_area, ButtonState first_arrow, ButtonState second_arrow, ref int scrollbutton_width, ref int scrollbutton_height, bool vert);
-		public abstract void DrawScrollBar (Graphics dc, Rectangle clip_rectangle, ScrollBar bar);
+		//public abstract void DrawScrollBar (Graphics dc, Rectangle_ area, ScrollBar bar, ref Rectangle_ thumb_pos, ref Rectangle_ first_arrow_area, ref Rectangle_ second_arrow_area, ButtonState first_arrow, ButtonState second_arrow, ref int scrollbutton_width, ref int scrollbutton_height, bool vert);
+		public abstract void DrawScrollBar (Graphics dc, Rectangle_ clip_rectangle, ScrollBar bar);
 
 		// Sizing
-		public abstract int ScrollBarButtonSize {get;}		// Size of the scroll button
+		public abstract int ScrollBarButtonSize {get;}		// Size_ of the scroll button
 
 		public abstract bool ScrollBarHasHotElementStyles { get; }
 
@@ -908,41 +908,41 @@ namespace System.Windows.Forms
 
 		#region StatusBar
 		// Drawing
-		public abstract void DrawStatusBar (Graphics dc, Rectangle clip_rectangle, StatusBar sb);
+		public abstract void DrawStatusBar (Graphics dc, Rectangle_ clip_rectangle, StatusBar sb);
 
 		// Sizing
-		public abstract int StatusBarSizeGripWidth {get;}		// Size of Resize area
+		public abstract int StatusBarSizeGripWidth {get;}		// Size_ of Resize area
 		public abstract int StatusBarHorzGapWidth {get;}	// Gap between panels
-		public abstract Size StatusBarDefaultSize{get;}
+		public abstract Size_ StatusBarDefaultSize{get;}
 		#endregion	// StatusBar
 
 		#region TabControl
-		public abstract Size TabControlDefaultItemSize {get; }
-		public abstract Point TabControlDefaultPadding {get; }
+		public abstract Size_ TabControlDefaultItemSize {get; }
+		public abstract Point_ TabControlDefaultPadding {get; }
 		public abstract int TabControlMinimumTabWidth {get; }
-		public abstract Rectangle TabControlSelectedDelta { get; }
+		public abstract Rectangle_ TabControlSelectedDelta { get; }
 		public abstract int TabControlSelectedSpacing { get; }
 		public abstract int TabPanelOffsetX { get; }
 		public abstract int TabPanelOffsetY { get; }
 		public abstract int TabControlColSpacing { get; }
-		public abstract Point TabControlImagePadding { get; }
+		public abstract Point_ TabControlImagePadding { get; }
 		public abstract int TabControlScrollerWidth { get; }
 
-		public abstract Rectangle TabControlGetDisplayRectangle (TabControl tab);
-		public abstract Rectangle TabControlGetPanelRect (TabControl tab);
-		public abstract Size TabControlGetSpacing (TabControl tab);
-		public abstract void DrawTabControl (Graphics dc, Rectangle area, TabControl tab);
+		public abstract Rectangle_ TabControlGetDisplayRectangle (TabControl tab);
+		public abstract Rectangle_ TabControlGetPanelRect (TabControl tab);
+		public abstract Size_ TabControlGetSpacing (TabControl tab);
+		public abstract void DrawTabControl (Graphics dc, Rectangle_ area, TabControl tab);
 		#endregion
 
 		#region TextBoxBase
-		public abstract void TextBoxBaseFillBackground (TextBoxBase textBoxBase, Graphics g, Rectangle clippingArea);
+		public abstract void TextBoxBaseFillBackground (TextBoxBase textBoxBase, Graphics g, Rectangle_ clippingArea);
 		public abstract bool TextBoxBaseHandleWmNcPaint (TextBoxBase textBoxBase, ref Message m);
 		public abstract bool TextBoxBaseShouldPaintBackground (TextBoxBase textBoxBase);
 		#endregion
 
 		#region	ToolBar
 		// Drawing
-		public abstract void DrawToolBar (Graphics dc, Rectangle clip_rectangle, ToolBar control);
+		public abstract void DrawToolBar (Graphics dc, Rectangle_ clip_rectangle, ToolBar control);
 
 		// Sizing
 		public abstract int ToolBarGripWidth {get;}		 // Grip width for the ToolBar
@@ -951,31 +951,31 @@ namespace System.Windows.Forms
 		public abstract int ToolBarDropDownWidth { get; }	 // width of the dropdown arrow rect
 		public abstract int ToolBarDropDownArrowWidth { get; }	 // width for the dropdown arrow on the ToolBarButton
 		public abstract int ToolBarDropDownArrowHeight { get; }	 // height for the dropdown arrow on the ToolBarButton
-		public abstract Size ToolBarDefaultSize{get;}
+		public abstract Size_ ToolBarDefaultSize{get;}
 
 		public abstract bool ToolBarHasHotElementStyles (ToolBar toolBar);
 		public abstract bool ToolBarHasHotCheckedElementStyles { get; }
 		#endregion	// ToolBar
 
 		#region ToolTip
-		public abstract void DrawToolTip(Graphics dc, Rectangle clip_rectangle, ToolTip.ToolTipWindow control);
-		public abstract Size ToolTipSize(ToolTip.ToolTipWindow tt, string text);
+		public abstract void DrawToolTip(Graphics dc, Rectangle_ clip_rectangle, ToolTip.ToolTipWindow control);
+		public abstract Size_ ToolTipSize(ToolTip.ToolTipWindow tt, string text);
 		public abstract bool ToolTipTransparentBackground { get; }
 		#endregion	// ToolTip
 		
 		#region BalloonWindow
 		public abstract void ShowBalloonWindow (IntPtr handle, int timeout, string title, string text, ToolTipIcon icon);
 		public abstract void HideBalloonWindow (IntPtr handle);
-		public abstract void DrawBalloonWindow (Graphics dc, Rectangle clip, NotifyIcon.BalloonWindow control);
-		public abstract Rectangle BalloonWindowRect (NotifyIcon.BalloonWindow control);
+		public abstract void DrawBalloonWindow (Graphics dc, Rectangle_ clip, NotifyIcon.BalloonWindow control);
+		public abstract Rectangle_ BalloonWindowRect (NotifyIcon.BalloonWindow control);
 		#endregion	// BalloonWindow
 
 		#region TrackBar
 		// Drawing
-		public abstract void DrawTrackBar (Graphics dc, Rectangle clip_rectangle, TrackBar tb);
+		public abstract void DrawTrackBar (Graphics dc, Rectangle_ clip_rectangle, TrackBar tb);
 
 		// Sizing
-		public abstract Size TrackBarDefaultSize{get; }		// Default size for the TrackBar control
+		public abstract Size_ TrackBarDefaultSize{get; }		// Default Size_ for the TrackBar control
 		
 		public abstract int TrackBarValueFromMousePosition (int x, int y, TrackBar tb);
 
@@ -983,71 +983,71 @@ namespace System.Windows.Forms
 		#endregion	// TrackBar
 
 		#region UpDownBase
-		public abstract void UpDownBaseDrawButton (Graphics g, Rectangle bounds, bool top, VisualStyles.PushButtonState state);
+		public abstract void UpDownBaseDrawButton (Graphics g, Rectangle_ bounds, bool top, VisualStyles.PushButtonState state);
 		public abstract bool UpDownBaseHasHotButtonStyle { get; }
 		#endregion
 
 		#region VScrollBar
-		public abstract Size VScrollBarDefaultSize{get;}	// Default size of the scrollbar
+		public abstract Size_ VScrollBarDefaultSize{get;}	// Default Size_ of the scrollbar
 		#endregion	// VScrollBar
 
 		#region TreeView
-		public abstract Size TreeViewDefaultSize { get; }
+		public abstract Size_ TreeViewDefaultSize { get; }
 		public abstract void TreeViewDrawNodePlusMinus (TreeView treeView, TreeNode node, Graphics dc, int x, int middle);
 		#endregion
 
 		#region Managed window
-		public abstract void DrawManagedWindowDecorations (Graphics dc, Rectangle clip, InternalWindowManager wm);
+		public abstract void DrawManagedWindowDecorations (Graphics dc, Rectangle_ clip, InternalWindowManager wm);
 		public abstract int ManagedWindowTitleBarHeight (InternalWindowManager wm);
 		public abstract int ManagedWindowBorderWidth (InternalWindowManager wm);
 		public abstract int ManagedWindowIconWidth (InternalWindowManager wm);
-		public abstract Size ManagedWindowButtonSize (InternalWindowManager wm);
+		public abstract Size_ ManagedWindowButtonSize (InternalWindowManager wm);
 		public abstract void ManagedWindowSetButtonLocations (InternalWindowManager wm);
-		public abstract Rectangle ManagedWindowGetTitleBarIconArea (InternalWindowManager wm);
-		public abstract Size ManagedWindowGetMenuButtonSize (InternalWindowManager wm);
+		public abstract Rectangle_ ManagedWindowGetTitleBarIconArea (InternalWindowManager wm);
+		public abstract Size_ ManagedWindowGetMenuButtonSize (InternalWindowManager wm);
 		public abstract bool ManagedWindowTitleButtonHasHotElementStyle (TitleButton button, Form form);
-		public abstract void ManagedWindowDrawMenuButton (Graphics dc, TitleButton button, Rectangle clip, InternalWindowManager wm);
+		public abstract void ManagedWindowDrawMenuButton (Graphics dc, TitleButton button, Rectangle_ clip, InternalWindowManager wm);
 		public abstract void ManagedWindowOnSizeInitializedOrChanged (Form form);
 		public const int ManagedWindowSpacingAfterLastTitleButton = 2;
 		#endregion
 
 		#region	ControlPaint Methods
-		public abstract void CPDrawBorder (Graphics graphics, Rectangle bounds, Color leftColor, int leftWidth,
-			ButtonBorderStyle leftStyle, Color topColor, int topWidth, ButtonBorderStyle topStyle,
-			Color rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color bottomColor,
+		public abstract void CPDrawBorder (Graphics graphics, Rectangle_ bounds, Color_ leftColor, int leftWidth,
+			ButtonBorderStyle leftStyle, Color_ topColor, int topWidth, ButtonBorderStyle topStyle,
+			Color_ rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color_ bottomColor,
 			int bottomWidth, ButtonBorderStyle bottomStyle);
 
-		public abstract void CPDrawBorder (Graphics graphics, RectangleF bounds, Color leftColor, int leftWidth,
-			ButtonBorderStyle leftStyle, Color topColor, int topWidth, ButtonBorderStyle topStyle,
-			Color rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color bottomColor,
+		public abstract void CPDrawBorder (Graphics graphics, RectangleF_ bounds, Color_ leftColor, int leftWidth,
+			ButtonBorderStyle leftStyle, Color_ topColor, int topWidth, ButtonBorderStyle topStyle,
+			Color_ rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color_ bottomColor,
 			int bottomWidth, ButtonBorderStyle bottomStyle);
 
-		public abstract void CPDrawBorder3D (Graphics graphics, Rectangle rectangle, Border3DStyle style, Border3DSide sides);
-		public abstract void CPDrawBorder3D (Graphics graphics, Rectangle rectangle, Border3DStyle style, Border3DSide sides, Color control_color);
-		public abstract void CPDrawButton (Graphics graphics, Rectangle rectangle, ButtonState state);
-		public abstract void CPDrawCaptionButton (Graphics graphics, Rectangle rectangle, CaptionButton button, ButtonState state);
-		public abstract void CPDrawCheckBox (Graphics graphics, Rectangle rectangle, ButtonState state);
-		public abstract void CPDrawComboButton (Graphics graphics, Rectangle rectangle, ButtonState state);
-		public abstract void CPDrawContainerGrabHandle (Graphics graphics, Rectangle bounds);
-		public abstract void CPDrawFocusRectangle (Graphics graphics, Rectangle rectangle, Color foreColor, Color backColor);
-		public abstract void CPDrawGrabHandle (Graphics graphics, Rectangle rectangle, bool primary, bool enabled);
-		public abstract void CPDrawGrid (Graphics graphics, Rectangle area, Size pixelsBetweenDots, Color backColor);
-		public abstract void CPDrawImageDisabled (Graphics graphics, Image image, int x, int y, Color background);
-		public abstract void CPDrawLockedFrame (Graphics graphics, Rectangle rectangle, bool primary);
-		public abstract void CPDrawMenuGlyph (Graphics graphics, Rectangle rectangle, MenuGlyph glyph, Color color, Color backColor);
-		public abstract void CPDrawMixedCheckBox (Graphics graphics, Rectangle rectangle, ButtonState state);
-		public abstract void CPDrawRadioButton (Graphics graphics, Rectangle rectangle, ButtonState state);
-		public abstract void CPDrawReversibleFrame (Rectangle rectangle, Color backColor, FrameStyle style);
-		public abstract void CPDrawReversibleLine (Point start, Point end, Color backColor);
-		public abstract void CPDrawScrollButton (Graphics graphics, Rectangle rectangle, ScrollButton button, ButtonState state);
-		public abstract void CPDrawSelectionFrame (Graphics graphics, bool active, Rectangle outsideRect, Rectangle insideRect,
+		public abstract void CPDrawBorder3D (Graphics graphics, Rectangle_ rectangle, Border3DStyle style, Border3DSide sides);
+		public abstract void CPDrawBorder3D (Graphics graphics, Rectangle_ rectangle, Border3DStyle style, Border3DSide sides, Color_ control_color);
+		public abstract void CPDrawButton (Graphics graphics, Rectangle_ rectangle, ButtonState state);
+		public abstract void CPDrawCaptionButton (Graphics graphics, Rectangle_ rectangle, CaptionButton button, ButtonState state);
+		public abstract void CPDrawCheckBox (Graphics graphics, Rectangle_ rectangle, ButtonState state);
+		public abstract void CPDrawComboButton (Graphics graphics, Rectangle_ rectangle, ButtonState state);
+		public abstract void CPDrawContainerGrabHandle (Graphics graphics, Rectangle_ bounds);
+		public abstract void CPDrawFocusRectangle (Graphics graphics, Rectangle_ rectangle, Color_ foreColor, Color_ backColor);
+		public abstract void CPDrawGrabHandle (Graphics graphics, Rectangle_ rectangle, bool primary, bool enabled);
+		public abstract void CPDrawGrid (Graphics graphics, Rectangle_ area, Size_ pixelsBetweenDots, Color_ backColor);
+		public abstract void CPDrawImageDisabled (Graphics graphics, Image image, int x, int y, Color_ background);
+		public abstract void CPDrawLockedFrame (Graphics graphics, Rectangle_ rectangle, bool primary);
+		public abstract void CPDrawMenuGlyph (Graphics graphics, Rectangle_ rectangle, MenuGlyph glyph, Color_ color, Color_ backColor);
+		public abstract void CPDrawMixedCheckBox (Graphics graphics, Rectangle_ rectangle, ButtonState state);
+		public abstract void CPDrawRadioButton (Graphics graphics, Rectangle_ rectangle, ButtonState state);
+		public abstract void CPDrawReversibleFrame (Rectangle_ rectangle, Color_ backColor, FrameStyle style);
+		public abstract void CPDrawReversibleLine (Point_ start, Point_ end, Color_ backColor);
+		public abstract void CPDrawScrollButton (Graphics graphics, Rectangle_ rectangle, ScrollButton button, ButtonState state);
+		public abstract void CPDrawSelectionFrame (Graphics graphics, bool active, Rectangle_ outsideRect, Rectangle_ insideRect,
 			Color backColor);
-		public abstract void CPDrawSizeGrip (Graphics graphics, Color backColor, Rectangle bounds);
-		public abstract void CPDrawStringDisabled (Graphics graphics, string s, Font font, Color color, RectangleF layoutRectangle,
+		public abstract void CPDrawSizeGrip (Graphics graphics, Color_ backColor, Rectangle_ bounds);
+		public abstract void CPDrawStringDisabled (Graphics graphics, string s, Font font, Color_ color, RectangleF_ layoutRectangle,
 			StringFormat format);
-		public abstract void CPDrawStringDisabled (IDeviceContext dc, string s, Font font, Color color, Rectangle layoutRectangle, TextFormatFlags format);
-		public abstract void CPDrawVisualStyleBorder (Graphics graphics, Rectangle bounds);
-		public abstract void CPDrawBorderStyle (Graphics dc, Rectangle area, BorderStyle border_style);
+		public abstract void CPDrawStringDisabled (IDeviceContext dc, string s, Font font, Color_ color, Rectangle_ layoutRectangle, TextFormatFlags format);
+		public abstract void CPDrawVisualStyleBorder (Graphics graphics, Rectangle_ bounds);
+		public abstract void CPDrawBorderStyle (Graphics dc, Rectangle_ area, BorderStyle border_style);
 		#endregion	// ControlPaint Methods
 	}
 }

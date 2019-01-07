@@ -22,9 +22,10 @@
 // Authors:
 //	Jonathan Chambers (jonathan.chambers@ansys.com)
 //
-
+extern alias DrawingNew;
 using System;
-using System.Drawing;
+
+using DrawingNew::System.Drawing;
 using System.Drawing.Printing;
 using System.Reflection;
 

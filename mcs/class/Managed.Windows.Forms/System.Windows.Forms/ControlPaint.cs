@@ -50,7 +50,7 @@ namespace System.Windows.Forms {
 		#endregion	// Private Enumerations
 
 		#region Helpers
-		internal static void Color2HBS(Color color, out int h, out int l, out int s) {
+		internal static void Color2HBS(Color_ color, out int h, out int l, out int s) {
 			int	r;
 			int	g;
 			int	b;
@@ -129,7 +129,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal static Color HBS2Color(int hue, int lum, int sat) {
+		internal static Color_ HBS2Color(int hue, int lum, int sat) {
 			int	R;
 			int	G;
 			int	B;
@@ -151,19 +151,19 @@ namespace System.Windows.Forms {
 				G = Math.Min(255, (HueToRGB(Magic1,Magic2,hue)*RGBMax+(HLSMax/2))/HLSMax);
 				B = Math.Min(255, (HueToRGB(Magic1,Magic2,hue-(HLSMax/3))*RGBMax+(HLSMax/2))/HLSMax);
 			}
-			return (Color.FromArgb(R, G, B));
+			return (Color_.FromArgb(R, G, B));
 		}
 		#endregion	// Helpers
 
 		#region Public Static Properties
-		public static Color ContrastControlDark {
+		public static Color_ ContrastControlDark {
 			get { return(SystemColors.ControlDark); }
 		}
 		#endregion	// Public Static Properties
 
 		#region Public Static Methods
 		[MonoTODO ("Not implemented, will throw NotImplementedException")]
-		public static IntPtr CreateHBitmap16Bit (Bitmap bitmap, Color background)
+		public static IntPtr CreateHBitmap16Bit (Bitmap bitmap, Color_ background)
 		{
 			throw new NotImplementedException ();
 		}
@@ -180,15 +180,15 @@ namespace System.Windows.Forms {
 			throw new NotImplementedException ();
 		}
 
-		public static Color Light(Color baseColor) {
+		public static Color_ Light(Color_ baseColor) {
 			return Light(baseColor, 0.5f);
 		}
 
-		public static Color Light (Color baseColor, float percOfLightLight)
+		public static Color_ Light (Color_ baseColor, float percOfLightLight)
 		{
 			if (baseColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb ()) {
 				int r_sub, g_sub, b_sub;
-				Color color;
+				Color_ color;
 
 				if (percOfLightLight <= 0f)
 					return ThemeEngine.Current.ColorControlLight;
@@ -200,7 +200,7 @@ namespace System.Windows.Forms {
 				g_sub = ThemeEngine.Current.ColorControlLightLight.G - ThemeEngine.Current.ColorControlLight.G;
 				b_sub = ThemeEngine.Current.ColorControlLightLight.B - ThemeEngine.Current.ColorControlLight.B;
 
-				color = Color.FromArgb (ThemeEngine.Current.ColorControlLight.A,
+				color = Color_.FromArgb (ThemeEngine.Current.ColorControlLight.A,
 						(int) (ThemeEngine.Current.ColorControlLight.R + (r_sub * percOfLightLight)),
 						(int) (ThemeEngine.Current.ColorControlLight.G + (g_sub * percOfLightLight)),
 						(int) (ThemeEngine.Current.ColorControlLight.B + (b_sub * percOfLightLight)));
@@ -215,22 +215,22 @@ namespace System.Windows.Forms {
 			return ControlPaint.HBS2Color (H, NewIntensity, S);
 		}
 
-		public static Color LightLight (Color baseColor)
+		public static Color_ LightLight (Color_ baseColor)
 		{
 			return Light(baseColor, 1.0f);
 		}
 
-		public static Color Dark (Color baseColor)
+		public static Color_ Dark (Color_ baseColor)
 		{
 			return Dark(baseColor, 0.5f);
 		}
 
-		public static Color Dark (Color baseColor, float percOfDarkDark)
+		public static Color_ Dark (Color_ baseColor, float percOfDarkDark)
 		{
 			if (baseColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb ()) {
 				
 				int r_sub, g_sub, b_sub;
-				Color color;
+				Color_ color;
 
 				if (percOfDarkDark <= 0f)
 					return ThemeEngine.Current.ColorControlDark;
@@ -242,7 +242,7 @@ namespace System.Windows.Forms {
 				g_sub = ThemeEngine.Current.ColorControlDarkDark.G - ThemeEngine.Current.ColorControlDark.G;
 				b_sub = ThemeEngine.Current.ColorControlDarkDark.B - ThemeEngine.Current.ColorControlDark.B;
 
-				color = Color.FromArgb (ThemeEngine.Current.ColorControlDark.A,
+				color = Color_.FromArgb (ThemeEngine.Current.ColorControlDark.A,
 						(int) (ThemeEngine.Current.ColorControlDark.R + (r_sub * percOfDarkDark)),
 						(int) (ThemeEngine.Current.ColorControlDark.G + (g_sub * percOfDarkDark)),
 						(int) (ThemeEngine.Current.ColorControlDark.B + (b_sub * percOfDarkDark)));
@@ -257,12 +257,12 @@ namespace System.Windows.Forms {
 			return ControlPaint.HBS2Color(H, NewIntensity, S);
 		}
 
-		public static Color DarkDark (Color baseColor)
+		public static Color_ DarkDark (Color_ baseColor)
 		{
 			return Dark(baseColor, 1.0f);
 		}
 
-		public static void DrawBorder (Graphics graphics, Rectangle bounds, Color color, ButtonBorderStyle style)
+		public static void DrawBorder (Graphics graphics, Rectangle_ bounds, Color_ color, ButtonBorderStyle style)
 		{
 			int line_width_top_left = 1;
 			int line_width_bottom_right = 1;
@@ -277,7 +277,7 @@ namespace System.Windows.Forms {
 			DrawBorder(graphics, bounds, color, line_width_top_left, style, color, line_width_top_left, style, color, line_width_bottom_right, style, color, line_width_bottom_right, style);
 		}
 
-		internal static void DrawBorder (Graphics graphics, RectangleF bounds, Color color, ButtonBorderStyle style)
+		internal static void DrawBorder (Graphics graphics, RectangleF_ bounds, Color_ color, ButtonBorderStyle style)
 		{
 			int line_width_top_left = 1;
 			int line_width_bottom_right = 1;
@@ -292,9 +292,9 @@ namespace System.Windows.Forms {
 			ThemeEngine.Current.CPDrawBorder (graphics, bounds, color, line_width_top_left, style, color, line_width_top_left, style, color, line_width_bottom_right, style, color, line_width_bottom_right, style);
 		}
 
-		public static void DrawBorder( Graphics graphics, Rectangle bounds, Color leftColor, int leftWidth,
-			ButtonBorderStyle leftStyle, Color topColor, int topWidth, ButtonBorderStyle topStyle,
-			Color rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color bottomColor, int bottomWidth,
+		public static void DrawBorder( Graphics graphics, Rectangle_ bounds, Color_ leftColor, int leftWidth,
+			ButtonBorderStyle leftStyle, Color_ topColor, int topWidth, ButtonBorderStyle topStyle,
+			Color_ rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color_ bottomColor, int bottomWidth,
 			ButtonBorderStyle bottomStyle) {
 
 			ThemeEngine.Current.CPDrawBorder (graphics, bounds, leftColor, leftWidth,
@@ -303,189 +303,189 @@ namespace System.Windows.Forms {
 		}
 
 
-		public static void DrawBorder3D(Graphics graphics, Rectangle rectangle) {
+		public static void DrawBorder3D(Graphics graphics, Rectangle_ rectangle) {
 			DrawBorder3D(graphics, rectangle, Border3DStyle.Etched, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom);
 		}
 
-		public static void DrawBorder3D(Graphics graphics, Rectangle rectangle, Border3DStyle style) {
+		public static void DrawBorder3D(Graphics graphics, Rectangle_ rectangle, Border3DStyle style) {
 			DrawBorder3D(graphics, rectangle, style, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom);
 		}
 
 		public static void DrawBorder3D(Graphics graphics, int x, int y, int width, int height) {
-			DrawBorder3D(graphics, new Rectangle(x, y, width, height), Border3DStyle.Etched, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom);
+			DrawBorder3D(graphics, new Rectangle_(x, y, width, height), Border3DStyle.Etched, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom);
 		}
 
 		public static void DrawBorder3D(Graphics graphics, int x, int y, int width, int height, Border3DStyle style) {
-			DrawBorder3D(graphics, new Rectangle(x, y, width, height), style, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom);
+			DrawBorder3D(graphics, new Rectangle_(x, y, width, height), style, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom);
 		}
 
 		public static void DrawBorder3D( Graphics graphics, int x, int y, int width, int height, Border3DStyle style,Border3DSide sides) {
-			DrawBorder3D( graphics, new Rectangle(x, y, width, height), style, sides);
+			DrawBorder3D( graphics, new Rectangle_(x, y, width, height), style, sides);
 		}
 
-		public static void DrawBorder3D( Graphics graphics, Rectangle rectangle, Border3DStyle style, Border3DSide sides) {
+		public static void DrawBorder3D( Graphics graphics, Rectangle_ rectangle, Border3DStyle style, Border3DSide sides) {
 
 			ThemeEngine.Current.CPDrawBorder3D (graphics, rectangle, style, sides);
 		}
 
 		public static void DrawButton( Graphics graphics, int x, int y, int width, int height, ButtonState state) {
-			DrawButton(graphics, new Rectangle(x, y, width, height), state);
+			DrawButton(graphics, new Rectangle_(x, y, width, height), state);
 		}
 
-		public static void DrawButton( Graphics graphics, Rectangle rectangle, ButtonState state) {
+		public static void DrawButton( Graphics graphics, Rectangle_ rectangle, ButtonState state) {
 
 			ThemeEngine.Current.CPDrawButton (graphics, rectangle, state);
 		}
 
 
 		public static void DrawCaptionButton(Graphics graphics, int x, int y, int width, int height, CaptionButton button, ButtonState state) {
-			DrawCaptionButton(graphics, new Rectangle(x, y, width, height), button, state);
+			DrawCaptionButton(graphics, new Rectangle_(x, y, width, height), button, state);
 		}
 
-		public static void DrawCaptionButton(Graphics graphics, Rectangle rectangle, CaptionButton button, ButtonState state) {
+		public static void DrawCaptionButton(Graphics graphics, Rectangle_ rectangle, CaptionButton button, ButtonState state) {
 
 			ThemeEngine.Current.CPDrawCaptionButton (graphics, rectangle, button, state);
 		}
 
 		public static void DrawCheckBox(Graphics graphics, int x, int y, int width, int height, ButtonState state) {
-			DrawCheckBox(graphics, new Rectangle(x, y, width, height), state);
+			DrawCheckBox(graphics, new Rectangle_(x, y, width, height), state);
 		}
 
-		public static void DrawCheckBox(Graphics graphics, Rectangle rectangle, ButtonState state) {
+		public static void DrawCheckBox(Graphics graphics, Rectangle_ rectangle, ButtonState state) {
 
 			ThemeEngine.Current.CPDrawCheckBox (graphics, rectangle, state);
 		}
 
-		public static void DrawComboButton(Graphics graphics, Rectangle rectangle, ButtonState state) {
+		public static void DrawComboButton(Graphics graphics, Rectangle_ rectangle, ButtonState state) {
 
 			ThemeEngine.Current.CPDrawComboButton (graphics, rectangle,  state);
 		}
 
 		public static void DrawComboButton(Graphics graphics, int x, int y, int width, int height, ButtonState state) {
-			DrawComboButton(graphics, new Rectangle(x, y, width, height), state);
+			DrawComboButton(graphics, new Rectangle_(x, y, width, height), state);
 		}
 
-		public static void DrawContainerGrabHandle(Graphics graphics, Rectangle bounds) {
+		public static void DrawContainerGrabHandle(Graphics graphics, Rectangle_ bounds) {
 
 			ThemeEngine.Current.CPDrawContainerGrabHandle (graphics, bounds);
 		}
 
-		public static void DrawFocusRectangle( Graphics graphics, Rectangle rectangle) {
+		public static void DrawFocusRectangle( Graphics graphics, Rectangle_ rectangle) {
 			DrawFocusRectangle(graphics, rectangle, SystemColors.Control, SystemColors.ControlText);
 		}
 
-		public static void DrawFocusRectangle( Graphics graphics, Rectangle rectangle, Color foreColor, Color backColor) {
+		public static void DrawFocusRectangle( Graphics graphics, Rectangle_ rectangle, Color_ foreColor, Color_ backColor) {
 
 			ThemeEngine.Current.CPDrawFocusRectangle (graphics, rectangle, foreColor, backColor);
 		}
 
-		public static void DrawGrabHandle(Graphics graphics, Rectangle rectangle, bool primary, bool enabled) {
+		public static void DrawGrabHandle(Graphics graphics, Rectangle_ rectangle, bool primary, bool enabled) {
 
 			ThemeEngine.Current.CPDrawGrabHandle (graphics, rectangle, primary, enabled);
 		}
 
-		public static void DrawGrid(Graphics graphics, Rectangle area, Size pixelsBetweenDots, Color backColor) {
+		public static void DrawGrid(Graphics graphics, Rectangle_ area, Size_ pixelsBetweenDots, Color_ backColor) {
 
 			ThemeEngine.Current.CPDrawGrid (graphics, area, pixelsBetweenDots, backColor);
 		}
 
-		public static void DrawImageDisabled(Graphics graphics, Image image, int x, int y, Color background) {
+		public static void DrawImageDisabled(Graphics graphics, Image image, int x, int y, Color_ background) {
 
 			ThemeEngine.Current.CPDrawImageDisabled (graphics, image, x, y, background);
 		}
 
-		public static void DrawLockedFrame(Graphics graphics, Rectangle rectangle, bool primary) {
+		public static void DrawLockedFrame(Graphics graphics, Rectangle_ rectangle, bool primary) {
 
 			ThemeEngine.Current.CPDrawLockedFrame (graphics, rectangle, primary);
 		}
 
-		public static void DrawMenuGlyph(Graphics graphics, Rectangle rectangle, MenuGlyph glyph) {
+		public static void DrawMenuGlyph(Graphics graphics, Rectangle_ rectangle, MenuGlyph glyph) {
 
-			ThemeEngine.Current.CPDrawMenuGlyph (graphics, rectangle, glyph, ThemeEngine.Current.ColorMenuText, Color.Empty);
+			ThemeEngine.Current.CPDrawMenuGlyph (graphics, rectangle, glyph, ThemeEngine.Current.ColorMenuText, Color_.Empty);
 		}
 
-		public static void DrawMenuGlyph (Graphics graphics, Rectangle rectangle, MenuGlyph glyph, Color foreColor, Color backColor)
+		public static void DrawMenuGlyph (Graphics graphics, Rectangle_ rectangle, MenuGlyph glyph, Color_ foreColor, Color_ backColor)
 		{
 			ThemeEngine.Current.CPDrawMenuGlyph (graphics, rectangle, glyph, foreColor, backColor);
 		}
 	
 		public static void DrawMenuGlyph(Graphics graphics, int x, int y, int width, int height, MenuGlyph glyph) {
-			DrawMenuGlyph(graphics, new Rectangle(x, y, width, height), glyph);
+			DrawMenuGlyph(graphics, new Rectangle_(x, y, width, height), glyph);
 		}
 
-		public static void DrawMenuGlyph (Graphics graphics, int x, int y, int width, int height, MenuGlyph glyph, Color foreColor, Color backColor)
+		public static void DrawMenuGlyph (Graphics graphics, int x, int y, int width, int height, MenuGlyph glyph, Color_ foreColor, Color_ backColor)
 		{
-			DrawMenuGlyph (graphics, new Rectangle (x, y, width, height), glyph, foreColor, backColor);
+			DrawMenuGlyph (graphics, new Rectangle_ (x, y, width, height), glyph, foreColor, backColor);
 		}
 
-		public static void DrawMixedCheckBox(Graphics graphics, Rectangle rectangle, ButtonState state) {
+		public static void DrawMixedCheckBox(Graphics graphics, Rectangle_ rectangle, ButtonState state) {
 			ThemeEngine.Current.CPDrawMixedCheckBox (graphics, rectangle, state);
 		}
 
 		public static void DrawMixedCheckBox(Graphics graphics, int x, int y, int width, int height, ButtonState state) {
-			DrawMixedCheckBox(graphics, new Rectangle(x, y, width, height), state);
+			DrawMixedCheckBox(graphics, new Rectangle_(x, y, width, height), state);
 		}
 
 
 		public static void DrawRadioButton(Graphics graphics, int x, int y, int width, int height, ButtonState state) {
-			DrawRadioButton(graphics, new Rectangle(x, y, width, height), state);
+			DrawRadioButton(graphics, new Rectangle_(x, y, width, height), state);
 		}
 
-		public static void DrawRadioButton(Graphics graphics, Rectangle rectangle, ButtonState state) {
+		public static void DrawRadioButton(Graphics graphics, Rectangle_ rectangle, ButtonState state) {
 
 			ThemeEngine.Current.CPDrawRadioButton (graphics, rectangle, state);
 		}
 
-		public static void DrawReversibleFrame(Rectangle rectangle, Color backColor, FrameStyle style) {
+		public static void DrawReversibleFrame(Rectangle_ rectangle, Color_ backColor, FrameStyle style) {
 			XplatUI.DrawReversibleFrame (rectangle, backColor, style);
 		}
 
-		public static void DrawReversibleLine(Point start, Point end, Color backColor) {
+		public static void DrawReversibleLine(Point_ start, Point_ end, Color_ backColor) {
 			XplatUI.DrawReversibleLine (start, end, backColor);
 		}
 
-		public static void FillReversibleRectangle(Rectangle rectangle, Color backColor) {
+		public static void FillReversibleRectangle(Rectangle_ rectangle, Color_ backColor) {
 			XplatUI.FillReversibleRectangle (rectangle, backColor);
 		}
 
 		public static void DrawScrollButton (Graphics graphics, int x, int y, int width, int height, ScrollButton button, ButtonState state) {
-			ThemeEngine.Current.CPDrawScrollButton (graphics, new Rectangle(x, y, width, height), button, state);
+			ThemeEngine.Current.CPDrawScrollButton (graphics, new Rectangle_(x, y, width, height), button, state);
 		}
 
-		public static void DrawScrollButton (Graphics graphics, Rectangle rectangle, ScrollButton button, ButtonState state) {
+		public static void DrawScrollButton (Graphics graphics, Rectangle_ rectangle, ScrollButton button, ButtonState state) {
 			ThemeEngine.Current.CPDrawScrollButton (graphics, rectangle, button, state);
 		}
 
 		[MonoTODO ("Stub, does nothing")]
 		private static bool DSFNotImpl = false;
-		public static void DrawSelectionFrame(Graphics graphics, bool active, Rectangle outsideRect, Rectangle insideRect, Color backColor) {
+		public static void DrawSelectionFrame(Graphics graphics, bool active, Rectangle_ outsideRect, Rectangle_ insideRect, Color_ backColor) {
 			if (!DSFNotImpl) {
 				DSFNotImpl = true;
-				Console.WriteLine("NOT IMPLEMENTED: DrawSelectionFrame(Graphics graphics, bool active, Rectangle outsideRect, Rectangle insideRect, Color backColor)");
+				Console.WriteLine("NOT IMPLEMENTED: DrawSelectionFrame(Graphics graphics, bool active, Rectangle_ outsideRect, Rectangle_ insideRect, Color_ backColor)");
 			}
 			//throw new NotImplementedException();
 		}
 
-		public static void DrawSizeGrip (Graphics graphics, Color backColor, Rectangle bounds)
+		public static void DrawSizeGrip (Graphics graphics, Color_ backColor, Rectangle_ bounds)
 		{
 			ThemeEngine.Current.CPDrawSizeGrip (graphics,  backColor,  bounds);
 		}
 
-		public static void DrawSizeGrip(Graphics graphics, Color backColor, int x, int y, int width, int height) {
-			DrawSizeGrip(graphics, backColor, new Rectangle(x, y, width, height));
+		public static void DrawSizeGrip(Graphics graphics, Color_ backColor, int x, int y, int width, int height) {
+			DrawSizeGrip(graphics, backColor, new Rectangle_(x, y, width, height));
 		}
 
-		public static void DrawStringDisabled(Graphics graphics, string s, Font font, Color color, RectangleF layoutRectangle, StringFormat format) {
+		public static void DrawStringDisabled(Graphics graphics, string s, Font font, Color_ color, RectangleF_ layoutRectangle, StringFormat format) {
 
 			ThemeEngine.Current.CPDrawStringDisabled (graphics, s, font, color, layoutRectangle, format);
 		}
 
-		public static void DrawStringDisabled (IDeviceContext dc, string s, Font font, Color color, Rectangle layoutRectangle, TextFormatFlags format)
+		public static void DrawStringDisabled (IDeviceContext dc, string s, Font font, Color_ color, Rectangle_ layoutRectangle, TextFormatFlags format)
 		{
 			ThemeEngine.Current.CPDrawStringDisabled (dc, s, font, color, layoutRectangle, format);
 		}
 		
-		public static void DrawVisualStyleBorder (Graphics graphics, Rectangle bounds)
+		public static void DrawVisualStyleBorder (Graphics graphics, Rectangle_ bounds)
 		{
 			ThemeEngine.Current.CPDrawVisualStyleBorder (graphics, bounds);
 		}

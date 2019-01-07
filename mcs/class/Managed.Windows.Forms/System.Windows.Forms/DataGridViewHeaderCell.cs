@@ -22,8 +22,8 @@
 // Author:
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
-
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -116,7 +116,7 @@ namespace System.Windows.Forms {
 			return string.Format ("DataGridViewHeaderCell {{ ColumnIndex={0}, RowIndex={1} }}", ColumnIndex, RowIndex);
 		}
 
-		protected override Size GetSize (int rowIndex)
+		protected override Size_ GetSize (int rowIndex)
 		{
 			if (DataGridView == null && rowIndex != -1)
 				throw new ArgumentOutOfRangeException ("rowIndex");
@@ -130,16 +130,16 @@ namespace System.Windows.Forms {
 				throw new ArgumentException ("rowIndex");
 				
 			if (DataGridView == null)
-				return new Size (-1, -1);
+				return new Size_ (-1, -1);
 
 			if (this is DataGridViewTopLeftHeaderCell)
-				return new Size (DataGridView.RowHeadersWidth, DataGridView.ColumnHeadersHeight);
+				return new Size_ (DataGridView.RowHeadersWidth, DataGridView.ColumnHeadersHeight);
 			if (this is DataGridViewColumnHeaderCell)
-				return new Size (100, DataGridView.ColumnHeadersHeight);
+				return new Size_ (100, DataGridView.ColumnHeadersHeight);
 			if (this is DataGridViewRowHeaderCell)
-				return new Size (DataGridView.RowHeadersWidth, 22);
+				return new Size_ (DataGridView.RowHeadersWidth, 22);
 			
-			return Size.Empty;
+			return Size_.Empty;
 		}
 
 		protected override object GetValue (int rowIndex)
@@ -211,7 +211,7 @@ namespace System.Windows.Forms {
 			base.OnMouseUp (e);
 		}
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates dataGridViewElementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates dataGridViewElementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			base.Paint (graphics, clipBounds, cellBounds, rowIndex, dataGridViewElementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 		}

@@ -25,9 +25,9 @@
 // Author:
 //      Daniel Nauck    (dna(at)mono-project(dot)de)
 
-
 using System;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
@@ -37,11 +37,11 @@ namespace System.Windows.Forms
 	[TypeConverter (typeof (FlatButtonAppearanceConverter))]
 	public class FlatButtonAppearance
 	{
-		private Color borderColor = Color.Empty;
+		private Color_ borderColor = Color_.Empty;
 		private int borderSize = 1;
-		private Color checkedBackColor = Color.Empty;
-		private Color mouseDownBackColor = Color.Empty;
-		private Color mouseOverBackColor = Color.Empty;
+		private Color_ checkedBackColor = Color_.Empty;
+		private Color_ mouseDownBackColor = Color_.Empty;
+		private Color_ mouseOverBackColor = Color_.Empty;
 		private ButtonBase owner = null;
 
 		internal FlatButtonAppearance (ButtonBase owner)
@@ -53,14 +53,14 @@ namespace System.Windows.Forms
 		[DefaultValue(typeof(Color), "")]
 		[NotifyParentProperty(true)]
 		[Browsable(true)]
-		public Color BorderColor
+		public Color_ BorderColor
 		{
 			get { return borderColor; }
 			set {
 				if(borderColor == value)
 					return;
 
-				if (value == Color.Transparent)
+				if (value == Color_.Transparent)
 					throw new NotSupportedException ("Cannot have a Transparent border.");
 					
 				borderColor = value;
@@ -95,7 +95,7 @@ namespace System.Windows.Forms
 		[DefaultValue(typeof(Color), "")]
 		[NotifyParentProperty(true)]
 		[Browsable(true)]
-		public Color CheckedBackColor 
+		public Color_ CheckedBackColor 
 		{
 			get { return checkedBackColor; }
 			set {
@@ -113,7 +113,7 @@ namespace System.Windows.Forms
 		[DefaultValue(typeof(Color), "")]
 		[Browsable(true)]
 		[NotifyParentProperty(true)]
-		public Color MouseDownBackColor
+		public Color_ MouseDownBackColor
 		{
 			get { return mouseDownBackColor; }
 			set {
@@ -131,7 +131,7 @@ namespace System.Windows.Forms
 		[DefaultValue(typeof(Color), "")]
 		[NotifyParentProperty(true)]
 		[Browsable(true)]
-		public Color MouseOverBackColor
+		public Color_ MouseOverBackColor
 		{
 			get { return mouseOverBackColor; }
 			set {

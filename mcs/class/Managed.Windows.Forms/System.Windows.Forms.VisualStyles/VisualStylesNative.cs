@@ -38,15 +38,15 @@ namespace System.Windows.Forms.VisualStyles
 		{
 			return UXTheme.CloseThemeData (hTheme);
 		}
-		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds)
+		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 
-			int result = UXTheme.DrawThemeBackground(hTheme, dc.GetHdc (), iPartId, iStateId, ref BoundsRect, IntPtr.Zero);
-			dc.ReleaseHdc ();
+            int result = UXTheme.DrawThemeBackground(hTheme, dc.GetHdc (), iPartId, iStateId, ref BoundsRect, IntPtr.Zero);
+            dc.ReleaseHdc ();
 			return result;
 		}
-		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, Rectangle clipRectangle)
+		public int UxThemeDrawThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, Rectangle_ clipRectangle)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 			XplatUIWin32.RECT ClipRect = XplatUIWin32.RECT.FromRectangle (clipRectangle);
@@ -55,7 +55,7 @@ namespace System.Windows.Forms.VisualStyles
 			dc.ReleaseHdc ();
 			return result;
 		}
-		public int UxThemeDrawThemeEdge (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, Edges edges, EdgeStyle style, EdgeEffects effects, out Rectangle result)
+		public int UxThemeDrawThemeEdge (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, Edges edges, EdgeStyle style, EdgeEffects effects, out Rectangle_ result)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 			XplatUIWin32.RECT retval;
@@ -65,7 +65,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval.ToRectangle();
 			return hresult;
 		}
-		public int UxThemeDrawThemeParentBackground (IDeviceContext dc, Rectangle bounds, Control childControl)
+		public int UxThemeDrawThemeParentBackground (IDeviceContext dc, Rectangle_ bounds, Control childControl)
 		{
 			int result;
 
@@ -79,7 +79,7 @@ namespace System.Windows.Forms.VisualStyles
 
 			return result;
 		}
-		public int UxThemeDrawThemeText (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string text, TextFormatFlags textFlags, Rectangle bounds)
+		public int UxThemeDrawThemeText (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string text, TextFormatFlags textFlags, Rectangle_ bounds)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 
@@ -87,7 +87,7 @@ namespace System.Windows.Forms.VisualStyles
 			dc.ReleaseHdc ();
 			return result;
 		}
-		public int UxThemeGetThemeBackgroundContentRect (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, out Rectangle result)
+		public int UxThemeGetThemeBackgroundContentRect (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, out Rectangle_ result)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 			XplatUIWin32.RECT retval;
@@ -98,7 +98,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval.ToRectangle ();
 			return hresult;
 		}
-		public int UxThemeGetThemeBackgroundExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle contentBounds, out Rectangle result)
+		public int UxThemeGetThemeBackgroundExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ contentBounds, out Rectangle_ result)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (contentBounds);
 			XplatUIWin32.RECT retval = new XplatUIWin32.RECT ();
@@ -109,7 +109,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval.ToRectangle ();
 			return hresult;
 		}
-		public int UxThemeGetThemeBackgroundRegion (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, out Region result)
+		public int UxThemeGetThemeBackgroundRegion (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, out Region result)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 			IntPtr retval;
@@ -128,12 +128,12 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval == 0 ? false : true;
 			return hresult;
 		}
-		public int UxThemeGetThemeColor (IntPtr hTheme, int iPartId, int iStateId, ColorProperty prop, out Color result)
+		public int UxThemeGetThemeColor (IntPtr hTheme, int iPartId, int iStateId, ColorProperty prop, out Color_ result)
 		{
 			int retval;
 			int hresult = UXTheme.GetThemeColor (hTheme, iPartId, iStateId, (int)prop, out retval);
 
-			result = System.Drawing.Color.FromArgb ((int)(0x000000FFU & retval),
+			result = System.Drawing.Color_.FromArgb ((int)(0x000000FFU & retval),
 			     (int)(0x0000FF00U & retval) >> 8, (int)(0x00FF0000U & retval) >> 16);
 			return hresult;
 		}
@@ -172,7 +172,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval.ToPadding();
 			return hresult;
 		}
-		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle bounds, ThemeSizeType type, out Size result)
+		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, Rectangle_ bounds, ThemeSizeType type, out Size_ result)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 			UXTheme.SIZE retval;
@@ -183,7 +183,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval.ToSize();
 			return hresult;
 		}
-		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, ThemeSizeType type, out Size result)
+		public int UxThemeGetThemePartSize (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, ThemeSizeType type, out Size_ result)
 		{
 			UXTheme.SIZE retval;
 
@@ -193,7 +193,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval.ToSize ();
 			return hresult;
 		}
-		public int UxThemeGetThemePosition (IntPtr hTheme, int iPartId, int iStateId, PointProperty prop, out Point result)
+		public int UxThemeGetThemePosition (IntPtr hTheme, int iPartId, int iStateId, PointProperty prop, out Point_ result)
 		{
 			POINT retval;
 			int hresult = UXTheme.GetThemePosition (hTheme, iPartId, iStateId, (int)prop, out retval);
@@ -209,7 +209,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = sb.ToString ();
 			return hresult;
 		}
-		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, Rectangle bounds, out Rectangle result)
+		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, Rectangle_ bounds, out Rectangle_ result)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (bounds);
 			XplatUIWin32.RECT retval;
@@ -220,7 +220,7 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval.ToRectangle ();
 			return hresult;
 		}
-		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, out Rectangle result)
+		public int UxThemeGetThemeTextExtent (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, string textToDraw, TextFormatFlags flags, out Rectangle_ result)
 		{
 			XplatUIWin32.RECT retval;
 			
@@ -262,10 +262,10 @@ namespace System.Windows.Forms.VisualStyles
 			result = retval;
 			return hresult;
 		}
-		public int UxThemeHitTestThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, HitTestOptions options, Rectangle backgroundRectangle, IntPtr hrgn, Point pt, out HitTestCode result)
+		public int UxThemeHitTestThemeBackground (IntPtr hTheme, IDeviceContext dc, int iPartId, int iStateId, HitTestOptions options, Rectangle_ backgroundRectangle, IntPtr hrgn, Point_ pt, out HitTestCode result)
 		{
 			XplatUIWin32.RECT BoundsRect = XplatUIWin32.RECT.FromRectangle (backgroundRectangle);
-			int retval;
+            HitTestCode retval;
 
 			int hresult = UXTheme.HitTestThemeBackground (hTheme, dc.GetHdc (), iPartId, iStateId, (uint)options, ref BoundsRect, hrgn, new POINT(pt.X, pt.Y), out retval);
 			dc.ReleaseHdc ();
@@ -275,7 +275,8 @@ namespace System.Windows.Forms.VisualStyles
 		}
 		public bool UxThemeIsAppThemed ()
 		{
-			return UXTheme.IsAppThemed ();
+			///return UXTheme.IsAppThemed ();
+            return false;
 		}
 		public bool UxThemeIsThemeActive ()
 		{
@@ -317,14 +318,14 @@ namespace System.Windows.Forms.VisualStyles
 				return GetData ("COMPANY");
 			}
 		}
-		public Color VisualStyleInformationControlHighlightHot {
+		public Color_ VisualStyleInformationControlHighlightHot {
 			get {
 				IntPtr theme = UXTheme.OpenThemeData (IntPtr.Zero, "BUTTON");
 
 				uint retval = UXTheme.GetThemeSysColor (theme, 1621);
 				UXTheme.CloseThemeData (theme);
 
-				return System.Drawing.Color.FromArgb ((int)(0x000000FFU & retval),
+				return System.Drawing.Color_.FromArgb ((int)(0x000000FFU & retval),
 					(int)(0x0000FF00U & retval) >> 8, (int)(0x00FF0000U & retval) >> 16);
 			}
 		}
@@ -412,14 +413,14 @@ namespace System.Windows.Forms.VisualStyles
 				return retval;
 			}
 		}
-		public Color VisualStyleInformationTextControlBorder {
+		public Color_ VisualStyleInformationTextControlBorder {
 			get {
 				IntPtr theme = UXTheme.OpenThemeData (IntPtr.Zero, "EDIT");
 
 				uint retval = UXTheme.GetThemeSysColor (theme, 1611);
 				UXTheme.CloseThemeData (theme);
 
-				return System.Drawing.Color.FromArgb ((int)(0x000000FFU & retval),
+				return System.Drawing.Color_.FromArgb ((int)(0x000000FFU & retval),
 						     (int)(0x0000FF00U & retval) >> 8, (int)(0x00FF0000U & retval) >> 16);
 			}
 		}
@@ -435,7 +436,7 @@ namespace System.Windows.Forms.VisualStyles
 		}
 		#endregion
 		#region VisualStyleRenderer
-		public void VisualStyleRendererDrawBackgroundExcludingArea (IntPtr theme, IDeviceContext dc, int part, int state, Rectangle bounds, Rectangle excludedArea)
+		public void VisualStyleRendererDrawBackgroundExcludingArea (IntPtr theme, IDeviceContext dc, int part, int state, Rectangle_ bounds, Rectangle_ excludedArea)
 		{
 			XplatUIWin32.RECT bounds_rect = XplatUIWin32.RECT.FromRectangle (bounds);
 			IntPtr hdc = dc.GetHdc ();

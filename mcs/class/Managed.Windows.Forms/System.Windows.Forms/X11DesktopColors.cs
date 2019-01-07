@@ -116,8 +116,8 @@ namespace System.Windows.Forms {
 						ThemeEngine.Current.ColorControlDarkDark = ControlPaint.Dark (ThemeEngine.Current.ColorControlDark);
 
 						// We don't want ControlLight to disappear on a white background!
-						if (ThemeEngine.Current.ColorControlLight.ToArgb () == Color.White.ToArgb ()) {
-							ThemeEngine.Current.ColorControlLight = Color.FromArgb (255, 227, 227, 227);
+						if (ThemeEngine.Current.ColorControlLight.ToArgb () == Color_.White.ToArgb ()) {
+							ThemeEngine.Current.ColorControlLight = Color_.FromArgb (255, 227, 227, 227);
 						}
 						widget = gtk_menu_new ();
 						gtk_widget_ensure_style (widget);
@@ -182,8 +182,8 @@ namespace System.Windows.Forms {
 			// Do nothing; all is done in our static ctor
 		}
 
-		private static Color ColorFromGdkColor (GdkColorStruct gtkcolor) {
-			return Color.FromArgb (255, 
+		private static Color_ ColorFromGdkColor (GdkColorStruct gtkcolor) {
+			return Color_.FromArgb (255, 
 				(gtkcolor.red >> 8)  & 0xff, 
 				(gtkcolor.green  >> 8) & 0xff,
 				(gtkcolor.blue >> 8) & 0xff );
@@ -201,7 +201,7 @@ namespace System.Windows.Forms {
 			
 			string line = sr.ReadLine();
 			
-			Color tmp_color;
+			Color_ tmp_color;
 			
 			while (line != null) {
 				line = line.Trim();
@@ -209,7 +209,7 @@ namespace System.Windows.Forms {
 				if (line.StartsWith( "background=")) {
 					tmp_color = GetColorFromKDEString(line);
 					
-					if (tmp_color != Color.Empty) {
+					if (tmp_color != Color_.Empty) {
 						ThemeEngine.Current.ColorControl = tmp_color;
 						ThemeEngine.Current.ColorMenu = tmp_color;
 					}
@@ -217,7 +217,7 @@ namespace System.Windows.Forms {
 				if (line.StartsWith( "foreground=")) {
 					tmp_color = GetColorFromKDEString(line);
 					
-					if (tmp_color != Color.Empty) {
+					if (tmp_color != Color_.Empty) {
 						ThemeEngine.Current.ColorControlText = tmp_color;
 						ThemeEngine.Current.ColorMenuText = tmp_color;						
 					}
@@ -225,14 +225,14 @@ namespace System.Windows.Forms {
 				if (line.StartsWith("selectBackground")) {
 					tmp_color = GetColorFromKDEString(line);
 					
-					if (tmp_color != Color.Empty) {
+					if (tmp_color != Color_.Empty) {
 						ThemeEngine.Current.ColorHighlight = tmp_color;
 					}
 				} else
 				if (line.StartsWith("selectForeground")) {
 					tmp_color = GetColorFromKDEString(line);
 					
-					if (tmp_color != Color.Empty) {
+					if (tmp_color != Color_.Empty) {
 						ThemeEngine.Current.ColorHighlightText = tmp_color;
 					}
 				}
@@ -245,7 +245,7 @@ namespace System.Windows.Forms {
 			return true;
 		}
 		
-		private static Color GetColorFromKDEString(string line) {
+		private static Color_ GetColorFromKDEString(string line) {
 			string[] split = line.Split(new char[] {'='});
 			
 			if (split.Length > 0) {
@@ -258,11 +258,11 @@ namespace System.Windows.Forms {
 					int g = System.Convert.ToInt32(split[1]);
 					int b = System.Convert.ToInt32(split[2]);
 					
-					return Color.FromArgb(r, g, b);
+					return Color_.FromArgb(r, g, b);
 				}
 			}
 			
-			return Color.Empty;
+			return Color_.Empty;
 		}
 		#endregion	// Methods
 

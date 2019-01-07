@@ -40,29 +40,29 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawRadioButton (Graphics g, Point glyphLocation, RadioButtonState state)
+		public static void DrawRadioButton (Graphics g, Point_ glyphLocation, RadioButtonState state)
 		{
-			DrawRadioButton (g, glyphLocation, Rectangle.Empty, String.Empty, null, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, false, state);
+			DrawRadioButton (g, glyphLocation, Rectangle_.Empty, String.Empty, null, TextFormatFlags.HorizontalCenter, null, Rectangle_.Empty, false, state);
 		}
 
-		public static void DrawRadioButton (Graphics g, Point glyphLocation, Rectangle textBounds, string radioButtonText, Font font, bool focused, RadioButtonState state)
+		public static void DrawRadioButton (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string radioButtonText, Font font, bool focused, RadioButtonState state)
 		{
-			DrawRadioButton (g, glyphLocation, textBounds, radioButtonText, font, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, focused, state);
+			DrawRadioButton (g, glyphLocation, textBounds, radioButtonText, font, TextFormatFlags.HorizontalCenter, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawRadioButton (Graphics g, Point glyphLocation, Rectangle textBounds, string radioButtonText, Font font, TextFormatFlags flags, bool focused, RadioButtonState state)
+		public static void DrawRadioButton (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string radioButtonText, Font font, TextFormatFlags flags, bool focused, RadioButtonState state)
 		{
-			DrawRadioButton (g, glyphLocation, textBounds, radioButtonText, font, flags, null, Rectangle.Empty, focused, state);
+			DrawRadioButton (g, glyphLocation, textBounds, radioButtonText, font, flags, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawRadioButton (Graphics g, Point glyphLocation, Rectangle textBounds, string radioButtonText, Font font, Image image, Rectangle imageBounds, bool focused, RadioButtonState state)
+		public static void DrawRadioButton (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string radioButtonText, Font font, Image image, Rectangle_ imageBounds, bool focused, RadioButtonState state)
 		{
 			DrawRadioButton (g, glyphLocation, textBounds, radioButtonText, font, TextFormatFlags.HorizontalCenter, image, imageBounds, focused, state);
 		}
 
-		public static void DrawRadioButton (Graphics g, Point glyphLocation, Rectangle textBounds, string radioButtonText, Font font, TextFormatFlags flags, Image image, Rectangle imageBounds, bool focused, RadioButtonState state)
+		public static void DrawRadioButton (Graphics g, Point_ glyphLocation, Rectangle_ textBounds, string radioButtonText, Font font, TextFormatFlags flags, Image image, Rectangle_ imageBounds, bool focused, RadioButtonState state)
 		{
-			Rectangle bounds = new Rectangle (glyphLocation, GetGlyphSize (g, state));
+			Rectangle_ bounds = new Rectangle_ (glyphLocation, GetGlyphSize (g, state));
 
 			if (Application.RenderWithVisualStyles || always_use_visual_styles == true) {
 				VisualStyleRenderer vsr = GetRadioButtonRenderer (state);
@@ -125,7 +125,7 @@ namespace System.Windows.Forms
 			return vsr.IsBackgroundPartiallyTransparent ();
 		}
 
-		public static void DrawParentBackground (Graphics g, Rectangle bounds, Control childControl)
+		public static void DrawParentBackground (Graphics g, Rectangle_ bounds, Control childControl)
 		{
 			if (!VisualStyleRenderer.IsSupported)
 				return;
@@ -135,10 +135,10 @@ namespace System.Windows.Forms
 			vsr.DrawParentBackground (g, bounds, childControl);
 		}
 
-		public static Size GetGlyphSize (Graphics g, RadioButtonState state)
+		public static Size_ GetGlyphSize (Graphics g, RadioButtonState state)
 		{
 			if (!VisualStyleRenderer.IsSupported)
-				return new Size (13, 13);
+				return new Size_ (13, 13);
 
 			VisualStyleRenderer vsr = GetRadioButtonRenderer(state);
 

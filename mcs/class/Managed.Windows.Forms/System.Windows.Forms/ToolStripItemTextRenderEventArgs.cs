@@ -33,14 +33,14 @@ namespace System.Windows.Forms
 	public class ToolStripItemTextRenderEventArgs : ToolStripItemRenderEventArgs
 	{
 		private string text;
-		private Color text_color;
+		private Color_ text_color;
 		private ToolStripTextDirection text_direction;
 		private Font text_font;
 		private TextFormatFlags text_format;
-		private Rectangle text_rectangle;
+		private Rectangle_ text_rectangle;
 
 		#region Public Constructors
-		public ToolStripItemTextRenderEventArgs (Graphics g, ToolStripItem item, string text, Rectangle textRectangle, Color textColor, Font textFont, ContentAlignment textAlign)
+		public ToolStripItemTextRenderEventArgs (Graphics g, ToolStripItem item, string text, Rectangle_ textRectangle, Color_ textColor, Font textFont, ContentAlignment textAlign)
 			: base (g, item)
 		{
 			this.text = text;
@@ -84,7 +84,7 @@ namespace System.Windows.Forms
 				this.text_format |= TextFormatFlags.HidePrefix;
 		}
 
-		public ToolStripItemTextRenderEventArgs (Graphics g, ToolStripItem item, string text, Rectangle textRectangle, Color textColor, Font textFont, TextFormatFlags format)
+		public ToolStripItemTextRenderEventArgs (Graphics g, ToolStripItem item, string text, Rectangle_ textRectangle, Color_ textColor, Font textFont, TextFormatFlags format)
 			: base (g, item)
 		{
 			this.text = text;
@@ -102,7 +102,7 @@ namespace System.Windows.Forms
 			set { this.text = value; }
 		}
 
-		public Color TextColor {
+		public Color_ TextColor {
 			get { return this.text_color; }
 			set { this.text_color = value; }
 		}
@@ -122,7 +122,7 @@ namespace System.Windows.Forms
 			set { this.text_format = value; }
 		}
 
-		public Rectangle TextRectangle {
+		public Rectangle_ TextRectangle {
 			get { return this.text_rectangle; }
 			set { this.text_rectangle = value; }
 		}

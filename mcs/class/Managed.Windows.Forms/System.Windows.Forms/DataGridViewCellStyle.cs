@@ -36,31 +36,31 @@ namespace System.Windows.Forms {
 	public class DataGridViewCellStyle : ICloneable {
 
 		private DataGridViewContentAlignment alignment;
-		private Color backColor;
+		private Color_ backColor;
 		private object dataSourceNullValue;
 		private Font font;
-		private Color foreColor;
+		private Color_ foreColor;
 		private string format;
 		private IFormatProvider formatProvider;
 		private object nullValue;
 		private Padding padding;
-		private Color selectionBackColor;
-		private Color selectionForeColor;
+		private Color_ selectionBackColor;
+		private Color_ selectionForeColor;
 		private object tag;
 		private DataGridViewTriState wrapMode;
 
 		public DataGridViewCellStyle ()
 		{
 			alignment = DataGridViewContentAlignment.NotSet;
-			backColor = Color.Empty;
+			backColor = Color_.Empty;
 			dataSourceNullValue = DBNull.Value;
 			font = null;
-			foreColor = Color.Empty;
+			foreColor = Color_.Empty;
 			format = String.Empty;
 			nullValue = string.Empty;
 			padding = Padding.Empty;
-			selectionBackColor = Color.Empty;
-			selectionForeColor = Color.Empty;
+			selectionBackColor = Color_.Empty;
+			selectionForeColor = Color_.Empty;
 			tag = null;
 			wrapMode = DataGridViewTriState.NotSet;
 		}
@@ -96,7 +96,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return backColor; }
 			set {
 				if (backColor != value) {
@@ -129,7 +129,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get { return foreColor; }
 			set {
 				if (foreColor != value) {
@@ -214,7 +214,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color SelectionBackColor {
+		public Color_ SelectionBackColor {
 			get { return selectionBackColor; }
 			set {
 				if (selectionBackColor != value) {
@@ -224,7 +224,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color SelectionForeColor {
+		public Color_ SelectionForeColor {
 			get { return selectionForeColor; }
 			set {
 				if (selectionForeColor != value) {
@@ -265,13 +265,13 @@ namespace System.Windows.Forms {
 			// We should only apply the new style if it is 'set'.
 			if (dataGridViewCellStyle.alignment != DataGridViewContentAlignment.NotSet)
 				this.alignment = dataGridViewCellStyle.alignment;
-			if (dataGridViewCellStyle.backColor != Color.Empty)
+			if (dataGridViewCellStyle.backColor != Color_.Empty)
 				this.backColor = dataGridViewCellStyle.backColor;
 			if (dataGridViewCellStyle.dataSourceNullValue != DBNull.Value)
 				this.dataSourceNullValue = dataGridViewCellStyle.dataSourceNullValue;
 			if (dataGridViewCellStyle.font != null)
 				this.font = dataGridViewCellStyle.font;
-			if (dataGridViewCellStyle.foreColor != Color.Empty)
+			if (dataGridViewCellStyle.foreColor != Color_.Empty)
 				this.foreColor = dataGridViewCellStyle.foreColor;
 			if (dataGridViewCellStyle.format != string.Empty)
 				this.format = dataGridViewCellStyle.format;
@@ -281,9 +281,9 @@ namespace System.Windows.Forms {
 				this.nullValue = dataGridViewCellStyle.nullValue;
 			if (dataGridViewCellStyle.padding != Padding.Empty)
 				this.padding = dataGridViewCellStyle.padding;
-			if (dataGridViewCellStyle.selectionBackColor != Color.Empty)
+			if (dataGridViewCellStyle.selectionBackColor != Color_.Empty)
 				this.selectionBackColor = dataGridViewCellStyle.selectionBackColor;
-			if (dataGridViewCellStyle.selectionForeColor != Color.Empty)
+			if (dataGridViewCellStyle.selectionForeColor != Color_.Empty)
 				this.selectionForeColor = dataGridViewCellStyle.selectionForeColor;
 			if (dataGridViewCellStyle.tag != null)
 				this.tag = dataGridViewCellStyle.tag;

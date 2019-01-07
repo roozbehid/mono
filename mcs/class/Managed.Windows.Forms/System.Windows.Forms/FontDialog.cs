@@ -25,8 +25,8 @@
 //
 
 // NOT COMPLETE - work in progress
-
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System;
@@ -41,7 +41,7 @@ namespace System.Windows.Forms
 		protected static readonly object EventApply = new object ();
 
 		private Font font;
-		private Color color = Color.Black;
+		private Color_ color = Color_.Black;
 		private bool allowSimulations = true;
 		private bool allowVectorFonts = true;
 		private bool allowVerticalFonts = true;
@@ -207,46 +207,46 @@ namespace System.Windows.Forms
 			form.MaximizeBox = false;
 			
 			// fontsizeListBox
-			fontsizeListBox.Location = new Point( 284, 47 );
-			fontsizeListBox.Size = new Size( 52, 95 );
+			fontsizeListBox.Location = new Point_( 284, 47 );
+			fontsizeListBox.Size = new Size_( 52, 95 );
 			fontsizeListBox.TabIndex = 10;
 			fontListBox.Sorted = true;
 			// fontTextBox
-			fontTextBox.Location = new Point( 16, 26 );
-			fontTextBox.Size = new Size( 140, 21 );
+			fontTextBox.Location = new Point_( 16, 26 );
+			fontTextBox.Size = new Size_( 140, 21 );
 			fontTextBox.TabIndex = 5;
 			fontTextBox.Text = "";
 			// fontstyleLabel
-			fontstyleLabel.Location = new Point( 164, 10 );
-			fontstyleLabel.Size = new Size( 100, 16 );
+			fontstyleLabel.Location = new Point_( 164, 10 );
+			fontstyleLabel.Size = new Size_( 100, 16 );
 			fontstyleLabel.TabIndex = 1;
 			fontstyleLabel.Text = "Font Style:";
 			// typesizeTextBox
-			fontsizeTextBox.Location = new Point( 284, 26 );
-			fontsizeTextBox.Size = new Size( 52, 21 );
+			fontsizeTextBox.Location = new Point_( 284, 26 );
+			fontsizeTextBox.Size = new Size_( 52, 21 );
 			fontsizeTextBox.TabIndex = 7;
 			fontsizeTextBox.Text = "";
 			fontsizeTextBox.MaxLength = 2;
 			// schriftartListBox
-			fontListBox.Location = new Point( 16, 47 );
-			fontListBox.Size = new Size( 140, 95 );
+			fontListBox.Location = new Point_( 16, 47 );
+			fontListBox.Size = new Size_( 140, 95 );
 			fontListBox.TabIndex = 8;
 			fontListBox.Sorted = true;
 			// exampleGroupBox
 			exampleGroupBox.Controls.Add( examplePanel );
 			exampleGroupBox.FlatStyle = FlatStyle.System;
-			exampleGroupBox.Location = new Point( 164, 158 );
-			exampleGroupBox.Size = new Size( 172, 70 );
+			exampleGroupBox.Location = new Point_( 164, 158 );
+			exampleGroupBox.Size = new Size_( 172, 70 );
 			exampleGroupBox.TabIndex = 12;
 			exampleGroupBox.TabStop = false;
 			exampleGroupBox.Text = "Example";
 			// fontstyleListBox
-			fontstyleListBox.Location = new Point( 164, 47 );
-			fontstyleListBox.Size = new Size( 112, 95 );
+			fontstyleListBox.Location = new Point_( 164, 47 );
+			fontstyleListBox.Size = new Size_( 112, 95 );
 			fontstyleListBox.TabIndex = 9;
 			// schriftartLabel
-			fontLabel.Location = new Point( 16, 10 );
-			fontLabel.Size = new Size( 88, 16 );
+			fontLabel.Location = new Point_( 16, 10 );
+			fontLabel.Size = new Size_( 88, 16 );
 			fontLabel.TabIndex = 0;
 			fontLabel.Text = "Font:";
 			// effectsGroupBox
@@ -254,72 +254,72 @@ namespace System.Windows.Forms
 			effectsGroupBox.Controls.Add( strikethroughCheckBox );
 			effectsGroupBox.Controls.Add( colorComboBox );
 			effectsGroupBox.FlatStyle = FlatStyle.System;
-			effectsGroupBox.Location = new Point( 16, 158 );
-			effectsGroupBox.Size = new Size( 140, 116 );
+			effectsGroupBox.Location = new Point_( 16, 158 );
+			effectsGroupBox.Size = new Size_( 140, 116 );
 			effectsGroupBox.TabIndex = 11;
 			effectsGroupBox.TabStop = false;
 			effectsGroupBox.Text = "Effects";
 			// strikethroughCheckBox
 			strikethroughCheckBox.FlatStyle = FlatStyle.System;
-			strikethroughCheckBox.Location = new Point( 8, 16 );
+			strikethroughCheckBox.Location = new Point_( 8, 16 );
 			strikethroughCheckBox.TabIndex = 0;
 			strikethroughCheckBox.Text = "Strikethrough";
 			// colorComboBox
-			colorComboBox.Location = new Point( 8, 70 );
-			colorComboBox.Size = new Size( 130, 21 );
+			colorComboBox.Location = new Point_( 8, 70 );
+			colorComboBox.Size = new Size_( 130, 21 );
 			// sizeLabel
-			sizeLabel.Location = new Point( 284, 10 );
-			sizeLabel.Size = new Size( 100, 16 );
+			sizeLabel.Location = new Point_( 284, 10 );
+			sizeLabel.Size = new Size_( 100, 16 );
 			sizeLabel.TabIndex = 2;
 			sizeLabel.Text = "Size:";
 			// scriptComboBox
-			scriptComboBox.Location = new Point( 164, 253 );
-			scriptComboBox.Size = new Size( 172, 21 );
+			scriptComboBox.Location = new Point_( 164, 253 );
+			scriptComboBox.Size = new Size_( 172, 21 );
 			scriptComboBox.TabIndex = 14;
 			scriptComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 			// okButton
 			okButton.FlatStyle = FlatStyle.System;
-			okButton.Location = new Point( 352, 26 );
-			okButton.Size = new Size( 70, 23 );
+			okButton.Location = new Point_( 352, 26 );
+			okButton.Size = new Size_( 70, 23 );
 			okButton.TabIndex = 3;
 			okButton.Text = "OK";
 			// cancelButton
 			cancelButton.FlatStyle = FlatStyle.System;
-			cancelButton.Location = new Point( 352, 52 );
-			cancelButton.Size = new Size( 70, 23 );
+			cancelButton.Location = new Point_( 352, 52 );
+			cancelButton.Size = new Size_( 70, 23 );
 			cancelButton.TabIndex = 4;
 			cancelButton.Text = "Cancel";
 			// applyButton
 			applyButton.FlatStyle = FlatStyle.System;
-			applyButton.Location = new Point( 352, 78 );
-			applyButton.Size = new Size( 70, 23 );
+			applyButton.Location = new Point_( 352, 78 );
+			applyButton.Size = new Size_( 70, 23 );
 			applyButton.TabIndex = 5;
 			applyButton.Text = "Apply";
 			// helpButton
 			helpButton.FlatStyle = FlatStyle.System;
-			helpButton.Location = new Point( 352, 104 );
-			helpButton.Size = new Size( 70, 23 );
+			helpButton.Location = new Point_( 352, 104 );
+			helpButton.Size = new Size_( 70, 23 );
 			helpButton.TabIndex = 6;
 			helpButton.Text = "Help";
 			// underlinedCheckBox
 			underlinedCheckBox.FlatStyle = FlatStyle.System;
-			underlinedCheckBox.Location = new Point( 8, 36 );
+			underlinedCheckBox.Location = new Point_( 8, 36 );
 			underlinedCheckBox.TabIndex = 1;
 			underlinedCheckBox.Text = "Underlined";
 			// fontstyleTextBox
-			fontstyleTextBox.Location = new Point( 164, 26 );
-			fontstyleTextBox.Size = new Size( 112, 21 );
+			fontstyleTextBox.Location = new Point_( 164, 26 );
+			fontstyleTextBox.Size = new Size_( 112, 21 );
 			fontstyleTextBox.TabIndex = 6;
 			fontstyleTextBox.Text = "";
 			// scriptLabel
-			scriptLabel.Location = new Point( 164, 236 );
-			scriptLabel.Size = new Size( 100, 16 );
+			scriptLabel.Location = new Point_( 164, 236 );
+			scriptLabel.Size = new Size_( 100, 16 );
 			scriptLabel.TabIndex = 13;
 			scriptLabel.Text = "Script:";
 			// examplePanel
-			examplePanel.Location = new Point( 8, 20 );
+			examplePanel.Location = new Point_( 8, 20 );
 			examplePanel.TabIndex = 0;
-			examplePanel.Size = new Size( 156, 40 );
+			examplePanel.Size = new Size_( 156, 40 );
 			examplePanel.BorderStyle = BorderStyle.Fixed3D;
 			
 			form.AcceptButton = okButton;
@@ -346,7 +346,7 @@ namespace System.Windows.Forms
 			exampleGroupBox.ResumeLayout( false );
 			effectsGroupBox.ResumeLayout( false );
 			
-			form.Size = new Size( 430, 318 );
+			form.Size = new Size_( 430, 318 );
 			
 			form.FormBorderStyle = FormBorderStyle.FixedDialog;
 			form.MaximizeBox = false;
@@ -442,7 +442,7 @@ namespace System.Windows.Forms
 		}
 
 		[DefaultValue ("Color [Black]")]
-		public Color Color
+		public Color_ Color
 		{
 			set {
 				color = value;
@@ -678,7 +678,7 @@ namespace System.Windows.Forms
 		#region Public Instance Methods
 		public override void Reset( )
 		{
-			color = Color.Black;
+            Color = Color_.Black;
 			allowSimulations = true;
 			allowVectorFonts = true;
 			allowVerticalFonts = true;
@@ -752,11 +752,11 @@ namespace System.Windows.Forms
 		
 		void OnPaintExamplePanel( object sender, PaintEventArgs e )
 		{
-			SolidBrush brush = ThemeEngine.Current.ResPool.GetSolidBrush( color );
+			SolidBrush brush = ThemeEngine.Current.ResPool.GetSolidBrush( Color );
 			
 			e.Graphics.FillRectangle( ThemeEngine.Current.ResPool.GetSolidBrush( SystemColors.Control ), 0, 0, 156, 40 );
 			
-			SizeF fontSizeF = e.Graphics.MeasureString( example_panel_text, font );
+			SizeF_ fontSizeF = e.Graphics.MeasureString( example_panel_text, font );
 			
 			int text_width = (int)fontSizeF.Width;
 			int text_height = (int)fontSizeF.Height;
@@ -766,7 +766,7 @@ namespace System.Windows.Forms
 			
 			int y = ( examplePanel.Height / 2 ) - ( text_height / 2 );
 			
-			e.Graphics.DrawString( example_panel_text, font, brush, new Point( x, y ) );
+			e.Graphics.DrawString( example_panel_text, font, brush, new Point_( x, y ) );
 		}
 		
 		void OnSelectedIndexChangedFontListBox( object sender, EventArgs e )
@@ -918,7 +918,7 @@ namespace System.Windows.Forms
 		
 		void OnFontSizeTextBoxKeyDown (object sender, KeyEventArgs e)
 		{
-			// Forward these keys on to the font size listbox
+			// Forward these keys on to the font Size_ listbox
 			switch (e.KeyCode) {
 				case Keys.Up:
 				case Keys.Down:
@@ -1205,16 +1205,16 @@ namespace System.Windows.Forms
 		{
 			internal class ColorComboBoxItem
 			{
-				private Color color;
+				private Color_ color;
 				private string name;
 				
-				public ColorComboBoxItem( Color color, string name )
+				public ColorComboBoxItem( Color_ color, string name )
 				{
 					this.color = color;
 					this.name = name;
 				}
 				
-				public Color Color
+				public Color_ Color
 				{
 					set {
 						color = value;
@@ -1242,7 +1242,7 @@ namespace System.Windows.Forms
 				}
 			}
 			
-			private Color selectedColor;
+			private Color_ selectedColor;
 			
 			private FontDialog fontDialog;
 			
@@ -1254,22 +1254,22 @@ namespace System.Windows.Forms
 				DrawMode = DrawMode.OwnerDrawFixed;
 				
 				Items.AddRange (new object[] {
-					new ColorComboBoxItem (Color.Black, "Black"),
-					new ColorComboBoxItem (Color.Maroon, "Maroon"),
-					new ColorComboBoxItem (Color.Green, "Green"),
-					new ColorComboBoxItem (Color.Olive, "Olive"),
-					new ColorComboBoxItem (Color.Navy, "Navy"),
-					new ColorComboBoxItem (Color.Purple, "Purple"),
-					new ColorComboBoxItem (Color.Teal, "Teal"),
- 					new ColorComboBoxItem (Color.Gray, "Gray"),
- 					new ColorComboBoxItem (Color.Silver, "Silver"),
- 					new ColorComboBoxItem (Color.Red, "Red"),
-					new ColorComboBoxItem (Color.Lime, "Lime"),
- 					new ColorComboBoxItem (Color.Yellow, "Yellow"),
- 					new ColorComboBoxItem (Color.Blue, "Blue"),
-					new ColorComboBoxItem (Color.Fuchsia, "Fuchsia"),
-					new ColorComboBoxItem (Color.Aqua, "Aqua"),
- 					new ColorComboBoxItem (Color.White, "White") }
+					new ColorComboBoxItem (Color_.Black, "Black"),
+					new ColorComboBoxItem (Color_.Maroon, "Maroon"),
+					new ColorComboBoxItem (Color_.Green, "Green"),
+					new ColorComboBoxItem (Color_.Olive, "Olive"),
+					new ColorComboBoxItem (Color_.Navy, "Navy"),
+					new ColorComboBoxItem (Color_.Purple, "Purple"),
+					new ColorComboBoxItem (Color_.Teal, "Teal"),
+ 					new ColorComboBoxItem (Color_.Gray, "Gray"),
+ 					new ColorComboBoxItem (Color_.Silver, "Silver"),
+ 					new ColorComboBoxItem (Color_.Red, "Red"),
+					new ColorComboBoxItem (Color_.Lime, "Lime"),
+ 					new ColorComboBoxItem (Color_.Yellow, "Yellow"),
+ 					new ColorComboBoxItem (Color_.Blue, "Blue"),
+					new ColorComboBoxItem (Color_.Fuchsia, "Fuchsia"),
+					new ColorComboBoxItem (Color_.Aqua, "Aqua"),
+ 					new ColorComboBoxItem (Color_.White, "White") }
 				);
 				
 				SelectedIndex = 0;
@@ -1283,22 +1283,22 @@ namespace System.Windows.Forms
 				
 				ColorComboBoxItem ccbi = Items[ e.Index ] as ColorComboBoxItem;
 				
-				Rectangle r = e.Bounds;
+				Rectangle_ r = e.Bounds;
 				r.X = r.X + 24;
 				
 				if ( ( e.State & DrawItemState.Selected ) == DrawItemState.Selected )
 				{
-					e.Graphics.FillRectangle( ThemeEngine.Current.ResPool.GetSolidBrush( Color.Blue ), e.Bounds ); // bot blue
+					e.Graphics.FillRectangle( ThemeEngine.Current.ResPool.GetSolidBrush( Color_.Blue ), e.Bounds ); // bot blue
 					e.Graphics.FillRectangle( ThemeEngine.Current.ResPool.GetSolidBrush( ccbi.Color ), e.Bounds.X + 3, e.Bounds.Y + 3, e.Bounds.X + 16, e.Bounds.Bottom - 3 );
-					e.Graphics.DrawRectangle( ThemeEngine.Current.ResPool.GetPen( Color.Black ), e.Bounds.X + 2, e. Bounds.Y + 2, e.Bounds.X + 17, e.Bounds.Bottom - 3 );
-					e.Graphics.DrawString( ccbi.Name, this.Font, ThemeEngine.Current.ResPool.GetSolidBrush( Color.White ), r );
+					e.Graphics.DrawRectangle( ThemeEngine.Current.ResPool.GetPen( Color_.Black ), e.Bounds.X + 2, e. Bounds.Y + 2, e.Bounds.X + 17, e.Bounds.Bottom - 3 );
+					e.Graphics.DrawString( ccbi.Name, this.Font, ThemeEngine.Current.ResPool.GetSolidBrush( Color_.White ), r );
 				}
 				else
 				{
-					e.Graphics.FillRectangle( ThemeEngine.Current.ResPool.GetSolidBrush( Color.White ), e.Bounds );
+					e.Graphics.FillRectangle( ThemeEngine.Current.ResPool.GetSolidBrush( Color_.White ), e.Bounds );
 					e.Graphics.FillRectangle( ThemeEngine.Current.ResPool.GetSolidBrush( ccbi.Color ), e.Bounds.X + 3, e.Bounds.Y + 3, e.Bounds.X + 16, e.Bounds.Bottom - 3 );
-					e.Graphics.DrawRectangle( ThemeEngine.Current.ResPool.GetPen( Color.Black ), e.Bounds.X + 2, e. Bounds.Y + 2, e.Bounds.X + 17, e.Bounds.Bottom - 3 );
-					e.Graphics.DrawString( ccbi.Name, this.Font, ThemeEngine.Current.ResPool.GetSolidBrush( Color.Black ), r );
+					e.Graphics.DrawRectangle( ThemeEngine.Current.ResPool.GetPen( Color_.Black ), e.Bounds.X + 2, e. Bounds.Y + 2, e.Bounds.X + 17, e.Bounds.Bottom - 3 );
+					e.Graphics.DrawString( ccbi.Name, this.Font, ThemeEngine.Current.ResPool.GetSolidBrush( Color_.Black ), r );
 				}
 			}
 			

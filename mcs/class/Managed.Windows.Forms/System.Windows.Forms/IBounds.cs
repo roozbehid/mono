@@ -25,16 +25,16 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
 {
 	interface IBounds
 	{
-		Rectangle Bounds { get; }
+		Rectangle_ Bounds { get; }
 	}
 }

@@ -23,8 +23,8 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -33,8 +33,8 @@ namespace System.Windows.Forms {
 
 		private DataGridView dataGridView;
 		private Graphics graphics;
-		private Rectangle clipBounds; 
-		private Rectangle cellBounds;
+		private Rectangle_ clipBounds; 
+		private Rectangle_ cellBounds;
 		private int rowIndex;
 		private int columnIndex;
 		private DataGridViewElementStates cellState;
@@ -45,7 +45,7 @@ namespace System.Windows.Forms {
 		private DataGridViewAdvancedBorderStyle advancedBorderStyle;
 		private DataGridViewPaintParts paintParts;
 
-		public DataGridViewCellPaintingEventArgs (DataGridView dataGridView, Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, int columnIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts) {
+		public DataGridViewCellPaintingEventArgs (DataGridView dataGridView, Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, int columnIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts) {
 			this.dataGridView = dataGridView;
 			this.graphics = graphics;
 			this.clipBounds = clipBounds;
@@ -65,7 +65,7 @@ namespace System.Windows.Forms {
 			get { return advancedBorderStyle; }
 		}
 
-		public Rectangle CellBounds {
+		public Rectangle_ CellBounds {
 			get { return cellBounds; }
 		}
 
@@ -73,7 +73,7 @@ namespace System.Windows.Forms {
 			get { return cellStyle; }
 		}
 
-		public Rectangle ClipBounds {
+		public Rectangle_ ClipBounds {
 			get { return clipBounds; }
 		}
 
@@ -109,7 +109,7 @@ namespace System.Windows.Forms {
 			get { return cellValue; }
 		}
 
-		public void Paint (Rectangle clipBounds, DataGridViewPaintParts paintParts) {
+		public void Paint (Rectangle_ clipBounds, DataGridViewPaintParts paintParts) {
 			if (rowIndex < -1 || rowIndex >= dataGridView.Rows.Count)
 				throw new InvalidOperationException("Invalid \"RowIndex.\"");
 			if (columnIndex < -1 || columnIndex >= dataGridView.Columns.Count)
@@ -129,13 +129,13 @@ namespace System.Windows.Forms {
 			cell.PaintInternal (graphics, clipBounds, cellBounds, rowIndex, cellState, Value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);				
 		}
 
-		public void PaintBackground (Rectangle clipBounds, bool cellsPaintSelectionBackground)
+		public void PaintBackground (Rectangle_ clipBounds, bool cellsPaintSelectionBackground)
 		{
 			Paint (clipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
 		}
 			
 		[MonoInternalNote ("Needs row header cell edit pencil glyph")]
-		public void PaintContent (Rectangle clipBounds)
+		public void PaintContent (Rectangle_ clipBounds)
 		{
 			Paint (clipBounds, DataGridViewPaintParts.ContentBackground | DataGridViewPaintParts.ContentForeground);
 		}

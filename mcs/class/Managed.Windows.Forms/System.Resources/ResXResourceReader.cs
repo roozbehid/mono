@@ -268,7 +268,7 @@ namespace System.Resources
 		private void ParseDataNode (bool meta)
 		{
 			Hashtable hashtable = ((meta && ! useResXDataNodes) ? hashtm : hasht);
-			Point pos = new Point (((IXmlLineInfo)xmlReader).LineNumber, ((IXmlLineInfo)xmlReader).LinePosition);
+			Point_ pos = new Point_ (((IXmlLineInfo)xmlReader).LineNumber, ((IXmlLineInfo)xmlReader).LinePosition);
 			string name = GetAttribute ("name");
 			string type_name = GetAttribute ("type");
 			string mime_type = GetAttribute ("mimetype");

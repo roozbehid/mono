@@ -38,42 +38,42 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawTabItem (Graphics g, Rectangle bounds, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, TabItemState state)
 		{
-			DrawTabItem(g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle.Empty, false, state);
+			DrawTabItem(g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle_.Empty, false, state);
 		}
 
-		public static void DrawTabItem (Graphics g, Rectangle bounds, bool focused, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, bool focused, TabItemState state)
 		{
-			DrawTabItem (g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle.Empty, focused, state);
+			DrawTabItem (g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle_.Empty, focused, state);
 		}
 		
-		public static void DrawTabItem (Graphics g, Rectangle bounds, string tabItemText, Font font, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, string tabItemText, Font font, TabItemState state)
 		{
-			DrawTabItem (g, bounds, tabItemText, font, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, false, state);
+			DrawTabItem (g, bounds, tabItemText, font, TextFormatFlags.HorizontalCenter, null, Rectangle_.Empty, false, state);
 		}
 
-		public static void DrawTabItem (Graphics g, Rectangle bounds, Image image, Rectangle imageRectangle, bool focused, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, Image image, Rectangle_ imageRectangle, bool focused, TabItemState state)
 		{
 			DrawTabItem (g, bounds, String.Empty, null, TextFormatFlags.HorizontalCenter, image, imageRectangle, focused, state);
 		}
 
-		public static void DrawTabItem (Graphics g, Rectangle bounds, string tabItemText, Font font, bool focused, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, string tabItemText, Font font, bool focused, TabItemState state)
 		{
-			DrawTabItem (g, bounds, tabItemText, font, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, focused, state);
+			DrawTabItem (g, bounds, tabItemText, font, TextFormatFlags.HorizontalCenter, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawTabItem (Graphics g, Rectangle bounds, string tabItemText, Font font, TextFormatFlags flags, bool focused, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, string tabItemText, Font font, TextFormatFlags flags, bool focused, TabItemState state)
 		{
-			DrawTabItem (g, bounds, tabItemText, font, flags, null, Rectangle.Empty, focused, state);
+			DrawTabItem (g, bounds, tabItemText, font, flags, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawTabItem (Graphics g, Rectangle bounds, string tabItemText, Font font, Image image, Rectangle imageRectangle, bool focused, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, string tabItemText, Font font, Image image, Rectangle_ imageRectangle, bool focused, TabItemState state)
 		{
 			DrawTabItem (g, bounds, tabItemText, font, TextFormatFlags.HorizontalCenter, image, imageRectangle, focused, state);
 		}
 
-		public static void DrawTabItem (Graphics g, Rectangle bounds, string tabItemText, Font font, TextFormatFlags flags, Image image, Rectangle imageRectangle, bool focused, TabItemState state)
+		public static void DrawTabItem (Graphics g, Rectangle_ bounds, string tabItemText, Font font, TextFormatFlags flags, Image image, Rectangle_ imageRectangle, bool focused, TabItemState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -112,7 +112,7 @@ namespace System.Windows.Forms
 				ControlPaint.DrawFocusRectangle(g, bounds);
 		}
 
-		public static void DrawTabPage (Graphics g, Rectangle bounds)
+		public static void DrawTabPage (Graphics g, Rectangle_ bounds)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();

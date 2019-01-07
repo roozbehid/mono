@@ -25,8 +25,8 @@
 //
 
 // NOT COMPLETE
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 
@@ -59,7 +59,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size Border3DSize {
+		public static Size_ Border3DSize {
 			get {
 				return ThemeEngine.Current.Border3DSize;
 			}
@@ -68,13 +68,13 @@ namespace System.Windows.Forms
 		[MonoInternalNote ("Determine if we need an X11 implementation or if defaults are good.")]
 		public static int BorderMultiplierFactor { get { return ThemeEngine.Current.BorderMultiplierFactor; } }
 
-		public static Size BorderSize {
+		public static Size_ BorderSize {
 			get {
 				return ThemeEngine.Current.BorderSize;
 			}
 		}
 
-		public static Size CaptionButtonSize {
+		public static Size_ CaptionButtonSize {
 			get {
 				return ThemeEngine.Current.CaptionButtonSize;
 			}
@@ -97,7 +97,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size CursorSize {
+		public static Size_ CursorSize {
 			get {
 				return XplatUI.CursorSize;
 			}
@@ -115,7 +115,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size DoubleClickSize {
+		public static Size_ DoubleClickSize {
 			get {
 				return ThemeEngine.Current.DoubleClickSize;
 			}
@@ -133,13 +133,13 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size DragSize {
+		public static Size_ DragSize {
 			get {
 				return XplatUI.DragSize;
 			}
 		}
 
-		public static Size FixedFrameBorderSize {
+		public static Size_ FixedFrameBorderSize {
 			get {
 				return ThemeEngine.Current.FixedFrameBorderSize;
 			}
@@ -150,7 +150,7 @@ namespace System.Windows.Forms
 		[MonoInternalNote ("Determine if we need an X11 implementation or if defaults are good.")]
 		public static int FontSmoothingType { get { return XplatUI.FontSmoothingType; } }
 
-		public static Size FrameBorderSize {
+		public static Size_ FrameBorderSize {
 			get {
 				return ThemeEngine.Current.FrameBorderSize;
 			}
@@ -185,7 +185,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size IconSize {
+		public static Size_ IconSize {
 			get {
 				return XplatUI.IconSize;
 			}
@@ -203,7 +203,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size IconSpacingSize {
+		public static Size_ IconSpacingSize {
 			get {
 				return ThemeEngine.Current.IconSpacingSize;
 			}
@@ -306,7 +306,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size MaxWindowTrackSize {
+		public static Size_ MaxWindowTrackSize {
 			get {
 				return XplatUI.MaxWindowTrackSize;
 			}
@@ -319,17 +319,17 @@ namespace System.Windows.Forms
 		}
 
 		[MonoInternalNote ("Determine if we need an X11 implementation or if defaults are good.")]
-		public static Size MenuBarButtonSize {
+		public static Size_ MenuBarButtonSize {
 			get { return ThemeEngine.Current.MenuBarButtonSize; }
 		}
 
-		public static Size MenuButtonSize {
+		public static Size_ MenuButtonSize {
 			get {
 				return ThemeEngine.Current.MenuButtonSize;
 			}
 		}
 
-		public static Size MenuCheckSize {
+		public static Size_ MenuCheckSize {
 			get {
 				return ThemeEngine.Current.MenuCheckSize;
 			}
@@ -359,25 +359,25 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size MinimizedWindowSize {
+		public static Size_ MinimizedWindowSize {
 			get {
 				return XplatUI.MinimizedWindowSize;
 			}
 		}
 
-		public static Size MinimizedWindowSpacingSize {
+		public static Size_ MinimizedWindowSpacingSize {
 			get {
 				return XplatUI.MinimizedWindowSpacingSize;
 			}
 		}
 
-		public static Size MinimumWindowSize {
+		public static Size_ MinimumWindowSize {
 			get {
 				return XplatUI.MinimumWindowSize;
 			}
 		}
 
-		public static Size MinWindowTrackSize {
+		public static Size_ MinWindowTrackSize {
 			get {
 				return XplatUI.MinWindowTrackSize;
 			}
@@ -407,7 +407,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size MouseHoverSize {
+		public static Size_ MouseHoverSize {
 			get {
 				return XplatUI.MouseHoverSize;
 			}
@@ -477,17 +477,17 @@ namespace System.Windows.Forms
 			get { return XplatUI.PowerStatus; }
 		}
 
-		public static Size PrimaryMonitorMaximizedWindowSize {
+		public static Size_ PrimaryMonitorMaximizedWindowSize {
 			get {
 				var workingArea = Screen.PrimaryScreen.WorkingArea;
-				return new Size (workingArea.Width, workingArea.Height);
+				return new Size_ (workingArea.Width, workingArea.Height);
 			}
 		}
 
-		public static Size PrimaryMonitorSize {
+		public static Size_ PrimaryMonitorSize {
 			get {
 				var bounds = Screen.PrimaryScreen.Bounds;
-				return new Size (bounds.Width, bounds.Height);
+				return new Size_ (bounds.Width, bounds.Height);
 			}
 		}
 
@@ -519,11 +519,11 @@ namespace System.Windows.Forms
 		}
 
 		[MonoInternalNote ("Determine if we need an X11 implementation or if defaults are good.")]
-		public static Size SmallCaptionButtonSize {
+		public static Size_ SmallCaptionButtonSize {
 			get { return XplatUI.SmallCaptionButtonSize; }
 		}
 
-		public static Size SmallIconSize {
+		public static Size_ SmallIconSize {
 			get {
 				return XplatUI.SmallIconSize;
 			}
@@ -535,7 +535,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Size ToolWindowCaptionButtonSize {
+		public static Size_ ToolWindowCaptionButtonSize {
 			get {
 				return ThemeEngine.Current.ToolWindowCaptionButtonSize;
 			}
@@ -593,16 +593,16 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Rectangle VirtualScreen {
+		public static Rectangle_ VirtualScreen {
 			get {
-				var rect = new Rectangle ();
+				var rect = new Rectangle_ ();
 				foreach (var screen in Screen.AllScreens)
 					rect = Rectangle.Union (rect, screen.Bounds);
 				return rect;
 			}
 		}
 
-		public static Rectangle WorkingArea {
+		public static Rectangle_ WorkingArea {
 			get {
 				return Screen.PrimaryScreen.WorkingArea;
 			}

@@ -33,12 +33,12 @@ namespace System.Windows.Forms
     {
         #region Private Fields
 
-        private Color backColor;
-        private Rectangle bounds;
+        private Color_ backColor;
+        private Rectangle_ bounds;
         private int columnIndex;
         private bool drawDefault;
         private Font font;
-        private Color foreColor;
+        private Color_ foreColor;
         private Graphics graphics;
         private ColumnHeader header;
         private ListViewItemStates state;
@@ -48,11 +48,11 @@ namespace System.Windows.Forms
 
         #region Properties
 
-        public Color BackColor {
+        public Color_ BackColor {
             get { return backColor; }
         }
 
-        public Rectangle Bounds {
+        public Rectangle_ Bounds {
             get { return bounds; }
         }
 
@@ -69,7 +69,7 @@ namespace System.Windows.Forms
             get { return font; }
         }
 
-        public Color ForeColor {
+        public Color_ ForeColor {
             get { return foreColor; }
         }
 
@@ -90,9 +90,9 @@ namespace System.Windows.Forms
 
         #region Constructors
 
-        public DrawListViewColumnHeaderEventArgs(Graphics graphics, Rectangle bounds, int columnIndex,
-                                        ColumnHeader header, ListViewItemStates state, Color foreColor,
-                                        Color backColor, Font font)
+        public DrawListViewColumnHeaderEventArgs(Graphics graphics, Rectangle_ bounds, int columnIndex,
+                                        ColumnHeader header, ListViewItemStates state, Color_ foreColor,
+                                        Color_ backColor, Font font)
         {
             this.backColor = backColor;
             this.bounds = bounds;
@@ -123,7 +123,7 @@ namespace System.Windows.Forms
         public void DrawText (TextFormatFlags flags)
         {
 		// Text adjustments
-		Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
+		Rectangle_ text_bounds = new Rectangle_ (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
 		TextRenderer.DrawText (graphics, header.Text, font, text_bounds, foreColor, flags);
         }
 

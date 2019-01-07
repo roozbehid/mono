@@ -25,6 +25,7 @@
 //
 //
 
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Drawing.Imaging;
@@ -45,11 +46,11 @@ namespace System.Windows.Forms
 		internal int step;
 		internal int val;
 		internal DateTime start = DateTime.Now;
-		internal Rectangle client_area = new Rectangle ();
+		internal Rectangle_ client_area = new Rectangle_ ();
 		internal ProgressBarStyle style;
 		Timer marquee_timer;
 		bool right_to_left_layout;
-		private static readonly Color defaultForeColor = SystemColors.Highlight;
+		private static readonly Color_ defaultForeColor = SystemColors.Highlight;
 		#endregion	// Local Variables
 
 		#region events
@@ -243,7 +244,7 @@ namespace System.Windows.Forms
 			get { return base.DefaultImeMode; }
 		}
 
-		protected override Size DefaultSize
+		protected override Size_ DefaultSize
 		{
 			get { return ThemeEngine.Current.ProgressBarDefaultSize; }
 		}

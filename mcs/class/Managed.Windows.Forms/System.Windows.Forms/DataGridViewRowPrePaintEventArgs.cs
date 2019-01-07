@@ -22,8 +22,8 @@
 // Author:
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
-
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -32,8 +32,8 @@ namespace System.Windows.Forms {
 
 		private DataGridView dataGridView;
 		private Graphics graphics;
-		private Rectangle clipBounds;
-		private Rectangle rowBounds;
+		private Rectangle_ clipBounds;
+		private Rectangle_ rowBounds;
 		private int rowIndex;
 		private DataGridViewElementStates rowState;
 		private string errorText;
@@ -42,7 +42,7 @@ namespace System.Windows.Forms {
 		private bool isLastVisibleRow;
 		private DataGridViewPaintParts paintParts;
 
-		public DataGridViewRowPrePaintEventArgs (DataGridView dataGridView, Graphics graphics, Rectangle clipBounds, Rectangle rowBounds, int rowIndex, DataGridViewElementStates rowState, string errorText, DataGridViewCellStyle inheritedRowStyle, bool isFirstDisplayedRow, bool isLastVisibleRow) {
+		public DataGridViewRowPrePaintEventArgs (DataGridView dataGridView, Graphics graphics, Rectangle_ clipBounds, Rectangle_ rowBounds, int rowIndex, DataGridViewElementStates rowState, string errorText, DataGridViewCellStyle inheritedRowStyle, bool isFirstDisplayedRow, bool isLastVisibleRow) {
 			this.dataGridView = dataGridView;
 			this.graphics = graphics;
 			this.clipBounds = clipBounds;
@@ -55,7 +55,7 @@ namespace System.Windows.Forms {
 			this.isLastVisibleRow = isLastVisibleRow;
 		}
 
-		public Rectangle ClipBounds {
+		public Rectangle_ ClipBounds {
 			get { return clipBounds; }
 			set { clipBounds = value; }
 		}
@@ -85,7 +85,7 @@ namespace System.Windows.Forms {
 			set { paintParts = value; }
 		}
 
-		public Rectangle RowBounds {
+		public Rectangle_ RowBounds {
 			get { return rowBounds; }
 		}
 
@@ -97,7 +97,7 @@ namespace System.Windows.Forms {
 			get { return rowState; }
 		}
 
-		public void DrawFocus (Rectangle bounds, bool cellsPaintSelectionBackground) {
+		public void DrawFocus (Rectangle_ bounds, bool cellsPaintSelectionBackground) {
 			if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
 				throw new InvalidOperationException ("Invalid RowIndex.");
 
@@ -106,7 +106,7 @@ namespace System.Windows.Forms {
 			row.PaintCells (graphics, clipBounds, bounds, rowIndex, rowState, isFirstDisplayedRow, isLastVisibleRow, DataGridViewPaintParts.Focus);
 		}
 
-		public void PaintCells (Rectangle clipBounds, DataGridViewPaintParts paintParts)
+		public void PaintCells (Rectangle_ clipBounds, DataGridViewPaintParts paintParts)
 		{
 			if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
 				throw new InvalidOperationException ("Invalid RowIndex.");
@@ -116,7 +116,7 @@ namespace System.Windows.Forms {
 			row.PaintCells (graphics, clipBounds, rowBounds, rowIndex, rowState, isFirstDisplayedRow, isLastVisibleRow, paintParts);
 		}
 
-		public void PaintCellsBackground (Rectangle clipBounds, bool cellsPaintSelectionBackground)
+		public void PaintCellsBackground (Rectangle_ clipBounds, bool cellsPaintSelectionBackground)
 		{
 			if (cellsPaintSelectionBackground)
 				PaintCells (clipBounds, DataGridViewPaintParts.All);
@@ -124,7 +124,7 @@ namespace System.Windows.Forms {
 				PaintCells (clipBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.SelectionBackground);
 		}
 
-		public void PaintCellsContent (Rectangle clipBounds)
+		public void PaintCellsContent (Rectangle_ clipBounds)
 		{
 			PaintCells (clipBounds, DataGridViewPaintParts.ContentBackground | DataGridViewPaintParts.ContentForeground);
 		}

@@ -25,10 +25,10 @@
 
 
 // NOT COMPLETE
-
 using System;
 using System.ComponentModel;
 using System.Collections;
+
 using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -1474,7 +1474,7 @@ namespace System.Windows.Forms {
 		internal IntPtr	Window;				// Last window we entered; used to generate WM_MOUSEHOVER (handle is X11 handle)
 		internal int	X;				// Last MouseMove X coordinate; used to generate WM_MOUSEHOVER
 		internal int	Y;				// Last MouseMove Y coordinate; used to generate WM_MOUSEHOVER
-		internal Size	Size;				// Size of the rectangle the mouse has to stay in to generate hover
+		internal Size_	Size;				// Size_ of the Rectangle_ the mouse has to stay in to generate hover
 		internal int	Interval;			// in milliseconds, how long to hold before hover is generated
 		internal IntPtr	Atom;				// X Atom
 	}
@@ -1491,7 +1491,7 @@ namespace System.Windows.Forms {
 	internal struct GrabStruct {
 		internal bool		Confined;		// Is the current grab (if any) confined to grab_area?
 		internal IntPtr		Hwnd;			// The window that is grabbed
-		internal Rectangle	Area;			// The area the current grab is confined to
+		internal Rectangle_	Area;			// The area the current grab is confined to
 	}
 
 	internal delegate int  XErrorHandler(IntPtr DisplayHandle, ref XErrorEvent error_event);
@@ -1660,7 +1660,7 @@ namespace System.Windows.Forms {
 	internal struct XcursorImage
 	{
 		private int version;
-		public int size;       /* nominal size for matching */
+		public int size;       /* nominal Size_ for matching */
 		public int width;      /* actual width */
 		public int height;     /* actual height */
 		public int xhot;       /* hot spot x (must be inside image) */

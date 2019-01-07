@@ -23,8 +23,8 @@
 //	Peter Bartok	(pbartok@novell.com)
 //
 //
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -60,7 +60,7 @@ namespace System.Windows.Forms {
 			this.bounds = XplatUI.WorkingArea;
 		}
 
-		internal Screen(bool primary, string name, Rectangle bounds, Rectangle workarea) {
+		internal Screen(bool primary, string name, Rectangle_ bounds, Rectangle_ workarea) {
 			this.primary = primary;
 			this.name = name;
 			this.bounds = bounds;
@@ -89,7 +89,7 @@ namespace System.Windows.Forms {
 			get { return bits_per_pixel; }
 		}
 
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get {
 				return this.bounds;
 			}
@@ -107,7 +107,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Rectangle WorkingArea {
+		public Rectangle_ WorkingArea {
 			get {
 				return this.workarea;
 			}
@@ -131,7 +131,7 @@ namespace System.Windows.Forms {
 			return Screen.PrimaryScreen;
 		}
 
-		public static Screen FromPoint(Point point) {
+		public static Screen FromPoint(Point_ point) {
 			for (int i = 0; i < all_screens.Length; i++) {
 				if (all_screens[i].Bounds.Contains(point)) {
 					return all_screens[i];
@@ -140,11 +140,11 @@ namespace System.Windows.Forms {
 			return Screen.PrimaryScreen;
 		}
 
-		public static Screen FromRectangle(Rectangle rect) {
+		public static Screen FromRectangle(Rectangle_ rect) {
 			Screen bestScrn = null;
 			int closest = Int32.MaxValue;
 			foreach (Screen scrn in Screen.AllScreens) {
-				Rectangle rcBounds = scrn.Bounds;
+				Rectangle_ rcBounds = scrn.Bounds;
 				int distance = 0;
 				if (rect.Left > rcBounds.Right)
 					distance += rect.Left - rcBounds.Right;
@@ -170,27 +170,27 @@ namespace System.Windows.Forms {
 			return bestScrn;
 		}
 
-		public static Rectangle GetBounds(Control ctl) {
+		public static Rectangle_ GetBounds(Control ctl) {
 			return Screen.FromControl(ctl).Bounds;
 		}
 
-		public static Rectangle GetBounds(Point pt) {
+		public static Rectangle_ GetBounds(Point_ pt) {
 			return Screen.FromPoint(pt).Bounds;
 		}
 
-		public static Rectangle GetBounds(Rectangle rect) {
+		public static Rectangle_ GetBounds(Rectangle_ rect) {
 			return Screen.FromRectangle(rect).Bounds;
 		}
 
-		public static Rectangle GetWorkingArea(Control ctl) {
+		public static Rectangle_ GetWorkingArea(Control ctl) {
 			return Screen.FromControl(ctl).WorkingArea;
 		}
 
-		public static Rectangle GetWorkingArea(Point pt) {
+		public static Rectangle_ GetWorkingArea(Point_ pt) {
 			return Screen.FromPoint(pt).WorkingArea;
 		}
 
-		public static Rectangle GetWorkingArea(Rectangle rect) {
+		public static Rectangle_ GetWorkingArea(Rectangle_ rect) {
 			return Screen.FromRectangle(rect).WorkingArea;
 		}
 		#endregion	// Public Static Methods

@@ -22,9 +22,9 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 //	Kazuki Oikawa (kazuki@panicode.com)
-
 using System;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.Serialization;
 using System.Text;
@@ -208,11 +208,11 @@ namespace System.Windows.Forms
 		#endregion	// ISerializable Members
 
 		#region Public Instance Properties
-		public Color BackColor {
+		public Color_ BackColor {
 			get {
 				if (prop_bag != null)
 					return prop_bag.BackColor;
-				return Color.Empty;
+				return Color_.Empty;
 			}
 			set {
 				if (prop_bag == null)
@@ -226,10 +226,10 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable (false)]
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get {
 				if (TreeView == null)
-					return Rectangle.Empty;
+					return Rectangle_.Empty;
 
 				int x = GetX ();
 				int y = GetY ();
@@ -237,7 +237,7 @@ namespace System.Windows.Forms
 				if (width == -1)
 					width = TreeView.GetNodeWidth (this);
 
-				Rectangle res = new Rectangle (x, y, width, TreeView.ActualItemHeight);
+				Rectangle_ res = new Rectangle_ (x, y, width, TreeView.ActualItemHeight);
 				return res;
 			}
 		}
@@ -332,13 +332,13 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get {
 				if (prop_bag != null)
 					return prop_bag.ForeColor;
 				if (TreeView != null)
 					return TreeView.ForeColor;
-				return Color.Empty;
+				return Color_.Empty;
 			}
 			set {
 				if (prop_bag == null)
@@ -747,7 +747,7 @@ namespace System.Windows.Forms
 			if (this.Parent != null)
 				ExpandParentRecursive (this.Parent);
 
-			Rectangle bounds = Bounds;
+			Rectangle_ bounds = Bounds;
 			if (bounds.Y < 0) {
 				TreeView.SetTop (this);
 			} else if (bounds.Bottom > TreeView.ViewportRectangle.Bottom) {
@@ -1033,7 +1033,7 @@ namespace System.Windows.Forms
 			get {
 				if (TreeView == null)
 					return false;
-				Rectangle bounds = Bounds;
+				Rectangle_ bounds = Bounds;
 				if (bounds.Y < 0 && bounds.Y > TreeView.ClientRectangle.Height)
 					return false;
 				return true;

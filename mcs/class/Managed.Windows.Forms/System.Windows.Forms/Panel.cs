@@ -24,10 +24,10 @@
 //
 
 // COMPLETE
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -102,7 +102,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.PanelDefaultSize; }
 		}
 		#endregion	// Proteced Instance Properties
@@ -160,9 +160,9 @@ namespace System.Windows.Forms {
 		#endregion
 
 		#region Internal Methods
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
-			Size retsize = Size.Empty;
+			Size_ retsize = Size_.Empty;
 
 			foreach (Control child in Controls) {
 				if (child.Dock == DockStyle.Fill) {

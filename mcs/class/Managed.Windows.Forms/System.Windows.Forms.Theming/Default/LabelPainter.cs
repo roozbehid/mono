@@ -21,8 +21,8 @@
 //
 // Authors:
 //	Everaldo Canuto (ecanuto@novell.com)
-
 using System;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -34,9 +34,9 @@ namespace System.Windows.Forms.Theming.Default
 		{
 		}
 
-		public virtual void Draw (Graphics dc, Rectangle client_rectangle, Label label) 
+		public virtual void Draw (Graphics dc, Rectangle_ client_rectangle, Label label) 
 		{
-			Rectangle rect = label.PaddingClientRectangle;
+			Rectangle_ rect = label.PaddingClientRectangle;
 
 			label.DrawImage (dc, label.Image, rect, label.ImageAlign);
 
@@ -50,8 +50,8 @@ namespace System.Windows.Forms.Theming.Default
 			}
 		}
 
-		public virtual Size DefaultSize {
-			get { return new Size (100, 23); }
+		public virtual Size_ DefaultSize {
+			get { return new Size_ (100, 23); }
 		}
 	}
 }

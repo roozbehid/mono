@@ -21,24 +21,24 @@
 //
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
 
 	internal class SizeGrip : Control {
 		#region Local Variables
-		private Point	capture_point;
+		private Point_	capture_point;
 		private Control captured_control;
 		private int	window_w;
 		private int	window_h;
 		private bool	hide_pending;
 		private bool	captured;
-		private bool	is_virtual; // If virtual the size grip is painted directly on the captured controls' surface.
+		private bool	is_virtual; // If virtual the Size_ grip is painted directly on the captured controls' surface.
 		private bool	enabled;
 		private bool	fill_background;
-		private Rectangle	last_painted_area; // The last area that was painted (to know which area to invalidate when resizing).
+		private Rectangle_	last_painted_area; // The last area that was painted (to know which area to invalidate when resizing).
 		#endregion	// Local Variables
 
 		#region Constructors
@@ -99,14 +99,14 @@ namespace System.Windows.Forms {
 		#endregion	// Properties
 
 		#region Methods
-		static internal Size GetDefaultSize () {
-			return new Size (SystemInformation.VerticalScrollBarWidth, SystemInformation.HorizontalScrollBarHeight);
+		static internal Size_ GetDefaultSize () {
+			return new Size_ (SystemInformation.VerticalScrollBarWidth, SystemInformation.HorizontalScrollBarHeight);
 		}
 		
-		static internal Rectangle GetDefaultRectangle (Control Parent)
+		static internal Rectangle_ GetDefaultRectangle (Control Parent)
 		{
-			Size size = GetDefaultSize ();
-			return new Rectangle (Parent.ClientSize.Width - size.Width, Parent.ClientSize.Height - size.Height, size.Width, size.Height);
+			Size_ size = GetDefaultSize ();
+			return new Rectangle_ (Parent.ClientSize.Width - size.Width, Parent.ClientSize.Height - size.Height, size.Width, size.Height);
 		}
 		
 		private void HandleResize (object sender, EventArgs e)
@@ -142,7 +142,7 @@ namespace System.Windows.Forms {
 			if (Visible) {
 				Control destination = (Control) sender;
 				Graphics gr = e.Graphics;
-				Rectangle rect = GetDefaultRectangle (destination);
+				Rectangle_ rect = GetDefaultRectangle (destination);
 			
 				if (!is_virtual || fill_background) {
 					gr.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (ThemeEngine.Current.ColorControl), rect);
@@ -159,7 +159,7 @@ namespace System.Windows.Forms {
 			Control ctrl = (Control) sender;
 			if (captured && !ctrl.Capture) {
 				captured = false;
-				CapturedControl.Size = new Size (window_w, window_h);
+				CapturedControl.Size = new Size_ (window_w, window_h);
 			}
 		}
 
@@ -183,7 +183,7 @@ namespace System.Windows.Forms {
 		internal void HandleMouseMove (object sender, MouseEventArgs e)
 		{
 			Control ctrl = (Control) sender;
-			Rectangle rect = GetDefaultRectangle (ctrl);
+			Rectangle_ rect = GetDefaultRectangle (ctrl);
 			
 			if (rect.Contains (e.X, e.Y)) {
 				ctrl.Cursor = Cursors.SizeNWSE;
@@ -194,7 +194,7 @@ namespace System.Windows.Forms {
 			if (captured) {
 				int	delta_x;
 				int	delta_y;
-				Point	current_point;
+				Point_	current_point;
 
 				current_point = Control.MousePosition;
 
@@ -203,9 +203,9 @@ namespace System.Windows.Forms {
 
 				Control parent = CapturedControl;
 				Form form_parent = parent as Form;
-				Size new_size = new Size (window_w + delta_x, window_h + delta_y);
-				Size max_size = form_parent != null ? form_parent.MaximumSize : Size.Empty;
-				Size min_size = form_parent != null ? form_parent.MinimumSize : Size.Empty;
+				Size_ new_size = new Size_ (window_w + delta_x, window_h + delta_y);
+				Size_ max_size = form_parent != null ? form_parent.MaximumSize : Size_.Empty;
+				Size_ min_size = form_parent != null ? form_parent.MinimumSize : Size_.Empty;
 				
 				if (new_size.Width > max_size.Width && max_size.Width > 0)
 					new_size.Width = max_size.Width;

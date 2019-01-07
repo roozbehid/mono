@@ -25,7 +25,6 @@
 //
 
 // COMPLETE
-
 using System.Drawing;
 using System.Threading;
 using System.Runtime.InteropServices;
@@ -34,48 +33,52 @@ namespace System.Windows.Forms {
 	internal abstract class XplatUIDriver {
 		internal abstract IntPtr	InitializeDriver();
 		internal abstract void		ShutdownDriver(IntPtr token);
-		internal delegate IntPtr	WndProc(IntPtr hwnd, Msg msg, IntPtr wParam, IntPtr lParam);
+
+      
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        [return:MarshalAs(UnmanagedType.U4)]
+        internal delegate Int32 WndProc(Int32 hwnd, [MarshalAs(UnmanagedType.U4)] Msg msg, Int32 wParam, Int32 lParam);
 
 
 		#region XplatUI Driver Properties
 		internal virtual int ActiveWindowTrackingDelay { get { return 0; } }
 
-		internal virtual Color ForeColor {
+		internal virtual Color_ ForeColor {
 			get {
 				return ThemeEngine.Current.DefaultWindowForeColor;
 			}
 		}
 
-		internal virtual  Color BackColor { 
+		internal virtual  Color_ BackColor { 
 			get {
 				return ThemeEngine.Current.DefaultWindowBackColor;
 			}
 		}
 
-		internal virtual Size Border3DSize {
+		internal virtual Size_ Border3DSize {
 			get {
-				return new Size (2, 2);
+				return new Size_ (2, 2);
 			}
 		}
 
-		internal virtual Size BorderSize {
+		internal virtual Size_ BorderSize {
 			get {
-				return new Size (1, 1);
+				return new Size_ (1, 1);
 			}
 		}
 
-		internal virtual Size CaptionButtonSize {
+		internal virtual Size_ CaptionButtonSize {
 			get {
-				return new Size (18, 18);
+				return new Size_ (18, 18);
 			}
 		}
 
 		internal virtual int CaretBlinkTime { get { return 530; } }
 		internal virtual int CaretWidth { get { return 10; } }
 		
-		internal virtual Size DoubleClickSize {
+		internal virtual Size_ DoubleClickSize {
 			get {
-				return new Size (4, 4);
+				return new Size_ (4, 4);
 			}
 		}
 
@@ -85,9 +88,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal virtual Size FixedFrameBorderSize {
+		internal virtual Size_ FixedFrameBorderSize {
 			get {
-				return new Size (3, 3);
+				return new Size_ (3, 3);
 			}
 		}
 
@@ -115,10 +118,10 @@ namespace System.Windows.Forms {
 		internal virtual bool IsSnapToDefaultEnabled { get { return false; } }
 		internal virtual bool IsTitleBarGradientEnabled { get { return false; } }
 		internal virtual bool IsToolTipAnimationEnabled { get { return false; } }
-		internal virtual Size MenuBarButtonSize { get { return new Size (19, 19); } }
-		public virtual Size MenuButtonSize {
+		internal virtual Size_ MenuBarButtonSize { get { return new Size_ (19, 19); } }
+		public virtual Size_ MenuButtonSize {
 			get {
-				return new Size(18, 18);
+				return new Size_(18, 18);
 			}
 		}
 		internal virtual int MenuShowDelay { get { return 0; } }
@@ -135,9 +138,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal virtual Size MouseHoverSize {
+		internal virtual Size_ MouseHoverSize {
 			get {
-				return new Size (1, 1);
+				return new Size_ (1, 1);
 			}
 		}
 
@@ -157,9 +160,9 @@ namespace System.Windows.Forms {
 			}
 		}
 		
-		internal virtual Point MousePosition {
+		internal virtual Point_ MousePosition {
 			get {
-				return Point.Empty;
+				return Point_.Empty;
 			}
 		}
 
@@ -181,8 +184,8 @@ namespace System.Windows.Forms {
 			get { return 4; }
 		}
 		
-		internal virtual Size SmallCaptionButtonSize {
-			get { return new Size (15, 15); }
+		internal virtual Size_ SmallCaptionButtonSize {
+			get { return new Size_ (15, 15); }
 		}
 		
 		internal virtual bool UIEffectsEnabled {
@@ -219,35 +222,35 @@ namespace System.Windows.Forms {
 		}
 
 		internal abstract int CaptionHeight { get; }
-		internal abstract Size CursorSize { get; }
+		internal abstract Size_ CursorSize { get; }
 		internal abstract bool DragFullWindows { get; }
-		internal abstract Size DragSize { get; }
-		internal abstract Size FrameBorderSize { get; }
-		internal abstract Size IconSize { get; }
-		internal abstract Size MaxWindowTrackSize { get; }
+		internal abstract Size_ DragSize { get; }
+		internal abstract Size_ FrameBorderSize { get; }
+		internal abstract Size_ IconSize { get; }
+		internal abstract Size_ MaxWindowTrackSize { get; }
 		internal abstract bool MenuAccessKeysUnderlined { get; }
-		internal virtual Size MinimizedWindowSize {
+		internal virtual Size_ MinimizedWindowSize {
 			get {
 				const int BorderWidth = 3;
-				return new Size (154 + 2 * BorderWidth, SystemInformation.CaptionHeight + 2 * BorderWidth - 1);
+				return new Size_ (154 + 2 * BorderWidth, SystemInformation.CaptionHeight + 2 * BorderWidth - 1);
 			}
 		}
-		internal abstract Size MinimizedWindowSpacingSize { get; }
-		internal abstract Size MinimumWindowSize { get; }
-		internal virtual Size MinimumFixedToolWindowSize { get { return Size.Empty; } }
-		internal virtual Size MinimumSizeableToolWindowSize { get { return Size.Empty; } }
-		internal virtual Size MinimumNoBorderWindowSize { get { return Size.Empty; } }
-		internal virtual Size MinWindowTrackSize {
+		internal abstract Size_ MinimizedWindowSpacingSize { get; }
+		internal abstract Size_ MinimumWindowSize { get; }
+		internal virtual Size_ MinimumFixedToolWindowSize { get { return Size_.Empty; } }
+		internal virtual Size_ MinimumSizeableToolWindowSize { get { return Size_.Empty; } }
+		internal virtual Size_ MinimumNoBorderWindowSize { get { return Size_.Empty; } }
+		internal virtual Size_ MinWindowTrackSize {
 			get {
-				return new Size (112, 27);
+				return new Size_ (112, 27);
 			}
 		}
-		internal abstract Size SmallIconSize { get; }
+		internal abstract Size_ SmallIconSize { get; }
 		internal abstract int MouseButtonCount { get; }
 		internal abstract bool MouseButtonsSwapped { get; }
 		internal abstract bool MouseWheelPresent { get; }
-		internal abstract Rectangle VirtualScreen { get; }
-		internal abstract Rectangle WorkingArea { get; }
+		internal abstract Rectangle_ VirtualScreen { get; }
+		internal abstract Rectangle_ WorkingArea { get; }
 		internal abstract Screen[] AllScreens { get; }
 		internal abstract bool ThemesEnabled { get; }
 
@@ -263,9 +266,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public virtual Size ToolWindowCaptionButtonSize {
+		public virtual Size_ ToolWindowCaptionButtonSize {
 			get {
-				return new Size (15, 15);
+				return new Size_ (15, 15);
 			}
 		}
 		#endregion	// XplatUI Driver Properties
@@ -279,7 +282,7 @@ namespace System.Windows.Forms {
 
 		internal abstract void EnableThemes();
 
-		internal abstract void GetDisplaySize(out Size size);
+		internal abstract void GetDisplaySize(out Size_ size);
 
 		internal abstract IntPtr CreateWindow(CreateParams cp);
 		internal abstract IntPtr CreateWindow(IntPtr Parent, int X, int Y, int Width, int Height);
@@ -287,12 +290,12 @@ namespace System.Windows.Forms {
 
 		internal abstract FormWindowState GetWindowState(IntPtr handle);
 		internal abstract void SetWindowState(IntPtr handle, FormWindowState state);
-		internal abstract void SetWindowMinMax(IntPtr handle, Rectangle maximized, Size min, Size max);
+		internal abstract void SetWindowMinMax(IntPtr handle, Rectangle_ maximized, Size_ min, Size_ max);
 
 		internal abstract void SetWindowStyle(IntPtr handle, CreateParams cp);
 
 		internal abstract double GetWindowTransparency(IntPtr handle);
-		internal abstract void SetWindowTransparency(IntPtr handle, double transparency, Color key);
+		internal abstract void SetWindowTransparency(IntPtr handle, double transparency, Color_ key);
 		internal abstract TransparencySupport SupportsTransparency();
 
 		internal virtual void SetAllowDrop (IntPtr handle, bool value)
@@ -328,7 +331,7 @@ namespace System.Windows.Forms {
 		internal abstract void Activate(IntPtr handle);
 		internal abstract void EnableWindow(IntPtr handle, bool Enable);
 		internal abstract void SetModal(IntPtr handle, bool Modal);
-		internal abstract void Invalidate(IntPtr handle, Rectangle rc, bool clear);
+		internal abstract void Invalidate(IntPtr handle, Rectangle_ rc, bool clear);
 		internal abstract void InvalidateNC(IntPtr handle);
 		internal abstract IntPtr DefWndProc(ref Message msg);
 		internal abstract void HandleException(Exception e);
@@ -343,7 +346,7 @@ namespace System.Windows.Forms {
 		internal abstract bool SetTopmost(IntPtr hWnd, bool Enabled);
 		internal abstract bool SetOwner(IntPtr hWnd, IntPtr hWndOwner);
 
-		internal abstract bool CalculateWindowRect(ref Rectangle ClientRect, CreateParams cp, Menu menu, out Rectangle WindowRect);
+		internal abstract bool CalculateWindowRect(ref Rectangle_ ClientRect, CreateParams cp, Menu menu, out Rectangle_ WindowRect);
 
 		internal abstract Region GetClipRegion(IntPtr hwnd);
 		internal abstract void SetClipRegion(IntPtr hwnd, Region region);
@@ -351,7 +354,7 @@ namespace System.Windows.Forms {
 		internal abstract void SetCursor(IntPtr hwnd, IntPtr cursor);
 		internal abstract void ShowCursor(bool show);
 		internal abstract void OverrideCursor(IntPtr cursor);
-		internal abstract IntPtr DefineCursor(Bitmap bitmap, Bitmap mask, Color cursor_pixel, Color mask_pixel, int xHotSpot, int yHotSpot);
+		internal abstract IntPtr DefineCursor(Bitmap bitmap, Bitmap mask, Color_ cursor_pixel, Color_ mask_pixel, int xHotSpot, int yHotSpot);
 		internal abstract IntPtr DefineStdCursor(StdCursor id);
 		internal abstract Bitmap DefineStdCursorBitmap(StdCursor id);
 		internal abstract void DestroyCursor(IntPtr cursor);
@@ -364,7 +367,7 @@ namespace System.Windows.Forms {
 		internal abstract void ClientToScreen(IntPtr hwnd, ref int x, ref int y);
 
 		internal abstract void GrabWindow(IntPtr hwnd, IntPtr ConfineToHwnd);
-		internal abstract void GrabInfo(out IntPtr hwnd, out bool GrabConfined, out Rectangle GrabArea);
+		internal abstract void GrabInfo(out IntPtr hwnd, out bool GrabConfined, out Rectangle_ GrabArea);
 		internal abstract void UngrabWindow(IntPtr hwnd);
 
 		internal abstract void SendAsyncMethod (AsyncMethodData method);
@@ -381,7 +384,7 @@ namespace System.Windows.Forms {
 		internal abstract IntPtr GetActive();
 		internal abstract IntPtr GetPreviousWindow(IntPtr hwnd);
 
-		internal abstract void ScrollWindow(IntPtr hwnd, Rectangle rectangle, int XAmount, int YAmount, bool with_children);
+		internal abstract void ScrollWindow(IntPtr hwnd, Rectangle_ rectangle, int XAmount, int YAmount, bool with_children);
 		internal abstract void ScrollWindow(IntPtr hwnd, int XAmount, int YAmount, bool with_children);
 
 		internal abstract bool GetFontMetrics(Graphics g, Font font, out int ascent, out int descent);
@@ -391,7 +394,7 @@ namespace System.Windows.Forms {
 		internal abstract void SystrayRemove(IntPtr hwnd, ref ToolTip tt);
 		internal abstract void SystrayBalloon(IntPtr hwnd, int timeout, string title, string text, ToolTipIcon icon);
 
-		internal abstract Point GetMenuOrigin(IntPtr hwnd);
+		internal abstract Point_ GetMenuOrigin(IntPtr hwnd);
 		internal abstract void MenuToScreen(IntPtr hwnd, ref int x, ref int y);
 		internal abstract void ScreenToMenu(IntPtr hwnd, ref int x, ref int y);
 
@@ -404,12 +407,12 @@ namespace System.Windows.Forms {
 		internal abstract int[] ClipboardAvailableFormats(IntPtr handle);
 		internal abstract object ClipboardRetrieve(IntPtr handle, int id, XplatUI.ClipboardToObject converter);
 
-		internal abstract void DrawReversibleLine(Point start, Point end, Color backColor);
-		internal abstract void DrawReversibleRectangle(IntPtr handle, Rectangle rect, int line_width);
-		internal abstract void FillReversibleRectangle (Rectangle rectangle, Color backColor);
-		internal abstract void DrawReversibleFrame (Rectangle rectangle, Color backColor, FrameStyle style);
+		internal abstract void DrawReversibleLine(Point_ start, Point_ end, Color_ backColor);
+		internal abstract void DrawReversibleRectangle(IntPtr handle, Rectangle_ rect, int line_width);
+		internal abstract void FillReversibleRectangle (Rectangle_ rectangle, Color_ backColor);
+		internal abstract void DrawReversibleFrame (Rectangle_ rectangle, Color_ backColor, FrameStyle style);
 
-		internal abstract SizeF GetAutoScaleSize(Font font);
+		internal abstract SizeF_ GetAutoScaleSize(Font font);
 
 		internal abstract IntPtr SendMessage(IntPtr hwnd, Msg message, IntPtr wParam, IntPtr lParam);
 		internal abstract bool PostMessage(IntPtr hwnd, Msg message, IntPtr wParam, IntPtr lParam);
@@ -456,7 +459,7 @@ namespace System.Windows.Forms {
 							 Graphics dest_dc,
 							 object offscreen_drawable,
 							 Graphics offscreen_dc,
-							 Rectangle r)
+							 Rectangle_ r)
 		{
 			dest_dc.DrawImage ((Bitmap)offscreen_drawable, r, r, GraphicsUnit.Pixel);
 		}

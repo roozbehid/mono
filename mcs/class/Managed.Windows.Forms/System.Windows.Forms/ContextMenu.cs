@@ -103,7 +103,7 @@ namespace System.Windows.Forms
 				eh (this, e);
 		}
 		
-		public void Show (Control control, Point pos)
+		public void Show (Control control, Point_ pos)
 		{
 			if (control == null)
 				throw new ArgumentException ();
@@ -116,12 +116,12 @@ namespace System.Windows.Forms
 			OnCollapse (EventArgs.Empty);
 		}
 
-		public void Show (Control control, Point pos, LeftRightAlignment alignment)
+		public void Show (Control control, Point_ pos, LeftRightAlignment alignment)
 		{
-			Point point;
+			Point_ point;
 			
 			if (alignment == LeftRightAlignment.Left)
-				point = new Point ((pos.X - control.Width), pos.Y);
+				point = new Point_ ((pos.X - control.Width), pos.Y);
 			else
 				point = pos;
 

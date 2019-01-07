@@ -26,9 +26,9 @@
 //
 
 // COMPLETE
-
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Drawing.Imaging;
@@ -57,7 +57,7 @@ namespace System.Windows.Forms
 		internal ContentAlignment image_align;
 		internal StringFormat string_format;
 		internal ContentAlignment text_align;
-		static SizeF req_witdthsize = new SizeF (0,0);
+		static SizeF_ req_witdthsize = new SizeF_ (1000,1000);
 
 		#region Events
 		static object AutoSizeChangedEvent = new object ();
@@ -244,7 +244,7 @@ namespace System.Windows.Forms
 			get { return new Padding (3, 0, 3, 0); }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeElements.LabelPainter.DefaultSize; }
 		}
 
@@ -384,14 +384,14 @@ namespace System.Windows.Forms
 			set { base.ImeMode = value; }
 		}
 
-		internal virtual Size InternalGetPreferredSize (Size proposed)
+		internal virtual Size_ InternalGetPreferredSize (Size_ proposed)
 		{
-			Size size;
+			Size_ size;
 
 			if (Text == string.Empty) {
-				size = new Size (0, Font.Height);
+				size = new Size_ (0, Font.Height);
 			} else {
-				size = Size.Ceiling (TextRenderer.MeasureString (Text, Font, req_witdthsize, string_format));
+				size = Size_.Ceiling (TextRenderer.MeasureString (Text, Font, req_witdthsize, string_format));
 				size.Width += 3;
 			}
 
@@ -409,7 +409,7 @@ namespace System.Windows.Forms
 			return size;
 		}
 
-		public override	Size GetPreferredSize (Size proposedSize)
+		public override	Size_ GetPreferredSize (Size_ proposedSize)
 		{
 			return InternalGetPreferredSize (proposedSize);
 		}
@@ -418,14 +418,14 @@ namespace System.Windows.Forms
 		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public virtual int PreferredHeight {
-			get { return InternalGetPreferredSize (Size.Empty).Height; }
+			get { return InternalGetPreferredSize (Size_.Empty).Height; }
 		}
 
 		[Browsable(false)]
 		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public virtual int PreferredWidth {
-			get { return InternalGetPreferredSize (Size.Empty).Width; }
+			get { return InternalGetPreferredSize (Size_.Empty).Width; }
 		}
 
 		[Obsolete ("This property has been deprecated.  Use BackColor instead.")]
@@ -516,9 +516,9 @@ namespace System.Windows.Forms
 
 		#region Public Methods
 
-		protected Rectangle CalcImageRenderBounds (Image image, Rectangle r, ContentAlignment align)
+		protected Rectangle_ CalcImageRenderBounds (Image image, Rectangle_ r, ContentAlignment align)
 		{
-			Rectangle rcImageClip = r;
+			Rectangle_ rcImageClip = r;
 			rcImageClip.Inflate (-2,-2);
 
 			int X = r.X;
@@ -565,12 +565,12 @@ namespace System.Windows.Forms
 				string_format.Dispose ();
 		}
 
-		protected internal void DrawImage (Graphics g, Image image, Rectangle r, ContentAlignment align)
+		protected internal void DrawImage (Graphics g, Image image, Rectangle_ r, ContentAlignment align)
 		{
  			if (image == null || g == null)
 				return;
 
-			Rectangle rcImageClip = CalcImageRenderBounds (image, r, align);
+			Rectangle_ rcImageClip = CalcImageRenderBounds (image, r, align);
 
 			if (Enabled)
 				g.DrawImage (image, rcImageClip.X, rcImageClip.Y, rcImageClip.Width, rcImageClip.Height);
@@ -675,7 +675,7 @@ namespace System.Windows.Forms
 			if (!AutoSize)
 				return;
 
-			Size s = InternalGetPreferredSize (Size.Empty);
+			Size_ s = InternalGetPreferredSize (Size_.Empty);
 			
 			SetBounds (Left, Top, s.Width, s.Height, BoundsSpecified.Size);
 		}

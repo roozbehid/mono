@@ -33,14 +33,14 @@ namespace System.Windows.Forms
 	public class ToolStripItemImageRenderEventArgs : ToolStripItemRenderEventArgs
 	{
 		private Image image;
-		private Rectangle image_rectangle;
+		private Rectangle_ image_rectangle;
 
-		public ToolStripItemImageRenderEventArgs (Graphics g, ToolStripItem item, Rectangle imageRectangle)
+		public ToolStripItemImageRenderEventArgs (Graphics g, ToolStripItem item, Rectangle_ imageRectangle)
 			: this (g, item, null, imageRectangle)
 		{
 		}
 		
-		public ToolStripItemImageRenderEventArgs (Graphics g, ToolStripItem item, Image image, Rectangle imageRectangle)
+		public ToolStripItemImageRenderEventArgs (Graphics g, ToolStripItem item, Image image, Rectangle_ imageRectangle)
 			: base (g, item)
 		{
 			this.image = image;
@@ -52,7 +52,7 @@ namespace System.Windows.Forms
 			get { return this.image; }
 		}
 
-		public Rectangle ImageRectangle {
+		public Rectangle_ ImageRectangle {
 			get { return this.image_rectangle; }
 		}
 		#endregion

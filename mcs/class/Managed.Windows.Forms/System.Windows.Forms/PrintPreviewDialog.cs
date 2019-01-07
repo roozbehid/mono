@@ -23,14 +23,15 @@
 //	Jonathan Chambers (jonathan.chambers@ansys.com)
 //	Peter Dennis Bartok (pbartok@novell.com)
 //
-
+extern alias DrawingNew;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Collections;
 using System.Diagnostics;
-using System.Drawing;
+
+using DrawingNew::System.Drawing;
 using System.Drawing.Printing;
 using System.Reflection;
 using System.Runtime.InteropServices;

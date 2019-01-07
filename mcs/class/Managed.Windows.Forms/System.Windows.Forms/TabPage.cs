@@ -22,10 +22,10 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -42,7 +42,7 @@ namespace System.Windows.Forms {
 		private int imageIndex = -1;
 		private string imageKey;
 		private string tooltip_text = String.Empty;
-		private Rectangle tab_bounds;
+		private Rectangle_ tab_bounds;
 		private int row;
 		private bool use_visual_style_back_color;
 		#endregion	// Fields
@@ -83,21 +83,21 @@ namespace System.Windows.Forms {
 		[Browsable (false)]
 		[DefaultValue ("{Width=0, Height=0}")]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Size MaximumSize {
+		public override Size_ MaximumSize {
 			get { return base.MaximumSize; }
 			set { base.MaximumSize = value; }
 		}
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Size MinimumSize {
+		public override Size_ MinimumSize {
 			get { return base.MinimumSize; }
 			set { base.MinimumSize = value; }
 		}
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new Size PreferredSize {
+		public new Size_ PreferredSize {
 			get { return base.PreferredSize; }
 		}
 		
@@ -107,7 +107,7 @@ namespace System.Windows.Forms {
 			set { use_visual_style_back_color = value; }
 		}
 
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor; }
 			set { use_visual_style_back_color = false; base.BackColor = value; }
 		}
@@ -241,7 +241,7 @@ namespace System.Windows.Forms {
 		#endregion	// Public Instance Methods
 
 		#region	Internal & Private Methods and Properties
-		internal Rectangle TabBounds {
+		internal Rectangle_ TabBounds {
 			get { return tab_bounds; }
 			set { tab_bounds = value; }
 		}
@@ -278,7 +278,7 @@ namespace System.Windows.Forms {
 		protected override void SetBoundsCore (int x, int y, int width, int height, BoundsSpecified specified) 
 		{
 			if (Owner != null && Owner.IsHandleCreated) {
-				Rectangle display = Owner.DisplayRectangle;
+				Rectangle_ display = Owner.DisplayRectangle;
 
 				base.SetBoundsCore (display.X, display.Y,
 							display.Width, display.Height,
@@ -365,7 +365,7 @@ namespace System.Windows.Forms {
 
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new Point Location {
+		public new Point_ Location {
 			get {
 				return base.Location;
 			}

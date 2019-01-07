@@ -125,7 +125,7 @@ namespace System.Windows.Forms
 
 		#region Protected Properties
 		protected internal override Padding DefaultMargin { get { return new Padding (1, 2, 1, 1); } }
-		protected override Size DefaultSize { get { return new Size (100, 15); } }
+		protected override Size_ DefaultSize { get { return new Size_ (100, 15); } }
 		#endregion
 
 		#region Public Methods

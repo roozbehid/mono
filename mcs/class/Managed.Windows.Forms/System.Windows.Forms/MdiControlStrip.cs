@@ -25,10 +25,10 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Windows.Forms.Layout;
 using System.Collections.Generic;
@@ -47,7 +47,7 @@ namespace System.Windows.Forms
 				form = ownerForm;
 				
 				base.AutoSize = false;
-				base.Size = new Size (20, 20);
+				base.Size = new Size_ (20, 20);
 				base.Image = ownerForm.Icon.ToBitmap ();
 				base.MergeIndex = int.MinValue;
 				base.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -78,12 +78,12 @@ namespace System.Windows.Forms
 				Image draw_image = this.Image;
 
 				// Figure out where our text and image go
-				Rectangle text_layout_rect;
-				Rectangle image_layout_rect;
+				Rectangle_ text_layout_rect;
+				Rectangle_ image_layout_rect;
 
 				this.CalculateTextAndImageRectangles (out text_layout_rect, out image_layout_rect);
 
-				if (image_layout_rect != Rectangle.Empty)
+				if (image_layout_rect != Rectangle_.Empty)
 					this.Owner.Renderer.DrawItemImage (new ToolStripItemImageRenderEventArgs (e.Graphics, this, draw_image, image_layout_rect));
 
 				return;
@@ -127,7 +127,7 @@ namespace System.Windows.Forms
 				
 				base.AutoSize = false;
 				base.Alignment = ToolStripItemAlignment.Right;
-				base.Size = new Size (20, 20);
+				base.Size = new Size_ (20, 20);
 				base.MergeIndex = int.MaxValue;
 				base.DisplayStyle = ToolStripItemDisplayStyle.None;
 
@@ -166,10 +166,10 @@ namespace System.Windows.Forms
 						g.DrawLine (Pens.Black, 6, 13, 11, 13);
 						break;
 					case ControlBoxType.Max:
-						g.DrawLines (Pens.Black, new Point[] {new Point (7, 8), new Point (7, 5), new Point (13, 5), new Point (13, 10), new Point (11, 10)});
+						g.DrawLines (Pens.Black, new Point_[] {new Point_ (7, 8), new Point_ (7, 5), new Point_ (13, 5), new Point_ (13, 10), new Point_ (11, 10)});
 						g.DrawLine (Pens.Black, 7, 6, 12, 6);
 						
-						g.DrawRectangle (Pens.Black, new Rectangle (5, 8, 6, 5));
+						g.DrawRectangle (Pens.Black, new Rectangle_ (5, 8, 6, 5));
 						g.DrawLine (Pens.Black, 5, 9, 11, 9);
 						
 						break;

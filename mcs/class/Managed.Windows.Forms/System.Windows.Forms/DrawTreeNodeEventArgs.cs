@@ -30,7 +30,7 @@ namespace System.Windows.Forms
 {
 	public class DrawTreeNodeEventArgs : EventArgs
 	{
-		private Rectangle bounds;
+		private Rectangle_ bounds;
 		private bool draw_default;
 		private Graphics graphics;
 		private TreeNode node;
@@ -38,7 +38,7 @@ namespace System.Windows.Forms
 
 		#region Public Constructors
 		public DrawTreeNodeEventArgs (Graphics graphics, TreeNode node,
-			Rectangle bounds, TreeNodeStates state)
+			Rectangle_ bounds, TreeNodeStates state)
 		{
 			this.bounds = bounds;
 			this.draw_default = false;
@@ -49,7 +49,7 @@ namespace System.Windows.Forms
 		#endregion // Public Constructors
 
 		#region Public Instance Properties
-		public Rectangle Bounds
+		public Rectangle_ Bounds
 		{
 			get { return bounds; }
 		}

@@ -135,22 +135,22 @@ namespace System.Windows.Forms {
 			
 		}
 
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
-			Size s = new Size (11, 18);
-			return new Rectangle (24, (OwningRow.Height - s.Height) / 2, s.Width, s.Height);
+			Size_ s = new Size_ (11, 18);
+			return new Rectangle_ (24, (OwningRow.Height - s.Height) / 2, s.Width, s.Height);
 		}
 
-		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null || string.IsNullOrEmpty (DataGridView.GetRowInternal (rowIndex).ErrorText))
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
-			Size error_icon = new Size (12, 11);
-			return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
+			Size_ error_icon = new Size_ (12, 11);
+			return new Rectangle_ (new Point_ (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
 		}
 
 		protected internal override string GetErrorText (int rowIndex)
@@ -161,17 +161,17 @@ namespace System.Windows.Forms {
 			return DataGridView.GetRowInternal (rowIndex).ErrorText;
 		}
 
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected override Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
 			object o = FormattedValue;
 
 			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				Size_ s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height = Math.Max (s.Height, 17);
 				s.Width += 48;
 				return s;
 			} else
-				return new Size (39, 17);
+				return new Size_ (39, 17);
 		}
 
 		protected override object GetValue (int rowIndex)
@@ -183,7 +183,7 @@ namespace System.Windows.Forms {
 		}
 
 		[MonoInternalNote ("Needs row header cell selected/edit pencil glyphs")]
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			// Prepaint
 			DataGridViewPaintParts pre = DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground;
@@ -193,7 +193,7 @@ namespace System.Windows.Forms {
 
 			// Paint content background
 			if ((paintParts & DataGridViewPaintParts.ContentBackground) == DataGridViewPaintParts.ContentBackground) {
-				Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
+				Color_ color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 				Pen p = ThemeEngine.Current.ResPool.GetPen (color);
 				int x = cellBounds.Left + 6;
 
@@ -208,11 +208,11 @@ namespace System.Windows.Forms {
 
 			// Paint content
 			if ((paintParts & DataGridViewPaintParts.ContentForeground) == DataGridViewPaintParts.ContentForeground) {
-				Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
+				Color_ color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 
 				TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter | TextFormatFlags.TextBoxControl;
 
-				Rectangle contentbounds = cellBounds;
+				Rectangle_ contentbounds = cellBounds;
 				contentbounds.Height -= 2;
 				contentbounds.Width -= 2;
 
@@ -227,7 +227,7 @@ namespace System.Windows.Forms {
 			base.Paint (graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, post);
 		}
 
-		protected override void PaintBorder (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
+		protected override void PaintBorder (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle)
 		{
 			if (ThemeEngine.Current.DataGridViewRowHeaderCellDrawBorder (this, graphics, cellBounds))
 				return;
@@ -246,14 +246,14 @@ namespace System.Windows.Forms {
 				graphics.DrawLine (p, cellBounds.Left, cellBounds.Top, cellBounds.Right - 1, cellBounds.Top);
 		}
 		
-		internal override void PaintPartBackground (Graphics graphics, Rectangle cellBounds, DataGridViewCellStyle style)
+		internal override void PaintPartBackground (Graphics graphics, Rectangle_ cellBounds, DataGridViewCellStyle style)
 		{
 			if (ThemeEngine.Current.DataGridViewRowHeaderCellDrawBackground (this, graphics, cellBounds))
 				return;
 			base.PaintPartBackground (graphics, cellBounds, style);
 		}
 
-		internal override void PaintPartSelectionBackground (Graphics graphics, Rectangle cellBounds, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle)
+		internal override void PaintPartSelectionBackground (Graphics graphics, Rectangle_ cellBounds, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle)
 		{
 			if (ThemeEngine.Current.DataGridViewRowHeaderCellDrawSelectionBackground (this))
 				return;
@@ -277,7 +277,7 @@ namespace System.Windows.Forms {
 			g.DrawLine (p, x + 7, y + 1, x + 1, y + 7);
 		}
 
-		internal override Rectangle InternalErrorIconsBounds {
+		internal override Rectangle_ InternalErrorIconsBounds {
 			get { return GetErrorIconBounds (null, null, RowIndex); }
 		}
 		
@@ -293,7 +293,7 @@ namespace System.Windows.Forms {
 			{
 			}
 
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get { return base.Bounds; }
 			}
 

@@ -32,14 +32,14 @@ namespace System.Windows.Forms
 		#region Fields
 		private bool alt_key_pressed;
 		private bool bubble_event;
-		private Point client_mouse_position;
+		private Point_ client_mouse_position;
 		private bool ctrl_key_pressed;
 		private string event_type;
 		private HtmlElement from_element;
 		private int key_pressed_code;
 		private MouseButtons mouse_buttons_pressed;
-		private Point mouse_position;
-		private Point offset_mouse_position;
+		private Point_ mouse_position;
+		private Point_ offset_mouse_position;
 		private bool return_value;
 		private bool shift_key_pressed;
 		private HtmlElement to_element;
@@ -50,14 +50,14 @@ namespace System.Windows.Forms
 		{
 			alt_key_pressed = false;
 			bubble_event = false;
-			client_mouse_position = Point.Empty;
+			client_mouse_position = Point_.Empty;
 			ctrl_key_pressed = false;;
 			event_type = null;
 			from_element = null;
 			key_pressed_code = 0;
 			mouse_buttons_pressed = MouseButtons.None;
-			mouse_position = Point.Empty;
-			offset_mouse_position = Point.Empty;
+			mouse_position = Point_.Empty;
+			offset_mouse_position = Point_.Empty;
 			return_value = false;
 			shift_key_pressed = false;
 			to_element = null;
@@ -74,7 +74,7 @@ namespace System.Windows.Forms
 			set { bubble_event = value; }
 		}
 		
-		public Point ClientMousePosition {
+		public Point_ ClientMousePosition {
 			get { return client_mouse_position; }
 		}
 		
@@ -100,11 +100,11 @@ namespace System.Windows.Forms
 			get { return mouse_buttons_pressed; }
 		}
 		
-		public Point MousePosition {
+		public Point_ MousePosition {
 			get { return mouse_position; }
 		}
 		
-		public Point OffsetMousePosition {
+		public Point_ OffsetMousePosition {
 			get { return offset_mouse_position; }
 		}
 		

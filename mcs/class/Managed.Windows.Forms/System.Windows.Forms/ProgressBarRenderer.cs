@@ -26,6 +26,7 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
+extern alias DrawingNew;
 using System.Drawing;
 using System.Windows.Forms.VisualStyles;
 
@@ -38,7 +39,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawHorizontalBar (Graphics g, Rectangle bounds)
+		public static void DrawHorizontalBar (Graphics g, Rectangle_ bounds)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -48,7 +49,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground(g, bounds);
 		}
 
-		public static void DrawHorizontalChunks (Graphics g, Rectangle bounds)
+		public static void DrawHorizontalChunks (Graphics g, Rectangle_ bounds)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -58,7 +59,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawVerticalBar (Graphics g, Rectangle bounds)
+		public static void DrawVerticalBar (Graphics g, Rectangle_ bounds)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -68,7 +69,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawVerticalChunks (Graphics g, Rectangle bounds)
+		public static void DrawVerticalChunks (Graphics g, Rectangle_ bounds)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();

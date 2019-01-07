@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -113,7 +113,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Methods
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
 			return base.GetPreferredSize (constrainingSize);
 		}

@@ -23,9 +23,9 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-
 using System;
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -123,10 +123,10 @@ namespace System.Windows.Forms {
 			return false;
 		}
 
-		public override void PositionEditingControl (bool setLocation, bool setSize, Rectangle cellBounds, Rectangle cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow)
+		public override void PositionEditingControl (bool setLocation, bool setSize, Rectangle_ cellBounds, Rectangle_ cellClip, DataGridViewCellStyle cellStyle, bool singleVerticalBorderAdded, bool singleHorizontalBorderAdded, bool isFirstDisplayedColumn, bool isFirstDisplayedRow)
 		{
-			cellBounds.Size = new Size (cellBounds.Width - 5, cellBounds.Height + 2);
-			cellBounds.Location = new Point (cellBounds.X + 3, ((cellBounds.Height - editingControl.Height) / 2) + cellBounds.Y - 1);
+			cellBounds.Size = new Size_ (cellBounds.Width - 5, cellBounds.Height + 2);
+			cellBounds.Location = new Point_ (cellBounds.X + 3, ((cellBounds.Height - editingControl.Height) / 2) + cellBounds.Y - 1);
 
 			base.PositionEditingControl (setLocation, setSize, cellBounds, cellClip, cellStyle, singleVerticalBorderAdded, singleHorizontalBorderAdded, isFirstDisplayedColumn, isFirstDisplayedRow);
 			
@@ -138,42 +138,42 @@ namespace System.Windows.Forms {
 			return string.Format ("DataGridViewTextBoxCell {{ ColumnIndex={0}, RowIndex={1} }}", ColumnIndex, RowIndex);
 		}
 
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 				
 			object o = FormattedValue;
-			Size s = Size.Empty;
+			Size_ s = Size_.Empty;
 			
 			if (o != null) {
 				s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height += 2;
 			}
 			
-			return new Rectangle (0, (OwningRow.Height - s.Height) / 2, s.Width, s.Height);
+			return new Rectangle_ (0, (OwningRow.Height - s.Height) / 2, s.Width, s.Height);
 		}
 
-		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 				
-			Size error_icon = new Size (12, 11);
-			return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
+			Size_ error_icon = new Size_ (12, 11);
+			return new Rectangle_ (new Point_ (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
 		}
 
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected override Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
 			object o = FormattedValue;
 			
 			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				Size_ s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height = Math.Max (s.Height, 20);
 				s.Width += 2;
 				return s;
 			} else
-				return new Size (21, 20);
+				return new Size_ (21, 20);
 		}
 
 		protected override void OnEnter (int rowIndex, bool throughMouseClick)
@@ -188,7 +188,7 @@ namespace System.Windows.Forms {
 		{
 		}
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			// Prepaint
 			DataGridViewPaintParts pre = DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground;
@@ -198,12 +198,12 @@ namespace System.Windows.Forms {
 
 			// Paint content
 			if (!IsInEditMode && (paintParts & DataGridViewPaintParts.ContentForeground) == DataGridViewPaintParts.ContentForeground) {
-				Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
+				Color_ color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 
 				TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.TextBoxControl;
 				flags |= AlignmentToFlags (cellStyle.Alignment);
 
-				Rectangle contentbounds = cellBounds;
+				Rectangle_ contentbounds = cellBounds;
 				
 				contentbounds.Height -= 2;
 				contentbounds.Width -= 2;

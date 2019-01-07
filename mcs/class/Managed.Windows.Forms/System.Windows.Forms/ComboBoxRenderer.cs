@@ -38,7 +38,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawDropDownButton (Graphics g, Rectangle bounds, ComboBoxState state)
+		public static void DrawDropDownButton (Graphics g, Rectangle_ bounds, ComboBoxState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -46,15 +46,15 @@ namespace System.Windows.Forms
 			GetComboRenderer (state).DrawBackground (g, bounds);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string comboBoxText, Font font, Rectangle textBounds, TextFormatFlags flags, ComboBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string comboBoxText, Font font, Rectangle_ textBounds, TextFormatFlags flags, ComboBoxState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
 
 			GetTextBoxRenderer (state).DrawBackground (g, bounds);
 
-			if (textBounds == Rectangle.Empty)
-				textBounds = new Rectangle (bounds.Left + 3, bounds.Top, bounds.Width - 4, bounds.Height);
+			if (textBounds == Rectangle_.Empty)
+				textBounds = new Rectangle_ (bounds.Left + 3, bounds.Top, bounds.Width - 4, bounds.Height);
 
 			if (comboBoxText != String.Empty)
 				if (state == ComboBoxState.Disabled)
@@ -63,24 +63,24 @@ namespace System.Windows.Forms
 					TextRenderer.DrawText (g, comboBoxText, font, textBounds, SystemColors.ControlText, flags);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, ComboBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, ComboBoxState state)
 		{
-			DrawTextBox (g, bounds, String.Empty, null, Rectangle.Empty, TextFormatFlags.VerticalCenter, state);
+			DrawTextBox (g, bounds, String.Empty, null, Rectangle_.Empty, TextFormatFlags.VerticalCenter, state);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string comboBoxText, Font font, ComboBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string comboBoxText, Font font, ComboBoxState state)
 		{
-			DrawTextBox (g, bounds, comboBoxText, font, Rectangle.Empty, TextFormatFlags.VerticalCenter, state);
+			DrawTextBox (g, bounds, comboBoxText, font, Rectangle_.Empty, TextFormatFlags.VerticalCenter, state);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string comboBoxText, Font font, Rectangle textBounds, ComboBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string comboBoxText, Font font, Rectangle_ textBounds, ComboBoxState state)
 		{
 			DrawTextBox (g, bounds, comboBoxText, font, textBounds, TextFormatFlags.Default, state);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string comboBoxText, Font font, TextFormatFlags flags, ComboBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string comboBoxText, Font font, TextFormatFlags flags, ComboBoxState state)
 		{
-			DrawTextBox (g, bounds, comboBoxText, font, Rectangle.Empty, flags |= TextFormatFlags.VerticalCenter, state);
+			DrawTextBox (g, bounds, comboBoxText, font, Rectangle_.Empty, flags |= TextFormatFlags.VerticalCenter, state);
 		}
 		#endregion
 

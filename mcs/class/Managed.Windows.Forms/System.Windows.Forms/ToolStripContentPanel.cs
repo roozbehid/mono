@@ -71,7 +71,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Size AutoScrollMargin {
+		public new Size_ AutoScrollMargin {
 			get { return base.AutoScrollMargin; }
 			set { base.AutoScrollMargin = value; }
 		}
@@ -79,7 +79,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Size AutoScrollMinSize {
+		public new Size_ AutoScrollMinSize {
 			get { return base.AutoScrollMinSize; }
 			set { base.AutoScrollMinSize = value; }
 		}
@@ -101,7 +101,7 @@ namespace System.Windows.Forms
 			set { base.AutoSizeMode = value; }
 		}
 		
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor; }
 			set { base.BackColor = value; 
 				
@@ -129,7 +129,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Point Location {
+		public new Point_ Location {
 			get { return base.Location; }
 			set { base.Location = value; }
 		}
@@ -137,7 +137,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public override Size MaximumSize {
+		public override Size_ MaximumSize {
 			get { return base.MaximumSize; }
 			set { base.MaximumSize = value; }
 		}
@@ -145,7 +145,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public override Size MinimumSize {
+		public override Size_ MinimumSize {
 			get { return base.MinimumSize; }
 			set { base.MinimumSize = value; }
 		}

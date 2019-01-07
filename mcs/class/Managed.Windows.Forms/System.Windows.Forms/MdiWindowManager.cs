@@ -24,8 +24,8 @@
 //
 //
 
-
 using System;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
@@ -44,7 +44,7 @@ namespace System.Windows.Forms {
 		internal EventHandler form_closed_handler;
 		
 		private MdiClient mdi_container;
-		private Rectangle prev_virtual_position;
+		private Rectangle_ prev_virtual_position;
 
 		private Point icon_clicked;
 		private DateTime icon_clicked_time;
@@ -100,13 +100,13 @@ namespace System.Windows.Forms {
 			}
 		}
 		
-		internal override Rectangle MaximizedBounds {
+		internal override Rectangle_ MaximizedBounds {
 			get {
-				Rectangle pb = mdi_container.ClientRectangle;
+				Rectangle_ pb = mdi_container.ClientRectangle;
 				int bw = ThemeEngine.Current.ManagedWindowBorderWidth (this);
 				int tw = TitleBarHeight;
 
-				Rectangle new_bounds = new Rectangle (pb.Left - bw,
+				Rectangle_ new_bounds = new Rectangle_ (pb.Left - bw,
 						pb.Top - tw - bw,
 						pb.Width + bw * 2,
 						pb.Height + tw + bw * 2);
@@ -260,13 +260,13 @@ namespace System.Windows.Forms {
 				return;
 			}
 			icon_clicked_time = DateTime.Now;
-			Point pnt = Point.Empty;
+			Point_ pnt = Point_.Empty;
 			pnt = form.MdiParent.PointToScreen (pnt);
 			pnt = form.PointToClient (pnt);
 			ShowPopup (pnt);
 		}
 		
-		internal void ShowPopup (Point pnt)
+		internal void ShowPopup (Point_ pnt)
 		{
 			// If we are using MainMenuStrip, display that menu instead
 			if (form.WindowState == FormWindowState.Maximized && form.MdiParent.MainMenuStrip != null)
@@ -301,7 +301,7 @@ namespace System.Windows.Forms {
 			int y = 0;
 
 			PointToScreen (ref x, ref y);
-			Cursor.Position = new Point (x, y);
+			Cursor.Position = new Point_ (x, y);
 			form.Cursor = Cursors.Cross;
 			state = State.Moving;
 			form.Capture = true;
@@ -313,7 +313,7 @@ namespace System.Windows.Forms {
 			int y = 0;
 
 			PointToScreen (ref x, ref y);
-			Cursor.Position = new Point (x, y);
+			Cursor.Position = new Point_ (x, y);
 			form.Cursor = Cursors.Cross;
 			state = State.Sizing;
 			form.Capture = true;
@@ -342,7 +342,7 @@ namespace System.Windows.Forms {
 
 		private void DrawIconMenuItem (object sender, DrawItemEventArgs de)
 		{
-			de.Graphics.DrawIcon (form.Icon, new Rectangle (de.Bounds.X + 2, de.Bounds.Y + 2,
+			de.Graphics.DrawIcon (form.Icon, new Rectangle_ (de.Bounds.X + 2, de.Bounds.Y + 2,
 							      de.Bounds.Height - 4, de.Bounds.Height - 4));
 		}
 
@@ -406,21 +406,21 @@ namespace System.Windows.Forms {
 
 		public override void DrawMaximizedButtons (object sender, PaintEventArgs pe)
 		{
-			Size bs = ThemeEngine.Current.ManagedWindowGetMenuButtonSize (this);
-			Point pnt =  XplatUI.GetMenuOrigin (mdi_container.ParentForm.Handle);
+			Size_ bs = ThemeEngine.Current.ManagedWindowGetMenuButtonSize (this);
+			Point_ pnt =  XplatUI.GetMenuOrigin (mdi_container.ParentForm.Handle);
 			int bw = ThemeEngine.Current.ManagedWindowBorderWidth (this);
 			TitleButtons buttons = MaximizedTitleButtons;
 			
 			buttons.Visible = true;
 			TitleButtons.Visible = false;
 			
-			buttons.CloseButton.Rectangle = new Rectangle (mdi_container.ParentForm.Size.Width - 1 - bw - bs.Width - 2,
+			buttons.CloseButton.Rectangle = new Rectangle_ (mdi_container.ParentForm.Size.Width - 1 - bw - bs.Width - 2,
 					pnt.Y + 2, bs.Width, bs.Height);
 
-			buttons.RestoreButton.Rectangle = new Rectangle (buttons.CloseButton.Rectangle.Left - 2 - bs.Width,
+			buttons.RestoreButton.Rectangle = new Rectangle_ (buttons.CloseButton.Rectangle.Left - 2 - bs.Width,
 					pnt.Y + 2, bs.Width, bs.Height);
 
-			buttons.MinimizeButton.Rectangle = new Rectangle (buttons.RestoreButton.Rectangle.Left - bs.Width,
+			buttons.MinimizeButton.Rectangle = new Rectangle_ (buttons.RestoreButton.Rectangle.Left - bs.Width,
 					pnt.Y + 2, bs.Width, bs.Height);
 
 			DrawTitleButton (pe.Graphics, buttons.MinimizeButton, pe.ClipRectangle);
@@ -434,7 +434,7 @@ namespace System.Windows.Forms {
 		
 		public bool HandleMenuMouseDown (MainMenu menu, int x, int y)
 		{
-			Point pt = MenuTracker.ScreenToMenu (menu, new Point (x, y));
+			Point_ pt = MenuTracker.ScreenToMenu (menu, new Point_ (x, y));
 
 			HandleTitleBarDown (pt.X, pt.Y);
 			return TitleButtons.AnyPushedTitleButtons;
@@ -442,21 +442,21 @@ namespace System.Windows.Forms {
 
 		public void HandleMenuMouseUp (MainMenu menu, int x, int y)
 		{
-			Point pt = MenuTracker.ScreenToMenu (menu, new Point (x, y));
+			Point_ pt = MenuTracker.ScreenToMenu (menu, new Point_ (x, y));
 
 			HandleTitleBarUp (pt.X, pt.Y);
 		}
 
 		public void HandleMenuMouseLeave (MainMenu menu, int x, int y)
 		{
-			Point pt = MenuTracker.ScreenToMenu (menu, new Point (x, y));
+			Point_ pt = MenuTracker.ScreenToMenu (menu, new Point_ (x, y));
 			HandleTitleBarLeave (pt.X, pt.Y);
 
 		}
 
 		public void HandleMenuMouseMove (MainMenu menu, int x, int y)
 		{
-			Point pt = MenuTracker.ScreenToMenu (menu, new Point (x, y));
+			Point_ pt = MenuTracker.ScreenToMenu (menu, new Point_ (x, y));
 
 			HandleTitleBarMouseMove (pt.X, pt.Y);
 
@@ -481,7 +481,7 @@ namespace System.Windows.Forms {
 					if (IsMaximized)
 						ClickIconMenuItem (null, null);
 					else
-						ShowPopup (Point.Empty);
+						ShowPopup (Point_.Empty);
 				} else {
 					icon_dont_show_popup = false;
 				}
@@ -589,8 +589,8 @@ namespace System.Windows.Forms {
 
 		protected override void HandleWindowMove (Message m)
 		{
-			Point pos = Cursor.Position;
-			Point move = MouseMove (pos);
+			Point_ pos = Cursor.Position;
+			Point_ move = MouseMove (pos);
 			
 			if (move.X == 0 && move.Y == 0)
 				return;
@@ -598,7 +598,7 @@ namespace System.Windows.Forms {
 			int x = virtual_position.X + move.X;
 			int y = virtual_position.Y + move.Y;
 		
-			Rectangle client = mdi_container.ClientRectangle;
+			Rectangle_ client = mdi_container.ClientRectangle;
 			if (mdi_container.VerticalScrollbarVisible)
 				client.Width -= SystemInformation.VerticalScrollBarWidth;
 			if (mdi_container.HorizontalScrollbarVisible)
@@ -615,7 +615,7 @@ namespace System.Windows.Forms {
 			return base.HandleNCMouseMove (ref m);
 		}
 
-		protected override void DrawVirtualPosition (Rectangle virtual_position)
+		protected override void DrawVirtualPosition (Rectangle_ virtual_position)
 		{
 			ClearVirtualPosition ();
 
@@ -626,10 +626,10 @@ namespace System.Windows.Forms {
 
 		protected override void ClearVirtualPosition ()
 		{
-			if (prev_virtual_position != Rectangle.Empty && form.Parent != null)
+			if (prev_virtual_position != Rectangle_.Empty && form.Parent != null)
 				XplatUI.DrawReversibleRectangle (form.Parent.Handle,
 						prev_virtual_position, 2);
-			prev_virtual_position = Rectangle.Empty;
+			prev_virtual_position = Rectangle_.Empty;
 		}
 
 		protected override void OnWindowFinishedMoving ()

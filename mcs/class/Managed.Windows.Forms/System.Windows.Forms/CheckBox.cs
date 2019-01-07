@@ -120,11 +120,11 @@ namespace System.Windows.Forms {
 			// is changed, not every paint.  Can only change so many things at a time.
 
 			// Figure out where our text and image should go
-			Rectangle glyph_rectangle;
-			Rectangle text_rectangle;
-			Rectangle image_rectangle;
+			Rectangle_ glyph_rectangle;
+			Rectangle_ text_rectangle;
+			Rectangle_ image_rectangle;
 
-			ThemeEngine.Current.CalculateCheckBoxTextAndImageLayout (this, Point.Empty, out glyph_rectangle, out text_rectangle, out image_rectangle);
+			ThemeEngine.Current.CalculateCheckBoxTextAndImageLayout (this, Point_.Empty, out glyph_rectangle, out text_rectangle, out image_rectangle);
 
 			// Draw our button
 			if (FlatStyle != FlatStyle.System)
@@ -133,7 +133,7 @@ namespace System.Windows.Forms {
 				ThemeEngine.Current.DrawCheckBox (pe.Graphics, this.ClientRectangle, this);
 		}
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
 			if (this.AutoSize)
 				return ThemeEngine.Current.CalculateCheckBoxAutoSize (this);
@@ -271,9 +271,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size(104, 24);
+				return new Size_(104, 24);
 			}
 		}
 		#endregion	// Protected Instance Properties

@@ -72,17 +72,17 @@ namespace System.Windows.Forms
 
 		#region Controls
 		#region ButtonBase
-		public override void DrawButtonBase (Graphics dc, Rectangle clip_area, ButtonBase button)
+		public override void DrawButtonBase (Graphics dc, Rectangle_ clip_area, ButtonBase button)
 		{
 			if (button.FlatStyle == FlatStyle.System) {
 				ButtonRenderer.DrawButton (
 					dc,
-					new Rectangle (Point.Empty, button.Size),
+					new Rectangle_ (Point_.Empty, button.Size),
 					button.Text,
 					button.Font,
 					button.TextFormatFlags,
 					null,
-					Rectangle.Empty,
+					Rectangle_.Empty,
 					ShouldPaintFocusRectagle (button),
 					GetPushButtonState (button)
 				);
@@ -105,24 +105,24 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Button 2.0
-		public override void DrawButtonBackground (Graphics g, Button button, Rectangle clipArea)
+		public override void DrawButtonBackground (Graphics g, Button button, Rectangle_ clipArea)
 		{
 			if (!RenderClientAreas ||
 				!button.UseVisualStyleBackColor) {
 				base.DrawButtonBackground (g, button, clipArea);
 				return;
 			}
-			ButtonRenderer.GetPushButtonRenderer (GetPushButtonState (button)).DrawBackground (g, new Rectangle (Point.Empty, button.Size));
+			ButtonRenderer.GetPushButtonRenderer (GetPushButtonState (button)).DrawBackground (g, new Rectangle_ (Point_.Empty, button.Size));
 		}
 		#endregion
 
 		#region CheckBox
-		protected override void CheckBox_DrawCheckBox (Graphics dc, CheckBox checkbox, ButtonState state, Rectangle checkbox_rectangle)
+		protected override void CheckBox_DrawCheckBox (Graphics dc, CheckBox checkbox, ButtonState state, Rectangle_ checkbox_rectangle)
 		{
 			if (checkbox.Appearance == Appearance.Normal && checkbox.FlatStyle == FlatStyle.System) {
 				CheckBoxRenderer.DrawCheckBox (
 					dc,
-					new Point (checkbox_rectangle.Left, checkbox_rectangle.Top),
+					new Point_ (checkbox_rectangle.Left, checkbox_rectangle.Top),
 					GetCheckBoxState (checkbox)
 				);
 				return;
@@ -170,7 +170,7 @@ namespace System.Windows.Forms
 				return VisualStyleElement.ComboBox.DropDownButton.Hot;
 			return VisualStyleElement.ComboBox.DropDownButton.Normal;
 		}
-		public override void ComboBoxDrawNormalDropDownButton (ComboBox comboBox, Graphics g, Rectangle clippingArea, Rectangle area, ButtonState state)
+		public override void ComboBoxDrawNormalDropDownButton (ComboBox comboBox, Graphics g, Rectangle_ clippingArea, Rectangle_ area, ButtonState state)
 		{
 			if (!RenderClientAreas) {
 				base.ComboBoxDrawNormalDropDownButton (comboBox, g, clippingArea, area, state);
@@ -214,7 +214,7 @@ namespace System.Windows.Forms
 			}
 			return true;
 		}
-		public override void ComboBoxDrawBackground (ComboBox comboBox, Graphics g, Rectangle clippingArea, FlatStyle style)
+		public override void ComboBoxDrawBackground (ComboBox comboBox, Graphics g, Rectangle_ clippingArea, FlatStyle style)
 		{
 			if (!RenderClientAreas || !ComboBoxShouldPaintBackground (comboBox)) {
 				base.ComboBoxDrawBackground (comboBox, g, clippingArea, style);
@@ -233,7 +233,7 @@ namespace System.Windows.Forms
 				base.ComboBoxDrawBackground (comboBox, g, clippingArea, style);
 				return;
 			}
-			new VisualStyleRenderer (element).DrawBackground (g, new Rectangle (Point.Empty, comboBox.Size), clippingArea);
+			new VisualStyleRenderer (element).DrawBackground (g, new Rectangle_ (Point_.Empty, comboBox.Size), clippingArea);
 		}
 		public override bool CombBoxBackgroundHasHotElementStyle (ComboBox comboBox)
 		{
@@ -247,7 +247,7 @@ namespace System.Windows.Forms
 		#endregion
 		#region ControlPaint
 		#region DrawButton
-		public override void CPDrawButton (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawButton (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			if (!RenderClientAreas ||
 				(state & ButtonState.Flat) == ButtonState.Flat ||
@@ -270,7 +270,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region DrawCaptionButton
-		public override void CPDrawCaptionButton (Graphics graphics, Rectangle rectangle, CaptionButton button, ButtonState state)
+		public override void CPDrawCaptionButton (Graphics graphics, Rectangle_ rectangle, CaptionButton button, ButtonState state)
 		{
 			if (!RenderClientAreas ||
 				(state & ButtonState.Flat) == ButtonState.Flat ||
@@ -327,7 +327,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region DrawCheckBox
-		public override void CPDrawCheckBox (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawCheckBox (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			if (!RenderClientAreas ||
 				(state & ButtonState.Flat) == ButtonState.Flat) {
@@ -357,7 +357,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region DrawComboButton
-		public override void CPDrawComboButton (Graphics graphics, Rectangle rectangle, ButtonState state)
+		public override void CPDrawComboButton (Graphics graphics, Rectangle_ rectangle, ButtonState state)
 		{
 			if (!RenderClientAreas ||
 				(state & ButtonState.Flat) == ButtonState.Flat ||
@@ -380,7 +380,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region DrawMixedCheckBox
-		public override void CPDrawMixedCheckBox (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawMixedCheckBox (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			if (!RenderClientAreas ||
 				(state & ButtonState.Flat) == ButtonState.Flat) {
@@ -410,7 +410,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region DrawRadioButton
-		public override void CPDrawRadioButton (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawRadioButton (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			if (!RenderClientAreas ||
 				(state & ButtonState.Flat) == ButtonState.Flat) {
@@ -440,7 +440,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region DrawScrollButton
-		public override void CPDrawScrollButton (Graphics dc, Rectangle area, ScrollButton type, ButtonState state)
+		public override void CPDrawScrollButton (Graphics dc, Rectangle_ area, ScrollButton type, ButtonState state)
 		{
 			if (!RenderClientAreas ||
 				(state & ButtonState.Flat) == ButtonState.Flat ||
@@ -502,7 +502,7 @@ namespace System.Windows.Forms
 		#region DataGridView
 		#region DataGridViewHeaderCell
 		#region DataGridViewRowHeaderCell
-		public override bool DataGridViewRowHeaderCellDrawBackground (DataGridViewRowHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewRowHeaderCellDrawBackground (DataGridViewRowHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			if (!RenderClientAreas ||
 				!cell.DataGridView.EnableHeadersVisualStyles)
@@ -513,7 +513,7 @@ namespace System.Windows.Forms
 			bounds.Width--;
 			Bitmap bitmap = new Bitmap (bounds.Height, bounds.Width);
 			Graphics bitmap_g = Graphics.FromImage (bitmap);
-			Rectangle bitmap_rectangle = new Rectangle (Point.Empty, bitmap.Size);
+			Rectangle_ bitmap_rectangle = new Rectangle_ (Point_.Empty, bitmap.Size);
 			VisualStyleRenderer renderer = new VisualStyleRenderer (element);
 			if (!AreEqual (element, VisualStyleElement.Header.Item.Normal) && renderer.IsBackgroundPartiallyTransparent ())
 				new VisualStyleRenderer (VisualStyleElement.Header.Item.Normal).DrawBackground (bitmap_g, bitmap_rectangle);
@@ -532,7 +532,7 @@ namespace System.Windows.Forms
 				return base.DataGridViewRowHeaderCellDrawSelectionBackground (cell);
 			return true;
 		}
-		public override bool DataGridViewRowHeaderCellDrawBorder (DataGridViewRowHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewRowHeaderCellDrawBorder (DataGridViewRowHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			if (!RenderClientAreas ||
 				!cell.DataGridView.EnableHeadersVisualStyles || !VisualStyleRenderer.IsElementDefined (DataGridViewRowHeaderCellGetVisualStyleElement (cell)))
@@ -552,7 +552,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region DataGridViewColumnHeaderCell
-		public override bool DataGridViewColumnHeaderCellDrawBackground (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewColumnHeaderCellDrawBackground (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			if (!RenderClientAreas ||
 				!cell.DataGridView.EnableHeadersVisualStyles || cell is DataGridViewTopLeftHeaderCell)
@@ -567,7 +567,7 @@ namespace System.Windows.Forms
 			renderer.DrawBackground (g, bounds);
 			return true;
 		}
-		public override bool DataGridViewColumnHeaderCellDrawBorder (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewColumnHeaderCellDrawBorder (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			if (!RenderClientAreas ||
 				!cell.DataGridView.EnableHeadersVisualStyles ||
@@ -607,7 +607,7 @@ namespace System.Windows.Forms
 
 		#region DateTimePicker
 		#region Border
-		protected override void DateTimePickerDrawBorder (DateTimePicker dateTimePicker, Graphics g, Rectangle clippingArea)
+		protected override void DateTimePickerDrawBorder (DateTimePicker dateTimePicker, Graphics g, Rectangle_ clippingArea)
 		{
 			if (!RenderClientAreas) {
 				base.DateTimePickerDrawBorder (dateTimePicker, g, clippingArea);
@@ -626,7 +626,7 @@ namespace System.Windows.Forms
 				base.DateTimePickerDrawBorder (dateTimePicker, g, clippingArea);
 				return;
 			}
-			new VisualStyleRenderer (element).DrawBackground (g, new Rectangle (Point.Empty, dateTimePicker.Size), clippingArea);
+			new VisualStyleRenderer (element).DrawBackground (g, new Rectangle_ (Point_.Empty, dateTimePicker.Size), clippingArea);
 		}
 		public override bool DateTimePickerBorderHasHotElementStyle {
 			get {
@@ -638,7 +638,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region Drop down button
-		protected override void DateTimePickerDrawDropDownButton (DateTimePicker dateTimePicker, Graphics g, Rectangle clippingArea)
+		protected override void DateTimePickerDrawDropDownButton (DateTimePicker dateTimePicker, Graphics g, Rectangle_ clippingArea)
 		{
 			if (!RenderClientAreas) {
 				base.DateTimePickerDrawDropDownButton (dateTimePicker, g, clippingArea);
@@ -662,17 +662,17 @@ namespace System.Windows.Forms
 		//TODO: Until somebody figures out how to obtain the proper width this will need to be updated when new Windows versions/themes are released.
 		const int DateTimePickerDropDownWidthOnWindowsVista = 34;
 		const int DateTimePickerDropDownHeightOnWindowsVista = 20;
-		public override Rectangle DateTimePickerGetDropDownButtonArea (DateTimePicker dateTimePicker)
+		public override Rectangle_ DateTimePickerGetDropDownButtonArea (DateTimePicker dateTimePicker)
 		{
 			if (!RenderClientAreas)
 				return base.DateTimePickerGetDropDownButtonArea (dateTimePicker);
 			VisualStyleElement element = VisualStyleElement.DatePicker.ShowCalendarButtonRight.Pressed;
 			if (!VisualStyleRenderer.IsElementDefined (element))
 				return base.DateTimePickerGetDropDownButtonArea (dateTimePicker);
-			Size size = new Size (DateTimePickerDropDownWidthOnWindowsVista, DateTimePickerDropDownHeightOnWindowsVista);
-			return new Rectangle (dateTimePicker.Width - size.Width, 0, size.Width, size.Height);
+			Size_ size = new Size_ (DateTimePickerDropDownWidthOnWindowsVista, DateTimePickerDropDownHeightOnWindowsVista);
+			return new Rectangle_ (dateTimePicker.Width - size.Width, 0, size.Width, size.Height);
 		}
-		public override Rectangle DateTimePickerGetDateArea (DateTimePicker dateTimePicker)
+		public override Rectangle_ DateTimePickerGetDateArea (DateTimePicker dateTimePicker)
 		{
 			if (!RenderClientAreas ||
 				dateTimePicker.ShowUpDown)
@@ -681,7 +681,7 @@ namespace System.Windows.Forms
 			if (!VisualStyleRenderer.IsElementDefined (element))
 				return base.DateTimePickerGetDateArea (dateTimePicker);
 			Graphics g = dateTimePicker.CreateGraphics ();
-			Rectangle result = new VisualStyleRenderer (element).GetBackgroundContentRectangle (g, dateTimePicker.ClientRectangle);
+			Rectangle_ result = new VisualStyleRenderer (element).GetBackgroundContentRectangle (g, dateTimePicker.ClientRectangle);
 			g.Dispose ();
 			result.Width -= DateTimePickerDropDownWidthOnWindowsVista;
 			return result;
@@ -697,7 +697,7 @@ namespace System.Windows.Forms
 		#endregion
 		#endregion
 		#region ListView
-		protected override void ListViewDrawColumnHeaderBackground (ListView listView, ColumnHeader columnHeader, Graphics g, Rectangle area, Rectangle clippingArea)
+		protected override void ListViewDrawColumnHeaderBackground (ListView listView, ColumnHeader columnHeader, Graphics g, Rectangle_ area, Rectangle_ clippingArea)
 		{
 			if (!RenderClientAreas) {
 				base.ListViewDrawColumnHeaderBackground (listView, columnHeader, g, area, clippingArea);
@@ -719,7 +719,7 @@ namespace System.Windows.Forms
 			}
 			new VisualStyleRenderer (element).DrawBackground (g, area, clippingArea);
 		}
-		protected override void ListViewDrawUnusedHeaderBackground (ListView listView, Graphics g, Rectangle area, Rectangle clippingArea)
+		protected override void ListViewDrawUnusedHeaderBackground (ListView listView, Graphics g, Rectangle_ area, Rectangle_ clippingArea)
 		{
 			if (!RenderClientAreas) {
 				base.ListViewDrawUnusedHeaderBackground (listView, g, area, clippingArea);
@@ -762,21 +762,21 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region GroupBox
-		public override void DrawGroupBox (Graphics dc, Rectangle area, GroupBox box)
+		public override void DrawGroupBox (Graphics dc, Rectangle_ area, GroupBox box)
 		{
 			GroupBoxRenderer.DrawGroupBox (
 				dc,
-				new Rectangle (Point.Empty, box.Size),
+				new Rectangle_ (Point_.Empty, box.Size),
 				box.Text,
 				box.Font,
-				box.ForeColor == GroupBox.DefaultForeColor ? Color.Empty : box.ForeColor,
+				box.ForeColor == GroupBox.DefaultForeColor ? Color_.Empty : box.ForeColor,
 				box.Enabled ? GroupBoxState.Normal : GroupBoxState.Disabled);
 		}
 		#endregion
 		#region Managed window
-		Rectangle ManagedWindowGetTitleBarRectangle (InternalWindowManager wm)
+		Rectangle_ ManagedWindowGetTitleBarRectangle (InternalWindowManager wm)
 		{
-			return new Rectangle (0, 0, wm.Form.Width, ManagedWindowTitleBarHeight (wm) + ManagedWindowBorderWidth (wm) * (wm.IsMinimized ? 2 : 1));
+			return new Rectangle_ (0, 0, wm.Form.Width, ManagedWindowTitleBarHeight (wm) + ManagedWindowBorderWidth (wm) * (wm.IsMinimized ? 2 : 1));
 		}
 		Region ManagedWindowGetWindowRegion (Form form)
 		{
@@ -789,10 +789,10 @@ namespace System.Windows.Forms
 			if (!renderer.IsBackgroundPartiallyTransparent ())
 				return null;
 			IDeviceContext dc = GetMeasurementDeviceContext ();
-			Rectangle title_bar_rectangle = ManagedWindowGetTitleBarRectangle (form.WindowManager);
+			Rectangle_ title_bar_rectangle = ManagedWindowGetTitleBarRectangle (form.WindowManager);
 			Region region = renderer.GetBackgroundRegion (dc, title_bar_rectangle);
 			ReleaseMeasurementDeviceContext (dc);
-			region.Union (new Rectangle (0, title_bar_rectangle.Bottom, form.Width, form.Height));
+			region.Union (new Rectangle_ (0, title_bar_rectangle.Bottom, form.Width, form.Height));
 			return region;
 		}
 		public override void ManagedWindowOnSizeInitializedOrChanged (Form form)
@@ -802,7 +802,7 @@ namespace System.Windows.Forms
 				return;
 			form.Region = ManagedWindowGetWindowRegion (form);
 		}
-		protected override Rectangle ManagedWindowDrawTitleBarAndBorders (Graphics dc, Rectangle clip, InternalWindowManager wm)
+		protected override Rectangle_ ManagedWindowDrawTitleBarAndBorders (Graphics dc, Rectangle_ clip, InternalWindowManager wm)
 		{
 			if (!render_non_client_areas)
 				return base.ManagedWindowDrawTitleBarAndBorders (dc, clip, wm);
@@ -818,26 +818,26 @@ namespace System.Windows.Forms
 				!VisualStyleRenderer.IsElementDefined (bottom_border_element))))
 				return base.ManagedWindowDrawTitleBarAndBorders (dc, clip, wm);
 			VisualStyleRenderer renderer = new VisualStyleRenderer (title_bar_element);
-			Rectangle title_bar_rectangle = ManagedWindowGetTitleBarRectangle (wm);
+			Rectangle_ title_bar_rectangle = ManagedWindowGetTitleBarRectangle (wm);
 			renderer.DrawBackground (dc, title_bar_rectangle, clip);
 			if (!wm.IsMinimized) {
 				int border_width = ManagedWindowBorderWidth (wm);
 				renderer.SetParameters (left_border_element);
-				renderer.DrawBackground (dc, new Rectangle (
+				renderer.DrawBackground (dc, new Rectangle_ (
 					0,
 					title_bar_rectangle.Bottom,
 					border_width,
 					wm.Form.Height - title_bar_rectangle.Bottom
 					), clip);
 				renderer.SetParameters (right_border_element);
-				renderer.DrawBackground (dc, new Rectangle (
+				renderer.DrawBackground (dc, new Rectangle_ (
 					wm.Form.Width - border_width,
 					title_bar_rectangle.Bottom,
 					border_width,
 					wm.Form.Height - title_bar_rectangle.Bottom
 					), clip);
 				renderer.SetParameters (bottom_border_element);
-				renderer.DrawBackground (dc, new Rectangle (
+				renderer.DrawBackground (dc, new Rectangle_ (
 					0,
 					wm.Form.Height - border_width,
 					wm.Form.Width,
@@ -1043,7 +1043,7 @@ namespace System.Windows.Forms
 				return VisualStyleElement.Window.RestoreButton.Normal;
 			}
 		}
-		protected override void ManagedWindowDrawTitleButton (Graphics dc, TitleButton button, Rectangle clip, Form form)
+		protected override void ManagedWindowDrawTitleButton (Graphics dc, TitleButton button, Rectangle_ clip, Form form)
 		{
 			if (!render_non_client_areas) {
 				base.ManagedWindowDrawTitleButton (dc, button, clip, form);
@@ -1056,7 +1056,7 @@ namespace System.Windows.Forms
 			}
 			new VisualStyleRenderer (element).DrawBackground (dc, button.Rectangle, clip);
 		}
-		public override Size ManagedWindowButtonSize (InternalWindowManager wm)
+		public override Size_ ManagedWindowButtonSize (InternalWindowManager wm)
 		{
 			if (!render_non_client_areas)
 				return base.ManagedWindowButtonSize (wm);
@@ -1066,11 +1066,11 @@ namespace System.Windows.Forms
 			if (!VisualStyleRenderer.IsElementDefined (element))
 				return base.ManagedWindowButtonSize (wm);
 			IDeviceContext dc = GetMeasurementDeviceContext ();
-			Size result = new VisualStyleRenderer (element).GetPartSize (dc, ThemeSizeType.True);
+			Size_ result = new VisualStyleRenderer (element).GetPartSize (dc, ThemeSizeType.True);
 			ReleaseMeasurementDeviceContext (dc);
 			return result;
 		}
-		public override void ManagedWindowDrawMenuButton (Graphics dc, TitleButton button, Rectangle clip, InternalWindowManager wm)
+		public override void ManagedWindowDrawMenuButton (Graphics dc, TitleButton button, Rectangle_ clip, InternalWindowManager wm)
 		{
 			if (!render_non_client_areas) {
 				base.ManagedWindowDrawMenuButton (dc, button, clip, wm);
@@ -1122,7 +1122,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region ProgressBar
-		public override void DrawProgressBar (Graphics dc, Rectangle clip_rect, ProgressBar ctrl)
+		public override void DrawProgressBar (Graphics dc, Rectangle_ clip_rect, ProgressBar ctrl)
 		{
 			if (!RenderClientAreas ||
 				!VisualStyleRenderer.IsElementDefined (VisualStyleElement.ProgressBar.Bar.Normal) ||
@@ -1132,7 +1132,7 @@ namespace System.Windows.Forms
 			}
 			VisualStyleRenderer renderer = new VisualStyleRenderer (VisualStyleElement.ProgressBar.Bar.Normal);
 			renderer.DrawBackground (dc, ctrl.ClientRectangle, clip_rect);
-			Rectangle client_area = renderer.GetBackgroundContentRectangle (dc, new Rectangle (Point.Empty, ctrl.Size));
+			Rectangle_ client_area = renderer.GetBackgroundContentRectangle (dc, new Rectangle_ (Point_.Empty, ctrl.Size));
 			renderer = new VisualStyleRenderer (VisualStyleElement.ProgressBar.Chunk.Normal);
 			/* Draw Blocks */
 			int draw_mode = 0;
@@ -1157,7 +1157,7 @@ namespace System.Windows.Forms
 				int first_pixel_outside_filled_area = (int)(((double)(ctrl.Value - ctrl.Minimum) * client_area.Width) / (Math.Max (ctrl.Maximum - ctrl.Minimum, 1))) + client_area.X;
 				int block_count = 0;
 				int increment = block_width + renderer.GetInteger (IntegerProperty.ProgressSpaceSize);
-				Rectangle block_rect = new Rectangle (start_pixel, client_area.Y, block_width, client_area.Height);
+				Rectangle_ block_rect = new Rectangle_ (start_pixel, client_area.Y, block_width, client_area.Height);
 				while (true) {
 					if (max_blocks != int.MaxValue) {
 						if (block_count == max_blocks)
@@ -1183,11 +1183,11 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region RadioButton
-		protected override void RadioButton_DrawButton (RadioButton radio_button, Graphics dc, ButtonState state, Rectangle radiobutton_rectangle) {
+		protected override void RadioButton_DrawButton (RadioButton radio_button, Graphics dc, ButtonState state, Rectangle_ radiobutton_rectangle) {
 			if (radio_button.Appearance == Appearance.Normal && radio_button.FlatStyle == FlatStyle.System) {
 				RadioButtonRenderer.DrawRadioButton (
 					dc,
-					new Point (radiobutton_rectangle.Left, radiobutton_rectangle.Top),
+					new Point_ (radiobutton_rectangle.Left, radiobutton_rectangle.Top),
 					GetRadioButtonState (radio_button)
 				);
 				return;
@@ -1216,7 +1216,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region ScrollBar
-		public override void DrawScrollBar (Graphics dc, Rectangle clip, ScrollBar bar)
+		public override void DrawScrollBar (Graphics dc, Rectangle_ clip, ScrollBar bar)
 		{
 			if (!RenderClientAreas ||
 				!ScrollBarAreElementsDefined) {
@@ -1228,13 +1228,13 @@ namespace System.Windows.Forms
 			int scroll_button_width = bar.scrollbutton_width;
 			int scroll_button_height = bar.scrollbutton_height;
 			if (bar.vert) {
-				bar.FirstArrowArea = new Rectangle (0, 0, bar.Width, scroll_button_height);
-				bar.SecondArrowArea = new Rectangle (
+				bar.FirstArrowArea = new Rectangle_ (0, 0, bar.Width, scroll_button_height);
+				bar.SecondArrowArea = new Rectangle_ (
 					0,
 					bar.ClientRectangle.Height - scroll_button_height,
 					bar.Width,
 					scroll_button_height);
-				Rectangle thumb_pos = bar.ThumbPos;
+				Rectangle_ thumb_pos = bar.ThumbPos;
 				thumb_pos.Width = bar.Width;
 				bar.ThumbPos = thumb_pos;
 				#region Background, upper track
@@ -1245,7 +1245,7 @@ namespace System.Windows.Forms
 						VisualStyleElement.ScrollBar.LowerTrackVertical.Normal :
 						VisualStyleElement.ScrollBar.LowerTrackVertical.Disabled;
 				renderer = new VisualStyleRenderer (element);
-				Rectangle upper_track_rect = new Rectangle (
+				Rectangle_ upper_track_rect = new Rectangle_ (
 					0,
 					0,
 					bar.ClientRectangle.Width,
@@ -1261,7 +1261,7 @@ namespace System.Windows.Forms
 						VisualStyleElement.ScrollBar.LowerTrackVertical.Normal :
 						VisualStyleElement.ScrollBar.LowerTrackVertical.Disabled;
 				renderer = new VisualStyleRenderer (element);
-				Rectangle lower_track_rect = new Rectangle (
+				Rectangle_ lower_track_rect = new Rectangle_ (
 					0,
 					bar.ThumbPos.Bottom,
 					bar.ClientRectangle.Width,
@@ -1320,13 +1320,13 @@ namespace System.Windows.Forms
 				}
 				#endregion
 			} else {
-				bar.FirstArrowArea = new Rectangle (0, 0, scroll_button_width, bar.Height);
-				bar.SecondArrowArea = new Rectangle (
+				bar.FirstArrowArea = new Rectangle_ (0, 0, scroll_button_width, bar.Height);
+				bar.SecondArrowArea = new Rectangle_ (
 					bar.ClientRectangle.Width - scroll_button_width,
 					0,
 					scroll_button_width,
 					bar.Height);
-				Rectangle thumb_pos = bar.ThumbPos;
+				Rectangle_ thumb_pos = bar.ThumbPos;
 				thumb_pos.Height = bar.Height;
 				bar.ThumbPos = thumb_pos;
 				#region Background, left track
@@ -1337,7 +1337,7 @@ namespace System.Windows.Forms
 						VisualStyleElement.ScrollBar.LeftTrackHorizontal.Normal :
 						VisualStyleElement.ScrollBar.LeftTrackHorizontal.Disabled;
 				renderer = new VisualStyleRenderer (element);
-				Rectangle left_track_rect = new Rectangle (
+				Rectangle_ left_track_rect = new Rectangle_ (
 					0,
 					0,
 					bar.ThumbPos.Left,
@@ -1353,7 +1353,7 @@ namespace System.Windows.Forms
 						VisualStyleElement.ScrollBar.RightTrackHorizontal.Normal :
 						VisualStyleElement.ScrollBar.RightTrackHorizontal.Disabled;
 				renderer = new VisualStyleRenderer (element);
-				Rectangle right_track_rect = new Rectangle (
+				Rectangle_ right_track_rect = new Rectangle_ (
 					bar.ThumbPos.Right,
 					0,
 					bar.ClientRectangle.Width - bar.ThumbPos.Right,
@@ -1452,7 +1452,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region StatusBar
-		protected override void DrawStatusBarBackground(Graphics dc, Rectangle clip, StatusBar sb) {
+		protected override void DrawStatusBarBackground(Graphics dc, Rectangle_ clip, StatusBar sb) {
 			if (!RenderClientAreas) {
 				base.DrawStatusBarBackground (dc, clip, sb);
 				return;
@@ -1464,7 +1464,7 @@ namespace System.Windows.Forms
 			}
 			new VisualStyleRenderer (element).DrawBackground (dc, sb.ClientRectangle, clip);
 		}
-		protected override void DrawStatusBarSizingGrip (Graphics dc, Rectangle clip, StatusBar sb, Rectangle area)
+		protected override void DrawStatusBarSizingGrip (Graphics dc, Rectangle_ clip, StatusBar sb, Rectangle_ area)
 		{
 			if (!RenderClientAreas) {
 				base.DrawStatusBarSizingGrip (dc, clip, sb, area);
@@ -1476,12 +1476,12 @@ namespace System.Windows.Forms
 				return;
 			}
 			VisualStyleRenderer renderer = new VisualStyleRenderer (element);
-			Rectangle sizing_grip_rectangle = new Rectangle (Point.Empty, renderer.GetPartSize (dc, ThemeSizeType.True));
+			Rectangle_ sizing_grip_rectangle = new Rectangle_ (Point_.Empty, renderer.GetPartSize (dc, ThemeSizeType.True));
 			sizing_grip_rectangle.X = sb.Width - sizing_grip_rectangle.Width;
 			sizing_grip_rectangle.Y = sb.Height - sizing_grip_rectangle.Height;
 			renderer.DrawBackground (dc, sizing_grip_rectangle, clip);
 		}
-		protected override void DrawStatusBarPanelBackground (Graphics dc, Rectangle area, StatusBarPanel panel)
+		protected override void DrawStatusBarPanelBackground (Graphics dc, Rectangle_ area, StatusBarPanel panel)
 		{
 			if (!RenderClientAreas) {
 				base.DrawStatusBarPanelBackground (dc, area, panel);
@@ -1512,7 +1512,7 @@ namespace System.Windows.Forms
 				return VisualStyleElement.TextBox.TextEdit.Focused;
 			return VisualStyleElement.TextBox.TextEdit.Normal;
 		}
-		public override void TextBoxBaseFillBackground (TextBoxBase textBoxBase, Graphics g, Rectangle clippingArea)
+		public override void TextBoxBaseFillBackground (TextBoxBase textBoxBase, Graphics g, Rectangle_ clippingArea)
 		{
 			if (!RenderClientAreas ||
 				!TextBoxBaseShouldPaint (textBoxBase)) {
@@ -1524,7 +1524,7 @@ namespace System.Windows.Forms
 				base.TextBoxBaseFillBackground (textBoxBase, g, clippingArea);
 				return;
 			}
-			Rectangle bounds = new Rectangle(Point.Empty, textBoxBase.Size);
+			Rectangle_ bounds = new Rectangle_(Point_.Empty, textBoxBase.Size);
 			bounds.X -= (bounds.Width - textBoxBase.ClientSize.Width) / 2;
 			bounds.Y -= (bounds.Height - textBoxBase.ClientSize.Height) / 2;
 			new VisualStyleRenderer (element).DrawBackground (g, bounds, clippingArea);
@@ -1540,8 +1540,8 @@ namespace System.Windows.Forms
 			PaintEventArgs e = XplatUI.PaintEventStart (ref m, textBoxBase.Handle, false);
 			new VisualStyleRenderer (element).DrawBackgroundExcludingArea (
 				e.Graphics,
-				new Rectangle (Point.Empty, textBoxBase.Size),
-				new Rectangle (new Point ((textBoxBase.Width - textBoxBase.ClientSize.Width) / 2,
+				new Rectangle_ (Point_.Empty, textBoxBase.Size),
+				new Rectangle_ (new Point_ ((textBoxBase.Width - textBoxBase.ClientSize.Width) / 2,
 					(textBoxBase.Height - textBoxBase.ClientSize.Height) / 2),
 					textBoxBase.ClientSize));
 			XplatUI.PaintEventEnd (ref m, textBoxBase.Handle, false);
@@ -1593,7 +1593,7 @@ namespace System.Windows.Forms
 				base.DrawToolBarButtonBorder (dc, item, is_flat);
 				return;
 			}
-			Rectangle rectangle = item.Rectangle;
+			Rectangle_ rectangle = item.Rectangle;
 			if (item.Button.Style == ToolBarButtonStyle.DropDownButton && item.Button.Parent.DropDownArrows)
 				rectangle.Width -= ToolBarDropDownWidth;
 			new VisualStyleRenderer (element).DrawBackground (dc, rectangle);
@@ -1685,7 +1685,7 @@ namespace System.Windows.Forms
 				base.DrawToolBarDropDownArrow (dc, item, is_flat);
 				return;
 			}
-			Rectangle rect = item.Rectangle;
+			Rectangle_ rect = item.Rectangle;
 			rect.X = item.Rectangle.Right - ToolBarDropDownWidth;
 			rect.Width = ToolBarDropDownWidth;
 			new VisualStyleRenderer (element).DrawBackground (dc, rect);
@@ -1721,7 +1721,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region ToolTip
-		protected override void ToolTipDrawBackground (Graphics dc, Rectangle clip_rectangle, ToolTip.ToolTipWindow control)
+		protected override void ToolTipDrawBackground (Graphics dc, Rectangle_ clip_rectangle, ToolTip.ToolTipWindow control)
 		{
 			if (!RenderClientAreas) {
 				base.ToolTipDrawBackground (dc, clip_rectangle, control);
@@ -1746,7 +1746,7 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region TrackBar
-		protected override Size TrackBarGetThumbSize (TrackBar trackBar)
+		protected override Size_ TrackBarGetThumbSize (TrackBar trackBar)
 		{
 			if (!RenderClientAreas)
 				return base.TrackBarGetThumbSize (trackBar);
@@ -1754,7 +1754,7 @@ namespace System.Windows.Forms
 			if (!VisualStyleRenderer.IsElementDefined (element))
 				return base.TrackBarGetThumbSize (trackBar);
 			Graphics g = trackBar.CreateGraphics ();
-			Size result = new VisualStyleRenderer (element).GetPartSize (g, ThemeSizeType.True);
+			Size_ result = new VisualStyleRenderer (element).GetPartSize (g, ThemeSizeType.True);
 			g.Dispose ();
 			return trackBar.Orientation == Orientation.Horizontal ? result : TrackBarRotateVerticalThumbSize (result);
 		}
@@ -1781,7 +1781,7 @@ namespace System.Windows.Forms
 					return TrackBarGetVerticalThumbVisualStyleElement (trackBar);
 				}
 		}
-		static Size TrackBarRotateVerticalThumbSize (Size value)
+		static Size_ TrackBarRotateVerticalThumbSize (Size_ value)
 		{
 			int temporary = value.Width;
 			value.Width = value.Height;
@@ -1789,7 +1789,7 @@ namespace System.Windows.Forms
 			return value;
 		}
 		#region Track
-		protected override void TrackBarDrawHorizontalTrack (Graphics dc, Rectangle thumb_area, Point channel_startpoint, Rectangle clippingArea)
+		protected override void TrackBarDrawHorizontalTrack (Graphics dc, Rectangle_ thumb_area, Point_ channel_startpoint, Rectangle_ clippingArea)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawHorizontalTrack (dc, thumb_area, channel_startpoint, clippingArea);
@@ -1801,9 +1801,9 @@ namespace System.Windows.Forms
 				return;
 			}
 			VisualStyleRenderer renderer = new VisualStyleRenderer (element);
-			renderer.DrawBackground (dc, new Rectangle (channel_startpoint, new Size (thumb_area.Width, renderer.GetPartSize (dc, ThemeSizeType.True).Height)), clippingArea);
+			renderer.DrawBackground (dc, new Rectangle_ (channel_startpoint, new Size_ (thumb_area.Width, renderer.GetPartSize (dc, ThemeSizeType.True).Height)), clippingArea);
 		}
-		protected override void TrackBarDrawVerticalTrack (Graphics dc, Rectangle thumb_area, Point channel_startpoint, Rectangle clippingArea)
+		protected override void TrackBarDrawVerticalTrack (Graphics dc, Rectangle_ thumb_area, Point_ channel_startpoint, Rectangle_ clippingArea)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawVerticalTrack (dc, thumb_area, channel_startpoint, clippingArea);
@@ -1815,7 +1815,7 @@ namespace System.Windows.Forms
 				return;
 			}
 			VisualStyleRenderer renderer = new VisualStyleRenderer (element);
-			renderer.DrawBackground (dc, new Rectangle (channel_startpoint, new Size (renderer.GetPartSize (dc, ThemeSizeType.True).Width, thumb_area.Height)), clippingArea);
+			renderer.DrawBackground (dc, new Rectangle_ (channel_startpoint, new Size_ (renderer.GetPartSize (dc, ThemeSizeType.True).Width, thumb_area.Height)), clippingArea);
 		}
 		#endregion
 		#region Thumb
@@ -1836,7 +1836,7 @@ namespace System.Windows.Forms
 			return trackBar.Focused;
 		}
 		#region Horizontal
-		protected override void TrackBarDrawHorizontalThumbBottom (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected override void TrackBarDrawHorizontalThumbBottom (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawHorizontalThumbBottom (dc, thumb_pos, br_thumb, clippingArea, trackBar);
@@ -1861,7 +1861,7 @@ namespace System.Windows.Forms
 				return VisualStyleElement.TrackBar.ThumbBottom.Focused;
 			return VisualStyleElement.TrackBar.ThumbBottom.Normal;
 		}
-		protected override void TrackBarDrawHorizontalThumbTop (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected override void TrackBarDrawHorizontalThumbTop (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawHorizontalThumbTop (dc, thumb_pos, br_thumb, clippingArea, trackBar);
@@ -1886,7 +1886,7 @@ namespace System.Windows.Forms
 				return VisualStyleElement.TrackBar.ThumbTop.Focused;
 			return VisualStyleElement.TrackBar.ThumbTop.Normal;
 		}
-		protected override void TrackBarDrawHorizontalThumb (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected override void TrackBarDrawHorizontalThumb (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawHorizontalThumb (dc, thumb_pos, br_thumb, clippingArea, trackBar);
@@ -1913,14 +1913,14 @@ namespace System.Windows.Forms
 		}
 		#endregion
 		#region Vertical
-		static Rectangle TrackBarRotateVerticalThumbSize (Rectangle value)
+		static Rectangle_ TrackBarRotateVerticalThumbSize (Rectangle_ value)
 		{
 			int temporary = value.Width;
 			value.Width = value.Height;
 			value.Height = temporary;
 			return value;
 		}
-		protected override void TrackBarDrawVerticalThumbRight (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected override void TrackBarDrawVerticalThumbRight (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawVerticalThumbRight (dc, thumb_pos, br_thumb, clippingArea, trackBar);
@@ -1945,7 +1945,7 @@ namespace System.Windows.Forms
 				return VisualStyleElement.TrackBar.ThumbRight.Focused;
 			return VisualStyleElement.TrackBar.ThumbRight.Normal;
 		}
-		protected override void TrackBarDrawVerticalThumbLeft (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected override void TrackBarDrawVerticalThumbLeft (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawVerticalThumbLeft (dc, thumb_pos, br_thumb, clippingArea, trackBar);
@@ -1970,7 +1970,7 @@ namespace System.Windows.Forms
 				return VisualStyleElement.TrackBar.ThumbLeft.Focused;
 			return VisualStyleElement.TrackBar.ThumbLeft.Normal;
 		}
-		protected override void TrackBarDrawVerticalThumb (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected override void TrackBarDrawVerticalThumb (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			if (!RenderClientAreas) {
 				base.TrackBarDrawVerticalThumb (dc, thumb_pos, br_thumb, clippingArea, trackBar);
@@ -2019,7 +2019,7 @@ namespace System.Windows.Forms
 			}
 			public void Paint (float x1, float y1, float x2, float y2)
 			{
-				renderer.DrawEdge (g, new Rectangle (
+				renderer.DrawEdge (g, new Rectangle_ (
 					(int)Math.Round (x1),
 					(int)Math.Round (y1),
 					1,
@@ -2046,7 +2046,7 @@ namespace System.Windows.Forms
 			}
 			public void Paint (float x1, float y1, float x2, float y2)
 			{
-				renderer.DrawEdge (g, new Rectangle (
+				renderer.DrawEdge (g, new Rectangle_ (
 					(int)Math.Round (x1),
 					(int)Math.Round (y1),
 					(int)Math.Round (x2 - x1) + 1,
@@ -2078,11 +2078,11 @@ namespace System.Windows.Forms
 				base.TreeViewDrawNodePlusMinus (treeView, node, dc, x, middle);
 				return;
 			}
-			new VisualStyleRenderer (element).DrawBackground (dc, new Rectangle (x, middle - 4, 9, 9));
+			new VisualStyleRenderer (element).DrawBackground (dc, new Rectangle_ (x, middle - 4, 9, 9));
 		}
 		#endregion
 		#region UpDownBase
-		public override void UpDownBaseDrawButton (Graphics g, Rectangle bounds, bool top, PushButtonState state)
+		public override void UpDownBaseDrawButton (Graphics g, Rectangle_ bounds, bool top, PushButtonState state)
 		{
 			if (!RenderClientAreas) {
 				base.UpDownBaseDrawButton (g, bounds, top, state);

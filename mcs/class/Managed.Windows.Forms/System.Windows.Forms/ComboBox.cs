@@ -66,9 +66,9 @@ namespace System.Windows.Forms
 		private bool show_dropdown_button;
 		private ButtonState button_state = ButtonState.Normal;
 		private bool dropped_down;
-		private Rectangle text_area;
-		private Rectangle button_area;
-		private Rectangle listbox_area;
+		private Rectangle_ text_area;
+		private Rectangle_ button_area;
+		private Rectangle_ listbox_area;
 		private const int button_width = 16;
 		bool drop_down_button_entered;
 		private AutoCompleteStringCollection auto_complete_custom_source = null;
@@ -289,7 +289,7 @@ namespace System.Windows.Forms
 				textbox_ctrl.AutoCompleteInternalSource = null;
 			}
 		}
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor; }
 			set {
 				if (base.BackColor == value)
@@ -331,8 +331,8 @@ namespace System.Windows.Forms
 			set { base.DataSource = value; }
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (121, 21); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (121, 21); }
 		}
 
 		[RefreshProperties(RefreshProperties.Repaint)]
@@ -414,7 +414,7 @@ namespace System.Windows.Forms
 					listbox_ctrl.Visible = true;
 
 					// This should give us a 150 default height
-					// for Simple mode if size hasn't been set
+					// for Simple mode if Size_ hasn't been set
 					// (DefaultSize doesn't work for us in this case)
 					if (requested_height == -1)
 						requested_height = 150;
@@ -508,7 +508,7 @@ namespace System.Windows.Forms
 			get { return base.Focused; }
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set {
 				if (base.ForeColor == value)
@@ -537,7 +537,7 @@ namespace System.Windows.Forms
 		public int ItemHeight {
 			get {
 				if (item_height == -1) {
-					SizeF sz = TextRenderer.MeasureString ("The quick brown Fox", Font);
+					SizeF_ sz = TextRenderer.MeasureString ("The quick brown Fox", Font);
 					item_height = (int) sz.Height;
 				}
 				return item_height;
@@ -577,10 +577,10 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Size MaximumSize {
+		public override Size_ MaximumSize {
 			get { return base.MaximumSize; }
 			set {
-				base.MaximumSize = new Size (value.Width, 0);
+				base.MaximumSize = new Size_ (value.Width, 0);
 			}
 		}
 
@@ -604,10 +604,10 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Size MinimumSize {
+		public override Size_ MinimumSize {
 			get { return base.MinimumSize; }
 			set {
-				base.MinimumSize = new Size (value.Width, 0);
+				base.MinimumSize = new Size_ (value.Width, 0);
 			}
 		}
 		
@@ -771,11 +771,11 @@ namespace System.Windows.Forms
 		#endregion Public Properties
 
 		#region Internal Properties
-		internal Rectangle ButtonArea {
+		internal Rectangle_ ButtonArea {
 			get { return button_area; }
 		}
 
-		internal Rectangle TextArea {
+		internal Rectangle_ TextArea {
 			get { return text_area; }
 		}
 		#endregion
@@ -1258,7 +1258,7 @@ namespace System.Windows.Forms
 			base.OnMouseEnter (e);
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}
@@ -1347,7 +1347,7 @@ namespace System.Windows.Forms
 					XplatUI.SendMessage (textbox_ctrl.Handle, (Msg) m.Msg, m.WParam, m.LParam);
 				return;
 			case Msg.WM_MOUSELEAVE:
-				Point location = PointToClient (Control.MousePosition);
+				Point_ location = PointToClient (Control.MousePosition);
 				if (ClientRectangle.Contains (location))
 					return;
 				break;
@@ -1382,10 +1382,10 @@ namespace System.Windows.Forms
 			listbox_area.Y = text_area.Bottom + 3;
 			listbox_area.Height -= (text_area.Height + 2);
 
-			Rectangle prev_button_area = button_area;
+			Rectangle_ prev_button_area = button_area;
 
 			if (DropDownStyle == ComboBoxStyle.Simple)
-				button_area = Rectangle.Empty;
+				button_area = Rectangle_.Empty;
 			else {
 				button_area = text_area;
 				button_area.X = text_area.Right - button_width - border;
@@ -1409,7 +1409,7 @@ namespace System.Windows.Forms
 
 			if (textbox_ctrl != null) {
 				int text_border = border + 1;
-				textbox_ctrl.Location = new Point (text_area.X + text_border, text_area.Y + text_border);
+				textbox_ctrl.Location = new Point_ (text_area.X + text_border, text_area.Y + text_border);
 				textbox_ctrl.Width = text_area.Width - button_area.Width - text_border * 2;
 				textbox_ctrl.Height = text_area.Height - text_border * 2;
 			}
@@ -1426,7 +1426,7 @@ namespace System.Windows.Forms
 			listbox_ctrl.HighlightedIndex = SelectedIndex;
 		}
 		
-		internal void Draw (Rectangle clip, Graphics dc)
+		internal void Draw (Rectangle_ clip, Graphics dc)
 		{
 			Theme theme = ThemeEngine.Current;
 			FlatStyle style = FlatStyle.Standard;
@@ -1442,9 +1442,9 @@ namespace System.Windows.Forms
 			// No edit control, we paint the edit ourselves
 			if (dropdown_style == ComboBoxStyle.DropDownList) {
 				DrawItemState state = DrawItemState.None;
-				Color back_color = BackColor;
-				Color fore_color = ForeColor;
-				Rectangle item_rect = text_area;
+				Color_ back_color = BackColor;
+				Color_ fore_color = ForeColor;
+				Rectangle_ item_rect = text_area;
 				item_rect.X += border;
 				item_rect.Y += border;
 				item_rect.Width -= (button_area.Width + 2 * border);
@@ -1500,7 +1500,7 @@ namespace System.Windows.Forms
 			if (listbox_ctrl == null)
 				CreateComboListBox ();
 
-			listbox_ctrl.Location = PointToScreen (new Point (text_area.X, text_area.Y + text_area.Height));
+			listbox_ctrl.Location = PointToScreen (new Point_ (text_area.X, text_area.Y + text_area.Height));
 
 			FindMatchOrSetIndex(SelectedIndex);
 
@@ -1735,7 +1735,7 @@ namespace System.Windows.Forms
 		
 		void OnMouseDownCB (object sender, MouseEventArgs e)
 		{
-			Rectangle area;
+			Rectangle_ area;
 			if (DropDownStyle == ComboBoxStyle.DropDownList)
 				area = ClientRectangle;
 			else
@@ -1781,7 +1781,7 @@ namespace System.Windows.Forms
 				return;
 
 			if (listbox_ctrl != null && listbox_ctrl.Visible) {
-				Point location = listbox_ctrl.PointToClient (Control.MousePosition);
+				Point_ location = listbox_ctrl.PointToClient (Control.MousePosition);
 				if (listbox_ctrl.ClientRectangle.Contains (location))
 					listbox_ctrl.Capture = true;
 			}
@@ -1821,7 +1821,7 @@ namespace System.Windows.Forms
 
 		MouseEventArgs TranslateMouseEventArgs (MouseEventArgs args)
 		{
-			Point loc = PointToClient (Control.MousePosition);
+			Point_ loc = PointToClient (Control.MousePosition);
 			return new MouseEventArgs (args.Button, args.Clicks, loc.X, loc.Y, args.Delta);
 		}
 
@@ -2335,7 +2335,7 @@ namespace System.Windows.Forms
 			private int top_item;			/* First item that we show the in the current page */
 			private int last_item;			/* Last visible item */
 			internal int page_size;			/* Number of listbox items per page */
-			private Rectangle textarea_drawable;	/* Rectangle of the drawable text area */
+			private Rectangle_ textarea_drawable;	/* Rectangle_ of the drawable text area */
 			
 			internal enum ItemNavigation
 			{
@@ -2403,7 +2403,7 @@ namespace System.Windows.Forms
 				
 				MouseEventArgs TranslateEvent (MouseEventArgs e)
 				{
-					Point loc = PointToClient (Control.MousePosition);
+					Point_ loc = PointToClient (Control.MousePosition);
 					return new MouseEventArgs (e.Button, e.Clicks, loc.X, loc.Y, e.Delta);
 				}
 			}
@@ -2462,7 +2462,7 @@ namespace System.Windows.Forms
 				bool show_scrollbar;
 
 				if (owner.DropDownStyle == ComboBoxStyle.Simple) {
-					Rectangle area = owner.listbox_area;
+					Rectangle_ area = owner.listbox_area;
 					width = area.Width;
 					height = area.Height;
 					show_scrollbar = owner.Items.Count * owner.ItemHeight > height;
@@ -2535,11 +2535,11 @@ namespace System.Windows.Forms
 				}
 
 				var borderWidth = Hwnd.GetBorderWidth (CreateParams);
-				var borderAdjustment = dropdown_style == ComboBoxStyle.Simple ? new Size (0, 0) :
-					new Size (borderWidth.top + borderWidth.bottom, borderWidth.left + borderWidth.right);
-				Size = new Size (width, height + borderAdjustment.Height);
-				textarea_drawable = new Rectangle (ClientRectangle.Location,
-					new Size (width - borderAdjustment.Width, height));
+				var borderAdjustment = dropdown_style == ComboBoxStyle.Simple ? new Size_ (0, 0) :
+					new Size_ (borderWidth.top + borderWidth.bottom, borderWidth.left + borderWidth.right);
+				Size = new Size_ (width, height + borderAdjustment.Height);
+				textarea_drawable = new Rectangle_ (ClientRectangle.Location,
+					new Size_ (width - borderAdjustment.Width, height));
 
 				if (vscrollbar_ctrl != null && show_scrollbar)
 					textarea_drawable.Width -= vscrollbar_ctrl.Width;
@@ -2547,21 +2547,21 @@ namespace System.Windows.Forms
 				last_item = LastVisibleItem ();
 			}
 
-			private void Draw (Rectangle clip, Graphics dc)
+			private void Draw (Rectangle_ clip, Graphics dc)
 			{
 				dc.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (owner.BackColor), clip);
 
 				if (owner.Items.Count > 0) {
 					
 					for (int i = top_item; i <= last_item; i++) {
-						Rectangle item_rect = GetItemDisplayRectangle (i, top_item);
+						Rectangle_ item_rect = GetItemDisplayRectangle (i, top_item);
 
 						if (!clip.IntersectsWith (item_rect))
 							continue;
 
 						DrawItemState state = DrawItemState.None;
-						Color back_color = owner.BackColor;
-						Color fore_color = owner.ForeColor;
+						Color_ back_color = owner.BackColor;
+						Color_ fore_color = owner.ForeColor;
 
 						if (i == HighlightedIndex) {
 							state |= DrawItemState.Selected;
@@ -2595,12 +2595,12 @@ namespace System.Windows.Forms
 				}
 			}
 
-			private Rectangle GetItemDisplayRectangle (int index, int top_index)
+			private Rectangle_ GetItemDisplayRectangle (int index, int top_index)
 			{
 				if (index < 0 || index >= owner.Items.Count)
 					throw new  ArgumentOutOfRangeException ("GetItemRectangle index out of range.");
 
-				Rectangle item_rect = new Rectangle ();
+				Rectangle_ item_rect = new Rectangle_ ();
 				int height = owner.GetItemHeight (index);
 
 				item_rect.X = 0;
@@ -2644,7 +2644,7 @@ namespace System.Windows.Forms
 
 			public int LastVisibleItem ()
 			{
-				Rectangle item_rect;
+				Rectangle_ item_rect;
 				int top_y = textarea_drawable.Y + textarea_drawable.Height;
 				int i = 0;
 				
@@ -2716,7 +2716,7 @@ namespace System.Windows.Forms
 					return;
 				}
 
-				Point pt = PointToClient (Control.MousePosition);
+				Point_ pt = PointToClient (Control.MousePosition);
 				int index = IndexFromPointDisplayRectangle (pt.X, pt.Y);
 
 				if (index != -1)
@@ -2769,9 +2769,9 @@ namespace System.Windows.Forms
 
 				CalcListBoxArea ();
 				// If the listbox would extend below the screen, move it above the textbox.
-				Rectangle scrn_rect = Screen.FromControl (owner).Bounds;
+				Rectangle_ scrn_rect = Screen.FromControl (owner).Bounds;
 				if (this.Location.Y + this.Height >= scrn_rect.Bottom)
-					this.Location = new Point (this.Location.X, this.Location.Y - (this.Height + owner.TextArea.Height));
+					this.Location = new Point_ (this.Location.X, this.Location.Y - (this.Height + owner.TextArea.Height));
 				Show ();
 
 				Refresh ();

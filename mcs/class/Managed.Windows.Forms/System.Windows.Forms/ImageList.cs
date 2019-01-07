@@ -59,11 +59,11 @@
 // MS.NET 2.0 does not clear keys when handle is destroyed that is treated as
 // a bug.
 //
-
 using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
+
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Imaging;
@@ -81,8 +81,8 @@ namespace System.Windows.Forms
 	{
 		#region Private Fields
 		private const ColorDepth DefaultColorDepth = ColorDepth.Depth8Bit;
-		private static readonly Size DefaultImageSize = new Size(16, 16);
-		private static readonly Color DefaultTransparentColor = Color.Transparent;
+		private static readonly Size_ DefaultImageSize = new Size_(16, 16);
+		private static readonly Color_ DefaultTransparentColor = Color_.Transparent;
 		private object tag;
 		private readonly ImageCollection images;
 		#endregion // Private Fields
@@ -117,7 +117,7 @@ namespace System.Windows.Forms
 						squares[255 + index] = squares[255 - index] = index * index;
 				}
 
-				internal static int GetNearestColor(Color[] palette, int color)
+				internal static int GetNearestColor(Color_[] palette, int color)
 				{
 					int index;
 					int count;
@@ -161,7 +161,7 @@ namespace System.Windows.Forms
 			{
 				internal readonly object Image;
 				internal readonly ItemFlags Flags;
-				internal readonly Color TransparentColor;
+				internal readonly Color_ TransparentColor;
 				internal readonly int ImageCount = 1;
 
 				internal ImageListItem(Icon value)
@@ -185,7 +185,7 @@ namespace System.Windows.Forms
 					this.Image = value;
 				}
 
-				internal ImageListItem(Image value, Color transparentColor) : this(value)
+				internal ImageListItem(Image value, Color_ transparentColor) : this(value)
 				{
 					this.Flags = ItemFlags.UseTransparentColor;
 					this.TransparentColor = transparentColor;
@@ -200,8 +200,8 @@ namespace System.Windows.Forms
 
 			#region ImageCollection Private Fields
 			private ColorDepth colorDepth = DefaultColorDepth;
-			private Size imageSize = DefaultImageSize;
-			private Color transparentColor = DefaultTransparentColor;
+			private Size_ imageSize = DefaultImageSize;
+			private Color_ transparentColor = DefaultTransparentColor;
 			private ArrayList list = new ArrayList();
 			private ArrayList keys = new ArrayList();
 			private int count;
@@ -252,7 +252,7 @@ namespace System.Windows.Forms
 			}
 
 			// For use in ImageList
-			internal Size ImageSize {
+			internal Size_ ImageSize {
 				get {
 					return this.imageSize;
 				}
@@ -308,7 +308,7 @@ namespace System.Windows.Forms
 			}
 
 			// For use in ImageList
-			internal Color TransparentColor {
+			internal Color_ TransparentColor {
 				get {
 					return this.transparentColor;
 				}
@@ -443,7 +443,7 @@ namespace System.Windows.Forms
 
 					bitmap = new Bitmap(imageWidth = this.imageSize.Width, imageHeight = this.imageSize.Height, PixelFormat.Format32bppArgb);
 					graphics = Graphics.FromImage(bitmap);
-					graphics.DrawIcon((Icon)item.Image, new Rectangle(0, 0, imageWidth, imageHeight));
+					graphics.DrawIcon((Icon)item.Image, new Rectangle_(0, 0, imageWidth, imageHeight));
 					graphics.Dispose();
 
 					ReduceColorDepth(bitmap);
@@ -460,7 +460,7 @@ namespace System.Windows.Forms
 					Image image;
 					Bitmap bitmap;
 					Graphics graphics;
-					Rectangle imageRect;
+					Rectangle_ imageRect;
 					ImageAttributes imageAttributes;
 
 					// When ImageSize was changed after adding image strips
@@ -481,7 +481,7 @@ namespace System.Windows.Forms
 					if (image.Height != (imageHeight = this.imageSize.Height))
 						throw new ArgumentException("Height of image strip must be equal to ImageSize.Height.", "value");
 
-					imageRect = new Rectangle(0, 0, imageWidth, imageHeight);
+					imageRect = new Rectangle_(0, 0, imageWidth, imageHeight);
 					if (this.transparentColor.A == 0)
 						imageAttributes = null;
 					else {
@@ -523,7 +523,7 @@ namespace System.Windows.Forms
 				}
 			}
 
-			private Image CreateImage(Image value, Color transparentColor)
+			private Image CreateImage(Image value, Color_ transparentColor)
 			{
 				int imageWidth;
 				int imageHeight;
@@ -538,7 +538,7 @@ namespace System.Windows.Forms
 
 				var bitmap = new Bitmap (imageWidth = this.imageSize.Width, imageHeight = this.imageSize.Height, PixelFormat.Format32bppArgb);
 				using (var graphics = Graphics.FromImage (bitmap))
-					graphics.DrawImage (value, new Rectangle(0, 0, imageWidth, imageHeight), 0, 0, value.Width, value.Height, GraphicsUnit.Pixel, imageAttributes);
+					graphics.DrawImage (value, new Rectangle_(0, 0, imageWidth, imageHeight), 0, 0, value.Width, value.Height, GraphicsUnit.Pixel, imageAttributes);
 
 				if (imageAttributes != null)
 					imageAttributes.Dispose ();
@@ -567,10 +567,10 @@ namespace System.Windows.Forms
 				int widthBytes;
 				int stride;
 				BitmapData bitmapData;
-				Color[] palette;
+				Color_[] palette;
 
 				if (this.colorDepth < ColorDepth.Depth32Bit) {
-					bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+					bitmapData = bitmap.LockBits(new Rectangle_(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
 					try {
 						linePtr = (byte*)bitmapData.Scan0;
 						height = bitmapData.Height;
@@ -657,7 +657,7 @@ namespace System.Windows.Forms
 				Add(null, value);
 			}
 
-			public int Add(Image value, Color transparentColor)
+			public int Add(Image value, Color_ transparentColor)
 			{
 				return AddItem(null, new ImageListItem(value, transparentColor));
 			}
@@ -906,7 +906,7 @@ namespace System.Windows.Forms
 
 		internal bool ShouldSerializeTransparentColor ()
 		{
-			return this.TransparentColor != Color.LightGray;
+			return this.TransparentColor != Color_.LightGray;
 		}
 
 		internal bool ShouldSerializeColorDepth()
@@ -935,7 +935,7 @@ namespace System.Windows.Forms
 
 		internal void ResetTransparentColor ()
 		{
-			this.TransparentColor = Color.LightGray;
+			this.TransparentColor = Color_.LightGray;
 		}
 		#endregion // Private Instance Methods
 
@@ -978,7 +978,7 @@ namespace System.Windows.Forms
 		}
 
 		[Localizable(true)]
-		public Size ImageSize {
+		public Size_ ImageSize {
 			get {
 				return images.ImageSize;
 			}
@@ -1015,7 +1015,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color TransparentColor {
+		public Color_ TransparentColor {
 			get {
 				return images.TransparentColor;
 			}
@@ -1027,7 +1027,7 @@ namespace System.Windows.Forms
 		#endregion // Public Instance Properties
 
 		#region Public Instance Methods
-		public void Draw(Graphics g, Point pt, int index)
+		public void Draw(Graphics g, Point_ pt, int index)
 		{
 			this.Draw(g, pt.X, pt.Y, index);
 		}

@@ -27,10 +27,10 @@
 // the common tests.
 //
 
-
 using System;
 using System.IO;
 using System.Text;
+
 using System.Drawing;
 using System.Threading;
 using System.Collections;
@@ -264,7 +264,7 @@ namespace System.Windows.Forms {
 			public IntPtr [] SupportedTypes;
 			public MouseButtons MouseState;
 			public DragDropEffects AllowedEffects;
-			public Point CurMousePos;
+			public Point_ CurMousePos;
 			
 			public IntPtr LastWindow;
 			public IntPtr LastTopLevel;
@@ -406,7 +406,7 @@ namespace System.Windows.Forms {
 			}
 
 			drag_data.State = DragState.Dragging;
-			drag_data.CurMousePos = new Point ();
+			drag_data.CurMousePos = new Point_ ();
 			source = toplevel = target = IntPtr.Zero;
 			dropped = false;
 			tracking = true;
@@ -506,7 +506,7 @@ namespace System.Windows.Forms {
 				return;
 
 			// `data' and other members are already available
-			Point pos = Control.MousePosition;
+			Point_ pos = Control.MousePosition;
 			DragEventArgs drag_args = new DragEventArgs (data, 0, pos.X, pos.Y, drag_data.AllowedEffects, DragDropEffects.None);
 
 			source_control.DndEnter (drag_args);

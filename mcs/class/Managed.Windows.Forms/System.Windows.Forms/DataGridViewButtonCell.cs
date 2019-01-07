@@ -87,12 +87,12 @@ namespace System.Windows.Forms {
 			return new DataGridViewButtonCellAccessibleObject(this);
 		}
 
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 				
-			Rectangle retval = Rectangle.Empty;
+			Rectangle_ retval = Rectangle_.Empty;
 			
 			retval.Height = OwningRow.Height - 1;
 			retval.Width = OwningColumn.Width - 1;
@@ -100,26 +100,26 @@ namespace System.Windows.Forms {
 			return retval;
 		}
 
-		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
-			Size error_icon = new Size (12, 11);
-			return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
+			Size_ error_icon = new Size_ (12, 11);
+			return new Rectangle_ (new Point_ (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
 		}
 
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected override Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
 			object o = FormattedValue;
 
 			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				Size_ s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height = Math.Max (s.Height, 21);
 				s.Width += 10;
 				return s;
 			} else
-				return new Size (21, 21);
+				return new Size_ (21, 21);
 		}
 
 		protected override object GetValue (int rowIndex)
@@ -222,27 +222,27 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates elementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates elementState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			// The internal paint routines are overridden instead of
 			// doing the custom paint logic here
 			base.Paint (graphics, clipBounds, cellBounds, rowIndex, elementState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 		}
 
-		internal override void PaintPartBackground (Graphics graphics, Rectangle cellBounds, DataGridViewCellStyle style)
+		internal override void PaintPartBackground (Graphics graphics, Rectangle_ cellBounds, DataGridViewCellStyle style)
 		{
 			ButtonRenderer.DrawButton (graphics, cellBounds, button_state);
 		}
 
-		internal override void PaintPartSelectionBackground (Graphics graphics, Rectangle cellBounds, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle)
+		internal override void PaintPartSelectionBackground (Graphics graphics, Rectangle_ cellBounds, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle)
 		{
 			cellBounds.Inflate (-2, -2);
 			base.PaintPartSelectionBackground (graphics, cellBounds, cellState, cellStyle);
 		}
 		
-		internal override void PaintPartContent (Graphics graphics, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
+		internal override void PaintPartContent (Graphics graphics, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
 		{
-			Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
+			Color_ color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 
 			TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter | TextFormatFlags.TextBoxControl | TextFormatFlags.HorizontalCenter;
 

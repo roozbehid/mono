@@ -23,10 +23,10 @@
 //	Peter Bartok	(pbartok@novell.com)
 //
 //
-
 using System;
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -216,8 +216,8 @@ namespace System.Windows.Forms {
 
 			private void window_MouseEnter(object sender, EventArgs e) {
 				if (!visible) {
-					Size	size;
-					Point	pt;
+					Size_	size;
+					Point_	pt;
 
 					visible = true;
 
@@ -337,9 +337,9 @@ namespace System.Windows.Forms {
 			//UIA Framework: Event used to indicate the ToolTip is shown/hidden.
 			tooltip.VisibleChanged += delegate (object sender, EventArgs args) {
 				if (tooltip.Visible == true)
-					OnUIAPopup (this, new PopupEventArgs (UIAControl, UIAControl, false, Size.Empty));
+					OnUIAPopup (this, new PopupEventArgs (UIAControl, UIAControl, false, Size_.Empty));
 				else if (tooltip.Visible == false)
-					OnUIAUnPopup (this, new PopupEventArgs (UIAControl, UIAControl, false, Size.Empty));
+					OnUIAUnPopup (this, new PopupEventArgs (UIAControl, UIAControl, false, Size_.Empty));
 			};
 		}
 
@@ -580,7 +580,7 @@ namespace System.Windows.Forms {
 			set { uia_control = value; }
 		}
 
-		internal Rectangle UIAToolTipRectangle {
+		internal Rectangle_ UIAToolTipRectangle {
 			get { return tooltip.Bounds; }
 		}
 

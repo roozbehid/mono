@@ -23,10 +23,10 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //	Ivan N. Zlatev <contact@i-nz.net>
 //
-
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+
 using System.Drawing;
 using System.Reflection;
 using System.Collections;
@@ -55,13 +55,13 @@ namespace System.Windows.Forms {
 		private bool allowUserToResizeColumns;
 		private bool allowUserToResizeRows;
 		private DataGridViewCellStyle alternatingRowsDefaultCellStyle;
-		private Point anchor_cell;
+		private Point_ anchor_cell;
 		private bool autoGenerateColumns;
 		private bool autoSize;
 		private DataGridViewAutoSizeColumnsMode autoSizeColumnsMode;
 		private DataGridViewAutoSizeRowsMode autoSizeRowsMode;
-		private Color backColor;
-		private Color backgroundColor;
+		private Color_ backColor;
+		private Color_ backgroundColor;
 		private Image backgroundImage;
 		private BorderStyle borderStyle;
 		private DataGridViewCellBorderStyle cellBorderStyle;
@@ -73,7 +73,7 @@ namespace System.Windows.Forms {
 		private bool columnHeadersVisible;
 		private DataGridViewColumnCollection columns;
 		private DataGridViewCell currentCell;
-		private Point currentCellAddress;
+		private Point_ currentCellAddress;
 		//private DataGridViewRow currentRow;
 		private string dataMember;
 		private object dataSource;
@@ -85,8 +85,8 @@ namespace System.Windows.Forms {
 		private int firstDisplayedScrollingColumnHiddenWidth;
 		private int firstDisplayedScrollingColumnIndex;
 		private int firstDisplayedScrollingRowIndex;
-		private Color gridColor = Color.FromKnownColor(KnownColor.ControlDark);
-		private int horizontalScrollingOffset;
+		private Color_ gridColor = Color_.FromArgb(0xFF, 0xAC, 0xA8, 0x99);
+        private int horizontalScrollingOffset;
 		private DataGridViewCell hover_cell = null;
 		private bool isCurrentCellDirty;
 		//private bool isCurrentRowDirty;
@@ -185,7 +185,7 @@ namespace System.Windows.Forms {
 			columnHeadersVisible = true;
 			columns = CreateColumnsInstance();
 			columns.CollectionChanged += OnColumnCollectionChanged;
-			currentCellAddress = new Point (-1, -1);
+			currentCellAddress = new Point_ (-1, -1);
 			dataMember = String.Empty;
 			defaultCellStyle = new DataGridViewCellStyle();
 			defaultCellStyle.BackColor = SystemColors.Window;
@@ -424,7 +424,7 @@ namespace System.Windows.Forms {
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return backColor; }
 			set {
 				if (backColor != value) {
@@ -434,11 +434,11 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color BackgroundColor {
+		public Color_ BackgroundColor {
 			get { return backgroundColor; }
 			set {
 				if (backgroundColor != value) {
-					if (value == Color.Empty) {
+					if (value == Color_.Empty) {
 						throw new ArgumentException("Cant set an Empty color.");
 					}
 					backgroundColor = value;
@@ -692,7 +692,7 @@ namespace System.Windows.Forms {
 		}
 
 		[Browsable (false)]
-		public Point CurrentCellAddress {
+		public Point_ CurrentCellAddress {
 			get { return currentCellAddress; }
 		}
 
@@ -777,7 +777,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public override Rectangle DisplayRectangle {
+		public override Rectangle_ DisplayRectangle {
 			get { return base.DisplayRectangle; }
 		}
 
@@ -875,16 +875,16 @@ namespace System.Windows.Forms {
 		[Browsable (false)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set { base.ForeColor = value; }
 		}
 
-		public Color GridColor {
+		public Color_ GridColor {
 			get { return gridColor; }
 			set {
 				if (gridColor != value) {
-					if (value == Color.Empty) {
+					if (value == Color_.Empty) {
 						throw new ArgumentException("Cant set an Empty color.");
 					}
 					gridColor = value;
@@ -2436,7 +2436,7 @@ namespace System.Windows.Forms {
 			if (RowHeadersVisible)
 				columnLeft += RowHeadersWidth;
 
-			Size visibleClientArea = ClientSize;
+			Size_ visibleClientArea = ClientSize;
 			if (verticalScrollBar.Visible)
 				visibleClientArea.Width -= verticalScrollBar.Width;
 			if (horizontalScrollBar.Visible)
@@ -2465,7 +2465,7 @@ namespace System.Windows.Forms {
 			if (ColumnHeadersVisible)
 				rowTop += ColumnHeadersHeight;
 
-			Size visibleClientArea = ClientSize;
+			Size_ visibleClientArea = ClientSize;
 			if (verticalScrollBar.Visible)
 				visibleClientArea.Width -= verticalScrollBar.Width;
 			if (horizontalScrollBar.Visible)
@@ -2541,7 +2541,7 @@ namespace System.Windows.Forms {
 			return GetRowInternal (rowIndex).Cells.GetCellInternal (colIndex);
 		}
 
-		public Rectangle GetCellDisplayRectangle (int columnIndex, int rowIndex, bool cutOverflow) {
+		public Rectangle_ GetCellDisplayRectangle (int columnIndex, int rowIndex, bool cutOverflow) {
 			// Allow the column and row headers (index == -1).
 			if (columnIndex < -1 || columnIndex >= columns.Count) {
 				throw new ArgumentOutOfRangeException ("Column index is out of range.");
@@ -2563,7 +2563,7 @@ namespace System.Windows.Forms {
 
 			// Handle the top left cell when both column and row headers are showing.
 			if (columnIndex == -1 && rowIndex == -1)
-				return new Rectangle (BorderWidth, BorderWidth, RowHeadersWidth, ColumnHeadersHeight);
+				return new Rectangle_ (BorderWidth, BorderWidth, RowHeadersWidth, ColumnHeadersHeight);
 
 			if (columnIndex >= 0)
 			{
@@ -2584,7 +2584,7 @@ namespace System.Windows.Forms {
 			
 			// Handle a cell in the header row.
 			if (rowIndex == -1)
-				return new Rectangle (x, BorderWidth, w, ColumnHeadersHeight);
+				return new Rectangle_ (x, BorderWidth, w, ColumnHeadersHeight);
 
 			for (int i = first_row_index; i < Rows.Count; i++) {
 				if (!rows[i].Visible)
@@ -2600,9 +2600,9 @@ namespace System.Windows.Forms {
 			
 			// Handle a cell in the header column.
 			if (columnIndex == -1)
-				return new Rectangle (BorderWidth, y, RowHeadersWidth, h);
+				return new Rectangle_ (BorderWidth, y, RowHeadersWidth, h);
 
-			return new Rectangle (x, y, w, h);
+			return new Rectangle_ (x, y, w, h);
 		}
 
 		public virtual DataObject GetClipboardContent () {
@@ -2644,7 +2644,7 @@ namespace System.Windows.Forms {
 				}
 			}
 			
-			// Find the smallest rectangle that encompasses all selected cells.
+			// Find the smallest Rectangle_ that encompasses all selected cells.
 			for (int r = 0; r < RowCount; r++) {
 				DataGridViewRow row = Rows [r];
 
@@ -2810,7 +2810,7 @@ namespace System.Windows.Forms {
 		}
 
 		[MonoTODO ("Does not use cutOverflow parameter")]
-		public Rectangle GetColumnDisplayRectangle (int columnIndex, bool cutOverflow)
+		public Rectangle_ GetColumnDisplayRectangle (int columnIndex, bool cutOverflow)
 		{
 			if (columnIndex < 0 || columnIndex > Columns.Count - 1)
 				throw new ArgumentOutOfRangeException ("columnIndex");
@@ -2837,11 +2837,11 @@ namespace System.Windows.Forms {
 				x += cols[i].Width;
 			}
 
-			return new Rectangle (x, 0, w, Height);
+			return new Rectangle_ (x, 0, w, Height);
 		}
 
 		[MonoTODO ("Does not use cutOverflow parameter")]
-		public Rectangle GetRowDisplayRectangle (int rowIndex, bool cutOverflow)
+		public Rectangle_ GetRowDisplayRectangle (int rowIndex, bool cutOverflow)
 		{
 			if (rowIndex < 0 || rowIndex > Rows.Count - 1)
 				throw new ArgumentOutOfRangeException ("rowIndex");
@@ -2867,7 +2867,7 @@ namespace System.Windows.Forms {
 				y += rows [i].Height;
 			}
 
-			return new Rectangle (0, y, Width, h);
+			return new Rectangle_ (0, y, Width, h);
 		}
 
 		public HitTestInfo HitTest (int x, int y) {
@@ -2890,7 +2890,7 @@ namespace System.Windows.Forms {
 			
 			// The little box in the bottom right if both scrollbars are shown is None
 			if (verticalScrollBar.Visible && horizontalScrollBar.Visible)
-				if (new Rectangle (verticalScrollBar.Left, horizontalScrollBar.Top, verticalScrollBar.Width, horizontalScrollBar.Height).Contains (x, y))
+				if (new Rectangle_ (verticalScrollBar.Left, horizontalScrollBar.Top, verticalScrollBar.Width, horizontalScrollBar.Height).Contains (x, y))
 					return new HitTestInfo (-1, x, -1, y, DataGridViewHitTestType.None);
 			
 			int rowindex = -1;
@@ -3191,8 +3191,8 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (240, 150); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (240, 150); }
 		}
 
 		protected ScrollBar HorizontalScrollBar {
@@ -3203,7 +3203,7 @@ namespace System.Windows.Forms {
 			get { return verticalScrollBar; }
 		}
 
-		protected virtual void AccessibilityNotifyCurrentCellChanged (Point cellAddress)
+		protected virtual void AccessibilityNotifyCurrentCellChanged (Point_ cellAddress)
 		{
 			throw new NotImplementedException ();
 		}
@@ -4137,7 +4137,7 @@ namespace System.Windows.Forms {
 		protected override void OnDoubleClick (EventArgs e) {
 			base.OnDoubleClick(e);
 
-			Point mouseLocation = this.PointToClient (Control.MousePosition);
+			Point_ mouseLocation = this.PointToClient (Control.MousePosition);
 			HitTestInfo hitInfo = HitTest (mouseLocation.X, mouseLocation.Y);
 			if (hitInfo.Type == DataGridViewHitTestType.Cell)
 				OnCellDoubleClick (new DataGridViewCellEventArgs (hitInfo.ColumnIndex, hitInfo.RowIndex));
@@ -4170,7 +4170,7 @@ namespace System.Windows.Forms {
 		{
 			base.OnGotFocus (e);
 
-			// To add focus rectangle if needed
+			// To add focus Rectangle_ if needed
 			if (currentCell != null && ShowFocusCues)
 				InvalidateCell (currentCell);
 		}
@@ -4229,12 +4229,12 @@ namespace System.Windows.Forms {
 		protected override void OnLayout (LayoutEventArgs e)
 		{
 			if (horizontalScrollBar.Visible && verticalScrollBar.Visible) {
-				horizontalScrollBar.Bounds = new Rectangle (BorderWidth, Height - BorderWidth - horizontalScrollBar.Height, Width - (2 * BorderWidth) - verticalScrollBar.Width, horizontalScrollBar.Height);
-				verticalScrollBar.Bounds = new Rectangle (Width - BorderWidth - verticalScrollBar.Width, BorderWidth, verticalScrollBar.Width, Height - (2 * BorderWidth) - horizontalScrollBar.Height);
+				horizontalScrollBar.Bounds = new Rectangle_ (BorderWidth, Height - BorderWidth - horizontalScrollBar.Height, Width - (2 * BorderWidth) - verticalScrollBar.Width, horizontalScrollBar.Height);
+				verticalScrollBar.Bounds = new Rectangle_ (Width - BorderWidth - verticalScrollBar.Width, BorderWidth, verticalScrollBar.Width, Height - (2 * BorderWidth) - horizontalScrollBar.Height);
 			} else if (horizontalScrollBar.Visible)
-				horizontalScrollBar.Bounds = new Rectangle (BorderWidth, Height - BorderWidth - horizontalScrollBar.Height, Width - (2 * BorderWidth), horizontalScrollBar.Height);
+				horizontalScrollBar.Bounds = new Rectangle_ (BorderWidth, Height - BorderWidth - horizontalScrollBar.Height, Width - (2 * BorderWidth), horizontalScrollBar.Height);
 			else if (verticalScrollBar.Visible)
-				verticalScrollBar.Bounds = new Rectangle (Width - BorderWidth - verticalScrollBar.Width, BorderWidth, verticalScrollBar.Width,  Height - (2 * BorderWidth));
+				verticalScrollBar.Bounds = new Rectangle_ (Width - BorderWidth - verticalScrollBar.Width, BorderWidth, verticalScrollBar.Width,  Height - (2 * BorderWidth));
 
 			AutoResizeColumnsInternal ();
 			Invalidate ();
@@ -4250,7 +4250,7 @@ namespace System.Windows.Forms {
 		{
 			base.OnLostFocus (e);
 
-			// To remove focus rectangle if needed
+			// To remove focus Rectangle_ if needed
 			if (currentCell != null && ShowFocusCues)
 				InvalidateCell (currentCell);
 		}
@@ -4267,8 +4267,8 @@ namespace System.Windows.Forms {
 
 			switch (hit.Type) {
 				case DataGridViewHitTestType.Cell:
-					Rectangle display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
-					Point cellpoint = new Point (e.X - display.X, e.Y - display.Y);
+					Rectangle_ display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
+					Point_ cellpoint = new Point_ (e.X - display.X, e.Y - display.Y);
 
 					OnCellMouseClick (new DataGridViewCellMouseEventArgs (hit.ColumnIndex, hit.RowIndex, cellpoint.X, cellpoint.Y, e));
 					
@@ -4281,8 +4281,8 @@ namespace System.Windows.Forms {
 						
 					break;
 				case DataGridViewHitTestType.ColumnHeader:
-					Rectangle display2 = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
-					Point cellpoint2 = new Point (e.X - display2.X, e.Y - display2.Y);
+					Rectangle_ display2 = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
+					Point_ cellpoint2 = new Point_ (e.X - display2.X, e.Y - display2.Y);
 					
 					OnColumnHeaderMouseClick (new DataGridViewCellMouseEventArgs (hit.ColumnIndex, hit.RowIndex, cellpoint2.X, cellpoint2.Y, e));
 					break;
@@ -4449,7 +4449,7 @@ namespace System.Windows.Forms {
 			
 			DataGridViewCell cell = null;
 			DataGridViewRow row = null;
-			Rectangle cellBounds;
+			Rectangle_ cellBounds;
 
 			if ((hitTest.Type == DataGridViewHitTestType.ColumnHeader ||
 			     (hitTest.Type == DataGridViewHitTestType.Cell && !ColumnHeadersVisible)) 
@@ -4573,10 +4573,10 @@ namespace System.Windows.Forms {
 				DataGridViewCell new_cell = GetCellInternal (hit.ColumnIndex, hit.RowIndex);
 				
 				// Check if we have moved into an error icon area
-				Rectangle icon = new_cell.ErrorIconBounds;
+				Rectangle_ icon = new_cell.ErrorIconBounds;
 
 				if (!icon.IsEmpty) {
-					Point loc = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false).Location;
+					Point_ loc = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false).Location;
 					
 					icon.X += loc.X;
 					icon.Y += loc.Y;
@@ -4595,7 +4595,7 @@ namespace System.Windows.Forms {
 					hover_cell = new_cell;
 					OnCellMouseEnter (new DataGridViewCellEventArgs (hit.ColumnIndex, hit.RowIndex));
 					
-					Rectangle display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
+					Rectangle_ display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
 					OnCellMouseMove (new DataGridViewCellMouseEventArgs (hit.ColumnIndex, hit.RowIndex, e.X - display.X, e.Y - display.Y, e));
 					
 					return;
@@ -4603,7 +4603,7 @@ namespace System.Windows.Forms {
 			
 				// Were we already in this cell?
 				if (hover_cell.RowIndex == hit.RowIndex && hover_cell.ColumnIndex == hit.ColumnIndex) {
-					Rectangle display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
+					Rectangle_ display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
 					OnCellMouseMove (new DataGridViewCellMouseEventArgs (hit.ColumnIndex, hit.RowIndex, e.X - display.X, e.Y - display.Y, e));
 				
 					return;
@@ -4616,7 +4616,7 @@ namespace System.Windows.Forms {
 				
 				OnCellMouseEnter (new DataGridViewCellEventArgs (hit.ColumnIndex, hit.RowIndex));
 
-				Rectangle display2 = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
+				Rectangle_ display2 = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
 				OnCellMouseMove (new DataGridViewCellMouseEventArgs (hit.ColumnIndex, hit.RowIndex, e.X - display2.X, e.Y - display2.Y, e));
 
 				return;
@@ -4629,10 +4629,10 @@ namespace System.Windows.Forms {
 					new_cursor = Cursors.HSplit;
 
 				// Check if we have moved into an error icon area
-				Rectangle icon = new_cell.InternalErrorIconsBounds;
+				Rectangle_ icon = new_cell.InternalErrorIconsBounds;
 
 				if (!icon.IsEmpty) {
-					Point loc = GetCellDisplayRectangle (0, hit.RowIndex, false).Location;
+					Point_ loc = GetCellDisplayRectangle (0, hit.RowIndex, false).Location;
 
 					icon.X += BorderWidth;
 					icon.Y += loc.Y;
@@ -4649,10 +4649,10 @@ namespace System.Windows.Forms {
 				DataGridViewTopLeftHeaderCell new_cell = (DataGridViewTopLeftHeaderCell)TopLeftHeaderCell;
 
 				// Check if we have moved into an error icon area
-				Rectangle icon = new_cell.InternalErrorIconsBounds;
+				Rectangle_ icon = new_cell.InternalErrorIconsBounds;
 
 				if (!icon.IsEmpty) {
-					Point loc = Point.Empty;
+					Point_ loc = Point_.Empty;
 
 					icon.X += BorderWidth;
 					icon.Y += loc.Y;
@@ -4706,7 +4706,7 @@ namespace System.Windows.Forms {
 			HitTestInfo hit = this.HitTest (e.X, e.Y);
 
 			if (hit.Type == DataGridViewHitTestType.Cell) {
-				Rectangle display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
+				Rectangle_ display = GetCellDisplayRectangle (hit.ColumnIndex, hit.RowIndex, false);
 				OnCellMouseUp (new DataGridViewCellMouseEventArgs (hit.ColumnIndex, hit.RowIndex, e.X - display.X, e.Y - display.Y, e));
 			}
 
@@ -4748,7 +4748,7 @@ namespace System.Windows.Forms {
 		protected override void OnPaint (PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			Rectangle bounds = ClientRectangle;
+			Rectangle_ bounds = ClientRectangle;
 			
 			// Paint the background
 			PaintBackground (g, e.ClipRectangle, bounds);
@@ -4760,14 +4760,14 @@ namespace System.Windows.Forms {
 			
 			// Paint the top left cell
 			if (rowHeadersVisible && columnHeadersVisible && ColumnCount > 0) {
-				Rectangle topleftbounds = new Rectangle (bounds.X, bounds.Y, rowHeadersWidth, columnHeadersHeight);
+				Rectangle_ topleftbounds = new Rectangle_ (bounds.X, bounds.Y, rowHeadersWidth, columnHeadersHeight);
 				
 				TopLeftHeaderCell.PaintWork (g, e.ClipRectangle, topleftbounds, -1, TopLeftHeaderCell.State, ColumnHeadersDefaultCellStyle, AdvancedColumnHeadersBorderStyle, DataGridViewPaintParts.All);
 			}
 			
 			// Paint the column headers
 			if (columnHeadersVisible) {
-				Rectangle headerBounds = bounds;
+				Rectangle_ headerBounds = bounds;
 				headerBounds.Height = columnHeadersHeight;
 				
 				if (rowHeadersVisible)
@@ -4840,14 +4840,14 @@ namespace System.Windows.Forms {
 			
 			// Paint the bottom right square if both scrollbars are displayed
 			if (horizontalScrollBar.Visible && verticalScrollBar.Visible)
-				g.FillRectangle (SystemBrushes.Control, new Rectangle (horizontalScrollBar.Right, verticalScrollBar.Bottom, verticalScrollBar.Width, horizontalScrollBar.Height));
+				g.FillRectangle (SystemBrushes.Control, new Rectangle_ (horizontalScrollBar.Right, verticalScrollBar.Bottom, verticalScrollBar.Width, horizontalScrollBar.Height));
 
 			// Paint the border
 			bounds = ClientRectangle;
 			
 			switch (BorderStyle) {
 				case BorderStyle.FixedSingle:
-					g.DrawRectangle (Pens.Black, new Rectangle (bounds.Left, bounds.Top, bounds.Width - 1, bounds.Height - 1));
+					g.DrawRectangle (Pens.Black, new Rectangle_ (bounds.Left, bounds.Top, bounds.Width - 1, bounds.Height - 1));
 					break;
 				case BorderStyle.Fixed3D:
 					ControlPaint.DrawBorder3D (g, bounds, Border3DStyle.Sunken);
@@ -4881,7 +4881,7 @@ namespace System.Windows.Forms {
 			
 			if (AutoSize) {
 				if (gridWidth > Size.Width || gridHeight > Size.Height)
-					Size = new Size(gridWidth, gridHeight);
+					Size = new Size_(gridWidth, gridHeight);
 			}
 			else {
 				if (gridWidth > Size.Width)
@@ -5260,7 +5260,7 @@ namespace System.Windows.Forms {
 			base.OnVisibleChanged(e);
 		}
 
-		protected virtual void PaintBackground (Graphics graphics, Rectangle clipBounds, Rectangle gridBounds)
+		protected virtual void PaintBackground (Graphics graphics, Rectangle_ clipBounds, Rectangle_ gridBounds)
 		{
 			graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (backgroundColor), gridBounds);
 		}
@@ -5729,8 +5729,8 @@ namespace System.Windows.Forms {
 
 				currentCell = cell;
 				if (setAnchorCellAddress)
-					anchor_cell = new Point (columnIndex, rowIndex);
-				currentCellAddress = new Point (columnIndex, rowIndex);
+					anchor_cell = new Point_ (columnIndex, rowIndex);
+				currentCellAddress = new Point_ (columnIndex, rowIndex);
 
 				if (cell != null) {
 					UpdateBindingPosition (cell.RowIndex);
@@ -6087,9 +6087,9 @@ namespace System.Windows.Forms {
 			return result;
 		}
 
-		Rectangle GetHeaderCellBounds (DataGridViewHeaderCell cell)
+		Rectangle_ GetHeaderCellBounds (DataGridViewHeaderCell cell)
 		{
-			Rectangle bounds = new Rectangle (ClientRectangle.Location, cell.Size);
+			Rectangle_ bounds = new Rectangle_ (ClientRectangle.Location, cell.Size);
 			if (cell is DataGridViewColumnHeaderCell) {
 				if (RowHeadersVisible)
 					bounds.X += RowHeadersWidth;
@@ -6329,7 +6329,7 @@ namespace System.Windows.Forms {
 				int delta_x = 0;
 
 				// The trick here is that in order to avoid unnecessary calculations each time a row/column 
-				// is added/removed we recalculate the whole grid size just before the scroll to selection.
+				// is added/removed we recalculate the whole grid Size_ just before the scroll to selection.
 				if (disp_x < first_col_index) {
 					RefreshScrollBars ();
 					scrollbarsRefreshed = true;
@@ -6477,7 +6477,7 @@ namespace System.Windows.Forms {
 			if (!allowUserToResizeColumns)
 				return false;
 				
-			Rectangle col_bounds = GetCellDisplayRectangle (col, 0, false);
+			Rectangle_ col_bounds = GetCellDisplayRectangle (col, 0, false);
 
 			if (mousex >= col_bounds.Right - 4 && mousex <= col_bounds.Right)
 				return true;
@@ -6490,7 +6490,7 @@ namespace System.Windows.Forms {
 			if (!allowUserToResizeRows)
 				return false;
 
-			Rectangle row_bounds = GetCellDisplayRectangle (0, row, false);
+			Rectangle_ row_bounds = GetCellDisplayRectangle (0, row, false);
 
 			if (mousey >= row_bounds.Bottom - 4 && mousey <= row_bounds.Bottom)
 				return true;
@@ -6500,13 +6500,13 @@ namespace System.Windows.Forms {
 
 		private void DrawVerticalResizeLine (int x)
 		{
-			Rectangle splitter = new Rectangle (x, Bounds.Y + 3 + (ColumnHeadersVisible ? ColumnHeadersHeight : 0), 1, Bounds.Height - 3 - (ColumnHeadersVisible ? ColumnHeadersHeight : 0));
+			Rectangle_ splitter = new Rectangle_ (x, Bounds.Y + 3 + (ColumnHeadersVisible ? ColumnHeadersHeight : 0), 1, Bounds.Height - 3 - (ColumnHeadersVisible ? ColumnHeadersHeight : 0));
 			XplatUI.DrawReversibleRectangle (Handle, splitter, 2);
 		}
 
 		private void DrawHorizontalResizeLine (int y)
 		{
-			Rectangle splitter = new Rectangle (Bounds.X + 3 + (RowHeadersVisible ? RowHeadersWidth : 0), y, Bounds.Width - 3 + (RowHeadersVisible ? RowHeadersWidth : 0), 1);
+			Rectangle_ splitter = new Rectangle_ (Bounds.X + 3 + (RowHeadersVisible ? RowHeadersWidth : 0), y, Bounds.Width - 3 + (RowHeadersVisible ? RowHeadersWidth : 0), 1);
 			XplatUI.DrawReversibleRectangle (Handle, splitter, 2);
 		}
 
@@ -6783,7 +6783,7 @@ namespace System.Windows.Forms {
 			#endregion
 			
 			#region Public Properties
-			public override Rectangle Bounds {
+			public override Rectangle_ Bounds {
 				get { return base.Bounds; }
 			}
 			

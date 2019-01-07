@@ -40,37 +40,37 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawButton (Graphics g, Rectangle bounds, PushButtonState state)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, PushButtonState state)
 		{
-			DrawButton (g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle.Empty, false, state);
+			DrawButton (g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle_.Empty, false, state);
 		}
 
-		public static void DrawButton (Graphics g, Rectangle bounds, bool focused, PushButtonState state)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, bool focused, PushButtonState state)
 		{
-			DrawButton (g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle.Empty, focused, state);
+			DrawButton (g, bounds, String.Empty, null, TextFormatFlags.Default, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawButton (Graphics g, Rectangle bounds, Image image, Rectangle imageBounds, bool focused, PushButtonState state)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, Image image, Rectangle_ imageBounds, bool focused, PushButtonState state)
 		{
 			DrawButton (g, bounds, String.Empty, null, TextFormatFlags.Default, image, imageBounds, focused, state);
 		}
 
-		public static void DrawButton (Graphics g, Rectangle bounds, string buttonText, Font font, bool focused, PushButtonState state)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, string buttonText, Font font, bool focused, PushButtonState state)
 		{
-			DrawButton (g, bounds, buttonText, font, TextFormatFlags.HorizontalCenter, null, Rectangle.Empty, focused, state);
+			DrawButton (g, bounds, buttonText, font, TextFormatFlags.HorizontalCenter, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawButton (Graphics g, Rectangle bounds, string buttonText, Font font, TextFormatFlags flags, bool focused, PushButtonState state)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, string buttonText, Font font, TextFormatFlags flags, bool focused, PushButtonState state)
 		{
-			DrawButton (g, bounds, buttonText, font, flags, null, Rectangle.Empty, focused, state);
+			DrawButton (g, bounds, buttonText, font, flags, null, Rectangle_.Empty, focused, state);
 		}
 
-		public static void DrawButton (Graphics g, Rectangle bounds, string buttonText, Font font, Image image, Rectangle imageBounds, bool focused, PushButtonState state)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, string buttonText, Font font, Image image, Rectangle_ imageBounds, bool focused, PushButtonState state)
 		{
 			DrawButton (g, bounds, buttonText, font, TextFormatFlags.HorizontalCenter, image, imageBounds, focused, state);
 		}
 
-		public static void DrawButton (Graphics g, Rectangle bounds, string buttonText, Font font, TextFormatFlags flags, Image image, Rectangle imageBounds, bool focused, PushButtonState state)
+		public static void DrawButton (Graphics g, Rectangle_ bounds, string buttonText, Font font, TextFormatFlags flags, Image image, Rectangle_ imageBounds, bool focused, PushButtonState state)
 		{
 			if (Application.RenderWithVisualStyles || always_use_visual_styles == true) {
 				VisualStyleRenderer vsr = GetPushButtonRenderer (state);
@@ -89,7 +89,7 @@ namespace System.Windows.Forms
 					g.DrawImage (image, imageBounds);
 			}
 
-			Rectangle focus_rect = bounds;
+			Rectangle_ focus_rect = bounds;
 			focus_rect.Inflate (-3, -3);
 
 			if (focused)
@@ -112,7 +112,7 @@ namespace System.Windows.Forms
 			return vsr.IsBackgroundPartiallyTransparent ();
 		}
 
-		public static void DrawParentBackground (Graphics g, Rectangle bounds, Control childControl)
+		public static void DrawParentBackground (Graphics g, Rectangle_ bounds, Control childControl)
 		{
 			if (!VisualStyleRenderer.IsSupported)
 				return;

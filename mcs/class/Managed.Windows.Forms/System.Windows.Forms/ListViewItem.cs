@@ -23,9 +23,9 @@
 //      Ravindra (rkumar@novell.com)
 //      Mike Kestner <mkestner@novell.com>
 //      Daniel Nauck (dna(at)mono-project(dot)de)
-
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.Serialization;
 
@@ -51,12 +51,12 @@ namespace System.Windows.Forms
 		private string image_key = String.Empty;
 		string tooltip_text = String.Empty;
 		int indent_count;
-		Point position = new Point (-1, -1);		// cached to mimic .Net behaviour	
-		Rectangle bounds = Rectangle.Empty;
-		Rectangle checkbox_rect;	// calculated by CalcListViewItem method
-		Rectangle icon_rect;
-		Rectangle item_rect;
-		Rectangle label_rect;
+		Point_ position = new Point_ (-1, -1);		// cached to mimic .Net behaviour	
+		Rectangle_ bounds = Rectangle_.Empty;
+		Rectangle_ checkbox_rect;	// calculated by CalcListViewItem method
+		Rectangle_ icon_rect;
+		Rectangle_ item_rect;
+		Rectangle_ label_rect;
 		ListView owner;
 		Font font;
 		Font hot_font;			// cached font for hot tracking
@@ -131,8 +131,8 @@ namespace System.Windows.Forms
 			this.image_index = imageIndex;
 		}
 
-		public ListViewItem (string [] items, int imageIndex, Color foreColor, 
-				     Color backColor, Font font) : this (items, imageIndex)
+		public ListViewItem (string [] items, int imageIndex, Color_ foreColor, 
+				     Color_ backColor, Font font) : this (items, imageIndex)
 		{
 			ForeColor = foreColor;
 			BackColor = backColor;
@@ -157,8 +157,8 @@ namespace System.Windows.Forms
 			this.ImageKey = imageKey;
 		}
 
-		public ListViewItem(string[] items, string imageKey, Color foreColor,
-					Color backColor, Font font) : this(items, imageKey)
+		public ListViewItem(string[] items, string imageKey, Color_ foreColor,
+					Color_ backColor, Font font) : this(items, imageKey)
 		{
 			ForeColor = foreColor;
 			BackColor = backColor;
@@ -216,14 +216,14 @@ namespace System.Windows.Forms
 			Group = group;
 		}
 
-		public ListViewItem(string[] items, int imageIndex, Color foreColor, Color backColor,
+		public ListViewItem(string[] items, int imageIndex, Color_ foreColor, Color_ backColor,
 				Font font, ListViewGroup group)
 			: this(items, imageIndex, foreColor, backColor, font)
 		{
 			Group = group;
 		}
 
-		public ListViewItem(string[] items, string imageKey, Color foreColor, Color backColor,
+		public ListViewItem(string[] items, string imageKey, Color_ foreColor, Color_ backColor,
 				Font font, ListViewGroup group)
 			: this(items, imageKey, foreColor, backColor, font)
 		{
@@ -238,7 +238,7 @@ namespace System.Windows.Forms
 
 		#region Public Instance Properties
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public Color BackColor {
+		public Color_ BackColor {
 			get {
 				if (sub_items.Count > 0)
 					return sub_items[0].BackColor;
@@ -252,7 +252,7 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable (false)]
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get {
 				return GetBounds (ItemBoundsPortion.Entire);
 			}
@@ -347,7 +347,7 @@ namespace System.Windows.Forms
 		}
 
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get {
 				if (sub_items.Count > 0)
 					return sub_items[0].ForeColor;
@@ -466,13 +466,13 @@ namespace System.Windows.Forms
 
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
 		[Browsable (false)]
-		public Point Position {
+		public Point_ Position {
 			get {
 				if (owner != null && owner.VirtualMode)
 					return owner.GetItemLocation (display_index);
 
 				if (owner != null && !owner.IsHandleCreated)
-					return new Point (-1, -1);
+					return new Point_ (-1, -1);
 
 				return position;
 			}
@@ -677,16 +677,16 @@ namespace System.Windows.Forms
 			if (owner == null)
 				return null;
 
-			Point loc = owner.GetItemLocation (display_index);
+			Point_ loc = owner.GetItemLocation (display_index);
 			return owner.FindNearestItem (searchDirection, loc);
 		}
 
-		public Rectangle GetBounds (ItemBoundsPortion portion)
+		public Rectangle_ GetBounds (ItemBoundsPortion portion)
 		{
 			if (owner == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 				
-			Rectangle rect;
+			Rectangle_ rect;
 
 			switch (portion) {
 			case ItemBoundsPortion.Icon:
@@ -709,7 +709,7 @@ namespace System.Windows.Forms
 				throw new ArgumentException ("Invalid value for portion.");
 			}
 
-			Point item_loc = owner.GetItemLocation (DisplayIndex);
+			Point_ item_loc = owner.GetItemLocation (DisplayIndex);
 			rect.X += item_loc.X;
 			rect.Y += item_loc.Y;
 			return rect;
@@ -796,8 +796,8 @@ namespace System.Windows.Forms
 			}
 
 			// After any sub item has been added.
-			ForeColor = (Color)info.GetValue ("ForeColor", typeof (Color));
-			BackColor = (Color)info.GetValue ("BackColor", typeof (Color));
+			ForeColor = (Color_)info.GetValue ("ForeColor", typeof (Color_));
+			BackColor = (Color_)info.GetValue ("BackColor", typeof (Color_));
 		}
 
 		protected virtual void Serialize (SerializationInfo info, StreamingContext context)
@@ -823,24 +823,24 @@ namespace System.Windows.Forms
 		#endregion	// Protected Methods
 
 		#region Private Internal Methods
-		internal Rectangle CheckRectReal {
+		internal Rectangle_ CheckRectReal {
 			get {
-				Rectangle rect = checkbox_rect;
-				Point item_loc = owner.GetItemLocation (DisplayIndex);
+				Rectangle_ rect = checkbox_rect;
+				Point_ item_loc = owner.GetItemLocation (DisplayIndex);
 				rect.X += item_loc.X;
 				rect.Y += item_loc.Y;
 				return rect;
 			}
 		}
 		
-		Rectangle text_bounds;
-		internal Rectangle TextBounds {
+		Rectangle_ text_bounds;
+		internal Rectangle_ TextBounds {
 			get {
 				// Call Layout() if it hasn't been called before.
-				if (owner.VirtualMode && bounds == new Rectangle (-1, -1, -1, -1))
+				if (owner.VirtualMode && bounds == new Rectangle_ (-1, -1, -1, -1))
 					Layout ();
-				Rectangle result = text_bounds;
-				Point loc = owner.GetItemLocation (DisplayIndex);
+				Rectangle_ result = text_bounds;
+				Point_ loc = owner.GetItemLocation (DisplayIndex);
 				result.X += loc.X;
 				result.Y += loc.Y;
 				return result;
@@ -890,7 +890,7 @@ namespace System.Windows.Forms
 			this.group = group;
 		}
 
-		internal void SetPosition (Point position)
+		internal void SetPosition (Point_ position)
 		{
 			this.position = position;
 		}
@@ -912,7 +912,7 @@ namespace System.Windows.Forms
 				return;
 
 			// Add some padding to bounds (focused extra space, selection)
-			Rectangle rect = Bounds;
+			Rectangle_ rect = Bounds;
 			rect.Inflate (1, 1);
 			owner.item_control.Invalidate (rect);
 		}
@@ -922,17 +922,17 @@ namespace System.Windows.Forms
 			if (owner == null)
 				return;
 			int item_ht;
-			Rectangle total;
-			Size text_size = owner.text_size;
+			Rectangle_ total;
+			Size_ text_size = owner.text_size;
 			
-			checkbox_rect = Rectangle.Empty;
+			checkbox_rect = Rectangle_.Empty;
 			if (owner.CheckBoxes)
 				checkbox_rect.Size = owner.CheckBoxSize;
 			switch (owner.View) {
 			case View.Details:
 				// LAMESPEC: MSDN says, "In all views except the details
 				// view of the ListView, this value specifies the same
-				// bounding rectangle as the Entire value." Actually, it
+				// bounding Rectangle_ as the Entire value." Actually, it
 				// returns same bounding rectangles for Item and Entire
 				// values in the case of Details view.
 
@@ -944,7 +944,7 @@ namespace System.Windows.Forms
 				if (owner.Columns.Count > 0)
 					checkbox_rect.X = owner.Columns[0].Rect.X + x_offset;
 
-				icon_rect = label_rect = Rectangle.Empty;
+				icon_rect = label_rect = Rectangle_.Empty;
 				icon_rect.X = checkbox_rect.Right + 2;
 				item_ht = owner.ItemSize.Height;
 
@@ -961,12 +961,12 @@ namespace System.Windows.Forms
 				else
 					label_rect.Width = text_size.Width;
 
-				SizeF text_sz = TextRenderer.MeasureString (Text, Font);
+				SizeF_ text_sz = TextRenderer.MeasureString (Text, Font);
 				text_bounds = label_rect;
 				text_bounds.Width = (int) text_sz.Width;
 
 				item_rect = total = Rectangle.Union
-					(Rectangle.Union (checkbox_rect, icon_rect), label_rect);
+					(Rectangle_.Union (checkbox_rect, icon_rect), label_rect);
 				bounds.Size = total.Size;
 
 				item_rect.Width = 0;
@@ -979,15 +979,15 @@ namespace System.Windows.Forms
 				// Bounds for sub items
 				int n = Math.Min (owner.Columns.Count, sub_items.Count);
 				for (int i = 0; i < n; i++) {
-					Rectangle col_rect = owner.Columns [i].Rect;
+					Rectangle_ col_rect = owner.Columns [i].Rect;
 					sub_items [i].SetBounds (col_rect.X, 0, col_rect.Width, item_ht);
 				}
 				break;
 
 			case View.LargeIcon:
-				label_rect = icon_rect = Rectangle.Empty;
+				label_rect = icon_rect = Rectangle_.Empty;
 
-				SizeF sz = TextRenderer.MeasureString (Text, Font);
+				SizeF_ sz = TextRenderer.MeasureString (Text, Font);
 				if ((int) sz.Width > text_size.Width) {
 					if (Focused && owner.InternalContainsFocus) {
 						int text_width = text_size.Width;
@@ -1029,7 +1029,7 @@ namespace System.Windows.Forms
 
 			case View.List:
 			case View.SmallIcon:
-				label_rect = icon_rect = Rectangle.Empty;
+				label_rect = icon_rect = Rectangle_.Empty;
 				icon_rect.X = checkbox_rect.Width + 1;
 				item_ht = Math.Max (owner.CheckBoxSize.Height, text_size.Height);
 
@@ -1044,15 +1044,15 @@ namespace System.Windows.Forms
 				label_rect.Width = text_size.Width;
 				label_rect.Height = icon_rect.Height = item_ht;
 
-				item_rect = Rectangle.Union (icon_rect, label_rect);
-				total = Rectangle.Union (item_rect, checkbox_rect);
+				item_rect = Rectangle_.Union (icon_rect, label_rect);
+				total = Rectangle_.Union (item_rect, checkbox_rect);
 				bounds.Size = total.Size;
 				break;
 			case View.Tile:
 				if (!Application.VisualStylesEnabled)
 					goto case View.LargeIcon;
 
-				label_rect = icon_rect = Rectangle.Empty;
+				label_rect = icon_rect = Rectangle_.Empty;
 
 				if (owner.LargeImageList != null) {
 					icon_rect.Width = owner.LargeImageList.ImageSize.Width;
@@ -1060,7 +1060,7 @@ namespace System.Windows.Forms
 				}
 
 				int separation = 2;
-				SizeF tsize = TextRenderer.MeasureString (Text, Font);
+				SizeF_ tsize = TextRenderer.MeasureString (Text, Font);
 				int main_item_height = (int) Math.Ceiling (tsize.Height);
 				int main_item_width = (int) Math.Ceiling (tsize.Width);
 				sub_items [0].bounds.Height = main_item_height;
@@ -1131,7 +1131,7 @@ namespace System.Windows.Forms
 			private object userData;
 			private SubItemStyle style;
 			[NonSerialized]
-			internal Rectangle bounds;
+			internal Rectangle_ bounds;
 
 		
 			#region UIA Framework: Methods, Properties and Events
@@ -1150,19 +1150,19 @@ namespace System.Windows.Forms
 			
 			#region Public Constructors
 			public ListViewSubItem ()
-				: this (null, string.Empty, Color.Empty,
-					Color.Empty, null)
+				: this (null, string.Empty, Color_.Empty,
+					Color_.Empty, null)
 			{
 			}
 
 			public ListViewSubItem (ListViewItem owner, string text)
-				: this (owner, text, Color.Empty,
-					Color.Empty, null)
+				: this (owner, text, Color_.Empty,
+					Color_.Empty, null)
 			{
 			}
 
-			public ListViewSubItem (ListViewItem owner, string text, Color foreColor,
-						Color backColor, Font font)
+			public ListViewSubItem (ListViewItem owner, string text, Color_ foreColor,
+						Color_ backColor, Font font)
 			{
 				this.owner = owner;
 				Text = text;
@@ -1172,9 +1172,9 @@ namespace System.Windows.Forms
 			#endregion // Public Constructors
 
 			#region Public Instance Properties
-			public Color BackColor {
+			public Color_ BackColor {
 				get {
-					if (style.backColor != Color.Empty)
+					if (style.backColor != Color_.Empty)
 						return style.backColor;
 					if (this.owner != null && this.owner.ListView != null)
 						return this.owner.ListView.BackColor;
@@ -1187,9 +1187,9 @@ namespace System.Windows.Forms
 			}
 
 			[Browsable (false)]
-			public Rectangle Bounds {
+			public Rectangle_ Bounds {
 				get {
-					Rectangle retval = bounds;
+					Rectangle_ retval = bounds;
 					if (owner != null) {
 						retval.X += owner.Bounds.X;
 						retval.Y += owner.Bounds.Y;
@@ -1216,9 +1216,9 @@ namespace System.Windows.Forms
 				}
 			}
 
-			public Color ForeColor {
+			public Color_ ForeColor {
 				get {
-					if (style.foreColor != Color.Empty)
+					if (style.foreColor != Color_.Empty)
 						return style.foreColor;
 					if (this.owner != null && this.owner.ListView != null)
 						return this.owner.ListView.ForeColor;
@@ -1312,7 +1312,7 @@ namespace System.Windows.Forms
 
 			internal void SetBounds (int x, int y, int width, int height)
 			{
-				bounds = new Rectangle (x, y, width, height);
+				bounds = new Rectangle_ (x, y, width, height);
 			}
 
 			#endregion // Private Methods
@@ -1324,7 +1324,7 @@ namespace System.Windows.Forms
 				{
 				}
 
-				public SubItemStyle (Color foreColor, Color backColor, Font font)
+				public SubItemStyle (Color_ foreColor, Color_ backColor, Font font)
 				{
 					this.foreColor = foreColor;
 					this.backColor = backColor;
@@ -1333,13 +1333,13 @@ namespace System.Windows.Forms
 
 				public void Reset ()
 				{
-					foreColor = Color.Empty;
-					backColor = Color.Empty;
+					foreColor = Color_.Empty;
+					backColor = Color_.Empty;
 					font = null;
 				}
 
-				public Color backColor;
-				public Color foreColor;
+				public Color_ backColor;
+				public Color_ foreColor;
 				public Font font;
 			}
 		}
@@ -1429,8 +1429,8 @@ namespace System.Windows.Forms
 				return Add (item);
 			}
 
-			public ListViewSubItem Add (string text, Color foreColor,
-						    Color backColor, Font font)
+			public ListViewSubItem Add (string text, Color_ foreColor,
+						    Color_ backColor, Font font)
 			{
 				ListViewSubItem item = new ListViewSubItem (owner, text,
 									    foreColor, backColor, font);
@@ -1465,8 +1465,8 @@ namespace System.Windows.Forms
 				owner.Invalidate ();
 			}
 
-			public void AddRange (string [] items, Color foreColor,
-					      Color backColor, Font font)
+			public void AddRange (string [] items, Color_ foreColor,
+					      Color_ backColor, Font font)
 			{
 				if (items == null)
 					throw new ArgumentNullException ("items");

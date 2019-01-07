@@ -46,8 +46,8 @@
 
 
 //#define _EXPERIMENTAL_
-
 using System;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -270,7 +270,7 @@ namespace System.Windows.Forms
 		static extern void gtk_paint_focus(IntPtr style, IntPtr window, int state_type, IntPtr area, IntPtr widget, string detail, int x, int y, int width, int height);
 		
 		[DllImport("libgtk-x11-2.0.so")]
-		static extern void gtk_widget_size_allocate (IntPtr widget, ref Rectangle allocation);
+		static extern void gtk_widget_size_allocate (IntPtr widget, ref Rectangle_ allocation);
 		
 		[DllImport("libgtk-x11-2.0.so")]
 		static extern void gtk_paint_option (IntPtr style, IntPtr window, int state_type, int shadow_type, IntPtr area, IntPtr widget, string detail, int x, int y, int width, int height);
@@ -451,7 +451,7 @@ namespace System.Windows.Forms
 		}
 		
 		#if _EXPERIMENTAL_
-		private void SetDrawableAndStyle (Rectangle area, Type type, Orientation orientation)
+		private void SetDrawableAndStyle (Rectangle_ area, Type type, Orientation orientation)
 		{
 			if (current_gdk_drawable != IntPtr.Zero) {
 				g_object_unref (current_gdk_drawable);
@@ -539,7 +539,7 @@ namespace System.Windows.Forms
 			dc.DrawImage (image, control.ClientRectangle);
 		}
 		
-		private void DrawDrawableToDC (Graphics dc, Rectangle area)
+		private void DrawDrawableToDC (Graphics dc, Rectangle_ area)
 		{
 			IntPtr new_pixbuf = gdk_pixbuf_new (0, true, 8, area.Width, area.Height);
 			
@@ -577,7 +577,7 @@ namespace System.Windows.Forms
 		}
 		#endif
 		
-		public override void DrawButtonBase (Graphics dc, Rectangle clip_area, ButtonBase button)
+		public override void DrawButtonBase (Graphics dc, Rectangle_ clip_area, ButtonBase button)
 		{
 			SetDrawableAndStyle (button);
 			
@@ -603,7 +603,7 @@ namespace System.Windows.Forms
 		
 		protected override void ButtonBase_DrawButton(ButtonBase button, Graphics dc)
 		{
-			Rectangle buttonRectangle = button.ClientRectangle;
+			Rectangle_ buttonRectangle = button.ClientRectangle;
 			
 			StateType state_type = StateType.Normal;
 			ShadowType shadow_type = button.FlatStyle == FlatStyle.Flat ? ShadowType.In : ShadowType.Out;
@@ -658,7 +658,7 @@ namespace System.Windows.Forms
 			if (!button.is_enabled)
 				return;
 			
-			Rectangle focus_rect = new Rectangle (button.ClientRectangle.X + 4, button.ClientRectangle.Y + 4, button.ClientRectangle.Width - 9, button.ClientRectangle.Height - 9);
+			Rectangle_ focus_rect = new Rectangle_ (button.ClientRectangle.X + 4, button.ClientRectangle.Y + 4, button.ClientRectangle.Width - 9, button.ClientRectangle.Height - 9);
 			
 			gtk_widget_grab_focus (global_gtk_button);
 			
@@ -675,7 +675,7 @@ namespace System.Windows.Forms
 		}
 		
 		#region ScrollBar
-		public override void DrawScrollBar( Graphics dc, Rectangle clip, ScrollBar bar ) {
+		public override void DrawScrollBar( Graphics dc, Rectangle_ clip, ScrollBar bar ) {
 			int		scrollbutton_width = bar.scrollbutton_width;
 			int		scrollbutton_height = bar.scrollbutton_height;
 			Rectangle	first_arrow_area;
@@ -684,10 +684,10 @@ namespace System.Windows.Forms
 			
 			SetDrawableAndStyle (bar);
 			
-			Rectangle allocation = new Rectangle (bar.ClientRectangle.X, bar.ClientRectangle.Y, bar.ClientRectangle.Width, bar.ClientRectangle.Height);
+			Rectangle_ allocation = new Rectangle_ (bar.ClientRectangle.X, bar.ClientRectangle.Y, bar.ClientRectangle.Width, bar.ClientRectangle.Height);
 			
 			// fix for artefacts
-			Color fix_color = bar.Parent != null ? bar.Parent.BackColor : ColorControl;
+			Color_ fix_color = bar.Parent != null ? bar.Parent.BackColor : ColorControl;
 			
 			if (bar.vert) {
 				gtk_widget_size_allocate (global_gtk_vscrollbar, ref allocation);
@@ -710,10 +710,10 @@ namespace System.Windows.Forms
 			thumb_pos = bar.ThumbPos;
 			
 			if ( bar.vert ) {
-				first_arrow_area = new Rectangle( 0, 0, bar.Width, scrollbutton_height + 1 );
+				first_arrow_area = new Rectangle_( 0, 0, bar.Width, scrollbutton_height + 1 );
 				bar.FirstArrowArea = first_arrow_area;
 				
-				second_arrow_area = new Rectangle( 0, bar.ClientRectangle.Height - scrollbutton_height - 1, bar.Width, scrollbutton_height + 1 );
+				second_arrow_area = new Rectangle_( 0, bar.ClientRectangle.Height - scrollbutton_height - 1, bar.Width, scrollbutton_height + 1 );
 				bar.SecondArrowArea = second_arrow_area;
 				
 				thumb_pos.Width = bar.Width;
@@ -727,10 +727,10 @@ namespace System.Windows.Forms
 				if ( clip.IntersectsWith( second_arrow_area ) )
 					CPDrawScrollButton( dc, second_arrow_area, ScrollButton.Down, bar.secondbutton_state );
 			} else {
-				first_arrow_area = new Rectangle( 0, 0, scrollbutton_width + 1, bar.Height );
+				first_arrow_area = new Rectangle_( 0, 0, scrollbutton_width + 1, bar.Height );
 				bar.FirstArrowArea = first_arrow_area;
 				
-				second_arrow_area = new Rectangle( bar.ClientRectangle.Width - scrollbutton_width - 1, 0, scrollbutton_width + 1, bar.Height );
+				second_arrow_area = new Rectangle_( bar.ClientRectangle.Width - scrollbutton_width - 1, 0, scrollbutton_width + 1, bar.Height );
 				bar.SecondArrowArea = second_arrow_area;
 				
 				thumb_pos.Height = bar.Height;
@@ -754,14 +754,14 @@ namespace System.Windows.Forms
 			#endif
 		}
 		
-		protected override void ScrollBar_DrawThumb( ScrollBar bar, Rectangle thumb_pos, Rectangle clip, Graphics dc ) {
+		protected override void ScrollBar_DrawThumb( ScrollBar bar, Rectangle_ thumb_pos, Rectangle_ clip, Graphics dc ) {
 			if ( bar.Enabled)
 				DrawScrollBarThumb( dc, thumb_pos, bar );
 		}
 		
-		protected void ScrollBar_Vertical_Draw_ThumbMoving_None (int scrollbutton_height, ScrollBar bar, Rectangle clip, Graphics dc)
+		protected void ScrollBar_Vertical_Draw_ThumbMoving_None (int scrollbutton_height, ScrollBar bar, Rectangle_ clip, Graphics dc)
 		{
-			Rectangle r = new Rectangle (0,
+			Rectangle_ r = new Rectangle_ (0,
 						     scrollbutton_height, bar.ClientRectangle.Width, bar.ClientRectangle.Height - (scrollbutton_height * 2));
 			gtk_paint_box (current_style, 
 				       current_gdk_drawable, 
@@ -774,9 +774,9 @@ namespace System.Windows.Forms
 				       r.Width, r.Height);
 		}
 		
-		protected void ScrollBar_Horizontal_Draw_ThumbMoving_None (int scrollbutton_width, ScrollBar bar, Rectangle clip, Graphics dc)
+		protected void ScrollBar_Horizontal_Draw_ThumbMoving_None (int scrollbutton_width, ScrollBar bar, Rectangle_ clip, Graphics dc)
 		{
-			Rectangle r = new Rectangle (scrollbutton_width,
+			Rectangle_ r = new Rectangle_ (scrollbutton_width,
 						     0, bar.ClientRectangle.Width - (scrollbutton_width * 2), bar.ClientRectangle.Height);
 			
 			gtk_paint_box (current_style, 
@@ -790,7 +790,7 @@ namespace System.Windows.Forms
 				       r.Width, r.Height);
 		}
 		
-		private void DrawScrollBarThumb( Graphics dc, Rectangle area, ScrollBar bar ) {
+		private void DrawScrollBarThumb( Graphics dc, Rectangle_ area, ScrollBar bar ) {
 			IntPtr gtk_scrollbar = bar.vert ? global_gtk_vscrollbar : global_gtk_hscrollbar;
 			
 			gtk_paint_box (current_style, 
@@ -806,7 +806,7 @@ namespace System.Windows.Forms
 		#endregion	// ScrollBar
 		
 		#region ProgressBar
-		public override void DrawProgressBar (Graphics dc, Rectangle clip_rect, ProgressBar ctrl)
+		public override void DrawProgressBar (Graphics dc, Rectangle_ clip_rect, ProgressBar ctrl)
 		{
 			Rectangle	client_area = ctrl.client_area;
 			int		barpos_pixels;
@@ -857,7 +857,7 @@ namespace System.Windows.Forms
 		#endregion	// ProgressBar
 		
 		#region RadioButton
-		protected override void RadioButton_DrawButton (RadioButton radio_button, Graphics dc, ButtonState state, Rectangle radiobutton_rectangle)
+		protected override void RadioButton_DrawButton (RadioButton radio_button, Graphics dc, ButtonState state, Rectangle_ radiobutton_rectangle)
 		{
 			// we currently don't care for flat or popup radio buttons
 			if (radio_button.appearance == Appearance.Button) {
@@ -867,7 +867,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		private void DrawRadioButton (Graphics dc, RadioButton radio_button, ButtonState state, Rectangle radiobutton_rectangle)
+		private void DrawRadioButton (Graphics dc, RadioButton radio_button, ButtonState state, Rectangle_ radiobutton_rectangle)
 		{
 			SetDrawableAndStyle (radio_button);
 			
@@ -906,13 +906,13 @@ namespace System.Windows.Forms
 			#endif
 		}
 		
-		protected override void RadioButton_DrawText (RadioButton radio_button, Rectangle text_rectangle, Graphics dc, StringFormat text_format)
+		protected override void RadioButton_DrawText (RadioButton radio_button, Rectangle_ text_rectangle, Graphics dc, StringFormat text_format)
 		{
 			if (radio_button.Appearance != Appearance.Button)
 				base.RadioButton_DrawText (radio_button, text_rectangle, dc, text_format);
 		}
 	
-		protected override void RadioButton_DrawFocus (RadioButton radio_button, Graphics dc, Rectangle text_rectangle)
+		protected override void RadioButton_DrawFocus (RadioButton radio_button, Graphics dc, Rectangle_ text_rectangle)
 		{
 			if (radio_button.Focused && radio_button.appearance != Appearance.Button) {
 				gtk_paint_focus (current_style,
@@ -934,7 +934,7 @@ namespace System.Windows.Forms
 		#endregion	// RadioButton
 		
 		#region CheckBox
-		protected override void CheckBox_DrawCheckBox (Graphics dc, CheckBox checkbox, ButtonState state, Rectangle checkbox_rectangle)
+		protected override void CheckBox_DrawCheckBox (Graphics dc, CheckBox checkbox, ButtonState state, Rectangle_ checkbox_rectangle)
 		{
 			// render as per normal button
 			if (checkbox.appearance == Appearance.Button) {
@@ -944,7 +944,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		private void InternalDrawCheckBox (Graphics dc, CheckBox checkbox, ButtonState state, Rectangle checkbox_rectangle)
+		private void InternalDrawCheckBox (Graphics dc, CheckBox checkbox, ButtonState state, Rectangle_ checkbox_rectangle)
 		{
 			SetDrawableAndStyle (checkbox);
 			
@@ -983,13 +983,13 @@ namespace System.Windows.Forms
 			#endif
 		}
 		
-		protected override void CheckBox_DrawText (CheckBox checkbox, Rectangle text_rectangle, Graphics dc, StringFormat text_format)
+		protected override void CheckBox_DrawText (CheckBox checkbox, Rectangle_ text_rectangle, Graphics dc, StringFormat text_format)
 		{
 			if (checkbox.Appearance != Appearance.Button)
 				base.CheckBox_DrawText (checkbox, text_rectangle, dc, text_format);
 		}
 		
-		protected override void CheckBox_DrawFocus( CheckBox checkbox, Graphics dc, Rectangle text_rectangle )
+		protected override void CheckBox_DrawFocus( CheckBox checkbox, Graphics dc, Rectangle_ text_rectangle )
 		{
 			if (checkbox.Focused && checkbox.appearance != Appearance.Button) {
 				gtk_paint_focus (current_style,
@@ -1011,20 +1011,20 @@ namespace System.Windows.Forms
 		#endregion	// CheckBox
 		
 		#region	TrackBar
-		private void DrawTrackBar_Vertical (Graphics dc, Rectangle clip_rectangle, TrackBar tb,
-						    ref Rectangle thumb_pos, ref Rectangle thumb_area,
+		private void DrawTrackBar_Vertical (Graphics dc, Rectangle_ clip_rectangle, TrackBar tb,
+						    ref Rectangle_ thumb_pos, ref Rectangle_ thumb_area,
 						    float ticks, int value_pos, bool mouse_value)
 		{			
-			Point toptick_startpoint = new Point ();
-			Point bottomtick_startpoint = new Point ();
-			Point channel_startpoint = new Point ();
+			Point_ toptick_startpoint = new Point_ ();
+			Point_ bottomtick_startpoint = new Point_ ();
+			Point_ channel_startpoint = new Point_ ();
 			float pixel_len;
 			float pixels_betweenticks;
 			const int space_from_right = 8;
 			const int space_from_left = 8;
-			Rectangle area = tb.ClientRectangle;
+			Rectangle_ area = tb.ClientRectangle;
 			
-			Rectangle allocation = new Rectangle (area.X, area.Y, area.Width, area.Height);
+			Rectangle_ allocation = new Rectangle_ (area.X, area.Y, area.Width, area.Height);
 			
 			gtk_widget_size_allocate (current_widget, ref allocation);
 			
@@ -1179,20 +1179,20 @@ namespace System.Windows.Forms
 			outside.Dispose ();
 		}
 		
-		private void DrawTrackBar_Horizontal (Graphics dc, Rectangle clip_rectangle, TrackBar tb,
-						      ref Rectangle thumb_pos, ref Rectangle thumb_area,
+		private void DrawTrackBar_Horizontal (Graphics dc, Rectangle_ clip_rectangle, TrackBar tb,
+						      ref Rectangle_ thumb_pos, ref Rectangle_ thumb_area,
 						      float ticks, int value_pos, bool mouse_value)
 		{			
-			Point toptick_startpoint = new Point ();
-			Point bottomtick_startpoint = new Point ();
-			Point channel_startpoint = new Point ();
+			Point_ toptick_startpoint = new Point_ ();
+			Point_ bottomtick_startpoint = new Point_ ();
+			Point_ channel_startpoint = new Point_ ();
 			float pixel_len;
 			float pixels_betweenticks;
 			const int space_from_right = 8;
 			const int space_from_left = 8;
-			Rectangle area = tb.ClientRectangle;
+			Rectangle_ area = tb.ClientRectangle;
 			
-			Rectangle allocation = new Rectangle (area.X, area.Y, area.Width, area.Height);
+			Rectangle_ allocation = new Rectangle_ (area.X, area.Y, area.Width, area.Height);
 			
 			gtk_widget_size_allocate (current_widget, ref allocation);
 			
@@ -1344,14 +1344,14 @@ namespace System.Windows.Forms
 			outside.Dispose ();			
 		}
 		
-		public override void DrawTrackBar (Graphics dc, Rectangle clip_rectangle, TrackBar tb)
+		public override void DrawTrackBar (Graphics dc, Rectangle_ clip_rectangle, TrackBar tb)
 		{
 			int		value_pos;
 			bool		mouse_value;
 			float		ticks = (tb.Maximum - tb.Minimum) / tb.tickFrequency; /* N of ticks draw*/
-			Rectangle	area;
-			Rectangle	thumb_pos = tb.ThumbPos;
-			Rectangle	thumb_area = tb.ThumbArea;
+			Rectangle_	area;
+			Rectangle_	thumb_pos = tb.ThumbPos;
+			Rectangle_	thumb_area = tb.ThumbArea;
 			
 			if (tb.thumb_pressed) {
 				value_pos = tb.thumb_mouseclick;
@@ -1402,7 +1402,7 @@ namespace System.Windows.Forms
 		}
 		#endregion	// TrackBar
 		
-		public override void CPDrawButton (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawButton (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			#if _EXPERIMENTAL_
 			SetDrawableAndStyle (rectangle, typeof(ButtonBase), Orientation.Horizontal);
@@ -1459,7 +1459,7 @@ namespace System.Windows.Forms
 		}
 		
 		/* Scroll button: regular button + direction arrow */
-		public override void CPDrawScrollButton (Graphics dc, Rectangle area, ScrollButton scroll_button_type, ButtonState state)
+		public override void CPDrawScrollButton (Graphics dc, Rectangle_ area, ScrollButton scroll_button_type, ButtonState state)
 		{
 			#if _EXPERIMENTAL_
 			Orientation orientation = Orientation.Vertical;
@@ -1538,7 +1538,7 @@ namespace System.Windows.Forms
 			#endif
 		}
 		
-		public void DrawScrollButtonPrimitive (Graphics dc, Rectangle area, ButtonState state, ScrollButton scroll_button_type)
+		public void DrawScrollButtonPrimitive (Graphics dc, Rectangle_ area, ButtonState state, ScrollButton scroll_button_type)
 		{
 			StateType state_type = StateType.Normal;
 			ShadowType shadow_type = ShadowType.Out;
@@ -1576,9 +1576,9 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		private static Color ColorFromGdkColor (GdkColorStruct gtkcolor)
+		private static Color_ ColorFromGdkColor (GdkColorStruct gtkcolor)
 		{
-			return Color.FromArgb (255, 
+			return Color_.FromArgb (255, 
 				(gtkcolor.red >> 8)  & 0xff, 
 				(gtkcolor.green  >> 8) & 0xff,
 				(gtkcolor.blue >> 8) & 0xff );

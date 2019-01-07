@@ -23,9 +23,9 @@
 //	Peter Bartok	pbartok@novell.com
 //
 //
-
 using System;
 using System.Collections;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Text;
@@ -77,7 +77,7 @@ namespace System.Windows.Forms
 			this.ending = ending;
 		}
 
-		internal Line (Document document, int LineNo, string Text, Font font, Color color, LineEnding ending) : this (document, ending)
+		internal Line (Document document, int LineNo, string Text, Font font, Color_ color, LineEnding ending) : this (document, ending)
 		{
 			space = Text.Length > DEFAULT_TEXT_LEN ? Text.Length+1 : DEFAULT_TEXT_LEN;
 
@@ -93,7 +93,7 @@ namespace System.Windows.Forms
 			tags.Color = color;
 		}
 
-		internal Line (Document document, int LineNo, string Text, HorizontalAlignment align, Font font, Color color, LineEnding ending) : this(document, ending)
+		internal Line (Document document, int LineNo, string Text, HorizontalAlignment align, Font font, Color_ color, LineEnding ending) : this(document, ending)
 		{
 			space = Text.Length > DEFAULT_TEXT_LEN ? Text.Length+1 : DEFAULT_TEXT_LEN;
 
@@ -303,7 +303,7 @@ namespace System.Windows.Forms
 				walk = walk.Next;
 			}
 
-			// Adjust the start point of any tags following
+			// Adjust the start Point_ of any tags following
 			if (tag != null) {
 				tag = tag.Next;
 				while (tag != null) {
@@ -456,7 +456,7 @@ namespace System.Windows.Forms
 			LineTag tag;
 			int pos;
 			int len;
-			SizeF size;
+			SizeF_ size;
 			float w;
 			int prev_offset;
 			bool retval;

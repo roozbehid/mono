@@ -22,8 +22,8 @@
 // Authors:
 //	Peter Bartok	pbartok@novell.com
 //
-
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
@@ -168,11 +168,11 @@ namespace System.Windows.Forms {
 			// is changed, not every paint.  Can only change so many things at a time.
 
 			// Figure out where our text and image should go
-			Rectangle glyph_rectangle;
-			Rectangle text_rectangle;
-			Rectangle image_rectangle;
+			Rectangle_ glyph_rectangle;
+			Rectangle_ text_rectangle;
+			Rectangle_ image_rectangle;
 
-			ThemeEngine.Current.CalculateRadioButtonTextAndImageLayout (this, Point.Empty, out glyph_rectangle, out text_rectangle, out image_rectangle);
+			ThemeEngine.Current.CalculateRadioButtonTextAndImageLayout (this, Point_.Empty, out glyph_rectangle, out text_rectangle, out image_rectangle);
 
 			// Draw our button
 			if (FlatStyle != FlatStyle.System && Appearance != Appearance.Button)
@@ -181,7 +181,7 @@ namespace System.Windows.Forms {
 				ThemeEngine.Current.DrawRadioButton (pe.Graphics, this.ClientRectangle, this);
 		}
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
 			if (this.AutoSize)
 				return ThemeEngine.Current.CalculateRadioButtonAutoSize (this);
@@ -288,7 +288,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
 				return ThemeEngine.Current.RadioButtonDefaultSize;
 			}

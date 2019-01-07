@@ -23,9 +23,9 @@
 //	Peter Bartok	pbartok@novell.com
 //
 //
-
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Drawing.Text;
 
@@ -42,8 +42,8 @@ namespace System.Windows.Forms {
 		internal int		re_show_delay;
 		internal bool		show_always;
 
-		internal Color		back_color;
-		internal Color		fore_color;
+		internal Color_		back_color;
+		internal Color_		fore_color;
 		
 		internal ToolTipWindow	tooltip_window;			// The actual tooltip window
 		internal Hashtable	tooltip_strings;		// List of strings for each control, indexed by control
@@ -69,15 +69,15 @@ namespace System.Windows.Forms {
 			private Control associated_control;
 			internal Icon icon;
 			internal string title = String.Empty;
-			internal Rectangle icon_rect;
-			internal Rectangle title_rect;
-			internal Rectangle text_rect;
+			internal Rectangle_ icon_rect;
+			internal Rectangle_ title_rect;
+			internal Rectangle_ text_rect;
 			#endregion	// ToolTipWindow Class Local Variables
 			
 			#region ToolTipWindow Class Constructor
 			internal ToolTipWindow() {
 				Visible = false;
-				Size = new Size(100, 20);
+				Size = new Size_(100, 20);
 				ForeColor = ThemeEngine.Current.ColorInfoText;
 				BackColor = ThemeEngine.Current.ColorInfo;
 
@@ -90,7 +90,7 @@ namespace System.Windows.Forms {
 				SetStyle (ControlStyles.ResizeRedraw, true);
 				if (ThemeEngine.Current.ToolTipTransparentBackground) {
 					SetStyle (ControlStyles.SupportsTransparentBackColor, true);
-					BackColor = Color.Transparent;
+					BackColor = Color_.Transparent;
 				} else
 					SetStyle (ControlStyles.Opaque, true);
 			}
@@ -177,8 +177,8 @@ namespace System.Windows.Forms {
 			// UIA Framework
 			private void OnUIAToolTip_VisibleChanged (object sender, EventArgs e)
 			{
-				if (Visible == false) 
-					OnUnPopup (new PopupEventArgs (associated_control, associated_control, false, Size.Empty));
+				if (Visible == false)
+                    OnUnPopup(new PopupEventArgs(associated_control, associated_control, false, Size_.Empty));
 			}
 
 			private void OnUnPopup (PopupEventArgs e)
@@ -202,14 +202,14 @@ namespace System.Windows.Forms {
 				if (IsDisposed)
 					return;
 
-				Size display_size;
+				Size_ display_size;
 				XplatUI.GetDisplaySize (out display_size);
 
 				associated_control = control;
 
 				Text = text;
 
-				PopupEventArgs pea = new PopupEventArgs (control, control, false, Size.Empty);
+                PopupEventArgs pea = new PopupEventArgs(control, control, false, Size_.Empty);
 				OnPopup (pea);
 
 				if (pea.Cancel)
@@ -225,27 +225,27 @@ namespace System.Windows.Forms {
 				if (IsDisposed)
 					return;
 
-				Size display_size;
+				Size_ display_size;
 				XplatUI.GetDisplaySize (out display_size);
 
 				associated_control = control;
 
 				Text = text;
 
-				PopupEventArgs pea = new PopupEventArgs (control, control, false, Size.Empty);
+                PopupEventArgs pea = new PopupEventArgs(control, control, false, Size_.Empty);
 				OnPopup (pea);
 				
 				if (pea.Cancel)
 					return;
 					
-				Size size = pea.ToolTipSize;
+				Size_ size = pea.ToolTipSize;
 
 				Width = size.Width;
 				Height = size.Height;
 
 				int cursor_w, cursor_h, hot_x, hot_y;
 				XplatUI.GetCursorInfo (control.Cursor.Handle, out cursor_w, out cursor_h, out hot_x, out hot_y);
-				Point loc = Control.MousePosition;
+				Point_ loc = Control.MousePosition;
 				loc.Y += (cursor_h - hot_y);
 
 				if ((loc.X + Width) > display_size.Width)
@@ -341,7 +341,7 @@ namespace System.Windows.Forms {
 		internal static event ControlEventHandler UIAToolTipHookUp;
 		internal static event ControlEventHandler UIAToolTipUnhookUp;
 
-		internal Rectangle UIAToolTipRectangle {
+		internal Rectangle_ UIAToolTipRectangle {
 			get { return tooltip_window.Bounds; }
 		}
 
@@ -366,7 +366,8 @@ namespace System.Windows.Forms {
 		#endregion
 
 		public ToolTip(System.ComponentModel.IContainer cont) : this() {
-			cont.Add (this);
+            if (cont != null)
+                cont.Add (this);
 		}
 
 		~ToolTip() {
@@ -423,13 +424,13 @@ namespace System.Windows.Forms {
 		}
 
 		[DefaultValue ("Color [Info]")]
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return this.back_color; }
 			set { this.back_color = value; tooltip_window.BackColor = value; }
 		}
 
 		[DefaultValue ("Color [InfoText]")]
-		public Color ForeColor
+		public Color_ ForeColor
 		{
 			get { return this.fore_color; }
 			set { this.fore_color = value; tooltip_window.ForeColor = value; }
@@ -611,7 +612,7 @@ namespace System.Windows.Forms {
 			// make sure that tooltip_window.Text gets updated if it's being shown,
 			// or show the tooltip for it if is not
 			if (active_control == control && caption != null && state == TipState.Show) {
-				Size size = ThemeEngine.Current.ToolTipSize(tooltip_window, caption);
+				Size_ size = ThemeEngine.Current.ToolTipSize(tooltip_window, caption);
 				tooltip_window.Width = size.Width;
 				tooltip_window.Height = size.Height;
 				tooltip_window.Text = caption;
@@ -654,7 +655,7 @@ namespace System.Windows.Forms {
 				HookupControlEvents (c);
 			}
 			else
-				tooltip_window.Location = c.PointToScreen (new Point (c.Width / 2, c.Height / 2));
+				tooltip_window.Location = c.PointToScreen (new Point_ (c.Width / 2, c.Height / 2));
 			
 			// We need to hide our tooltip if the form loses focus, is closed, or is minimized
 			HookupFormEvents ((Form)c.TopLevelControl);
@@ -669,17 +670,17 @@ namespace System.Windows.Forms {
 			}
 		}
 		
-		public void Show (string text, IWin32Window window, Point point)
+		public void Show (string text, IWin32Window window, Point_ point)
 		{
 			Show (text, window, point, 0);
 		}
 
 		public void Show (string text, IWin32Window window, int x, int y)
 		{
-			Show (text, window, new Point (x, y), 0);
+			Show (text, window, new Point_ (x, y), 0);
 		}
 		
-		public void Show (string text, IWin32Window window, Point point, int duration)
+		public void Show (string text, IWin32Window window, Point_ point, int duration)
 		{
 			if (window == null)
 				throw new ArgumentNullException ("window");
@@ -693,7 +694,7 @@ namespace System.Windows.Forms {
 
 			Control c = (Control)window;
 			
-			Point display_point = c.PointToScreen (Point.Empty);
+			Point_ display_point = c.PointToScreen (Point_.Empty);
 			display_point.X += point.X;
 			display_point.Y += point.Y;
 
@@ -715,7 +716,7 @@ namespace System.Windows.Forms {
 		
 		public void Show (string text, IWin32Window window, int x, int y, int duration)
 		{
-			Show (text, window, new Point (x, y), duration);
+			Show (text, window, new Point_ (x, y), duration);
 		}
 		
 		public void Hide (IWin32Window win)
@@ -902,23 +903,23 @@ namespace System.Windows.Forms {
 		}
 		
 		private bool MouseInControl (Control control, bool fuzzy) {
-			Point	m;
-			Point	c;
-			Size	cw;
+			Point_	m;
+			Point_	c;
+			Size_	cw;
 
 			if (control == null) {
 				return false;
 			}
 
 			m = Control.MousePosition;
-			c = new Point(control.Bounds.X, control.Bounds.Y);
+			c = new Point_(control.Bounds.X, control.Bounds.Y);
 			if (control.Parent != null) {
 				c = control.Parent.PointToScreen(c);
 			}
 			cw = control.ClientSize;
 
 
-			Rectangle rect = new Rectangle (c, cw);
+			Rectangle_ rect = new Rectangle_ (c, cw);
 			
 			//
 			// We won't get mouse move events on all platforms with the exact same

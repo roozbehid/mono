@@ -223,7 +223,7 @@ namespace System.Windows.Forms {
 		#region Public Instance Properties
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get {
 				return base.BackColor;
 			}
@@ -330,7 +330,7 @@ namespace System.Windows.Forms {
 		
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { 
 				return base.ForeColor;
 			}
@@ -412,9 +412,9 @@ namespace System.Windows.Forms {
 			get { return base.CreateParams; }
 		}
 		
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size (75, 23);
+				return new Size_ (75, 23);
 			}
 		}
 		#endregion	// Protected Instance Properties
@@ -422,7 +422,7 @@ namespace System.Windows.Forms {
 		#region Protected Static Methods
 		[CLSCompliant(false)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected static Color GetColorFromOleColor (uint color)
+		protected static Color_ GetColorFromOleColor (uint color)
 		{
 			throw new NotImplementedException("COM/ActiveX support is not implemented"); 
 		}
@@ -477,7 +477,7 @@ namespace System.Windows.Forms {
 
 		[CLSCompliant(false)]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected static uint GetOleColorFromColor (Color color)
+		protected static uint GetOleColorFromColor (Color_ color)
 		{
 			throw new NotImplementedException("COM/ActiveX support is not implemented"); 
 		}
@@ -625,13 +625,13 @@ namespace System.Windows.Forms {
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new void DrawToBitmap (Bitmap bitmap, Rectangle targetBounds)
+		public new void DrawToBitmap (Bitmap bitmap, Rectangle_ targetBounds)
 		{
 			throw new NotImplementedException("COM/ActiveX support is not implemented");
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected new virtual Rectangle GetScaledBounds (Rectangle bounds, SizeF factor, BoundsSpecified specified)
+		protected new virtual Rectangle_ GetScaledBounds (Rectangle_ bounds, SizeF_ factor, BoundsSpecified specified)
 		{
 			throw new NotImplementedException("COM/ActiveX support is not implemented");
 		}

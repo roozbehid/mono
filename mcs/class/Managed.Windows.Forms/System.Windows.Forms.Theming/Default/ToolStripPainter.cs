@@ -21,8 +21,8 @@
 //
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.Theming.Default
@@ -41,7 +41,7 @@ namespace System.Windows.Forms.Theming.Default
 			if (e.Item.Enabled == false)
 				return;
 
-			Rectangle paint_here = new Rectangle (0, 0, e.Item.Width, e.Item.Height);
+			Rectangle_ paint_here = new Rectangle_ (0, 0, e.Item.Width, e.Item.Height);
 			
 			ToolStripButton tsb = e.Item as ToolStripButton;
 			
@@ -49,7 +49,7 @@ namespace System.Windows.Forms.Theming.Default
 				ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.SunkenOuter);
 			else if (e.Item.Selected)
 				ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.RaisedInner);
-			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty)
+			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color_.Empty)
 				e.Graphics.FillRectangle (ResPool.GetSolidBrush (e.Item.BackColor), paint_here);
 		}
 
@@ -58,13 +58,13 @@ namespace System.Windows.Forms.Theming.Default
 			if (e.Item.Enabled == false)
 				return;
 
-			Rectangle paint_here = new Rectangle (0, 0, e.Item.Width, e.Item.Height);
+			Rectangle_ paint_here = new Rectangle_ (0, 0, e.Item.Width, e.Item.Height);
 
 			if (e.Item.Pressed)
 				ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.SunkenOuter);
 			else if (e.Item.Selected)
 				ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.RaisedInner);
-			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty)
+			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color_.Empty)
 				e.Graphics.FillRectangle (ResPool.GetSolidBrush (e.Item.BackColor), paint_here);
 		}
 
@@ -90,7 +90,7 @@ namespace System.Windows.Forms.Theming.Default
 		public virtual void OnRenderMenuItemBackground (ToolStripItemRenderEventArgs e)
 		{
 			ToolStripMenuItem tsmi = (ToolStripMenuItem)e.Item;
-			Rectangle paint_here = new Rectangle (Point.Empty, tsmi.Size);
+			Rectangle_ paint_here = new Rectangle_ (Point_.Empty, tsmi.Size);
 			
 			if (tsmi.IsOnDropDown) {
 				// Drop down menu item
@@ -102,20 +102,20 @@ namespace System.Windows.Forms.Theming.Default
 					ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.SunkenOuter);
 				else if (e.Item.Selected)
 					ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.RaisedInner);
-				else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty)
+				else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color_.Empty)
 					e.Graphics.FillRectangle (ResPool.GetSolidBrush (e.Item.BackColor), paint_here);
 			}
 		}
 
 		public virtual void OnRenderOverflowButtonBackground (ToolStripItemRenderEventArgs e)
 		{
-			Rectangle paint_here = new Rectangle (Point.Empty, e.Item.Size);
+			Rectangle_ paint_here = new Rectangle_ (Point_.Empty, e.Item.Size);
 
 			if (e.Item.Pressed)
 				ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.SunkenOuter);
 			else if (e.Item.Selected)
 				ControlPaint.DrawBorder3D (e.Graphics, paint_here, Border3DStyle.RaisedInner);
-			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty)
+			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color_.Empty)
 				e.Graphics.FillRectangle (ResPool.GetSolidBrush (e.Item.BackColor), paint_here);
 
 			// Paint the arrow
@@ -142,16 +142,16 @@ namespace System.Windows.Forms.Theming.Default
 		{
 			ToolStripSplitButton tssb = (ToolStripSplitButton)e.Item;
 
-			Rectangle button_part = new Rectangle (Point.Empty, tssb.ButtonBounds.Size);
-			Point drop_start = new Point (tssb.Width - tssb.DropDownButtonBounds.Width, 0);
-			Rectangle drop_part = new Rectangle (drop_start, tssb.DropDownButtonBounds.Size);
+			Rectangle_ button_part = new Rectangle_ (Point_.Empty, tssb.ButtonBounds.Size);
+			Point_ drop_start = new Point_ (tssb.Width - tssb.DropDownButtonBounds.Width, 0);
+			Rectangle_ drop_part = new Rectangle_ (drop_start, tssb.DropDownButtonBounds.Size);
 
 			// Regular button part
 			if (tssb.ButtonPressed)
 				ControlPaint.DrawBorder3D (e.Graphics, button_part, Border3DStyle.SunkenOuter);
 			else if (tssb.ButtonSelected)
 				ControlPaint.DrawBorder3D (e.Graphics, button_part, Border3DStyle.RaisedInner);
-			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty)
+			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color_.Empty)
 				e.Graphics.FillRectangle (ResPool.GetSolidBrush (e.Item.BackColor), button_part);
 
 			// Drop down button part
@@ -159,7 +159,7 @@ namespace System.Windows.Forms.Theming.Default
 				ControlPaint.DrawBorder3D (e.Graphics, drop_part, Border3DStyle.SunkenOuter);
 			else if (tssb.DropDownButtonSelected || tssb.ButtonSelected)
 				ControlPaint.DrawBorder3D (e.Graphics, drop_part, Border3DStyle.RaisedInner);
-			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color.Empty)
+			else if (e.Item.BackColor != Control.DefaultBackColor && e.Item.BackColor != Color_.Empty)
 				e.Graphics.FillRectangle (ResPool.GetSolidBrush (e.Item.BackColor), drop_part);
 		}
 
@@ -180,8 +180,8 @@ namespace System.Windows.Forms.Theming.Default
 			if (e.ToolStrip is ToolStripDropDown)
 				ControlPaint.DrawBorder3D (e.Graphics, e.AffectedBounds, Border3DStyle.Raised);
 			else {
-				e.Graphics.DrawLine (SystemPens.ControlDark, new Point (e.ToolStrip.Left, e.ToolStrip.Height - 2), new Point (e.ToolStrip.Right, e.ToolStrip.Height - 2));
-				e.Graphics.DrawLine (Pens.White, new Point (e.ToolStrip.Left, e.ToolStrip.Height - 1), new Point (e.ToolStrip.Right, e.ToolStrip.Height - 1));
+				e.Graphics.DrawLine (SystemPens.ControlDark, new Point_ (e.ToolStrip.Left, e.ToolStrip.Height - 2), new Point_ (e.ToolStrip.Right, e.ToolStrip.Height - 2));
+				e.Graphics.DrawLine (Pens.White, new Point_ (e.ToolStrip.Left, e.ToolStrip.Height - 1), new Point_ (e.ToolStrip.Right, e.ToolStrip.Height - 1));
 			}
 		}
 		#endregion

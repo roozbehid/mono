@@ -39,7 +39,7 @@ namespace System.Windows.Forms.Theming.Default
 
 		protected SystemResPool ResPool { get { return ThemeEngine.Current.ResPool; } }
 
-		public void PaintRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, ElementState state, FlatStyle style, bool isChecked)
+		public void PaintRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, ElementState state, FlatStyle style, bool isChecked)
 		{
 			switch (style) {
 				case FlatStyle.Standard:
@@ -95,7 +95,7 @@ namespace System.Windows.Forms.Theming.Default
 		}
 
 		#region Standard
-		public virtual void DrawNormalRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawNormalRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			ButtonState bs = ButtonState.Normal;
 
@@ -105,12 +105,12 @@ namespace System.Windows.Forms.Theming.Default
 			ControlPaint.DrawRadioButton (g, bounds, bs);
 		}
 
-		public virtual void DrawHotRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawHotRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			DrawNormalRadioButton (g, bounds, backColor, foreColor, isChecked);
 		}
 
-		public virtual void DrawPressedRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawPressedRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			ButtonState bs = ButtonState.Pushed;
 
@@ -120,7 +120,7 @@ namespace System.Windows.Forms.Theming.Default
 			ControlPaint.DrawRadioButton (g, bounds, bs);
 		}
 
-		public virtual void DrawDisabledRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawDisabledRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			ButtonState bs = ButtonState.Inactive;
 
@@ -132,7 +132,7 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 
 		#region FlatStyle
-		public virtual void DrawFlatNormalRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawFlatNormalRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.DrawArc (SystemPens.ControlDarkDark, bounds, 0, 359);
 			g.FillPie (SystemBrushes.ControlLightLight, bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2, 0, 359);
@@ -141,7 +141,7 @@ namespace System.Windows.Forms.Theming.Default
 				DrawFlatRadioGlyphDot (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawFlatHotRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawFlatHotRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.DrawArc (SystemPens.ControlDarkDark, bounds, 0, 359);
 			g.FillPie (SystemBrushes.ControlLight, bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2, 0, 359);
@@ -150,7 +150,7 @@ namespace System.Windows.Forms.Theming.Default
 				DrawFlatRadioGlyphDot (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawFlatPressedRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawFlatPressedRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.DrawArc (SystemPens.ControlDarkDark, bounds, 0, 359);
 			g.FillPie (SystemBrushes.ControlLightLight, bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2, 0, 359);
@@ -159,7 +159,7 @@ namespace System.Windows.Forms.Theming.Default
 				DrawFlatRadioGlyphDot (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawFlatDisabledRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawFlatDisabledRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.FillPie (SystemBrushes.Control, bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2, 0, 359);
 			g.DrawArc (SystemPens.ControlDark, bounds, 0, 359);
@@ -170,7 +170,7 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 
 		#region Popup
-		public virtual void DrawPopupNormalRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawPopupNormalRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.FillPie (SystemBrushes.ControlLightLight, bounds, 0, 359);
 			g.DrawArc (SystemPens.ControlDark, bounds, 0, 359);
@@ -179,7 +179,7 @@ namespace System.Windows.Forms.Theming.Default
 				DrawFlatRadioGlyphDot (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawPopupHotRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawPopupHotRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.FillPie (SystemBrushes.ControlLightLight, bounds, 0, 359);
 			g.DrawArc (SystemPens.ControlLight, bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2, 0, 359);
@@ -191,7 +191,7 @@ namespace System.Windows.Forms.Theming.Default
 				DrawFlatRadioGlyphDot (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawPopupPressedRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawPopupPressedRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.FillPie (SystemBrushes.ControlLightLight, bounds, 0, 359);
 			g.DrawArc (SystemPens.ControlLight, bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2, 0, 359);
@@ -203,7 +203,7 @@ namespace System.Windows.Forms.Theming.Default
 				DrawFlatRadioGlyphDot (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawPopupDisabledRadioButton (Graphics g, Rectangle bounds, Color backColor, Color foreColor, bool isChecked)
+		public virtual void DrawPopupDisabledRadioButton (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, bool isChecked)
 		{
 			g.FillPie (SystemBrushes.Control, bounds.X + 1, bounds.Y + 1, bounds.Width - 2, bounds.Height - 2, 0, 359);
 			g.DrawArc (SystemPens.ControlDark, bounds, 0, 359);
@@ -214,7 +214,7 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 
 		#region Glyph
-		protected void DrawFlatRadioGlyphDot (Graphics g, Rectangle bounds, Color dotColor)
+		protected void DrawFlatRadioGlyphDot (Graphics g, Rectangle_ bounds, Color_ dotColor)
 		{
 			int lineWidth = Math.Max (1, Math.Min (bounds.Width, bounds.Height) / 3);
 

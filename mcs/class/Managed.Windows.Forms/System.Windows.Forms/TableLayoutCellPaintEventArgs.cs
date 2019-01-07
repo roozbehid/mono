@@ -32,13 +32,13 @@ namespace System.Windows.Forms
 {
 	public class TableLayoutCellPaintEventArgs : PaintEventArgs
 	{
-		private Rectangle cell_bounds;
+		private Rectangle_ cell_bounds;
 		private int column;
 		private int row;
 
 		#region Public Constructors
-		public TableLayoutCellPaintEventArgs (Graphics g, Rectangle clipRectangle,
-			Rectangle cellBounds, int column, int row)
+		public TableLayoutCellPaintEventArgs (Graphics g, Rectangle_ clipRectangle,
+			Rectangle_ cellBounds, int column, int row)
 			: base (g, clipRectangle)
 		{
 			this.cell_bounds = cellBounds;
@@ -48,7 +48,7 @@ namespace System.Windows.Forms
 		#endregion	// Public Constructors
 
 		#region Public Instance Properties
-		public Rectangle CellBounds {
+		public Rectangle_ CellBounds {
 			get { return this.cell_bounds; }
 		}
 

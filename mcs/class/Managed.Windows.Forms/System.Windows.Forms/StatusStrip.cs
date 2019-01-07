@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -90,8 +90,8 @@ namespace System.Windows.Forms
 		}
 		
 		[Browsable (false)]
-		public Rectangle SizeGripBounds {
-			get { return new Rectangle (this.Width - 12, 0, 12, this.Height); }
+		public Rectangle_ SizeGripBounds {
+			get { return new Rectangle_ (this.Width - 12, 0, 12, this.Height); }
 		}
 		
 		[DefaultValue (true)]
@@ -120,8 +120,8 @@ namespace System.Windows.Forms
 			get { return false; }
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (200, 22); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (200, 22); }
 		}
 		#endregion
 
@@ -165,7 +165,7 @@ namespace System.Windows.Forms
 
 			ToolStripItemOverflow[] overflow = new ToolStripItemOverflow[this.Items.Count];
 			ToolStripItemPlacement[] placement = new ToolStripItemPlacement[this.Items.Count];
-			Size proposedSize = new Size (0, Bounds.Height);
+			Size_ proposedSize = new Size_ (0, Bounds.Height);
 			int[] widths = new int[this.Items.Count];
 			int total_width = 0;
 			int toolstrip_width = DisplayRectangle.Width;
@@ -225,7 +225,7 @@ namespace System.Windows.Forms
 			}
 
 			i = 0;
-			Point layout_pointer = new Point (this.DisplayRectangle.Left, this.DisplayRectangle.Top);
+			Point_ layout_pointer = new Point_ (this.DisplayRectangle.Left, this.DisplayRectangle.Top);
 			int button_height = this.DisplayRectangle.Height;
 
 			// Now we should know where everything goes, so lay everything out
@@ -233,7 +233,7 @@ namespace System.Windows.Forms
 				tsi.SetPlacement (placement[i]);
 
 				if (placement[i] == ToolStripItemPlacement.Main) {
-					tsi.SetBounds (new Rectangle (layout_pointer.X + tsi.Margin.Left, layout_pointer.Y + tsi.Margin.Top, widths[i] - tsi.Margin.Horizontal, button_height - tsi.Margin.Vertical));
+					tsi.SetBounds (new Rectangle_ (layout_pointer.X + tsi.Margin.Left, layout_pointer.Y + tsi.Margin.Top, widths[i] - tsi.Margin.Horizontal, button_height - tsi.Margin.Vertical));
 					layout_pointer.X += widths[i];
 				}
 
@@ -258,10 +258,10 @@ namespace System.Windows.Forms
 		protected override void WndProc (ref Message m)
 		{
 			switch ((Msg)m.Msg) {
-				// If the mouse is over the size grip, change the cursor
+				// If the mouse is over the Size_ grip, change the cursor
 				case Msg.WM_MOUSEMOVE: {
 					if (FromParamToMouseButtons ((int) m.WParam.ToInt32()) == MouseButtons.None) {	
-						Point p = new Point (LowOrder ((int) m.LParam.ToInt32 ()), HighOrder ((int) m.LParam.ToInt32 ()));
+						Point_ p = new Point_ (LowOrder ((int) m.LParam.ToInt32 ()), HighOrder ((int) m.LParam.ToInt32 ()));
 						
 						if (this.SizingGrip && this.SizeGripBounds.Contains (p)) {
 							this.Cursor = Cursors.SizeNWSE;
@@ -272,10 +272,10 @@ namespace System.Windows.Forms
 
 					break;
 				}
-				// If the left mouse button is pushed over the size grip,
+				// If the left mouse button is pushed over the Size_ grip,
 				// send the WM a message to begin a window resize operation
 				case Msg.WM_LBUTTONDOWN: {
-					Point p = new Point (LowOrder ((int)m.LParam.ToInt32 ()), HighOrder ((int)m.LParam.ToInt32 ()));
+					Point_ p = new Point_ (LowOrder ((int)m.LParam.ToInt32 ()), HighOrder ((int)m.LParam.ToInt32 ()));
 					Form form = FindForm ();
 
 					if (this.SizingGrip && this.SizeGripBounds.Contains (p)) {

@@ -33,9 +33,9 @@
 //
 
 // NOT COMPLETE
-
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
@@ -60,8 +60,8 @@ namespace System.Windows.Forms
 		private int largeChange;
 		private Orientation orientation;
 		private TickStyle tickStyle;		
-		private Rectangle thumb_pos = new Rectangle ();	 /* Current position and size of the thumb */
-		private Rectangle thumb_area = new Rectangle (); /* Area where the thumb can scroll */
+		private Rectangle_ thumb_pos = new Rectangle_ ();	 /* Current position and Size_ of the thumb */
+		private Rectangle_ thumb_area = new Rectangle_ (); /* Area where the thumb can scroll */
 		internal bool thumb_pressed = false;		 
 		private Timer holdclick_timer = new Timer ();
 		internal int thumb_mouseclick;		
@@ -230,7 +230,7 @@ namespace System.Windows.Forms
 		}
 
 		#region Private & Internal Properties
-		internal Rectangle ThumbPos {
+		internal Rectangle_ ThumbPos {
 			get {
 				return thumb_pos;
 			}
@@ -240,7 +240,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Rectangle ThumbArea {
+		internal Rectangle_ ThumbArea {
 			get {
 				return thumb_area;
 			}
@@ -301,7 +301,7 @@ namespace System.Windows.Forms
 			get {return ImeMode.Disable; }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.TrackBarDefaultSize; }
 		}	
 		
@@ -324,7 +324,7 @@ namespace System.Windows.Forms
 
 		[EditorBrowsable (EditorBrowsableState.Never)]	
 		[Browsable (false)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set { base.ForeColor = value; }
 		}		
@@ -400,7 +400,7 @@ namespace System.Windows.Forms
 					orientation = value;
 					
 					if (this.IsHandleCreated) {
-						Size = new Size (Height, Width);
+						Size = new Size_ (Height, Width);
 						Refresh (); 
 					}
 				}
@@ -573,9 +573,9 @@ namespace System.Windows.Forms
 					
 			if (AutoSize)
 				if (Orientation == Orientation.Horizontal)
-					Size = new Size (Width, 40);
+					Size = new Size_ (Width, 40);
 				else
-					Size = new Size (50, Height);
+					Size = new Size_ (50, Height);
 			
 			UpdatePos (Value, true);			
 		}
@@ -709,7 +709,7 @@ namespace System.Windows.Forms
 
 			bool fire_timer = false;
     			
-    			Point point = new Point (e.X, e.Y);
+    			Point_ point = new Point_ (e.X, e.Y);
 
 			if (orientation == Orientation.Horizontal) {
 				
@@ -735,7 +735,7 @@ namespace System.Windows.Forms
 				}
 			}
 			else {
-				Rectangle vertical_thumb_pos = thumb_pos;
+				Rectangle_ vertical_thumb_pos = thumb_pos;
 				vertical_thumb_pos.Width = thumb_pos.Height;
 				vertical_thumb_pos.Height = thumb_pos.Width;
 				if (vertical_thumb_pos.Contains (point)) {
@@ -779,9 +779,9 @@ namespace System.Windows.Forms
 			ThumbEntered = GetRealThumbRectangle ().Contains (e.Location);
     		}
 
-		Rectangle GetRealThumbRectangle ()
+		Rectangle_ GetRealThumbRectangle ()
 		{
-			Rectangle result = thumb_pos;
+			Rectangle_ result = thumb_pos;
 			if (Orientation == Orientation.Vertical) {
 				result.Width = thumb_pos.Height;
 				result.Height = thumb_pos.Width;
@@ -859,11 +859,11 @@ namespace System.Windows.Forms
 
 		private void OnFirstClickTimer (Object source, object e)
 		{						
-			Point pnt;
+			Point_ pnt;
 			pnt = PointToClient (MousePosition);			
 			/*
 				On Win32 the thumb only moves in one direction after a click, 
-				if the thumb passes the clicked point it will never go in the 
+				if the thumb passes the clicked Point_ it will never go in the 
 				other way unless the mouse is released and clicked again. This
 				is also true if the mouse moves while beeing hold down.
 			*/

@@ -38,15 +38,15 @@ namespace System.Windows.Forms {
 		private bool			force_hscroll_visible;
 		private bool			force_vscroll_visible;
 		private bool			auto_scroll;
-		private Size			auto_scroll_margin;
-		private Size			auto_scroll_min_size;
-		private Point			scroll_position;
+		private Size_			auto_scroll_margin;
+		private Size_			auto_scroll_min_size;
+		private Point_			scroll_position;
 		private DockPaddingEdges	dock_padding;
 		private SizeGrip		sizegrip;
 		internal ImplicitHScrollBar	hscrollbar;
 		internal ImplicitVScrollBar	vscrollbar;
-		internal Size			canvas_size;
-		private Rectangle		display_rectangle;
+		internal Size_			canvas_size;
+		private Rectangle_		display_rectangle;
 		private Control			old_parent;
 		private HScrollProperties	horizontalScroll;
 		private VScrollProperties	verticalScroll;
@@ -162,9 +162,9 @@ namespace System.Windows.Forms {
 			auto_scroll = false;
 			force_hscroll_visible = false;
 			force_vscroll_visible = false;
-			auto_scroll_margin = new Size(0, 0);
-			auto_scroll_min_size = new Size(0, 0);
-			scroll_position = new Point(0, 0);
+			auto_scroll_margin = new Size_(0, 0);
+			auto_scroll_min_size = new Size_(0, 0);
+			scroll_position = new Point_(0, 0);
 			SizeChanged +=new EventHandler(Recalculate);
 			VisibleChanged += new EventHandler (VisibleChangedHandler);
 			LocationChanged += new EventHandler (LocationChangedHandler);
@@ -244,7 +244,7 @@ namespace System.Windows.Forms {
 
 		[Localizable(true)]
 		[MWFCategory("Layout")]
-		public Size AutoScrollMargin {
+		public Size_ AutoScrollMargin {
 			get {
 				return auto_scroll_margin;
 			}
@@ -264,12 +264,12 @@ namespace System.Windows.Forms {
 
 		internal bool ShouldSerializeAutoScrollMargin ()
 		{
-			return this.AutoScrollMargin != new Size (0, 0);
+			return this.AutoScrollMargin != new Size_ (0, 0);
 		}
 
 		[Localizable(true)]
 		[MWFCategory("Layout")]
-		public Size AutoScrollMinSize {
+		public Size_ AutoScrollMinSize {
 			get {
 				return auto_scroll_min_size;
 			}
@@ -285,12 +285,12 @@ namespace System.Windows.Forms {
 
 		internal bool ShouldSerializeAutoScrollMinSize ()
 		{
-			return this.AutoScrollMinSize != new Size (0, 0);
+			return this.AutoScrollMinSize != new Size_ (0, 0);
 		}
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Point AutoScrollPosition {
+		public Point_ AutoScrollPosition {
 			get {
 				return DisplayRectangle.Location;
 			}
@@ -332,7 +332,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public override Rectangle DisplayRectangle {
+		public override Rectangle_ DisplayRectangle {
 			get {
 				if (auto_scroll) {
 					int		width;
@@ -443,7 +443,7 @@ namespace System.Windows.Forms {
 			int	corner_x;
 			int	corner_y;
 
-			Rectangle within = new Rectangle ();
+			Rectangle_ within = new Rectangle_ ();
 			within.Size = ClientSize;
 			
 			if (!AutoScroll || (!hscrollbar.VisibleInternal && !vscrollbar.VisibleInternal)) {
@@ -516,7 +516,7 @@ namespace System.Windows.Forms {
 				y = 0;
 			}
 
-			auto_scroll_margin = new Size(x, y);
+			auto_scroll_margin = new Size_(x, y);
 			Recalculate (false);
 		}
 		#endregion	// Public Instance Methods
@@ -588,17 +588,17 @@ namespace System.Windows.Forms {
 			base.ScaleCore(dx, dy);
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}
 		
-		protected virtual Point ScrollToControl (Control activeControl)
+		protected virtual Point_ ScrollToControl (Control activeControl)
 		{
 			int corner_x;
 			int corner_y;
 
-			Rectangle within = new Rectangle ();
+			Rectangle_ within = new Rectangle_ ();
 			within.Size = ClientSize;
 
 			if (vscrollbar.Visible)
@@ -626,7 +626,7 @@ namespace System.Windows.Forms {
 			corner_x = AutoScrollPosition.X + x_diff;
 			corner_y = AutoScrollPosition.Y + y_diff;
 			
-			return new Point (corner_x, corner_y);
+			return new Point_ (corner_x, corner_y);
 		}
 
 		protected void SetDisplayRectLocation(int x, int y) {
@@ -772,8 +772,8 @@ namespace System.Windows.Forms {
 				return;
 			}
 
-			Size canvas = canvas_size;
-			Size client = ClientSize;
+			Size_ canvas = canvas_size;
+			Size_ client = ClientSize;
 
 			canvas.Width += auto_scroll_margin.Width;
 			canvas.Height += auto_scroll_margin.Height;
@@ -811,12 +811,12 @@ namespace System.Windows.Forms {
 			if (right_edge < 0) right_edge = 0;
 			if (bottom_edge < 0) bottom_edge = 0;
 
-			Rectangle hscroll_bounds;
-			Rectangle vscroll_bounds;
+			Rectangle_ hscroll_bounds;
+			Rectangle_ vscroll_bounds;
 
-			hscroll_bounds = new Rectangle (0, client.Height - SystemInformation.HorizontalScrollBarHeight,
+			hscroll_bounds = new Rectangle_ (0, client.Height - SystemInformation.HorizontalScrollBarHeight,
 							ClientRectangle.Width, SystemInformation.HorizontalScrollBarHeight);
-			vscroll_bounds = new Rectangle (client.Width - SystemInformation.VerticalScrollBarWidth, 0,
+			vscroll_bounds = new Rectangle_ (client.Width - SystemInformation.VerticalScrollBarWidth, 0,
 							SystemInformation.VerticalScrollBarWidth, ClientRectangle.Height);
 
 			/* the ScrollWindow calls here are needed
@@ -839,7 +839,7 @@ namespace System.Windows.Forms {
 				hscrollbar.Value = 0;
 			}
 
-			/* Manually setting the size of the thumb should be done before
+			/* Manually setting the Size_ of the thumb should be done before
 			 * the other assignments */
 			if (hscroll_visible) {
 				hscrollbar.manual_thumb_size = right_edge;
@@ -869,7 +869,7 @@ namespace System.Windows.Forms {
 				hscroll_bounds.Width -= SystemInformation.VerticalScrollBarWidth;
 				vscroll_bounds.Height -= SystemInformation.HorizontalScrollBarHeight;
 
-				sizegrip.Bounds = new Rectangle (hscroll_bounds.Right,
+				sizegrip.Bounds = new Rectangle_ (hscroll_bounds.Right,
 								 vscroll_bounds.Bottom,
 								 SystemInformation.VerticalScrollBarWidth,
 								 SystemInformation.HorizontalScrollBarHeight);
@@ -907,13 +907,13 @@ namespace System.Windows.Forms {
 			}
 
 			sizegrip.CapturedControl = Parent;
-			// This is really wierd, the size grip is only showing up 
+			// This is really wierd, the Size_ grip is only showing up 
 			// if the bottom right corner of the scrollable control is within
 			// two pixels from the bottom right corner of its parent.
 			bool show_sizegrip = hscrollbar.VisibleInternal && vscrollbar.VisibleInternal;
 			bool enable_sizegrip = false;
 			if (show_sizegrip && Parent != null) {
-				Point diff = new Point (Parent.ClientRectangle.Bottom - Bottom, Parent.ClientRectangle.Right - Right);
+				Point_ diff = new Point_ (Parent.ClientRectangle.Bottom - Bottom, Parent.ClientRectangle.Right - Right);
 				enable_sizegrip = diff.X <= 2 && diff.X >= 0 && diff.Y <= 2 && diff.Y >= 0;
 			}
 			sizegrip.Visible = show_sizegrip;
@@ -977,10 +977,10 @@ namespace System.Windows.Forms {
 			num_of_children = Controls.Count;
 
 			for (int i = 0; i < num_of_children; i++) {
-				Controls[i].Location = new Point (Controls[i].Left - XOffset, Controls[i].Top - YOffset);
+				Controls[i].Location = new Point_ (Controls[i].Left - XOffset, Controls[i].Top - YOffset);
 				//Controls[i].Left -= XOffset;
 				//Controls[i].Top -= YOffset;
-				// Is this faster? Controls[i].Location -= new Size(XOffset, YOffset);
+				// Is this faster? Controls[i].Location -= new Size_(XOffset, YOffset);
 			}
 
 			scroll_position.X += XOffset;

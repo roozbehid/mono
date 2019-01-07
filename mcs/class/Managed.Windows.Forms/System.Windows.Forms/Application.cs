@@ -242,13 +242,6 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static RegistryKey CommonAppDataRegistry {
-			get {
-				string key = string.Format ("Software\\{0}\\{1}\\{2}", CompanyName, ProductName, ProductVersion);
-
-				return Registry.LocalMachine.CreateSubKey (key);
-			}
-		}
 
 		public static string CompanyName {
 			get {
@@ -331,13 +324,13 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static RegistryKey UserAppDataRegistry {
+		/*public static RegistryKey UserAppDataRegistry {
 			get {
 				string key = string.Format ("Software\\{0}\\{1}\\{2}", CompanyName, ProductName, ProductVersion);
 				
 				return Registry.CurrentUser.CreateSubKey (key);
 			}
-		}
+		}*/
 
 		public static bool UseWaitCursor {
 			get {

@@ -23,12 +23,13 @@
 //	George Giolfan (georgegiolfan@yahoo.com)
 
 using System.Drawing;
+
 using System.Windows.Forms.VisualStyles;
 namespace System.Windows.Forms.Theming.VisualStyles
 {
 	class CheckBoxPainter : Default.CheckBoxPainter
 	{
-		public override void DrawNormalCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public override void DrawNormalCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			CheckBoxState check_box_state;
 			switch (state) {
@@ -44,7 +45,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
 			}
 			DrawCheckBox (g, bounds, check_box_state);
 		}
-		public override void DrawHotCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public override void DrawHotCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			CheckBoxState check_box_state;
 			switch (state) {
@@ -60,7 +61,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
 			}
 			DrawCheckBox (g, bounds, check_box_state);
 		}
-		public override void DrawPressedCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public override void DrawPressedCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			CheckBoxState check_box_state;
 			switch (state) {
@@ -76,7 +77,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
 			}
 			DrawCheckBox (g, bounds, check_box_state);
 		}
-		public override void DrawDisabledCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public override void DrawDisabledCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			CheckBoxState check_box_state;
 			switch (state) {
@@ -92,7 +93,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
 			}
 			DrawCheckBox (g, bounds, check_box_state);
 		}
-		static void DrawCheckBox (Graphics g, Rectangle bounds, CheckBoxState state)
+		static void DrawCheckBox (Graphics g, Rectangle_ bounds, CheckBoxState state)
 		{
 			CheckBoxRenderer.DrawCheckBox (
 				g,

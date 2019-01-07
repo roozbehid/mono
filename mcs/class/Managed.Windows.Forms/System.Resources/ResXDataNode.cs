@@ -46,7 +46,7 @@ namespace System.Resources
 		private string name;
 		private ResXFileRef fileRef;
 		private string comment;
-		private Point pos;
+		private Point_ pos;
 
 		internal ResXDataNodeHandler handler;
 
@@ -90,7 +90,7 @@ namespace System.Resources
 			}
 		}
 
-		public ResXDataNode (string name, object value) : this (name, value, Point.Empty)
+		public ResXDataNode (string name, object value) : this (name, value, Point_.Empty)
 		{
 		}
 
@@ -107,11 +107,11 @@ namespace System.Resources
 
 			this.name = name;
 			this.fileRef = fileRef;
-			pos = Point.Empty;
+			pos = Point_.Empty;
 			handler = new FileRefHandler (fileRef);
 		}
 
-		internal ResXDataNode (string name, object value, Point position)
+		internal ResXDataNode (string name, object value, Point_ position)
 		{
 			if (name == null)
 				throw new ArgumentNullException ("name");
@@ -132,7 +132,7 @@ namespace System.Resources
 		}
 
 		internal ResXDataNode (string nameAtt, string mimeTypeAtt, string typeAtt, 
-		                       string dataString, string commentString, Point position, 
+		                       string dataString, string commentString, Point_ position, 
 		                       string basePath)
 		{
 
@@ -168,7 +168,7 @@ namespace System.Resources
 				throw new Exception ("handler is null");
 		}
 
-		public Point GetNodePosition ()
+		public Point_ GetNodePosition ()
 		{
 			return pos;
 		}

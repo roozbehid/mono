@@ -25,9 +25,9 @@
 //
 
 // NOT COMPLETE
-
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -169,8 +169,8 @@ namespace System.Windows.Forms {
 			case Msg.WM_NCPAINT:
 				PaintEventArgs pe = XplatUI.PaintEventStart (ref m, Handle, false);
 
-				Rectangle clip;
-				clip = new Rectangle (0, 0, Width, Height);
+				Rectangle_ clip;
+				clip = new Rectangle_ (0, 0, Width, Height);
 
 				ControlPaint.DrawBorder3D (pe.Graphics, clip, Border3DStyle.Sunken);
 				XplatUI.PaintEventEnd (ref m, Handle, false);
@@ -192,7 +192,7 @@ namespace System.Windows.Forms {
 			ArrangeWindows ();
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			// Never change the MdiClient's location
 			specified &= ~BoundsSpecified.Location;
@@ -322,19 +322,19 @@ namespace System.Windows.Forms {
 					return;
 
 				// Calculate desired height and width
-				Size newSize;
-				Size offset;
+				Size_ newSize;
+				Size_ offset;
 
 				if (value == MdiLayout.TileHorizontal) {
-					newSize = new Size(ClientSize.Width, clientHeight / total);
-					offset = new Size (0, newSize.Height);
+					newSize = new Size_(ClientSize.Width, clientHeight / total);
+					offset = new Size_ (0, newSize.Height);
 				} else {
-					newSize = new Size(ClientSize.Width / total, clientHeight);
-					offset = new Size (newSize.Width, 0);
+					newSize = new Size_(ClientSize.Width / total, clientHeight);
+					offset = new Size_ (newSize.Width, 0);
 				}
 				
-				// Loop again and set the size and location.
-				Point nextLocation = Point.Empty;
+				// Loop again and set the Size_ and location.
+				Point_ nextLocation = Point_.Empty;
 				
 				for (int i = 0; i < Controls.Count; i++) {
 					Form form = Controls [i] as Form;
@@ -446,7 +446,7 @@ namespace System.Windows.Forms {
 					sizegrip = new SizeGrip (this.ParentForm);
 					Controls.AddImplicit (sizegrip);
 				}
-				sizegrip.Location = new Point (hbar.Right, vbar.Bottom);
+				sizegrip.Location = new Point_ (hbar.Right, vbar.Bottom);
 				sizegrip.Visible = true;
 				XplatUI.SetZOrder (sizegrip.Handle, vbar.Handle, false, false);
 			} else if (sizegrip != null) {
@@ -566,7 +566,7 @@ namespace System.Windows.Forms {
 
 		internal void ArrangeIconicWindows (bool rearrange_all)
 		{
-			Rectangle rect = Rectangle.Empty;
+			Rectangle_ rect = Rectangle_.Empty;
 
 			lock_sizing = true;
 			foreach (Form form in Controls) {
@@ -575,7 +575,7 @@ namespace System.Windows.Forms {
 
 				MdiWindowManager wm = (MdiWindowManager) form.WindowManager;
 				
-				if (wm.IconicBounds != Rectangle.Empty && !rearrange_all) {
+				if (wm.IconicBounds != Rectangle_.Empty && !rearrange_all) {
 					if (form.Bounds != wm.IconicBounds)
 						form.Bounds = wm.IconicBounds;
 					continue;

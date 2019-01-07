@@ -23,10 +23,10 @@
 //	olivier Dufour	olivier.duff@free.fr
 //
 //
-
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using System.Drawing;
 using System.Security.Permissions;
 using System.ComponentModel;
@@ -38,10 +38,10 @@ namespace System.Windows.Forms
 
 		public DataGridViewLinkCell ()
 		{
-			activeLinkColor = Color.Red;
-			linkColor = Color.FromArgb (0, 0, 255);
+			activeLinkColor = Color_.Red;
+			linkColor = Color_.FromArgb (0, 0, 255);
 			trackVisitedState = true;
-			visited_link_color = Color.FromArgb (128, 0, 128);
+			visited_link_color = Color_.FromArgb (128, 0, 128);
 		}
 
 		#region Public Methods
@@ -74,44 +74,44 @@ namespace System.Windows.Forms
 			return new DataGridViewLinkCellAccessibleObject (this);
 		}
 		
-		protected override Rectangle GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetContentBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null)
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
 			object o = FormattedValue;
-			Size s = Size.Empty;
+			Size_ s = Size_.Empty;
 
 			if (o != null) {
 				s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height += 3;
 			} else {
-				return new Rectangle (1, 10, 0, 0);
+				return new Rectangle_ (1, 10, 0, 0);
 			}
 
-			return new Rectangle (1, (OwningRow.Height - s.Height) / 2 - 1, s.Width, s.Height);
+			return new Rectangle_ (1, (OwningRow.Height - s.Height) / 2 - 1, s.Width, s.Height);
 		}
 		
-		protected override Rectangle GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
+		protected override Rectangle_ GetErrorIconBounds (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex)
 		{
 			if (DataGridView == null || string.IsNullOrEmpty (ErrorText))
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 
-			Size error_icon = new Size (12, 11);
-			return new Rectangle (new Point (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
+			Size_ error_icon = new Size_ (12, 11);
+			return new Rectangle_ (new Point_ (Size.Width - error_icon.Width - 5, (Size.Height - error_icon.Height) / 2), error_icon);
 		}
 		
-		protected override Size GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size constraintSize)
+		protected override Size_ GetPreferredSize (Graphics graphics, DataGridViewCellStyle cellStyle, int rowIndex, Size_ constraintSize)
 		{
 			object o = FormattedValue;
 
 			if (o != null) {
-				Size s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
+				Size_ s = DataGridViewCell.MeasureTextSize (graphics, o.ToString (), cellStyle.Font, TextFormatFlags.Default);
 				s.Height = Math.Max (s.Height, 20);
 				s.Width += 4;
 				return s;
 			} else
-				return new Size (21, 20);
+				return new Size_ (21, 20);
 		}
 		
 		protected override object GetValue (int rowIndex)
@@ -204,12 +204,12 @@ namespace System.Windows.Forms
 			DataGridView.InvalidateCell (this);
 		}
 
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint (Graphics graphics, Rectangle_ clipBounds, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			base.Paint (graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 		}
 		
-		internal override void PaintPartContent (Graphics graphics, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
+		internal override void PaintPartContent (Graphics graphics, Rectangle_ cellBounds, int rowIndex, DataGridViewElementStates cellState, DataGridViewCellStyle cellStyle, object formattedValue)
 		{
 			Font font = cellStyle.Font;
 
@@ -224,7 +224,7 @@ namespace System.Windows.Forms
 					break;
 			}
 
-			Color color;
+			Color_ color;
 			
 			if (linkState == LinkState.Active)
 				color = ActiveLinkColor;
@@ -245,21 +245,21 @@ namespace System.Windows.Forms
 
 		#region Private fields
 
-		private Color activeLinkColor;
+		private Color_ activeLinkColor;
 		private LinkBehavior linkBehavior;
-		private Color linkColor;
+		private Color_ linkColor;
 		private bool linkVisited;
 		private Cursor parent_cursor;
 		private bool trackVisitedState;
 		private bool useColumnTextForLinkValue;
-		private Color visited_link_color;
+		private Color_ visited_link_color;
 		private LinkState linkState;
 
 		#endregion
 
 		#region Public properties
 
-		public Color ActiveLinkColor {
+		public Color_ ActiveLinkColor {
 			get { return activeLinkColor; }
 			set { activeLinkColor = value; }
 		}
@@ -269,7 +269,7 @@ namespace System.Windows.Forms
 			get { return linkBehavior; }
 			set { linkBehavior = value; }
 		}
-		public Color LinkColor {
+		public Color_ LinkColor {
 			get { return linkColor; }
 			set { linkColor = value; }
 		}
@@ -288,7 +288,7 @@ namespace System.Windows.Forms
 			set { useColumnTextForLinkValue = value; }
 		}
 
-		public Color VisitedLinkColor {
+		public Color_ VisitedLinkColor {
 			get { return visited_link_color; }
 			set { visited_link_color = value; }
 		}

@@ -25,10 +25,10 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System.Windows.Forms.Layout;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -126,14 +126,14 @@ namespace System.Windows.Forms
                        AdjustFormScrollbars (AutoScroll);
                }
 		
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
 			int width = 0;
 			int height = 0;
 			bool horizontal = FlowDirection == FlowDirection.LeftToRight || FlowDirection == FlowDirection.RightToLeft;
 			if (!WrapContents || (horizontal && proposedSize.Width == 0) || (!horizontal && proposedSize.Height == 0)) {
 				foreach (Control control in Controls) {
-					Size control_preferred_size;
+					Size_ control_preferred_size;
 					if (control.AutoSize)
 						control_preferred_size = control.PreferredSize;
 					else
@@ -152,7 +152,7 @@ namespace System.Windows.Forms
 				int size_in_other_direction = 0;
 				int increase;
 				foreach (Control control in Controls) {
-					Size control_preferred_size;
+					Size_ control_preferred_size;
 					if (control.AutoSize)
 						control_preferred_size = control.PreferredSize;
 					else
@@ -188,7 +188,7 @@ namespace System.Windows.Forms
 					width += size_in_other_direction;
 				}
 			}
-			return new Size (width, height);
+			return new Size_ (width, height);
 		}
 		#endregion
 	}

@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
@@ -91,7 +91,7 @@ namespace System.Windows.Forms
 		protected override Padding DefaultGripMargin { get { return new Padding (2, 2, 0, 2); } }
 		protected override Padding DefaultPadding { get { return new Padding (6, 2, 0, 2); } }
 		protected override bool DefaultShowItemToolTips { get { return false; } }
-		protected override Size DefaultSize { get { return new Size (200, 24); } }
+		protected override Size_ DefaultSize { get { return new Size_ (200, 24); } }
 		#endregion
 
 		#region Protected Methods

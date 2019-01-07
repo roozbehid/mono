@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Threading;
@@ -107,18 +107,18 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Protected Properties
-		protected internal virtual Point DropDownLocation {
+		protected internal virtual Point_ DropDownLocation {
 			get {
-				Point p;
+				Point_ p;
 
 				if (this.IsOnDropDown) {
-					p = Parent.PointToScreen (new Point (this.Bounds.Left, this.Bounds.Top - 1));
+					p = Parent.PointToScreen (new Point_ (this.Bounds.Left, this.Bounds.Top - 1));
 					p.X += this.Bounds.Width;
 					p.Y += this.Bounds.Left;
 					return p;
 				}
 				else
-					p = new Point (this.Bounds.Left, this.Bounds.Bottom - 1);
+					p = new Point_ (this.Bounds.Left, this.Bounds.Bottom - 1);
 
 				return Parent.PointToScreen (p);
 			}

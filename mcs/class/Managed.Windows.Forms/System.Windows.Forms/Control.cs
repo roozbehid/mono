@@ -62,8 +62,8 @@ namespace System.Windows.Forms
 		#region Local Variables
 
 		// Basic
-		internal Rectangle		bounds;			// bounding rectangle for control (client area + decorations)
-		Rectangle               explicit_bounds; // explicitly set bounds
+		internal Rectangle_		bounds;			// bounding Rectangle_ for control (client area + decorations)
+		Rectangle_               explicit_bounds; // explicitly set bounds
 		internal object			creator_thread;		// thread that created the control
 		internal                ControlNativeWindow	window;			// object for native window handle
 		private                 IWindowTarget window_target;
@@ -85,8 +85,8 @@ namespace System.Windows.Forms
 		bool                    tab_stop; // is the control a tab stop?
 		bool                    is_disposed; // has the window already been disposed?
 		bool                    is_disposing; // is the window getting disposed?
-		Size                    client_size; // size of the client area (window excluding decorations)
-		Rectangle               client_rect; // rectangle with the client area (window excluding decorations)
+		Size_                    client_size; // Size_ of the client area (window excluding decorations)
+		Rectangle_               client_rect; // Rectangle_ with the client area (window excluding decorations)
 		ControlStyles           control_style; // rather win32-specific, style bits for control
 		ImeMode                 ime_mode;
 		object                  control_tag; // object that contains data about our control
@@ -96,8 +96,8 @@ namespace System.Windows.Forms
 		Region                  clip_region; // User-specified clip region for the window
 
 		// Visuals
-		internal Color			foreground_color;	// foreground color for control
-		internal Color			background_color;	// background color for control
+		internal Color_			foreground_color;	// foreground Color_ for control
+		internal Color_			background_color;	// background Color_ for control
 		Image                   background_image; // background image for control
 		internal Font			font;			// font for control
 		string                  text; // window/title text for control
@@ -147,12 +147,12 @@ namespace System.Windows.Forms
 		static bool verify_thread_handle;
 		Padding padding;
 		ImageLayout backgroundimage_layout;
-		Size maximum_size;
-		Size minimum_size;
+		Size_ maximum_size;
+		Size_ minimum_size;
 		Padding margin;
 		private ContextMenuStrip context_menu_strip;
 		private bool nested_layout = false;
-		Point auto_scroll_offset;
+		Point_ auto_scroll_offset;
 		private AutoSizeMode auto_size_mode;
 		private bool suppressing_key_press;
 
@@ -891,7 +891,7 @@ namespace System.Windows.Forms
 			cursor = null;
 			right_to_left = RightToLeft.Inherit;
 			border_style = BorderStyle.None;
-			background_color = Color.Empty;
+			background_color = Color_.Empty;
 			dist_right = 0;
 			dist_bottom = 0;
 			tab_stop = true;
@@ -904,8 +904,8 @@ namespace System.Windows.Forms
 			backgroundimage_layout = ImageLayout.Tile;
 			use_compatible_text_rendering = Application.use_compatible_text_rendering;
 			padding = this.DefaultPadding;
-			maximum_size = new Size();
-			minimum_size = new Size();
+			maximum_size = new Size_();
+			minimum_size = new Size_();
 			margin = this.DefaultMargin;
 			auto_size_mode = AutoSizeMode.GrowOnly;
 
@@ -925,7 +925,7 @@ namespace System.Windows.Forms
 			
 			bounds.Size = DefaultSize;
 			client_size = ClientSizeFromSize (bounds.Size);
-			client_rect = new Rectangle (Point.Empty, client_size);
+			client_rect = new Rectangle_ (Point_.Empty, client_size);
 			explicit_bounds = bounds;
 		}
 
@@ -987,10 +987,10 @@ namespace System.Windows.Forms
 
 		#region Internal Properties
 
-		internal Rectangle PaddingClientRectangle
+		internal Rectangle_ PaddingClientRectangle
 		{
 			get {
-				return new Rectangle (
+				return new Rectangle_ (
 					ClientRectangle.Left   + padding.Left,
 					ClientRectangle.Top    + padding.Top, 
 					ClientRectangle.Width  - padding.Horizontal, 
@@ -1081,9 +1081,9 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		internal Size InternalClientSize { set { this.client_size = value; } }
+		internal Size_ InternalClientSize { set { this.client_size = value; } }
 		internal virtual bool ActivateOnShow { get { return true; } }
-		internal Rectangle ExplicitBounds { get { return this.explicit_bounds; } set { this.explicit_bounds = value; } }
+		internal Rectangle_ ExplicitBounds { get { return this.explicit_bounds; } set { this.explicit_bounds = value; } }
 
 		internal bool ValidationFailed { 
 			get { 
@@ -1215,7 +1215,7 @@ namespace System.Windows.Forms
 				if (!active_tracker.OnMouseDown (args)) {
 					Control control = GetRealChildAtPoint (Cursor.Position);
 					if (control != null) {
-						Point pt = control.PointToClient (Cursor.Position);
+                        Point_ pt = control.PointToClient (Cursor.Position);
 						XplatUI.SendMessage (control.Handle, 
 							(Msg)m.Msg, 
 							m.WParam, 
@@ -1315,7 +1315,7 @@ namespace System.Windows.Forms
 					PaintEventArgs	parent_pe;
 					GraphicsState	state;
 
-					parent_pe = new PaintEventArgs(pevent.Graphics, new Rectangle(pevent.ClipRectangle.X + Left, pevent.ClipRectangle.Y + Top, pevent.ClipRectangle.Width, pevent.ClipRectangle.Height));
+					parent_pe = new PaintEventArgs(pevent.Graphics, new Rectangle_(pevent.ClipRectangle.X + Left, pevent.ClipRectangle.Y + Top, pevent.ClipRectangle.Width, pevent.ClipRectangle.Height));
 
 					state = parent_pe.Graphics.Save();
 					parent_pe.Graphics.TranslateTransform(-Left, -Top);
@@ -1340,13 +1340,13 @@ namespace System.Windows.Forms
 					hwnd = Hwnd.ObjectFromHandle(Handle);
 
 					if (hwnd != null) {
-						parent_pe = new PaintEventArgs(pevent.Graphics, new Rectangle(pevent.ClipRectangle.X + Left, pevent.ClipRectangle.Y + Top, pevent.ClipRectangle.Width, pevent.ClipRectangle.Height));
+						parent_pe = new PaintEventArgs(pevent.Graphics, new Rectangle_(pevent.ClipRectangle.X + Left, pevent.ClipRectangle.Y + Top, pevent.ClipRectangle.Width, pevent.ClipRectangle.Height));
 
 						region = new Region ();
 						region.MakeEmpty();
 						region.Union(ClientRectangle);
 
-						foreach (Rectangle r in hwnd.ClipRectangles) {
+						foreach (Rectangle_ r in hwnd.ClipRectangles) {
 							region.Union (r);
 						}
 
@@ -1373,7 +1373,7 @@ namespace System.Windows.Forms
 
 			if (background_image == null) {
 				if (!tbstyle_flat) {
-					Rectangle paintRect = pevent.ClipRectangle;
+					Rectangle_ paintRect = pevent.ClipRectangle;
 					Brush pen = ThemeEngine.Current.ResPool.GetSolidBrush(BackColor);
 					pevent.Graphics.FillRectangle(pen, paintRect);
 				}
@@ -1384,7 +1384,7 @@ namespace System.Windows.Forms
 		}
 
 		void DrawBackgroundImage (Graphics g) {
-			Rectangle drawing_rectangle = new Rectangle ();
+			Rectangle_ drawing_rectangle = new Rectangle_ ();
 			g.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (BackColor), ClientRectangle);
 				
 			switch (backgroundimage_layout)
@@ -1395,11 +1395,11 @@ namespace System.Windows.Forms
 				}
 				return;
 			case ImageLayout.Center:
-				drawing_rectangle.Location = new Point (ClientSize.Width / 2 - background_image.Width / 2, ClientSize.Height / 2 - background_image.Height / 2);
+				drawing_rectangle.Location = new Point_ (ClientSize.Width / 2 - background_image.Width / 2, ClientSize.Height / 2 - background_image.Height / 2);
 				drawing_rectangle.Size = background_image.Size;
 				break;
 			case ImageLayout.None:
-				drawing_rectangle.Location = Point.Empty;
+				drawing_rectangle.Location = Point_.Empty;
 				drawing_rectangle.Size = background_image.Size;
 				break;
 			case ImageLayout.Stretch:
@@ -1676,8 +1676,8 @@ namespace System.Windows.Forms
 			bool		pre_enabled;
 			bool		pre_visible;
 			Font		pre_font;
-			Color		pre_fore_color;
-			Color		pre_back_color;
+			Color_		pre_fore_color;
+			Color_		pre_back_color;
 			RightToLeft	pre_rtl;
 
 			// These properties are inherited from our parent
@@ -1742,31 +1742,31 @@ namespace System.Windows.Forms
 		}
 
 		// Sometimes we need to do this calculation without it being virtual (constructor)
-		internal Size InternalSizeFromClientSize (Size clientSize)
+		internal Size_ InternalSizeFromClientSize (Size_ clientSize)
 		{
-			Rectangle ClientRect;
-			Rectangle WindowRect;
+			Rectangle_ ClientRect;
+			Rectangle_ WindowRect;
 			CreateParams cp;
 
-			ClientRect = new Rectangle (0, 0, clientSize.Width, clientSize.Height);
+			ClientRect = new Rectangle_ (0, 0, clientSize.Width, clientSize.Height);
 			cp = this.CreateParams;
 
 			if (XplatUI.CalculateWindowRect (ref ClientRect, cp, null, out WindowRect))
-				return new Size (WindowRect.Width, WindowRect.Height);
+				return new Size_ (WindowRect.Width, WindowRect.Height);
 
-			return Size.Empty;
+			return Size_.Empty;
 		}
 		
-		internal Size ClientSizeFromSize (Size size)
+		internal Size_ ClientSizeFromSize (Size_ size)
 		{
-			// Calling this gives us the difference in Size and ClientSize.
+			// Calling this gives us the difference in Size_ and ClientSize.
 			// We just have to apply that difference to our given size.
-			Size client_size = this.InternalSizeFromClientSize (size);
+			Size_ client_size = this.InternalSizeFromClientSize (size);
 			
-			if (client_size == Size.Empty)
-				return Size.Empty;
+			if (client_size == Size_.Empty)
+				return Size_.Empty;
 				
-			return new Size (size.Width - (client_size.Width - size.Width), size.Height - (client_size.Height - size.Height));
+			return new Size_ (size.Width - (client_size.Width - size.Width), size.Height - (client_size.Height - size.Height));
 		}
 		
 		internal CreateParams GetCreateParams ()
@@ -1774,7 +1774,7 @@ namespace System.Windows.Forms
 			return CreateParams;
 		}
 
-		internal virtual Size GetPreferredSizeCore (Size proposedSize)
+		internal virtual Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
 			return this.explicit_bounds.Size;
 		}
@@ -1813,7 +1813,7 @@ namespace System.Windows.Forms
 				return;
 			}
 
-			Point pt = PointToClient (Cursor.Position);
+			Point_ pt = PointToClient (Cursor.Position);
 
 			if (!bounds.Contains (pt) && !Capture)
 				return;
@@ -1851,7 +1851,7 @@ namespace System.Windows.Forms
 		#endregion	// Private & Internal Methods
 
 		#region Public Static Properties
-		public static Color DefaultBackColor {
+		public static Color_ DefaultBackColor {
 			get {
 				return ThemeEngine.Current.DefaultControlBackColor;
 			}
@@ -1863,7 +1863,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Color DefaultForeColor {
+		public static Color_ DefaultForeColor {
 			get {
 				return ThemeEngine.Current.DefaultControlForeColor;
 			}
@@ -1881,7 +1881,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public static Point MousePosition {
+		public static Point_ MousePosition {
 			get {
 				return Cursor.Position;
 			}
@@ -2013,7 +2013,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[DefaultValue (typeof (Point), "0, 0")]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public virtual Point AutoScrollOffset {
+		public virtual Point_ AutoScrollOffset {
 			get {
 				return auto_scroll_offset;
 			}
@@ -2053,7 +2053,7 @@ namespace System.Windows.Forms
 		
 		[AmbientValue ("{Width=0, Height=0}")]
 		[MWFCategory("Layout")]
-		public virtual Size MaximumSize {
+		public virtual Size_ MaximumSize {
 			get {
 				return maximum_size;
 			}
@@ -2071,7 +2071,7 @@ namespace System.Windows.Forms
 		}
 
 		[MWFCategory("Layout")]
-		public virtual Size MinimumSize {
+		public virtual Size_ MinimumSize {
 			get {
 				return minimum_size;
 			}
@@ -2090,11 +2090,11 @@ namespace System.Windows.Forms
 
 		[DispId(-501)]
 		[MWFCategory("Appearance")]
-		public virtual Color BackColor {
+		public virtual Color_ BackColor {
 			get {
 				if (background_color.IsEmpty) {
 					if (parent!=null) {
-						Color pcolor = parent.BackColor;
+						Color_ pcolor = parent.BackColor;
 						if (pcolor.A == 0xff || GetStyle(ControlStyles.SupportsTransparentBackColor))
 							return pcolor;
 					}
@@ -2191,7 +2191,7 @@ namespace System.Windows.Forms
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get {
 				return this.bounds;
 			}
@@ -2287,7 +2287,7 @@ namespace System.Windows.Forms
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Rectangle ClientRectangle {
+		public Rectangle_ ClientRectangle {
 			get {
 				client_rect.Width = client_size.Width;
 				client_rect.Height = client_size.Height;
@@ -2298,7 +2298,7 @@ namespace System.Windows.Forms
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Size ClientSize {
+		public Size_ ClientSize {
 			get {
 #if notneeded
 				if ((this is Form) && (((Form)this).form_parent_window != null)) {
@@ -2453,7 +2453,7 @@ namespace System.Windows.Forms
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public virtual Rectangle DisplayRectangle {
+		public virtual Rectangle_ DisplayRectangle {
 			get {
 				// for the control class the DisplayRectangle == ClientRectangle
 				return ClientRectangle;
@@ -2526,11 +2526,11 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public void DrawToBitmap (Bitmap bitmap, Rectangle targetBounds)
+		public void DrawToBitmap (Bitmap bitmap, Rectangle_ targetBounds)
 		{
 			Graphics g = Graphics.FromImage (bitmap);
 			
-			// Only draw within the target bouds, and up to the size of the control
+			// Only draw within the target bouds, and up to the Size_ of the control
 			g.IntersectClip (targetBounds);
 			g.IntersectClip (Bounds);
 			
@@ -2638,7 +2638,7 @@ namespace System.Windows.Forms
 
 		[DispId(-513)]
 		[MWFCategory("Appearance")]
-		public virtual Color ForeColor {
+		public virtual Color_ ForeColor {
 			get {
 				if (foreground_color.IsEmpty) {
 					if (parent!=null) {
@@ -2811,7 +2811,7 @@ namespace System.Windows.Forms
 
 		[Localizable(true)]
 		[MWFCategory("Layout")]
-		public Point Location {
+		public Point_ Location {
 			get {
 				return this.bounds.Location;
 			}
@@ -2823,7 +2823,7 @@ namespace System.Windows.Forms
 
 		internal bool ShouldSerializeLocation ()
 		{
-			return this.Location != new Point (0, 0);
+			return this.Location != new Point_ (0, 0);
 		}
 
 		[Localizable (true)]
@@ -2907,8 +2907,8 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable (false)]
-		public Size PreferredSize {
-			get { return this.GetPreferredSize (Size.Empty); }
+		public Size_ PreferredSize {
+			get { return this.GetPreferredSize (Size_.Empty); }
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -3023,9 +3023,9 @@ namespace System.Windows.Forms
 
 		[Localizable(true)]
 		[MWFCategory("Layout")]
-		public Size Size {
+		public Size_ Size {
 			get {
-				return new Size(Width, Height);
+				return new Size_(Width, Height);
 			}
 
 			set {
@@ -3316,13 +3316,13 @@ namespace System.Windows.Forms
 			get { return new Padding (3); }
 		}
 		
-		protected virtual Size DefaultMaximumSize { get { return new Size (); } }
-		protected virtual Size DefaultMinimumSize { get { return new Size (); } }
+		protected virtual Size_ DefaultMaximumSize { get { return new Size_ (); } }
+		protected virtual Size_ DefaultMinimumSize { get { return new Size_ (); } }
 		protected virtual Padding DefaultPadding { get { return new Padding (); } }
 
-		protected virtual Size DefaultSize {
+		protected virtual Size_ DefaultSize {
 			get {
-				return new Size(0, 0);
+				return new Size_(0, 0);
 			}
 		}
 
@@ -3532,7 +3532,8 @@ namespace System.Windows.Forms
 			if (!IsHandleCreated) {
 				this.CreateHandle();
 			}
-			return Graphics.FromHwnd(this.window.Handle);
+            //return Graphics.FromHwnd(this.window.Handle);
+            return Graphics.FromHwnd(IntPtr.Zero);
 		}
 
 		public DragDropEffects DoDragDrop(object data, DragDropEffects allowedEffects) {
@@ -3589,7 +3590,7 @@ namespace System.Windows.Forms
 			return has_focus;
 		}
 
-		internal Control GetRealChildAtPoint (Point pt) {
+		internal Control GetRealChildAtPoint (Point_ pt) {
 			if (!IsHandleCreated)
 				CreateHandle ();
 
@@ -3606,12 +3607,12 @@ namespace System.Windows.Forms
 			return null;
 		}
 
-		public Control GetChildAtPoint(Point pt)
+		public Control GetChildAtPoint(Point_ pt)
 		{
 			return GetChildAtPoint (pt, GetChildAtPointSkip.None);
 		}
 
-		public Control GetChildAtPoint (Point pt, GetChildAtPointSkip skipValue)
+		public Control GetChildAtPoint (Point_ pt, GetChildAtPointSkip skipValue)
 		{
 			// MS's version causes the handle to be created.  The stack trace shows that get_Handle is called here, but
 			// we'll just call CreateHandle instead.
@@ -3679,8 +3680,8 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public virtual Size GetPreferredSize (Size proposedSize) {
-			Size retsize = GetPreferredSizeCore (proposedSize);
+		public virtual Size_ GetPreferredSize (Size_ proposedSize) {
+			Size_ retsize = GetPreferredSizeCore (proposedSize);
 			
 			// If we're bigger than the MaximumSize, fix that
 			if (this.maximum_size.Width != 0 && retsize.Width > this.maximum_size.Width)
@@ -3711,12 +3712,12 @@ namespace System.Windows.Forms
 			Invalidate (ClientRectangle, invalidateChildren);
 		}
 
-		public void Invalidate (Rectangle rc)
+		public void Invalidate (Rectangle_ rc)
 		{
 			Invalidate (rc, false);
 		}
 
-		public void Invalidate (Rectangle rc, bool invalidateChildren)
+		public void Invalidate (Rectangle_ rc, bool invalidateChildren)
 		{
 			// Win32 invalidates control including when Width and Height is equal 0
 			// or is not visible, only Paint event must be care about this.
@@ -3756,7 +3757,7 @@ namespace System.Windows.Forms
 		{
 			using (Graphics g = CreateGraphics ()){
 				RectangleF bounds = region.GetBounds (g);
-				Invalidate (new Rectangle ((int) bounds.X, (int) bounds.Y, (int) bounds.Width, (int) bounds.Height), invalidateChildren);
+				Invalidate (new Rectangle_ ((int) bounds.X, (int) bounds.Y, (int) bounds.Width, (int) bounds.Height), invalidateChildren);
 			}
 		}
 
@@ -3812,22 +3813,22 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Point PointToClient (Point p) {
+		public Point_ PointToClient (Point_ p) {
 			int x = p.X;
 			int y = p.Y;
 
 			XplatUI.ScreenToClient (Handle, ref x, ref y);
 
-			return new Point (x, y);
+			return new Point_ (x, y);
 		}
 
-		public Point PointToScreen(Point p) {
+		public Point_ PointToScreen(Point_ p) {
 			int x = p.X;
 			int y = p.Y;
 
 			XplatUI.ClientToScreen(Handle, ref x, ref y);
 
-			return new Point(x, y);
+			return new Point_(x, y);
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -3904,12 +3905,12 @@ namespace System.Windows.Forms
 			return false;
 		}
 
-		public Rectangle RectangleToClient(Rectangle r) {
-			return new Rectangle(PointToClient(r.Location), r.Size);
+		public Rectangle_ RectangleToClient(Rectangle_ r) {
+			return new Rectangle_(PointToClient(r.Location), r.Size);
 		}
 
-		public Rectangle RectangleToScreen(Rectangle r) {
-			return new Rectangle(PointToScreen(r.Location), r.Size);
+		public Rectangle_ RectangleToScreen(Rectangle_ r) {
+			return new Rectangle_(PointToScreen(r.Location), r.Size);
 		}
 
 		public virtual void Refresh() {
@@ -3921,7 +3922,7 @@ namespace System.Windows.Forms
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public virtual void ResetBackColor() {
-			BackColor = Color.Empty;
+			BackColor = Color_.Empty;
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -3942,7 +3943,7 @@ namespace System.Windows.Forms
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public virtual void ResetForeColor() {
-			foreground_color = Color.Empty;
+			foreground_color = Color_.Empty;
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
@@ -3994,7 +3995,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public void Scale (SizeF factor)
+		public void Scale (SizeF_ factor)
 		{
 			BoundsSpecified bounds_spec = BoundsSpecified.All;
 
@@ -4220,7 +4221,7 @@ namespace System.Windows.Forms
 					XplatUI.SetBorderStyle(window.Handle, (FormBorderStyle)border_style);
 				}
 
-				Rectangle save_bounds = explicit_bounds;
+				Rectangle_ save_bounds = explicit_bounds;
 				UpdateBounds ();
 				explicit_bounds = save_bounds;
 			}
@@ -4252,7 +4253,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected virtual Rectangle GetScaledBounds (Rectangle bounds, SizeF factor, BoundsSpecified specified)
+		protected virtual Rectangle_ GetScaledBounds (Rectangle_ bounds, SizeF_ factor, BoundsSpecified specified)
 		{
 			// Top level controls do not scale location
 			if (!is_toplevel) {
@@ -4276,9 +4277,9 @@ namespace System.Windows.Forms
 			return bounds;
 		}
 
-		private Rectangle GetScaledBoundsOld (Rectangle bounds, SizeF factor, BoundsSpecified specified)
+		private Rectangle_ GetScaledBoundsOld (Rectangle_ bounds, SizeF_ factor, BoundsSpecified specified)
 		{
-			RectangleF new_bounds = new RectangleF(bounds.Location, bounds.Size);
+			RectangleF_ new_bounds = new RectangleF_(bounds.Location, bounds.Size);
 
 			// Top level controls do not scale location
 			if (!is_toplevel) {
@@ -4358,7 +4359,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		protected virtual void NotifyInvalidate(Rectangle invalidatedArea) {
+		protected virtual void NotifyInvalidate(Rectangle_ invalidatedArea) {
 			// override me?
 		}
 
@@ -4602,9 +4603,9 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected virtual void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected virtual void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
-			Rectangle new_bounds = GetScaledBounds (bounds, factor, specified);
+			Rectangle_ new_bounds = GetScaledBounds (bounds, factor, specified);
 
 			SetBounds (new_bounds.X, new_bounds.Y, new_bounds.Width, new_bounds.Height, specified);
 		}
@@ -4612,7 +4613,7 @@ namespace System.Windows.Forms
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		protected virtual void ScaleCore (float dx, float dy)
 		{
-			Rectangle new_bounds = GetScaledBoundsOld (bounds, new SizeF (dx, dy), BoundsSpecified.All);
+			Rectangle_ new_bounds = GetScaledBoundsOld (bounds, new SizeF_ (dx, dy), BoundsSpecified.All);
 
 			SuspendLayout ();
 
@@ -4650,8 +4651,8 @@ namespace System.Windows.Forms
 			// Nasty hack for 2.0 DateTimePicker
 			height = OverrideHeight (height);
 			
-			Rectangle old_explicit = explicit_bounds;
-			Rectangle new_bounds = new Rectangle (x, y, width, height);
+			Rectangle_ old_explicit = explicit_bounds;
+			Rectangle_ new_bounds = new Rectangle_ (x, y, width, height);
 
 			// SetBoundsCore updates the Win32 control itself. UpdateBounds updates the controls variables and fires events, I'm guessing - pdb
 			if (IsHandleCreated) {
@@ -4690,12 +4691,12 @@ namespace System.Windows.Forms
 			// We need to store the explicit bounds because UpdateBounds is always going
 			// to change it, and we have to fix it.  However, UpdateBounds also calls
 			// OnLocationChanged, OnSizeChanged, and OnClientSizeChanged.  The user can
-			// override those or use those events to change the size explicitly, and we 
+			// override those or use those events to change the Size_ explicitly, and we 
 			// can't undo those changes.  So if the bounds after calling UpdateBounds are
 			// the same as the ones we sent it, we need to fix the explicit bounds.  If
 			// it's not the same as we sent UpdateBounds, then someone else changed it, and
 			// we better not mess it up.  Fun stuff.
-			Rectangle stored_explicit_bounds = explicit_bounds;
+			Rectangle_ stored_explicit_bounds = explicit_bounds;
 			
 			UpdateBounds(x, y, width, height);
 
@@ -4714,9 +4715,9 @@ namespace System.Windows.Forms
 
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		protected virtual void SetClientSizeCore(int x, int y) {
-			Size NewSize = InternalSizeFromClientSize (new Size (x, y));
+			Size_ NewSize = InternalSizeFromClientSize (new Size_ (x, y));
 			
-			if (NewSize != Size.Empty)
+			if (NewSize != Size_.Empty)
 				SetBounds (bounds.X, bounds.Y, NewSize.Width, NewSize.Height, BoundsSpecified.Size);
 		}
 
@@ -4792,7 +4793,7 @@ namespace System.Windows.Forms
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		protected virtual Size SizeFromClientSize (Size clientSize) {
+		protected virtual Size_ SizeFromClientSize (Size_ clientSize) {
 			return InternalSizeFromClientSize (clientSize);
 		}
 
@@ -4816,10 +4817,10 @@ namespace System.Windows.Forms
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		protected void UpdateBounds(int x, int y, int width, int height) {
 			CreateParams	cp;
-			Rectangle	rect;
+			Rectangle_	rect;
 
 			// Calculate client rectangle
-			rect = new Rectangle(0, 0, 0, 0);
+			rect = new Rectangle_(0, 0, 0, 0);
 			cp = CreateParams;
 
 			XplatUI.CalculateWindowRect(ref rect, cp, cp.menu, out rect);
@@ -5176,7 +5177,7 @@ namespace System.Windows.Forms
 
 		private void WmWindowPosChanged (ref Message m) {
 			if (Visible) {
-				Rectangle save_bounds = explicit_bounds;
+				Rectangle_ save_bounds = explicit_bounds;
 				UpdateBounds();
 				explicit_bounds = save_bounds;
 				if (GetStyle(ControlStyles.ResizeRedraw)) {
@@ -5341,9 +5342,9 @@ namespace System.Windows.Forms
 			}
 
 			MouseEventArgs	me;
-			Point		pt;
+			Point_		pt;
 
-			pt = new Point(LowOrder ((int) m.LParam.ToInt32 ()), HighOrder ((int) m.LParam.ToInt32 ()));
+			pt = new Point_(LowOrder ((int) m.LParam.ToInt32 ()), HighOrder ((int) m.LParam.ToInt32 ()));
 			pt = PointToScreen(pt);
 
 			me = new MouseEventArgs (FromParamToMouseButtons ((int) m.WParam.ToInt32()) | MouseButtons.Right, 
@@ -5389,9 +5390,9 @@ namespace System.Windows.Forms
 
 		private void WmContextMenu (ref Message m) {
 			if (context_menu != null) {
-				Point	pt;
+				Point_	pt;
 
-				pt = new Point(LowOrder ((int) m.LParam.ToInt32 ()), HighOrder ((int) m.LParam.ToInt32 ()));
+				pt = new Point_(LowOrder ((int) m.LParam.ToInt32 ()), HighOrder ((int) m.LParam.ToInt32 ()));
 
 				if (pt.X == -1 || pt.Y == -1) {
 					pt.X = (this.Width / 2) + this.Left;
@@ -5405,9 +5406,9 @@ namespace System.Windows.Forms
 
 				// If there isn't a regular context menu, show the Strip version
 				if (context_menu == null && context_menu_strip != null) {
-					Point pt;
+					Point_ pt;
 
-					pt = new Point (LowOrder ((int)m.LParam.ToInt32 ()), HighOrder ((int)m.LParam.ToInt32 ()));
+					pt = new Point_ (LowOrder ((int)m.LParam.ToInt32 ()), HighOrder ((int)m.LParam.ToInt32 ()));
 					
 					if (pt.X == -1 || pt.Y == -1) { 
 						pt.X = (this.Width / 2) + this.Left; 
@@ -5547,14 +5548,14 @@ namespace System.Windows.Forms
 		}
 
 		private void WmHelp (ref Message m) {
-			Point	mouse_pos;
+			Point_	mouse_pos;
 			if (m.LParam != IntPtr.Zero) {
 				HELPINFO	hi;
 
 				hi = new HELPINFO();
 
 				hi = (HELPINFO) Marshal.PtrToStructure (m.LParam, typeof (HELPINFO));
-				mouse_pos = new Point(hi.MousePos.x, hi.MousePos.y);
+				mouse_pos = new Point_(hi.MousePos.x, hi.MousePos.y);
 			} else {
 				mouse_pos = Control.MousePosition;
 			}
@@ -5885,11 +5886,11 @@ namespace System.Windows.Forms
 					InvalidateBackBuffer ();
 				} else if (backbuffer != null){
 					// we need this Inflate call here so
-					// that the border of the rectangle is
+					// that the border of the Rectangle_ is
 					// considered Visible (the
 					// invalid_region.IsVisible call) in
 					// the WM_PAINT handling below.
-					Rectangle r = Rectangle.Inflate(e.InvalidRect, 1,1);
+					Rectangle_ r = Rectangle.Inflate(e.InvalidRect, 1,1);
 					backbuffer.InvalidRegion.Union (r);
 				}
 			}
@@ -5926,7 +5927,7 @@ namespace System.Windows.Forms
 			if (eh != null)
 				eh (this, levent);
 
-			Size s = Size;
+			Size_ s = Size;
 			
 			// If our layout changed our PreferredSize, our parent
 			// needs to re-lay us out.  However, it's not always possible to

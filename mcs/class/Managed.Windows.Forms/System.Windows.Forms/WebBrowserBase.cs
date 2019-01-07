@@ -23,10 +23,10 @@
 //	Andreia Gaita	<avidigal@novell.com>
 
 #undef debug
-
 using System;
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -75,7 +75,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor; }
 			set { base.BackColor = value; }
 		}
@@ -123,7 +123,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set { base.ForeColor = value; }
 		}
@@ -169,8 +169,8 @@ namespace System.Windows.Forms
 
 		#region Protected Properties
 
-		protected override Size DefaultSize {
-			get { return new Size (100, 100); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (100, 100); }
 		}
 
 		#endregion
@@ -178,7 +178,7 @@ namespace System.Windows.Forms
 		#region Public Methods
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new void DrawToBitmap (Bitmap bitmap, Rectangle targetBounds)
+		public new void DrawToBitmap (Bitmap bitmap, Rectangle_ targetBounds)
 		{
 			base.DrawToBitmap (bitmap, targetBounds);
 		}

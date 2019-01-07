@@ -26,13 +26,13 @@
 //	Marek Safar, marek.safar@seznam.cz
 //	Alexander Olk, alex.olk@googlemail.com
 //
-
 using System.ComponentModel;
 using System.Data;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Drawing.Printing;
+//using System.Drawing.Printing;
 using System.Drawing.Text;
 using System.Reflection;
 using System.Text;
@@ -50,8 +50,8 @@ namespace System.Windows.Forms
 		}
 
 		/* Hardcoded colour values not exposed in the API constants in all configurations */
-		protected static readonly Color arrow_color = Color.Black;
-		protected static readonly Color pen_ticks_color = Color.Black;
+		protected static readonly Color_ arrow_color = Color_.Black;
+		protected static readonly Color_ pen_ticks_color = Color_.Black;
 		protected static StringFormat string_format_menu_text;
 		protected static StringFormat string_format_menu_shortcut;
 		protected static StringFormat string_format_menu_menubar_text;
@@ -95,7 +95,7 @@ namespace System.Windows.Forms
 		}
 
 		public override bool DoubleBufferingSupported {
-			get {return true; }
+			get {return false; }
 		}
 
 		public override int HorizontalScrollBarHeight {
@@ -119,13 +119,13 @@ namespace System.Windows.Forms
 		#endregion	// Principal Theme Methods
 
 		#region	Internal Methods
-		protected Brush GetControlBackBrush (Color c) {
+		protected Brush GetControlBackBrush (Color_ c) {
 			if (c.ToArgb () == DefaultControlBackColor.ToArgb ())
 				return SystemBrushes.Control;
 			return ResPool.GetSolidBrush (c);
 		}
 
-		protected Brush GetControlForeBrush (Color c) {
+		protected Brush GetControlForeBrush (Color_ c) {
 			if (c.ToArgb () == DefaultControlForeColor.ToArgb ())
 				return SystemBrushes.ControlText;
 			return ResPool.GetSolidBrush (c);
@@ -159,13 +159,13 @@ namespace System.Windows.Forms
 
 		#region Button
 		#region Standard Button Style
-		public override void DrawButton (Graphics g, Button b, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle)
+		public override void DrawButton (Graphics g, Button b, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle)
 		{
 			// Draw Button Background
 			DrawButtonBackground (g, b, clipRectangle);
 
 			// If we have an image, draw it
-			if (imageBounds.Size != Size.Empty)
+			if (imageBounds.Size != Size_.Empty)
 				DrawButtonImage (g, b, imageBounds);
 
 			// If we're focused, draw a focus rectangle
@@ -173,11 +173,11 @@ namespace System.Windows.Forms
 				DrawButtonFocus (g, b);
 
 			// If we have text, draw it
-			if (textBounds != Rectangle.Empty)
+			if (textBounds != Rectangle_.Empty)
 				DrawButtonText (g, b, textBounds);
 		}
 
-		public virtual void DrawButtonBackground (Graphics g, Button button, Rectangle clipArea) 
+		public virtual void DrawButtonBackground (Graphics g, Button button, Rectangle_ clipArea) 
 		{
 			if (button.Pressed)
 				ThemeElements.DrawButton (g, button.ClientRectangle, ButtonThemeState.Pressed, button.BackColor, button.ForeColor);
@@ -193,10 +193,10 @@ namespace System.Windows.Forms
 
 		public virtual void DrawButtonFocus (Graphics g, Button button)
 		{
-			ControlPaint.DrawFocusRectangle (g, Rectangle.Inflate (button.ClientRectangle, -4, -4));
+			ControlPaint.DrawFocusRectangle (g, Rectangle_.Inflate (button.ClientRectangle, -4, -4));
 		}
 
-		public virtual void DrawButtonImage (Graphics g, ButtonBase button, Rectangle imageBounds)
+		public virtual void DrawButtonImage (Graphics g, ButtonBase button, Rectangle_ imageBounds)
 		{
 			if (button.Enabled)
 				g.DrawImage (button.Image, imageBounds);
@@ -204,7 +204,7 @@ namespace System.Windows.Forms
 				CPDrawImageDisabled (g, button.Image, imageBounds.Left, imageBounds.Top, ColorControl);
 		}
 
-		public virtual void DrawButtonText (Graphics g, ButtonBase button, Rectangle textBounds)
+		public virtual void DrawButtonText (Graphics g, ButtonBase button, Rectangle_ textBounds)
 		{
 			// Ensure that at least one line is going to get displayed.
 			// Line limit does not ensure that despite its description.
@@ -218,14 +218,14 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region FlatStyle Button Style
-		public override void DrawFlatButton (Graphics g, ButtonBase b, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle)
+		public override void DrawFlatButton (Graphics g, ButtonBase b, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle)
 		{
 			// Draw Button Background
 			if (b.BackgroundImage == null)
 				DrawFlatButtonBackground (g, b, clipRectangle);
 
 			// If we have an image, draw it
-			if (imageBounds.Size != Size.Empty)
+			if (imageBounds.Size != Size_.Empty)
 				DrawFlatButtonImage (g, b, imageBounds);
 
 			// If we're focused, draw a focus rectangle
@@ -233,11 +233,11 @@ namespace System.Windows.Forms
 				DrawFlatButtonFocus (g, b);
 
 			// If we have text, draw it
-			if (textBounds != Rectangle.Empty)
+			if (textBounds != Rectangle_.Empty)
 				DrawFlatButtonText (g, b, textBounds);
 		}
 
-		public virtual void DrawFlatButtonBackground (Graphics g, ButtonBase button, Rectangle clipArea)
+		public virtual void DrawFlatButtonBackground (Graphics g, ButtonBase button, Rectangle_ clipArea)
 		{
 			if (button.Pressed)
 				ThemeElements.DrawFlatButton (g, button.ClientRectangle, ButtonThemeState.Pressed, button.BackColor, button.ForeColor, button.FlatAppearance);
@@ -258,18 +258,18 @@ namespace System.Windows.Forms
 		public virtual void DrawFlatButtonFocus (Graphics g, ButtonBase button)
 		{
 			if (!button.Pressed) {
-				Color focus_color = ControlPaint.Dark (button.BackColor);
-				g.DrawRectangle (ResPool.GetPen (focus_color), new Rectangle (button.ClientRectangle.Left + 4, button.ClientRectangle.Top + 4, button.ClientRectangle.Width - 9, button.ClientRectangle.Height - 9));
+				Color_ focus_color = ControlPaint.Dark (button.BackColor);
+				g.DrawRectangle (ResPool.GetPen (focus_color), new Rectangle_ (button.ClientRectangle.Left + 4, button.ClientRectangle.Top + 4, button.ClientRectangle.Width - 9, button.ClientRectangle.Height - 9));
 			}
 		}
 
-		public virtual void DrawFlatButtonImage (Graphics g, ButtonBase button, Rectangle imageBounds)
+		public virtual void DrawFlatButtonImage (Graphics g, ButtonBase button, Rectangle_ imageBounds)
 		{
 			// No changes from Standard for image for this theme
 			DrawButtonImage (g, button, imageBounds);
 		}
 
-		public virtual void DrawFlatButtonText (Graphics g, ButtonBase button, Rectangle textBounds)
+		public virtual void DrawFlatButtonText (Graphics g, ButtonBase button, Rectangle_ textBounds)
 		{
 			// No changes from Standard for text for this theme
 			DrawButtonText (g, button, textBounds);
@@ -277,13 +277,13 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Popup Button Style
-		public override void DrawPopupButton (Graphics g, Button b, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle)
+		public override void DrawPopupButton (Graphics g, Button b, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle)
 		{
 			// Draw Button Background
 			DrawPopupButtonBackground (g, b, clipRectangle);
 
 			// If we have an image, draw it
-			if (imageBounds.Size != Size.Empty)
+			if (imageBounds.Size != Size_.Empty)
 				DrawPopupButtonImage (g, b, imageBounds);
 
 			// If we're focused, draw a focus rectangle
@@ -291,11 +291,11 @@ namespace System.Windows.Forms
 				DrawPopupButtonFocus (g, b);
 
 			// If we have text, draw it
-			if (textBounds != Rectangle.Empty)
+			if (textBounds != Rectangle_.Empty)
 				DrawPopupButtonText (g, b, textBounds);
 		}
 
-		public virtual void DrawPopupButtonBackground (Graphics g, Button button, Rectangle clipArea)
+		public virtual void DrawPopupButtonBackground (Graphics g, Button button, Rectangle_ clipArea)
 		{
 			if (button.Pressed)
 				ThemeElements.DrawPopupButton (g, button.ClientRectangle, ButtonThemeState.Pressed, button.BackColor, button.ForeColor);
@@ -315,13 +315,13 @@ namespace System.Windows.Forms
 			DrawButtonFocus (g, button);
 		}
 
-		public virtual void DrawPopupButtonImage (Graphics g, Button button, Rectangle imageBounds)
+		public virtual void DrawPopupButtonImage (Graphics g, Button button, Rectangle_ imageBounds)
 		{
 			// No changes from Standard for image for this theme
 			DrawButtonImage (g, button, imageBounds);
 		}
 
-		public virtual void DrawPopupButtonText (Graphics g, Button button, Rectangle textBounds)
+		public virtual void DrawPopupButtonText (Graphics g, Button button, Rectangle_ textBounds)
 		{
 			// No changes from Standard for image for this theme
 			DrawButtonText (g, button, textBounds);
@@ -329,11 +329,11 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Button Layout Calculations
-		public override Size CalculateButtonAutoSize (Button button)
+		public override Size_ CalculateButtonAutoSize (Button button)
 		{
-			Size ret_size = Size.Empty;
-			Size text_size = TextRenderer.MeasureTextInternal (button.Text, button.Font, button.UseCompatibleTextRendering);
-			Size image_size = button.Image == null ? Size.Empty : button.Image.Size;
+			Size_ ret_size = Size_.Empty;
+			Size_ text_size = TextRenderer.MeasureTextInternal (button.Text, button.Font, button.UseCompatibleTextRendering);
+			Size_ image_size = button.Image == null ? Size_.Empty : button.Image.Size;
 			
 			// Pad the text size
 			if (button.Text.Length != 0) {
@@ -365,16 +365,16 @@ namespace System.Windows.Forms
 			return ret_size;
 		}
 
-		public override void CalculateButtonTextAndImageLayout (Graphics g, ButtonBase button, out Rectangle textRectangle, out Rectangle imageRectangle)
+		public override void CalculateButtonTextAndImageLayout (Graphics g, ButtonBase button, out Rectangle_ textRectangle, out Rectangle_ imageRectangle)
 		{
 			Image image = button.Image;
 			string text = button.Text;
-			Rectangle content_rect = button.PaddingClientRectangle;
-			Size text_size = TextRenderer.MeasureTextInternal (g, text, button.Font, content_rect.Size, button.TextFormatFlags, button.UseCompatibleTextRendering);
-			Size image_size = image == null ? Size.Empty : image.Size;
+			Rectangle_ content_rect = button.PaddingClientRectangle;
+			Size_ text_size = TextRenderer.MeasureTextInternal (g, text, button.Font, content_rect.Size, button.TextFormatFlags, button.UseCompatibleTextRendering);
+			Size_ image_size = image == null ? Size_.Empty : image.Size;
 
-			textRectangle = Rectangle.Inflate (content_rect, -4, -4);
-			imageRectangle = Rectangle.Empty;
+			textRectangle = Rectangle_.Inflate (content_rect, -4, -4);
+			imageRectangle = Rectangle_.Empty;
 			
 			bool displayEllipsis = (button.TextFormatFlags & (TextFormatFlags.EndEllipsis | TextFormatFlags.PathEllipsis | TextFormatFlags.WordEllipsis)) != 0;
 
@@ -437,7 +437,7 @@ namespace System.Windows.Forms
 							break;
 					}
 					
-					imageRectangle = new Rectangle (image_x, image_y, image_width, image_height);
+					imageRectangle = new Rectangle_ (image_x, image_y, image_width, image_height);
 					break;
 				case TextImageRelation.ImageAboveText:
 					LayoutTextAboveOrBelowImage (textRectangle, false, text_size, image_size, button.TextAlign, button.ImageAlign, displayEllipsis, out textRectangle, out imageRectangle);
@@ -456,7 +456,7 @@ namespace System.Windows.Forms
 				textRectangle.Offset (1, 1);
 		}
 
-		private void LayoutTextBeforeOrAfterImage (Rectangle totalArea, bool textFirst, Size textSize, Size imageSize, System.Drawing.ContentAlignment textAlign, System.Drawing.ContentAlignment imageAlign, out Rectangle textRect, out Rectangle imageRect)
+		private void LayoutTextBeforeOrAfterImage (Rectangle_ totalArea, bool textFirst, Size_ textSize, Size_ imageSize, System.Drawing.ContentAlignment textAlign, System.Drawing.ContentAlignment imageAlign, out Rectangle_ textRect, out Rectangle_ imageRect)
 		{
 			int element_spacing = 0;	// Spacing between the Text and the Image
 			int total_width = textSize.Width + element_spacing + imageSize.Width;
@@ -464,7 +464,7 @@ namespace System.Windows.Forms
 			if (!textFirst)
 				element_spacing += 2;
 				
-			// If the text is too big, chop it down to the size we have available to it
+			// If the text is too big, chop it down to the Size_ we have available to it
 			if (total_width > totalArea.Width) {
 				textSize.Width = totalArea.Width - element_spacing - imageSize.Width;
 				total_width = totalArea.Width;
@@ -473,8 +473,8 @@ namespace System.Windows.Forms
 			int excess_width = totalArea.Width - total_width;
 			int offset = 0;
 
-			Rectangle final_text_rect;
-			Rectangle final_image_rect;
+			Rectangle_ final_text_rect;
+			Rectangle_ final_image_rect;
 
 			HorizontalAlignment h_text = GetHorizontalAlignment (textAlign);
 			HorizontalAlignment h_image = GetHorizontalAlignment (imageAlign);
@@ -489,19 +489,19 @@ namespace System.Windows.Forms
 				offset += (int)(2 * (excess_width / 3));
 
 			if (textFirst) {
-				final_text_rect = new Rectangle (totalArea.Left + offset, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
-				final_image_rect = new Rectangle (final_text_rect.Right + element_spacing, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
+				final_text_rect = new Rectangle_ (totalArea.Left + offset, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
+				final_image_rect = new Rectangle_ (final_text_rect.Right + element_spacing, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
 			}
 			else {
-				final_image_rect = new Rectangle (totalArea.Left + offset, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
-				final_text_rect = new Rectangle (final_image_rect.Right + element_spacing, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
+				final_image_rect = new Rectangle_ (totalArea.Left + offset, AlignInRectangle (totalArea, imageSize, imageAlign).Top, imageSize.Width, imageSize.Height);
+				final_text_rect = new Rectangle_ (final_image_rect.Right + element_spacing, AlignInRectangle (totalArea, textSize, textAlign).Top, textSize.Width, textSize.Height);
 			}
 
 			textRect = final_text_rect;
 			imageRect = final_image_rect;
 		}
 
-		private void LayoutTextAboveOrBelowImage (Rectangle totalArea, bool textFirst, Size textSize, Size imageSize, System.Drawing.ContentAlignment textAlign, System.Drawing.ContentAlignment imageAlign, bool displayEllipsis, out Rectangle textRect, out Rectangle imageRect)
+		private void LayoutTextAboveOrBelowImage (Rectangle_ totalArea, bool textFirst, Size_ textSize, Size_ imageSize, System.Drawing.ContentAlignment textAlign, System.Drawing.ContentAlignment imageAlign, bool displayEllipsis, out Rectangle_ textRect, out Rectangle_ imageRect)
 		{
 			int element_spacing = 0;	// Spacing between the Text and the Image
 			int total_height = textSize.Height + element_spacing + imageSize.Height;
@@ -514,15 +514,15 @@ namespace System.Windows.Forms
 				
 			// If the there isn't enough room and we're text first, cut out the image
 			if (total_height > totalArea.Height && textFirst) {
-				imageSize = Size.Empty;
+				imageSize = Size_.Empty;
 				total_height = totalArea.Height;
 			}
 
 			int excess_height = totalArea.Height - total_height;
 			int offset = 0;
 
-			Rectangle final_text_rect;
-			Rectangle final_image_rect;
+			Rectangle_ final_text_rect;
+			Rectangle_ final_image_rect;
 
 			VerticalAlignment v_text = GetVerticalAlignment (textAlign);
 			VerticalAlignment v_image = GetVerticalAlignment (imageAlign);
@@ -538,13 +538,13 @@ namespace System.Windows.Forms
 
 			if (textFirst) {
 				var textHeight = excess_height >= 0 ? totalArea.Height - imageSize.Height - element_spacing: textSize.Height;
-				final_text_rect = new Rectangle (AlignInRectangle (totalArea, textSize, textAlign).Left, totalArea.Top + offset, textSize.Width, textHeight);
-				final_image_rect = new Rectangle (AlignInRectangle (totalArea, imageSize, imageAlign).Left, final_text_rect.Bottom + element_spacing, imageSize.Width, imageSize.Height);
+				final_text_rect = new Rectangle_ (AlignInRectangle (totalArea, textSize, textAlign).Left, totalArea.Top + offset, textSize.Width, textHeight);
+				final_image_rect = new Rectangle_ (AlignInRectangle (totalArea, imageSize, imageAlign).Left, final_text_rect.Bottom + element_spacing, imageSize.Width, imageSize.Height);
 			}
 			else {
-				final_image_rect = new Rectangle (AlignInRectangle (totalArea, imageSize, imageAlign).Left, totalArea.Top + offset, imageSize.Width, imageSize.Height);
+				final_image_rect = new Rectangle_ (AlignInRectangle (totalArea, imageSize, imageAlign).Left, totalArea.Top + offset, imageSize.Width, imageSize.Height);
 				var textHeight = excess_height >= 0 ? totalArea.Height - final_image_rect.Height : textSize.Height;
-				final_text_rect = new Rectangle (AlignInRectangle (totalArea, textSize, textAlign).Left, final_image_rect.Bottom + element_spacing, textSize.Width, textHeight);
+				final_text_rect = new Rectangle_ (AlignInRectangle (totalArea, textSize, textAlign).Left, final_image_rect.Bottom + element_spacing, textSize.Width, textHeight);
 				
 				if (final_text_rect.Bottom > totalArea.Bottom) {
 					final_text_rect.Y -= (final_text_rect.Bottom - totalArea.Bottom);
@@ -610,7 +610,7 @@ namespace System.Windows.Forms
 			return VerticalAlignment.Top;
 		}
 
-		internal Rectangle AlignInRectangle (Rectangle outer, Size inner, System.Drawing.ContentAlignment align)
+		internal Rectangle_ AlignInRectangle (Rectangle_ outer, Size_ inner, System.Drawing.ContentAlignment align)
 		{
 			int x = 0;
 			int y = 0;
@@ -628,13 +628,13 @@ namespace System.Windows.Forms
 			else if (align == System.Drawing.ContentAlignment.BottomCenter || align == System.Drawing.ContentAlignment.BottomRight || align == System.Drawing.ContentAlignment.BottomLeft)
 				y = outer.Bottom - inner.Height;
 
-			return new Rectangle (x, y, Math.Min (inner.Width, outer.Width), Math.Min (inner.Height, outer.Height));
+			return new Rectangle_ (x, y, Math.Min (inner.Width, outer.Width), Math.Min (inner.Height, outer.Height));
 		}
 		#endregion
 		#endregion
 
 		#region ButtonBase
-		public override void DrawButtonBase(Graphics dc, Rectangle clip_area, ButtonBase button)
+		public override void DrawButtonBase(Graphics dc, Rectangle_ clip_area, ButtonBase button)
 		{
 			// Draw the button: Draw border, etc.
 			ButtonBase_DrawButton(button, dc);
@@ -659,7 +659,7 @@ namespace System.Windows.Forms
 
 		protected virtual void ButtonBase_DrawButton (ButtonBase button, Graphics dc)
 		{
-			Rectangle borderRectangle;
+			Rectangle_ borderRectangle;
 			bool check_or_radio = false;
 			bool check_or_radio_checked = false;
 			
@@ -676,8 +676,8 @@ namespace System.Windows.Forms
 			}
 			
 			if (button.Focused && button.Enabled && !check_or_radio) {
-				// shrink the rectangle for the normal button drawing inside the focus rectangle
-				borderRectangle = Rectangle.Inflate (button.ClientRectangle, -1, -1);
+				// shrink the Rectangle_ for the normal button drawing inside the focus rectangle
+				borderRectangle = Rectangle_.Inflate (button.ClientRectangle, -1, -1);
 			} else {
 				borderRectangle = button.ClientRectangle;
 			}
@@ -703,7 +703,7 @@ namespace System.Windows.Forms
 					
 					Pen pen = is_ColorControl ? SystemPens.ControlDark : ResPool.GetPen (cpcolor.Dark);
 					dc.DrawRectangle (pen, borderRectangle.X + 4, borderRectangle.Y + 4,
-							  borderRectangle.Width - 9, borderRectangle.Height - 9);
+                              borderRectangle.Width - 9, borderRectangle.Height - 9);
 				}
 				
 				Internal_DrawButton (dc, borderRectangle, 3, cpcolor, is_ColorControl, button.BackColor);
@@ -715,7 +715,7 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		private void Internal_DrawButton (Graphics dc, Rectangle rect, int state, CPColor cpcolor, bool is_ColorControl, Color backcolor)
+		private void Internal_DrawButton (Graphics dc, Rectangle_ rect, int state, CPColor cpcolor, bool is_ColorControl, Color_ backcolor)
 		{
 			switch (state) {
 			case 0: // normal or normal disabled button
@@ -840,7 +840,7 @@ namespace System.Windows.Forms
 				}
 			}
 			
-			dc.SetClip (new Rectangle(3, 3, width - 5, height - 5));
+			dc.SetClip (new Rectangle_(3, 3, width - 5, height - 5));
 
 			if (button.Enabled)
 				dc.DrawImage (i, image_x, image_y, image_width, image_height);
@@ -852,7 +852,7 @@ namespace System.Windows.Forms
 		
 		protected virtual void ButtonBase_DrawFocus(ButtonBase button, Graphics dc)
 		{
-			Color focus_color = button.ForeColor;
+			Color_ focus_color = button.ForeColor;
 			
 			int inflate_value = -3;
 			
@@ -867,15 +867,15 @@ namespace System.Windows.Forms
 			}
 			
 			if (button.Focused) {
-				Rectangle rect = Rectangle.Inflate (button.ClientRectangle, inflate_value, inflate_value);
+				Rectangle_ rect = Rectangle_.Inflate (button.ClientRectangle, inflate_value, inflate_value);
 				ControlPaint.DrawFocusRectangle (dc, rect);
 			}
 		}
 		
 		protected virtual void ButtonBase_DrawText(ButtonBase button, Graphics dc)
 		{
-			Rectangle buttonRectangle = button.ClientRectangle;
-			Rectangle text_rect = Rectangle.Inflate(buttonRectangle, -4, -4);
+			Rectangle_ buttonRectangle = button.ClientRectangle;
+			Rectangle_ text_rect = Rectangle_.Inflate(buttonRectangle, -4, -4);
 			
 			if (button.is_pressed) {
 				text_rect.X++;
@@ -897,15 +897,15 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public override Size ButtonBaseDefaultSize {
+		public override Size_ ButtonBaseDefaultSize {
 			get {
-				return new Size (75, 23);
+				return new Size_ (75, 23);
 			}
 		}
 		#endregion	// ButtonBase
 
 		#region CheckBox
-		public override void DrawCheckBox (Graphics g, CheckBox cb, Rectangle glyphArea, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle)
+		public override void DrawCheckBox (Graphics g, CheckBox cb, Rectangle_ glyphArea, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle)
 		{
 			// Draw Button Background
 			if (cb.Appearance == Appearance.Button && cb.FlatStyle != FlatStyle.Flat)
@@ -918,18 +918,18 @@ namespace System.Windows.Forms
 			DrawFlatButton (g, cb, textBounds, imageBounds, clipRectangle);
 			
 			// If we have an image, draw it
-			if (imageBounds.Size != Size.Empty)
+			if (imageBounds.Size != Size_.Empty)
 				DrawCheckBoxImage (g, cb, imageBounds);
 
-			if (cb.Focused && cb.Enabled && cb.ShowFocusCues && textBounds != Rectangle.Empty)
+			if (cb.Focused && cb.Enabled && cb.ShowFocusCues && textBounds != Rectangle_.Empty)
 				DrawCheckBoxFocus (g, cb, textBounds);
 
 			// If we have text, draw it
-			if (textBounds != Rectangle.Empty)
+			if (textBounds != Rectangle_.Empty)
 				DrawCheckBoxText (g, cb, textBounds);
 		}
 
-		public virtual void DrawCheckBoxGlyph (Graphics g, CheckBox cb, Rectangle glyphArea)
+		public virtual void DrawCheckBoxGlyph (Graphics g, CheckBox cb, Rectangle_ glyphArea)
 		{
 			if (cb.Pressed)
 				ThemeElements.CurrentTheme.CheckBoxPainter.PaintCheckBox (g, glyphArea, cb.BackColor, cb.ForeColor, ElementState.Pressed, cb.FlatStyle, cb.CheckState);
@@ -943,12 +943,12 @@ namespace System.Windows.Forms
 				ThemeElements.CurrentTheme.CheckBoxPainter.PaintCheckBox (g, glyphArea, cb.BackColor, cb.ForeColor, ElementState.Normal, cb.FlatStyle, cb.CheckState);
 		}
 
-		public virtual void DrawCheckBoxFocus (Graphics g, CheckBox cb, Rectangle focusArea)
+		public virtual void DrawCheckBoxFocus (Graphics g, CheckBox cb, Rectangle_ focusArea)
 		{
 			ControlPaint.DrawFocusRectangle (g, focusArea);
 		}
 
-		public virtual void DrawCheckBoxImage (Graphics g, CheckBox cb, Rectangle imageBounds)
+		public virtual void DrawCheckBoxImage (Graphics g, CheckBox cb, Rectangle_ imageBounds)
 		{
 			if (cb.Enabled)
 				g.DrawImage (cb.Image, imageBounds);
@@ -956,7 +956,7 @@ namespace System.Windows.Forms
 				CPDrawImageDisabled (g, cb.Image, imageBounds.Left, imageBounds.Top, ColorControl);
 		}
 
-		public virtual void DrawCheckBoxText (Graphics g, CheckBox cb, Rectangle textBounds)
+		public virtual void DrawCheckBoxText (Graphics g, CheckBox cb, Rectangle_ textBounds)
 		{
 			if (cb.Enabled)
 				TextRenderer.DrawTextInternal (g, cb.Text, cb.Font, textBounds, cb.ForeColor, cb.TextFormatFlags, cb.UseCompatibleTextRendering);
@@ -964,16 +964,16 @@ namespace System.Windows.Forms
 				DrawStringDisabled20 (g, cb.Text, cb.Font, textBounds, cb.BackColor, cb.TextFormatFlags, cb.UseCompatibleTextRendering);
 		}
 
-		public override void CalculateCheckBoxTextAndImageLayout (ButtonBase button, Point p, out Rectangle glyphArea, out Rectangle textRectangle, out Rectangle imageRectangle)
+		public override void CalculateCheckBoxTextAndImageLayout (ButtonBase button, Point_ p, out Rectangle_ glyphArea, out Rectangle_ textRectangle, out Rectangle_ imageRectangle)
 		{
 			int check_size = CheckSize;
 
 			if (button is CheckBox)
 				check_size = (button as CheckBox).Appearance == Appearance.Normal ? check_size : 0;
 				
-			glyphArea = new Rectangle (button.Padding.Left, button.Padding.Top, check_size, check_size);
+			glyphArea = new Rectangle_ (button.Padding.Left, button.Padding.Top, check_size, check_size);
 			
-			Rectangle content_rect = button.PaddingClientRectangle;
+			Rectangle_ content_rect = button.PaddingClientRectangle;
 			ContentAlignment align = ContentAlignment.TopLeft;
 			
 			if (button is CheckBox)
@@ -1026,29 +1026,29 @@ namespace System.Windows.Forms
 			Image image = button.Image;
 			string text = button.Text;
 			
-			Size proposed = Size.Empty;
+			Size_ proposed = Size_.Empty;
 			
 			// Force wrapping if we aren't AutoSize and our text is too long
 			if (!button.AutoSize)
 				proposed.Width = button.PaddingClientRectangle.Width - glyphArea.Width - 2;
 
-			Size text_size = TextRenderer.MeasureTextInternal (text, button.Font, proposed, button.TextFormatFlags, button.UseCompatibleTextRendering);
+			Size_ text_size = TextRenderer.MeasureTextInternal (text, button.Font, proposed, button.TextFormatFlags, button.UseCompatibleTextRendering);
 			
 			// Text can't be bigger than the content rectangle
 			text_size.Height = Math.Min (text_size.Height, content_rect.Height);
 			text_size.Width = Math.Min (text_size.Width, content_rect.Width);
 			
-			Size image_size = image == null ? Size.Empty : image.Size;
+			Size_ image_size = image == null ? Size_.Empty : image.Size;
 
-			textRectangle = Rectangle.Empty;
-			imageRectangle = Rectangle.Empty;
+			textRectangle = Rectangle_.Empty;
+			imageRectangle = Rectangle_.Empty;
 
 			switch (button.TextImageRelation) {
 				case TextImageRelation.Overlay:
-					// Text is centered vertically, and 2 pixels to the right
-					textRectangle.X = content_rect.Left + 2;
-					textRectangle.Y = button.PaddingClientRectangle.Top + ((content_rect.Height - text_size.Height) / 2) - 1;
-					textRectangle.Size = text_size;
+                    // Text is centered vertically, and 2 pixels to the right
+                    textRectangle.X = content_rect.Left + 2;
+                    textRectangle.Y = button.PaddingClientRectangle.Top + ((content_rect.Height - text_size.Height) / 2) - 1;
+                    textRectangle.Size = text_size;
 
 					// Image is dependent on ImageAlign
 					if (image == null)
@@ -1102,7 +1102,7 @@ namespace System.Windows.Forms
 							break;
 					}
 
-					imageRectangle = new Rectangle (image_x + check_size, image_y, image_width, image_height);
+					imageRectangle = new Rectangle_ (image_x + check_size, image_y, image_width, image_height);
 					break;
 				case TextImageRelation.ImageAboveText:
 					content_rect.Inflate (-4, -4);
@@ -1123,11 +1123,11 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Size CalculateCheckBoxAutoSize (CheckBox checkBox)
+		public override Size_ CalculateCheckBoxAutoSize (CheckBox checkBox)
 		{
-			Size ret_size = Size.Empty;
-			Size text_size = TextRenderer.MeasureTextInternal (checkBox.Text, checkBox.Font, checkBox.UseCompatibleTextRendering);
-			Size image_size = checkBox.Image == null ? Size.Empty : checkBox.Image.Size;
+			Size_ ret_size = Size_.Empty;
+			Size_ text_size = TextRenderer.MeasureTextInternal (checkBox.Text, checkBox.Font, checkBox.UseCompatibleTextRendering);
+			Size_ image_size = checkBox.Image == null ? Size_.Empty : checkBox.Image.Size;
 
 			// Pad the text size
 			if (checkBox.Text.Length != 0) {
@@ -1163,7 +1163,7 @@ namespace System.Windows.Forms
 			return ret_size;
 		}
 
-		public override void DrawCheckBox(Graphics dc, Rectangle clip_area, CheckBox checkbox) {
+		public override void DrawCheckBox(Graphics dc, Rectangle_ clip_area, CheckBox checkbox) {
 			StringFormat		text_format;
 			Rectangle		client_rectangle;
 			Rectangle		text_rectangle;
@@ -1173,7 +1173,7 @@ namespace System.Windows.Forms
 
 			client_rectangle = checkbox.ClientRectangle;
 			text_rectangle = client_rectangle;
-			checkbox_rectangle = new Rectangle(text_rectangle.X, text_rectangle.Y, checkmark_size, checkmark_size);
+			checkbox_rectangle = new Rectangle_(text_rectangle.X, text_rectangle.Y, checkmark_size, checkmark_size);
 
 			text_format = new StringFormat();
 			text_format.Alignment = StringAlignment.Near;
@@ -1183,7 +1183,7 @@ namespace System.Windows.Forms
 			else
 				text_format.HotkeyPrefix = HotkeyPrefix.Hide;
 
-			/* Calculate the position of text and checkbox rectangle */
+			/* Calculate the position of text and checkbox Rectangle_ */
 			if (checkbox.appearance!=Appearance.Button) {
 				switch(checkbox.check_alignment) {
 					case ContentAlignment.BottomCenter: {
@@ -1345,9 +1345,9 @@ namespace System.Windows.Forms
 			CheckBox_DrawText(checkbox, text_rectangle, dc, text_format);
 
 			if (checkbox.Focused && checkbox.Enabled && checkbox.appearance != Appearance.Button && checkbox.Text != String.Empty && checkbox.ShowFocusCues) {
-				SizeF text_size = dc.MeasureString (checkbox.Text, checkbox.Font);
+				SizeF_ text_size = dc.MeasureString (checkbox.Text, checkbox.Font);
 				
-				Rectangle focus_rect = Rectangle.Empty;
+				Rectangle_ focus_rect = Rectangle_.Empty;
 				focus_rect.X = text_rectangle.X;
 				focus_rect.Y = (int)((text_rectangle.Height - text_size.Height) / 2);
 				focus_rect.Size = text_size.ToSize ();
@@ -1357,7 +1357,7 @@ namespace System.Windows.Forms
 			text_format.Dispose ();
 		}
 
-		protected virtual void CheckBox_DrawCheckBox( Graphics dc, CheckBox checkbox, ButtonState state, Rectangle checkbox_rectangle )
+		protected virtual void CheckBox_DrawCheckBox( Graphics dc, CheckBox checkbox, ButtonState state, Rectangle_ checkbox_rectangle )
 		{
 			Brush brush = checkbox.BackColor.ToArgb () == ColorControl.ToArgb () ? SystemBrushes.Control : ResPool.GetSolidBrush (checkbox.BackColor);
 			dc.FillRectangle (brush, checkbox.ClientRectangle);			
@@ -1377,19 +1377,19 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		protected virtual void CheckBox_DrawText( CheckBox checkbox, Rectangle text_rectangle, Graphics dc, StringFormat text_format )
+		protected virtual void CheckBox_DrawText( CheckBox checkbox, Rectangle_ text_rectangle, Graphics dc, StringFormat text_format )
 		{
 			DrawCheckBox_and_RadioButtonText (checkbox, text_rectangle, dc, 
 							  text_format, checkbox.Appearance, checkbox.Checked);
 		}
 		
-		protected virtual void CheckBox_DrawFocus( CheckBox checkbox, Graphics dc, Rectangle text_rectangle )
+		protected virtual void CheckBox_DrawFocus( CheckBox checkbox, Graphics dc, Rectangle_ text_rectangle )
 		{
 			DrawInnerFocusRectangle (dc, text_rectangle, checkbox.BackColor);
 		}
 
 		// renders a checkBox with the Flat and Popup FlatStyle
-		protected virtual void DrawFlatStyleCheckBox (Graphics graphics, Rectangle rectangle, CheckBox checkbox)
+		protected virtual void DrawFlatStyleCheckBox (Graphics graphics, Rectangle_ rectangle, CheckBox checkbox)
 		{
 			Pen			pen;			
 			Rectangle	rect;
@@ -1401,12 +1401,12 @@ namespace System.Windows.Forms
 			// set up our rectangles first
 			if (checkbox.FlatStyle == FlatStyle.Popup && checkbox.is_entered) {
 				// clip one pixel from bottom right for non popup rendered checkboxes
-				checkbox_rectangle = new Rectangle(rectangle.X, rectangle.Y, Math.Max(rectangle.Width-1, 0), Math.Max(rectangle.Height-1,0));
-				fill_rectangle = new Rectangle(checkbox_rectangle.X+1, checkbox_rectangle.Y+1, Math.Max(checkbox_rectangle.Width-3, 0), Math.Max(checkbox_rectangle.Height-3,0));
+				checkbox_rectangle = new Rectangle_(rectangle.X, rectangle.Y, Math.Max(rectangle.Width-1, 0), Math.Max(rectangle.Height-1,0));
+				fill_rectangle = new Rectangle_(checkbox_rectangle.X+1, checkbox_rectangle.Y+1, Math.Max(checkbox_rectangle.Width-3, 0), Math.Max(checkbox_rectangle.Height-3,0));
 			} else {
 				// clip two pixels from bottom right for non popup rendered checkboxes
-				checkbox_rectangle = new Rectangle(rectangle.X, rectangle.Y, Math.Max(rectangle.Width-2, 0), Math.Max(rectangle.Height-2,0));
-				fill_rectangle = new Rectangle(checkbox_rectangle.X+1, checkbox_rectangle.Y+1, Math.Max(checkbox_rectangle.Width-2, 0), Math.Max(checkbox_rectangle.Height-2,0));
+				checkbox_rectangle = new Rectangle_(rectangle.X, rectangle.Y, Math.Max(rectangle.Width-2, 0), Math.Max(rectangle.Height-2,0));
+				fill_rectangle = new Rectangle_(checkbox_rectangle.X+1, checkbox_rectangle.Y+1, Math.Max(checkbox_rectangle.Width-2, 0), Math.Max(checkbox_rectangle.Height-2,0));
 			}	
 			
 			
@@ -1414,7 +1414,7 @@ namespace System.Windows.Forms
 			if (checkbox.Enabled) {
 				// process the state of the checkbox
 				if (checkbox.is_entered || checkbox.Capture) {
-					// decide on which background color to use
+					// decide on which background Color_ to use
 					if (checkbox.FlatStyle == FlatStyle.Popup && checkbox.is_entered && checkbox.Capture) {
 						graphics.FillRectangle(ResPool.GetSolidBrush (checkbox.BackColor), fill_rectangle);
 					} else if (checkbox.FlatStyle == FlatStyle.Flat) { 
@@ -1460,8 +1460,8 @@ namespace System.Windows.Forms
 				lineWidth = Math.Max(3, fill_rectangle.Width/3);
 				Scale=Math.Max(1, fill_rectangle.Width/9);
 				
-				// flat style check box is rendered inside a rectangle shifted down by one
-				rect=new Rectangle(fill_rectangle.X, fill_rectangle.Y+1, fill_rectangle.Width, fill_rectangle.Height);
+				// flat style check box is rendered inside a Rectangle_ shifted down by one
+				rect=new Rectangle_(fill_rectangle.X, fill_rectangle.Y+1, fill_rectangle.Width, fill_rectangle.Height);
 				if (checkbox.Enabled) {
 					pen=ResPool.GetPen(checkbox.ForeColor);
 				} else {
@@ -1475,7 +1475,7 @@ namespace System.Windows.Forms
 			}					
 		}
 
-		private void DrawCheckBox_and_RadioButtonText (ButtonBase button_base, Rectangle text_rectangle, Graphics dc, 
+		private void DrawCheckBox_and_RadioButtonText (ButtonBase button_base, Rectangle_ text_rectangle, Graphics dc, 
 							       StringFormat text_format, Appearance appearance, bool ischecked)
 		{
 			// offset the text if it's pressed and a button
@@ -1508,8 +1508,8 @@ namespace System.Windows.Forms
 		
 		public override void DrawCheckedListBoxItem (CheckedListBox ctrl, DrawItemEventArgs e)
 		{			
-			Color back_color, fore_color;
-			Rectangle item_rect = e.Bounds;
+			Color_ back_color, fore_color;
+			Rectangle_ item_rect = e.Bounds;
 			ButtonState state;
 
 			/* Draw checkbox */		
@@ -1524,7 +1524,7 @@ namespace System.Windows.Forms
 			if (ctrl.ThreeDCheckBoxes == false)
 				state |= ButtonState.Flat;
 
-			Rectangle checkbox_rect = new Rectangle (2, (item_rect.Height - 11) / 2, CheckSize, CheckSize);
+			Rectangle_ checkbox_rect = new Rectangle_ (2, (item_rect.Height - 11) / 2, CheckSize, CheckSize);
 			ControlPaint.DrawCheckBox (e.Graphics,
 				item_rect.X + checkbox_rect.X, item_rect.Y + checkbox_rect.Y,
 				checkbox_rect.Width, checkbox_rect.Height,
@@ -1561,8 +1561,8 @@ namespace System.Windows.Forms
 		#region ComboBox		
 		public override void DrawComboBoxItem (ComboBox ctrl, DrawItemEventArgs e)
 		{
-			Color back_color, fore_color;
-			Rectangle text_draw = e.Bounds;
+			Color_ back_color, fore_color;
+			Rectangle_ text_draw = e.Bounds;
 			StringFormat string_format = new StringFormat ();
 			string_format.FormatFlags = StringFormatFlags.LineLimit;
 			
@@ -1593,19 +1593,19 @@ namespace System.Windows.Forms
 			string_format.Dispose ();
 		}
 		
-		public override void DrawFlatStyleComboButton (Graphics graphics, Rectangle rectangle, ButtonState state)
+		public override void DrawFlatStyleComboButton (Graphics graphics, Rectangle_ rectangle, ButtonState state)
 		{
-			Point[]			arrow = new Point[3];
-			Point				P1;
-			Point				P2;
-			Point				P3;
+            Drawing.Point_[]			arrow = new Drawing.Point_[3];
+            Drawing.Point_				P1;
+            Drawing.Point_				P2;
+            Drawing.Point_				P3;
 			int				centerX;
 			int				centerY;
 			int				shiftX;
 			int				shiftY;
-			Rectangle		rect;
+			Rectangle_		rect;
 
-			rect=new Rectangle(rectangle.X+rectangle.Width/4, rectangle.Y+rectangle.Height/4, rectangle.Width/2, rectangle.Height/2);
+			rect=new Rectangle_(rectangle.X+rectangle.Width/4, rectangle.Y+rectangle.Height/4, rectangle.Width/2, rectangle.Height/2);
 			centerX=rect.Left+rect.Width/2;
 			centerY=rect.Top+rect.Height/2;
 			shiftX=Math.Max(1, rect.Width/8);
@@ -1618,9 +1618,9 @@ namespace System.Windows.Forms
 
 			rect.Y-=shiftY;
 			centerY-=shiftY;
-			P1=new Point(rect.Left + 1, centerY);
-			P2=new Point(rect.Right - 1, centerY);
-			P3=new Point(centerX, rect.Bottom - 1);
+			P1=new Drawing.Point_(rect.Left + 1, centerY);
+			P2=new Drawing.Point_(rect.Right - 1, centerY);
+			P3=new Drawing.Point_(centerX, rect.Bottom - 1);
 
 			arrow[0]=P1;
 			arrow[1]=P2;
@@ -1644,7 +1644,7 @@ namespace System.Windows.Forms
 				graphics.FillPolygon(SystemBrushes.ControlText, arrow, FillMode.Winding);
 			}		
 		}
-		public override void ComboBoxDrawNormalDropDownButton (ComboBox comboBox, Graphics g, Rectangle clippingArea, Rectangle area, ButtonState state)
+		public override void ComboBoxDrawNormalDropDownButton (ComboBox comboBox, Graphics g, Rectangle_ clippingArea, Rectangle_ area, ButtonState state)
 		{
 			CPDrawComboButton (g, area, state);
 		}
@@ -1656,7 +1656,7 @@ namespace System.Windows.Forms
 		{
 			return false;
 		}
-		public override void ComboBoxDrawBackground (ComboBox comboBox, Graphics g, Rectangle clippingArea, FlatStyle style)
+		public override void ComboBoxDrawBackground (ComboBox comboBox, Graphics g, Rectangle_ clippingArea, FlatStyle style)
 		{
 			if (!comboBox.Enabled)
 				g.FillRectangle (ResPool.GetSolidBrush (ColorControl), comboBox.ClientRectangle);
@@ -1665,7 +1665,7 @@ namespace System.Windows.Forms
 				g.FillRectangle (ResPool.GetSolidBrush (comboBox.Parent.BackColor), comboBox.ClientRectangle);
 
 			if (style == FlatStyle.Popup && (comboBox.Entered || comboBox.Focused)) {
-				Rectangle area = comboBox.TextArea;
+				Rectangle_ area = comboBox.TextArea;
 				area.Height -= 1;
 				area.Width -= 1;
 				g.DrawRectangle (ResPool.GetPen (SystemColors.ControlDark), area);
@@ -1685,20 +1685,20 @@ namespace System.Windows.Forms
 		public override int DataGridPreferredColumnWidth { get { return 75;} }
 		public override int DataGridMinimumColumnCheckBoxHeight { get { return 16;} }
 		public override int DataGridMinimumColumnCheckBoxWidth { get { return 16;} }
-		public override Color DataGridAlternatingBackColor { get { return ColorWindow;} }
-		public override Color DataGridBackColor { get  { return  ColorWindow;} }		
-		public override Color DataGridBackgroundColor { get  { return  ColorAppWorkspace;} }
-		public override Color DataGridCaptionBackColor { get  { return ColorActiveCaption;} }
-		public override Color DataGridCaptionForeColor { get  { return ColorActiveCaptionText;} }
-		public override Color DataGridGridLineColor { get { return ColorControl;} }
-		public override Color DataGridHeaderBackColor { get  { return ColorControl;} }
-		public override Color DataGridHeaderForeColor { get  { return ColorControlText;} }
-		public override Color DataGridLinkColor { get  { return ColorHotTrack;} }
-		public override Color DataGridLinkHoverColor { get  { return ColorHotTrack;} }
-		public override Color DataGridParentRowsBackColor { get  { return ColorControl;} }
-		public override Color DataGridParentRowsForeColor { get  { return ColorWindowText;} }
-		public override Color DataGridSelectionBackColor { get  { return ColorActiveCaption;} }
-		public override Color DataGridSelectionForeColor { get  { return ColorActiveCaptionText;} }
+		public override Color_ DataGridAlternatingBackColor { get { return ColorWindow;} }
+		public override Color_ DataGridBackColor { get  { return  ColorWindow;} }		
+		public override Color_ DataGridBackgroundColor { get  { return  ColorAppWorkspace;} }
+		public override Color_ DataGridCaptionBackColor { get  { return ColorActiveCaption;} }
+		public override Color_ DataGridCaptionForeColor { get  { return ColorActiveCaptionText;} }
+		public override Color_ DataGridGridLineColor { get { return ColorControl;} }
+		public override Color_ DataGridHeaderBackColor { get  { return ColorControl;} }
+		public override Color_ DataGridHeaderForeColor { get  { return ColorControlText;} }
+		public override Color_ DataGridLinkColor { get  { return ColorHotTrack;} }
+		public override Color_ DataGridLinkHoverColor { get  { return ColorHotTrack;} }
+		public override Color_ DataGridParentRowsBackColor { get  { return ColorControl;} }
+		public override Color_ DataGridParentRowsForeColor { get  { return ColorWindowText;} }
+		public override Color_ DataGridSelectionBackColor { get  { return ColorActiveCaption;} }
+		public override Color_ DataGridSelectionForeColor { get  { return ColorActiveCaptionText;} }
 		
 		public override void DataGridPaint (PaintEventArgs pe, DataGrid grid)
 		{
@@ -1710,7 +1710,7 @@ namespace System.Windows.Forms
 			// Paint scrollBar corner
 			if (grid.VScrollBar.Visible && grid.HScrollBar.Visible) {
 
-				Rectangle corner = new Rectangle (grid.ClientRectangle.X + grid.ClientRectangle.Width - grid.VScrollBar.Width,
+				Rectangle_ corner = new Rectangle_ (grid.ClientRectangle.X + grid.ClientRectangle.Width - grid.VScrollBar.Width,
 								  grid.ClientRectangle.Y + grid.ClientRectangle.Height - grid.HScrollBar.Height,
 								  grid.VScrollBar.Width, grid.HScrollBar.Height);
 
@@ -1721,9 +1721,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void DataGridPaintCaption (Graphics g, Rectangle clip, DataGrid grid)
+		public override void DataGridPaintCaption (Graphics g, Rectangle_ clip, DataGrid grid)
 		{
-			Rectangle bounds = clip;
+			Rectangle_ bounds = clip;
 			bounds.Intersect (grid.caption_area);
 
 			// Background
@@ -1736,7 +1736,7 @@ namespace System.Windows.Forms
 
 			// Caption text
 			if (grid.CaptionText != String.Empty) {
-				Rectangle text_rect = grid.caption_area;
+				Rectangle_ text_rect = grid.caption_area;
 				text_rect.Y += text_rect.Height / 2 - grid.CaptionFont.Height / 2;
 				text_rect.Height = grid.CaptionFont.Height;
 
@@ -1762,16 +1762,16 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void DataGridPaintColumnHeaders (Graphics g, Rectangle clip, DataGrid grid)
+		public override void DataGridPaintColumnHeaders (Graphics g, Rectangle_ clip, DataGrid grid)
 		{
 			if (!grid.CurrentTableStyle.ColumnHeadersVisible)
 				return;
 
-			Rectangle columns_area = grid.column_headers_area;
+			Rectangle_ columns_area = grid.column_headers_area;
 
 			// Paint corner shared between row and column header
 			if (grid.CurrentTableStyle.CurrentRowHeadersVisible) {
-				Rectangle rect_bloc = grid.column_headers_area;
+				Rectangle_ rect_bloc = grid.column_headers_area;
 				rect_bloc.Width = grid.RowHeaderWidth;
 				if (clip.IntersectsWith (rect_bloc)) {
 					if (grid.FlatMode)
@@ -1788,7 +1788,7 @@ namespace System.Windows.Forms
 			}
 
 			// Set column painting
-			Rectangle rect_columnhdr = new Rectangle ();
+			Rectangle_ rect_columnhdr = new Rectangle_ ();
 			int col_pixel;
 			Region current_clip;
 			Region prev_clip = g.Clip;
@@ -1819,13 +1819,13 @@ namespace System.Windows.Forms
 
 			g.Clip = prev_clip;
 				
-			Rectangle not_usedarea = grid.column_headers_area;
+			Rectangle_ not_usedarea = grid.column_headers_area;
 			not_usedarea.X = (column_cnt == 0) ? grid.RowHeaderWidth : rect_columnhdr.X + rect_columnhdr.Width;
 			not_usedarea.Width = grid.ClientRectangle.X + grid.ClientRectangle.Width - not_usedarea.X;
 			g.FillRectangle (ResPool.GetSolidBrush (grid.BackgroundColor), not_usedarea);
 		}
 
-		public override void DataGridPaintColumnHeader (Graphics g, Rectangle bounds, DataGrid grid, int col)
+		public override void DataGridPaintColumnHeader (Graphics g, Rectangle_ bounds, DataGrid grid, int col)
 		{
 			// Background
 			g.FillRectangle (ResPool.GetSolidBrush (grid.CurrentTableStyle.HeaderBackColor), bounds);
@@ -1878,7 +1878,7 @@ namespace System.Windows.Forms
 
 			// Arrow (6 x 6)
 			if (style.ArrowDrawingMode != DataGridColumnStyle.ArrowDrawing.No) {
-				Point pnt = new Point (bounds.X + bounds.Width + 4, bounds.Y + ((bounds.Height - 6)/2));
+				Point_ pnt = new Point_ (bounds.X + bounds.Width + 4, bounds.Y + ((bounds.Height - 6)/2));
 				
 				if (style.ArrowDrawingMode == DataGridColumnStyle.ArrowDrawing.Ascending) {
 					g.DrawLine (SystemPens.ControlLightLight, pnt.X + 6, pnt.Y + 6, pnt.X + 3, pnt.Y);
@@ -1892,9 +1892,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void DataGridPaintParentRows (Graphics g, Rectangle clip, DataGrid grid)
+		public override void DataGridPaintParentRows (Graphics g, Rectangle_ clip, DataGrid grid)
 		{
-			Rectangle rect_row = new Rectangle ();
+			Rectangle_ rect_row = new Rectangle_ ();
 
 			rect_row.X = grid.ParentRowsArea.X;
 			rect_row.Width = grid.ParentRowsArea.Width;
@@ -1922,7 +1922,7 @@ namespace System.Windows.Forms
 			g.Clip = prev_clip;
 		}
 
-		public override void DataGridPaintParentRow (Graphics g, Rectangle bounds, DataGridDataSource row, DataGrid grid)
+		public override void DataGridPaintParentRow (Graphics g, Rectangle_ bounds, DataGridDataSource row, DataGrid grid)
 		{
 			// Background
 			g.FillRectangle (ResPool.GetSolidBrush (grid.ParentRowsBackColor),
@@ -1939,11 +1939,11 @@ namespace System.Windows.Forms
 				table_name = ((ITypedList)((DataRowView)row.view).DataView).GetListName (null) + ": ";
 			// XXX else?
 
-			Rectangle	text_rect;
-			Size		text_size;
+			Rectangle_	text_rect;
+			Size_		text_size;
 
 			text_size = g.MeasureString (table_name, bold_font).ToSize();
-			text_rect = new Rectangle(new Point(bounds.X + 3, bounds.Y + bounds.Height - text_size.Height), text_size);
+			text_rect = new Rectangle_(new Drawing.Point_(bounds.X + 3, bounds.Y + bounds.Height - text_size.Height), text_size);
 
 			g.DrawString (table_name,
 				      bold_font, ResPool.GetSolidBrush (grid.ParentRowsForeColor), text_rect, text_format);
@@ -1973,14 +1973,14 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void DataGridPaintRowHeaderArrow (Graphics g, Rectangle bounds, DataGrid grid) 
-		{		
-			Point[] arrow = new Point[3];
-			Point P1, P2, P3;
+		public override void DataGridPaintRowHeaderArrow (Graphics g, Rectangle_ bounds, DataGrid grid) 
+		{
+            Drawing.Point_[] arrow = new Drawing.Point_[3];
+			Point_ P1, P2, P3;
 			int centerX, centerY, shiftX;			
-			Rectangle rect;
+			Rectangle_ rect;
 			
-			rect = new Rectangle (bounds.X + bounds.Width /4, 
+			rect = new Rectangle_ (bounds.X + bounds.Width /4, 
 				bounds.Y + bounds.Height/4, bounds.Width / 2, bounds.Height / 2);
 			
 			centerX = rect.Left + rect.Width / 2;
@@ -1988,9 +1988,9 @@ namespace System.Windows.Forms
 			shiftX = Math.Max (1, rect.Width / 8);			
 			rect.X -= shiftX;
 			centerX -= shiftX;			
-			P1 = new Point (centerX, rect.Top - 1);
-			P2 = new Point (centerX, rect.Bottom);
-			P3 = new Point (rect.Right, centerY);			
+			P1 = new Point_ (centerX, rect.Top - 1);
+			P2 = new Point_ (centerX, rect.Bottom);
+			P3 = new Point_ (rect.Right, centerY);			
 			arrow[0] = P1;
 			arrow[1] = P2;
 			arrow[2] = P3;
@@ -1999,7 +1999,7 @@ namespace System.Windows.Forms
 				(grid.CurrentTableStyle.CurrentHeaderForeColor), arrow, FillMode.Winding);
 		}
 
-		public override void DataGridPaintRowHeaderStar (Graphics g, Rectangle bounds, DataGrid grid) 
+		public override void DataGridPaintRowHeaderStar (Graphics g, Rectangle_ bounds, DataGrid grid) 
 		{
 			int x = bounds.X + 4;
 			int y = bounds.Y + 3;
@@ -2011,7 +2011,7 @@ namespace System.Windows.Forms
 			g.DrawLine (pen, x + 7, y + 1, x + 1, y + 7);
 		}		
 
-		public override void DataGridPaintRowHeader (Graphics g, Rectangle bounds, int row, DataGrid grid)
+		public override void DataGridPaintRowHeader (Graphics g, Rectangle_ bounds, int row, DataGrid grid)
 		{
 			bool is_add_row = grid.ShowEditRow && row == grid.DataGridRows.Length - 1;
 			bool is_current_row = row == grid.CurrentCell.RowNumber;
@@ -2026,7 +2026,7 @@ namespace System.Windows.Forms
 						      ResPool.GetSolidBrush (grid.CurrentTableStyle.CurrentHeaderForeColor),
 						      bounds);
 				} else {
-					Rectangle rect = new Rectangle (bounds.X - 2, bounds.Y, 18, 18);
+					Rectangle_ rect = new Rectangle_ (bounds.X - 2, bounds.Y, 18, 18);
 					DataGridPaintRowHeaderArrow (g, rect, grid);
 				}
 			}
@@ -2041,10 +2041,10 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		public override void DataGridPaintRows (Graphics g, Rectangle cells, Rectangle clip, DataGrid grid)
+		public override void DataGridPaintRows (Graphics g, Rectangle_ cells, Rectangle_ clip, DataGrid grid)
 		{
-			Rectangle rect_row = new Rectangle ();
-			Rectangle not_usedarea = new Rectangle ();
+			Rectangle_ rect_row = new Rectangle_ ();
+			Rectangle_ not_usedarea = new Rectangle_ ();
 
 			int rowcnt = grid.VisibleRowCount;
 			
@@ -2090,11 +2090,11 @@ namespace System.Windows.Forms
 			g.FillRectangle (ResPool.GetSolidBrush (grid.BackgroundColor), not_usedarea);
 		}
 
-		public override void DataGridPaintRelationRow (Graphics g, int row, Rectangle row_rect, bool is_newrow,
-							       Rectangle clip, DataGrid grid)
+		public override void DataGridPaintRelationRow (Graphics g, int row, Rectangle_ row_rect, bool is_newrow,
+							       Rectangle_ clip, DataGrid grid)
 		{
-			Rectangle rect_header;
-			Rectangle icon_bounds = new Rectangle ();
+			Rectangle_ rect_header;
+			Rectangle_ icon_bounds = new Rectangle_ ();
 			Pen pen = ThemeEngine.Current.ResPool.GetPen (grid.CurrentTableStyle.ForeColor);
 
 			/* paint the header if it's visible and intersects the clip */
@@ -2127,7 +2127,7 @@ namespace System.Windows.Forms
 				}
 			}
 
-			Rectangle nested_rect = row_rect;
+			Rectangle_ nested_rect = row_rect;
 
 			if (grid.DataGridRows[row].IsExpanded)
 				nested_rect.Height -= grid.DataGridRows[row].RelationHeight;
@@ -2156,7 +2156,7 @@ namespace System.Windows.Forms
 
 				//Region prev_clip = g.Clip;
 				//Region current_clip;
-				Rectangle rect_cell = row_rect;
+				Rectangle_ rect_cell = row_rect;
 
 				rect_cell.X = nested_rect.X + grid.GetColumnStartingPixel (grid.FirstVisibleColumn) - grid.HorizPixelOffset;
 				rect_cell.Y += nested_rect.Height;
@@ -2176,7 +2176,7 @@ namespace System.Windows.Forms
 
 
 				/* draw the line leading from the +/- to the relation area */
-				Rectangle outline = grid.DataGridRows[row].relation_area;
+				Rectangle_ outline = grid.DataGridRows[row].relation_area;
 				outline.Y = rect_cell.Y;
 				outline.Height --;
 
@@ -2194,7 +2194,7 @@ namespace System.Windows.Forms
 					      outline, string_format);
 
 				if (row_rect.X + row_rect.Width > rect_cell.X + rect_cell.Width) {
-					Rectangle not_usedarea = new Rectangle ();
+					Rectangle_ not_usedarea = new Rectangle_ ();
 					not_usedarea.X = rect_cell.X + rect_cell.Width;
 					not_usedarea.Width = row_rect.X + row_rect.Width - rect_cell.X - rect_cell.Width;
 					not_usedarea.Y = row_rect.Y;
@@ -2206,14 +2206,14 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void DataGridPaintRowContents (Graphics g, int row, Rectangle row_rect, bool is_newrow,
-							       Rectangle clip, DataGrid grid)
+		public override void DataGridPaintRowContents (Graphics g, int row, Rectangle_ row_rect, bool is_newrow,
+							       Rectangle_ clip, DataGrid grid)
 		{
-			Rectangle rect_cell = new Rectangle ();
+			Rectangle_ rect_cell = new Rectangle_ ();
 			int col_pixel;
-			Color backcolor, forecolor;
+			Color_ backcolor, forecolor;
 			Brush backBrush, foreBrush;
-			Rectangle not_usedarea = Rectangle.Empty;
+			Rectangle_ not_usedarea = Rectangle_.Empty;
 
 			rect_cell.Y = row_rect.Y;
 			rect_cell.Height = row_rect.Height;
@@ -2301,12 +2301,12 @@ namespace System.Windows.Forms
 						 not_usedarea);
 		}
 
-		public override void DataGridPaintRow (Graphics g, int row, Rectangle row_rect, bool is_newrow,
-						       Rectangle clip, DataGrid grid)
+		public override void DataGridPaintRow (Graphics g, int row, Rectangle_ row_rect, bool is_newrow,
+						       Rectangle_ clip, DataGrid grid)
 		{			
 			/* paint the header if it's visible and intersects the clip */
 			if (grid.CurrentTableStyle.CurrentRowHeadersVisible) {
-				Rectangle rect_header = row_rect;
+				Rectangle_ rect_header = row_rect;
 				rect_header.Width = grid.RowHeaderWidth;
 				row_rect.X += grid.RowHeaderWidth;
 				if (clip.IntersectsWith (rect_header)) {
@@ -2322,7 +2322,7 @@ namespace System.Windows.Forms
 		#region DataGridView
 		#region DataGridViewHeaderCell
 		#region DataGridViewRowHeaderCell
-		public override bool DataGridViewRowHeaderCellDrawBackground (DataGridViewRowHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewRowHeaderCellDrawBackground (DataGridViewRowHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			return false;
 		}
@@ -2332,19 +2332,19 @@ namespace System.Windows.Forms
 			return false;
 		}
 
-		public override bool DataGridViewRowHeaderCellDrawBorder (DataGridViewRowHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewRowHeaderCellDrawBorder (DataGridViewRowHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			return false;
 		}
 		#endregion
 
 		#region DataGridViewColumnHeaderCell
-		public override bool DataGridViewColumnHeaderCellDrawBackground (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewColumnHeaderCellDrawBackground (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			return false;
 		}
 
-		public override bool DataGridViewColumnHeaderCellDrawBorder (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle bounds)
+		public override bool DataGridViewColumnHeaderCellDrawBorder (DataGridViewColumnHeaderCell cell, Graphics g, Rectangle_ bounds)
 		{
 			return false;
 		}
@@ -2363,12 +2363,12 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region DateTimePicker
-		protected virtual void DateTimePickerDrawBorder (DateTimePicker dateTimePicker, Graphics g, Rectangle clippingArea)
+		protected virtual void DateTimePickerDrawBorder (DateTimePicker dateTimePicker, Graphics g, Rectangle_ clippingArea)
 		{
 			this.CPDrawBorder3D (g, dateTimePicker.ClientRectangle, Border3DStyle.Sunken, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom, dateTimePicker.BackColor);
 		}
 
-		protected virtual void DateTimePickerDrawDropDownButton (DateTimePicker dateTimePicker, Graphics g, Rectangle clippingArea)
+		protected virtual void DateTimePickerDrawDropDownButton (DateTimePicker dateTimePicker, Graphics g, Rectangle_ clippingArea)
 		{
 			ButtonState state = dateTimePicker.is_drop_down_visible ? ButtonState.Pushed : ButtonState.Normal;
 			g.FillRectangle (ResPool.GetSolidBrush (ColorControl), dateTimePicker.drop_down_arrow_rect);
@@ -2378,14 +2378,14 @@ namespace System.Windows.Forms
 			  state);
 		}
 
-		public override void DrawDateTimePicker(Graphics dc, Rectangle clip_rectangle, DateTimePicker dtp)
+		public override void DrawDateTimePicker(Graphics dc, Rectangle_ clip_rectangle, DateTimePicker dtp)
 		{
 
 			if (!clip_rectangle.IntersectsWith (dtp.ClientRectangle))
 				return;
 
 			// draw the outer border
-			Rectangle button_bounds = dtp.ClientRectangle;
+			Rectangle_ button_bounds = dtp.ClientRectangle;
 			DateTimePickerDrawBorder (dtp, dc, clip_rectangle);
 
 			// deflate by the border width
@@ -2396,8 +2396,8 @@ namespace System.Windows.Forms
 				} else {
 					ButtonState up_state = dtp.is_up_pressed ? ButtonState.Pushed : ButtonState.Normal;
 					ButtonState down_state = dtp.is_down_pressed ? ButtonState.Pushed : ButtonState.Normal;
-					Rectangle up_bounds = dtp.drop_down_arrow_rect;
-					Rectangle down_bounds = dtp.drop_down_arrow_rect;
+					Rectangle_ up_bounds = dtp.drop_down_arrow_rect;
+					Rectangle_ down_bounds = dtp.drop_down_arrow_rect;
 
 					up_bounds.Height = up_bounds.Height / 2;
 					down_bounds.Y = up_bounds.Height;
@@ -2424,9 +2424,9 @@ namespace System.Windows.Forms
 			dc.FillRectangle (SystemBrushes.Window, dtp.date_area_rect);
 
 			// Update date_area_rect if we are drawing the checkbox
-			Rectangle date_area_rect = dtp.date_area_rect;
+			Rectangle_ date_area_rect = dtp.date_area_rect;
 			if (dtp.ShowCheckBox) {
-				Rectangle check_box_rect = dtp.CheckBoxRect;
+				Rectangle_ check_box_rect = dtp.CheckBoxRect;
 				date_area_rect.X = date_area_rect.X + check_box_rect.Width + DateTimePicker.check_box_space * 2;
 				date_area_rect.Width = date_area_rect.Width - check_box_rect.Width - DateTimePicker.check_box_space * 2;
 
@@ -2452,7 +2452,7 @@ namespace System.Windows.Forms
 					for (int i = 0; i < dtp.part_data.Length; i++)
 					{
 						DateTimePicker.PartData fd = dtp.part_data[i];
-						RectangleF text_rect = new RectangleF();
+						RectangleF_ text_rect = new RectangleF();
 						string text = fd.GetText(dtp.Value);
 						text_rect.Size = gr.MeasureString (text, dtp.Font, 250, text_format);
 						if (!fd.is_literal)
@@ -2472,7 +2472,7 @@ namespace System.Windows.Forms
 				// draw the text part
 				Brush text_brush = ResPool.GetSolidBrush (dtp.ShowCheckBox && dtp.Checked == false ?
 						SystemColors.GrayText : dtp.ForeColor); // Use GrayText if Checked is false
-				RectangleF clip_rectangleF = clip_rectangle;
+				RectangleF_ clip_rectangleF = clip_rectangle;
 
 				for (int i = 0; i < dtp.part_data.Length; i++)
 				{
@@ -2484,15 +2484,15 @@ namespace System.Windows.Forms
 
 					text = dtp.editing_part_index == i ? dtp.editing_text : fd.GetText (dtp.Value);
 
-					PointF text_position = new PointF ();
-					SizeF text_size;
-					RectangleF text_rect;
+					PointF_ text_position = new PointF_ ();
+					SizeF_ text_size;
+					RectangleF_ text_rect;
 
 					text_size = dc.MeasureString (text, dtp.Font, 250, text_format);
 					text_position.X = (fd.drawing_rectangle.Left + fd.drawing_rectangle.Width / 2) - text_size.Width / 2;
 					text_position.Y = (fd.drawing_rectangle.Top + fd.drawing_rectangle.Height / 2) - text_size.Height / 2;
-					text_rect = new RectangleF (text_position, text_size);
-					text_rect = RectangleF.Intersect (text_rect, date_area_rect);
+					text_rect = new RectangleF_ (text_position, text_size);
+					text_rect = RectangleF_.Intersect (text_rect, date_area_rect);
 					
 					if (text_rect.IsEmpty)
 						break;
@@ -2522,9 +2522,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Rectangle DateTimePickerGetDropDownButtonArea (DateTimePicker dateTimePicker)
+		public override Rectangle_ DateTimePickerGetDropDownButtonArea (DateTimePicker dateTimePicker)
 		{
-			Rectangle rect = dateTimePicker.ClientRectangle;
+			Rectangle_ rect = dateTimePicker.ClientRectangle;
 			rect.X = rect.Right - SystemInformation.VerticalScrollBarWidth - 2;
 			if (rect.Width > (SystemInformation.VerticalScrollBarWidth + 2)) {
 				rect.Width = SystemInformation.VerticalScrollBarWidth;
@@ -2536,9 +2536,9 @@ namespace System.Windows.Forms
 			return rect;
 		}
 
-		public override Rectangle DateTimePickerGetDateArea (DateTimePicker dateTimePicker)
+		public override Rectangle_ DateTimePickerGetDateArea (DateTimePicker dateTimePicker)
 		{
-			Rectangle rect = dateTimePicker.ClientRectangle;
+			Rectangle_ rect = dateTimePicker.ClientRectangle;
 			if (dateTimePicker.ShowUpDown) {
 				// set the space to the left of the up/down button
 				if (rect.Width > (DateTimePicker.up_down_width + 4)) {
@@ -2567,9 +2567,9 @@ namespace System.Windows.Forms
 		#endregion // DateTimePicker
 
 		#region GroupBox
-		public override void DrawGroupBox (Graphics dc,  Rectangle area, GroupBox box) {
+		public override void DrawGroupBox (Graphics dc,  Rectangle_ area, GroupBox box) {
 			StringFormat	text_format;
-			SizeF		size;
+			SizeF_		size;
 			int		width;
 			int		y;
 
@@ -2592,9 +2592,9 @@ namespace System.Windows.Forms
 
 			// Clip the are that the text will be in
 			Region prev_clip = dc.Clip;
-			dc.SetClip (new Rectangle (10, 0, width, box.Font.Height), CombineMode.Exclude);
+			dc.SetClip (new Rectangle_ (10, 0, width, box.Font.Height), CombineMode.Exclude);
 			/* Draw group box*/
-			CPDrawBorder3D (dc, new Rectangle (0, y, box.Width, box.Height - y), Border3DStyle.Etched, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom, box.BackColor);
+			CPDrawBorder3D (dc, new Rectangle_ (0, y, box.Width, box.Height - y), Border3DStyle.Etched, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom, box.BackColor);
 			dc.Clip = prev_clip;
 
 			/* Text */
@@ -2610,17 +2610,17 @@ namespace System.Windows.Forms
 			text_format.Dispose ();	
 		}
 
-		public override Size GroupBoxDefaultSize {
+		public override Size_ GroupBoxDefaultSize {
 			get {
-				return new Size (200,100);
+				return new Size_ (200,100);
 			}
 		}
 		#endregion
 
 		#region HScrollBar
-		public override Size HScrollBarDefaultSize {
+		public override Size_ HScrollBarDefaultSize {
 			get {
-				return new Size (80, this.ScrollBarButtonSize);
+				return new Size_ (80, this.ScrollBarButtonSize);
 			}
 		}
 
@@ -2630,7 +2630,7 @@ namespace System.Windows.Forms
 
 		public override void DrawListBoxItem (ListBox ctrl, DrawItemEventArgs e)
 		{
-			Color back_color, fore_color;
+			Color_ back_color, fore_color;
 			
 			if ((e.State & DrawItemState.Selected) == DrawItemState.Selected) {
 				back_color = ColorHighlight;
@@ -2654,7 +2654,7 @@ namespace System.Windows.Forms
 
 		#region ListView
 		// Drawing
-		public override void DrawListViewItems (Graphics dc, Rectangle clip, ListView control)
+		public override void DrawListViewItems (Graphics dc, Rectangle_ clip, ListView control)
 		{
 			bool details = control.View == View.Details;
 			int first = control.FirstVisibleIndex;	
@@ -2689,7 +2689,7 @@ namespace System.Windows.Forms
 
 			ListViewInsertionMark insertion_mark = control.InsertionMark;
 			int insertion_mark_index = insertion_mark.Index;
-			if (Application.VisualStylesEnabled && insertion_mark.Bounds != Rectangle.Empty &&
+			if (Application.VisualStylesEnabled && insertion_mark.Bounds != Rectangle_.Empty &&
 					(control.View != View.Details && control.View != View.List) &&
 					insertion_mark_index > -1 && insertion_mark_index < control.Items.Count) {
 
@@ -2701,7 +2701,7 @@ namespace System.Windows.Forms
 			
 			// draw the gridlines
 			if (details && control.GridLines && !control.UsingGroups) {
-				Size control_size = control.ClientSize;
+				Size_ control_size = control.ClientSize;
 				int top = (control.HeaderStyle == ColumnHeaderStyle.None) ?
 					0 : control.header_control.Height;
 
@@ -2727,7 +2727,7 @@ namespace System.Windows.Forms
 			
 			// Draw corner between the two scrollbars
 			if (control.h_scroll.Visible == true && control.v_scroll.Visible == true) {
-				Rectangle rect = new Rectangle ();
+				Rectangle_ rect = new Rectangle_ ();
 				rect.X = control.h_scroll.Location.X + control.h_scroll.Width;
 				rect.Width = control.v_scroll.Width;
 				rect.Y = control.v_scroll.Location.Y + control.v_scroll.Height;
@@ -2735,13 +2735,13 @@ namespace System.Windows.Forms
 				dc.FillRectangle (SystemBrushes.Control, rect);
 			}
 
-			Rectangle box_select_rect = control.item_control.BoxSelectRectangle;
+			Rectangle_ box_select_rect = control.item_control.BoxSelectRectangle;
 			if (!box_select_rect.Size.IsEmpty)
 				dc.DrawRectangle (ResPool.GetDashPen (ColorControlText, DashStyle.Dot), box_select_rect);
 
 		}
 
-		public override void DrawListViewHeader (Graphics dc, Rectangle clip, ListView control)
+		public override void DrawListViewHeader (Graphics dc, Rectangle_ clip, ListView control)
 		{	
 			bool details = (control.View == View.Details);
 				
@@ -2751,7 +2751,7 @@ namespace System.Windows.Forms
 						  0, 0, control.TotalWidth, control.Font.Height + 5);
 				if (control.Columns.Count > 0) {
 					foreach (ColumnHeader col in control.Columns) {
-						Rectangle rect = col.Rect;
+						Rectangle_ rect = col.Rect;
 						rect.X -= control.h_marker;
 
 						bool owner_draw = false;
@@ -2792,7 +2792,7 @@ namespace System.Windows.Forms
 							if (x_origin < rect.X)
 								x_origin = rect.X;
 
-							control.SmallImageList.Draw (dc, new Point (x_origin, y_origin), image_index);
+							control.SmallImageList.Draw (dc, new Point_ (x_origin, y_origin), image_index);
 							rect.X += image_width;
 							rect.Width -= image_width;
 						}
@@ -2801,7 +2801,7 @@ namespace System.Windows.Forms
 					}
 					int right = control.GetReorderedColumn (control.Columns.Count - 1).Rect.Right - control.h_marker;
 					if (right < control.Right) {
-						Rectangle rect = control.Columns [0].Rect;
+						Rectangle_ rect = control.Columns [0].Rect;
 						rect.X = right;
 						rect.Width = control.Right - right;
 						ListViewDrawUnusedHeaderBackground (control, dc, rect, clip);
@@ -2810,7 +2810,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		protected virtual void ListViewDrawColumnHeaderBackground (ListView listView, ColumnHeader columnHeader, Graphics g, Rectangle area, Rectangle clippingArea)
+		protected virtual void ListViewDrawColumnHeaderBackground (ListView listView, ColumnHeader columnHeader, Graphics g, Rectangle_ area, Rectangle_ clippingArea)
 		{
 			ButtonState state;
 			if (listView.HeaderStyle == ColumnHeaderStyle.Clickable)
@@ -2820,7 +2820,7 @@ namespace System.Windows.Forms
 			CPDrawButton (g, area, state);
 		}
 		
-		protected virtual void ListViewDrawUnusedHeaderBackground (ListView listView, Graphics g, Rectangle area, Rectangle clippingArea)
+		protected virtual void ListViewDrawUnusedHeaderBackground (ListView listView, Graphics g, Rectangle_ area, Rectangle_ clippingArea)
 		{
 			ButtonState state;
 			if (listView.HeaderStyle == ColumnHeaderStyle.Clickable)
@@ -2832,20 +2832,20 @@ namespace System.Windows.Forms
 
 		public override void DrawListViewHeaderDragDetails (Graphics dc, ListView view, ColumnHeader col, int target_x)
 		{
-			Rectangle rect = col.Rect;
+			Rectangle_ rect = col.Rect;
 			rect.X -= view.h_marker;
-			Color color = Color.FromArgb (0x7f, ColorControlDark.R, ColorControlDark.G, ColorControlDark.B);
+			Color_ color = Color_.FromArgb (0x7f, ColorControlDark.R, ColorControlDark.G, ColorControlDark.B);
 			dc.FillRectangle (ResPool.GetSolidBrush (color), rect);
 			rect.X += 3;
 			rect.Width -= 8;
 			if (rect.Width <= 0)
 				return;
-			color = Color.FromArgb (0x7f, ColorControlText.R, ColorControlText.G, ColorControlText.B);
+			color = Color_.FromArgb (0x7f, ColorControlText.R, ColorControlText.G, ColorControlText.B);
 			dc.DrawString (col.Text, view.Font, ResPool.GetSolidBrush (color), rect, col.Format);
 			dc.DrawLine (ResPool.GetSizedPen (ColorHighlight, 2), target_x, 0, target_x, col.Rect.Height);
 		}
 
-		protected virtual bool DrawListViewColumnHeaderOwnerDraw (Graphics dc, ListView control, ColumnHeader column, Rectangle bounds)
+		protected virtual bool DrawListViewColumnHeaderOwnerDraw (Graphics dc, ListView control, ColumnHeader column, Rectangle_ bounds)
 		{
 			ListViewItemStates state = ListViewItemStates.ShowKeyboardCues;
 			if (column.Pressed)
@@ -2892,10 +2892,10 @@ namespace System.Windows.Forms
 
 		protected virtual void DrawListViewItem (Graphics dc, ListView control, ListViewItem item)
 		{				
-			Rectangle rect_checkrect = item.CheckRectReal;
-			Rectangle icon_rect = item.GetBounds (ItemBoundsPortion.Icon);
-			Rectangle full_rect = item.GetBounds (ItemBoundsPortion.Entire);
-			Rectangle text_rect = item.GetBounds (ItemBoundsPortion.Label);			
+			Rectangle_ rect_checkrect = item.CheckRectReal;
+			Rectangle_ icon_rect = item.GetBounds (ItemBoundsPortion.Icon);
+			Rectangle_ full_rect = item.GetBounds (ItemBoundsPortion.Entire);
+			Rectangle_ text_rect = item.GetBounds (ItemBoundsPortion.Label);			
 
 			// Tile view doesn't support CheckBoxes
 			if (control.CheckBoxes && control.View != View.Tile) {
@@ -2907,8 +2907,8 @@ namespace System.Windows.Forms
 					// set the checkbox background
 					dc.FillRectangle (SystemBrushes.Window,
 							  rect_checkrect);
-					// define a rectangle inside the border area
-					Rectangle rect = new Rectangle (rect_checkrect.X + 2,
+					// define a Rectangle_ inside the border area
+					Rectangle_ rect = new Rectangle_ (rect_checkrect.X + 2,
 									rect_checkrect.Y + 2,
 									rect_checkrect.Width - 4,
 									rect_checkrect.Height - 4);
@@ -2981,9 +2981,9 @@ namespace System.Windows.Forms
 			if ((control.View == View.LargeIcon && !item.Focused) || control.View == View.Details || control.View == View.Tile)
 				format.Trimming = StringTrimming.EllipsisCharacter;
 
-			Rectangle highlight_rect = text_rect;
+			Rectangle_ highlight_rect = text_rect;
 			if (control.View == View.Details) { // Adjustments for Details view
-				Size text_size = Size.Ceiling (dc.MeasureString (item.Text, item.Font));
+				Size_ text_size = Size_.Ceiling (dc.MeasureString (item.Text, item.Font));
 
 				if (!control.FullRowSelect) // Selection shouldn't be outside the item bounds
 					highlight_rect.Width = Math.Min (text_size.Width + 4, text_rect.Width);
@@ -3031,12 +3031,12 @@ namespace System.Windows.Forms
 			}
 
 			if (item.Focused && control.Focused) {				
-				Rectangle focus_rect = highlight_rect;
+				Rectangle_ focus_rect = highlight_rect;
 				if (control.FullRowSelect && control.View == View.Details) {
 					int width = 0;
 					foreach (ColumnHeader col in control.Columns)
 						width += col.Width;
-					focus_rect = new Rectangle (0, full_rect.Y, width, full_rect.Height);
+					focus_rect = new Rectangle_ (0, full_rect.Y, width, full_rect.Height);
 				}
 				if (control.ShowFocusCues) {
 					if (item.Selected)
@@ -3058,7 +3058,7 @@ namespace System.Windows.Forms
 				DrawListViewSubItem (dc, control, item, i);
 
 			// Fill in selection for remaining columns if Column.Count > SubItems.Count
-			Rectangle sub_item_rect = item.GetBounds (ItemBoundsPortion.Label);
+			Rectangle_ sub_item_rect = item.GetBounds (ItemBoundsPortion.Label);
 			if (item.Selected && (control.Focused || !control.HideSelection) && control.FullRowSelect) {
 				for (int index = count; index < columns_count; index++) {
 					ColumnHeader col = control.Columns [index];
@@ -3080,8 +3080,8 @@ namespace System.Windows.Forms
 			format.FormatFlags = StringFormatFlags.NoWrap;
 			format.Trimming = StringTrimming.EllipsisCharacter;
 
-			Rectangle sub_item_rect = subItem.Bounds;
-			Rectangle sub_item_text_rect = sub_item_rect;
+			Rectangle_ sub_item_rect = subItem.Bounds;
+			Rectangle_ sub_item_text_rect = sub_item_rect;
 			sub_item_text_rect.X += 3;
 			sub_item_text_rect.Width -= ListViewItemPaddingWidth;
 						
@@ -3144,15 +3144,15 @@ namespace System.Windows.Forms
 
 		protected virtual void DrawListViewGroupHeader (Graphics dc, ListView control, ListViewGroup group)
 		{
-			Rectangle text_bounds = group.HeaderBounds;
-			Rectangle header_bounds = group.HeaderBounds;
+			Rectangle_ text_bounds = group.HeaderBounds;
+			Rectangle_ header_bounds = group.HeaderBounds;
 			text_bounds.Offset (8, 0);
 			text_bounds.Inflate (-8, 0);
 			int text_height = control.Font.Height + 2; // add a tiny padding between the text and the group line
 
 			Font font = new Font (control.Font, control.Font.Style | FontStyle.Bold);
-			Brush brush = new LinearGradientBrush (new Point (header_bounds.Left, 0), new Point (header_bounds.Left + ListViewGroupLineWidth, 0), 
-					SystemColors.Desktop, Color.White);
+			Brush brush = new LinearGradientBrush (new Point_ (header_bounds.Left, 0), new Point_ (header_bounds.Left + ListViewGroupLineWidth, 0), 
+					SystemColors.Desktop, Color_.White);
 			Pen pen = new Pen (brush);
 
 			StringFormat sformat = new StringFormat ();
@@ -3201,8 +3201,8 @@ namespace System.Windows.Forms
 			return ListViewGetHeaderHeight (ThemeEngine.Current.DefaultFont);
 		}
 
-		public override Size ListViewCheckBoxSize {
-			get { return new Size (16, 16); }
+		public override Size_ ListViewCheckBoxSize {
+			get { return new Size_ (16, 16); }
 		}
 
 		public override int ListViewColumnHeaderHeight {
@@ -3229,8 +3229,8 @@ namespace System.Windows.Forms
 			get { return 6; }
 		}
 
-		public override Size ListViewDefaultSize {
-			get { return new Size (121, 97); }
+		public override Size_ ListViewDefaultSize {
+			get { return new Size_ (121, 97); }
 		}
 
 		public override int ListViewGroupHeight { 
@@ -3276,7 +3276,7 @@ namespace System.Windows.Forms
 				item.Width = mi.ItemWidth;
 				return;
 			} else {		
-				SizeF size;
+				SizeF_ size;
 				size =  dc.MeasureString (item.Text, MenuFont, int.MaxValue, string_format_menu_text);
 				item.Width = (int) size.Width;
 				item.Height = (int) size.Height;
@@ -3373,7 +3373,7 @@ namespace System.Windows.Forms
 		}
 		
 		// Draws a menu bar in a window
-		public override void DrawMenuBar (Graphics dc, Menu menu, Rectangle rect)
+		public override void DrawMenuBar (Graphics dc, Menu menu, Rectangle_ rect)
 		{
 			if (menu.Height == 0)
 				CalcMenuBarSize (dc, menu, rect.Width);
@@ -3388,7 +3388,7 @@ namespace System.Windows.Forms
 			
 			for (int i = 0; i < menu.MenuItems.Count; i++) {
 				MenuItem item = menu.MenuItems [i];
-				Rectangle item_rect = item.bounds;
+				Rectangle_ item_rect = item.bounds;
 				item_rect.X += rect.X;
 				item_rect.Y += rect.Y;
 				item.MenuHeight = menu.Height;
@@ -3396,19 +3396,19 @@ namespace System.Windows.Forms
 			}	
 		}		
 		
-		protected Bitmap CreateGlyphBitmap (Size size, MenuGlyph glyph, Color color)
+		protected Bitmap CreateGlyphBitmap (Size_ size, MenuGlyph glyph, Color_ color)
 		{
-			Color bg_color;
+			Color_ bg_color;
 			if (color.R == 0 && color.G == 0 && color.B == 0)
-				bg_color = Color.White;
+				bg_color = Color_.White;
 			else
-				bg_color = Color.Black;
+				bg_color = Color_.Black;
 			
 			Bitmap	bmp = new Bitmap (size.Width, size.Height);
 			Graphics gr = Graphics.FromImage (bmp);
-			Rectangle rect = new Rectangle (Point.Empty, size);
+			Rectangle_ rect = new Rectangle_ (Point_.Empty, size);
 			gr.FillRectangle (ResPool.GetSolidBrush (bg_color), rect);
-			CPDrawMenuGlyph (gr, rect, glyph, color, Color.Empty);
+			CPDrawMenuGlyph (gr, rect, glyph, color, Color_.Empty);
 			bmp.MakeTransparent (bg_color);
 			gr.Dispose ();
 			
@@ -3418,7 +3418,7 @@ namespace System.Windows.Forms
 		public override void DrawMenuItem (MenuItem item, DrawItemEventArgs e)
 		{
 			StringFormat string_format;
-			Rectangle rect_text = e.Bounds;
+			Rectangle_ rect_text = e.Bounds;
 			
 			if (item.Visible == false)
 				return;
@@ -3444,7 +3444,7 @@ namespace System.Windows.Forms
 				rect_text.X += MenuCheckSize.Width;
 
 			if (item.BarBreak) { /* Draw vertical break bar*/
-				Rectangle rect = e.Bounds;
+				Rectangle_ rect = e.Bounds;
 				rect.Y++;
 				rect.Width = 3;
 				rect.Height = item.MenuHeight - 6;
@@ -3456,8 +3456,8 @@ namespace System.Windows.Forms
 					rect.X + 1, rect.Y , rect.X +1, rect.Y + rect.Height);
 			}			
 			
-			Color color_text;
-			Color color_back;
+			Color_ color_text;
+			Color_ color_back;
 			Brush brush_text = null;
 			Brush brush_back = null;
 			
@@ -3505,7 +3505,7 @@ namespace System.Windows.Forms
 
 			if (!item.MenuBar && item.Shortcut != Shortcut.None && item.ShowShortcut) {
 				string str = item.GetShortCutText ();
-				Rectangle rect = rect_text;
+				Rectangle_ rect = rect_text;
 				rect.X = item.XTab;
 				rect.Width -= item.XTab;
 
@@ -3527,7 +3527,7 @@ namespace System.Windows.Forms
 
 				int cx = MenuCheckSize.Width;
 				int cy = MenuCheckSize.Height;
-				Bitmap	bmp = CreateGlyphBitmap (new Size (cx, cy), MenuGlyph.Arrow, color_text);
+				Bitmap	bmp = CreateGlyphBitmap (new Size_ (cx, cy), MenuGlyph.Arrow, color_text);
 				
 				if (item.Enabled) {
 					e.Graphics.DrawImage (bmp, e.Bounds.X + e.Bounds.Width - cx,
@@ -3543,10 +3543,10 @@ namespace System.Windows.Forms
 			/* Draw checked or radio */
 			if (item.MenuBar == false && item.Checked) {
 
-				Rectangle area = e.Bounds;
+				Rectangle_ area = e.Bounds;
 				int cx = MenuCheckSize.Width;
 				int cy = MenuCheckSize.Height;
-				Bitmap	bmp = CreateGlyphBitmap (new Size (cx, cy), item.RadioCheck ? MenuGlyph.Bullet : MenuGlyph.Checkmark, color_text);
+				Bitmap	bmp = CreateGlyphBitmap (new Size_ (cx, cy), item.RadioCheck ? MenuGlyph.Bullet : MenuGlyph.Checkmark, color_text);
 
 				e.Graphics.DrawImage (bmp, area.X, e.Bounds.Y + ((e.Bounds.Height - cy) / 2));
 
@@ -3554,9 +3554,9 @@ namespace System.Windows.Forms
 			}			
 		}		
 			
-		public override void DrawPopupMenu (Graphics dc, Menu menu, Rectangle cliparea, Rectangle rect)
+		public override void DrawPopupMenu (Graphics dc, Menu menu, Rectangle_ cliparea, Rectangle_ rect)
 		{
-			// Fill rectangle area
+			// Fill Rectangle_ area
 			dc.FillRectangle (SystemBrushes.Menu, cliparea);
 			
 			// Draw menu borders
@@ -3577,13 +3577,13 @@ namespace System.Windows.Forms
 		#region MonthCalendar
 
 		// draw the month calendar
-		public override void DrawMonthCalendar(Graphics dc, Rectangle clip_rectangle, MonthCalendar mc) 
+		public override void DrawMonthCalendar(Graphics dc, Rectangle_ clip_rectangle, MonthCalendar mc) 
 		{
-			Rectangle client_rectangle = mc.ClientRectangle;
-			Size month_size = mc.SingleMonthSize;
+			Rectangle_ client_rectangle = mc.ClientRectangle;
+			Size_ month_size = mc.SingleMonthSize;
 			// cache local copies of Marshal-by-ref internal members (gets around error CS0197)
-			Size calendar_spacing = (Size)((object)mc.calendar_spacing);
-			Size date_cell_size = (Size)((object)mc.date_cell_size);
+			Size_ calendar_spacing = (Size_)((object)mc.calendar_spacing);
+			Size_ date_cell_size = (Size_)((object)mc.date_cell_size);
 			
 			// draw the singlecalendars
 			int x_offset = 1;
@@ -3607,7 +3607,7 @@ namespace System.Windows.Forms
 						x_offset = 1;
 					}
 
-					Rectangle month_rect = new Rectangle (x_offset, y_offset, month_size.Width, month_size.Height);
+					Rectangle_ month_rect = new Rectangle_ (x_offset, y_offset, month_size.Width, month_size.Height);
 					if (month_rect.IntersectsWith (clip_rectangle)) {
 						DrawSingleMonth (
 							dc,
@@ -3620,7 +3620,7 @@ namespace System.Windows.Forms
 				}
 			}
 			
-			Rectangle bottom_rect = new Rectangle (
+			Rectangle_ bottom_rect = new Rectangle_ (
 						client_rectangle.X,
 						Math.Max(client_rectangle.Bottom - date_cell_size.Height - 3, 0),
 						client_rectangle.Width,
@@ -3633,7 +3633,7 @@ namespace System.Windows.Forms
 					int today_offset = 5;
 					if (mc.ShowTodayCircle) 
 					{
-						Rectangle today_circle_rect = new Rectangle (
+						Rectangle_ today_circle_rect = new Rectangle_ (
 							client_rectangle.X + 5,
 							Math.Max(client_rectangle.Bottom - date_cell_size.Height - 2, 0),
 							date_cell_size.Width,
@@ -3645,7 +3645,7 @@ namespace System.Windows.Forms
 					StringFormat text_format = new StringFormat();
 					text_format.LineAlignment = StringAlignment.Center;
 					text_format.Alignment = StringAlignment.Near;
-					Rectangle today_rect = new Rectangle (
+					Rectangle_ today_rect = new Rectangle_ (
 							today_offset + client_rectangle.X,
 							Math.Max(client_rectangle.Bottom - date_cell_size.Height, 0),
 							Math.Max(client_rectangle.Width - today_offset, 0),
@@ -3669,7 +3669,7 @@ namespace System.Windows.Forms
 				} else if (i == mc.CalendarDimensions.Width && clip_rectangle.Right == client_rectangle.Right) {
 					dc.FillRectangle (border_brush, client_rectangle.Right - 1, client_rectangle.Y, 1, client_rectangle.Height);
 				} else { 
-					Rectangle rect = new Rectangle (
+					Rectangle_ rect = new Rectangle_ (
 						client_rectangle.X + (month_size.Width*i) + (calendar_spacing.Width * (i-1)) + 1,
 						client_rectangle.Y,
 						calendar_spacing.Width,
@@ -3685,7 +3685,7 @@ namespace System.Windows.Forms
 				} else if (i == mc.CalendarDimensions.Height && clip_rectangle.Bottom == client_rectangle.Bottom) {
 					dc.FillRectangle (border_brush, client_rectangle.X, client_rectangle.Bottom - 1, client_rectangle.Width, 1);
 				} else { 
-					Rectangle rect = new Rectangle (
+					Rectangle_ rect = new Rectangle_ (
 						client_rectangle.X,
 						client_rectangle.Y + (month_size.Height*i) + (calendar_spacing.Height*(i-1)) + 1,
 						client_rectangle.Width,
@@ -3698,23 +3698,23 @@ namespace System.Windows.Forms
 			
 			// draw the drop down border if need
 			if (mc.owner != null) {
-				Rectangle bounds = mc.ClientRectangle;
+				Rectangle_ bounds = mc.ClientRectangle;
 				if (clip_rectangle.Contains (mc.Location)) {
 					// find out if top or left line to draw
-					if(clip_rectangle.Contains (new Point (bounds.Left, bounds.Bottom))) {
+					if(clip_rectangle.Contains (new Point_ (bounds.Left, bounds.Bottom))) {
 					
 						dc.DrawLine (SystemPens.ControlText, bounds.X, bounds.Y, bounds.X, bounds.Bottom-1);
 					}
-					if(clip_rectangle.Contains (new Point (bounds.Right, bounds.Y))) {
+					if(clip_rectangle.Contains (new Point_ (bounds.Right, bounds.Y))) {
 						dc.DrawLine (SystemPens.ControlText, bounds.X, bounds.Y, bounds.Right-1, bounds.Y);
 					}
 				}
-				if (clip_rectangle.Contains (new Point(bounds.Right, bounds.Bottom))) {
+				if (clip_rectangle.Contains (new Drawing.Point_(bounds.Right, bounds.Bottom))) {
 					// find out if bottom or right line to draw
-					if(clip_rectangle.Contains (new Point (bounds.Left, bounds.Bottom))) {
+					if(clip_rectangle.Contains (new Point_(bounds.Left, bounds.Bottom))) {
 						dc.DrawLine (SystemPens.ControlText, bounds.X, bounds.Bottom-1, bounds.Right-1, bounds.Bottom-1);
 					}
-					if(clip_rectangle.Contains (new Point (bounds.Right, bounds.Y))) {
+					if(clip_rectangle.Contains (new Point_(bounds.Right, bounds.Y))) {
 						dc.DrawLine (SystemPens.ControlText, bounds.Right-1, bounds.Y, bounds.Right-1, bounds.Bottom-1);
 					}
 				}
@@ -3722,17 +3722,17 @@ namespace System.Windows.Forms
 		}
 
 		// darws a single part of the month calendar (with one month)
-		private void DrawSingleMonth(Graphics dc, Rectangle clip_rectangle, Rectangle rectangle, MonthCalendar mc, int row, int col) 
+		private void DrawSingleMonth(Graphics dc, Rectangle_ clip_rectangle, Rectangle_ rectangle, MonthCalendar mc, int row, int col) 
 		{
 			// cache local copies of Marshal-by-ref internal members (gets around error CS0197)
-			Size title_size = (Size)((object)mc.title_size);
-			Size date_cell_size = (Size)((object)mc.date_cell_size);
+			Size_ title_size = (Size_)((object)mc.title_size);
+			Size_ date_cell_size = (Size_)((object)mc.date_cell_size);
 			DateTime current_month = (DateTime)((object)mc.current_month);
 			DateTime sunday = new DateTime(2006, 10, 1);
 			
 			// draw the title back ground
 			DateTime this_month = current_month.AddMonths (row*mc.CalendarDimensions.Width+col);
-			Rectangle title_rect = new Rectangle(rectangle.X, rectangle.Y, title_size.Width, title_size.Height);
+			Rectangle_ title_rect = new Rectangle_(rectangle.X, rectangle.Y, title_size.Width, title_size.Height);
 			if (title_rect.IntersectsWith (clip_rectangle)) {
 				dc.FillRectangle (ResPool.GetSolidBrush (mc.TitleBackColor), title_rect);
 				// draw the title				
@@ -3740,13 +3740,13 @@ namespace System.Windows.Forms
 				dc.DrawString (title_text, mc.bold_font, ResPool.GetSolidBrush (mc.TitleForeColor), title_rect, mc.centered_format);
 
 				if (mc.ShowYearUpDown) {
-					Rectangle year_rect;
-					Rectangle upRect, downRect;
+					Rectangle_ year_rect;
+					Rectangle_ upRect, downRect;
 					ButtonState upState, downState;
 					
 					mc.GetYearNameRectangles (title_rect, row * mc.CalendarDimensions.Width + col, out year_rect, out upRect, out downRect);
 					dc.FillRectangle (ResPool.GetSolidBrush (SystemColors.Control), year_rect);
-					dc.DrawString (this_month.ToString ("yyyy"), mc.bold_font, ResPool.GetSolidBrush (Color.Black), year_rect, mc.centered_format);
+					dc.DrawString (this_month.ToString ("yyyy"), mc.bold_font, ResPool.GetSolidBrush (Color_.Black), year_rect, mc.centered_format);
 					
 					upState = mc.IsYearGoingUp ? ButtonState.Pushed : ButtonState.Normal;
 					downState = mc.IsYearGoingDown ? ButtonState.Pushed : ButtonState.Normal;
@@ -3765,7 +3765,7 @@ namespace System.Windows.Forms
 						mc,
 						title_size,
 						mc.button_x_offset,
-						(System.Drawing.Size)((object)mc.button_size),
+						(System.Drawing.Size_)((object)mc.button_size),
 						true);
 				}
 				if (row == 0 && col == mc.CalendarDimensions.Width-1) 
@@ -3777,14 +3777,14 @@ namespace System.Windows.Forms
 						mc,
 						title_size,
 						mc.button_x_offset,
-						(System.Drawing.Size)((object)mc.button_size),
+						(System.Drawing.Size_)((object)mc.button_size),
 						false);
 				}
 			}
 			
 			// set the week offset and draw week nums if needed
 			int col_offset = (mc.ShowWeekNumbers) ? 1 : 0;
-			Rectangle day_name_rect = new Rectangle(
+			Rectangle_ day_name_rect = new Rectangle_(
 				rectangle.X,
 				rectangle.Y + title_size.Height,
 				(7 + col_offset) * date_cell_size.Width,
@@ -3801,7 +3801,7 @@ namespace System.Windows.Forms
 						position = 7 + position;
 					}
 					// draw it
-					Rectangle day_rect = new Rectangle(
+					Rectangle_ day_rect = new Rectangle_(
 						day_name_rect.X + ((i + col_offset)* date_cell_size.Width),
 						day_name_rect.Y,
 						date_cell_size.Width,
@@ -3821,7 +3821,7 @@ namespace System.Windows.Forms
 
 
 			// draw the actual date items in the grid (including the week numbers)
-			Rectangle date_rect = new Rectangle (
+			Rectangle_ date_rect = new Rectangle_ (
 				rectangle.X,
 				rectangle.Y + title_size.Height + date_cell_size.Height,
 				date_cell_size.Width,
@@ -3832,7 +3832,7 @@ namespace System.Windows.Forms
 			for (int i=0; i < 6; i++) 
 			{
 				// establish if this row is in our clip_area
-				Rectangle row_rect = new Rectangle (
+				Rectangle_ row_rect = new Rectangle_ (
 					rectangle.X,
 					rectangle.Y + title_size.Height + (date_cell_size.Height * (i+1)),
 					date_cell_size.Width * 7,
@@ -3889,7 +3889,7 @@ namespace System.Windows.Forms
 						date_rect.Offset(date_cell_size.Width, 0);
 					}
 
-					// shift the rectangle down one row
+					// shift the Rectangle_ down one row
 					int offset = (mc.ShowWeekNumbers) ? -8 : -7;
 					date_rect.Offset(offset*date_cell_size.Width, date_cell_size.Height);
 				}
@@ -3911,28 +3911,28 @@ namespace System.Windows.Forms
 		}
 
 		// draws the pervious or next button
-		private void DrawMonthCalendarButton (Graphics dc, Rectangle rectangle, MonthCalendar mc, Size title_size, int x_offset, Size button_size, bool is_previous) 
+		private void DrawMonthCalendarButton (Graphics dc, Rectangle_ rectangle, MonthCalendar mc, Size_ title_size, int x_offset, Size_ button_size, bool is_previous) 
 		{
 			const int arrow_width = 4;
 			const int arrow_height = 7;
 
 			bool is_clicked = false;
-			Rectangle button_rect;
-			PointF arrow_center;
-			PointF [] arrow_path = new PointF [3];
+			Rectangle_ button_rect;
+			PointF_ arrow_center;
+			PointF_ [] arrow_path = new PointF_ [3];
 			
 			// prepare the button
 			if (is_previous) 
 			{
 				is_clicked = mc.is_previous_clicked;
 
-				button_rect = new Rectangle (
-					rectangle.X + 1 + x_offset,
-					rectangle.Y + 1 + ((title_size.Height - button_size.Height)/2),
+				button_rect = new Rectangle_ (
+                    rectangle.X + 1 + x_offset,
+                    rectangle.Y + 1 + ((title_size.Height - button_size.Height)/2),
 					Math.Max(button_size.Width - 1, 0),
 					Math.Max(button_size.Height - 1, 0));
 
-				arrow_center = new PointF (button_rect.X + ((button_rect.Width + arrow_width) / 2.0f), 
+				arrow_center = new PointF_ (button_rect.X + ((button_rect.Width + arrow_width) / 2.0f), 
 											rectangle.Y + ((button_rect.Height + arrow_height) / 2) + 1);
 				if (is_clicked) {
 					arrow_center.X += 1;
@@ -3950,13 +3950,13 @@ namespace System.Windows.Forms
 			{
 				is_clicked = mc.is_next_clicked;
 
-				button_rect = new Rectangle (
+				button_rect = new Rectangle_ (
 					rectangle.Right - 1 - x_offset - button_size.Width,
 					rectangle.Y + 1 + ((title_size.Height - button_size.Height)/2),
 					Math.Max(button_size.Width - 1, 0),
 					Math.Max(button_size.Height - 1, 0));
 
-				arrow_center = new PointF (button_rect.X + ((button_rect.Width + arrow_width) / 2.0f), 
+				arrow_center = new PointF_ (button_rect.X + ((button_rect.Width + arrow_width) / 2.0f), 
 											rectangle.Y + ((button_rect.Height + arrow_height) / 2) + 1);
 				if (is_clicked) {
 					arrow_center.X += 1;
@@ -3987,9 +3987,9 @@ namespace System.Windows.Forms
 		
 
 		// draws one day in the calendar grid
-		private void DrawMonthCalendarDate (Graphics dc, Rectangle rectangle, MonthCalendar mc,	DateTime date, DateTime month, int row, int col) {
-			Color date_color = mc.ForeColor;
-			Rectangle interior = new Rectangle (rectangle.X, rectangle.Y, Math.Max(rectangle.Width - 1, 0), Math.Max(rectangle.Height - 1, 0));
+		private void DrawMonthCalendarDate (Graphics dc, Rectangle_ rectangle, MonthCalendar mc,	DateTime date, DateTime month, int row, int col) {
+			Color_ date_color = mc.ForeColor;
+			Rectangle_ interior = new Rectangle_ (rectangle.X, rectangle.Y, Math.Max(rectangle.Width - 1, 0), Math.Max(rectangle.Height - 1, 0));
 
 			// find out if we are the lead of the first calendar or the trail of the last calendar						
 			if (date.Year != month.Year || date.Month != month.Month) {
@@ -4016,18 +4016,18 @@ namespace System.Windows.Forms
 				// see if the date is in the start of selection
 				date_color = mc.BackColor;
 				// draw the left hand of the back ground
-				Rectangle selection_rect = Rectangle.Inflate (rectangle, inflate, inflate);				
+				Rectangle_ selection_rect = Rectangle_.Inflate (rectangle, inflate, inflate);				
 				dc.FillPie (ResPool.GetSolidBrush (mc.TitleBackColor), selection_rect, 0, 360);
 			} else if (date == mc.SelectionStart.Date) {
 				// see if the date is in the start of selection
 				date_color = mc.BackColor;
 				// draw the left hand of the back ground
-				Rectangle selection_rect = Rectangle.Inflate (rectangle, inflate, inflate);				
+				Rectangle_ selection_rect = Rectangle_.Inflate (rectangle, inflate, inflate);				
 				dc.FillPie (ResPool.GetSolidBrush (mc.TitleBackColor), selection_rect, 90, 180);
 				// fill the other side as a straight rect
 				if (date < mc.SelectionEnd.Date) 
 				{
-					// use rectangle instead of rectangle to go all the way to edge of rect
+					// use Rectangle_ instead of Rectangle_ to go all the way to edge of rect
 					selection_rect.X = (int) Math.Floor((double)(rectangle.X + rectangle.Width / 2));
 					selection_rect.Width = Math.Max(rectangle.Right - selection_rect.X, 0);
 					dc.FillRectangle (ResPool.GetSolidBrush (mc.TitleBackColor), selection_rect);
@@ -4036,7 +4036,7 @@ namespace System.Windows.Forms
 				// see if it is the end of selection
 				date_color = mc.BackColor;
 				// draw the left hand of the back ground
-				Rectangle selection_rect = Rectangle.Inflate (rectangle, inflate, inflate);
+				Rectangle_ selection_rect = Rectangle_.Inflate (rectangle, inflate, inflate);
 				dc.FillPie (ResPool.GetSolidBrush (mc.TitleBackColor), selection_rect, 270, 180);
 				// fill the other side as a straight rect
 				if (date > mc.SelectionStart.Date) {
@@ -4048,7 +4048,7 @@ namespace System.Windows.Forms
 				// now see if it's in the middle
 				date_color = mc.BackColor;
 				// draw the left hand of the back ground
-				Rectangle selection_rect = Rectangle.Inflate (rectangle, 0, inflate);
+				Rectangle_ selection_rect = Rectangle_.Inflate (rectangle, 0, inflate);
 				dc.FillRectangle (ResPool.GetSolidBrush (mc.TitleBackColor), selection_rect);
 			}
 
@@ -4065,46 +4065,46 @@ namespace System.Windows.Forms
 
 			// draw the selection grid
 			if (mc.is_date_clicked && mc.clicked_date == date) {
-				Pen pen = ResPool.GetDashPen (Color.Black, DashStyle.Dot);
+				Pen pen = ResPool.GetDashPen (Color_.Black, DashStyle.Dot);
 				dc.DrawRectangle (pen, interior);
 			}
 		}
 
-		private void DrawTodayCircle (Graphics dc, Rectangle rectangle) {
-			Color circle_color = Color.FromArgb (248, 0, 0);
+		private void DrawTodayCircle (Graphics dc, Rectangle_ rectangle) {
+			Color_ circle_color = Color_.FromArgb (248, 0, 0);
 			// draw the left hand of the circle 
-			Rectangle lhs_circle_rect = new Rectangle (rectangle.X + 1, rectangle.Y + 4, Math.Max(rectangle.Width - 2, 0), Math.Max(rectangle.Height - 5, 0));
-			Rectangle rhs_circle_rect = new Rectangle (rectangle.X + 1, rectangle.Y + 1, Math.Max(rectangle.Width - 2, 0), Math.Max(rectangle.Height - 2, 0));
-			Point [] curve_points = new Point [3];
-			curve_points [0] = new Point (lhs_circle_rect.X, rhs_circle_rect.Y + rhs_circle_rect.Height/12);
-			curve_points [1] = new Point (lhs_circle_rect.X + lhs_circle_rect.Width/9, rhs_circle_rect.Y);
-			curve_points [2] = new Point (lhs_circle_rect.X + lhs_circle_rect.Width/2 + 1, rhs_circle_rect.Y);
+			Rectangle_ lhs_circle_rect = new Rectangle_ (rectangle.X + 1, rectangle.Y + 4, Math.Max(rectangle.Width - 2, 0), Math.Max(rectangle.Height - 5, 0));
+			Rectangle_ rhs_circle_rect = new Rectangle_ (rectangle.X + 1, rectangle.Y + 1, Math.Max(rectangle.Width - 2, 0), Math.Max(rectangle.Height - 2, 0));
+            Drawing.Point_ [] curve_points = new Point_[3];
+			curve_points [0] = new Point_ (lhs_circle_rect.X, rhs_circle_rect.Y + rhs_circle_rect.Height/12);
+			curve_points [1] = new Point_ (lhs_circle_rect.X + lhs_circle_rect.Width/9, rhs_circle_rect.Y);
+			curve_points [2] = new Point_ (lhs_circle_rect.X + lhs_circle_rect.Width/2 + 1, rhs_circle_rect.Y);
 
 			Pen pen = ResPool.GetSizedPen(circle_color, 2);
 			dc.DrawArc (pen, lhs_circle_rect, 90, 180);
 			dc.DrawArc (pen, rhs_circle_rect, 270, 180);					
 			dc.DrawCurve (pen, curve_points);
-			dc.DrawLine (ResPool.GetPen (circle_color), curve_points [2], new Point (curve_points [2].X, lhs_circle_rect.Y));
+			dc.DrawLine (ResPool.GetPen (circle_color), curve_points [2], new Point_(curve_points[2].X, lhs_circle_rect.Y));
 		}
 
 		#endregion 	// MonthCalendar
 
 		#region Panel
-		public override Size PanelDefaultSize {
+		public override Size_ PanelDefaultSize {
 			get {
-				return new Size (200, 100);
+				return new Size_ (200, 100);
 			}
 		}
 		#endregion	// Panel
 
 		#region PictureBox
-		public override void DrawPictureBox (Graphics dc, Rectangle clip, PictureBox pb) {
-			Rectangle client = pb.ClientRectangle;
+		public override void DrawPictureBox (Graphics dc, Rectangle_ clip, PictureBox pb) {
+			Rectangle_ client = pb.ClientRectangle;
 
-			client = new Rectangle (client.Left + pb.Padding.Left, client.Top + pb.Padding.Top, client.Width - pb.Padding.Horizontal, client.Height - pb.Padding.Vertical);
+			client = new Rectangle_ (client.Left + pb.Padding.Left, client.Top + pb.Padding.Top, client.Width - pb.Padding.Horizontal, client.Height - pb.Padding.Vertical);
 
 			// FIXME - instead of drawing the whole picturebox every time
-			// intersect the clip rectangle with the drawn picture and only draw what's needed,
+			// intersect the clip Rectangle_ with the drawn picture and only draw what's needed,
 			// Also, we only need a background fill where no image goes
 			if (pb.Image != null) {
 				switch (pb.SizeMode) {
@@ -4117,12 +4117,12 @@ namespace System.Windows.Forms
 					break;
 
 				case PictureBoxSizeMode.Zoom:
-					Size image_size;
+					Size_ image_size;
 					
 					if (((float)pb.Image.Width / (float)pb.Image.Height) >= ((float)client.Width / (float)client.Height))
-						image_size = new Size (client.Width, (pb.Image.Height * client.Width) / pb.Image.Width);
+						image_size = new Size_ (client.Width, (pb.Image.Height * client.Width) / pb.Image.Width);
 					else
-						image_size = new Size ((pb.Image.Width * client.Height) / pb.Image.Height, client.Height);
+						image_size = new Size_ ((pb.Image.Width * client.Height) / pb.Image.Height, client.Height);
 
 					dc.DrawImage (pb.Image, (client.Width / 2) - (image_size.Width / 2), (client.Height / 2) - (image_size.Height / 2), image_size.Width, image_size.Height);
 					break;
@@ -4137,9 +4137,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Size PictureBoxDefaultSize {
+		public override Size_ PictureBoxDefaultSize {
 			get {
-				return new Size (100, 50);
+				return new Size_ (100, 50);
 			}
 		}
 		#endregion	// PictureBox
@@ -4148,8 +4148,8 @@ namespace System.Windows.Forms
 		public override int PrintPreviewControlPadding {
 			get { return 8; }
 		}
-
-		public override Size PrintPreviewControlGetPageSize (PrintPreviewControl preview)
+        /*
+		public override Size_ PrintPreviewControlGetPageSize (PrintPreviewControl preview)
 		{
 			int page_width, page_height;
 			int padding = PrintPreviewControlPadding;
@@ -4161,13 +4161,13 @@ namespace System.Windows.Forms
 
 				float image_ratio = (float)pis[0].Image.Width / pis[0].Image.Height;
 
-				/* try to lay things out using the width to determine the size */
+				/* try to lay things out using the width to determine the Size_ *//*
 				page_width = width_available / preview.Columns;
 				page_height = (int)(page_width / image_ratio);
 
-				/* does the height fit? */
+				/* does the height fit? *//*
 				if (page_height * (preview.Rows + 1) > height_available) {
-					/* no, lay things out via the height */
+					/* no, lay things out via the height *//*
 					page_height = height_available / (preview.Rows + 1);
 					page_width = (int)(page_height * image_ratio);
 				}
@@ -4177,10 +4177,10 @@ namespace System.Windows.Forms
 				page_height = (int)(pis[0].Image.Height * preview.Zoom);
 			}
 
-			return new Size (page_width, page_height);
+			return new Size_ (page_width, page_height);
 		}
 
-		public override void PrintPreviewControlPaint (PaintEventArgs pe, PrintPreviewControl preview, Size page_size)
+		public override void PrintPreviewControlPaint (PaintEventArgs pe, PrintPreviewControl preview, Size_ page_size)
 		{
 			int padding = 8;
 			PreviewPageInfo[] pis = preview.page_infos;
@@ -4192,11 +4192,11 @@ namespace System.Windows.Forms
 			int width = page_size.Width * preview.Columns + padding * (preview.Columns - 1) + 2 * padding;
 			int height = page_size.Height * (preview.Rows + 1) + padding * preview.Rows + 2 * padding;
 
-			Rectangle viewport = preview.ViewPort;
+			Rectangle_ viewport = preview.ViewPort;
 
 			pe.Graphics.Clip = new Region (viewport);
 
-			/* center things if we can */
+			/* center things if we can *//*
 			int off_x = viewport.Width / 2 - width / 2;
 			if (off_x < 0) off_x = 0;
 			int off_y = viewport.Height / 2 - height / 2;
@@ -4214,7 +4214,7 @@ namespace System.Windows.Forms
 						Image image = preview.image_cache[p];
 						if (image == null)
 							image = pis[p].Image;
-						Rectangle dest = new Rectangle (new Point (page_x, page_y), page_size);
+						Rectangle_ dest = new Rectangle_ (new Point_ (page_x, page_y), page_size);
 
 						pe.Graphics.DrawImage (image, dest, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
 
@@ -4225,12 +4225,13 @@ namespace System.Windows.Forms
 				}
 			}
 		}
-		#endregion      // PrintPreviewControl
+		*/
+        #endregion      // PrintPreviewControl
 
 		#region ProgressBar
-		public override void DrawProgressBar (Graphics dc, Rectangle clip_rect, ProgressBar ctrl) 
+		public override void DrawProgressBar (Graphics dc, Rectangle_ clip_rect, ProgressBar ctrl) 
 		{
-			Rectangle client_area = ctrl.client_area;
+			Rectangle_ client_area = ctrl.client_area;
 			
 			/* Draw border */
 			CPDrawBorder3D (dc, ctrl.ClientRectangle, Border3DStyle.SunkenOuter, Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom & ~Border3DSide.Middle, ColorControl);
@@ -4245,7 +4246,7 @@ namespace System.Windows.Forms
 			case 1: { // Continuous
 				int pixels_to_draw;
 				pixels_to_draw = (int)(client_area.Width * ((double)(ctrl.Value - ctrl.Minimum) / (double)(Math.Max(ctrl.Maximum - ctrl.Minimum, 1))));
-				dc.FillRectangle (ResPool.GetSolidBrush (ctrl.ForeColor), new Rectangle (client_area.X, client_area.Y, pixels_to_draw, client_area.Height));
+				dc.FillRectangle (ResPool.GetSolidBrush (ctrl.ForeColor), new Rectangle_ (client_area.X, client_area.Y, pixels_to_draw, client_area.Height));
 				break;
 			}
 			case 2: // Marquee
@@ -4260,7 +4261,7 @@ namespace System.Windows.Forms
 				goto case 0;
 			case 0:
 			default:  // Blocks
-				Rectangle block_rect;
+				Rectangle_ block_rect;
 				int space_betweenblocks = ProgressBarChunkSpacing;
 				int block_width;
 				int increment;
@@ -4272,7 +4273,7 @@ namespace System.Windows.Forms
 				barpos_pixels = (int)(((double)(ctrl.Value - ctrl.Minimum) * client_area.Width) / (Math.Max (ctrl.Maximum - ctrl.Minimum, 1)));
 				increment = block_width + space_betweenblocks;
 				
-				block_rect = new Rectangle (start_pixel, client_area.Y, block_width, client_area.Height);
+				block_rect = new Rectangle_ (start_pixel, client_area.Y, block_width, client_area.Height);
 				while (true) {
 					if (max_blocks != int.MaxValue) {
 						if (block_count >= max_blocks)
@@ -4311,9 +4312,9 @@ namespace System.Windows.Forms
 
 		const int ProgressBarDefaultHeight = 23;
 
-		public override Size ProgressBarDefaultSize {
+		public override Size_ ProgressBarDefaultSize {
 			get {
-				return new Size (100, ProgressBarDefaultHeight);
+				return new Size_ (100, ProgressBarDefaultHeight);
 			}
 		}
 
@@ -4322,24 +4323,24 @@ namespace System.Windows.Forms
 		#endregion	// ProgressBar
 
 		#region RadioButton
-		public override void DrawRadioButton (Graphics dc, Rectangle clip_rectangle, RadioButton radio_button) {
+		public override void DrawRadioButton (Graphics dc, Rectangle_ clip_rectangle, RadioButton radio_button) {
 			StringFormat	text_format;
-			Rectangle 	client_rectangle;
-			Rectangle	text_rectangle;
-			Rectangle 	radiobutton_rectangle;
+			Rectangle_ 	client_rectangle;
+			Rectangle_	text_rectangle;
+			Rectangle_ 	radiobutton_rectangle;
 			int		radiobutton_size = 13;
 			int 	radiobutton_space = 4;
 
 			client_rectangle = radio_button.ClientRectangle;
 			text_rectangle = client_rectangle;
-			radiobutton_rectangle = new Rectangle(text_rectangle.X, text_rectangle.Y, radiobutton_size, radiobutton_size);
+			radiobutton_rectangle = new Rectangle_(text_rectangle.X, text_rectangle.Y, radiobutton_size, radiobutton_size);
 
 			text_format = new StringFormat();
 			text_format.Alignment = StringAlignment.Near;
 			text_format.LineAlignment = StringAlignment.Center;
 			text_format.HotkeyPrefix = HotkeyPrefix.Show;
 
-			/* Calculate the position of text and checkbox rectangle */
+			/* Calculate the position of text and checkbox Rectangle_ */
 			if (radio_button.appearance!=Appearance.Button) {
 				switch(radio_button.radiobutton_alignment) {
 				case ContentAlignment.BottomCenter: {
@@ -4493,9 +4494,9 @@ namespace System.Windows.Forms
 			RadioButton_DrawText(radio_button, text_rectangle, dc, text_format);
 
 			if (radio_button.Focused && radio_button.Enabled && radio_button.appearance != Appearance.Button && radio_button.Text != String.Empty && radio_button.ShowFocusCues) {
-				SizeF text_size = dc.MeasureString (radio_button.Text, radio_button.Font);
+				SizeF_ text_size = dc.MeasureString (radio_button.Text, radio_button.Font);
 				
-				Rectangle focus_rect = Rectangle.Empty;
+				Rectangle_ focus_rect = Rectangle_.Empty;
 				focus_rect.X = text_rectangle.X;
 				focus_rect.Y = (int)((text_rectangle.Height - text_size.Height) / 2);
 				focus_rect.Size = text_size.ToSize ();
@@ -4506,7 +4507,7 @@ namespace System.Windows.Forms
 			text_format.Dispose ();
 		}
 
-		protected virtual void RadioButton_DrawButton(RadioButton radio_button, Graphics dc, ButtonState state, Rectangle radiobutton_rectangle)
+		protected virtual void RadioButton_DrawButton(RadioButton radio_button, Graphics dc, ButtonState state, Rectangle_ radiobutton_rectangle)
 		{
 			dc.FillRectangle(GetControlBackBrush (radio_button.BackColor), radio_button.ClientRectangle);
 			
@@ -4525,20 +4526,20 @@ namespace System.Windows.Forms
 			}
 		}
 		
-		protected virtual void RadioButton_DrawText(RadioButton radio_button, Rectangle text_rectangle, Graphics dc, StringFormat text_format)
+		protected virtual void RadioButton_DrawText(RadioButton radio_button, Rectangle_ text_rectangle, Graphics dc, StringFormat text_format)
 		{
 			DrawCheckBox_and_RadioButtonText (radio_button, text_rectangle, dc, 
 							  text_format, radio_button.Appearance, radio_button.Checked);
 		}
 		
-		protected virtual void RadioButton_DrawFocus(RadioButton radio_button, Graphics dc, Rectangle text_rectangle)
+		protected virtual void RadioButton_DrawFocus(RadioButton radio_button, Graphics dc, Rectangle_ text_rectangle)
 		{
 			DrawInnerFocusRectangle (dc, text_rectangle, radio_button.BackColor);
 		}
 		
 		
 		// renders a radio button with the Flat and Popup FlatStyle
-		protected virtual void DrawFlatStyleRadioButton (Graphics graphics, Rectangle rectangle, RadioButton radio_button)
+		protected virtual void DrawFlatStyleRadioButton (Graphics graphics, Rectangle_ rectangle, RadioButton radio_button)
 		{
 			int	lineWidth;
 			
@@ -4573,7 +4574,7 @@ namespace System.Windows.Forms
 				}
 			} else {
 				// disabled
-				// fill control background color regardless of actual backcolor
+				// fill control background Color_ regardless of actual backcolor
 				graphics.FillPie (SystemBrushes.Control, rectangle.X + 1, rectangle.Y + 1, rectangle.Width - 2, rectangle.Height - 2, 0, 359);
 				// draw the ark as control dark
 				graphics.DrawArc (SystemPens.ControlDark, rectangle, 0, 359);
@@ -4606,13 +4607,13 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Size RadioButtonDefaultSize {
+		public override Size_ RadioButtonDefaultSize {
 			get {
-				return new Size (104,24);
+				return new Size_ (104,24);
 			}
 		}
 
-		public override void DrawRadioButton (Graphics g, RadioButton rb, Rectangle glyphArea, Rectangle textBounds, Rectangle imageBounds, Rectangle clipRectangle)
+		public override void DrawRadioButton (Graphics g, RadioButton rb, Rectangle_ glyphArea, Rectangle_ textBounds, Rectangle_ imageBounds, Rectangle_ clipRectangle)
 		{
 			// Draw Button Background
 			if (rb.FlatStyle == FlatStyle.Flat || rb.FlatStyle == FlatStyle.Popup) {
@@ -4623,18 +4624,18 @@ namespace System.Windows.Forms
 			DrawRadioButtonGlyph (g, rb, glyphArea);
 
 			// If we have an image, draw it
-			if (imageBounds.Size != Size.Empty)
+			if (imageBounds.Size != Size_.Empty)
 				DrawRadioButtonImage (g, rb, imageBounds);
 
-			if (rb.Focused && rb.Enabled && rb.ShowFocusCues && textBounds.Size != Size.Empty)
+			if (rb.Focused && rb.Enabled && rb.ShowFocusCues && textBounds.Size != Size_.Empty)
 				DrawRadioButtonFocus (g, rb, textBounds);
 
 			// If we have text, draw it
-			if (textBounds != Rectangle.Empty)
+			if (textBounds != Rectangle_.Empty)
 				DrawRadioButtonText (g, rb, textBounds);
 		}
 
-		public virtual void DrawRadioButtonGlyph (Graphics g, RadioButton rb, Rectangle glyphArea)
+		public virtual void DrawRadioButtonGlyph (Graphics g, RadioButton rb, Rectangle_ glyphArea)
 		{
 			if (rb.Pressed)
 				ThemeElements.CurrentTheme.RadioButtonPainter.PaintRadioButton (g, glyphArea, rb.BackColor, rb.ForeColor, ElementState.Pressed, rb.FlatStyle, rb.Checked);
@@ -4648,12 +4649,12 @@ namespace System.Windows.Forms
 				ThemeElements.CurrentTheme.RadioButtonPainter.PaintRadioButton (g, glyphArea, rb.BackColor, rb.ForeColor, ElementState.Normal, rb.FlatStyle, rb.Checked);
 		}
 
-		public virtual void DrawRadioButtonFocus (Graphics g, RadioButton rb, Rectangle focusArea)
+		public virtual void DrawRadioButtonFocus (Graphics g, RadioButton rb, Rectangle_ focusArea)
 		{
 			ControlPaint.DrawFocusRectangle (g, focusArea);
 		}
 
-		public virtual void DrawRadioButtonImage (Graphics g, RadioButton rb, Rectangle imageBounds)
+		public virtual void DrawRadioButtonImage (Graphics g, RadioButton rb, Rectangle_ imageBounds)
 		{
 			if (rb.Enabled)
 				g.DrawImage (rb.Image, imageBounds);
@@ -4661,7 +4662,7 @@ namespace System.Windows.Forms
 				CPDrawImageDisabled (g, rb.Image, imageBounds.Left, imageBounds.Top, ColorControl);
 		}
 
-		public virtual void DrawRadioButtonText (Graphics g, RadioButton rb, Rectangle textBounds)
+		public virtual void DrawRadioButtonText (Graphics g, RadioButton rb, Rectangle_ textBounds)
 		{
 			if (rb.Enabled)
 				TextRenderer.DrawTextInternal (g, rb.Text, rb.Font, textBounds, rb.ForeColor, rb.TextFormatFlags, rb.UseCompatibleTextRendering);
@@ -4669,11 +4670,11 @@ namespace System.Windows.Forms
 				DrawStringDisabled20 (g, rb.Text, rb.Font, textBounds, rb.BackColor, rb.TextFormatFlags, rb.UseCompatibleTextRendering);
 		}
 
-		public override Size CalculateRadioButtonAutoSize (RadioButton rb)
+		public override Size_ CalculateRadioButtonAutoSize (RadioButton rb)
 		{
-			Size ret_size = Size.Empty;
-			Size text_size = TextRenderer.MeasureTextInternal (rb.Text, rb.Font, rb.UseCompatibleTextRendering);
-			Size image_size = rb.Image == null ? Size.Empty : rb.Image.Size;
+			Size_ ret_size = Size_.Empty;
+			Size_ text_size = TextRenderer.MeasureTextInternal (rb.Text, rb.Font, rb.UseCompatibleTextRendering);
+			Size_ image_size = rb.Image == null ? Size_.Empty : rb.Image.Size;
 
 			// Pad the text size
 			if (rb.Text.Length != 0) {
@@ -4709,14 +4710,14 @@ namespace System.Windows.Forms
 			return ret_size;
 		}
 
-		public override void CalculateRadioButtonTextAndImageLayout (ButtonBase b, Point offset, out Rectangle glyphArea, out Rectangle textRectangle, out Rectangle imageRectangle)
+		public override void CalculateRadioButtonTextAndImageLayout (ButtonBase b, Point_ offset, out Rectangle_ glyphArea, out Rectangle_ textRectangle, out Rectangle_ imageRectangle)
 		{
 			CalculateCheckBoxTextAndImageLayout (b, offset, out glyphArea, out textRectangle, out imageRectangle);
 		}
 		#endregion	// RadioButton
 
 		#region ScrollBar
-		public override void DrawScrollBar (Graphics dc, Rectangle clip, ScrollBar bar)
+		public override void DrawScrollBar (Graphics dc, Rectangle_ clip, ScrollBar bar)
 		{
 			int		scrollbutton_width = bar.scrollbutton_width;
 			int		scrollbutton_height = bar.scrollbutton_height;
@@ -4727,10 +4728,10 @@ namespace System.Windows.Forms
 			thumb_pos = bar.ThumbPos;
 
 			if (bar.vert) {
-				first_arrow_area = new Rectangle(0, 0, bar.Width, scrollbutton_height);
+				first_arrow_area = new Rectangle_(0, 0, bar.Width, scrollbutton_height);
 				bar.FirstArrowArea = first_arrow_area;
 
-				second_arrow_area = new Rectangle(0, bar.ClientRectangle.Height - scrollbutton_height, bar.Width, scrollbutton_height);
+				second_arrow_area = new Rectangle_(0, bar.ClientRectangle.Height - scrollbutton_height, bar.Width, scrollbutton_height);
 				bar.SecondArrowArea = second_arrow_area;
 
 				thumb_pos.Width = bar.Width;
@@ -4739,19 +4740,19 @@ namespace System.Windows.Forms
 				Brush VerticalBrush;
 				/* Background, upper track */
 				if (bar.thumb_moving == ScrollBar.ThumbMoving.Backwards)
-					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (255, 63, 63, 63), Color.Black);
+					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (255, 63, 63, 63), Color_.Black);
 				else
-					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color.White);
-				Rectangle UpperTrack = new Rectangle (0, 0, bar.ClientRectangle.Width, bar.ThumbPos.Bottom);
+					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color_.White);
+				Rectangle_ UpperTrack = new Rectangle_ (0, 0, bar.ClientRectangle.Width, bar.ThumbPos.Bottom);
 				if (clip.IntersectsWith (UpperTrack))
 					dc.FillRectangle (VerticalBrush, UpperTrack);
 
 				/* Background, lower track */
 				if (bar.thumb_moving == ScrollBar.ThumbMoving.Forward)
-					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (255, 63, 63, 63), Color.Black);
+					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (255, 63, 63, 63), Color_.Black);
 				else
-					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color.White);
-				Rectangle LowerTrack = new Rectangle (0, bar.ThumbPos.Bottom, bar.ClientRectangle.Width, bar.ClientRectangle.Height - bar.ThumbPos.Bottom);
+					VerticalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color_.White);
+				Rectangle_ LowerTrack = new Rectangle_ (0, bar.ThumbPos.Bottom, bar.ClientRectangle.Width, bar.ClientRectangle.Height - bar.ThumbPos.Bottom);
 				if (clip.IntersectsWith (LowerTrack))
 					dc.FillRectangle (VerticalBrush, LowerTrack);
 
@@ -4761,10 +4762,10 @@ namespace System.Windows.Forms
 				if (clip.IntersectsWith (second_arrow_area))
 					CPDrawScrollButton (dc, second_arrow_area, ScrollButton.Down, bar.secondbutton_state);
 			} else {
-				first_arrow_area = new Rectangle(0, 0, scrollbutton_width, bar.Height);
+				first_arrow_area = new Rectangle_(0, 0, scrollbutton_width, bar.Height);
 				bar.FirstArrowArea = first_arrow_area;
 
-				second_arrow_area = new Rectangle (bar.ClientRectangle.Width - scrollbutton_width, 0, scrollbutton_width, bar.Height);
+				second_arrow_area = new Rectangle_ (bar.ClientRectangle.Width - scrollbutton_width, 0, scrollbutton_width, bar.Height);
 				bar.SecondArrowArea = second_arrow_area;
 
 				thumb_pos.Height = bar.Height;
@@ -4773,19 +4774,19 @@ namespace System.Windows.Forms
 				Brush HorizontalBrush;
 				//Background, left track
 				if (bar.thumb_moving == ScrollBar.ThumbMoving.Backwards)
-					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (255, 63, 63, 63), Color.Black);
+					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (255, 63, 63, 63), Color_.Black);
 				else
-					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color.White);
-				Rectangle LeftTrack = new Rectangle (0, 0, bar.ThumbPos.Right, bar.ClientRectangle.Height);
+					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color_.White);
+				Rectangle_ LeftTrack = new Rectangle_ (0, 0, bar.ThumbPos.Right, bar.ClientRectangle.Height);
 				if (clip.IntersectsWith (LeftTrack))
 					dc.FillRectangle (HorizontalBrush, LeftTrack);
 
 				//Background, right track
 				if (bar.thumb_moving == ScrollBar.ThumbMoving.Forward)
-					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (255, 63, 63, 63), Color.Black);
+					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (255, 63, 63, 63), Color_.Black);
 				else
-					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color.White);
-				Rectangle RightTrack = new Rectangle (bar.ThumbPos.Right, 0, bar.ClientRectangle.Width - bar.ThumbPos.Right, bar.ClientRectangle.Height);
+					HorizontalBrush = ResPool.GetHatchBrush (HatchStyle.Percent50, ColorScrollBar, Color_.White);
+				Rectangle_ RightTrack = new Rectangle_ (bar.ThumbPos.Right, 0, bar.ClientRectangle.Width - bar.ThumbPos.Right, bar.ClientRectangle.Height);
 				if (clip.IntersectsWith (RightTrack))
 					dc.FillRectangle (HorizontalBrush, RightTrack);
 
@@ -4800,7 +4801,7 @@ namespace System.Windows.Forms
 			ScrollBar_DrawThumb(bar, thumb_pos, clip, dc);				
 		}
 
-		protected virtual void ScrollBar_DrawThumb(ScrollBar bar, Rectangle thumb_pos, Rectangle clip, Graphics dc)
+		protected virtual void ScrollBar_DrawThumb(ScrollBar bar, Rectangle_ thumb_pos, Rectangle_ clip, Graphics dc)
 		{
 			if (bar.Enabled && thumb_pos.Width > 0 && thumb_pos.Height > 0 && clip.IntersectsWith(thumb_pos))
 				DrawScrollButtonPrimitive(dc, thumb_pos, ButtonState.Normal);
@@ -4830,8 +4831,8 @@ namespace System.Windows.Forms
 		#endregion	// ScrollBar
 
 		#region StatusBar
-		public	override void DrawStatusBar (Graphics real_dc, Rectangle clip, StatusBar sb) {
-			Rectangle area = sb.ClientRectangle;
+		public	override void DrawStatusBar (Graphics real_dc, Rectangle_ clip, StatusBar sb) {
+			Rectangle_ area = sb.ClientRectangle;
 			int horz_border = 2;
 			int vert_border = 2;
 
@@ -4859,14 +4860,14 @@ namespace System.Windows.Forms
 				}
 		
 				dc.DrawString (text, sb.Font, ResPool.GetSolidBrush (sb.ForeColor),
-						new Rectangle(area.X + 2, area.Y + 2, area.Width - 4, area.Height - 4), string_format);
+						new Rectangle_(area.X + 2, area.Y + 2, area.Width - 4, area.Height - 4), string_format);
 				string_format.Dispose ();
 			} else if (sb.ShowPanels) {
 				Brush br_forecolor = GetControlForeBrush (sb.ForeColor);
 				int prev_x = area.X + horz_border;
 				int y = area.Y + vert_border;
 				for (int i = 0; i < sb.Panels.Count; i++) {
-					Rectangle pr = new Rectangle (prev_x, y,
+					Rectangle_ pr = new Rectangle_ (prev_x, y,
 						sb.Panels [i].Width, area.Height);
 					prev_x += pr.Width + StatusBarHorzGapWidth;
 					if (pr.IntersectsWith (clip))
@@ -4883,7 +4884,7 @@ namespace System.Windows.Forms
 
 		}
 
-		protected virtual void DrawStatusBarBackground (Graphics dc, Rectangle clip, StatusBar sb)
+		protected virtual void DrawStatusBarBackground (Graphics dc, Rectangle_ clip, StatusBar sb)
 		{
 			bool is_color_control = sb.BackColor.ToArgb () == ColorControl.ToArgb ();
 
@@ -4891,13 +4892,13 @@ namespace System.Windows.Forms
 			dc.FillRectangle (brush, clip);
 		}
 
-		protected virtual void DrawStatusBarSizingGrip (Graphics dc, Rectangle clip, StatusBar sb, Rectangle area)
+		protected virtual void DrawStatusBarSizingGrip (Graphics dc, Rectangle_ clip, StatusBar sb, Rectangle_ area)
 		{
-			area = new Rectangle (area.Right - 16 - 2, area.Bottom - 12 - 1, 16, 16);
+			area = new Rectangle_ (area.Right - 16 - 2, area.Bottom - 12 - 1, 16, 16);
 			CPDrawSizeGrip (dc, ColorControl, area);
 		}
 
-		protected virtual void DrawStatusBarPanel (Graphics dc, Rectangle area, int index,
+		protected virtual void DrawStatusBarPanel (Graphics dc, Rectangle_ area, int index,
 			Brush br_forecolor, StatusBarPanel panel) {
 			int border_size = 3; // this is actually const, even if the border style is none
 			int icon_width = 16;
@@ -4929,7 +4930,7 @@ namespace System.Windows.Forms
 				}
 			}
 
-			Rectangle string_rect = Rectangle.Empty;
+			Rectangle_ string_rect = Rectangle_.Empty;
 			int x;
 			int len;
 			int icon_x = 0;
@@ -4939,7 +4940,7 @@ namespace System.Windows.Forms
 			case HorizontalAlignment.Right:
 				len = (int) dc.MeasureString (text, panel.Parent.Font).Width;
 				x = area.Right - len - 4;
-				string_rect = new Rectangle (x, y, 
+				string_rect = new Rectangle_ (x, y, 
 						area.Right - x - border_size,
 						area.Bottom - y - border_size);
 				if (panel.Icon != null) {
@@ -4950,7 +4951,7 @@ namespace System.Windows.Forms
 				len = (int) dc.MeasureString (text, panel.Parent.Font).Width;
 				x = area.Left + ((panel.Width - len) / 2);
 				
-				string_rect = new Rectangle (x, y, 
+				string_rect = new Rectangle_ (x, y, 
 						area.Right - x - border_size,
 						area.Bottom - y - border_size);
 
@@ -4968,7 +4969,7 @@ namespace System.Windows.Forms
 				}
 
 				x = left;
-				string_rect = new Rectangle (x, y, 
+				string_rect = new Rectangle_ (x, y, 
 						area.Right - x - border_size,
 						area.Bottom - y - border_size);
 				break;
@@ -4980,11 +4981,11 @@ namespace System.Windows.Forms
 			dc.SetClip (clip_bounds);
 
 			if (panel.Icon != null) {
-				dc.DrawIcon (panel.Icon, new Rectangle (icon_x, y, icon_width, icon_width));
+				dc.DrawIcon (panel.Icon, new Rectangle_ (icon_x, y, icon_width, icon_width));
 			}
 		}
 
-		protected virtual void DrawStatusBarPanelBackground (Graphics dc, Rectangle area, StatusBarPanel panel)
+		protected virtual void DrawStatusBarPanelBackground (Graphics dc, Rectangle_ area, StatusBarPanel panel)
 		{
 			if (panel.BorderStyle != StatusBarPanelBorderStyle.None) {
 				Border3DStyle border_style = Border3DStyle.SunkenOuter;
@@ -5003,9 +5004,9 @@ namespace System.Windows.Forms
 			get { return 3; }
 		}
 
-		public override Size StatusBarDefaultSize {
+		public override Size_ StatusBarDefaultSize {
 			get {
-				return new Size (100, 22);
+				return new Size_ (100, 22);
 			}
 		}
 		#endregion	// StatusBar
@@ -5014,11 +5015,11 @@ namespace System.Windows.Forms
 
 		#region TabControl settings
 
-		public override Size TabControlDefaultItemSize {
+		public override Size_ TabControlDefaultItemSize {
 			get { return ThemeElements.CurrentTheme.TabControlPainter.DefaultItemSize; }
 		}
 
-		public override Point TabControlDefaultPadding {
+		public override Point_ TabControlDefaultPadding {
 			get { return ThemeElements.CurrentTheme.TabControlPainter.DefaultPadding; }
 		}
 
@@ -5026,7 +5027,7 @@ namespace System.Windows.Forms
 			get { return ThemeElements.CurrentTheme.TabControlPainter.MinimumTabWidth; }
 		}
 
-		public override Rectangle TabControlSelectedDelta {
+		public override Rectangle_ TabControlSelectedDelta {
 			get { return ThemeElements.CurrentTheme.TabControlPainter.SelectedTabDelta; }
 		}
 
@@ -5046,7 +5047,7 @@ namespace System.Windows.Forms
 			get { return ThemeElements.CurrentTheme.TabControlPainter.ColSpacing; }
 		}
 
-		public override Point TabControlImagePadding {
+		public override Point_ TabControlImagePadding {
 			get { return ThemeElements.CurrentTheme.TabControlPainter.ImagePadding; }
 		}
 
@@ -5055,7 +5056,7 @@ namespace System.Windows.Forms
 		}
 
 
-		public override Size TabControlGetSpacing (TabControl tab) 
+		public override Size_ TabControlGetSpacing (TabControl tab) 
 		{
 			try {
 				return ThemeElements.CurrentTheme.TabControlPainter.RowSpacing (tab);
@@ -5065,17 +5066,17 @@ namespace System.Windows.Forms
 		}
 		#endregion
 
-		public override void DrawTabControl (Graphics dc, Rectangle area, TabControl tab)
+		public override void DrawTabControl (Graphics dc, Rectangle_ area, TabControl tab)
 		{
 			ThemeElements.CurrentTheme.TabControlPainter.Draw (dc, area, tab);
 		}
 
-		public override Rectangle TabControlGetDisplayRectangle (TabControl tab)
+		public override Rectangle_ TabControlGetDisplayRectangle (TabControl tab)
 		{
 			return ThemeElements.CurrentTheme.TabControlPainter.GetDisplayRectangle (tab);
 		}
 
-		public override Rectangle TabControlGetPanelRect (TabControl tab)
+		public override Rectangle_ TabControlGetPanelRect (TabControl tab)
 		{
 			return ThemeElements.CurrentTheme.TabControlPainter.GetTabPanelRect (tab);
 		}
@@ -5083,7 +5084,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region TextBox
-		public override void TextBoxBaseFillBackground (TextBoxBase textBoxBase, Graphics g, Rectangle clippingArea)
+		public override void TextBoxBaseFillBackground (TextBoxBase textBoxBase, Graphics g, Rectangle_ clippingArea)
 		{
 			if (textBoxBase.backcolor_set || (textBoxBase.Enabled && !textBoxBase.read_only)) {
 				g.FillRectangle(ResPool.GetSolidBrush(textBoxBase.BackColor), clippingArea);
@@ -5104,7 +5105,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region ToolBar
-		public  override void DrawToolBar (Graphics dc, Rectangle clip_rectangle, ToolBar control) 
+		public  override void DrawToolBar (Graphics dc, Rectangle_ clip_rectangle, ToolBar control) 
 		{
 			StringFormat format = new StringFormat ();
 			format.Trimming = StringTrimming.EllipsisCharacter;
@@ -5190,7 +5191,7 @@ namespace System.Windows.Forms
 					style = Border3DStyle.Raised;
 			}
 			
-			Rectangle rect = item.Rectangle;
+			Rectangle_ rect = item.Rectangle;
 			if ((item.Button.Style == ToolBarButtonStyle.DropDownButton) && (item.Button.Parent.DropDownArrows) && is_flat)
 				rect.Width -= ToolBarDropDownWidth;
 
@@ -5199,7 +5200,7 @@ namespace System.Windows.Forms
 
 		protected virtual void DrawToolBarSeparator (Graphics dc, ToolBarItem item)
 		{
-			Rectangle area = item.Rectangle;
+			Rectangle_ area = item.Rectangle;
 			int offset = (int) SystemPens.Control.Width + 1;
 			dc.DrawLine (SystemPens.ControlDark, area.X + 1, area.Y, area.X + 1, area.Bottom);
 			dc.DrawLine (SystemPens.ControlLight, area.X + offset, area.Y, area.X + offset, area.Bottom);
@@ -5208,7 +5209,7 @@ namespace System.Windows.Forms
 		protected virtual void DrawToolBarToggleButtonBackground (Graphics dc, ToolBarItem item)
 		{
 			Brush brush;
-			Rectangle area = item.Rectangle;
+			Rectangle_ area = item.Rectangle;
 			area.X += ToolBarImageGripWidth;
 			area.Y += ToolBarImageGripWidth;
 			area.Width -= 2 * ToolBarImageGripWidth;
@@ -5226,7 +5227,7 @@ namespace System.Windows.Forms
 
 		protected virtual void DrawToolBarDropDownArrow (Graphics dc, ToolBarItem item, bool is_flat)
 		{
-			Rectangle rect = item.Rectangle;
+			Rectangle_ rect = item.Rectangle;
 			rect.X = item.Rectangle.Right - ToolBarDropDownWidth;
 			rect.Width = ToolBarDropDownWidth;
 			
@@ -5241,13 +5242,13 @@ namespace System.Windows.Forms
 				if (item.DDPressed)
 					CPDrawBorder3D (dc, rect, Border3DStyle.Flat, all_sides);
 				else if (item.Button.Pushed || item.Pressed)
-					CPDrawBorder3D (dc, Rectangle.Inflate(rect, -1, -1), Border3DStyle.SunkenOuter, all_sides);
+					CPDrawBorder3D (dc, Rectangle_.Inflate(rect, -1, -1), Border3DStyle.SunkenOuter, all_sides);
 				else
 					CPDrawBorder3D (dc, rect, Border3DStyle.Raised, all_sides);
 			}
 			
-			PointF [] vertices = new PointF [3];
-			PointF ddCenter = new PointF (rect.X + (rect.Width/2.0f), rect.Y + (rect.Height / 2));
+			PointF_ [] vertices = new PointF_ [3];
+			PointF_ ddCenter = new PointF_ (rect.X + (rect.Width/2.0f), rect.Y + (rect.Height / 2));
 			
 			// Increase vertical and horizontal position by 1 when button is pressed
 			if (item.Pressed || item.Button.Pushed || item.DDPressed) {
@@ -5282,7 +5283,7 @@ namespace System.Windows.Forms
 					CPDrawImageDisabled (dc, item.Button.Image, x, y, ColorControl);
 			}
 
-			Rectangle text_rect = item.TextRectangle;
+			Rectangle_ text_rect = item.TextRectangle;
 			if (text_rect.Width <= 0 || text_rect.Height <= 0)
 				return;
 
@@ -5327,9 +5328,9 @@ namespace System.Windows.Forms
 			get { return 3;}
 		}
 
-		public override Size ToolBarDefaultSize {
+		public override Size_ ToolBarDefaultSize {
 			get {
-				return new Size (100, 42);
+				return new Size_ (100, 42);
 			}
 		}
 
@@ -5346,13 +5347,13 @@ namespace System.Windows.Forms
 		#endregion	// ToolBar
 
 		#region ToolTip
-		public override void DrawToolTip(Graphics dc, Rectangle clip_rectangle, ToolTip.ToolTipWindow control)
+		public override void DrawToolTip(Graphics dc, Rectangle_ clip_rectangle, ToolTip.ToolTipWindow control)
 		{
 			ToolTipDrawBackground (dc, clip_rectangle, control);
 
 			TextFormatFlags flags = TextFormatFlags.HidePrefix;
 
-			Color foreground = control.ForeColor;
+			Color_ foreground = control.ForeColor;
 			if (control.title.Length > 0) {
 				Font bold_font = new Font (control.Font, control.Font.Style | FontStyle.Bold);
 				TextRenderer.DrawTextInternal (dc, control.title, bold_font, control.title_rect,
@@ -5366,56 +5367,56 @@ namespace System.Windows.Forms
 			TextRenderer.DrawTextInternal (dc, control.Text, control.Font, control.text_rect, foreground, flags, false);
 		}
 
-		protected virtual void ToolTipDrawBackground (Graphics dc, Rectangle clip_rectangle, ToolTip.ToolTipWindow control)
+		protected virtual void ToolTipDrawBackground (Graphics dc, Rectangle_ clip_rectangle, ToolTip.ToolTipWindow control)
 		{
 			Brush back_brush = ResPool.GetSolidBrush (control.BackColor);
 			dc.FillRectangle (back_brush, control.ClientRectangle);
 			dc.DrawRectangle (SystemPens.WindowFrame, 0, 0, control.Width - 1, control.Height - 1);
 		}
 
-		public override Size ToolTipSize(ToolTip.ToolTipWindow tt, string text)
+		public override Size_ ToolTipSize(ToolTip.ToolTipWindow tt, string text)
 		{
-			Size size = TextRenderer.MeasureTextInternal (text, tt.Font, false);
+			Size_ size = TextRenderer.MeasureTextInternal (text, tt.Font, false);
 			size.Width += 4;
 			size.Height += 3;
-			Rectangle text_rect = new Rectangle (Point.Empty, size);
+			Rectangle_ text_rect = new Rectangle_ (Point_.Empty, size);
 			text_rect.Inflate (-2, -1);
 			tt.text_rect = text_rect;
-			tt.icon_rect = tt.title_rect = Rectangle.Empty;
+			tt.icon_rect = tt.title_rect = Rectangle_.Empty;
 
-			Size title_size = Size.Empty;
+			Size_ title_size = Size_.Empty;
 			if (tt.title.Length > 0) {
 				Font bold_font = new Font (tt.Font, tt.Font.Style | FontStyle.Bold);
 				title_size = TextRenderer.MeasureTextInternal (tt.title, bold_font, false);
 				bold_font.Dispose ();
 			}
 
-			Size icon_size = Size.Empty;
+			Size_ icon_size = Size_.Empty;
 			if (tt.icon != null)
-				icon_size = new Size (size.Height, size.Height);
+				icon_size = new Size_ (size.Height, size.Height);
 
-			if (icon_size != Size.Empty || title_size != Size.Empty) {
+			if (icon_size != Size_.Empty || title_size != Size_.Empty) {
 				int padding = 8;
 				int top_area_width = 0;
 				int top_area_height = icon_size.Height > title_size.Height ? icon_size.Height : title_size.Height;
-				Size text_size = size;
-				Point location = new Point (padding, padding);
+				Size_ text_size = size;
+                Drawing.Point_ location = new Point_(padding, padding);
 
-				if (icon_size != Size.Empty) {
-					tt.icon_rect = new Rectangle (location, icon_size);
+				if (icon_size != Size_.Empty) {
+					tt.icon_rect = new Rectangle_ (location, icon_size);
 					top_area_width = icon_size.Width + padding;
 				}
 
-				if (title_size != Size.Empty) {
-					Rectangle title_rect = new Rectangle (location, new Size (title_size.Width, top_area_height));
-					if (icon_size != Size.Empty)
+				if (title_size != Size_.Empty) {
+					Rectangle_ title_rect = new Rectangle_ (location, new Size_ (title_size.Width, top_area_height));
+					if (icon_size != Size_.Empty)
 						title_rect.X += icon_size.Width + padding;
 
 					tt.title_rect = title_rect;
 					top_area_width += title_size.Width;
 				}
 
-				tt.text_rect = new Rectangle (new Point (location.X, location.Y + top_area_height + padding),
+				tt.text_rect = new Rectangle_(new Point_(location.X, location.Y + top_area_height + padding),
 						text_size);
 
 				size.Height += padding + top_area_height;
@@ -5473,13 +5474,13 @@ namespace System.Windows.Forms
 		private const int balloon_iconsize = 16;
 		private const int balloon_bordersize = 8; 
 		
-		public override void DrawBalloonWindow (Graphics dc, Rectangle clip, NotifyIcon.BalloonWindow control) 
+		public override void DrawBalloonWindow (Graphics dc, Rectangle_ clip, NotifyIcon.BalloonWindow control) 
 		{
 			Brush solidbrush = ResPool.GetSolidBrush (this.ColorInfoText);
-			Rectangle rect = control.ClientRectangle;
+			Rectangle_ rect = control.ClientRectangle;
 			int iconsize = (control.Icon == ToolTipIcon.None) ? 0 : balloon_iconsize;
 			
-			// Rectangle borders and background.
+			// Rectangle_ borders and background.
 			dc.FillRectangle (ResPool.GetSolidBrush (ColorInfo), rect);
 			dc.DrawRectangle (ResPool.GetPen (ColorWindowFrame), 0, 0, rect.Width - 1, rect.Height - 1);
 
@@ -5508,10 +5509,10 @@ namespace System.Windows.Forms
 			}
 
 			if (control.Icon != ToolTipIcon.None)
-				dc.DrawImage (image, new Rectangle (balloon_bordersize, balloon_bordersize, iconsize, iconsize));
+				dc.DrawImage (image, new Rectangle_ (balloon_bordersize, balloon_bordersize, iconsize, iconsize));
 			
 			// Title
-			Rectangle titlerect = new Rectangle (rect.X + balloon_bordersize + iconsize + (iconsize > 0 ? balloon_bordersize : 0), 
+			Rectangle_ titlerect = new Rectangle_ (rect.X + balloon_bordersize + iconsize + (iconsize > 0 ? balloon_bordersize : 0), 
 												rect.Y + balloon_bordersize, 
 												rect.Width - ((3 * balloon_bordersize) + iconsize), 
 												rect.Height - (2 * balloon_bordersize));
@@ -5520,7 +5521,7 @@ namespace System.Windows.Forms
 			dc.DrawString (control.Title, titlefont, solidbrush, titlerect, control.Format);
 			
 			// Text
-			Rectangle textrect = new Rectangle (rect.X + balloon_bordersize, 
+			Rectangle_ textrect = new Rectangle_ (rect.X + balloon_bordersize, 
 												rect.Y + balloon_bordersize, 
 												rect.Width - (2 * balloon_bordersize), 
 												rect.Height - (2 * balloon_bordersize));
@@ -5530,18 +5531,18 @@ namespace System.Windows.Forms
 			dc.DrawString (control.Text, control.Font, solidbrush, textrect, textformat);
 		}
 
-		public override Rectangle BalloonWindowRect (NotifyIcon.BalloonWindow control)
+		public override Rectangle_ BalloonWindowRect (NotifyIcon.BalloonWindow control)
 		{
-			Rectangle deskrect = Screen.GetWorkingArea (control);
-			SizeF maxsize = new SizeF (250, 200);
+			Rectangle_ deskrect = Screen.GetWorkingArea (control);
+			SizeF_ maxsize = new SizeF_ (250, 200);
 
-			SizeF titlesize = TextRenderer.MeasureString (control.Title, control.Font, maxsize, control.Format);
-			SizeF textsize = TextRenderer.MeasureString (control.Text, control.Font, maxsize, control.Format);
+			SizeF_ titlesize = TextRenderer.MeasureString (control.Title, control.Font, maxsize, control.Format);
+			SizeF_ textsize = TextRenderer.MeasureString (control.Text, control.Font, maxsize, control.Format);
 			
 			if (titlesize.Height < balloon_iconsize)
 				titlesize.Height = balloon_iconsize;
 			
-			Rectangle rect = new Rectangle ();
+			Rectangle_ rect = new Rectangle_ ();
 			rect.Height = (int) (titlesize.Height + textsize.Height + (3 * balloon_bordersize));
 			rect.Width = (int) ((titlesize.Width > textsize.Width) ? titlesize.Width : textsize.Width) + (2 * balloon_bordersize);
 			rect.X = deskrect.Width - rect.Width - 2;
@@ -5557,8 +5558,8 @@ namespace System.Windows.Forms
 			int result = tb.Value;
 			int value_pos = tb.Value;
 			float pixels_betweenticks;
-			Rectangle thumb_pos = Rectangle.Empty, thumb_area = Rectangle.Empty;
-			Point channel_startpoint = Point.Empty, na_point = Point.Empty;
+			Rectangle_ thumb_pos = Rectangle_.Empty, thumb_area = Rectangle_.Empty;
+            Point_ channel_startpoint = Point_.Empty, na_point = Point_.Empty;
 			
 			GetTrackBarDrawingInfo (tb, out pixels_betweenticks, out thumb_area, out thumb_pos, out channel_startpoint, out na_point, out na_point);
 			
@@ -5586,20 +5587,20 @@ namespace System.Windows.Forms
 			return result;
 		}
 		
-		private void GetTrackBarDrawingInfo (TrackBar tb, out float pixels_betweenticks, out Rectangle thumb_area, out Rectangle thumb_pos, out Point channel_startpoint, out Point bottomtick_startpoint, out Point toptick_startpoint)
+		private void GetTrackBarDrawingInfo (TrackBar tb, out float pixels_betweenticks, out Rectangle_ thumb_area, out Rectangle_ thumb_pos, out Point_ channel_startpoint, out Point_ bottomtick_startpoint, out Point_ toptick_startpoint)
 		{
-			thumb_area = Rectangle.Empty;
-			thumb_pos = Rectangle.Empty;
+			thumb_area = Rectangle_.Empty;
+			thumb_pos = Rectangle_.Empty;
 			
 			if (tb.Orientation == Orientation.Vertical) {
-				toptick_startpoint = new Point ();
-				bottomtick_startpoint = new Point ();
-				channel_startpoint = new Point ();
+				toptick_startpoint = new Point_ ();
+				bottomtick_startpoint = new Point_ ();
+				channel_startpoint = new Point_ ();
 				float pixel_len;
 				const int space_from_right = 8;
 				const int space_from_left = 8;
 				const int space_from_bottom = 11;
-				Rectangle area = tb.ClientRectangle;
+				Rectangle_ area = tb.ClientRectangle;
 
 				switch (tb.TickStyle) {
 				case TickStyle.BottomRight:
@@ -5641,13 +5642,13 @@ namespace System.Windows.Forms
 
 				thumb_pos.Y = thumb_area.Bottom - space_from_bottom - (int)(pixels_betweenticks * (float)(tb.Value - tb.Minimum));
 			} else {	
-				toptick_startpoint = new Point ();
-				bottomtick_startpoint = new Point ();
-				channel_startpoint = new Point ();
+				toptick_startpoint = new Point_ ();
+				bottomtick_startpoint = new Point_ ();
+				channel_startpoint = new Point_ ();
 				float pixel_len;
 				const int space_from_right = 8;
 				const int space_from_left = 8;
-				Rectangle area = tb.ClientRectangle;
+				Rectangle_ area = tb.ClientRectangle;
 							
 				switch (tb.TickStyle) {
 				case TickStyle.BottomRight:
@@ -5693,15 +5694,15 @@ namespace System.Windows.Forms
 			thumb_pos.Size = TrackBarGetThumbSize (tb);
 		}
 
-		protected virtual Size TrackBarGetThumbSize (TrackBar trackBar)
+		protected virtual Size_ TrackBarGetThumbSize (TrackBar trackBar)
 		{
 			return TrackBarGetThumbSize ();
 		}
 
-		public static Size TrackBarGetThumbSize ()
+		public static Size_ TrackBarGetThumbSize ()
 		{
-			/* Draw thumb fixed 10x22 size */
-			return new Size (10, 22);
+			/* Draw thumb fixed 10x22 Size_ */
+			return new Size_ (10, 22);
 		}
 
 		public const int TrackBarVerticalTrackWidth = 4;
@@ -5735,16 +5736,16 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region DrawTrackBar_Vertical
-		private void DrawTrackBar_Vertical (Graphics dc, Rectangle clip_rectangle, TrackBar tb,
-			ref Rectangle thumb_pos, ref Rectangle thumb_area,  Brush br_thumb,
-			float ticks, int value_pos, bool mouse_value) {			
+		private void DrawTrackBar_Vertical (Graphics dc, Rectangle_ clip_rectangle, TrackBar tb,
+			ref Rectangle_ thumb_pos, ref Rectangle_ thumb_area,  Brush br_thumb,
+			float ticks, int value_pos, bool mouse_value) {
 
-			Point toptick_startpoint = new Point ();
-			Point bottomtick_startpoint = new Point ();
-			Point channel_startpoint = new Point ();
+            Drawing.Point_ toptick_startpoint = new Point_();
+            Drawing.Point_ bottomtick_startpoint = new Point_();
+            Drawing.Point_ channel_startpoint = new Point_();
 			float pixel_len;
 			float pixels_betweenticks;
-			Rectangle area = tb.ClientRectangle;
+			Rectangle_ area = tb.ClientRectangle;
 			
 			GetTrackBarDrawingInfo (tb, out pixels_betweenticks, out thumb_area, out thumb_pos, out channel_startpoint, out bottomtick_startpoint, out toptick_startpoint);
 
@@ -5814,7 +5815,7 @@ namespace System.Windows.Forms
 		}
 
 		#region Track
-		protected virtual void TrackBarDrawVerticalTrack (Graphics dc, Rectangle thumb_area, Point channel_startpoint, Rectangle clippingArea)
+		protected virtual void TrackBarDrawVerticalTrack (Graphics dc, Rectangle_ thumb_area, Point_ channel_startpoint, Rectangle_ clippingArea)
 		{
 			dc.FillRectangle (SystemBrushes.ControlDark, channel_startpoint.X, channel_startpoint.Y,
 				1, thumb_area.Height);
@@ -5828,7 +5829,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Thumb
-		protected virtual void TrackBarDrawVerticalThumbRight (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected virtual void TrackBarDrawVerticalThumbRight (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			Pen pen = SystemPens.ControlLightLight;
 			dc.DrawLine (pen, thumb_pos.X, thumb_pos.Y, thumb_pos.X, thumb_pos.Y + 10);
@@ -5849,7 +5850,7 @@ namespace System.Windows.Forms
 			dc.FillRectangle (br_thumb, thumb_pos.X + 19, thumb_pos.Y + 4, 1, 2);
 		}
 
-		protected virtual void TrackBarDrawVerticalThumbLeft (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected virtual void TrackBarDrawVerticalThumbLeft (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			Pen pen = SystemPens.ControlLightLight;
 			dc.DrawLine (pen, thumb_pos.X + 4, thumb_pos.Y, thumb_pos.X + 4 + 16, thumb_pos.Y);
@@ -5871,7 +5872,7 @@ namespace System.Windows.Forms
 			dc.FillRectangle (br_thumb, thumb_pos.X + 1, thumb_pos.Y + 4, 1, 2);
 		}
 
-		protected virtual void TrackBarDrawVerticalThumb (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected virtual void TrackBarDrawVerticalThumb (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			Pen pen = SystemPens.ControlLightLight;
 			dc.DrawLine (pen, thumb_pos.X, thumb_pos.Y, thumb_pos.X, thumb_pos.Y + 9);
@@ -5901,22 +5902,22 @@ namespace System.Windows.Forms
 		/* 
 			Horizontal trackbar 
 		  
-			Does not matter the size of the control, Win32 always draws:
+			Does not matter the Size_ of the control, Win32 always draws:
 				- Ticks starting from pixel 13, 8
 				- Channel starting at pos 8, 19 and ends at Width - 8
 				- Autosize makes always the control 45 pixels high
 				- Ticks are draw at (channel.Witdh - 10) / (Maximum - Minimum)
 				
 		*/
-		private void DrawTrackBar_Horizontal (Graphics dc, Rectangle clip_rectangle, TrackBar tb,
-			ref Rectangle thumb_pos, ref Rectangle thumb_area, Brush br_thumb,
-			float ticks, int value_pos, bool mouse_value) {			
-			Point toptick_startpoint = new Point ();
-			Point bottomtick_startpoint = new Point ();
-			Point channel_startpoint = new Point ();
+		private void DrawTrackBar_Horizontal (Graphics dc, Rectangle_ clip_rectangle, TrackBar tb,
+			ref Rectangle_ thumb_pos, ref Rectangle_ thumb_area, Brush br_thumb,
+			float ticks, int value_pos, bool mouse_value) {
+            Drawing.Point_ toptick_startpoint = new Point_();
+            Drawing.Point_ bottomtick_startpoint = new Point_();
+            Drawing.Point_ channel_startpoint = new Point_();
 			float pixel_len;
 			float pixels_betweenticks;
-			Rectangle area = tb.ClientRectangle;
+			Rectangle_ area = tb.ClientRectangle;
 			
 			GetTrackBarDrawingInfo (tb , out pixels_betweenticks, out thumb_area, out thumb_pos, out channel_startpoint, out bottomtick_startpoint, out toptick_startpoint);
 
@@ -5985,7 +5986,7 @@ namespace System.Windows.Forms
 		}
 
 		#region Track
-		protected virtual void TrackBarDrawHorizontalTrack (Graphics dc, Rectangle thumb_area, Point channel_startpoint, Rectangle clippingArea)
+		protected virtual void TrackBarDrawHorizontalTrack (Graphics dc, Rectangle_ thumb_area, Point_ channel_startpoint, Rectangle_ clippingArea)
 		{
 			dc.FillRectangle (SystemBrushes.ControlDark, channel_startpoint.X, channel_startpoint.Y,
 				thumb_area.Width, 1);
@@ -5999,7 +6000,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Thumb
-		protected virtual void TrackBarDrawHorizontalThumbBottom (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected virtual void TrackBarDrawHorizontalThumbBottom (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			Pen pen = SystemPens.ControlLightLight;
 			dc.DrawLine (pen, thumb_pos.X, thumb_pos.Y, thumb_pos.X + 10, thumb_pos.Y);
@@ -6020,7 +6021,7 @@ namespace System.Windows.Forms
 			dc.FillRectangle (br_thumb, thumb_pos.X + 4, thumb_pos.Y + 19, 2, 1);
 		}
 
-		protected virtual void TrackBarDrawHorizontalThumbTop (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected virtual void TrackBarDrawHorizontalThumbTop (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			Pen pen = SystemPens.ControlLightLight;
 			dc.DrawLine (pen, thumb_pos.X, thumb_pos.Y + 4, thumb_pos.X, thumb_pos.Y + 4 + 16);
@@ -6042,7 +6043,7 @@ namespace System.Windows.Forms
 			dc.FillRectangle (br_thumb, thumb_pos.X + 4, thumb_pos.Y + 1, 2, 1);
 		}
 
-		protected virtual void TrackBarDrawHorizontalThumb (Graphics dc, Rectangle thumb_pos, Brush br_thumb, Rectangle clippingArea, TrackBar trackBar)
+		protected virtual void TrackBarDrawHorizontalThumb (Graphics dc, Rectangle_ thumb_pos, Brush br_thumb, Rectangle_ clippingArea, TrackBar trackBar)
 		{
 			Pen pen = SystemPens.ControlLightLight;
 			dc.DrawLine (pen, thumb_pos.X, thumb_pos.Y, thumb_pos.X + 9, thumb_pos.Y);
@@ -6068,15 +6069,15 @@ namespace System.Windows.Forms
 		#endregion
 		#endregion
 
-		public override void DrawTrackBar (Graphics dc, Rectangle clip_rectangle, TrackBar tb) 
+		public override void DrawTrackBar (Graphics dc, Rectangle_ clip_rectangle, TrackBar tb) 
 		{
 			Brush		br_thumb;
 			int		value_pos;
 			bool		mouse_value;
 			float		ticks = (tb.Maximum - tb.Minimum) / tb.tickFrequency; /* N of ticks draw*/
-			Rectangle	area;
-			Rectangle	thumb_pos = tb.ThumbPos;
-			Rectangle	thumb_area = tb.ThumbArea;
+			Rectangle_	area;
+			Rectangle_	thumb_pos = tb.ThumbPos;
+			Rectangle_	thumb_area = tb.ThumbArea;
 			
 			if (tb.thumb_pressed) {
 				value_pos = tb.thumb_mouseclick;
@@ -6121,9 +6122,9 @@ namespace System.Windows.Forms
 			tb.ThumbArea = thumb_area;
 		}
 
-		public override Size TrackBarDefaultSize {
+		public override Size_ TrackBarDefaultSize {
 			get {
-				return new Size (104, 42);
+				return new Size_ (104, 42);
 			}
 		}
 
@@ -6135,7 +6136,7 @@ namespace System.Windows.Forms
 		#endregion	// TrackBar
 
 		#region UpDownBase
-		public override void UpDownBaseDrawButton (Graphics g, Rectangle bounds, bool top, VisualStyles.PushButtonState state)
+		public override void UpDownBaseDrawButton (Graphics g, Rectangle_ bounds, bool top, VisualStyles.PushButtonState state)
 		{
 			ControlPaint.DrawScrollButton (g, bounds, top ? ScrollButton.Up : ScrollButton.Down, state == VisualStyles.PushButtonState.Pressed ? ButtonState.Pushed : ButtonState.Normal);
 		}
@@ -6148,17 +6149,17 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region	VScrollBar
-		public override Size VScrollBarDefaultSize {
+		public override Size_ VScrollBarDefaultSize {
 			get {
-				return new Size (this.ScrollBarButtonSize, 80);
+				return new Size_ (this.ScrollBarButtonSize, 80);
 			}
 		}
 		#endregion	// VScrollBar
 
 		#region TreeView
-		public override Size TreeViewDefaultSize {
+		public override Size_ TreeViewDefaultSize {
 			get {
-				return new Size (121, 97);
+				return new Size_ (121, 97);
 			}
 		}
 
@@ -6259,48 +6260,48 @@ namespace System.Windows.Forms
 				buttons.MaximizeButton.State = ButtonState.Inactive;
 
 			int bw = ManagedWindowBorderWidth (wm);
-			Size btsize = ManagedWindowButtonSize (wm);
+			Size_ btsize = ManagedWindowButtonSize (wm);
 			int btw = btsize.Width;
 			int bth = btsize.Height;
 			int top = bw + 2;
 			int left = form.Width - bw - btw - ManagedWindowSpacingAfterLastTitleButton;
 			
 			if ((!wm.IsToolWindow || wm.IsMinimized) && wm.HasBorders) {
-				buttons.CloseButton.Rectangle = new Rectangle (left, top, btw, bth);
+				buttons.CloseButton.Rectangle = new Rectangle_ (left, top, btw, bth);
 				left -= 2 + btw;
 				
 				if (buttons.MaximizeButton.Visible) {
-					buttons.MaximizeButton.Rectangle = new Rectangle (left, top, btw, bth);
+					buttons.MaximizeButton.Rectangle = new Rectangle_ (left, top, btw, bth);
 					left -= 2 + btw;
 				} 
 				if (buttons.RestoreButton.Visible) {
-					buttons.RestoreButton.Rectangle = new Rectangle (left, top, btw, bth);
+					buttons.RestoreButton.Rectangle = new Rectangle_ (left, top, btw, bth);
 					left -= 2 + btw;
 				}
 
-				buttons.MinimizeButton.Rectangle = new Rectangle (left, top, btw, bth);
+				buttons.MinimizeButton.Rectangle = new Rectangle_ (left, top, btw, bth);
 				left -= 2 + btw;
 			} else if (wm.IsToolWindow) {
-				buttons.CloseButton.Rectangle = new Rectangle (left, top, btw, bth);
+				buttons.CloseButton.Rectangle = new Rectangle_ (left, top, btw, bth);
 				left -= 2 + btw;
 			}
 		}
 
-		protected virtual Rectangle ManagedWindowDrawTitleBarAndBorders (Graphics dc, Rectangle clip, InternalWindowManager wm)
+		protected virtual Rectangle_ ManagedWindowDrawTitleBarAndBorders (Graphics dc, Rectangle_ clip, InternalWindowManager wm)
 		{
 			Form form = wm.Form;
 			int tbheight = ManagedWindowTitleBarHeight (wm);
 			int bdwidth = ManagedWindowBorderWidth (wm);
-			Color titlebar_color = Color.FromArgb (255, 10, 36, 106);
-			Color titlebar_color2 = Color.FromArgb (255, 166, 202, 240);
-			Color color = ThemeEngine.Current.ColorControlDark;
-			Color color2 = Color.FromArgb (255, 192, 192, 192);
+			Color_ titlebar_color = Color_.FromArgb (255, 10, 36, 106);
+			Color_ titlebar_color2 = Color_.FromArgb (255, 166, 202, 240);
+			Color_ color = ThemeEngine.Current.ColorControlDark;
+			Color_ color2 = Color_.FromArgb (255, 192, 192, 192);
 
 			Pen pen = ResPool.GetPen (ColorControl);
-			Rectangle borders = new Rectangle (0, 0, form.Width, form.Height);
+			Rectangle_ borders = new Rectangle_ (0, 0, form.Width, form.Height);
 			ControlPaint.DrawBorder3D (dc, borders, Border3DStyle.Raised);
 			// The 3d border is only 2 pixels wide, so we draw the innermost pixels ourselves
-			borders = new Rectangle (2, 2, form.Width - 5, form.Height - 5);
+			borders = new Rectangle_ (2, 2, form.Width - 5, form.Height - 5);
 			for (int i = 2; i < bdwidth; i++) {
 				dc.DrawRectangle (pen, borders);
 				borders.Inflate (-1, -1);
@@ -6318,7 +6319,7 @@ namespace System.Windows.Forms
 				color2 = titlebar_color2;
 			}
 
-			Rectangle tb = new Rectangle (bdwidth, bdwidth, form.Width - (bdwidth * 2), tbheight - 1);
+			Rectangle_ tb = new Rectangle_ (bdwidth, bdwidth, form.Width - (bdwidth * 2), tbheight - 1);
 
 			// HACK: For now always draw the titlebar until we get updates better
 			if (tb.Width > 0 && tb.Height > 0) {
@@ -6336,17 +6337,17 @@ namespace System.Windows.Forms
 			return tb;
 		}
 
-		public override void DrawManagedWindowDecorations (Graphics dc, Rectangle clip, InternalWindowManager wm)
+		public override void DrawManagedWindowDecorations (Graphics dc, Rectangle_ clip, InternalWindowManager wm)
 		{
 #if debug
 			Console.WriteLine (DateTime.Now.ToLongTimeString () + " DrawManagedWindowDecorations");
 			dc.FillRectangle (Brushes.Black, clip);
 #endif
-			Rectangle tb = ManagedWindowDrawTitleBarAndBorders (dc, clip, wm);
+			Rectangle_ tb = ManagedWindowDrawTitleBarAndBorders (dc, clip, wm);
 
 			Form form = wm.Form;
 			if (wm.ShowIcon) {
-				Rectangle icon = ManagedWindowGetTitleBarIconArea (wm);
+				Rectangle_ icon = ManagedWindowGetTitleBarIconArea (wm);
 				if (icon.IntersectsWith (clip))
 					dc.DrawIcon (form.Icon, icon);
 				const int SpacingBetweenIconAndCaption = 2;
@@ -6371,28 +6372,28 @@ namespace System.Windows.Forms
 
 				if (tb.IntersectsWith (clip))
 					dc.DrawString (window_caption, WindowBorderFont,
-						ThemeEngine.Current.ResPool.GetSolidBrush (Color.White),
+						ThemeEngine.Current.ResPool.GetSolidBrush (Color_.White),
 						tb, format);
 			}
 		}
 
-		public override Size ManagedWindowButtonSize (InternalWindowManager wm)
+		public override Size_ ManagedWindowButtonSize (InternalWindowManager wm)
 		{
 			int height = ManagedWindowTitleBarHeight (wm);
 			if (!wm.IsMaximized && !wm.IsMinimized) {
 				if (wm.IsToolWindow)
-					return new Size (SystemInformation.ToolWindowCaptionButtonSize.Width - 2,
+					return new Size_ (SystemInformation.ToolWindowCaptionButtonSize.Width - 2,
 							height - 5);
 				if (wm.Form.FormBorderStyle == FormBorderStyle.None)
-					return Size.Empty;
+					return Size_.Empty;
 			} else
 				height = SystemInformation.CaptionHeight;
 
-			return new Size (SystemInformation.CaptionButtonSize.Width - 2,
+			return new Size_ (SystemInformation.CaptionButtonSize.Width - 2,
 					height - 5);
 		}
 
-		private int DrawTitleButton (Graphics dc, TitleButton button, Rectangle clip, Form form)
+		private int DrawTitleButton (Graphics dc, TitleButton button, Rectangle_ clip, Form form)
 		{
 			if (!button.Visible) {
 				return int.MaxValue;
@@ -6404,7 +6405,7 @@ namespace System.Windows.Forms
 			return button.Rectangle.Left;
 		}
 
-		protected virtual void ManagedWindowDrawTitleButton (Graphics dc, TitleButton button, Rectangle clip, Form form)
+		protected virtual void ManagedWindowDrawTitleButton (Graphics dc, TitleButton button, Rectangle_ clip, Form form)
 		{
 			dc.FillRectangle (SystemBrushes.Control, button.Rectangle);
 
@@ -6412,15 +6413,15 @@ namespace System.Windows.Forms
 					button.Caption, button.State);
 		}
 
-		public override Rectangle ManagedWindowGetTitleBarIconArea (InternalWindowManager wm)
+		public override Rectangle_ ManagedWindowGetTitleBarIconArea (InternalWindowManager wm)
 		{
 			int bw = ManagedWindowBorderWidth (wm);
-			return new Rectangle (bw + 3, bw + 2, wm.IconWidth, wm.IconWidth);
+			return new Rectangle_ (bw + 3, bw + 2, wm.IconWidth, wm.IconWidth);
 		}
 
-		public override Size ManagedWindowGetMenuButtonSize (InternalWindowManager wm)
+		public override Size_ ManagedWindowGetMenuButtonSize (InternalWindowManager wm)
 		{
-			Size result = SystemInformation.MenuButtonSize;
+			Size_ result = SystemInformation.MenuButtonSize;
 			result.Width -= 2;
 			result.Height -= 4;
 			return result;
@@ -6431,7 +6432,7 @@ namespace System.Windows.Forms
 			return false;
 		}
 
-		public override void ManagedWindowDrawMenuButton (Graphics dc, TitleButton button, Rectangle clip, InternalWindowManager wm)
+		public override void ManagedWindowDrawMenuButton (Graphics dc, TitleButton button, Rectangle_ clip, InternalWindowManager wm)
 		{
 			dc.FillRectangle (SystemBrushes.Control, button.Rectangle);
 			ControlPaint.DrawCaptionButton (dc, button.Rectangle,
@@ -6444,9 +6445,9 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region ControlPaint
-		public override void CPDrawBorder (Graphics graphics, Rectangle bounds, Color leftColor, int leftWidth,
-			ButtonBorderStyle leftStyle, Color topColor, int topWidth, ButtonBorderStyle topStyle,
-			Color rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color bottomColor,
+		public override void CPDrawBorder (Graphics graphics, Rectangle_ bounds, Color_ leftColor, int leftWidth,
+			ButtonBorderStyle leftStyle, Color_ topColor, int topWidth, ButtonBorderStyle topStyle,
+			Color_ rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color_ bottomColor,
 			int bottomWidth, ButtonBorderStyle bottomStyle) {
 			DrawBorderInternal(graphics, bounds.Left, bounds.Top, bounds.Left, bounds.Bottom-1, leftWidth, leftColor, leftStyle, Border3DSide.Left);
 			DrawBorderInternal(graphics, bounds.Left, bounds.Top, bounds.Right-1, bounds.Top, topWidth, topColor, topStyle, Border3DSide.Top);
@@ -6454,9 +6455,9 @@ namespace System.Windows.Forms
 			DrawBorderInternal(graphics, bounds.Left, bounds.Bottom-1, bounds.Right-1, bounds.Bottom-1, bottomWidth, bottomColor, bottomStyle, Border3DSide.Bottom);
 		}
 
-		public override void CPDrawBorder (Graphics graphics, RectangleF bounds, Color leftColor, int leftWidth,
-			ButtonBorderStyle leftStyle, Color topColor, int topWidth, ButtonBorderStyle topStyle,
-			Color rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color bottomColor,
+		public override void CPDrawBorder (Graphics graphics, RectangleF_ bounds, Color_ leftColor, int leftWidth,
+			ButtonBorderStyle leftStyle, Color_ topColor, int topWidth, ButtonBorderStyle topStyle,
+			Color_ rightColor, int rightWidth, ButtonBorderStyle rightStyle, Color_ bottomColor,
 			int bottomWidth, ButtonBorderStyle bottomStyle) {
 			DrawBorderInternal(graphics, bounds.Left, bounds.Top, bounds.Left, bounds.Bottom-1, leftWidth, leftColor, leftStyle, Border3DSide.Left);
 			DrawBorderInternal(graphics, bounds.Left, bounds.Top, bounds.Right-1, bounds.Top, topWidth, topColor, topStyle, Border3DSide.Top);
@@ -6464,17 +6465,17 @@ namespace System.Windows.Forms
 			DrawBorderInternal(graphics, bounds.Left, bounds.Bottom-1, bounds.Right-1, bounds.Bottom-1, bottomWidth, bottomColor, bottomStyle, Border3DSide.Bottom);
 		}
 
-		public override void CPDrawBorder3D (Graphics graphics, Rectangle rectangle, Border3DStyle style, Border3DSide sides) {
+		public override void CPDrawBorder3D (Graphics graphics, Rectangle_ rectangle, Border3DStyle style, Border3DSide sides) {
 			CPDrawBorder3D(graphics, rectangle, style, sides, ColorControl);
 		}
 
-		public override void CPDrawBorder3D (Graphics graphics, Rectangle rectangle, Border3DStyle style, Border3DSide sides, Color control_color)
+		public override void CPDrawBorder3D (Graphics graphics, Rectangle_ rectangle, Border3DStyle style, Border3DSide sides, Color_ control_color)
 		{
 			Pen		penTopLeft;
 			Pen		penTopLeftInner;
 			Pen		penBottomRight;
 			Pen		penBottomRightInner;
-			Rectangle	rect= new Rectangle (rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
+			Rectangle	rect= new Rectangle_ (rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
 			bool is_ColorControl = control_color.ToArgb () == ColorControl.ToArgb () ? true : false;
 			
 			if ((style & Border3DStyle.Adjust) != 0) {
@@ -6562,16 +6563,16 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void CPDrawButton (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawButton (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			CPDrawButtonInternal (dc, rectangle, state, SystemPens.ControlDarkDark, SystemPens.ControlDark, SystemPens.ControlLight);
 		}
 
-		private void CPDrawButtonInternal (Graphics dc, Rectangle rectangle, ButtonState state, Pen DarkPen, Pen NormalPen, Pen LightPen)
+		private void CPDrawButtonInternal (Graphics dc, Rectangle_ rectangle, ButtonState state, Pen DarkPen, Pen NormalPen, Pen LightPen)
 		{
-			// sadly enough, the rectangle gets always filled with a hatchbrush
+			// sadly enough, the Rectangle_ gets always filled with a hatchbrush
 			dc.FillRectangle (ResPool.GetHatchBrush (HatchStyle.Percent50,
-								 Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
+								 Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
 										 ColorControl.G, ColorControl.B),
 								 ColorControl),
 					  rectangle.X + 1, rectangle.Y + 1, rectangle.Width - 2, rectangle.Height - 2);
@@ -6628,20 +6629,20 @@ namespace System.Windows.Forms
 		}
 
 
-		public override void CPDrawCaptionButton (Graphics graphics, Rectangle rectangle, CaptionButton button, ButtonState state) {
+		public override void CPDrawCaptionButton (Graphics graphics, Rectangle_ rectangle, CaptionButton button, ButtonState state) {
 			Rectangle	captionRect;
 			int			lineWidth;
 
 			CPDrawButtonInternal (graphics, rectangle, state, SystemPens.ControlDarkDark, SystemPens.ControlDark, SystemPens.ControlLightLight);
 
 			if (rectangle.Width<rectangle.Height) {
-				captionRect=new Rectangle(rectangle.X+1, rectangle.Y+rectangle.Height/2-rectangle.Width/2+1, rectangle.Width-4, rectangle.Width-4);
+				captionRect=new Rectangle_(rectangle.X+1, rectangle.Y+rectangle.Height/2-rectangle.Width/2+1, rectangle.Width-4, rectangle.Width-4);
 			} else {
-				captionRect=new Rectangle(rectangle.X+rectangle.Width/2-rectangle.Height/2+1, rectangle.Y+1, rectangle.Height-4, rectangle.Height-4);
+				captionRect=new Rectangle_(rectangle.X+rectangle.Width/2-rectangle.Height/2+1, rectangle.Y+1, rectangle.Height-4, rectangle.Height-4);
 			}
 
 			if ((state & ButtonState.Pushed)!=0) {
-				captionRect=new Rectangle(rectangle.X+2, rectangle.Y+2, rectangle.Width-3, rectangle.Height-3);
+				captionRect=new Rectangle_(rectangle.X+2, rectangle.Y+2, rectangle.Width-3, rectangle.Height-3);
 			}
 
 			/* Make sure we've got at least a line width of 1 */
@@ -6682,16 +6683,16 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void CPDrawCheckBox (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawCheckBox (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			CPDrawCheckBoxInternal (dc, rectangle, state, false /* mixed */);
 		}
 
-		private void CPDrawCheckBoxInternal (Graphics dc, Rectangle rectangle, ButtonState state, bool mixed)
+		private void CPDrawCheckBoxInternal (Graphics dc, Rectangle_ rectangle, ButtonState state, bool mixed)
 		{
 			Pen check_pen = (mixed) ? Pens.Gray : Pens.Black;
 			
-			Rectangle cb_rect = new Rectangle (rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
+			Rectangle_ cb_rect = new Rectangle_ (rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
 			
 			if ((state & ButtonState.All) == ButtonState.All) {
 				cb_rect.Width -= 2;
@@ -6720,11 +6721,11 @@ namespace System.Windows.Forms
 				int x_pos = Math.Max (0, cb_rect.X + (cb_rect.Width / 2) - check_box_visible_size / 2);
 				int y_pos = Math.Max (0, cb_rect.Y + (cb_rect.Height / 2) - check_box_visible_size / 2);
 				
-				Rectangle rect = new Rectangle (x_pos, y_pos, check_box_visible_size, check_box_visible_size);
+				Rectangle_ rect = new Rectangle_ (x_pos, y_pos, check_box_visible_size, check_box_visible_size);
 				
 				if (((state & ButtonState.Pushed) == ButtonState.Pushed) || ((state & ButtonState.Inactive) == ButtonState.Inactive)) {
 					dc.FillRectangle (ResPool.GetHatchBrush (HatchStyle.Percent50,
-										 Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
+										 Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
 												 ColorControl.G, ColorControl.B),
 										 ColorControl), rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3);
 				} else
@@ -6744,7 +6745,7 @@ namespace System.Windows.Forms
 				
 				// oh boy, matching ms is like fighting against windmills
 				using (Pen h_pen = new Pen (ResPool.GetHatchBrush (HatchStyle.Percent50,
-										   Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
+										   Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
 												   ColorControl.G, ColorControl.B), ColorControl))) {
 					dc.DrawLine (h_pen, rect.X + 1, rect.Bottom - 1, rect.Right - 1, rect.Bottom - 1);
 					dc.DrawLine (h_pen, rect.Right - 1, rect.Y + 1, rect.Right - 1, rect.Bottom - 1);
@@ -6761,7 +6762,7 @@ namespace System.Windows.Forms
 					int lineWidth = Math.Max (3, check_size / 3);
 					int Scale = Math.Max (1, check_size / 9);
 					
-					Rectangle rect = new Rectangle (cb_rect.X + (cb_rect.Width / 2) - (int)Math.Ceiling ((float)check_size / 2) - 1, cb_rect.Y + (cb_rect.Height / 2) - (check_size / 2) - 1, 
+					Rectangle_ rect = new Rectangle_ (cb_rect.X + (cb_rect.Width / 2) - (int)Math.Ceiling ((float)check_size / 2) - 1, cb_rect.Y + (cb_rect.Height / 2) - (check_size / 2) - 1, 
 									check_size, check_size);
 					
 					for (int i = 0; i < lineWidth; i++) {
@@ -6774,7 +6775,7 @@ namespace System.Windows.Forms
 					int x_half = cb_rect.Width / 2;
 					int y_half = cb_rect.Height / 2;
 					
-					Rectangle rect = new Rectangle (cb_rect.X + x_half - (check_size / 2) - 1, cb_rect.Y + y_half - (check_size / 2), 
+					Rectangle_ rect = new Rectangle_ (cb_rect.X + x_half - (check_size / 2) - 1, cb_rect.Y + y_half - (check_size / 2), 
 									check_size, check_size);
 					
 					int gradient_left = check_size / 3;
@@ -6789,16 +6790,16 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void CPDrawComboButton (Graphics graphics, Rectangle rectangle, ButtonState state) {
-			Point[]			arrow = new Point[3];
-			Point				P1;
-			Point				P2;
-			Point				P3;
+		public override void CPDrawComboButton (Graphics graphics, Rectangle_ rectangle, ButtonState state) {
+            Drawing.Point_[]			arrow = new Drawing.Point_[3];
+            Drawing.Point_				P1;
+            Drawing.Point_				P2;
+            Drawing.Point_				P3;
 			int				centerX;
 			int				centerY;
 			int				shiftX;
 			int				shiftY;
-			Rectangle		rect;
+			Rectangle_		rect;
 
 			if ((state & ButtonState.Checked)!=0) {
 				graphics.FillRectangle(ResPool.GetHatchBrush (HatchStyle.Percent50, ColorControlLightLight, ColorControlLight),rectangle);				
@@ -6810,14 +6811,14 @@ namespace System.Windows.Forms
 				if ((state & (ButtonState.Pushed | ButtonState.Checked))!=0) {
 					// this needs to render like a pushed button - jba
 					// CPDrawBorder3D(graphics, rectangle, Border3DStyle.Sunken, Border3DSide.Left | Border3DSide.Top | Border3DSide.Right | Border3DSide.Bottom, ColorControl);
-					Rectangle trace_rectangle = new Rectangle(rectangle.X, rectangle.Y, Math.Max (rectangle.Width-1, 0), Math.Max (rectangle.Height-1, 0));
+					Rectangle_ trace_rectangle = new Rectangle_(rectangle.X, rectangle.Y, Math.Max (rectangle.Width-1, 0), Math.Max (rectangle.Height-1, 0));
 					graphics.DrawRectangle (SystemPens.ControlDark, trace_rectangle);
 				} else {
 					CPDrawBorder3D(graphics, rectangle, Border3DStyle.Raised, Border3DSide.Left | Border3DSide.Top | Border3DSide.Right | Border3DSide.Bottom, ColorControl);
 				}
 			}
 
-			rect=new Rectangle(rectangle.X+rectangle.Width/4, rectangle.Y+rectangle.Height/4, rectangle.Width/2, rectangle.Height/2);
+			rect=new Rectangle_(rectangle.X+rectangle.Width/4, rectangle.Y+rectangle.Height/4, rectangle.Width/2, rectangle.Height/2);
 			centerX=rect.Left+rect.Width/2;
 			centerY=rect.Top+rect.Height/2;
 			shiftX=Math.Max(1, rect.Width/8);
@@ -6830,9 +6831,9 @@ namespace System.Windows.Forms
 
 			rect.Y-=shiftY;
 			centerY-=shiftY;
-			P1=new Point(rect.Left, centerY);
-			P2=new Point(rect.Right, centerY);
-			P3=new Point(centerX, rect.Bottom);
+			P1=new Drawing.Point_(rect.Left, centerY);
+			P2=new Drawing.Point_(rect.Right, centerY);
+			P3=new Drawing.Point_(centerX, rect.Bottom);
 
 			arrow[0]=P1;
 			arrow[1]=P2;
@@ -6858,10 +6859,10 @@ namespace System.Windows.Forms
 		}
 
 
-		public override void CPDrawContainerGrabHandle (Graphics graphics, Rectangle bounds)
+		public override void CPDrawContainerGrabHandle (Graphics graphics, Rectangle_ bounds)
 		{
 			Pen			pen	= Pens.Black;
-			Rectangle	rect	= new Rectangle (bounds.X, bounds.Y, bounds.Width - 1, bounds.Height - 1);	// Dunno why, but MS does it that way, too
+			Rectangle	rect	= new Rectangle_ (bounds.X, bounds.Y, bounds.Width - 1, bounds.Height - 1);	// Dunno why, but MS does it that way, too
 			int			X;
 			int			Y;
 			
@@ -6884,12 +6885,12 @@ namespace System.Windows.Forms
 			graphics.DrawLine (pen, rect.Right - 3, Y - 1, rect.Right - 3, Y + 1);
 		}
 
-		public virtual void DrawFlatStyleFocusRectangle (Graphics graphics, Rectangle rectangle, ButtonBase button, Color foreColor, Color backColor) {
+		public virtual void DrawFlatStyleFocusRectangle (Graphics graphics, Rectangle_ rectangle, ButtonBase button, Color_ foreColor, Color_ backColor) {
 			// make a rectange to trace around border of the button
-			Rectangle trace_rectangle = new Rectangle(rectangle.X, rectangle.Y, Math.Max (rectangle.Width-1, 0), Math.Max (rectangle.Height-1, 0));
+			Rectangle_ trace_rectangle = new Rectangle_(rectangle.X, rectangle.Y, Math.Max (rectangle.Width-1, 0), Math.Max (rectangle.Height-1, 0));
 			
-			Color outerColor = foreColor;
-			// adjust focus color according to the flatstyle
+			Color_ outerColor = foreColor;
+			// adjust focus Color_ according to the flatstyle
 			if (button.FlatStyle == FlatStyle.Popup && !button.is_pressed) {
 				outerColor = (backColor.ToArgb () == ColorControl.ToArgb ()) ? ControlPaint.Dark(ColorControl) : ColorControlText;				
 			}
@@ -6899,21 +6900,21 @@ namespace System.Windows.Forms
 			
 			// draw the inner rectangle						
 			if (button.FlatStyle == FlatStyle.Popup) {
-				DrawInnerFocusRectangle (graphics, Rectangle.Inflate (rectangle, -4, -4), backColor);
+				DrawInnerFocusRectangle (graphics, Rectangle_.Inflate (rectangle, -4, -4), backColor);
 			} else {
 				// draw a flat inner rectangle
 				Pen pen = ResPool.GetPen (ControlPaint.LightLight (backColor));
-				graphics.DrawRectangle(pen, Rectangle.Inflate (trace_rectangle, -4, -4));				
+				graphics.DrawRectangle(pen, Rectangle_.Inflate (trace_rectangle, -4, -4));				
 			}
 		}
 		
-		public virtual void DrawInnerFocusRectangle(Graphics graphics, Rectangle rectangle, Color backColor)
+		public virtual void DrawInnerFocusRectangle(Graphics graphics, Rectangle_ rectangle, Color_ backColor)
 		{	
 			// make a rectange to trace around border of the button
-			Rectangle trace_rectangle = new Rectangle(rectangle.X, rectangle.Y, Math.Max (rectangle.Width-1, 0), Math.Max (rectangle.Height-1, 0));
+			Rectangle_ trace_rectangle = new Rectangle_(rectangle.X, rectangle.Y, Math.Max (rectangle.Width-1, 0), Math.Max (rectangle.Height-1, 0));
 			
 #if NotUntilCairoIsFixed
-			Color colorBackInverted = Color.FromArgb (Math.Abs (backColor.R-255), Math.Abs (backColor.G-255), Math.Abs (backColor.B-255));
+			Color colorBackInverted = Color_.FromArgb (Math.Abs (backColor.R-255), Math.Abs (backColor.G-255), Math.Abs (backColor.B-255));
 			DashStyle oldStyle; // used for caching old penstyle
 			Pen pen = ResPool.GetPen (colorBackInverted);
 
@@ -6923,24 +6924,24 @@ namespace System.Windows.Forms
 			graphics.DrawRectangle (pen, trace_rectangle);
 			pen.DashStyle = oldStyle;
 #else
-			CPDrawFocusRectangle(graphics, trace_rectangle, Color.Wheat, backColor);
+			CPDrawFocusRectangle(graphics, trace_rectangle, Color_.Wheat, backColor);
 #endif
 		}
 				
 
-		public override void CPDrawFocusRectangle (Graphics graphics, Rectangle rectangle, Color foreColor, Color backColor) 
+		public override void CPDrawFocusRectangle (Graphics graphics, Rectangle_ rectangle, Color_ foreColor, Color_ backColor) 
 		{			
-			Rectangle rect = rectangle;
+			Rectangle_ rect = rectangle;
 			Pen pen;
 			HatchBrush brush;
 				
 			if (backColor.GetBrightness () >= 0.5) {
-				foreColor = Color.Transparent;
-				backColor = Color.Black;
+				foreColor = Color_.Transparent;
+				backColor = Color_.Black;
 				
 			} else {
-				backColor = Color.FromArgb (Math.Abs (backColor.R-255), Math.Abs (backColor.G-255), Math.Abs (backColor.B-255));
-				foreColor = Color.Black;
+				backColor = Color_.FromArgb (Math.Abs (backColor.R-255), Math.Abs (backColor.G-255), Math.Abs (backColor.B-255));
+				foreColor = Color_.Black;
 			}
 						
 			brush = ResPool.GetHatchBrush (HatchStyle.Percent50, backColor, foreColor);
@@ -6953,7 +6954,7 @@ namespace System.Windows.Forms
 			pen.Dispose ();
 		}
 		
-		public override void CPDrawGrabHandle (Graphics graphics, Rectangle rectangle, bool primary, bool enabled)
+		public override void CPDrawGrabHandle (Graphics graphics, Rectangle_ rectangle, bool primary, bool enabled)
 		{
 			Brush	sb;
 			Pen pen;
@@ -6978,8 +6979,8 @@ namespace System.Windows.Forms
 		}
 
 
-		public override void CPDrawGrid (Graphics graphics, Rectangle area, Size pixelsBetweenDots, Color backColor) {
-			Color	foreColor;
+		public override void CPDrawGrid (Graphics graphics, Rectangle_ area, Size_ pixelsBetweenDots, Color_ backColor) {
+			Color_	foreColor;
 			int	h;
 			int	b;
 			int	s;
@@ -6987,9 +6988,9 @@ namespace System.Windows.Forms
 			ControlPaint.Color2HBS(backColor, out h, out b, out s);
 			
 			if (b>127) {
-				foreColor=Color.Black;
+				foreColor=Color_.Black;
 			} else {
-				foreColor=Color.White;
+				foreColor=Color_.White;
 			}
 
 			// still not perfect. it seems that ms calculates the position of the first dot or line
@@ -7002,7 +7003,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void CPDrawImageDisabled (Graphics graphics, Image image, int x, int y, Color background) {
+		public override void CPDrawImageDisabled (Graphics graphics, Image image, int x, int y, Color_ background) {
 			/*
 				Microsoft seems to ignore the background and simply make
 				the image grayscale. At least when having > 256 colors on
@@ -7033,21 +7034,21 @@ namespace System.Windows.Forms
 				 imagedisabled_attributes.SetColorMatrix (colorMatrix);
 			}
 			
-			graphics.DrawImage(image, new Rectangle(x, y, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, imagedisabled_attributes);
+			graphics.DrawImage(image, new Rectangle_(x, y, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, imagedisabled_attributes);
 			
 		}
 
 
-		public override void CPDrawLockedFrame (Graphics graphics, Rectangle rectangle, bool primary) {
+		public override void CPDrawLockedFrame (Graphics graphics, Rectangle_ rectangle, bool primary) {
 			Pen	penBorder;
 			Pen	penInside;
 
 			if (primary) {
-				penBorder = ResPool.GetSizedPen (Color.White, 2);
-				penInside = ResPool.GetPen (Color.Black);
+				penBorder = ResPool.GetSizedPen (Color_.White, 2);
+				penInside = ResPool.GetPen (Color_.Black);
 			} else {
-				penBorder = ResPool.GetSizedPen (Color.Black, 2);
-				penInside = ResPool.GetPen (Color.White);
+				penBorder = ResPool.GetSizedPen (Color_.Black, 2);
+				penInside = ResPool.GetPen (Color_.White);
 			}
 			penBorder.Alignment=PenAlignment.Inset;
 			penInside.Alignment=PenAlignment.Inset;
@@ -7057,11 +7058,11 @@ namespace System.Windows.Forms
 		}
 
 
-		public override void CPDrawMenuGlyph (Graphics graphics, Rectangle rectangle, MenuGlyph glyph, Color color, Color backColor) {
+		public override void CPDrawMenuGlyph (Graphics graphics, Rectangle_ rectangle, MenuGlyph glyph, Color_ color, Color_ backColor) {
 			Rectangle	rect;
 			int			lineWidth;
 
-			if (backColor != Color.Empty)
+			if (backColor != Color_.Empty)
 				graphics.FillRectangle (ResPool.GetSolidBrush (backColor), rectangle);
 				
 			Brush brush = ResPool.GetSolidBrush (color);
@@ -7071,9 +7072,9 @@ namespace System.Windows.Forms
 				float height = rectangle.Height * 0.7f;
 				float width  = height / 2.0f;
 				
-				PointF ddCenter = new PointF (rectangle.X + ((rectangle.Width-width) / 2.0f), rectangle.Y + (rectangle.Height / 2.0f));
+				PointF_ ddCenter = new PointF_ (rectangle.X + ((rectangle.Width-width) / 2.0f), rectangle.Y + (rectangle.Height / 2.0f));
 
-				PointF [] vertices = new PointF [3];
+				PointF_ [] vertices = new PointF_ [3];
 				vertices [0].X = ddCenter.X;
 				vertices [0].Y = ddCenter.Y - (height / 2.0f);
 				vertices [1].X = ddCenter.X;
@@ -7089,7 +7090,7 @@ namespace System.Windows.Forms
 			case MenuGlyph.Bullet: {
 				
 				lineWidth=Math.Max(2, rectangle.Width/3);
-				rect=new Rectangle(rectangle.X+lineWidth, rectangle.Y+lineWidth, rectangle.Width-lineWidth*2, rectangle.Height-lineWidth*2);
+				rect=new Rectangle_(rectangle.X+lineWidth, rectangle.Y+lineWidth, rectangle.Width-lineWidth*2, rectangle.Height-lineWidth*2);
 				
 				graphics.FillEllipse(brush, rect);
 				
@@ -7100,7 +7101,7 @@ namespace System.Windows.Forms
 				
 				Pen pen = ResPool.GetPen (color);
 				lineWidth = Math.Max (2, rectangle.Width / 6);
-				rect = new Rectangle(rectangle.X + lineWidth, rectangle.Y + lineWidth, rectangle.Width - lineWidth * 2, rectangle.Height- lineWidth * 2);
+				rect = new Rectangle_(rectangle.X + lineWidth, rectangle.Y + lineWidth, rectangle.Width - lineWidth * 2, rectangle.Height- lineWidth * 2);
 
 				int Scale = Math.Max (1, rectangle.Width / 12);
 				int top = (rect.Y + lineWidth + ((rect.Height - ((2 * Scale) + lineWidth)) / 2));
@@ -7115,49 +7116,49 @@ namespace System.Windows.Forms
 
 		}
 
-		public override void CPDrawMixedCheckBox (Graphics graphics, Rectangle rectangle, ButtonState state)
+		public override void CPDrawMixedCheckBox (Graphics graphics, Rectangle_ rectangle, ButtonState state)
 		{
 			CPDrawCheckBoxInternal (graphics, rectangle, state, true /* mixed */);
 		}
 
-		public override void CPDrawRadioButton (Graphics dc, Rectangle rectangle, ButtonState state)
+		public override void CPDrawRadioButton (Graphics dc, Rectangle_ rectangle, ButtonState state)
 		{
 			CPColor cpcolor = ResPool.GetCPColor (ColorControl);
 			
-			Color dot_color = Color.Black;
+			Color_ dot_color = Color_.Black;
 			
-			Color top_left_outer = Color.Black;
-			Color top_left_inner = Color.Black;
-			Color bottom_right_outer = Color.Black;
-			Color bottom_right_inner = Color.Black;
+			Color_ top_left_outer = Color_.Black;
+			Color_ top_left_inner = Color_.Black;
+			Color_ bottom_right_outer = Color_.Black;
+			Color_ bottom_right_inner = Color_.Black;
 			
 			int ellipse_diameter = (rectangle.Width > rectangle.Height) ? (int)(rectangle.Height  * 0.9f) : (int)(rectangle.Width * 0.9f);
 			int radius = ellipse_diameter / 2;
 			
-			Rectangle rb_rect = new Rectangle (rectangle.X + (rectangle.Width / 2) - radius, rectangle.Y + (rectangle.Height / 2) - radius, ellipse_diameter, ellipse_diameter);
+			Rectangle_ rb_rect = new Rectangle_ (rectangle.X + (rectangle.Width / 2) - radius, rectangle.Y + (rectangle.Height / 2) - radius, ellipse_diameter, ellipse_diameter);
 			
 			Brush brush = null;
 			
 			if ((state & ButtonState.All) == ButtonState.All) {
-				brush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
+				brush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
 												     ColorControl.G, ColorControl.B), ColorControl);
 				dot_color = cpcolor.Dark;
 			} else
 			if ((state & ButtonState.Flat) == ButtonState.Flat) {
 				if (((state & ButtonState.Inactive) == ButtonState.Inactive) || ((state & ButtonState.Pushed) == ButtonState.Pushed))
-					brush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255), ColorControl.G, ColorControl.B), ColorControl);
+					brush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255), ColorControl.G, ColorControl.B), ColorControl);
 				else
 					brush = SystemBrushes.ControlLightLight;
 			} else {
 				if (((state & ButtonState.Inactive) == ButtonState.Inactive) || ((state & ButtonState.Pushed) == ButtonState.Pushed))
-					brush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255), ColorControl.G, ColorControl.B), ColorControl);
+					brush = ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255), ColorControl.G, ColorControl.B), ColorControl);
 				else
 					brush = SystemBrushes.ControlLightLight;
 				
 				top_left_outer = cpcolor.Dark;
 				top_left_inner = cpcolor.DarkDark;
 				bottom_right_outer = cpcolor.Light;
-				bottom_right_inner = Color.Transparent;
+				bottom_right_inner = Color_.Transparent;
 				
 				if ((state & ButtonState.Inactive) == ButtonState.Inactive)
 					dot_color = cpcolor.Dark;
@@ -7168,19 +7169,19 @@ namespace System.Windows.Forms
 			int line_width = Math.Max (1, (int)(ellipse_diameter * 0.08f));
 			
 			dc.DrawArc (ResPool.GetSizedPen (top_left_outer, line_width), rb_rect, 135.0f, 180.0f);
-			dc.DrawArc (ResPool.GetSizedPen (top_left_inner, line_width), Rectangle.Inflate (rb_rect, -line_width, -line_width), 135.0f, 180.0f);
+			dc.DrawArc (ResPool.GetSizedPen (top_left_inner, line_width), Rectangle_.Inflate (rb_rect, -line_width, -line_width), 135.0f, 180.0f);
 			dc.DrawArc (ResPool.GetSizedPen (bottom_right_outer, line_width), rb_rect, 315.0f, 180.0f);
 			
-			if (bottom_right_inner != Color.Transparent)
-				dc.DrawArc (ResPool.GetSizedPen (bottom_right_inner, line_width), Rectangle.Inflate (rb_rect, -line_width, -line_width), 315.0f, 180.0f);
+			if (bottom_right_inner != Color_.Transparent)
+				dc.DrawArc (ResPool.GetSizedPen (bottom_right_inner, line_width), Rectangle_.Inflate (rb_rect, -line_width, -line_width), 315.0f, 180.0f);
 			else
-				using (Pen h_pen = new Pen (ResPool.GetHatchBrush (HatchStyle.Percent50, Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255), ColorControl.G, ColorControl.B), ColorControl), line_width)) {
-					dc.DrawArc (h_pen, Rectangle.Inflate (rb_rect, -line_width, -line_width), 315.0f, 180.0f);
+				using (Pen h_pen = new Pen (ResPool.GetHatchBrush (HatchStyle.Percent50, Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255), ColorControl.G, ColorControl.B), ColorControl), line_width)) {
+					dc.DrawArc (h_pen, Rectangle_.Inflate (rb_rect, -line_width, -line_width), 315.0f, 180.0f);
 				}
 			
 			if ((state & ButtonState.Checked) == ButtonState.Checked) {
 				int inflate = line_width * 4;
-				Rectangle tmp = Rectangle.Inflate (rb_rect, -inflate, -inflate);
+				Rectangle_ tmp = Rectangle_.Inflate (rb_rect, -inflate, -inflate);
 				if (rectangle.Height >  13) {
 					tmp.X += 1;
 					tmp.Y += 1;
@@ -7197,18 +7198,18 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override void CPDrawReversibleFrame (Rectangle rectangle, Color backColor, FrameStyle style) {
+		public override void CPDrawReversibleFrame (Rectangle_ rectangle, Color_ backColor, FrameStyle style) {
 
 		}
 
 
-		public override void CPDrawReversibleLine (Point start, Point end, Color backColor) {
+		public override void CPDrawReversibleLine (Drawing.Point_ start, Point_ end, Color_ backColor) {
 
 		}
 
 
 		/* Scroll button: regular button + direction arrow */
-		public override void CPDrawScrollButton (Graphics dc, Rectangle area, ScrollButton type, ButtonState state)
+		public override void CPDrawScrollButton (Graphics dc, Rectangle_ area, ScrollButton type, ButtonState state)
 		{
 			DrawScrollButtonPrimitive (dc, area, state);
 			
@@ -7219,11 +7220,11 @@ namespace System.Windows.Forms
 				offset = 1;
 			
 			// skip the border
-			Rectangle rect = new Rectangle (area.X + 2 + offset, area.Y + 2 + offset, area.Width - 4, area.Height - 4);
-			
-			Point [] arrow = new Point [3];
+			Rectangle_ rect = new Rectangle_ (area.X + 2 + offset, area.Y + 2 + offset, area.Width - 4, area.Height - 4);
+
+            Drawing.Point_ [] arrow = new Point_[3];
 			for (int i = 0; i < 3; i++)
-				arrow [i] = new Point ();
+				arrow [i] = new Point_ ();
 			
 			Pen pen = SystemPens.ControlText;
 			
@@ -7400,13 +7401,13 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public  override void CPDrawSelectionFrame (Graphics graphics, bool active, Rectangle outsideRect, Rectangle insideRect,
+		public  override void CPDrawSelectionFrame (Graphics graphics, bool active, Rectangle_ outsideRect, Rectangle_ insideRect,
 			Color backColor) {
 
 		}
 
 
-		public override void CPDrawSizeGrip (Graphics dc, Color backColor, Rectangle bounds)
+		public override void CPDrawSizeGrip (Graphics dc, Color_ backColor, Rectangle_ bounds)
 		{
 			Pen pen_dark = ResPool.GetPen(ControlPaint.Dark(backColor));
 			Pen pen_light_light = ResPool.GetPen(ControlPaint.LightLight(backColor));
@@ -7418,18 +7419,18 @@ namespace System.Windows.Forms
 			}
 		}
 
-		private void DrawStringDisabled20 (Graphics g, string s, Font font, Rectangle layoutRectangle, Color color, TextFormatFlags flags, bool useDrawString)
+		private void DrawStringDisabled20 (Graphics g, string s, Font font, Rectangle_ layoutRectangle, Color_ color, TextFormatFlags flags, bool useDrawString)
 		{
 			CPColor cpcolor = ResPool.GetCPColor (color);
 
-			layoutRectangle.Offset (1, 1);
+            layoutRectangle.Offset (1, 1);
 			TextRenderer.DrawTextInternal (g, s, font, layoutRectangle, cpcolor.LightLight, flags, useDrawString);
 
-			layoutRectangle.Offset (-1, -1);
+            layoutRectangle.Offset (-1, -1);
 			TextRenderer.DrawTextInternal (g, s, font, layoutRectangle, cpcolor.Dark, flags, useDrawString);
 		}
 
-		public  override void CPDrawStringDisabled (Graphics dc, string s, Font font, Color color, RectangleF layoutRectangle, StringFormat format)
+		public  override void CPDrawStringDisabled (Graphics dc, string s, Font font, Color_ color, RectangleF_ layoutRectangle, StringFormat format)
 		{
 			CPColor cpcolor = ResPool.GetCPColor (color);
 			
@@ -7439,7 +7440,7 @@ namespace System.Windows.Forms
 			dc.DrawString (s, font, ResPool.GetSolidBrush (cpcolor.Dark), layoutRectangle, format);
 		}
 
-		public override void CPDrawStringDisabled (IDeviceContext dc, string s, Font font, Color color, Rectangle layoutRectangle, TextFormatFlags format)
+		public override void CPDrawStringDisabled (IDeviceContext dc, string s, Font font, Color_ color, Rectangle_ layoutRectangle, TextFormatFlags format)
 		{
 			CPColor cpcolor = ResPool.GetCPColor (color);
 
@@ -7450,20 +7451,20 @@ namespace System.Windows.Forms
 			TextRenderer.DrawText (dc, s, font, layoutRectangle, cpcolor.Dark, format);
 		}
 
-		public override void CPDrawVisualStyleBorder (Graphics graphics, Rectangle bounds)
+		public override void CPDrawVisualStyleBorder (Graphics graphics, Rectangle_ bounds)
 		{
 			graphics.DrawRectangle (SystemPens.ControlDarkDark, bounds);
 		}
 
 		private static void DrawBorderInternal (Graphics graphics, int startX, int startY, int endX, int endY,
-			int width, Color color, ButtonBorderStyle style, Border3DSide side) 
+			int width, Color_ color, ButtonBorderStyle style, Border3DSide side) 
 		{
 			DrawBorderInternal (graphics, (float) startX, (float) startY, (float) endX, (float) endY, 
 				width, color, style, side);
 		}
 
 		private static void DrawBorderInternal (Graphics graphics, float startX, float startY, float endX, float endY,
-			int width, Color color, ButtonBorderStyle style, Border3DSide side) {
+			int width, Color_ color, ButtonBorderStyle style, Border3DSide side) {
 
 			Pen pen = null;
 
@@ -7486,7 +7487,7 @@ namespace System.Windows.Forms
 
 			switch(style) {
 			case ButtonBorderStyle.Outset: {
-				Color		colorGrade;
+				Color_		colorGrade;
 				int		hue, brightness, saturation;
 				int		brightnessSteps;
 				int		brightnessDownSteps;
@@ -7535,7 +7536,7 @@ namespace System.Windows.Forms
 			}
 
 			case ButtonBorderStyle.Inset: {
-				Color		colorGrade;
+				Color_		colorGrade;
 				int		hue, brightness, saturation;
 				int		brightnessSteps;
 				int		brightnessDownSteps;
@@ -7629,7 +7630,7 @@ namespace System.Windows.Forms
 			still look like MS's scaled caption buttons. (as opposed to scaling a bitmap)
 		*/
 
-		private void DrawCaptionHelper(Graphics graphics, Color color, Pen pen, int lineWidth, int shift, Rectangle captionRect, CaptionButton button) {
+		private void DrawCaptionHelper(Graphics graphics, Color_ color, Pen pen, int lineWidth, int shift, Rectangle_ captionRect, CaptionButton button) {
 			switch(button) {
 			case CaptionButton.Close: {
 				if (lineWidth<2) {
@@ -7739,7 +7740,7 @@ namespace System.Windows.Forms
 		}
 
 		/* Generic scroll button */
-		public void DrawScrollButtonPrimitive (Graphics dc, Rectangle area, ButtonState state) {
+		public void DrawScrollButtonPrimitive (Graphics dc, Rectangle_ area, ButtonState state) {
 			if ((state & ButtonState.Pushed) == ButtonState.Pushed) {
 				dc.FillRectangle (SystemBrushes.Control, area.X + 1,
 					area.Y + 1, area.Width - 2 , area.Height - 2);
@@ -7779,7 +7780,7 @@ namespace System.Windows.Forms
 			
 		}
 		
-		public override void CPDrawBorderStyle (Graphics dc, Rectangle area, BorderStyle border_style) {
+		public override void CPDrawBorderStyle (Graphics dc, Rectangle_ area, BorderStyle border_style) {
 			switch (border_style){
 			case BorderStyle.Fixed3D:
 				dc.DrawLine (ResPool.GetPen (ColorControlDark), area.X, area.Y, area.X +area.Width, area.Y);

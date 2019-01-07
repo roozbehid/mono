@@ -25,10 +25,10 @@
 //
 
 // #define DEBUG
-
 using System;
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -64,7 +64,7 @@ namespace System.Windows.Forms {
 		private bool		enable_auto_drag_drop;
 		private RichTextBoxLanguageOptions language_option;
 		private bool		rich_text_shortcuts_enabled;
-		private Color		selection_back_color;
+		private Color_		selection_back_color;
 		#endregion	// Local Variables
 
 		#region Public Constructors
@@ -110,9 +110,9 @@ namespace System.Windows.Forms {
 			OnLinkClicked (new LinkClickedEventArgs (link.LinkTag.LinkText));
 		}
 
-		internal override Color ChangeBackColor (Color backColor)
+		internal override Color_ ChangeBackColor (Color_ backColor)
 		{
-			if (backColor == Color.Empty) {
+			if (backColor == Color_.Empty) {
 				backcolor_set = false;
 				if (!ReadOnly) {
 					backColor = SystemColors.Window;
@@ -237,12 +237,12 @@ namespace System.Windows.Forms {
 					// Font changes always set the whole doc to that font
 					start = document.GetLine(1);
 					end = document.GetLine(document.Lines);
-					document.FormatText(start, 1, end, end.text.Length + 1, base.Font, Color.Empty, Color.Empty, FormatSpecified.Font);
+					document.FormatText(start, 1, end, end.text.Length + 1, base.Font, Color_.Empty, Color_.Empty, FormatSpecified.Font);
 				}
 			}
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get {
 				return base.ForeColor;
 			}
@@ -476,7 +476,7 @@ namespace System.Windows.Forms {
 		[MonoTODO ("Stub, does nothing")]
 		[Browsable (false)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public Color SelectionBackColor {
+		public Color_ SelectionBackColor {
 			get { return selection_back_color; }
 			set { selection_back_color = value; }
 		}
@@ -509,9 +509,9 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public Color SelectionColor {
+		public Color_ SelectionColor {
 			get {
-				Color	color;
+				Color_	color;
 				LineTag	start;
 				LineTag	end;
 				LineTag	tag;
@@ -530,7 +530,7 @@ namespace System.Windows.Forms {
 				while (tag != null) {
 
 					if (!color.Equals (tag.Color))
-						return Color.Empty;
+						return Color_.Empty;
 
 					if (tag == end)
 						break;
@@ -542,7 +542,7 @@ namespace System.Windows.Forms {
 			}
 
 			set {
-				if (value == Color.Empty)
+				if (value == Color_.Empty)
 					value = DefaultForeColor;
 					
 				int sel_start;
@@ -553,14 +553,14 @@ namespace System.Windows.Forms {
 
 				document.FormatText (document.selection_start.line, document.selection_start.pos + 1,
 						document.selection_end.line, document.selection_end.pos + 1, null,
-						value, Color.Empty, FormatSpecified.Color);
+						value, Color_.Empty, FormatSpecified.Color);
 
 				document.CharIndexToLineTag(sel_start, out document.selection_start.line, out document.selection_start.tag, out document.selection_start.pos);
 				document.CharIndexToLineTag(sel_end, out document.selection_end.line, out document.selection_end.tag, out document.selection_end.pos);
 
 				document.UpdateView(document.selection_start.line, 0);
 
-				//Re-Align the caret in case its changed size or position
+				//Re-Align the caret in case its changed Size_ or position
 				//probably not necessary here
 				document.AlignCaret(false);
 			}
@@ -611,13 +611,13 @@ namespace System.Windows.Forms {
 
 				document.FormatText (document.selection_start.line, document.selection_start.pos + 1,
 						document.selection_end.line, document.selection_end.pos + 1, value,
-						Color.Empty, Color.Empty, FormatSpecified.Font);
+						Color_.Empty, Color_.Empty, FormatSpecified.Font);
 
 				document.CharIndexToLineTag(sel_start, out document.selection_start.line, out document.selection_start.tag, out document.selection_start.pos);
 				document.CharIndexToLineTag(sel_end, out document.selection_end.line, out document.selection_end.tag, out document.selection_end.pos);
 
 				document.UpdateView(document.selection_start.line, 0);
-				//Re-Align the caret in case its changed size or position
+				//Re-Align the caret in case its changed Size_ or position
 				Document.AlignCaret (false);
 
 			}
@@ -774,9 +774,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size(100, 96);
+				return new Size_(100, 96);
 			}
 		}
 		#endregion	// Protected Instance Properties
@@ -898,7 +898,7 @@ namespace System.Windows.Forms {
 		}
 
 		
-		internal override char GetCharFromPositionInternal (Point p)
+		internal override char GetCharFromPositionInternal (Point_ p)
 		{
 			LineTag tag;
 			int pos;
@@ -911,7 +911,7 @@ namespace System.Windows.Forms {
 			return tag.Line.text[pos];
 		}
 
-		public override int GetCharIndexFromPosition(Point pt) {
+		public override int GetCharIndexFromPosition(Point_ pt) {
 			LineTag	tag;
 			int	pos;
 
@@ -930,13 +930,13 @@ namespace System.Windows.Forms {
 			return line.LineNo - 1;
 		}
 
-		public override Point GetPositionFromCharIndex(int index) {
+		public override Point_ GetPositionFromCharIndex(int index) {
 			Line	line;
 			LineTag	tag;
 			int	pos;
 
 			document.CharIndexToLineTag(index, out line, out tag, out pos);
-			return new Point(line.X + (int)line.widths[pos] + document.OffsetX - document.ViewPortX, 
+			return new Point_(line.X + (int)line.widths[pos] + document.OffsetX - document.ViewPortX, 
 					 line.Y + document.OffsetY - document.ViewPortY);
 		}
 
@@ -1104,7 +1104,7 @@ namespace System.Windows.Forms {
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new void DrawToBitmap (Bitmap bitmap, Rectangle targetBounds)
+		public new void DrawToBitmap (Bitmap bitmap, Rectangle_ targetBounds)
 		{
 			using (Graphics dc = Graphics.FromImage (bitmap))
 				Draw (dc, targetBounds);
@@ -1307,7 +1307,7 @@ namespace System.Windows.Forms {
 		}
 
 		private class RtfSectionStyle : ICloneable {
-			internal Color rtf_color;
+			internal Color_ rtf_color;
 			internal RTF.Font rtf_rtffont;
 			internal int rtf_rtffont_size;
 			internal FontStyle rtf_rtfstyle;
@@ -1406,7 +1406,7 @@ namespace System.Windows.Forms {
 								if (color.Red == -1 && color.Green == -1 && color.Blue == -1) {
 									this.rtf_style.rtf_color = ForeColor;
 								} else {
-									this.rtf_style.rtf_color = Color.FromArgb(color.Red, color.Green, color.Blue);
+									this.rtf_style.rtf_color = Color_.FromArgb(color.Red, color.Green, color.Blue);
 								}
 								FlushText (rtf, false);
 							}
@@ -1660,16 +1660,16 @@ namespace System.Windows.Forms {
 
 			font = new Font (rtf_style.rtf_rtffont.Name, rtf_style.rtf_rtffont_size, rtf_style.rtf_rtfstyle);
 
-			if (rtf_style.rtf_color == Color.Empty) {
+			if (rtf_style.rtf_color == Color_.Empty) {
 				System.Windows.Forms.RTF.Color color;
 
-				// First color in table is default
+				// First Color_ in table is default
 				color = System.Windows.Forms.RTF.Color.GetColor (rtf, 0);
 
 				if ((color == null) || (color.Red == -1 && color.Green == -1 && color.Blue == -1)) {
 					rtf_style.rtf_color = ForeColor;
 				} else {
-					rtf_style.rtf_color = Color.FromArgb (color.Red, color.Green, color.Blue);
+					rtf_style.rtf_color = Color_.FromArgb (color.Red, color.Green, color.Blue);
 				}
 
 			}
@@ -1696,7 +1696,7 @@ namespace System.Windows.Forms {
 				if (rtf_line.Length > 0) {
 					document.InsertString (line, rtf_cursor_x, rtf_line.ToString ());
 					document.FormatText (line, rtf_cursor_x + 1, line, rtf_cursor_x + 1 + length,
-			    font, rtf_style.rtf_color, Color.Empty,
+			    font, rtf_style.rtf_color, Color_.Empty,
 							FormatSpecified.Font | FormatSpecified.Color);
 				}
 				if (newline) {
@@ -1739,7 +1739,7 @@ namespace System.Windows.Forms {
 
 			rtf_skip_count = 0;
 			rtf_line = new StringBuilder();
-			rtf_style.rtf_color = Color.Empty;
+			rtf_style.rtf_color = Color_.Empty;
 			rtf_style.rtf_rtffont_size = (int)this.Font.Size;
 			rtf_style.rtf_rtfalign = HorizontalAlignment.Left;
 			rtf_style.rtf_rtfstyle = FontStyle.Regular;
@@ -1793,8 +1793,8 @@ namespace System.Windows.Forms {
 			OnVScroll(e);
 		}
 
-		private void PointToTagPos(Point pt, out LineTag tag, out int pos) {
-			Point p;
+		private void PointToTagPos(Point_ pt, out LineTag tag, out int pos) {
+			Point_ p;
 
 			p = pt;
 
@@ -1919,7 +1919,7 @@ namespace System.Windows.Forms {
 			StringBuilder	sb;
 			ArrayList	fonts;
 			ArrayList	colors;
-			Color		color;
+			Color_		color;
 			Font		font;
 			Line		line;
 			LineTag		tag;
@@ -2002,7 +2002,7 @@ namespace System.Windows.Forms {
 			sb.Append("}");
 			sb.Append(Environment.NewLine);
 
-			// Emit the color table (if needed)
+			// Emit the Color_ table (if needed)
 			if ((colors.Count > 1) || ((((Color)colors[0]).R != this.ForeColor.R) || (((Color)colors[0]).G != this.ForeColor.G) || (((Color)colors[0]).B != this.ForeColor.B))) {
 				sb.Append("{\\colortbl ");			// Header and NO! default color
 				for (i = 0; i < colors.Count; i++) {
@@ -2023,7 +2023,7 @@ namespace System.Windows.Forms {
 			sb.Append(" ");		// Space separator
 
 			font = tag.Font;
-			color = (Color)colors[0];
+			color = (Color_)colors[0];
 			line = start_line;
 			line_no = start_line.line_no;
 			pos = start_pos;

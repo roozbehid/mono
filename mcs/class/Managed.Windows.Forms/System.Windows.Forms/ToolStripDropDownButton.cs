@@ -135,22 +135,22 @@ namespace System.Windows.Forms
 			base.OnPaint (e);
 
 			if (this.Owner != null) {
-				Color font_color = this.Enabled ? this.ForeColor : SystemColors.GrayText;
+				Color_ font_color = this.Enabled ? this.ForeColor : SystemColors.GrayText;
 				Image draw_image = this.Enabled ? this.Image : ToolStripRenderer.CreateDisabledImage (this.Image);
 
 				this.Owner.Renderer.DrawDropDownButtonBackground (new System.Windows.Forms.ToolStripItemRenderEventArgs (e.Graphics, this));
 
-				Rectangle text_layout_rect;
-				Rectangle image_layout_rect;
+				Rectangle_ text_layout_rect;
+				Rectangle_ image_layout_rect;
 
 				this.CalculateTextAndImageRectangles (out text_layout_rect, out image_layout_rect);
 
-				if (text_layout_rect != Rectangle.Empty)
+				if (text_layout_rect != Rectangle_.Empty)
 					this.Owner.Renderer.DrawItemText (new System.Windows.Forms.ToolStripItemTextRenderEventArgs (e.Graphics, this, this.Text, text_layout_rect, font_color, this.Font, this.TextAlign));
-				if (image_layout_rect != Rectangle.Empty)
+				if (image_layout_rect != Rectangle_.Empty)
 					this.Owner.Renderer.DrawItemImage (new System.Windows.Forms.ToolStripItemImageRenderEventArgs (e.Graphics, this, draw_image, image_layout_rect));
 				if (this.ShowDropDownArrow)
-					this.Owner.Renderer.DrawArrow (new ToolStripArrowRenderEventArgs (e.Graphics, this, new Rectangle (this.Width - 10, 0, 6, this.Height), Color.Black, ArrowDirection.Down));
+					this.Owner.Renderer.DrawArrow (new ToolStripArrowRenderEventArgs (e.Graphics, this, new Rectangle_ (this.Width - 10, 0, 6, this.Height), Color_.Black, ArrowDirection.Down));
 				return;
 			}
 		}
@@ -170,9 +170,9 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Internal Methods
-		internal override Size CalculatePreferredSize (Size constrainingSize)
+		internal override Size_ CalculatePreferredSize (Size_ constrainingSize)
 		{
-			Size preferred_size = base.CalculatePreferredSize (constrainingSize);
+			Size_ preferred_size = base.CalculatePreferredSize (constrainingSize);
 
 			if (this.ShowDropDownArrow)
 				preferred_size.Width += 9;

@@ -47,41 +47,41 @@ namespace System.Windows.Forms
 		public static DataGridTableStyle DefaultTableStyle = new DataGridTableStyle (true);
 
 		#region	Local Variables
-		private static readonly Color		def_alternating_backcolor = ThemeEngine.Current.DataGridAlternatingBackColor;
-		private static readonly Color		def_backcolor = ThemeEngine.Current.DataGridBackColor;
-		private static readonly Color		def_forecolor = SystemColors.WindowText;
-		private static readonly Color		def_gridline_color = ThemeEngine.Current.DataGridGridLineColor;
-		private static readonly Color		def_header_backcolor = ThemeEngine.Current.DataGridHeaderBackColor;
+		private static readonly Color_		def_alternating_backcolor = ThemeEngine.Current.DataGridAlternatingBackColor;
+		private static readonly Color_		def_backcolor = ThemeEngine.Current.DataGridBackColor;
+		private static readonly Color_		def_forecolor = SystemColors.WindowText;
+		private static readonly Color_		def_gridline_color = ThemeEngine.Current.DataGridGridLineColor;
+		private static readonly Color_		def_header_backcolor = ThemeEngine.Current.DataGridHeaderBackColor;
 		private static readonly Font		def_header_font = ThemeEngine.Current.DefaultFont;
-		private static readonly Color		def_header_forecolor = ThemeEngine.Current.DataGridHeaderForeColor;
-		private static readonly Color		def_link_color = ThemeEngine.Current.DataGridLinkColor;
-		private static readonly Color		def_link_hovercolor = ThemeEngine.Current.DataGridLinkHoverColor;
-		private static readonly Color		def_selection_backcolor = ThemeEngine.Current.DataGridSelectionBackColor;
-		private static readonly Color		def_selection_forecolor = ThemeEngine.Current.DataGridSelectionForeColor;
+		private static readonly Color_		def_header_forecolor = ThemeEngine.Current.DataGridHeaderForeColor;
+		private static readonly Color_		def_link_color = ThemeEngine.Current.DataGridLinkColor;
+		private static readonly Color_		def_link_hovercolor = ThemeEngine.Current.DataGridLinkHoverColor;
+		private static readonly Color_		def_selection_backcolor = ThemeEngine.Current.DataGridSelectionBackColor;
+		private static readonly Color_		def_selection_forecolor = ThemeEngine.Current.DataGridSelectionForeColor;
 		private static readonly int		def_preferredrow_height = ThemeEngine.Current.DefaultFont.Height + 3;
 
 		private bool				allow_sorting;
 		private DataGrid			datagrid;
-		private Color				header_forecolor;
+		private Color_				header_forecolor;
 		private string				mapping_name;
-		private Color 				alternating_backcolor;
+		private Color_ 				alternating_backcolor;
 		private bool				columnheaders_visible;
 		private GridColumnStylesCollection	column_styles;
-		private Color 				gridline_color;
+		private Color_ 				gridline_color;
 		private DataGridLineStyle 		gridline_style;
-		private Color 				header_backcolor;
+		private Color_ 				header_backcolor;
 		private Font 				header_font;
-		private Color 				link_color;
-		private Color 				link_hovercolor;
+		private Color_ 				link_color;
+		private Color_ 				link_hovercolor;
 		private int 				preferredcolumn_width;
 		private int 				preferredrow_height;
 		private bool 				_readonly;
 		private bool 				rowheaders_visible;
-		private Color 				selection_backcolor;
-		private Color 				selection_forecolor;
+		private Color_ 				selection_backcolor;
+		private Color_ 				selection_forecolor;
 		private int 				rowheaders_width;
-		private Color				backcolor;
-		private Color				forecolor;
+		private Color_				backcolor;
+		private Color_				forecolor;
 		private bool				is_default;
 		internal ArrayList                      table_relations;
 		CurrencyManager				manager;
@@ -144,7 +144,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color AlternatingBackColor {
+		public Color_ AlternatingBackColor {
 			get { return alternating_backcolor; }
 			set {
 				if (is_default)
@@ -157,7 +157,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return backcolor; }
 			set {
 				if (is_default)
@@ -200,7 +200,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get { return forecolor; }
 			set {
 				if (is_default)
@@ -220,7 +220,7 @@ namespace System.Windows.Forms
 			get { return column_styles; }
 		}
 
-		public Color GridLineColor {
+		public Color_ GridLineColor {
 			get { return gridline_color; }
 			set {
 				if (is_default)
@@ -247,14 +247,14 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color HeaderBackColor {
+		public Color_ HeaderBackColor {
 			get { return header_backcolor; }
 			set {
 				if (is_default)
 					throw new ArgumentException ("Cannot change the value of this property on the default DataGridTableStyle.");
 
-				if (value == Color.Empty) {
-					throw new ArgumentNullException ("Color.Empty value is invalid.");
+				if (value == Color_.Empty) {
+					throw new ArgumentNullException ("Color_.Empty value is invalid.");
 				}
 
 				if (header_backcolor != value) {
@@ -287,7 +287,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color HeaderForeColor {
+		public Color_ HeaderForeColor {
 			get { return header_forecolor; }
 			set {
 				if (is_default)
@@ -300,7 +300,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color LinkColor {
+		public Color_ LinkColor {
 			get { return link_color; }
 			set {
 				if (is_default)
@@ -316,7 +316,7 @@ namespace System.Windows.Forms
 
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		[Browsable(false)]
-		public Color LinkHoverColor {
+		public Color_ LinkHoverColor {
 			get { return link_hovercolor; }
 			set {
 				if (link_hovercolor != value) {
@@ -410,7 +410,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color SelectionBackColor {
+		public Color_ SelectionBackColor {
 			get { return selection_backcolor; }
 			set {
 				if (is_default)
@@ -423,8 +423,8 @@ namespace System.Windows.Forms
 			}
 		}
 
-		[Description("The foreground color for the current data grid row")]
-		public Color SelectionForeColor  {
+		[Description("The foreground Color_ for the current data grid row")]
+		public Color_ SelectionForeColor  {
 			get { return selection_forecolor; }
 			set {
 				if (is_default)
@@ -450,7 +450,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Color CurrentGridLineColor {
+		internal Color_ CurrentGridLineColor {
 			get {
 				if (is_default && datagrid != null) {
 					return datagrid.GridLineColor;
@@ -460,7 +460,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Color CurrentHeaderBackColor {
+		internal Color_ CurrentHeaderBackColor {
 			get {
 				if (is_default && datagrid != null) {
 					return datagrid.HeaderBackColor;
@@ -470,7 +470,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Color CurrentHeaderForeColor {
+		internal Color_ CurrentHeaderForeColor {
 			get {
 				if (is_default && datagrid != null) {
 					return datagrid.HeaderForeColor;

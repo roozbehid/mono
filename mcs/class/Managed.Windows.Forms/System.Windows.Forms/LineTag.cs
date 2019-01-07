@@ -23,9 +23,9 @@
 //	Peter Bartok	pbartok@novell.com
 //
 //
-
 using System;
 using System.Collections;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Text;
@@ -37,8 +37,8 @@ namespace System.Windows.Forms
 		#region	Local Variables
 		// Formatting
 		private Font		font;		// System.Drawing.Font object for this tag
-		private Color		color;		// The font color for this tag
-		private Color		back_color;	// In 2.0 tags can have background colours.
+		private Color_		color;		// The font Color_ for this tag
+		private Color_		back_color;	// In 2.0 tags can have background colours.
 		private Font		link_font;	// Cached font used for link if IsLink
 		private bool		is_link;	// Whether this tag is a link
 		private string		link_text;	// The full link text e.g. this might be 
@@ -77,21 +77,21 @@ namespace System.Windows.Forms
 			get { return ascent; }
 		}
 		
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return back_color; }
 			set { back_color = value; }
 		}
 
-		public Color ColorToDisplay {
+		public Color_ ColorToDisplay {
 			get {
 				if (IsLink == true)
-					return Color.Blue;
+					return Color_.Blue;
 
 				return color;
 			}
 		}
 
-		public Color Color {
+		public Color_ Color {
 			get { return color; }
 			set { color = value; }
 		}
@@ -310,14 +310,14 @@ namespace System.Windows.Forms
 			return;
 		}
 		
-		public virtual void Draw (Graphics dc, Color color, float x, float y, int start, int end)
+		public virtual void Draw (Graphics dc, Color_ color, float x, float y, int start, int end)
 		{
 			TextBoxTextRenderer.DrawText (dc, line.text.ToString (start, end).Replace ("\r", string.Empty), FontToDisplay, color, x, y, false);
 		}
 		
-		public virtual void Draw (Graphics dc, Color color, float xoff, float y, int start, int end, string text)
+		public virtual void Draw (Graphics dc, Color_ color, float xoff, float y, int start, int end, string text)
 		{
-			Rectangle measured_text;
+			Rectangle_ measured_text;
 			Draw (dc, color, xoff, y, start, end, text, out measured_text, false);
 		}
 
@@ -325,8 +325,8 @@ namespace System.Windows.Forms
 		/// 
 		/// </summary>
 		/// <param name="drawStart">0 based start index</param>
-		public virtual void Draw (Graphics dc, Color color, float xoff, float y, int drawStart, int drawEnd,
-					  string text, out Rectangle measuredText, bool measureText)
+		public virtual void Draw (Graphics dc, Color_ color, float xoff, float y, int drawStart, int drawEnd,
+					  string text, out Rectangle_ measuredText, bool measureText)
 		{
 			if (measureText) {
 				int xstart = (int)line.widths [drawStart] + (int)xoff;
@@ -334,9 +334,9 @@ namespace System.Windows.Forms
 				int ystart = (int)y;
 				int yend = (int)TextBoxTextRenderer.MeasureText (dc, Text (), FontToDisplay).Height;
 
-				measuredText = new Rectangle (xstart, ystart, xend, yend);
+				measuredText = new Rectangle_ (xstart, ystart, xend, yend);
 			} else {
-				measuredText = new Rectangle ();
+				measuredText = new Rectangle_ ();
 			}
 
 			while (drawStart < drawEnd) {
@@ -413,7 +413,7 @@ namespace System.Windows.Forms
 		/// Removes any previous tags overlapping the same area; 
 		/// returns true if lineheight has changed</summary>
 		/// <param name="formatStart">1-based character position on line</param>
-		public static bool FormatText (Line line, int formatStart, int length, Font font, Color color, Color backColor, FormatSpecified specified)
+		public static bool FormatText (Line line, int formatStart, int length, Font font, Color_ color, Color_ backColor, FormatSpecified specified)
 		{
 			LineTag tag;
 			LineTag start_tag;
@@ -567,7 +567,7 @@ namespace System.Windows.Forms
 			return font.Height;
 		}
 
-		private static void SetFormat (LineTag tag, Font font, Color color, Color back_color, FormatSpecified specified)
+		private static void SetFormat (LineTag tag, Font font, Color_ color, Color_ back_color, FormatSpecified specified)
 		{
 			if ((FormatSpecified.Font & specified) == FormatSpecified.Font) {
 				tag.Font = font;
@@ -577,20 +577,20 @@ namespace System.Windows.Forms
 			if ((FormatSpecified.BackColor & specified) == FormatSpecified.BackColor) {
 				tag.back_color = back_color;
 			}
-			// Console.WriteLine ("setting format:   {0}  {1}   new color {2}", color.Color, specified, tag.color.Color);
+			// Console.WriteLine ("setting format:   {0}  {1}   new Color_ {2}", color.Color, specified, tag.color.Color);
 		}
 
-		public virtual SizeF SizeOfPosition (Graphics dc, int pos)
+		public virtual SizeF_ SizeOfPosition (Graphics dc, int pos)
 		{
 			if (pos >= line.TextLengthWithoutEnding () && line.document.multiline)
-				return SizeF.Empty;
+				return SizeF_.Empty;
 
 			string text = line.text.ToString (pos, 1);
 			switch ((int) text [0]) {
 			case '\t':
 				if (!line.document.multiline)
 					goto case 10;
-				SizeF res = TextBoxTextRenderer.MeasureText (dc, " ", font); 
+				SizeF_ res = TextBoxTextRenderer.MeasureText (dc, " ", font); 
 				res.Width *= 8.0F;
 				return res;
 			case 10:

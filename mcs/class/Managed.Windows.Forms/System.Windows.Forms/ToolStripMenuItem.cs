@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 using System.Windows.Forms.Design;
@@ -197,8 +197,8 @@ namespace System.Windows.Forms
 			get { return new Padding (4, 0, 4, 0); }
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (32, 19); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (32, 19); }
 		}
 		#endregion
 
@@ -340,9 +340,9 @@ namespace System.Windows.Forms
 			// If DropDown.ShowImageMargin is false, we don't display the image
 			Image draw_image = this.UseImageMargin ? this.Image : null;
 			
-			// Disable this color detection until we do the color detection for ToolStrip *completely*
-			// Color font_color = this.ForeColor == SystemColors.ControlText ? SystemColors.MenuText : this.ForeColor;
-			Color font_color = ForeColor;
+			// Disable this Color_ detection until we do the Color_ detection for ToolStrip *completely*
+			// Color_ font_color = this.ForeColor == SystemColors.ControlText ? SystemColors.MenuText : this.ForeColor;
+			Color_ font_color = ForeColor;
 			
 			if ((this.Selected || this.Pressed) && this.IsOnDropDown && font_color == SystemColors.MenuText)
 				font_color = SystemColors.HighlightText;
@@ -357,42 +357,42 @@ namespace System.Windows.Forms
 			this.Owner.Renderer.DrawMenuItemBackground (new ToolStripItemRenderEventArgs (e.Graphics, this));
 
 			// Figure out where our text and image go
-			Rectangle text_layout_rect;
-			Rectangle image_layout_rect;
+			Rectangle_ text_layout_rect;
+			Rectangle_ image_layout_rect;
 
 			this.CalculateTextAndImageRectangles (out text_layout_rect, out image_layout_rect);
 
 			if (this.IsOnDropDown) {
 				if (!this.UseImageMargin) {
-					image_layout_rect = Rectangle.Empty;
-					text_layout_rect = new Rectangle (8, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
+					image_layout_rect = Rectangle_.Empty;
+					text_layout_rect = new Rectangle_ (8, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
 				} else {
-					text_layout_rect = new Rectangle (35, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
+					text_layout_rect = new Rectangle_ (35, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
 				
-					if (image_layout_rect != Rectangle.Empty)
-						image_layout_rect = new Rectangle (new Point (4, 3), base.GetImageSize ());
+					if (image_layout_rect != Rectangle_.Empty)
+						image_layout_rect = new Rectangle_ (new Point_ (4, 3), base.GetImageSize ());
 				}
 
 				if (this.Checked && this.ShowMargin)
-					this.Owner.Renderer.DrawItemCheck (new ToolStripItemImageRenderEventArgs (e.Graphics, this, new Rectangle (2, 1, 19, 19)));
+					this.Owner.Renderer.DrawItemCheck (new ToolStripItemImageRenderEventArgs (e.Graphics, this, new Rectangle_ (2, 1, 19, 19)));
 			}
-			if (text_layout_rect != Rectangle.Empty)
+			if (text_layout_rect != Rectangle_.Empty)
 				this.Owner.Renderer.DrawItemText (new ToolStripItemTextRenderEventArgs (e.Graphics, this, this.Text, text_layout_rect, font_color, this.Font, this.TextAlign));
 
 			string key_string = GetShortcutDisplayString ();
 			
 			if (!string.IsNullOrEmpty (key_string) && !this.HasDropDownItems) {
 				int offset = 15;
-				Size key_string_size = TextRenderer.MeasureText (key_string, this.Font);
-				Rectangle key_string_rect = new Rectangle (this.ContentRectangle.Right - key_string_size.Width - offset, text_layout_rect.Top, key_string_size.Width, text_layout_rect.Height);
+				Size_ key_string_size = TextRenderer.MeasureText (key_string, this.Font);
+				Rectangle_ key_string_rect = new Rectangle_ (this.ContentRectangle.Right - key_string_size.Width - offset, text_layout_rect.Top, key_string_size.Width, text_layout_rect.Height);
 				this.Owner.Renderer.DrawItemText (new ToolStripItemTextRenderEventArgs (e.Graphics, this, key_string, key_string_rect, font_color, this.Font, this.TextAlign));
 			}
 				
-			if (image_layout_rect != Rectangle.Empty)
+			if (image_layout_rect != Rectangle_.Empty)
 				this.Owner.Renderer.DrawItemImage (new ToolStripItemImageRenderEventArgs (e.Graphics, this, draw_image, image_layout_rect));
 
 			if (this.IsOnDropDown && this.HasDropDownItems && this.Parent is ToolStripDropDownMenu)
-				this.Owner.Renderer.DrawArrow (new ToolStripArrowRenderEventArgs (e.Graphics, this, new Rectangle (this.Bounds.Width - 17, 2, 10, 20), Color.Black, ArrowDirection.Right));
+				this.Owner.Renderer.DrawArrow (new ToolStripArrowRenderEventArgs (e.Graphics, this, new Rectangle_ (this.Bounds.Width - 17, 2, 10, 20), Color_.Black, ArrowDirection.Right));
 			
 			return;
 		}
@@ -443,7 +443,7 @@ namespace System.Windows.Forms
 			return true;
 		}
 		
-		protected internal override void SetBounds (Rectangle rect)
+		protected internal override void SetBounds (Rectangle_ rect)
 		{
 			base.SetBounds (rect);
 		}
@@ -489,18 +489,18 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Internal Methods
-		internal override Size CalculatePreferredSize (Size constrainingSize)
+		internal override Size_ CalculatePreferredSize (Size_ constrainingSize)
 		{
-			Size base_size = base.CalculatePreferredSize (constrainingSize);
+			Size_ base_size = base.CalculatePreferredSize (constrainingSize);
 			
 			string key_string = GetShortcutDisplayString ();
 			
 			if (string.IsNullOrEmpty (key_string))
 				return base_size;
 			
-			Size text_size = TextRenderer.MeasureText (key_string, this.Font);
+			Size_ text_size = TextRenderer.MeasureText (key_string, this.Font);
 			
-			return new Size (base_size.Width + text_size.Width - 25, base_size.Height);
+			return new Size_ (base_size.Width + text_size.Width - 25, base_size.Height);
 		}
 		
 		internal string GetShortcutDisplayString ()

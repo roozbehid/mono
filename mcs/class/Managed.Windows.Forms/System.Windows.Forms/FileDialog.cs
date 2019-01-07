@@ -33,6 +33,7 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.IO;
 using System.Resources;
@@ -131,21 +132,21 @@ namespace System.Windows.Forms
 			form = new DialogForm (this);
 			vfs = new MWFVFS ();
 			
-			Size formConfigSize = Size.Empty;
-			Point formConfigLocation = Point.Empty;
+			Size_ formConfigSize = Size_.Empty;
+			Point_ formConfigLocation = Point_.Empty;
 			
 			object formWidth = MWFConfig.GetValue (filedialog_string, width_string);
 			
 			object formHeight = MWFConfig.GetValue (filedialog_string, height_string);
 			
 			if (formHeight != null && formWidth != null)
-				formConfigSize = new Size ((int)formWidth, (int)formHeight);
+				formConfigSize = new Size_ ((int)formWidth, (int)formHeight);
 			
 			object formLocationX = MWFConfig.GetValue (filedialog_string, x_string);
 			object formLocationY = MWFConfig.GetValue (filedialog_string, y_string);
 			
 			if (formLocationX != null && formLocationY != null)
-				formConfigLocation = new Point ((int)formLocationX, (int)formLocationY);
+				formConfigLocation = new Point_ ((int)formLocationX, (int)formLocationY);
 			
 			configFileNames = (string[])MWFConfig.GetValue (filedialog_string, filenames_string);
 			
@@ -174,24 +175,24 @@ namespace System.Windows.Forms
 			
 			//imageListTopToolbar
 			imageListTopToolbar.ColorDepth = ColorDepth.Depth32Bit;
-			imageListTopToolbar.ImageSize = new Size (16, 16); // 16, 16
+			imageListTopToolbar.ImageSize = new Size_ (16, 16); // 16, 16
 			imageListTopToolbar.Images.Add (ResourceImageLoader.Get ("go-previous.png"));
 			imageListTopToolbar.Images.Add (ResourceImageLoader.Get ("go-top.png"));
 			imageListTopToolbar.Images.Add (ResourceImageLoader.Get ("folder-new.png"));
 			imageListTopToolbar.Images.Add (ResourceImageLoader.Get ("preferences-system-windows.png"));
-			imageListTopToolbar.TransparentColor = Color.Transparent;
+			imageListTopToolbar.TransparentColor = Color_.Transparent;
 			
 			// searchLabel
 			searchSaveLabel.FlatStyle = FlatStyle.System;
-			searchSaveLabel.Location = new Point (6, 6);
-			searchSaveLabel.Size = new Size (86, 22);
+			searchSaveLabel.Location = new Point_ (6, 6);
+			searchSaveLabel.Size = new Size_ (86, 22);
 			searchSaveLabel.TextAlign = ContentAlignment.MiddleRight;
 			
 			// dirComboBox
 			dirComboBox.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right)));
 			dirComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-			dirComboBox.Location = new Point (99, 6);
-			dirComboBox.Size = new Size (261, 22);
+			dirComboBox.Location = new Point_ (99, 6);
+			dirComboBox.Size = new Size_ (261, 22);
 			dirComboBox.TabIndex = 7;
 			
 			// smallButtonToolBar
@@ -203,28 +204,28 @@ namespace System.Windows.Forms
 								     upToolBarButton,
 								     newdirToolBarButton,
 								     menueToolBarButton});
-			smallButtonToolBar.ButtonSize = new Size (24, 24); // 21, 16
+			smallButtonToolBar.ButtonSize = new Size_ (24, 24); // 21, 16
 			smallButtonToolBar.Divider = false;
 			smallButtonToolBar.Dock = DockStyle.None;
 			smallButtonToolBar.DropDownArrows = true;
 			smallButtonToolBar.ImageList = imageListTopToolbar;
-			smallButtonToolBar.Location = new Point (372, 6);
+			smallButtonToolBar.Location = new Point_ (372, 6);
 			smallButtonToolBar.ShowToolTips = true;
-			smallButtonToolBar.Size = new Size (140, 28);
+			smallButtonToolBar.Size = new Size_ (140, 28);
 			smallButtonToolBar.TabIndex = 8;
 			smallButtonToolBar.TextAlign = ToolBarTextAlign.Right;
 			
 			// buttonPanel
 			popupButtonPanel.Dock = DockStyle.None;
 			popupButtonPanel.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left))));
-			popupButtonPanel.Location = new Point (6, 35);
-			popupButtonPanel.Size = new Size (87, 338);
+			popupButtonPanel.Location = new Point_ (6, 35);
+			popupButtonPanel.Size = new Size_ (87, 338);
 			popupButtonPanel.TabIndex = 9;
 			
 			// mwfFileView
 			mwfFileView.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
-			mwfFileView.Location = new Point (99, 35);
-			mwfFileView.Size = new Size (450, 283);
+			mwfFileView.Location = new Point_ (99, 35);
+			mwfFileView.Size = new Size_ (450, 283);
 			mwfFileView.MultiSelect = false;
 			mwfFileView.TabIndex = 10;
 			mwfFileView.RegisterSender (dirComboBox);
@@ -233,15 +234,15 @@ namespace System.Windows.Forms
 			// fileNameLabel
 			fileNameLabel.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Left)));
 			fileNameLabel.FlatStyle = FlatStyle.System;
-			fileNameLabel.Location = new Point (101, 326);
-			fileNameLabel.Size = new Size (70, 21);
+			fileNameLabel.Location = new Point_ (101, 326);
+			fileNameLabel.Size = new Size_ (70, 21);
 			fileNameLabel.Text = "File name:";
 			fileNameLabel.TextAlign = ContentAlignment.MiddleLeft;
 			
 			// fileNameComboBox
 			fileNameComboBox.Anchor = ((AnchorStyles)(((AnchorStyles.Bottom | AnchorStyles.Left) | AnchorStyles.Right)));
-			fileNameComboBox.Location = new Point (195, 326);
-			fileNameComboBox.Size = new Size (246, 22);
+			fileNameComboBox.Location = new Point_ (195, 326);
+			fileNameComboBox.Size = new Size_ (246, 22);
 			fileNameComboBox.TabIndex = 1;
 			fileNameComboBox.MaxDropDownItems = MaxFileNameItems;
 			fileNameComboBox.RestoreContextMenu ();
@@ -250,16 +251,16 @@ namespace System.Windows.Forms
 			// fileTypeLabel
 			fileTypeLabel.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Left)));
 			fileTypeLabel.FlatStyle = FlatStyle.System;
-			fileTypeLabel.Location = new Point (101, 355);
-			fileTypeLabel.Size = new Size (90, 21);
+			fileTypeLabel.Location = new Point_ (101, 355);
+			fileTypeLabel.Size = new Size_ (90, 21);
 			fileTypeLabel.Text = "Files of type:";
 			fileTypeLabel.TextAlign = ContentAlignment.MiddleLeft;
 			
 			// fileTypeComboBox
 			fileTypeComboBox.Anchor = ((AnchorStyles)(((AnchorStyles.Bottom | AnchorStyles.Left) | AnchorStyles.Right)));
 			fileTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-			fileTypeComboBox.Location = new Point (195, 355);
-			fileTypeComboBox.Size = new Size (246, 22);
+			fileTypeComboBox.Location = new Point_ (195, 355);
+			fileTypeComboBox.Size = new Size_ (246, 22);
 			fileTypeComboBox.TabIndex = 2;
 			
 			// backToolBarButton
@@ -288,16 +289,16 @@ namespace System.Windows.Forms
 			// openSaveButton
 			openSaveButton.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
 			openSaveButton.FlatStyle = FlatStyle.System;
-			openSaveButton.Location = new Point (474, 326);
-			openSaveButton.Size = new Size (75, 23);
+			openSaveButton.Location = new Point_ (474, 326);
+			openSaveButton.Size = new Size_ (75, 23);
 			openSaveButton.TabIndex = 4;
 			openSaveButton.FlatStyle = FlatStyle.System;
 			
 			// cancelButton
 			cancelButton.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
 			cancelButton.FlatStyle = FlatStyle.System;
-			cancelButton.Location = new Point (474, 353);
-			cancelButton.Size = new Size (75, 23);
+			cancelButton.Location = new Point_ (474, 353);
+			cancelButton.Size = new Size_ (75, 23);
 			cancelButton.TabIndex = 5;
 			cancelButton.Text = "Cancel";
 			cancelButton.FlatStyle = FlatStyle.System;
@@ -305,8 +306,8 @@ namespace System.Windows.Forms
 			// helpButton
 			helpButton.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
 			helpButton.FlatStyle = FlatStyle.System;
-			helpButton.Location = new Point (474, 353);
-			helpButton.Size = new Size (75, 23);
+			helpButton.Location = new Point_ (474, 353);
+			helpButton.Size = new Size_ (75, 23);
 			helpButton.TabIndex = 6;
 			helpButton.Text = "Help";
 			helpButton.FlatStyle = FlatStyle.System;
@@ -315,8 +316,8 @@ namespace System.Windows.Forms
 			// checkBox
 			readonlyCheckBox.Anchor = ((AnchorStyles)(((AnchorStyles.Bottom | AnchorStyles.Left) | AnchorStyles.Right)));
 			readonlyCheckBox.Text = "Open Readonly";
-			readonlyCheckBox.Location = new Point (195, 350);
-			readonlyCheckBox.Size = new Size (245, 21);
+			readonlyCheckBox.Location = new Point_ (195, 350);
+			readonlyCheckBox.Size = new Size_ (245, 21);
 			readonlyCheckBox.TabIndex = 3;
 			readonlyCheckBox.FlatStyle = FlatStyle.System;
 			readonlyCheckBox.Visible = false;
@@ -326,7 +327,7 @@ namespace System.Windows.Forms
 			form.MaximizeBox = true;
 			form.MinimizeBox = true;
 			form.FormBorderStyle = FormBorderStyle.Sizable;
-			form.ClientSize =  new Size (555, 385);
+			form.ClientSize =  new Size_ (555, 385);
 			form.MinimumSize = form.Size;
 
 			form.Controls.Add (smallButtonToolBar);
@@ -345,11 +346,11 @@ namespace System.Windows.Forms
 			
 			form.ResumeLayout (true);
 
-			if (formConfigSize != Size.Empty) {
+			if (formConfigSize != Size_.Empty) {
 				form.ClientSize = formConfigSize;
 			}
 			
-			if (formConfigLocation != Point.Empty) {
+			if (formConfigLocation != Point_.Empty) {
 				form.Location = formConfigLocation;
 			}
 			
@@ -1249,15 +1250,15 @@ namespace System.Windows.Forms
 			if (!ShowHelp && !ShowReadOnly)
 				fy += 29;
 
-			mwfFileView.Size = new Size (450 + fx, 254 + fy);
-			fileNameLabel.Location = new Point (101, 298 + fy);
-			fileNameComboBox.Location = new Point (195, 298 + fy);
-			fileTypeLabel.Location = new Point (101, 326 + fy);
-			fileTypeComboBox.Location = new Point (195, 326 + fy);
-			openSaveButton.Location = new Point (474 + fx, 298 + fy);
-			cancelButton.Location = new Point (474 + fx, 324 + fy);
-			helpButton.Location = new Point (474 + fx, 353 + fy);
-			readonlyCheckBox.Location = new Point (195, 350 + fy);
+			mwfFileView.Size = new Size_ (450 + fx, 254 + fy);
+			fileNameLabel.Location = new Point_ (101, 298 + fy);
+			fileNameComboBox.Location = new Point_ (195, 298 + fy);
+			fileTypeLabel.Location = new Point_ (101, 326 + fy);
+			fileTypeComboBox.Location = new Point_ (195, 326 + fy);
+			openSaveButton.Location = new Point_ (474 + fx, 298 + fy);
+			cancelButton.Location = new Point_ (474 + fx, 324 + fy);
+			helpButton.Location = new Point_ (474 + fx, 353 + fy);
+			readonlyCheckBox.Location = new Point_ (195, 350 + fy);
 
 			helpButton.Visible = ShowHelp;
 			readonlyCheckBox.Visible = ShowReadOnly;
@@ -1418,7 +1419,7 @@ namespace System.Windows.Forms
 			private Image image = null;
 			private PopupButtonState popupButtonState = PopupButtonState.Normal;
 			private StringFormat text_format = new StringFormat();
-			private Rectangle text_rect = Rectangle.Empty;
+			private Rectangle_ text_rect = Rectangle_.Empty;
 			
 			public PopupButton ()
 			{
@@ -1481,25 +1482,25 @@ namespace System.Windows.Forms
 				}
 				
 				if (Text != String.Empty) {
-					if (text_rect == Rectangle.Empty)
-						text_rect = new Rectangle (0, Height - 30, Width, Height - 30); 
+					if (text_rect == Rectangle_.Empty)
+						text_rect = new Rectangle_ (0, Height - 30, Width, Height - 30); 
 					
 					gr.DrawString (Text, Font, Brushes.White, text_rect, text_format);
 				}
 				
 				switch (popupButtonState) {
 					case PopupButtonState.Up:
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.White), 0, 0, ClientSize.Width - 1, 0);
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.White), 0, 0, 0, ClientSize.Height - 1);
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.Black), ClientSize.Width - 1, 0, ClientSize.Width - 1, ClientSize.Height - 1);
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.Black), 0, ClientSize.Height - 1, ClientSize.Width - 1, ClientSize.Height - 1);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.White), 0, 0, ClientSize.Width - 1, 0);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.White), 0, 0, 0, ClientSize.Height - 1);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.Black), ClientSize.Width - 1, 0, ClientSize.Width - 1, ClientSize.Height - 1);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.Black), 0, ClientSize.Height - 1, ClientSize.Width - 1, ClientSize.Height - 1);
 						break;
 						
 					case PopupButtonState.Down:
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.Black), 0, 0, ClientSize.Width - 1, 0);
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.Black), 0, 0, 0, ClientSize.Height - 1);
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.White), ClientSize.Width - 1, 0, ClientSize.Width - 1, ClientSize.Height - 1);
-						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color.White), 0, ClientSize.Height - 1, ClientSize.Width - 1, ClientSize.Height - 1);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.Black), 0, 0, ClientSize.Width - 1, 0);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.Black), 0, 0, 0, ClientSize.Height - 1);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.White), ClientSize.Width - 1, 0, ClientSize.Width - 1, ClientSize.Height - 1);
+						gr.DrawLine (ThemeEngine.Current.ResPool.GetPen (Color_.White), 0, ClientSize.Height - 1, ClientSize.Width - 1, ClientSize.Height - 1);
 						break;
 				}
 			}
@@ -1553,8 +1554,8 @@ namespace System.Windows.Forms
 		{
 			SuspendLayout ();
 			
-			BackColor = Color.FromArgb (128, 128, 128);
-			Size = new Size (85, 336);
+			BackColor = Color_.FromArgb (128, 128, 128);
+			Size = new Size_ (85, 336);
 			InternalBorderStyle = BorderStyle.Fixed3D;
 			
 			recentlyusedButton = new PopupButton ();
@@ -1563,43 +1564,43 @@ namespace System.Windows.Forms
 			mycomputerButton = new PopupButton ();
 			networkButton = new PopupButton ();
 			
-			recentlyusedButton.Size = new Size (81, 64);
+			recentlyusedButton.Size = new Size_ (81, 64);
 			recentlyusedButton.Image = ThemeEngine.Current.Images (UIIcon.PlacesRecentDocuments, 32);
 			recentlyusedButton.BackColor = BackColor;
-			recentlyusedButton.ForeColor = Color.Black;
-			recentlyusedButton.Location = new Point (2, 2);
+			recentlyusedButton.ForeColor = Color_.Black;
+			recentlyusedButton.Location = new Point_ (2, 2);
 			recentlyusedButton.Text = "Recently\nused";
 			recentlyusedButton.Click += new EventHandler (OnClickButton);
 			
 			desktopButton.Image = ThemeEngine.Current.Images (UIIcon.PlacesDesktop, 32);
 			desktopButton.BackColor = BackColor;
-			desktopButton.ForeColor = Color.Black;
-			desktopButton.Size = new Size (81, 64);
-			desktopButton.Location = new Point (2, 66);
+			desktopButton.ForeColor = Color_.Black;
+			desktopButton.Size = new Size_ (81, 64);
+			desktopButton.Location = new Point_ (2, 66);
 			desktopButton.Text = "Desktop";
 			desktopButton.Click += new EventHandler (OnClickButton);
 			
 			personalButton.Image = ThemeEngine.Current.Images (UIIcon.PlacesPersonal, 32);
 			personalButton.BackColor = BackColor;
-			personalButton.ForeColor = Color.Black;
-			personalButton.Size = new Size (81, 64);
-			personalButton.Location = new Point (2, 130);
+			personalButton.ForeColor = Color_.Black;
+			personalButton.Size = new Size_ (81, 64);
+			personalButton.Location = new Point_ (2, 130);
 			personalButton.Text = "Personal";
 			personalButton.Click += new EventHandler (OnClickButton);
 			
 			mycomputerButton.Image = ThemeEngine.Current.Images (UIIcon.PlacesMyComputer, 32);
 			mycomputerButton.BackColor = BackColor;
-			mycomputerButton.ForeColor = Color.Black;
-			mycomputerButton.Size = new Size (81, 64);
-			mycomputerButton.Location = new Point (2, 194);
+			mycomputerButton.ForeColor = Color_.Black;
+			mycomputerButton.Size = new Size_ (81, 64);
+			mycomputerButton.Location = new Point_ (2, 194);
 			mycomputerButton.Text = "My Computer";
 			mycomputerButton.Click += new EventHandler (OnClickButton);
 			
 			networkButton.Image = ThemeEngine.Current.Images (UIIcon.PlacesMyNetwork, 32);
 			networkButton.BackColor = BackColor;
-			networkButton.ForeColor = Color.Black;
-			networkButton.Size = new Size (81, 64);
-			networkButton.Location = new Point (2, 258);
+			networkButton.ForeColor = Color_.Black;
+			networkButton.Size = new Size_ (81, 64);
+			networkButton.Location = new Point_ (2, 258);
 			networkButton.Text = "My Network";
 			networkButton.Click += new EventHandler (OnClickButton);
 			
@@ -1896,14 +1897,14 @@ namespace System.Windows.Forms
 			DrawMode = DrawMode.OwnerDrawFixed;
 			
 			imageList.ColorDepth = ColorDepth.Depth32Bit;
-			imageList.ImageSize = new Size (16, 16);
+			imageList.ImageSize = new Size_ (16, 16);
 			imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesRecentDocuments, 16));
 			imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesDesktop, 16));
 			imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesPersonal, 16));
 			imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesMyComputer, 16));
 			imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.PlacesMyNetwork, 16));
 			imageList.Images.Add (ThemeEngine.Current.Images (UIIcon.NormalFolder, 16));
-			imageList.TransparentColor = Color.Transparent;
+			imageList.TransparentColor = Color_.Transparent;
 			
 			recentlyUsedDirComboboxItem = new DirComboBoxItem (imageList, 0, "Recently used", MWFVFS.RecentlyUsedPrefix, 0);
 			desktopDirComboboxItem = new DirComboBoxItem (imageList, 1, "Desktop", MWFVFS.DesktopPrefix, 0);
@@ -2063,8 +2064,8 @@ namespace System.Windows.Forms
 			Bitmap bmp = new Bitmap (e.Bounds.Width, e.Bounds.Height, e.Graphics);
 			Graphics gr = Graphics.FromImage (bmp);
 			
-			Color backColor = e.BackColor;
-			Color foreColor = e.ForeColor;
+			Color_ backColor = e.BackColor;
+			Color_ foreColor = e.ForeColor;
 			
 			int xPos = dcbi.XPos;
 
@@ -2072,7 +2073,7 @@ namespace System.Windows.Forms
 				xPos = 0;
 
 			gr.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (backColor),
-					new Rectangle (0, 0, bmp.Width, bmp.Height));
+					new Rectangle_ (0, 0, bmp.Width, bmp.Height));
 			
 			if ((e.State & DrawItemState.Selected) == DrawItemState.Selected &&
 					(!DroppedDown || (e.State & DrawItemState.ComboBoxEdit) != DrawItemState.ComboBoxEdit)) {
@@ -2081,15 +2082,15 @@ namespace System.Windows.Forms
 				int w = (int) gr.MeasureString (dcbi.Name, e.Font).Width;
 
 				gr.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (ThemeEngine.Current.ColorHighlight),
-						new Rectangle (xPos + 23, 1, w + 3, e.Bounds.Height - 2));
+						new Rectangle_ (xPos + 23, 1, w + 3, e.Bounds.Height - 2));
 				if ((e.State & DrawItemState.Focus) == DrawItemState.Focus) {
-					ControlPaint.DrawFocusRectangle (gr, new Rectangle (xPos + 22, 0, w + 5,
+					ControlPaint.DrawFocusRectangle (gr, new Rectangle_ (xPos + 22, 0, w + 5,
 							e.Bounds.Height), foreColor, ThemeEngine.Current.ColorHighlight);
 				}
 			}
 
-			gr.DrawString (dcbi.Name, e.Font , ThemeEngine.Current.ResPool.GetSolidBrush (foreColor), new Point (24 + xPos, (bmp.Height - e.Font.Height) / 2));
-			gr.DrawImage (dcbi.ImageList.Images [dcbi.ImageIndex], new Rectangle (new Point (xPos + 2, 0), new Size (16, 16)));
+			gr.DrawString (dcbi.Name, e.Font , ThemeEngine.Current.ResPool.GetSolidBrush (foreColor), new Point_ (24 + xPos, (bmp.Height - e.Font.Height) / 2));
+			gr.DrawImage (dcbi.ImageList.Images [dcbi.ImageIndex], new Rectangle_ (new Point_ (xPos + 2, 0), new Size_ (16, 16)));
 			
 			e.Graphics.DrawImage (bmp, e.Bounds.X, e.Bounds.Y);
 			gr.Dispose ();
@@ -3172,50 +3173,50 @@ namespace System.Windows.Forms
 			groupBox1.Controls.Add (newNameTextBox);
 			groupBox1.Controls.Add (label1);
 			groupBox1.Controls.Add (iconPictureBox);
-			groupBox1.Location = new Point (8, 8);
-			groupBox1.Size = new Size (232, 160);
+			groupBox1.Location = new Point_ (8, 8);
+			groupBox1.Size = new Size_ (232, 160);
 			groupBox1.TabIndex = 5;
 			groupBox1.TabStop = false;
 			groupBox1.Text = "New Name";
 			
 			// cancelButton
 			cancelButton.DialogResult = DialogResult.Cancel;
-			cancelButton.Location = new Point (168, 176);
+			cancelButton.Location = new Point_ (168, 176);
 			cancelButton.TabIndex = 4;
 			cancelButton.Text = "Cancel";
 			
 			// iconPictureBox
 			iconPictureBox.BorderStyle = BorderStyle.Fixed3D;
-			iconPictureBox.Location = new Point (86, 24);
-			iconPictureBox.Size = new Size (60, 60);
+			iconPictureBox.Location = new Point_ (86, 24);
+			iconPictureBox.Size = new Size_ (60, 60);
 			iconPictureBox.TabIndex = 3;
 			iconPictureBox.TabStop = false;
 			iconPictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
 			
 			// newNameTextBox
-			newNameTextBox.Location = new Point (16, 128);
-			newNameTextBox.Size = new Size (200, 20);
+			newNameTextBox.Location = new Point_ (16, 128);
+			newNameTextBox.Size = new Size_ (200, 20);
 			newNameTextBox.TabIndex = 5;
 			newNameTextBox.Text = String.Empty;
 			
 			// okButton
 			okButton.DialogResult = DialogResult.OK;
-			okButton.Location = new Point (80, 176);
+			okButton.Location = new Point_ (80, 176);
 			okButton.TabIndex = 3;
 			okButton.Text = "OK";
 			
 			// label1
-			label1.Location = new Point (16, 96);
-			label1.Size = new Size (200, 23);
+			label1.Location = new Point_ (16, 96);
+			label1.Size = new Size_ (200, 23);
 			label1.TabIndex = 4;
 			label1.Text = "Enter Name:";
 			label1.TextAlign = ContentAlignment.MiddleCenter;
 			
 			// MainForm
 			AcceptButton = okButton;
-			AutoScaleBaseSize = new Size (5, 13);
+			AutoScaleBaseSize = new Size_ (5, 13);
 			CancelButton = cancelButton;
-			ClientSize = new Size (248, 205);
+			ClientSize = new Size_ (248, 205);
 			Controls.Add (groupBox1);
 			Controls.Add (cancelButton);
 			Controls.Add (okButton);
@@ -4705,7 +4706,7 @@ namespace System.Windows.Forms
 	#region MWFConfig
 	// easy to use class to store and read internal MWF config settings.
 	// the config values are stored in the users home dir as a hidden xml file called "mwf_config".
-	// currently supports int, string, byte, color and arrays (including byte arrays)
+	// currently supports int, string, byte, Color_ and arrays (including byte arrays)
 	// don't forget, when you read a value you still have to cast this value.
 	//
 	// usage:
@@ -5078,7 +5079,7 @@ namespace System.Windows.Forms
 						} else
 						if (type == "color") {
 							int color = Int32.Parse (single_value);
-							value = Color.FromArgb (color);
+							value = Color_.FromArgb (color);
 						} else
 						if (type == "byte-array") {
 							byte[] b_array = Convert.FromBase64String (single_value);

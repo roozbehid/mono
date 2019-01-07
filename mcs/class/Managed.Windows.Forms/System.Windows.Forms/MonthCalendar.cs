@@ -24,11 +24,11 @@
 //
 // REMAINING TODO:
 //	- get the date_cell_size and title_size to be pixel perfect match of SWF
-
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -46,7 +46,7 @@ namespace System.Windows.Forms {
 		ArrayList		annually_bolded_dates;
 		ArrayList		monthly_bolded_dates;
 		ArrayList		bolded_dates;
-		Size 			calendar_dimensions;
+		Size_ 			calendar_dimensions;
 		Day 			first_day_of_week;
 		DateTime 		max_date;
 		int 			max_selection_count;
@@ -56,11 +56,11 @@ namespace System.Windows.Forms {
 		bool 			show_today;
 		bool 			show_today_circle;
 		bool 			show_week_numbers;
-		Color 			title_back_color;
-		Color 			title_fore_color;
+		Color_ 			title_back_color;
+		Color_ 			title_fore_color;
 		DateTime 		today_date;
 		bool 			today_date_set;
-		Color 			trailing_fore_color;
+		Color_ 			trailing_fore_color;
 		ContextMenu		today_menu;
 		ContextMenu		month_menu;
 		Timer			timer;
@@ -79,23 +79,23 @@ namespace System.Windows.Forms {
 		internal DateTime 		current_month;			// the month that is being displayed in top left corner of the grid		
 		internal DateTimePicker		owner;				// used if this control is popped up
 		internal int 			button_x_offset;
-		internal Size 			button_size;
-		internal Size			title_size;
-		internal Size			date_cell_size;
-		internal Size			calendar_spacing;
+		internal Size_ 			button_size;
+		internal Size_			title_size;
+		internal Size_			date_cell_size;
+		internal Size_			calendar_spacing;
 		internal int			divider_line_offset;
 		internal DateTime		clicked_date;
-		internal Rectangle 		clicked_rect;
+		internal Rectangle_ 		clicked_rect;
 		internal bool			is_date_clicked;
 		internal bool			is_previous_clicked;
 		internal bool			is_next_clicked;
 		internal bool 			is_shift_pressed;
 		internal DateTime		first_select_start_date;
 		internal int			last_clicked_calendar_index;
-		internal Rectangle		last_clicked_calendar_rect;
+		internal Rectangle_		last_clicked_calendar_rect;
 		internal Font 			bold_font;			// Cache the font in FontStyle.Bold
 		internal StringFormat		centered_format;		// Cache centered string format
-		private Point			month_title_click_location;
+		private Point_			month_title_click_location;
 		// this is used to see which item was actually clicked on in the beginning
 		// so that we know which item to fire on timer
 		//	0: date clicked
@@ -127,7 +127,7 @@ namespace System.Windows.Forms {
 			// iniatialise local members
 			annually_bolded_dates = null;
 			bolded_dates = null;
-			calendar_dimensions = new Size (1,1);
+			calendar_dimensions = new Size_ (1,1);
 			first_day_of_week = Day.Default;
 			max_date = new DateTime (9998, 12, 31);
 			max_selection_count = 7;
@@ -154,12 +154,12 @@ namespace System.Windows.Forms {
 		
 			// intiailise internal variables used
 			button_x_offset = 5;
-			button_size = new Size (22, 17);
+			button_size = new Size_ (22, 17);
 			// default settings based on 8.25 pt San Serif Font
 			// Not sure of algorithm used to establish this
-			date_cell_size = new Size (24, 16);		// default size at san-serif 8.25
+			date_cell_size = new Size_ (24, 16);		// default Size_ at san-serif 8.25
 			divider_line_offset = 4;
-			calendar_spacing = new Size (4, 5);		// horiz and vert spacing between months in a calendar grid
+			calendar_spacing = new Size_ (4, 5);		// horiz and vert spacing between months in a calendar grid
 
 			// set some state info
 			clicked_date = now;
@@ -169,7 +169,7 @@ namespace System.Windows.Forms {
 			is_shift_pressed = false;
 			click_state = new bool [] {false, false, false};
 			first_select_start_date = now;
-			month_title_click_location = Point.Empty;
+			month_title_click_location = Point_.Empty;
 
 			// set up context menus
 			SetUpTodayMenu ();
@@ -245,8 +245,8 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		// the back color for the main part of the calendar
-		public override Color BackColor {
+		// the back Color_ for the main part of the calendar
+		public override Color_ BackColor {
 			set {
 				base.BackColor = value;
 			}
@@ -281,7 +281,7 @@ namespace System.Windows.Forms {
 		// the configuration of the monthly grid display - only allowed to display at most,
 		// 1 calendar year at a time, will be trimmed to fit it properly
 		[Localizable (true)]
-		public Size CalendarDimensions {
+		public Size_ CalendarDimensions {
 			set {
 				if (value.Width < 0 || value.Height < 0) {
 					throw new ArgumentException ();
@@ -292,18 +292,18 @@ namespace System.Windows.Forms {
 						// iteratively reduce the largest dimension till our
 						// product is less than 12
 						if (value.Width > 12 && value.Height > 12) {
-							calendar_dimensions = new Size (4, 3);
+							calendar_dimensions = new Size_ (4, 3);
 						} else if (value.Width > 12) {
 							for (int i = 12; i > 0; i--) {
 								if (i * value.Height <= 12) {
-									calendar_dimensions = new Size (i, value.Height);
+									calendar_dimensions = new Size_ (i, value.Height);
 									break;
 								}
 							}
 						} else if (value.Height > 12) {
 							for (int i = 12; i > 0; i--) {
 								if (i * value.Width <= 12) {
-									calendar_dimensions = new Size (value.Width, i);
+									calendar_dimensions = new Size_ (value.Width, i);
 									break;
 								}
 							}
@@ -344,8 +344,8 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		// the fore color for the main part of the calendar
-		public override Color ForeColor {
+		// the fore Color_ for the main part of the calendar
+		public override Color_ ForeColor {
 			set {
 				base.ForeColor = value;
 			}
@@ -693,10 +693,10 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		// the rectangle size required to render one month based on current font
+		// the Rectangle_ Size_ required to render one month based on current font
 		[Browsable (false)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public Size SingleMonthSize {
+		public Size_ SingleMonthSize {
 			get {
 				if (this.Font == null) {
 					throw new InvalidOperationException();
@@ -710,16 +710,16 @@ namespace System.Windows.Forms {
 				int row_count = 7;		// not including the today date
 
 				// set the date_cell_size and the title_size
-				date_cell_size = new Size ((int) Math.Ceiling (1.8 * multiplier), multiplier);
-				title_size = new Size ((date_cell_size.Width * column_count), 2 * multiplier);
+				date_cell_size = new Size_ ((int) Math.Ceiling (1.8 * multiplier), multiplier);
+				title_size = new Size_ ((date_cell_size.Width * column_count), 2 * multiplier);
 
-				return new Size (column_count * date_cell_size.Width, row_count * date_cell_size.Height + title_size.Height);
+				return new Size_ (column_count * date_cell_size.Width, row_count * date_cell_size.Height + title_size.Height);
 			}
 		}
 
 		[Localizable(false)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public new Size Size {
+		public new Size_ Size {
 			get {
 				return base.Size;
 			}
@@ -741,9 +741,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		// the back color for the title of the calendar and the
+		// the back Color_ for the title of the calendar and the
 		// forecolor for the day of the week text
-		public Color TitleBackColor {
+		public Color_ TitleBackColor {
 			set {
 				if (title_back_color != value) {
 					title_back_color = value;
@@ -755,8 +755,8 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		// the fore color for the title of the calendar
-		public Color TitleForeColor {
+		// the fore Color_ for the title of the calendar
+		public Color_ TitleForeColor {
 			set {
 				if (title_fore_color != value) {
 					title_fore_color = value;
@@ -791,8 +791,8 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		// the color used for trailing dates in the calendar
-		public Color TrailingForeColor {
+		// the Color_ used for trailing dates in the calendar
+		public Color_ TrailingForeColor {
 			set {
 				if (trailing_fore_color != value) {
 					trailing_fore_color = value;
@@ -840,9 +840,9 @@ namespace System.Windows.Forms {
 			}			
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				Size single_month = SingleMonthSize;
+				Size_ single_month = SingleMonthSize;
 				// get the width
 				int width = calendar_dimensions.Width * single_month.Width;
 				if (calendar_dimensions.Width > 1) {
@@ -866,7 +866,7 @@ namespace System.Windows.Forms {
 					height +=2;
 				}
 
-				return new Size (width, height);
+				return new Size_ (width, height);
 			}
 		}
 
@@ -917,11 +917,11 @@ namespace System.Windows.Forms {
 
 		// HitTest overload that recieve's x and y co-ordinates as separate ints
 		public HitTestInfo HitTest (int x, int y) {
-			return HitTest (new Point (x, y));
+			return HitTest (new Point_ (x, y));
 		}
 
 		// returns a HitTestInfo for MonthCalendar element's under the specified point
-		public HitTestInfo HitTest (Point point) {
+		public HitTestInfo HitTest (Point_ point) {
 			return HitTest (point, out last_clicked_calendar_index, out last_clicked_calendar_rect);
 		}
 
@@ -990,7 +990,7 @@ namespace System.Windows.Forms {
 
 		// sets the calendar_dimensions. If product is > 12, the larger dimension is reduced to make product < 12
 		public void SetCalendarDimensions(int x, int y) {
-			this.CalendarDimensions = new Size(x, y);
+			this.CalendarDimensions = new Size_(x, y);
 		}
 
 		// sets the currently selected date as date
@@ -1063,8 +1063,8 @@ namespace System.Windows.Forms {
 		}
 
 		protected override void OnFontChanged (EventArgs e) {
-			// Update size based on new font's space requirements
-			Size = new Size (CalendarDimensions.Width * SingleMonthSize.Width,
+			// Update Size_ based on new font's space requirements
+			Size = new Size_ (CalendarDimensions.Width * SingleMonthSize.Width,
 					CalendarDimensions.Height * SingleMonthSize.Height);
 			bold_font = new Font (Font, Font.Style | FontStyle.Bold);
 			base.OnFontChanged (e);
@@ -1093,10 +1093,10 @@ namespace System.Windows.Forms {
 		// i think this is overriden to not allow the control to be changed to an arbitrary size
 		protected override void SetBoundsCore (int x, int y, int width, int height, BoundsSpecified specified) 
 		{
-			// only allow sizes = default size to be set
-			Size default_size = DefaultSize;
-			Size min_size = default_size;
-			Size max_size = new Size (default_size.Width + SingleMonthSize.Width + calendar_spacing.Width,
+			// only allow sizes = default Size_ to be set
+			Size_ default_size = DefaultSize;
+			Size_ min_size = default_size;
+			Size_ max_size = new Size_ (default_size.Width + SingleMonthSize.Width + calendar_spacing.Width,
 					default_size.Height + SingleMonthSize.Height + calendar_spacing.Height);
 			int x_mid_point = (max_size.Width + min_size.Width)/2;
 			int y_mid_point = (max_size.Height + min_size.Height)/2;
@@ -1322,15 +1322,15 @@ namespace System.Windows.Forms {
 
 		#region internal/private methods
 		internal HitTestInfo HitTest (
-			Point point,
+			Point_ point,
 			out int calendar_index,
-			out Rectangle calendar_rect) {
+			out Rectangle_ calendar_rect) {
 			// start by initialising the ref parameters
 			calendar_index = -1;
-			calendar_rect = Rectangle.Empty;
+			calendar_rect = Rectangle_.Empty;
 
 			// before doing all the hard work, see if the today's date wasn't clicked
-			Rectangle today_rect = new Rectangle (
+			Rectangle_ today_rect = new Rectangle_ (
 				ClientRectangle.X, 
 				ClientRectangle.Bottom - date_cell_size.Height,
 				7 * date_cell_size.Width,
@@ -1339,24 +1339,24 @@ namespace System.Windows.Forms {
 				return new HitTestInfo(HitArea.TodayLink, point, DateTime.Now);
 			}
 
-			Size month_size = SingleMonthSize;
+			Size_ month_size = SingleMonthSize;
 			// define calendar rect's that this thing can land in
-			Rectangle[] calendars = new Rectangle [CalendarDimensions.Width * CalendarDimensions.Height];
+			Rectangle_[] calendars = new Rectangle_ [CalendarDimensions.Width * CalendarDimensions.Height];
 			for (int i=0; i < CalendarDimensions.Width * CalendarDimensions.Height; i ++) {
 				if (i == 0) {
-					calendars[i] = new Rectangle (
-						new Point (ClientRectangle.X + 1, ClientRectangle.Y + 1),
+					calendars[i] = new Rectangle_ (
+						new Point_ (ClientRectangle.X + 1, ClientRectangle.Y + 1),
 						month_size);
 				} else {
 					// calendar on the next row
 					if (i % CalendarDimensions.Width == 0) {
-						calendars[i] = new Rectangle (
-							new Point (calendars[i-CalendarDimensions.Width].X, calendars[i-CalendarDimensions.Width].Bottom + calendar_spacing.Height),
+						calendars[i] = new Rectangle_ (
+							new Point_ (calendars[i-CalendarDimensions.Width].X, calendars[i-CalendarDimensions.Width].Bottom + calendar_spacing.Height),
 							month_size);
 					} else {
 						// calendar on the next column
-						calendars[i] = new Rectangle (
-							new Point (calendars[i-1].Right + calendar_spacing.Width, calendars[i-1].Y),
+						calendars[i] = new Rectangle_ (
+							new Point_ (calendars[i-1].Right + calendar_spacing.Width, calendars[i-1].Y),
 							month_size);
 					}
 				}
@@ -1366,14 +1366,14 @@ namespace System.Windows.Forms {
 			for (int i = 0; i < calendars.Length ; i++) {
 				if (calendars[i].Contains (point)) {
 					// check the title section
-					Rectangle title_rect = new Rectangle (
+					Rectangle_ title_rect = new Rectangle_ (
 						calendars[i].Location,
 						title_size);
 					if (title_rect.Contains (point) ) {
 						// make sure it's not a previous button
 						if (i == 0) {
-							Rectangle button_rect = new Rectangle(
-								new Point (calendars[i].X + button_x_offset, (title_size.Height - button_size.Height)/2),
+							Rectangle_ button_rect = new Rectangle_(
+								new Point_ (calendars[i].X + button_x_offset, (title_size.Height - button_size.Height)/2),
 								button_size);
 							if (button_rect.Contains (point)) {
 								return new HitTestInfo (HitArea.PrevMonthButton, point, new DateTime (1, 1, 1));
@@ -1381,8 +1381,8 @@ namespace System.Windows.Forms {
 						}
 						// make sure it's not the next button
 						if (i % CalendarDimensions.Height == 0 && i % CalendarDimensions.Width == calendar_dimensions.Width - 1) {
-							Rectangle button_rect = new Rectangle(
-								new Point (calendars[i].Right - button_x_offset - button_size.Width, (title_size.Height - button_size.Height)/2),
+							Rectangle_ button_rect = new Rectangle_(
+								new Point_ (calendars[i].Right - button_x_offset - button_size.Width, (title_size.Height - button_size.Height)/2),
 								button_size);
 							if (button_rect.Contains (point)) {
 								return new HitTestInfo (HitArea.NextMonthButton, point, new DateTime (1, 1, 1));
@@ -1397,7 +1397,7 @@ namespace System.Windows.Forms {
 						if (GetMonthNameRectangle (title_rect, i).Contains (point)) {
 							return new HitTestInfo (HitArea.TitleMonth, point, new DateTime (1, 1, 1));
 						}
-						Rectangle year, up, down;
+						Rectangle_ year, up, down;
 						GetYearNameRectangles (title_rect, i, out year, out up, out down);
 						if (year.Contains (point)) {
 							return new HitTestInfo (HitArea.TitleYear, point, new DateTime (1, 1, 1), HitAreaExtra.YearRectangle);
@@ -1411,13 +1411,13 @@ namespace System.Windows.Forms {
 						return new HitTestInfo (HitArea.TitleBackground, point, new DateTime (1, 1, 1));
 					}
 
-					Point date_grid_location = new Point (calendars[i].X, title_rect.Bottom);
+					Point_ date_grid_location = new Point_ (calendars[i].X, title_rect.Bottom);
 
 					// see if it's in the Week numbers
 					if (ShowWeekNumbers) {
-						Rectangle weeks_rect = new Rectangle (
+						Rectangle_ weeks_rect = new Rectangle_ (
 							date_grid_location,
-							new Size (date_cell_size.Width,Math.Max (calendars[i].Height - title_rect.Height, 0)));
+							new Size_ (date_cell_size.Width,Math.Max (calendars[i].Height - title_rect.Height, 0)));
 						if (weeks_rect.Contains (point)) {
 							return new HitTestInfo(HitArea.WeekNumbers, point, DateTime.Now);
 						}
@@ -1427,21 +1427,21 @@ namespace System.Windows.Forms {
 					}
 
 					// see if it's in the week names
-					Rectangle day_rect = new Rectangle (
+					Rectangle_ day_rect = new Rectangle_ (
 						date_grid_location,
-						new Size (Math.Max (calendars[i].Right - date_grid_location.X, 0), date_cell_size.Height));
+						new Size_ (Math.Max (calendars[i].Right - date_grid_location.X, 0), date_cell_size.Height));
 					if (day_rect.Contains (point)) {
 						return new HitTestInfo (HitArea.DayOfWeek, point, new DateTime (1, 1, 1));
 					}
 						
 					// finally see if it was a date that was clicked
-					Rectangle date_grid = new Rectangle (
-						new Point (day_rect.X, day_rect.Bottom),
-						new Size (day_rect.Width, Math.Max(calendars[i].Bottom - day_rect.Bottom, 0)));
+					Rectangle_ date_grid = new Rectangle_ (
+						new Point_ (day_rect.X, day_rect.Bottom),
+						new Size_ (day_rect.Width, Math.Max(calendars[i].Bottom - day_rect.Bottom, 0)));
 					if (date_grid.Contains (point)) {
 						clicked_rect = date_grid;
 						// okay so it's inside the grid, get the offset
-						Point offset = new Point (point.X - date_grid.X, point.Y - date_grid.Y);
+						Point_ offset = new Point_ (point.X - date_grid.X, point.Y - date_grid.Y);
 						int row = offset.Y / date_cell_size.Height;
 						int col = offset.X / date_cell_size.Width;
 						// establish our first day of the month
@@ -1626,49 +1626,49 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		// returns the rectangle for themonth name
-		internal Rectangle GetMonthNameRectangle (Rectangle title_rect, int calendar_index) {
+		// returns the Rectangle_ for themonth name
+		internal Rectangle_ GetMonthNameRectangle (Rectangle_ title_rect, int calendar_index) {
 			DateTime this_month = this.current_month.AddMonths (calendar_index);
-			Size title_text_size = TextRenderer.MeasureString (this_month.ToString ("MMMM yyyy"), this.Font).ToSize ();
-			Size month_size = TextRenderer.MeasureString (this_month.ToString ("MMMM"), this.Font).ToSize ();
+			Size_ title_text_size = TextRenderer.MeasureString (this_month.ToString ("MMMM yyyy"), this.Font).ToSize ();
+			Size_ month_size = TextRenderer.MeasureString (this_month.ToString ("MMMM"), this.Font).ToSize ();
 			// return only the month name part of that
-			return new Rectangle (
-				new Point (
+			return new Rectangle_ (
+				new Point_ (
 					title_rect.X + ((title_rect.Width - title_text_size.Width)/2),
 					title_rect.Y + ((title_rect.Height - title_text_size.Height)/2)),
 				month_size);
 		}
 
-		internal void GetYearNameRectangles (Rectangle title_rect, int calendar_index, out Rectangle year_rect, out Rectangle up_rect, out Rectangle down_rect)
+		internal void GetYearNameRectangles (Rectangle_ title_rect, int calendar_index, out Rectangle_ year_rect, out Rectangle_ up_rect, out Rectangle_ down_rect)
 		{
 			DateTime this_month = this.current_month.AddMonths (calendar_index);
-			SizeF title_text_size = TextRenderer.MeasureString (this_month.ToString ("MMMM yyyy"), this.bold_font, int.MaxValue, centered_format);
-			SizeF year_size = TextRenderer.MeasureString (this_month.ToString ("yyyy"), this.bold_font, int.MaxValue, centered_format);
+			SizeF_ title_text_size = TextRenderer.MeasureString (this_month.ToString ("MMMM yyyy"), this.bold_font, int.MaxValue, centered_format);
+			SizeF_ year_size = TextRenderer.MeasureString (this_month.ToString ("yyyy"), this.bold_font, int.MaxValue, centered_format);
 			// find out how much space the title took
-			RectangleF text_rect = new RectangleF (
-				new PointF (
+			RectangleF_ text_rect = new RectangleF_ (
+				new PointF_ (
 					title_rect.X + ((title_rect.Width - title_text_size.Width) / 2),
 					title_rect.Y + ((title_rect.Height - title_text_size.Height) / 2)),
 				title_text_size);
 			// return only the rect of the year
-			year_rect = new Rectangle (
-				new Point (
+			year_rect = new Rectangle_ (
+				new Point_ (
 					((int)(text_rect.Right - year_size.Width + 1)),
 					(int)text_rect.Y),
-				new Size ((int)(year_size.Width + 1), (int)(year_size.Height + 1)));
+				new Size_ ((int)(year_size.Width + 1), (int)(year_size.Height + 1)));
 			
 			year_rect.Inflate (0, 1);
-			up_rect = new Rectangle ();
-			up_rect.Location = new Point (year_rect.X + year_rect.Width + 2, year_rect.Y);
-			up_rect.Size = new Size (16, year_rect.Height / 2);
-			down_rect = new Rectangle ();
-			down_rect.Location = new Point (up_rect.X, up_rect.Y + up_rect.Height + 1);
+			up_rect = new Rectangle_ ();
+			up_rect.Location = new Point_ (year_rect.X + year_rect.Width + 2, year_rect.Y);
+			up_rect.Size = new Size_ (16, year_rect.Height / 2);
+			down_rect = new Rectangle_ ();
+			down_rect.Location = new Point_ (up_rect.X, up_rect.Y + up_rect.Height + 1);
 			down_rect.Size = up_rect.Size;
 		}
 
-		// returns the rectangle for the year in the title
-		internal Rectangle GetYearNameRectangle (Rectangle title_rect, int calendar_index) {
-			Rectangle result, discard;
+		// returns the Rectangle_ for the year in the title
+		internal Rectangle_ GetYearNameRectangle (Rectangle_ title_rect, int calendar_index) {
+			Rectangle_ result, discard;
 			GetYearNameRectangles (title_rect, calendar_index, out result, out discard, out discard);
 			return result;		
 		}
@@ -1730,7 +1730,7 @@ namespace System.Windows.Forms {
 		// called when month context menu is clicked
 		private void MonthMenuItemClickHandler (object sender, EventArgs e) {
 			MenuItem item = sender as MenuItem;
-			if (item != null && month_title_click_location != Point.Empty) {
+			if (item != null && month_title_click_location != Point_.Empty) {
 				// establish which month we want to move to
 				if (item.Parent == null) {
 					return;
@@ -1740,11 +1740,11 @@ namespace System.Windows.Forms {
 					return;
 				}
 				// okay let's establish which calendar was hit
-				Size month_size = this.SingleMonthSize;
+				Size_ month_size = this.SingleMonthSize;
 				for (int i=0; i < CalendarDimensions.Height; i++) {
 					for (int j=0; j < CalendarDimensions.Width; j++) {
 						int month_index = (i * CalendarDimensions.Width) + j;
-						Rectangle month_rect = new Rectangle ( new Point (0, 0), month_size);
+						Rectangle_ month_rect = new Rectangle_ ( new Point_ (0, 0), month_size);
 						if (j == 0) {
 							month_rect.X = this.ClientRectangle.X + 1;
 						} else {
@@ -1755,7 +1755,7 @@ namespace System.Windows.Forms {
 						} else {
 							month_rect.Y = this.ClientRectangle.Y + 1 + ((i)*(month_size.Height+calendar_spacing.Height));
 						}
-						// see if the point is inside
+						// see if the Point_ is inside
 						if (month_rect.Contains (month_title_click_location)) {
 							DateTime clicked_month = CurrentMonth.AddMonths (month_index);
 							// get the month that we want to move to
@@ -1769,7 +1769,7 @@ namespace System.Windows.Forms {
 				}
 
 				// clear the point
-				month_title_click_location = Point.Empty;
+				month_title_click_location = Point_.Empty;
 			}
 		}
 		
@@ -1805,7 +1805,7 @@ namespace System.Windows.Forms {
 			if (hti.HitArea == HitArea.PrevMonthButton) {
 				// invalidate the prev monthbutton
 				this.Invalidate(
-					new Rectangle (
+					new Rectangle_ (
 						this.ClientRectangle.X + 1 + button_x_offset,
 						this.ClientRectangle.Y + 1 + (title_size.Height - button_size.Height)/2,
 						button_size.Width,
@@ -1815,7 +1815,7 @@ namespace System.Windows.Forms {
 			} else {
 				// invalidate the next monthbutton
 				this.Invalidate(
-					new Rectangle (
+					new Rectangle_ (
 						this.ClientRectangle.Right - 1 - button_x_offset - button_size.Width,
 						this.ClientRectangle.Y + 1 + (title_size.Height - button_size.Height)/2,
 						button_size.Width,
@@ -1840,7 +1840,7 @@ namespace System.Windows.Forms {
 			// invalidate the next monthbutton
 			if (this.is_next_clicked) {
 				this.Invalidate(
-					new Rectangle (
+					new Rectangle_ (
 						this.ClientRectangle.Right - 1 - button_x_offset - button_size.Width,
 						this.ClientRectangle.Y + 1 + (title_size.Height - button_size.Height)/2,
 						button_size.Width,
@@ -1849,7 +1849,7 @@ namespace System.Windows.Forms {
 			// invalidate the prev monthbutton
 			if (this.is_previous_clicked) {
 				this.Invalidate(
-					new Rectangle (
+					new Rectangle_ (
 						this.ClientRectangle.X + 1 + button_x_offset,
 						this.ClientRectangle.Y + 1 + (title_size.Height - button_size.Height)/2,
 						button_size.Width,
@@ -1903,7 +1903,7 @@ namespace System.Windows.Forms {
 					hti.HitArea == HitArea.NextMonthDate ||
 					hti.HitArea == HitArea.Date)
 				{
-					Rectangle prev_rect = clicked_rect;
+					Rectangle_ prev_rect = clicked_rect;
 					DateTime prev_clicked = clicked_date;
 					DoDateMouseDown (hti);
 					if (owner == null) {
@@ -1919,7 +1919,7 @@ namespace System.Windows.Forms {
 						SelectDate (clicked_date);
 						date_selected_event_pending = true;
 
-						Rectangle invalid = Rectangle.Union (prev_rect, clicked_rect);
+						Rectangle_ invalid = Rectangle.Union (prev_rect, clicked_rect);
 						Invalidate (invalid);
 					}
 				}
@@ -1944,7 +1944,7 @@ namespace System.Windows.Forms {
 				timer.Enabled = false;
 			}
 			
-			Point point = new Point (e.X, e.Y);
+			Point_ point = new Point_ (e.X, e.Y);
 			// figure out if we are in drop down mode and a click happened outside us
 			if (this.owner != null) {
 				if (!this.ClientRectangle.Contains (point)) {
@@ -2154,7 +2154,7 @@ namespace System.Windows.Forms {
 		{
 			if ((e.Button & MouseButtons.Left) == 0) {
 				if (show_today && (this.ContextMenu == null))
-					today_menu.Show (this, new Point (e.X, e.Y));
+					today_menu.Show (this, new Point_ (e.X, e.Y));
 				return;
 			}
 
@@ -2217,8 +2217,8 @@ namespace System.Windows.Forms {
 			DateTime current = range.Start;
 			while (current <= range.End) {
 				DateTime month_end = new DateTime (current.Year, current.Month, 1).AddMonths (1).AddDays (-1);;
-				Rectangle start_rect;
-				Rectangle end_rect;
+				Rectangle_ start_rect;
+				Rectangle_ end_rect;
 				// see if entire selection is in this current month
 				if (range.End <= month_end && current < last_month)	{
 					// the end is the last date
@@ -2230,7 +2230,7 @@ namespace System.Windows.Forms {
 					end_rect = GetDateRowRect (current, range.End);
 				} else if (current < last_month) {
 					// otherwise it simply means we have a selection spaning
-					// multiple months simply set rectangle inside the current month
+					// multiple months simply set Rectangle_ inside the current month
 					start_rect = GetDateRowRect (current, current);
 					end_rect = GetDateRowRect (month_end, month_end);
 				} else {
@@ -2242,7 +2242,7 @@ namespace System.Windows.Forms {
 				current = month_end.AddDays (1);
 				// invalidate from the start row to the end row for this month				
 				this.Invalidate (
-					new Rectangle (
+					new Rectangle_ (
 						start_rect.X,
 						start_rect.Y,
 						start_rect.Width,
@@ -2251,14 +2251,14 @@ namespace System.Windows.Forms {
 		} 
 		
 		// gets the rect of the row where the specified date appears on the specified month
-		private Rectangle GetDateRowRect (DateTime month, DateTime date) {
+		private Rectangle_ GetDateRowRect (DateTime month, DateTime date) {
 			// first get the general rect of the supplied month
-			Size month_size = SingleMonthSize;
-			Rectangle month_rect = Rectangle.Empty;
+			Size_ month_size = SingleMonthSize;
+			Rectangle_ month_rect = Rectangle_.Empty;
 			for (int i=0; i < CalendarDimensions.Width*CalendarDimensions.Height; i++) {
 				DateTime this_month = this.current_month.AddMonths (i);
 				if (month.Year == this_month.Year && month.Month == this_month.Month) {
-					month_rect = new Rectangle (
+					month_rect = new Rectangle_ (
 						this.ClientRectangle.X + 1 + (month_size.Width * (i%CalendarDimensions.Width)) + (this.calendar_spacing.Width * (i%CalendarDimensions.Width)),
 						this.ClientRectangle.Y + 1 + (month_size.Height * (i/CalendarDimensions.Width)) + (this.calendar_spacing.Height * (i/CalendarDimensions.Width)),
 						month_size.Width,
@@ -2267,8 +2267,8 @@ namespace System.Windows.Forms {
 				}
 			}
 			// now find out where in the month the supplied date is
-			if (month_rect == Rectangle.Empty) {
-				return Rectangle.Empty;
+			if (month_rect == Rectangle_.Empty) {
+				return Rectangle_.Empty;
 			}
 			// find out which row this date is in
 			int row = -1;
@@ -2284,18 +2284,18 @@ namespace System.Windows.Forms {
 			}
 			// ensure it's a valid row
 			if (row < 0) {
-				return Rectangle.Empty;
+				return Rectangle_.Empty;
 			}
 			int x_offset = (this.ShowWeekNumbers) ? date_cell_size.Width : 0;
 			int y_offset = title_size.Height + (date_cell_size.Height * (row + 1));
-			return new Rectangle (
+			return new Rectangle_ (
 				month_rect.X + x_offset,
 				month_rect.Y + y_offset,
 				date_cell_size.Width * 7,
 				date_cell_size.Height);
 		}
 
-		internal void Draw (Rectangle clip_rect, Graphics dc)
+		internal void Draw (Rectangle_ clip_rect, Graphics dc)
 		{
 			ThemeEngine.Current.DrawMonthCalendar (dc, clip_rect, this);
 		}
@@ -2348,7 +2348,7 @@ namespace System.Windows.Forms {
 		public sealed class HitTestInfo {
 
 			private HitArea hit_area;
-			private Point point;
+			private Point_ point;
 			private DateTime time;
 
 			internal HitAreaExtra hit_area_extra;
@@ -2357,12 +2357,12 @@ namespace System.Windows.Forms {
 			// default constructor
 			internal HitTestInfo () {
 				hit_area = HitArea.Nowhere;
-				point = new Point (0, 0);
+				point = new Point_ (0, 0);
 				time = DateTime.Now;
 			}
 
 			// overload receives all properties
-			internal HitTestInfo (HitArea hit_area, Point point, DateTime time) {
+			internal HitTestInfo (HitArea hit_area, Point_ point, DateTime time) {
 				this.hit_area = hit_area;
 				this.point = point;
 				this.time = time;
@@ -2370,7 +2370,7 @@ namespace System.Windows.Forms {
 			}
 			
 			// overload receives all properties
-			internal HitTestInfo (HitArea hit_area, Point point, DateTime time, DateTime hit_time)
+			internal HitTestInfo (HitArea hit_area, Point_ point, DateTime time, DateTime hit_time)
 			{
 				this.hit_area = hit_area;
 				this.point = point;
@@ -2378,7 +2378,7 @@ namespace System.Windows.Forms {
 				this.hit_time = hit_time;
 			}
 			
-			internal HitTestInfo (HitArea hit_area, Point point, DateTime time, HitAreaExtra hit_area_extra)
+			internal HitTestInfo (HitArea hit_area, Point_ point, DateTime time, HitAreaExtra hit_area_extra)
 			{
 				this.hit_area = hit_area;
 				this.hit_area_extra = hit_area_extra;
@@ -2393,8 +2393,8 @@ namespace System.Windows.Forms {
 				}
 			}
 
-			// the point that is being test
-			public Point Point {
+			// the Point_ that is being test
+			public Point_ Point {
 				get {
 					return point;
 				}

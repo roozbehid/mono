@@ -31,8 +31,8 @@ using System.Drawing;
 namespace System.Windows.Forms {
 	public sealed class AmbientProperties {
 		#region Local Variables
-		private Color	fore_color;
-		private Color	back_color;
+		private Color_ fore_color;
+		private Color_ back_color;
 		private Font	font;
 		private Cursor	cursor;
 		#endregion	// Local Variables
@@ -43,7 +43,7 @@ namespace System.Windows.Forms {
 		#endregion	// Public Constructors
 
 		#region Public Instance Properties
-		public Color BackColor {
+		public Color_ BackColor {
 			get {
 				return back_color;
 			}
@@ -73,7 +73,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get {
 				return fore_color;
 			}

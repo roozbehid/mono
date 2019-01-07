@@ -25,8 +25,8 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
+
 using System.Drawing;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -295,7 +295,7 @@ namespace System.Windows.Forms
 			
 			for (int i = 0; i < column_widths.Length; i++) {
 				for (int j = 0; j < row_heights.Length; j++) {
-					this.OnCellPaint (new TableLayoutCellPaintEventArgs (e.Graphics, e.ClipRectangle, new Rectangle (x, y, column_widths[i] + border_width, row_heights[j] + border_width), i, j));
+					this.OnCellPaint (new TableLayoutCellPaintEventArgs (e.Graphics, e.ClipRectangle, new Rectangle_ (x, y, column_widths[i] + border_width, row_heights[j] + border_width), i, j));
 					y += row_heights[j] + border_width;
 				}
 
@@ -304,7 +304,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		protected override void ScaleControl (SizeF factor, BoundsSpecified specified)
+		protected override void ScaleControl (SizeF_ factor, BoundsSpecified specified)
 		{
 			base.ScaleControl (factor, specified);
 		}
@@ -336,7 +336,7 @@ namespace System.Windows.Forms
 		
 		private void DrawCellBorders (PaintEventArgs e)
 		{
-			Rectangle paint_here = new Rectangle (Point.Empty, this.Size);
+			Rectangle_ paint_here = new Rectangle_ (Point_.Empty, this.Size);
 
 			switch (CellBorderStyle) {
 				case TableLayoutPanelCellBorderStyle.Single:
@@ -358,7 +358,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		private void DrawSingleBorder (Graphics g, Rectangle rect)
+		private void DrawSingleBorder (Graphics g, Rectangle_ rect)
 		{
 			ControlPaint.DrawBorder (g, rect, SystemColors.ControlDark, ButtonBorderStyle.Solid);
 
@@ -368,17 +368,17 @@ namespace System.Windows.Forms
 			for (int i = 0; i < column_widths.Length - 1; i++) {
 				x += column_widths[i] + 1;
 
-				g.DrawLine (SystemPens.ControlDark, new Point (x, 1), new Point (x, Bottom - 2));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (x, 1), new Point_ (x, Bottom - 2));
 			}
 
 			for (int j = 0; j < row_heights.Length - 1; j++) {
 				y += row_heights[j] + 1;
 
-				g.DrawLine (SystemPens.ControlDark, new Point (1, y), new Point (Right - 2, y));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (1, y), new Point_ (Right - 2, y));
 			}
 		}
 
-		private void DrawInsetBorder (Graphics g, Rectangle rect)
+		private void DrawInsetBorder (Graphics g, Rectangle_ rect)
 		{
 			ControlPaint.DrawBorder3D (g, rect, Border3DStyle.Etched);
 			
@@ -388,22 +388,22 @@ namespace System.Windows.Forms
 			for (int i = 0; i < column_widths.Length - 1; i++) {
 				x += column_widths[i] + 2;
 
-				g.DrawLine (SystemPens.ControlDark, new Point (x, 1), new Point (x, Bottom - 3));
-				g.DrawLine (Pens.White, new Point (x + 1, 1), new Point (x + 1, Bottom - 3));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (x, 1), new Point_ (x, Bottom - 3));
+				g.DrawLine (Pens.White, new Point_ (x + 1, 1), new Point_ (x + 1, Bottom - 3));
 			}
 
 			for (int j = 0; j < row_heights.Length - 1; j++) {
 				y += row_heights[j] + 2;
 
-				g.DrawLine (SystemPens.ControlDark, new Point (1, y), new Point (Right - 3, y));
-				g.DrawLine (Pens.White, new Point (1, y + 1), new Point (Right - 3, y + 1));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (1, y), new Point_ (Right - 3, y));
+				g.DrawLine (Pens.White, new Point_ (1, y + 1), new Point_ (Right - 3, y + 1));
 			}
 		}
 
-		private void DrawOutsetBorder (Graphics g, Rectangle rect)
+		private void DrawOutsetBorder (Graphics g, Rectangle_ rect)
 		{
-			g.DrawRectangle (SystemPens.ControlDark, new Rectangle (rect.Left + 1, rect.Top + 1, rect.Width - 2, rect.Height - 2));
-			g.DrawRectangle (Pens.White, new Rectangle (rect.Left, rect.Top, rect.Width - 2, rect.Height - 2));
+			g.DrawRectangle (SystemPens.ControlDark, new Rectangle_ (rect.Left + 1, rect.Top + 1, rect.Width - 2, rect.Height - 2));
+			g.DrawRectangle (Pens.White, new Rectangle_ (rect.Left, rect.Top, rect.Width - 2, rect.Height - 2));
 
 			int x = DisplayRectangle.X;
 			int y = DisplayRectangle.Y;
@@ -411,25 +411,25 @@ namespace System.Windows.Forms
 			for (int i = 0; i < column_widths.Length - 1; i++) {
 				x += column_widths[i] + 2;
 
-				g.DrawLine (Pens.White, new Point (x, 1), new Point (x, Bottom - 3));
-				g.DrawLine (SystemPens.ControlDark, new Point (x + 1, 1), new Point (x + 1, Bottom - 3));
+				g.DrawLine (Pens.White, new Point_ (x, 1), new Point_ (x, Bottom - 3));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (x + 1, 1), new Point_ (x + 1, Bottom - 3));
 			}
 
 			for (int j = 0; j < row_heights.Length - 1; j++) {
 				y += row_heights[j] + 2;
 
-				g.DrawLine (Pens.White, new Point (1, y), new Point (Right - 3, y));
-				g.DrawLine (SystemPens.ControlDark, new Point (1, y + 1), new Point (Right - 3, y + 1));
+				g.DrawLine (Pens.White, new Point_ (1, y), new Point_ (Right - 3, y));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (1, y + 1), new Point_ (Right - 3, y + 1));
 			}
 		}
 
-		private void DrawOutsetDoubleBorder (Graphics g, Rectangle rect)
+		private void DrawOutsetDoubleBorder (Graphics g, Rectangle_ rect)
 		{
 			rect.Width -= 1;
 			rect.Height -= 1;
 			
-			g.DrawRectangle (SystemPens.ControlDark, new Rectangle (rect.Left + 2, rect.Top + 2, rect.Width - 2, rect.Height - 2));
-			g.DrawRectangle (Pens.White, new Rectangle (rect.Left, rect.Top, rect.Width - 2, rect.Height - 2));
+			g.DrawRectangle (SystemPens.ControlDark, new Rectangle_ (rect.Left + 2, rect.Top + 2, rect.Width - 2, rect.Height - 2));
+			g.DrawRectangle (Pens.White, new Rectangle_ (rect.Left, rect.Top, rect.Width - 2, rect.Height - 2));
 
 			int x = DisplayRectangle.X;
 			int y = DisplayRectangle.Y;
@@ -437,15 +437,15 @@ namespace System.Windows.Forms
 			for (int i = 0; i < column_widths.Length - 1; i++) {
 				x += column_widths[i] + 3;
 
-				g.DrawLine (Pens.White, new Point (x, 3), new Point (x, Bottom - 5));
-				g.DrawLine (SystemPens.ControlDark, new Point (x + 2, 3), new Point (x + 2, Bottom - 5));
+				g.DrawLine (Pens.White, new Point_ (x, 3), new Point_ (x, Bottom - 5));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (x + 2, 3), new Point_ (x + 2, Bottom - 5));
 			}
 
 			for (int j = 0; j < row_heights.Length - 1; j++) {
 				y += row_heights[j] + 3;
 
-				g.DrawLine (Pens.White, new Point (3, y), new Point (Right - 4, y));
-				g.DrawLine (SystemPens.ControlDark, new Point (3, y + 2), new Point (Right - 4, y + 2));
+				g.DrawLine (Pens.White, new Point_ (3, y), new Point_ (Right - 4, y));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (3, y + 2), new Point_ (Right - 4, y + 2));
 			}
 
 			x = DisplayRectangle.X;
@@ -454,23 +454,23 @@ namespace System.Windows.Forms
 			for (int i = 0; i < column_widths.Length - 1; i++) {
 				x += column_widths[i] + 3;
 
-				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point (x + 1, 3), new Point (x + 1, Bottom - 5));
+				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point_ (x + 1, 3), new Point_ (x + 1, Bottom - 5));
 			}
 
 			for (int j = 0; j < row_heights.Length - 1; j++) {
 				y += row_heights[j] + 3;
 
-				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point (3, y + 1), new Point (Right - 4, y + 1));
+				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point_ (3, y + 1), new Point_ (Right - 4, y + 1));
 			}
 		}
 	
-		private void DrawInsetDoubleBorder (Graphics g, Rectangle rect)
+		private void DrawInsetDoubleBorder (Graphics g, Rectangle_ rect)
 		{
 			rect.Width -= 1;
 			rect.Height -= 1;
 			
-			g.DrawRectangle (Pens.White, new Rectangle (rect.Left + 2, rect.Top + 2, rect.Width - 2, rect.Height - 2));
-			g.DrawRectangle (SystemPens.ControlDark, new Rectangle (rect.Left, rect.Top, rect.Width - 2, rect.Height - 2));
+			g.DrawRectangle (Pens.White, new Rectangle_ (rect.Left + 2, rect.Top + 2, rect.Width - 2, rect.Height - 2));
+			g.DrawRectangle (SystemPens.ControlDark, new Rectangle_ (rect.Left, rect.Top, rect.Width - 2, rect.Height - 2));
 
 			int x = DisplayRectangle.X;
 			int y = DisplayRectangle.Y;
@@ -478,15 +478,15 @@ namespace System.Windows.Forms
 			for (int i = 0; i < column_widths.Length - 1; i++) {
 				x += column_widths[i] + 3;
 
-				g.DrawLine (SystemPens.ControlDark, new Point (x, 3), new Point (x, Bottom - 5));
-				g.DrawLine (Pens.White, new Point (x + 2, 3), new Point (x + 2, Bottom - 5));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (x, 3), new Point_ (x, Bottom - 5));
+				g.DrawLine (Pens.White, new Point_ (x + 2, 3), new Point_ (x + 2, Bottom - 5));
 			}
 
 			for (int j = 0; j < row_heights.Length - 1; j++) {
 				y += row_heights[j] + 3;
 
-				g.DrawLine (SystemPens.ControlDark, new Point (3, y), new Point (Right - 4, y));
-				g.DrawLine (Pens.White, new Point (3, y + 2), new Point (Right - 4, y + 2));
+				g.DrawLine (SystemPens.ControlDark, new Point_ (3, y), new Point_ (Right - 4, y));
+				g.DrawLine (Pens.White, new Point_ (3, y + 2), new Point_ (Right - 4, y + 2));
 			}
 
 			x = DisplayRectangle.X;
@@ -495,17 +495,17 @@ namespace System.Windows.Forms
 			for (int i = 0; i < column_widths.Length - 1; i++) {
 				x += column_widths[i] + 3;
 
-				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point (x + 1, 3), new Point (x + 1, Bottom - 5));
+				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point_ (x + 1, 3), new Point_ (x + 1, Bottom - 5));
 			}
 
 			for (int j = 0; j < row_heights.Length - 1; j++) {
 				y += row_heights[j] + 3;
 
-				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point (3, y + 1), new Point (Right - 4, y + 1));
+				g.DrawLine (ThemeEngine.Current.ResPool.GetPen (BackColor), new Point_ (3, y + 1), new Point_ (Right - 4, y + 1));
 			}
 		}
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
 			// If the tablelayoutowner is autosize, we have to make sure it is big enough
 			// to hold every non-autosize control
@@ -657,7 +657,7 @@ namespace System.Windows.Forms
 
 			int needed_height = non_percent_total_height + percent_total_height + (border_width * (actual_rows + 1));
 
-			return new Size (needed_width, needed_height);
+			return new Size_ (needed_width, needed_height);
 		}
 
 		/// <summary>

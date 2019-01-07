@@ -21,8 +21,8 @@
 //
 // Authors:
 //	Everaldo Canuto (ecanuto@novell.com)
-
 using System;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -34,7 +34,7 @@ namespace System.Windows.Forms.Theming.Default
 		{
 		}
 
-		private Color GetPieceColor (LinkLabel label, LinkLabel.Piece piece, int i)
+		private Color_ GetPieceColor (LinkLabel label, LinkLabel.Piece piece, int i)
 		{
 			if (!label.Enabled)
 				return label.DisabledLinkColor;
@@ -54,9 +54,9 @@ namespace System.Windows.Forms.Theming.Default
 			return label.LinkColor;
 		}
 		
-		public virtual void Draw (Graphics dc, Rectangle clip_rectangle, LinkLabel label)
+		public virtual void Draw (Graphics dc, Rectangle_ clip_rectangle, LinkLabel label)
 		{
-			Rectangle client_rect = label.PaddingClientRectangle;
+			Rectangle_ client_rect = label.PaddingClientRectangle;
 
 			label.DrawImage (dc, label.Image, client_rect, label.ImageAlign);
 
@@ -73,7 +73,7 @@ namespace System.Windows.Forms.Theming.Default
 
 			Font font, link_font = ThemeEngine.Current.GetLinkFont (label);
 			
-			Region text_region = new Region (new Rectangle());
+			Region text_region = new Region (new Rectangle_());
 
 			// Draw links.
 			for (int i = 0; i < label.pieces.Length; i ++) {
@@ -84,7 +84,7 @@ namespace System.Windows.Forms.Theming.Default
 					continue;
 				}
 
-				Color color = GetPieceColor (label, piece, i);
+				Color_ color = GetPieceColor (label, piece, i);
 
 				if ( (label.LinkBehavior == LinkBehavior.AlwaysUnderline) || 
 					 (label.LinkBehavior == LinkBehavior.SystemDefault) ||

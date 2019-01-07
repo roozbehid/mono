@@ -26,8 +26,8 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //	Stefan Noack (noackstefan@googlemail.com)
 //
-
 using System;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.Layout
@@ -36,13 +36,13 @@ namespace System.Windows.Forms.Layout
 	{
 		void LayoutDockedChildren (Control parent, Control[] controls)
 		{
-			Rectangle space = parent.DisplayRectangle;
+			Rectangle_ space = parent.DisplayRectangle;
 			MdiClient mdi = null;
 			
 			// Deal with docking; go through in reverse, MS docs say that lowest Z-order is closest to edge
 			for (int i = controls.Length - 1; i >= 0; i--) {
 				Control child = controls[i];
-				Size child_size = child.Size;
+				Size_ child_size = child.Size;
 
 				if (child.AutoSize)
 					child_size = GetPreferredControlSize (child);
@@ -97,7 +97,7 @@ namespace System.Windows.Forms.Layout
 
 		void LayoutAnchoredChildren (Control parent, Control[] controls)
 		{
-			Rectangle space = parent.ClientRectangle;
+			Rectangle_ space = parent.ClientRectangle;
 
 			for (int i = 0; i < controls.Length; i++) {
 				int left;
@@ -172,7 +172,7 @@ namespace System.Windows.Forms.Layout
 				left = child.Left;
 				top = child.Top;
 				
-				Size preferredsize = GetPreferredControlSize (child);
+				Size_ preferredsize = GetPreferredControlSize (child);
 
 				if (((anchor & AnchorStyles.Left) != 0) || ((anchor & AnchorStyles.Right) == 0))
 					child.dist_right += child.Width - preferredsize.Width;
@@ -196,7 +196,7 @@ namespace System.Windows.Forms.Layout
 			left = container.Left;
 			top = container.Top;
 
-			Size preferredsize = container.PreferredSize;
+			Size_ preferredsize = container.PreferredSize;
 
 			if (container.GetAutoSizeMode () == AutoSizeMode.GrowAndShrink) {
 				width = preferredsize.Width;
@@ -240,11 +240,11 @@ namespace System.Windows.Forms.Layout
 			return false;
 		}
 
-		private Size GetPreferredControlSize (Control child)
+		private Size_ GetPreferredControlSize (Control child)
 		{
 			int width;
 			int height;
-			Size preferredsize = child.PreferredSize;
+			Size_ preferredsize = child.PreferredSize;
 
 			if (child.GetAutoSizeMode () == AutoSizeMode.GrowAndShrink || (child.Dock != DockStyle.None && !(child is Button) && !(child is FlowLayoutPanel))) {
 				width = preferredsize.Width;
@@ -284,7 +284,7 @@ namespace System.Windows.Forms.Layout
 			if (child.MaximumSize.Height != 0 && height > child.MaximumSize.Height)
 				height = child.MaximumSize.Height;
 				
-			return new Size (width, height);
+			return new Size_ (width, height);
 		}
 	}
 }

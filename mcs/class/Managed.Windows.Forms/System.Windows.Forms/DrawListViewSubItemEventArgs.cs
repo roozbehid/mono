@@ -32,7 +32,7 @@ namespace System.Windows.Forms
     {
         #region Private Fields
 
-        private Rectangle bounds;
+        private Rectangle_ bounds;
         private int columnIndex;
 		private bool drawDefault;
         private Graphics graphics;
@@ -47,7 +47,7 @@ namespace System.Windows.Forms
 
         #region Properties
 
-        public Rectangle Bounds {
+        public Rectangle_ Bounds {
             get { return bounds; }
         }
 
@@ -89,7 +89,7 @@ namespace System.Windows.Forms
 
         #region Constructors
 
-        public DrawListViewSubItemEventArgs(Graphics graphics, Rectangle bounds,
+        public DrawListViewSubItemEventArgs(Graphics graphics, Rectangle_ bounds,
                                             ListViewItem item, ListViewItem.ListViewSubItem subItem,
                                             int itemIndex, int columnIndex,
                                             ColumnHeader header, ListViewItemStates itemState)
@@ -114,10 +114,10 @@ namespace System.Windows.Forms
 		graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (subItem.BackColor), bounds);
         }
 
-        public void DrawFocusRectangle (Rectangle bounds)
+        public void DrawFocusRectangle (Rectangle_ bounds)
         {
 		if ((itemState & ListViewItemStates.Focused) != 0) {
-			Rectangle rect = new Rectangle (bounds.X + 1, bounds.Y + 1, bounds.Width - 1, bounds.Height - 1);
+			Rectangle_ rect = new Rectangle_ (bounds.X + 1, bounds.Y + 1, bounds.Width - 1, bounds.Height - 1);
 			ThemeEngine.Current.CPDrawFocusRectangle (graphics, rect, subItem.ForeColor, subItem.BackColor);
 		}
         }
@@ -130,7 +130,7 @@ namespace System.Windows.Forms
         public void DrawText (TextFormatFlags flags)
         {
 		// Text adjustments
-		Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
+		Rectangle_ text_bounds = new Rectangle_ (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
 		TextRenderer.DrawText (graphics, subItem.Text, subItem.Font, text_bounds, subItem.ForeColor, flags);
         }
 

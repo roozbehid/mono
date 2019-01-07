@@ -41,8 +41,8 @@ namespace System.Windows.Forms.Theming.Default
 		
 		#region Buttons
 		#region Standard Button
-		public virtual void Draw (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor) {
-			bool is_themecolor = backColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb () || backColor == Color.Empty ? true : false;
+		public virtual void Draw (Graphics g, Rectangle_ bounds, ButtonThemeState state, Color_ backColor, Color_ foreColor) {
+			bool is_themecolor = backColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb () || backColor == Color_.Empty ? true : false;
 			CPColor cpcolor = is_themecolor ? CPColor.Empty : ResPool.GetCPColor (backColor);
 			Pen pen;
 			
@@ -98,8 +98,8 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 
 		#region FlatStyle Button
-		public virtual void DrawFlat (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor, FlatButtonAppearance appearance) {
-			bool is_themecolor = backColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb () || backColor == Color.Empty ? true : false;
+		public virtual void DrawFlat (Graphics g, Rectangle_ bounds, ButtonThemeState state, Color_ backColor, Color_ foreColor, FlatButtonAppearance appearance) {
+			bool is_themecolor = backColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb () || backColor == Color_.Empty ? true : false;
 			CPColor cpcolor = is_themecolor ? CPColor.Empty : ResPool.GetCPColor (backColor);
 			Pen pen;
 			
@@ -110,24 +110,24 @@ namespace System.Windows.Forms.Theming.Default
 					break;
 				case ButtonThemeState.Entered:
 				case ButtonThemeState.Default | ButtonThemeState.Entered:
-					if (appearance.MouseOverBackColor != Color.Empty)
+					if (appearance.MouseOverBackColor != Color_.Empty)
 						g.FillRectangle (ResPool.GetSolidBrush (appearance.MouseOverBackColor), bounds);
 					else
 						g.FillRectangle (ResPool.GetSolidBrush (ChangeIntensity (backColor, .9F)), bounds);
 					break;
 				case ButtonThemeState.Pressed:
-					if (appearance.MouseDownBackColor != Color.Empty)
+					if (appearance.MouseDownBackColor != Color_.Empty)
 						g.FillRectangle (ResPool.GetSolidBrush (appearance.MouseDownBackColor), bounds);
 					else
 						g.FillRectangle (ResPool.GetSolidBrush (ChangeIntensity (backColor, .95F)), bounds);
 					break;
 				case ButtonThemeState.Default:
-					if (appearance.CheckedBackColor != Color.Empty)
+					if (appearance.CheckedBackColor != Color_.Empty)
 						g.FillRectangle (ResPool.GetSolidBrush (appearance.CheckedBackColor), bounds);
 					break;
 			}
 			
-			if (appearance.BorderColor == Color.Empty)
+			if (appearance.BorderColor == Color_.Empty)
 				pen = is_themecolor ? SystemPens.ControlDarkDark : ResPool.GetSizedPen (cpcolor.DarkDark, appearance.BorderSize);
 			else
 				pen = ResPool.GetSizedPen (appearance.BorderColor, appearance.BorderSize);
@@ -141,8 +141,8 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 
 		#region Popup Button
-		public virtual void DrawPopup (Graphics g, Rectangle bounds, ButtonThemeState state, Color backColor, Color foreColor) {
-			bool is_themecolor = backColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb () || backColor == Color.Empty ? true : false;
+		public virtual void DrawPopup (Graphics g, Rectangle_ bounds, ButtonThemeState state, Color_ backColor, Color_ foreColor) {
+			bool is_themecolor = backColor.ToArgb () == ThemeEngine.Current.ColorControl.ToArgb () || backColor == Color_.Empty ? true : false;
 			CPColor cpcolor = is_themecolor ? CPColor.Empty : ResPool.GetCPColor (backColor);
 			Pen pen;
 
@@ -176,7 +176,7 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 		#endregion
 		
-		private static Color ChangeIntensity (Color baseColor, float percent)
+		private static Color_ ChangeIntensity (Color_ baseColor, float percent)
 		{
 			int H, I, S;
 

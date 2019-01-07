@@ -52,79 +52,79 @@ namespace System.Windows.Forms
 		}
 
 		#region Public Methods
-		public static void DrawText (IDeviceContext dc, string text, Font font, Point pt, Color foreColor)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor)
 		{
-			DrawTextInternal (dc, text, font, pt, foreColor, Color.Transparent, TextFormatFlags.Default, false);
+			DrawTextInternal (dc, text, font, pt, foreColor, Color_.Transparent, TextFormatFlags.Default, false);
 		}
 
-		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor)
 		{
-			DrawTextInternal (dc, text, font, bounds, foreColor, Color.Transparent, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter, false);
+			DrawTextInternal (dc, text, font, bounds, foreColor, Color_.Transparent, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter, false);
 		}
 
-		public static void DrawText (IDeviceContext dc, string text, Font font, Point pt, Color foreColor, Color backColor)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor, Color_ backColor)
 		{
 			DrawTextInternal (dc, text, font, pt, foreColor, backColor, TextFormatFlags.Default, false);
 		}
 
-		public static void DrawText (IDeviceContext dc, string text, Font font, Point pt, Color foreColor, TextFormatFlags flags)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor, TextFormatFlags flags)
 		{
-			DrawTextInternal (dc, text, font, pt, foreColor, Color.Transparent, flags, false);
+			DrawTextInternal (dc, text, font, pt, foreColor, Color_.Transparent, flags, false);
 		}
 
-		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor, Color backColor)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor, Color_ backColor)
 		{
 			DrawTextInternal (dc, text, font, bounds, foreColor, backColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter, false);
 		}
 
-		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor, TextFormatFlags flags)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor, TextFormatFlags flags)
 		{
-			DrawTextInternal (dc, text, font, bounds, foreColor, Color.Transparent, flags, false);
+			DrawTextInternal (dc, text, font, bounds, foreColor, Color_.Transparent, flags, false);
 		}
 
-		public static void DrawText (IDeviceContext dc, string text, Font font, Point pt, Color foreColor, Color backColor, TextFormatFlags flags)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor, Color_ backColor, TextFormatFlags flags)
 		{
 			DrawTextInternal (dc, text, font, pt, foreColor, backColor, flags, false);
 		}
 
-		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor, Color backColor, TextFormatFlags flags)
+		public static void DrawText (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor, Color_ backColor, TextFormatFlags flags)
 		{
 			DrawTextInternal (dc, text, font, bounds, foreColor, backColor, flags, false);
 		}
 
-		public static Size MeasureText (string text, Font font)
+		public static Size_ MeasureText (string text, Font font)
 		{
-			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, Size.Empty, TextFormatFlags.Default, false);
+			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, Size_.Empty, TextFormatFlags.Default, false);
 		}
 
-		public static Size MeasureText (IDeviceContext dc, string text, Font font)
+		public static Size_ MeasureText (IDeviceContext dc, string text, Font font)
 		{
-			return MeasureTextInternal (dc, text, font, Size.Empty, TextFormatFlags.Default, false);
+			return MeasureTextInternal (dc, text, font, Size_.Empty, TextFormatFlags.Default, false);
 		}
 
-		public static Size MeasureText (string text, Font font, Size proposedSize)
+		public static Size_ MeasureText (string text, Font font, Size_ proposedSize)
 		{
 			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, proposedSize, TextFormatFlags.Default, false);
 		}
 
-		public static Size MeasureText (IDeviceContext dc, string text, Font font, Size proposedSize)
+		public static Size_ MeasureText (IDeviceContext dc, string text, Font font, Size_ proposedSize)
 		{
 			return MeasureTextInternal (dc, text, font, proposedSize, TextFormatFlags.Default, false);
 		}
 
-		public static Size MeasureText (string text, Font font, Size proposedSize, TextFormatFlags flags)
+		public static Size_ MeasureText (string text, Font font, Size_ proposedSize, TextFormatFlags flags)
 		{
 			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, proposedSize, flags, false);
 		}
 
-		public static Size MeasureText (IDeviceContext dc, string text, Font font, Size proposedSize, TextFormatFlags flags)
+		public static Size_ MeasureText (IDeviceContext dc, string text, Font font, Size_ proposedSize, TextFormatFlags flags)
 		{
 			return MeasureTextInternal (dc, text, font, proposedSize, flags, false);
 		}
 		#endregion
 
 		#region Internal Methods That Do Stuff
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor, Color backColor, TextFormatFlags flags, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor, Color_ backColor, TextFormatFlags flags, bool useDrawString)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
@@ -133,12 +133,12 @@ namespace System.Windows.Forms
 				return;
 
 			// We use MS GDI API's unless told not to, or we aren't on Windows
-			if (!useDrawString && !XplatUI.RunningOnUnix) {
+			if (!useDrawString && XplatUI.RunningOnUnix) {
 				if ((flags & TextFormatFlags.VerticalCenter) == TextFormatFlags.VerticalCenter || (flags & TextFormatFlags.Bottom) == TextFormatFlags.Bottom)
 					flags |= TextFormatFlags.SingleLine;
 
 				// Calculate the text bounds (there is often padding added)
-				Rectangle new_bounds = PadRectangle (bounds, flags);
+				Rectangle_ new_bounds = PadRectangle (bounds, flags);
 				new_bounds.Offset ((int)(dc as Graphics).Transform.OffsetX, (int)(dc as Graphics).Transform.OffsetY);
 
 				IntPtr hdc = IntPtr.Zero;
@@ -163,11 +163,11 @@ namespace System.Windows.Forms
 					hdc = dc.GetHdc ();
 					
 				// Set the fore color
-				if (foreColor != Color.Empty)
+				if (foreColor != Color_.Empty)
 					SetTextColor (hdc, ColorTranslator.ToWin32 (foreColor));
 
 				// Set the back color
-				if (backColor != Color.Transparent && backColor != Color.Empty) {
+				if (backColor != Color_.Transparent && backColor != Color_.Empty) {
 					SetBkMode (hdc, 2);	//1-Transparent, 2-Opaque
 					SetBkColor (hdc, ColorTranslator.ToWin32 (backColor));
 				}
@@ -208,7 +208,7 @@ namespace System.Windows.Forms
 
 				StringFormat sf = FlagsToStringFormat (flags);
 
-				Rectangle new_bounds = PadDrawStringRectangle (bounds, flags);
+				Rectangle_ new_bounds = PadDrawStringRectangle (bounds, flags);
 
 				g.DrawString (text, font, ThemeEngine.Current.ResPool.GetSolidBrush (foreColor), new_bounds, sf);
 
@@ -219,15 +219,15 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal static Size MeasureTextInternal (IDeviceContext dc, string text, Font font, Size proposedSize, TextFormatFlags flags, bool useMeasureString)
+		internal static Size_ MeasureTextInternal (IDeviceContext dc, string text, Font font, Size_ proposedSize, TextFormatFlags flags, bool useMeasureString)
 		{
 			if (!useMeasureString && !XplatUI.RunningOnUnix) {
-				// Tell DrawText to calculate size instead of draw
+				// Tell DrawText to calculate Size_ instead of draw
 				flags |= (TextFormatFlags)1024;		// DT_CALCRECT
 
 				IntPtr hdc = dc.GetHdc ();
 
-				XplatUIWin32.RECT r = XplatUIWin32.RECT.FromRectangle (new Rectangle (Point.Empty, proposedSize));
+				XplatUIWin32.RECT r = XplatUIWin32.RECT.FromRectangle (new Rectangle_ (Point_.Empty, proposedSize));
 
 				IntPtr prevobj;
 
@@ -245,7 +245,7 @@ namespace System.Windows.Forms
 
 				// Really, I am just making something up here, which as far as I can tell, MS
 				// just makes something up as well.  This will require lots of tweaking to match MS.  :(
-				Size retval = r.ToRectangle ().Size;
+				Size_ retval = r.ToRectangle ().Size;
 
 				if (retval.Width > 0 && (flags & TextFormatFlags.NoPadding) == 0) {
 					retval.Width += 6;
@@ -257,7 +257,7 @@ namespace System.Windows.Forms
 			else {
 			StringFormat sf = FlagsToStringFormat (flags);
 
-				Size retval;
+				Size_ retval;
 
 				int proposedWidth;
 				if (proposedSize.Width == 0)
@@ -281,112 +281,112 @@ namespace System.Windows.Forms
 		#endregion
 
 #region Internal Methods That Are Just Overloads
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point pt, Color foreColor, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor, bool useDrawString)
 		{
-			DrawTextInternal (dc, text, font, pt, foreColor, Color.Transparent, TextFormatFlags.Default, useDrawString);
+			DrawTextInternal (dc, text, font, pt, foreColor, Color_.Transparent, TextFormatFlags.Default, useDrawString);
 		}
 
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor, bool useDrawString)
 		{
-			DrawTextInternal (dc, text, font, bounds, foreColor, Color.Transparent, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter, useDrawString);
+			DrawTextInternal (dc, text, font, bounds, foreColor, Color_.Transparent, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter, useDrawString);
 		}
 
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point pt, Color foreColor, Color backColor, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor, Color_ backColor, bool useDrawString)
 		{
 			DrawTextInternal (dc, text, font, pt, foreColor, backColor, TextFormatFlags.Default, useDrawString);
 		}
 
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point pt, Color foreColor, TextFormatFlags flags, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor, TextFormatFlags flags, bool useDrawString)
 		{
-			DrawTextInternal (dc, text, font, pt, foreColor, Color.Transparent, flags, useDrawString);
+			DrawTextInternal (dc, text, font, pt, foreColor, Color_.Transparent, flags, useDrawString);
 		}
 
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor, Color backColor, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor, Color_ backColor, bool useDrawString)
 		{
 			DrawTextInternal (dc, text, font, bounds, foreColor, backColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter, useDrawString);
 		}
 
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle bounds, Color foreColor, TextFormatFlags flags, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Rectangle_ bounds, Color_ foreColor, TextFormatFlags flags, bool useDrawString)
 		{
-			DrawTextInternal (dc, text, font, bounds, foreColor, Color.Transparent, flags, useDrawString);
+			DrawTextInternal (dc, text, font, bounds, foreColor, Color_.Transparent, flags, useDrawString);
 		}
 
-		internal static Size MeasureTextInternal (string text, Font font, bool useMeasureString)
+		internal static Size_ MeasureTextInternal (string text, Font font, bool useMeasureString)
 		{
-			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, Size.Empty, TextFormatFlags.Default, useMeasureString);
+			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, Size_.Empty, TextFormatFlags.Default, useMeasureString);
 		}
 
-		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point pt, Color foreColor, Color backColor, TextFormatFlags flags, bool useDrawString)
+		internal static void DrawTextInternal (IDeviceContext dc, string text, Font font, Point_ pt, Color_ foreColor, Color_ backColor, TextFormatFlags flags, bool useDrawString)
 		{
-			Size sz = MeasureTextInternal (dc, text, font, useDrawString);
-			DrawTextInternal (dc, text, font, new Rectangle (pt, sz), foreColor, backColor, flags, useDrawString);
+			Size_ sz = MeasureTextInternal (dc, text, font, useDrawString);
+			DrawTextInternal (dc, text, font, new Rectangle_ (pt, sz), foreColor, backColor, flags, useDrawString);
 		}
 
-		internal static Size MeasureTextInternal (IDeviceContext dc, string text, Font font, bool useMeasureString)
+		internal static Size_ MeasureTextInternal (IDeviceContext dc, string text, Font font, bool useMeasureString)
 		{
-			return MeasureTextInternal (dc, text, font, Size.Empty, TextFormatFlags.Default, useMeasureString);
+			return MeasureTextInternal (dc, text, font, Size_.Empty, TextFormatFlags.Default, useMeasureString);
 		}
 
-		internal static Size MeasureTextInternal (string text, Font font, Size proposedSize, bool useMeasureString)
+		internal static Size_ MeasureTextInternal (string text, Font font, Size_ proposedSize, bool useMeasureString)
 		{
 			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, proposedSize, TextFormatFlags.Default, useMeasureString);
 		}
 
-		internal static Size MeasureTextInternal (IDeviceContext dc, string text, Font font, Size proposedSize, bool useMeasureString)
+		internal static Size_ MeasureTextInternal (IDeviceContext dc, string text, Font font, Size_ proposedSize, bool useMeasureString)
 		{
 			return MeasureTextInternal (dc, text, font, proposedSize, TextFormatFlags.Default, useMeasureString);
 		}
 
-		internal static Size MeasureTextInternal (string text, Font font, Size proposedSize, TextFormatFlags flags, bool useMeasureString)
+		internal static Size_ MeasureTextInternal (string text, Font font, Size_ proposedSize, TextFormatFlags flags, bool useMeasureString)
 		{
 			return MeasureTextInternal (Hwnd.GraphicsContext, text, font, proposedSize, flags, useMeasureString);
 		}
 #endregion
 
 		#region Thread-Safe Static Graphics Methods
-		internal static SizeF MeasureString (string text, Font font)
+		internal static SizeF_ MeasureString (string text, Font font)
 		{
 			return Hwnd.GraphicsContext.MeasureString (text, font);
 		}
 
-		internal static SizeF MeasureString (string text, Font font, int width)
+		internal static SizeF_ MeasureString (string text, Font font, int width)
 		{
 			return Hwnd.GraphicsContext.MeasureString (text, font, width);
 		}
 
-		internal static SizeF MeasureString (string text, Font font, SizeF layoutArea)
+		internal static SizeF_ MeasureString (string text, Font font, SizeF_ layoutArea)
 		{
 			return Hwnd.GraphicsContext.MeasureString (text, font, layoutArea);
 		}
 
-		internal static SizeF MeasureString (string text, Font font, int width, StringFormat format)
+		internal static SizeF_ MeasureString (string text, Font font, int width, StringFormat format)
 		{
 			return Hwnd.GraphicsContext.MeasureString (text, font, width, format);
 		}
 
-		internal static SizeF MeasureString (string text, Font font, PointF origin, StringFormat stringFormat)
+		internal static SizeF_ MeasureString (string text, Font font, PointF_ origin, StringFormat stringFormat)
 		{
 			return Hwnd.GraphicsContext.MeasureString (text, font, origin, stringFormat);
 		}
 
-		internal static SizeF MeasureString (string text, Font font, SizeF layoutArea, StringFormat stringFormat)
+		internal static SizeF_ MeasureString (string text, Font font, SizeF_ layoutArea, StringFormat stringFormat)
 		{
 			return Hwnd.GraphicsContext.MeasureString (text, font, layoutArea, stringFormat);
 		}
 
-		internal static SizeF MeasureString (string text, Font font, SizeF layoutArea, StringFormat stringFormat, out int charactersFitted, out int linesFilled)
+		internal static SizeF_ MeasureString (string text, Font font, SizeF_ layoutArea, StringFormat stringFormat, out int charactersFitted, out int linesFilled)
 		{
 			return Hwnd.GraphicsContext.MeasureString (text, font, layoutArea, stringFormat, out charactersFitted, out linesFilled);
 		}
 
-		internal static Region[] MeasureCharacterRanges (string text, Font font, RectangleF layoutRect, StringFormat stringFormat)
+		internal static Region[] MeasureCharacterRanges (string text, Font font, RectangleF_ layoutRect, StringFormat stringFormat)
 		{
 			return Hwnd.GraphicsContext.MeasureCharacterRanges (text, font, layoutRect, stringFormat);
 		}
 		
-		internal static SizeF GetDpi ()
+		internal static SizeF_ GetDpi ()
 		{
-			return new SizeF (Hwnd.GraphicsContext.DpiX, Hwnd.GraphicsContext.DpiY);
+			return new SizeF_ (Hwnd.GraphicsContext.DpiX, Hwnd.GraphicsContext.DpiY);
 		}
 		#endregion
 		
@@ -450,7 +450,7 @@ namespace System.Windows.Forms
 			return sf;
 		}
 
-		private static Rectangle PadRectangle (Rectangle r, TextFormatFlags flags)
+		private static Rectangle_ PadRectangle (Rectangle_ r, TextFormatFlags flags)
 		{
 			if ((flags & TextFormatFlags.NoPadding) == 0 && (flags & TextFormatFlags.Right) == 0 && (flags & TextFormatFlags.HorizontalCenter) == 0) {
 				r.X += 3;
@@ -473,7 +473,7 @@ namespace System.Windows.Forms
 			return r;
 		}
 
-		private static Rectangle PadDrawStringRectangle (Rectangle r, TextFormatFlags flags)
+		private static Rectangle_ PadDrawStringRectangle (Rectangle_ r, TextFormatFlags flags)
 		{
 			if ((flags & TextFormatFlags.NoPadding) == 0 && (flags & TextFormatFlags.Right) == 0 && (flags & TextFormatFlags.HorizontalCenter) == 0) {
 				r.X += 1;
@@ -498,10 +498,11 @@ namespace System.Windows.Forms
 
 			return r;
 		}
-#endregion
+        #endregion
 
-#region DllImports (Windows)
-		[DllImport ("user32", CharSet = CharSet.Unicode, EntryPoint = "DrawText")]
+        #region DllImports (Windows)
+#if false
+        [DllImport ("user32", CharSet = CharSet.Unicode, EntryPoint = "DrawText")]
 		static extern int Win32DrawText (IntPtr hdc, string lpStr, int nCount, ref XplatUIWin32.RECT lpRect, int wFormat);
 
 		[DllImport ("gdi32")]
@@ -521,6 +522,28 @@ namespace System.Windows.Forms
 
 		[DllImport("gdi32")]
 		static extern bool SelectClipRgn(IntPtr hdc, IntPtr hrgn);
-#endregion
-	}
+#else
+        [DllImport("nanox.dll", CharSet = CharSet.Ansi, EntryPoint = "DrawTextA")]
+        static extern int Win32DrawText(IntPtr hdc, string lpStr, int nCount, ref XplatUIWin32.RECT lpRect, int wFormat);
+
+        [DllImport("nanox.dll")]
+        static extern int SetTextColor(IntPtr hdc, int crColor);
+
+        [DllImport("nanox.dll")]
+        static extern IntPtr SelectObject(IntPtr hDC, IntPtr hObject);
+
+        [DllImport("nanox.dll")]
+        static extern int SetBkColor(IntPtr hdc, int crColor);
+
+        [DllImport("nanox.dll")]
+        static extern int SetBkMode(IntPtr hdc, int iBkMode);
+
+        [DllImport("nanox.dll")]
+        static extern bool DeleteObject(IntPtr objectHandle);
+
+        [DllImport("nanox.dll")]
+        static extern bool SelectClipRgn(IntPtr hdc, IntPtr hrgn);
+#endif
+        #endregion
+    }
 }

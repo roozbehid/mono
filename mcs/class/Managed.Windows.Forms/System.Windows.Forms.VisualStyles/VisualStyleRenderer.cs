@@ -92,7 +92,7 @@ namespace System.Windows.Forms.VisualStyles
 		#endregion
 
 		#region Public Instance Methods
-		public void DrawBackground (IDeviceContext dc, Rectangle bounds)
+		public void DrawBackground (IDeviceContext dc, Rectangle_ bounds)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
@@ -100,7 +100,7 @@ namespace System.Windows.Forms.VisualStyles
 			last_hresult = VisualStyles.UxThemeDrawThemeBackground (theme, dc, this.part, this.state, bounds);
 		}
 
-		public void DrawBackground (IDeviceContext dc, Rectangle bounds, Rectangle clipRectangle)
+		public void DrawBackground (IDeviceContext dc, Rectangle_ bounds, Rectangle_ clipRectangle)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
@@ -108,17 +108,17 @@ namespace System.Windows.Forms.VisualStyles
 			last_hresult = VisualStyles.UxThemeDrawThemeBackground (theme, dc, this.part, this.state, bounds, clipRectangle);
 		}
 
-		public Rectangle DrawEdge (IDeviceContext dc, Rectangle bounds, Edges edges, EdgeStyle style, EdgeEffects effects)
+		public Rectangle_ DrawEdge (IDeviceContext dc, Rectangle_ bounds, Edges edges, EdgeStyle style, EdgeEffects effects)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
 			
-			Rectangle result;
+			Rectangle_ result;
 			last_hresult = VisualStyles.UxThemeDrawThemeEdge (theme, dc, this.part, this.state, bounds, edges, style, effects, out result);
 			return result;
 		}
 
-		public void DrawImage (Graphics g, Rectangle bounds, ImageList imageList, int imageIndex)
+		public void DrawImage (Graphics g, Rectangle_ bounds, ImageList imageList, int imageIndex)
 		{
 			if (g == null)
 				throw new ArgumentNullException ("g");
@@ -130,7 +130,7 @@ namespace System.Windows.Forms.VisualStyles
 			g.DrawImage (imageList.Images[imageIndex], bounds);
 		}
 
-		public void DrawImage (Graphics g, Rectangle bounds, Image image)
+		public void DrawImage (Graphics g, Rectangle_ bounds, Image image)
 		{
 			if (g == null)
 				throw new ArgumentNullException ("g");
@@ -140,7 +140,7 @@ namespace System.Windows.Forms.VisualStyles
 			g.DrawImage (image, bounds);
 		}
 
-		public void DrawParentBackground (IDeviceContext dc, Rectangle bounds, Control childControl)
+		public void DrawParentBackground (IDeviceContext dc, Rectangle_ bounds, Control childControl)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
@@ -148,7 +148,7 @@ namespace System.Windows.Forms.VisualStyles
 			last_hresult = VisualStyles.UxThemeDrawThemeParentBackground (dc, bounds, childControl);
 		}
 
-		public void DrawText (IDeviceContext dc, Rectangle bounds, string textToDraw, bool drawDisabled, TextFormatFlags flags)
+		public void DrawText (IDeviceContext dc, Rectangle_ bounds, string textToDraw, bool drawDisabled, TextFormatFlags flags)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
@@ -156,38 +156,38 @@ namespace System.Windows.Forms.VisualStyles
 			last_hresult = VisualStyles.UxThemeDrawThemeText (theme, dc, this.part, this.state, textToDraw, flags, bounds);
 		}
 
-		public void DrawText (IDeviceContext dc, Rectangle bounds, string textToDraw, bool drawDisabled)
+		public void DrawText (IDeviceContext dc, Rectangle_ bounds, string textToDraw, bool drawDisabled)
 		{
 			this.DrawText (dc, bounds, textToDraw, drawDisabled, TextFormatFlags.Default);
 		}
 
-		public void DrawText (IDeviceContext dc, Rectangle bounds, string textToDraw)
+		public void DrawText (IDeviceContext dc, Rectangle_ bounds, string textToDraw)
 		{
 			this.DrawText (dc, bounds, textToDraw, false, TextFormatFlags.Default);
 		}
 
-		public Rectangle GetBackgroundContentRectangle (IDeviceContext dc, Rectangle bounds)
+		public Rectangle_ GetBackgroundContentRectangle (IDeviceContext dc, Rectangle_ bounds)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
 
-			Rectangle result;
+			Rectangle_ result;
 			last_hresult = VisualStyles.UxThemeGetThemeBackgroundContentRect (theme, dc, this.part, this.state, bounds, out result);
 			return result;
 		}
 
-		public Rectangle GetBackgroundExtent (IDeviceContext dc, Rectangle contentBounds)
+		public Rectangle_ GetBackgroundExtent (IDeviceContext dc, Rectangle_ contentBounds)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
 
-			Rectangle result;
+			Rectangle_ result;
 			last_hresult = VisualStyles.UxThemeGetThemeBackgroundExtent (theme, dc, this.part, this.state, contentBounds, out result);
 			return result;
 		}
 
 		[System.Security.SuppressUnmanagedCodeSecurity]
-		public Region GetBackgroundRegion (IDeviceContext dc, Rectangle bounds)
+		public Region GetBackgroundRegion (IDeviceContext dc, Rectangle_ bounds)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
@@ -207,12 +207,12 @@ namespace System.Windows.Forms.VisualStyles
 			return result;
 		}
 
-		public Color GetColor (ColorProperty prop)
+		public Color_ GetColor (ColorProperty prop)
 		{
 			if (!Enum.IsDefined (typeof (ColorProperty), prop))
 				throw new System.ComponentModel.InvalidEnumArgumentException ("prop", (int)prop, typeof (ColorProperty));
 
-			Color result;
+			Color_ result;
 			last_hresult = VisualStyles.UxThemeGetThemeColor (theme, this.part, this.state, prop, out result);
 			return result;
 		}
@@ -280,36 +280,36 @@ namespace System.Windows.Forms.VisualStyles
 			return result;
 		}
 		
-		public Size GetPartSize (IDeviceContext dc, Rectangle bounds, ThemeSizeType type)
+		public Size_ GetPartSize (IDeviceContext dc, Rectangle_ bounds, ThemeSizeType type)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
 			if (!Enum.IsDefined (typeof (ThemeSizeType), type))
 				throw new System.ComponentModel.InvalidEnumArgumentException ("prop", (int)type, typeof (ThemeSizeType));
 
-			Size result;
+			Size_ result;
 			last_hresult = VisualStyles.UxThemeGetThemePartSize (theme, dc, this.part, this.state, bounds, type, out result);
 			return result;
 		}
 
-		public Size GetPartSize (IDeviceContext dc, ThemeSizeType type)
+		public Size_ GetPartSize (IDeviceContext dc, ThemeSizeType type)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
 			if (!Enum.IsDefined (typeof (ThemeSizeType), type))
 				throw new System.ComponentModel.InvalidEnumArgumentException ("prop", (int)type, typeof (ThemeSizeType));
 
-			Size result;
+			Size_ result;
 			last_hresult = VisualStyles.UxThemeGetThemePartSize (theme, dc, this.part, this.state, type, out result);
 			return result;
 		}
 
-		public Point GetPoint (PointProperty prop)
+		public Point_ GetPoint (PointProperty prop)
 		{
 			if (!Enum.IsDefined (typeof (PointProperty), prop))
 				throw new System.ComponentModel.InvalidEnumArgumentException ("prop", (int)prop, typeof (PointProperty));
 
-			Point result;
+			Point_ result;
 			last_hresult = VisualStyles.UxThemeGetThemePosition (theme, this.part, this.state, prop, out result);
 			return result;
 		}
@@ -325,22 +325,22 @@ namespace System.Windows.Forms.VisualStyles
 			return result;
 		}
 		
-		public Rectangle GetTextExtent (IDeviceContext dc, Rectangle bounds, string textToDraw, TextFormatFlags flags)
+		public Rectangle_ GetTextExtent (IDeviceContext dc, Rectangle_ bounds, string textToDraw, TextFormatFlags flags)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
 
-			Rectangle result;
+			Rectangle_ result;
 			last_hresult = VisualStyles.UxThemeGetThemeTextExtent (theme, dc, this.part, this.state, textToDraw, flags, bounds, out result);
 			return result;
 		}
 
-		public Rectangle GetTextExtent (IDeviceContext dc, string textToDraw, TextFormatFlags flags)
+		public Rectangle_ GetTextExtent (IDeviceContext dc, string textToDraw, TextFormatFlags flags)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
 
-			Rectangle result;
+			Rectangle_ result;
 			last_hresult = VisualStyles.UxThemeGetThemeTextExtent (theme, dc, this.part, this.state, textToDraw, flags, out result);
 			return result;
 		}
@@ -355,7 +355,7 @@ namespace System.Windows.Forms.VisualStyles
 			return result;
 		}
 
-		public HitTestCode HitTestBackground (IDeviceContext dc, Rectangle backgroundRectangle, IntPtr hRgn, Point pt, HitTestOptions options)
+		public HitTestCode HitTestBackground (IDeviceContext dc, Rectangle_ backgroundRectangle, IntPtr hRgn, Point_ pt, HitTestOptions options)
 		{
 			if (dc == null)
 				throw new ArgumentNullException ("dc");
@@ -365,7 +365,7 @@ namespace System.Windows.Forms.VisualStyles
 			return result;
 		}
 
-		public HitTestCode HitTestBackground (Graphics g, Rectangle backgroundRectangle, Region region, Point pt, HitTestOptions options)
+		public HitTestCode HitTestBackground (Graphics g, Rectangle_ backgroundRectangle, Region region, Point_ pt, HitTestOptions options)
 		{
 			if (g == null)
 				throw new ArgumentNullException ("g");
@@ -375,7 +375,7 @@ namespace System.Windows.Forms.VisualStyles
 			return this.HitTestBackground(g, backgroundRectangle, hRgn, pt, options);
 		}
 
-		public HitTestCode HitTestBackground (IDeviceContext dc, Rectangle backgroundRectangle, Point pt, HitTestOptions options)
+		public HitTestCode HitTestBackground (IDeviceContext dc, Rectangle_ backgroundRectangle, Point_ pt, HitTestOptions options)
 		{
 			return this.HitTestBackground (dc, backgroundRectangle, IntPtr.Zero, pt, options);
 		}
@@ -417,7 +417,7 @@ namespace System.Windows.Forms.VisualStyles
 		#endregion
 
 		#region Private Instance Methods
-		internal void DrawBackgroundExcludingArea (IDeviceContext dc, Rectangle bounds, Rectangle excludedArea)
+		internal void DrawBackgroundExcludingArea (IDeviceContext dc, Rectangle_ bounds, Rectangle_ excludedArea)
 		{
 			VisualStyles.VisualStyleRendererDrawBackgroundExcludingArea (theme, dc, part, state, bounds, excludedArea);
 		}

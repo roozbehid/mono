@@ -39,9 +39,9 @@ namespace System.Windows.Forms
 		#region Public Constructors
 		public ToolStripComboBox () : base (new ToolStripComboBoxControl ())
 		{
-			// The default size of a new ToolStripComboBox doesn't seem
+			// The default Size_ of a new ToolStripComboBox doesn't seem
 			// to be DefaultSize.
-			Size = new Size (121, 21);
+			Size = new Size_ (121, 21);
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
@@ -218,7 +218,7 @@ namespace System.Windows.Forms
 
 		#region Protected Properties
 		protected internal override Padding DefaultMargin { get { return new Padding (1, 0, 1, 0); } }
-		protected override Size DefaultSize { get { return new Size (100, 22); } }
+		protected override Size_ DefaultSize { get { return new Size_ (100, 22); } }
 		#endregion
 
 		#region Public Methods
@@ -257,7 +257,7 @@ namespace System.Windows.Forms
 			return this.ComboBox.GetItemHeight (index);
 		}
 
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
 			return base.GetPreferredSize (constrainingSize);
 		}

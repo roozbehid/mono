@@ -30,7 +30,6 @@
 
 // NOT COMPLETE
 
-
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -92,16 +91,16 @@ namespace System.Windows.Forms
 		static private readonly int keysearch_keydelay = 1000;
 		private int[] reordered_column_indices;
 		private int[] reordered_items_indices;
-		private Point [] items_location;
+		private Point_ [] items_location;
 		private ItemMatrixLocation [] items_matrix_location;
-		private Size item_size; // used for caching item size
+		private Size_ item_size; // used for caching item size
 		private int custom_column_width; // used when using Columns with SmallIcon/List views
 		private int hot_item_index = -1;
 		private bool hot_tracking;
 		private ListViewInsertionMark insertion_mark;
 		private bool show_item_tooltips;
 		private ToolTip item_tooltip;
-		private Size tile_size;
+		private Size_ tile_size;
 		private bool virtual_mode;
 		private int virtual_list_size;
 		private bool right_to_left_layout;
@@ -112,7 +111,7 @@ namespace System.Windows.Forms
 		// internal variables
 		internal ImageList large_image_list;
 		internal ImageList small_image_list;
-		internal Size text_size = Size.Empty;
+		internal Size_ text_size = Size_.Empty;
 
 		#region Events
 		static object AfterLabelEditEvent = new object ();
@@ -268,7 +267,7 @@ namespace System.Windows.Forms
 			foreground_color = SystemColors.WindowText;
 			selected_indices = new SelectedIndexCollection (this);
 			selected_items = new SelectedListViewItemCollection (this);
-			items_location = new Point [16];
+			items_location = new Point_ [16];
 			items_matrix_location = new ItemMatrixLocation [16];
 			reordered_items_indices = new int [16];
 			item_tooltip = new ToolTip ();
@@ -317,7 +316,7 @@ namespace System.Windows.Forms
 		#endregion	// Public Constructors
 
 		#region Private Internal Properties
-		internal Size CheckBoxSize {
+		internal Size_ CheckBoxSize {
 			get {
 				if (this.check_boxes) {
 					if (this.state_image_list != null)
@@ -325,16 +324,16 @@ namespace System.Windows.Forms
 					else
 						return ThemeEngine.Current.ListViewCheckBoxSize;
 				}
-				return Size.Empty;
+				return Size_.Empty;
 			}
 		}
 
-		internal Size ItemSize {
+		internal Size_ ItemSize {
 			get {
 				if (view != View.Details)
 					return item_size;
 
-				Size size = new Size ();
+				Size_ size = new Size_ ();
 				size.Height = item_size.Height;
 				for (int i = 0; i < columns.Count; i++)
 					size.Width += columns [i].Wd;
@@ -384,7 +383,7 @@ namespace System.Windows.Forms
 			get { return base.CreateParams; }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.ListViewDefaultSize; }
 		}
 		protected override bool DoubleBuffered {
@@ -453,7 +452,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get {
 				if (background_color.IsEmpty)
 					return ThemeEngine.Current.ColorWindow;
@@ -555,7 +554,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get {
 				if (foreground_color.IsEmpty)
 					return ThemeEngine.Current.ColorWindowText;
@@ -903,7 +902,7 @@ namespace System.Windows.Forms
 		}
 
 		[Browsable (true)]
-		public Size TileSize {
+		public Size_ TileSize {
 			get {
 				return tile_size;
 			}
@@ -934,7 +933,7 @@ namespace System.Windows.Forms
 				else {
 					int header_offset = header_control.Height;
 					for (int i = 0; i < items.Count; i++) {
-						Point item_loc = GetItemLocation (i);
+						Point_ item_loc = GetItemLocation (i);
 						if (item_loc.X >= 0 && item_loc.Y - header_offset >= 0)
 							return items [i];
 					}
@@ -1050,7 +1049,7 @@ namespace System.Windows.Forms
 				if (h_marker == 0 && v_marker == 0)
 					return 0;
 				
-				Size item_size = ItemSize;
+				Size_ item_size = ItemSize;
 				// In virtual mode we always have fixed positions, and we can infer the positon easily
 				if (virtual_mode) {
 					int first = 0;
@@ -1073,7 +1072,7 @@ namespace System.Windows.Forms
 					return first;
 				}
 				for (int i = 0; i < items.Count; i++) {
-					Rectangle item_rect = new Rectangle (GetItemLocation (i), item_size);
+					Rectangle_ item_rect = new Rectangle_ (GetItemLocation (i), item_size);
 					if (item_rect.Right >= 0 && item_rect.Bottom >= 0)
 						return i;
 				}
@@ -1137,13 +1136,13 @@ namespace System.Windows.Forms
 
 		const int text_padding = 15;
 
-		internal Size GetChildColumnSize (int index)
+		internal Size_ GetChildColumnSize (int index)
 		{
-			Size ret_size = Size.Empty;
+			Size_ ret_size = Size_.Empty;
 			ColumnHeader col = this.columns [index];
 
 			if (col.Width == -2) { // autosize = max(items, columnheader)
-				Size size = Size.Ceiling (TextRenderer.MeasureString
+				Size_ size = Size_.Ceiling (TextRenderer.MeasureString
 					(col.Text, this.Font));
 				size.Width += text_padding;
 				ret_size = BiggestItem (index);
@@ -1156,7 +1155,7 @@ namespace System.Windows.Forms
 				if (ret_size.IsEmpty) {
 					ret_size.Width = ThemeEngine.Current.ListViewEmptyColumnWidth;
 					if (col.Text.Length > 0)
-						ret_size.Height = Size.Ceiling (TextRenderer.MeasureString
+						ret_size.Height = Size_.Ceiling (TextRenderer.MeasureString
 										(col.Text, this.Font)).Height;
 					else
 						ret_size.Height = this.Font.Height;
@@ -1165,7 +1164,7 @@ namespace System.Windows.Forms
 
 			ret_size.Height += text_padding;
 
-			// adjust the size for icon and checkbox for 0th column
+			// adjust the Size_ for icon and checkbox for 0th column
 			if (index == 0) {
 				ret_size.Width += (this.CheckBoxSize.Width + 4);
 				if (this.small_image_list != null)
@@ -1174,31 +1173,31 @@ namespace System.Windows.Forms
 			return ret_size;
 		}
 
-		// Returns the size of biggest item text in a column
+		// Returns the Size_ of biggest item text in a column
 		// or the sum of the text and indent count if we are on 2.0
-		private Size BiggestItem (int col)
+		private Size_ BiggestItem (int col)
 		{
-			Size temp = Size.Empty;
-			Size ret_size = Size.Empty;
+			Size_ temp = Size_.Empty;
+			Size_ ret_size = Size_.Empty;
     			bool use_indent_count = small_image_list != null;
 
 			// VirtualMode uses the first item text size
 			if (virtual_mode && items.Count > 0) {
 				ListViewItem item = items [0];
-				ret_size = Size.Ceiling (TextRenderer.MeasureString (item.SubItems[col].Text,
+				ret_size = Size_.Ceiling (TextRenderer.MeasureString (item.SubItems[col].Text,
 							Font));
 
 				if (use_indent_count)
 					ret_size.Width += item.IndentCount * small_image_list.ImageSize.Width;
 			} else {
-				// 0th column holds the item text, we check the size of
+				// 0th column holds the item text, we check the Size_ of
 				// the various subitems falling in that column and get
 				// the biggest one's size.
 				foreach (ListViewItem item in items) {
 					if (col >= item.SubItems.Count)
 						continue;
 
-					temp = Size.Ceiling (TextRenderer.MeasureString
+					temp = Size_.Ceiling (TextRenderer.MeasureString
 								(item.SubItems [col].Text, Font));
 
 					if (use_indent_count)
@@ -1218,11 +1217,11 @@ namespace System.Windows.Forms
 
 		const int max_wrap_padding = 30;
 
-		// Sets the size of the biggest item text as per the view
+		// Sets the Size_ of the biggest item text as per the view
 		private void CalcTextSize ()
 		{
-			// clear the old value
-			text_size = Size.Empty;
+            // clear the old value
+            text_size = Size_.Empty;
 
 			if (items.Count == 0)
 				return;
@@ -1230,7 +1229,7 @@ namespace System.Windows.Forms
 			text_size = BiggestItem (0);
 
 			if (view == View.LargeIcon && this.label_wrap) {
-				Size temp = Size.Empty;
+				Size_ temp = Size_.Empty;
 				if (this.check_boxes)
 					temp.Width += 2 * this.CheckBoxSize.Width;
 				int icon_w = LargeImageList == null ? 12 : LargeImageList.ImageSize.Width;
@@ -1289,15 +1288,15 @@ namespace System.Windows.Forms
 
 		private void CalculateScrollBars ()
 		{
-			Rectangle client_area = ClientRectangle;
+			Rectangle_ client_area = ClientRectangle;
 			int height = client_area.Height;
 			int width = client_area.Width;
-			Size item_size;
+			Size_ item_size;
 			
 			if (!scrollable) {
 				h_scroll.Visible = false;
 				v_scroll.Visible = false;
-				item_control.Size = new Size (width, height);
+				item_control.Size = new Size_ (width, height);
 				header_control.Width = width;
 				return;
 			}
@@ -1329,7 +1328,7 @@ namespace System.Windows.Forms
 			item_size = ItemSize;
 
 			if (h_scroll.is_visible) {
-				h_scroll.Location = new Point (client_area.X, client_area.Bottom - h_scroll.Height);
+				h_scroll.Location = new Point_ (client_area.X, client_area.Bottom - h_scroll.Height);
 				h_scroll.Minimum = 0;
 
 				// if v_scroll is visible, adjust the maximum of the
@@ -1353,7 +1352,7 @@ namespace System.Windows.Forms
 			}
 
 			if (v_scroll.is_visible) {
-				v_scroll.Location = new Point (client_area.Right - v_scroll.Width, client_area.Y);
+				v_scroll.Location = new Point_ (client_area.Right - v_scroll.Width, client_area.Y);
 				v_scroll.Minimum = 0;
 
 				// if h_scroll is visible, adjust the height of
@@ -1378,7 +1377,7 @@ namespace System.Windows.Forms
 				width -= v_scroll.Width;
 			}
 			
-			item_control.Size = new Size (width, height);
+			item_control.Size = new Size_ (width, height);
 
 			if (header_control.is_visible)
 				header_control.Width = width;
@@ -1484,7 +1483,7 @@ namespace System.Windows.Forms
 			Invalidate ();
 		}
 
-		Size LargeIconItemSize
+		Size_ LargeIconItemSize
 		{
 			get {
 				int image_w = LargeImageList == null ? 12 : LargeImageList.ImageSize.Width;
@@ -1495,11 +1494,11 @@ namespace System.Windows.Forms
 				if (check_boxes)
 					w += 2 + CheckBoxSize.Width;
 
-				return new Size (w, h);
+				return new Size_ (w, h);
 			}
 		}
 
-		Size SmallIconItemSize {
+		Size_ SmallIconItemSize {
 			get {
 				int image_w = SmallImageList == null ? 0 : SmallImageList.ImageSize.Width;
 				int image_h = SmallImageList == null ? 0 : SmallImageList.ImageSize.Height;
@@ -1509,22 +1508,22 @@ namespace System.Windows.Forms
 				if (check_boxes)
 					w += 2 + CheckBoxSize.Width;
 
-				return new Size (w, h);
+				return new Size_ (w, h);
 			}
 		}
 
-		Size TileItemSize {
+		Size_ TileItemSize {
 			get {
-				// Calculate tile size if needed
+				// Calculate tile Size_ if needed
 				// It appears that using Font.Size instead of a SizeF value can give us
 				// a slightly better approach to the proportions defined in .Net
-				if (tile_size == Size.Empty) {
+				if (tile_size == Size_.Empty) {
 					int image_w = LargeImageList == null ? 0 : LargeImageList.ImageSize.Width;
 					int image_h = LargeImageList == null ? 0 : LargeImageList.ImageSize.Height;
-					int w = (int)Font.Size * ThemeEngine.Current.ListViewTileWidthFactor + image_w + 4;
-					int h = Math.Max ((int)Font.Size * ThemeEngine.Current.ListViewTileHeightFactor, image_h);
-				
-					tile_size = new Size (w, h);
+					int w = (int)base.Font.Size * ThemeEngine.Current.ListViewTileWidthFactor + image_w + 4;
+					int h = Math.Max ((int)base.Font.Size * ThemeEngine.Current.ListViewTileHeightFactor, image_h);
+
+                    tile_size = new Size_ (w, h);
 				}
 			
 				return tile_size;
@@ -1543,11 +1542,11 @@ namespace System.Windows.Forms
 
 		void SetItemLocation (int index, int x, int y, int row, int col)
 		{
-			Point old_location = items_location [index];
+			Point_ old_location = items_location [index];
 			if (old_location.X == x && old_location.Y == y)
 				return;
 
-			items_location [index] = new Point (x, y);
+			items_location [index] = new Point_ (x, y);
 			items_matrix_location [index] = new ItemMatrixLocation (row, col);
 
 			//
@@ -1580,7 +1579,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal void ChangeItemLocation (int display_index, Point new_pos)
+		internal void ChangeItemLocation (int display_index, Point_ new_pos)
 		{
 			int new_display_index = GetDisplayIndexFromLocation (new_pos);
 			if (new_display_index == display_index)
@@ -1608,10 +1607,10 @@ namespace System.Windows.Forms
 			item.Invalidate ();
 		}
 
-		int GetDisplayIndexFromLocation (Point loc)
+		int GetDisplayIndexFromLocation (Point_ loc)
 		{
 			int display_index = -1;
-			Rectangle item_area;
+			Rectangle_ item_area;
 
 			// First item
 			if (loc.X < 0 || loc.Y < 0)
@@ -1623,7 +1622,7 @@ namespace System.Windows.Forms
 				loc.X = 0;
 
 			for (int i = 0; i < items.Count; i++) {
-				item_area = new Rectangle (GetItemLocation (i), item_size);
+				item_area = new Rectangle_ (GetItemLocation (i), item_size);
 				item_area.Inflate (ThemeEngine.Current.ListViewHorizontalSpacing,
 						ThemeEngine.Current.ListViewVerticalSpacing);
 
@@ -1659,9 +1658,9 @@ namespace System.Windows.Forms
 		int cols;
 		int[,] item_index_matrix;
 
-		void CalculateRowsAndCols (Size item_size, bool left_aligned, int x_spacing, int y_spacing)
+		void CalculateRowsAndCols (Size_ item_size, bool left_aligned, int x_spacing, int y_spacing)
 		{
-			Rectangle area = ClientRectangle;
+			Rectangle_ area = ClientRectangle;
 
 			if (UseCustomColumnWidth)
 				CalculateCustomColumnWidth ();
@@ -1731,12 +1730,12 @@ namespace System.Windows.Forms
 			custom_column_width = min_width;
 		}
 
-		void LayoutIcons (Size item_size, bool left_aligned, int x_spacing, int y_spacing)
+		void LayoutIcons (Size_ item_size, bool left_aligned, int x_spacing, int y_spacing)
 		{
 			header_control.Visible = false;
-			header_control.Size = Size.Empty;
+            header_control.Size = Size_.Empty;
 			item_control.Visible = true;
-			item_control.Location = Point.Empty;
+			item_control.Location = Point_.Empty;
 			ItemSize = item_size; // Cache item size
 			this.x_spacing = x_spacing;
 			this.y_spacing = y_spacing;
@@ -1744,7 +1743,7 @@ namespace System.Windows.Forms
 			if (items.Count == 0)
 				return;
 
-			Size sz = item_size;
+			Size_ sz = item_size;
 
 			CalculateRowsAndCols (sz, left_aligned, x_spacing, y_spacing);
 
@@ -1752,7 +1751,7 @@ namespace System.Windows.Forms
 			layout_ht = rows * (sz.Height + y_spacing) - y_spacing;
 
 			if (virtual_mode) { // no actual assignment is needed on items for virtual mode
-				item_control.Size = new Size (layout_wd, layout_ht);
+				item_control.Size = new Size_ (layout_wd, layout_ht);
 				return;
 			}
 
@@ -1771,7 +1770,7 @@ namespace System.Windows.Forms
 					if (group == null)
 						group = groups.DefaultGroup;
 
-					Point group_items_loc = group.items_area_location;
+					Point_ group_items_loc = group.items_area_location;
 					int current_item = group.current_item++;
 					int starting_row = group.starting_row;
 
@@ -1811,13 +1810,13 @@ namespace System.Windows.Forms
 
 				item.Layout ();
 				item.DisplayIndex = display_index;
-				item.SetPosition (new Point (x, y));
+				item.SetPosition (new Point_ (x, y));
 			}
 
-			item_control.Size = new Size (layout_wd, layout_ht);
+			item_control.Size = new Size_ (layout_wd, layout_ht);
 		}
 
-		void CalculateGroupsLayout (Size item_size, int y_spacing, int y_origin)
+		void CalculateGroupsLayout (Size_ item_size, int y_spacing, int y_origin)
 		{
 			int y = y_origin;
 			bool details = view == View.Details;
@@ -1835,11 +1834,11 @@ namespace System.Windows.Forms
 
 		int LayoutGroupHeader (ListViewGroup group, int y_origin, int item_height, int y_spacing, int rows)
 		{
-			Rectangle client_area = ClientRectangle;
+			Rectangle_ client_area = ClientRectangle;
 			int header_height = Font.Height + 15; // one line height + some padding
 
-			group.HeaderBounds = new Rectangle (0, y_origin, client_area.Width - v_scroll.Width, header_height);
-			group.items_area_location = new Point (0, y_origin + header_height);
+			group.HeaderBounds = new Rectangle_ (0, y_origin, client_area.Width - v_scroll.Width, header_height);
+			group.items_area_location = new Point_ (0, y_origin + header_height);
 
 			int items_area_height = ((item_height + y_spacing) * rows);
 			return header_height + items_area_height + 10; // Add a small bottom margin
@@ -1881,7 +1880,7 @@ namespace System.Windows.Forms
 
 			if (header_style == ColumnHeaderStyle.None) {
 				header_control.Visible = false;
-				header_control.Size = Size.Empty;
+                header_control.Size = Size_.Empty;
 				layout_wd = ClientRectangle.Width;
 			} else {
 				header_control.Width = x;
@@ -1902,12 +1901,12 @@ namespace System.Windows.Forms
 			}
 
 			item_control.Visible = true;
-			item_control.Location = Point.Empty;
+			item_control.Location = Point_.Empty;
 			item_control.Width = ClientRectangle.Width;
 			AdjustChildrenZOrder ();
 
 			int item_height = GetDetailsItemHeight ();
-			ItemSize = new Size (0, item_height); // We only cache Height for details view
+			ItemSize = new Size_ (0, item_height); // We only cache Height for details view
 			int y = header_control.Height;
 			layout_ht = y + (item_height * items.Count);
 			if (items.Count > 0 && grid_lines) // some space for bottom gridline
@@ -1935,7 +1934,7 @@ namespace System.Windows.Forms
 						group = groups.DefaultGroup;
 
 					int current_item = group.current_item++;
-					Point group_items_loc = group.items_area_location;
+					Point_ group_items_loc = group.items_area_location;
 					display_index = group.starting_item + current_item;
 
 					y = item_y = current_item * (item_height + 2) + group_items_loc.Y;
@@ -1951,7 +1950,7 @@ namespace System.Windows.Forms
 
 				item.Layout ();
 				item.DisplayIndex = display_index;
-				item.SetPosition (new Point (0, item_y));
+				item.SetPosition (new Point_ (0, item_y));
 			}
 		}
 
@@ -1978,7 +1977,7 @@ namespace System.Windows.Forms
 
 			// items_location, items_matrix_location and reordered_items_indices must keep the same length
 			count = Math.Max (count, items_location.Length * 2);
-			items_location = new Point [count];
+			items_location = new Point_ [count];
 			items_matrix_location = new ItemMatrixLocation [count];
 			reordered_items_indices = new int [count];
 		}
@@ -2022,9 +2021,9 @@ namespace System.Windows.Forms
 			CalculateScrollBars ();
 		}
 
-		internal Point GetItemLocation (int index)
+		internal Point_ GetItemLocation (int index)
 		{
-			Point loc = Point.Empty;
+			Point_ loc = Point_.Empty;
 			if (virtual_mode)
 				loc = GetFixedItemLocation (index);
 			else
@@ -2036,9 +2035,9 @@ namespace System.Windows.Forms
 			return loc;
 		}
 
-		Point GetFixedItemLocation (int index)
+		Point_ GetFixedItemLocation (int index)
 		{
-			Point loc = Point.Empty;
+			Point_ loc = Point_.Empty;
 
 			switch (view) {
 				case View.LargeIcon:
@@ -2132,7 +2131,7 @@ namespace System.Windows.Forms
 					break;
 				case Keys.PageDown:
 					int last_index = LastVisibleIndex;
-					Rectangle item_rect = new Rectangle (GetItemLocation (last_index), ItemSize);
+					Rectangle_ item_rect = new Rectangle_ (GetItemLocation (last_index), ItemSize);
 					if (item_rect.Bottom > item_control.ClientRectangle.Bottom)
 						last_index--;
 					if (FocusedItem.DisplayIndex == last_index) {
@@ -2431,7 +2430,7 @@ namespace System.Windows.Forms
 
 		private MouseEventArgs TranslateMouseEventArgs (MouseEventArgs args)
 		{
-			Point loc = PointToClient (Control.MousePosition);
+			Point_ loc = PointToClient (Control.MousePosition);
 			return new MouseEventArgs (args.Button, args.Clicks, loc.X, loc.Y, args.Delta);
 		}
 
@@ -2445,7 +2444,7 @@ namespace System.Windows.Forms
 			ListViewItem prev_hovered_item;
 			ListViewItem prev_tooltip_item;
 			int clicks;
-			Point drag_begin = new Point (-1, -1);
+			Point_ drag_begin = new Point_ (-1, -1);
 			internal int dragged_item_index = -1;
 			
 			ListViewLabelEditTextBox edit_text_box;
@@ -2478,10 +2477,10 @@ namespace System.Windows.Forms
 
 			BoxSelect box_select_mode = BoxSelect.None;
 			IList prev_selection;
-			Point box_select_start;
+			Point_ box_select_start;
 
-			Rectangle box_select_rect;
-			internal Rectangle BoxSelectRectangle {
+			Rectangle_ box_select_rect;
+			internal Rectangle_ BoxSelectRectangle {
 				get { return box_select_rect; }
 				set {
 					if (box_select_rect == value)
@@ -2498,7 +2497,7 @@ namespace System.Windows.Forms
 				if (BoxSelectRectangle.Size.IsEmpty)
 					return;
 
-				Rectangle edge = BoxSelectRectangle;
+				Rectangle_ edge = BoxSelectRectangle;
 				edge.X -= 1;
 				edge.Y -= 1;
 				edge.Width += 2;
@@ -2514,7 +2513,7 @@ namespace System.Windows.Forms
 				Invalidate (edge);
 			}
 
-			private Rectangle CalculateBoxSelectRectangle (Point pt)
+			private Rectangle_ CalculateBoxSelectRectangle (Point_ pt)
 			{
 				int left = Math.Min (box_select_start.X, pt.X);
 				int right = Math.Max (box_select_start.X, pt.X);
@@ -2525,7 +2524,7 @@ namespace System.Windows.Forms
 
 			bool BoxIntersectsItem (int index)
 			{
-				Rectangle r = new Rectangle (owner.GetItemLocation (index), owner.ItemSize);
+				Rectangle_ r = new Rectangle_ (owner.GetItemLocation (index), owner.ItemSize);
 				if (owner.View != View.Details) {
 					r.X += r.Width / 4;
 					r.Y += r.Height / 4;
@@ -2537,7 +2536,7 @@ namespace System.Windows.Forms
 
 			bool BoxIntersectsText (int index)
 			{
-				Rectangle r = owner.GetItemAtDisplayIndex (index).TextBounds;
+				Rectangle_ r = owner.GetItemAtDisplayIndex (index).TextBounds;
 				return BoxSelectRectangle.IntersectsWith (r);
 			}
 
@@ -2559,7 +2558,7 @@ namespace System.Windows.Forms
 				}
 			}
 
-			private bool PerformBoxSelection (Point pt)
+			private bool PerformBoxSelection (Point_ pt)
 			{
 				if (box_select_mode == BoxSelect.None)
 					return false;
@@ -2612,10 +2611,10 @@ namespace System.Windows.Forms
 					return;
 
 				bool box_selecting = false;
-				Size item_size = owner.ItemSize;
-				Point pt = new Point (me.X, me.Y);
+				Size_ item_size = owner.ItemSize;
+				Point_ pt = new Point_ (me.X, me.Y);
 				for (int i = 0; i < owner.items.Count; i++) {
-					Rectangle item_rect = new Rectangle (owner.GetItemLocation (i), item_size);
+					Rectangle_ item_rect = new Rectangle_ (owner.GetItemLocation (i), item_size);
 					if (!item_rect.Contains (pt))
 						continue;
 
@@ -2719,7 +2718,7 @@ namespace System.Windows.Forms
 
 			private void ItemsMouseMove (object sender, MouseEventArgs me)
 			{
-				bool done = PerformBoxSelection (new Point (me.X, me.Y));
+				bool done = PerformBoxSelection (new Point_ (me.X, me.Y));
 
 				owner.OnMouseMove (owner.TranslateMouseEventArgs (me));
 
@@ -2731,7 +2730,7 @@ namespace System.Windows.Forms
 						)
 					return;
 
-				Point pt = PointToClient (Control.MousePosition);
+				Point_ pt = PointToClient (Control.MousePosition);
 				ListViewItem item = owner.GetItemAt (pt.X, pt.Y);
 
 				if (hover_processed && item != null && item != prev_hovered_item) {
@@ -2757,13 +2756,13 @@ namespace System.Windows.Forms
 				}
 
 				if (me.Button == MouseButtons.Left || me.Button == MouseButtons.Right) {
-					if (drag_begin != new Point (-1, -1)) {
-						Rectangle r = new Rectangle (drag_begin, SystemInformation.DragSize);
+					if (drag_begin != new Point_ (-1, -1)) {
+						Rectangle_ r = new Rectangle_ (drag_begin, SystemInformation.DragSize);
 						if (!r.Contains (me.X, me.Y)) {
 							ListViewItem dragged_item  = owner.items [dragged_item_index];
 							owner.OnItemDrag (new ItemDragEventArgs (me.Button, dragged_item));
 
-							drag_begin = new Point (-1, -1);
+							drag_begin = new Point_ (-1, -1);
 							dragged_item_index = -1;
 						}
 					}
@@ -2793,7 +2792,7 @@ namespace System.Windows.Forms
 					return;
 
 				hover_processed = true;
-				Point pt = PointToClient (Control.MousePosition);
+				Point_ pt = PointToClient (Control.MousePosition);
 				ListViewItem item = owner.GetItemAt (pt.X, pt.Y);
 				if (item == null)
 					return;
@@ -2840,9 +2839,9 @@ namespace System.Windows.Forms
 					return;
 				}
 
-				Point pt = new Point (me.X, me.Y);
+				Point_ pt = new Point_ (me.X, me.Y);
 
-				Rectangle rect = Rectangle.Empty;
+				Rectangle_ rect = Rectangle_.Empty;
 				if (clicked_item != null) {
 					if (owner.view == View.Details && !owner.full_row_select)
 						rect = clicked_item.GetBounds (ItemBoundsPortion.Label);
@@ -2879,8 +2878,8 @@ namespace System.Windows.Forms
 			private void ResetMouseState ()
 			{				
 				clicked_item = null;
-				box_select_start = Point.Empty;
-				BoxSelectRectangle = Rectangle.Empty;
+				box_select_start = Point_.Empty;
+				BoxSelectRectangle = Rectangle_.Empty;
 				prev_selection = null;
 				box_select_mode = BoxSelect.None;
 				checking = false;
@@ -2888,7 +2887,7 @@ namespace System.Windows.Forms
 				// Clean these bits in case the mouse buttons were
 				// released before firing ItemDrag
 				dragged_item_index = -1;
-				drag_begin = new Point (-1, -1);
+				drag_begin = new Point_ (-1, -1);
 			}
 			
 			private void LabelEditFinished (object sender, EventArgs e)
@@ -2933,7 +2932,7 @@ namespace System.Windows.Forms
 					case View.Details:
 						edit_text_box.TextAlign = HorizontalAlignment.Left;
 						edit_text_box.Bounds = item.GetBounds (ItemBoundsPortion.Label);
-						SizeF sizef = TextRenderer.MeasureString (item.Text, item.Font);
+						SizeF_ sizef = TextRenderer.MeasureString (item.Text, item.Font);
 						edit_text_box.Width = (int)sizef.Width + 4;
 						edit_text_box.MaxWidth = owner.ClientRectangle.Width - edit_text_box.Bounds.X;
 						edit_text_box.WordWrap = false;
@@ -3045,7 +3044,7 @@ namespace System.Windows.Forms
 			
 			int old_number_lines = 1;
 			
-			SizeF text_size_one_char;
+			SizeF_ text_size_one_char;
 			
 			public ListViewLabelEditTextBox ()
 			{
@@ -3093,7 +3092,7 @@ namespace System.Windows.Forms
 			
 			protected override void OnTextChanged (EventArgs e)
 			{
-				SizeF text_size = TextRenderer.MeasureString (Text, Font);
+				SizeF_ text_size = TextRenderer.MeasureString (Text, Font);
 				
 				int new_width = (int)text_size.Width + 8;
 				
@@ -3330,7 +3329,7 @@ namespace System.Windows.Forms
 			// kept pressed at the end
 			if (v_marker != v_scroll.Value) {
 				int pixels = v_marker - v_scroll.Value;
-				Rectangle area = item_control.ClientRectangle;
+				Rectangle_ area = item_control.ClientRectangle;
 				if (header_control.Visible) {
 					area.Y += header_control.Height;
 					area.Height -= header_control.Height;
@@ -3655,9 +3654,9 @@ namespace System.Windows.Forms
 			if (index < 0 || index >= items.Count || scrollable == false || updating)
 				return;
 
-			Rectangle view_rect = item_control.ClientRectangle;
+			Rectangle_ view_rect = item_control.ClientRectangle;
 			// Avoid direct access to items in virtual mode, and use item bounds otherwise, since we could have reordered items
-			Rectangle bounds = virtual_mode ? new Rectangle (GetItemLocation (index), ItemSize) : items [index].Bounds;
+			Rectangle_ bounds = virtual_mode ? new Rectangle_ (GetItemLocation (index), ItemSize) : items [index].Bounds;
 
 			if (view == View.Details && header_style != ColumnHeaderStyle.None) {
 				view_rect.Y += header_control.Height;
@@ -3709,7 +3708,7 @@ namespace System.Windows.Forms
 
 			if (virtual_mode) {
 				SearchForVirtualItemEventArgs args = new SearchForVirtualItemEventArgs (true,
-						isPrefixSearch, includeSubItemsInSearch, text, Point.Empty, 
+						isPrefixSearch, includeSubItemsInSearch, text, Point_.Empty, 
 						SearchDirectionHint.Down, startIndex);
 
 				OnSearchForVirtualItem (args);
@@ -3762,10 +3761,10 @@ namespace System.Windows.Forms
 
 		public ListViewItem FindNearestItem (SearchDirectionHint searchDirection, int x, int y)
 		{
-			return FindNearestItem (searchDirection, new Point (x, y));
+			return FindNearestItem (searchDirection, new Point_ (x, y));
 		}
 
-		public ListViewItem FindNearestItem (SearchDirectionHint dir, Point point)
+		public ListViewItem FindNearestItem (SearchDirectionHint dir, Point_ point)
 		{
 			if (dir < SearchDirectionHint.Left || dir > SearchDirectionHint.Down)
 				throw new ArgumentOutOfRangeException ("searchDirection");
@@ -3808,7 +3807,7 @@ namespace System.Windows.Forms
 			}
 
 			for (int i = 0; i < items.Count; i++) {
-				Point item_loc = GetItemLocation (i);
+				Point_ item_loc = GetItemLocation (i);
 
 				if (dir == SearchDirectionHint.Up) {
 					if (point.Y < item_loc.Y)
@@ -3839,9 +3838,9 @@ namespace System.Windows.Forms
 		
 		public ListViewItem GetItemAt (int x, int y)
 		{
-			Size item_size = ItemSize;
+			Size_ item_size = ItemSize;
 			for (int i = 0; i < items.Count; i++) {
-				Rectangle item_rect = items [i].Bounds;
+				Rectangle_ item_rect = items [i].Bounds;
 				if (item_rect.Contains (x, y))
 					return items [i];
 			}
@@ -3849,12 +3848,12 @@ namespace System.Windows.Forms
 			return null;
 		}
 
-		public Rectangle GetItemRect (int index)
+		public Rectangle_ GetItemRect (int index)
 		{
 			return GetItemRect (index, ItemBoundsPortion.Entire);
 		}
 
-		public Rectangle GetItemRect (int index, ItemBoundsPortion portion)
+		public Rectangle_ GetItemRect (int index, ItemBoundsPortion portion)
 		{
 			if (index < 0 || index >= items.Count)
 				throw new IndexOutOfRangeException ("index");
@@ -3862,7 +3861,7 @@ namespace System.Windows.Forms
 			return items [index].GetBounds (portion);
 		}
 
-		public ListViewHitTestInfo HitTest (Point point)
+		public ListViewHitTestInfo HitTest (Point_ point)
 		{
 			return HitTest (point.X, point.Y);
 		}
@@ -4007,7 +4006,7 @@ namespace System.Windows.Forms
 
 			private ColumnHeader ColumnAtX (int x)
 			{
-				Point pt = new Point (x, 0);
+				Point_ pt = new Point_ (x, 0);
 				ColumnHeader result = null;
 				foreach (ColumnHeader col in owner.Columns) {
 					if (col.Rect.Contains (pt)) {
@@ -4058,9 +4057,9 @@ namespace System.Windows.Forms
 				Invalidate (GetColumnHeaderInvalidateArea (columnHeader));
 			}
 
-			Rectangle GetColumnHeaderInvalidateArea (ColumnHeader columnHeader)
+			Rectangle_ GetColumnHeaderInvalidateArea (ColumnHeader columnHeader)
 			{
-				Rectangle bounds = columnHeader.Rect;
+				Rectangle_ bounds = columnHeader.Rect;
 				bounds.X -= owner.h_marker;
 				return bounds;
 			}
@@ -4075,7 +4074,7 @@ namespace System.Windows.Forms
 			
 			private void HeaderMouseMove (object sender, MouseEventArgs me)
 			{
-				Point pt = new Point (me.X + owner.h_marker, me.Y);
+				Point_ pt = new Point_ (me.X + owner.h_marker, me.Y);
 
 				if (column_resize_active) {
 					int width = pt.X - resize_column.X;
@@ -4094,7 +4093,7 @@ namespace System.Windows.Forms
 
 				if (clicked_column != null) {
 					if (owner.AllowColumnReorder) {
-						Rectangle r;
+						Rectangle_ r;
 
 						r = drag_column.Rect;
 						r.X = clicked_column.Rect.X + me.X - drag_x;
@@ -4120,7 +4119,7 @@ namespace System.Windows.Forms
 				}
 
 				for (int i = 0; i < owner.Columns.Count; i++) {
-					Rectangle zone = owner.Columns [i].Rect;
+					Rectangle_ zone = owner.Columns [i].Rect;
 					if (zone.Contains (pt))
 						EnteredColumnHeader = owner.Columns [i];
 					zone.X = zone.Right - 5;
@@ -6040,7 +6039,7 @@ namespace System.Windows.Forms
 		static object UIACheckBoxesChangedEvent = new object ();
 		static object UIAFocusedItemChangedEvent = new object ();
 
-		internal Rectangle UIAHeaderControl {
+		internal Rectangle_ UIAHeaderControl {
 			get { return header_control.Bounds; }
 		}
 
@@ -6095,7 +6094,7 @@ namespace System.Windows.Forms
 			remove { Events.RemoveHandler (UIAFocusedItemChangedEvent, value); }
 		}
 
-		internal Rectangle UIAGetHeaderBounds (ListViewGroup group)
+		internal Rectangle_ UIAGetHeaderBounds (ListViewGroup group)
 		{
 			return group.HeaderBounds;
 		}

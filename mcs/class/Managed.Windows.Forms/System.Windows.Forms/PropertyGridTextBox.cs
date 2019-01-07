@@ -24,8 +24,8 @@
 //
 
 // COMPLETE
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 
@@ -35,10 +35,10 @@ namespace System.Windows.Forms.PropertyGridInternal
 	{
 		private bool _focusing = false;
 
-		public void FocusAt (Point location)
+		public void FocusAt (Point_ location)
 		{
 			_focusing = true;
-			Point pnt = PointToClient (location);
+			Point_ pnt = PointToClient (location);
 			XplatUI.SendMessage (Handle, Msg.WM_LBUTTONDOWN, new IntPtr ((int)MsgButtons.MK_LBUTTON), Control.MakeParam (pnt.X, pnt.Y));
 		}
 
@@ -84,14 +84,14 @@ namespace System.Windows.Forms.PropertyGridInternal
 
 			dialog_button.Dock = DockStyle.Right;
 			dialog_button.BackColor = SystemColors.Control;
-			dialog_button.Size = new Size(16, 16);
+			dialog_button.Size = new Size_(16, 16);
 			dialog_button.TabIndex = 1;
 			dialog_button.Visible = false;
 			dialog_button.Click += new System.EventHandler(dialog_button_Click);
 
 			dropdown_button.Dock = DockStyle.Right;
 			dropdown_button.BackColor = SystemColors.Control;
-			dropdown_button.Size = new Size(16, 16);
+			dropdown_button.Size = new Size_(16, 16);
 			dropdown_button.TabIndex = 2;
 			dropdown_button.Visible = false;
 			dropdown_button.Click += new System.EventHandler(dropdown_button_Click);
@@ -151,7 +151,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 			}
 		}
 
-		public new Color ForeColor {
+		public new Color_ ForeColor {
 			get {
 				return base.ForeColor;
 			}
@@ -163,7 +163,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 			}
 		}
 
-		public new Color BackColor {
+		public new Color_ BackColor {
 			get {
 				return base.BackColor;
 			}
@@ -255,9 +255,9 @@ namespace System.Windows.Forms.PropertyGridInternal
 
 		#endregion Private Helper Methods
 
-		internal void SendMouseDown (Point screenLocation)
+		internal void SendMouseDown (Point_ screenLocation)
 		{
-			Point clientLocation = PointToClient (screenLocation);
+			Point_ clientLocation = PointToClient (screenLocation);
 			XplatUI.SendMessage (Handle, Msg.WM_LBUTTONDOWN, new IntPtr ((int) MsgButtons.MK_LBUTTON), Control.MakeParam (clientLocation.X, clientLocation.Y));
 			textbox.FocusAt (screenLocation);
 		}	

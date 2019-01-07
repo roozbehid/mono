@@ -67,7 +67,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.VScrollBarDefaultSize; }
 		}	
 

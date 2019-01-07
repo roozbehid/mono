@@ -36,7 +36,7 @@ using Carbon = System.Windows.Forms.CarbonInternal;
 
 /// Carbon Version
 namespace System.Windows.Forms {
-	internal delegate Rectangle [] HwndDelegate (IntPtr handle);
+	internal delegate Rectangle_ [] HwndDelegate (IntPtr handle);
 
 	internal class XplatUICarbon : XplatUIDriver {
 		#region Local Variables
@@ -59,7 +59,7 @@ namespace System.Windows.Forms {
 
 		internal static HwndDelegate HwndDelegate = new HwndDelegate (GetClippingRectangles);
 		// Instance members
-		internal Point mouse_position;
+		internal Point_ mouse_position;
 
 		// Event handlers
 		internal Carbon.ApplicationHandler ApplicationHandler;
@@ -136,7 +136,7 @@ namespace System.Windows.Forms {
 			AddExpose (hwnd, client, (int) rect.origin.x, (int) rect.origin.y, (int) rect.size.width, (int) rect.size.height);
 		}
 		
-		internal void AddExpose (Hwnd hwnd, bool client, Rectangle rect) {
+		internal void AddExpose (Hwnd hwnd, bool client, Rectangle_ rect) {
 			AddExpose (hwnd, client, (int) rect.X, (int) rect.Y, (int) rect.Width, (int) rect.Height);
 		}
 
@@ -149,21 +149,21 @@ namespace System.Windows.Forms {
 						XplatUIDriverSupport.ExecuteClientMessage((GCHandle)queueobj);
 					} else {
 						MSG msg = (MSG)queueobj;
-						NativeWindow.WndProc (msg.hwnd, msg.message, msg.wParam, msg.lParam);
+						NativeWindow.WndProc ((Int32)msg.hwnd, msg.message, (Int32)msg.wParam, (Int32)msg.lParam);
 					}
 				}
 			}
 		}
 
-		internal static Rectangle [] GetClippingRectangles (IntPtr handle) {
+		internal static Rectangle_ [] GetClippingRectangles (IntPtr handle) {
 			Hwnd hwnd = Hwnd.ObjectFromHandle (handle);
 
 			if (hwnd == null)
 				return null;
  			if (hwnd.Handle != handle)
-				return new Rectangle [] {hwnd.ClientRect};
+				return new Rectangle_ [] {hwnd.ClientRect};
 
-			return (Rectangle []) hwnd.GetClippingRectangles ().ToArray (typeof (Rectangle));
+			return (Rectangle_ []) hwnd.GetClippingRectangles ().ToArray (typeof (Rectangle));
 		}
 
 		internal IntPtr GetMousewParam(int Delta) {
@@ -220,7 +220,7 @@ namespace System.Windows.Forms {
 			Hover.X = -1;
 			Hover.Y = -1;
 			MouseState = MouseButtons.None;
-			mouse_position = Point.Empty;
+			mouse_position = Point_.Empty;
 				
 			// Initialize the Caret
 			Caret.Timer = new Timer ();
@@ -273,9 +273,9 @@ namespace System.Windows.Forms {
 		internal void PerformNCCalc(Hwnd hwnd) {
 			XplatUIWin32.NCCALCSIZE_PARAMS  ncp;
 			IntPtr ptr;
-			Rectangle rect;
+			Rectangle_ rect;
 
-			rect = new Rectangle (0, 0, hwnd.Width, hwnd.Height);
+			rect = new Rectangle_ (0, 0, hwnd.Width, hwnd.Height);
 
 			ncp = new XplatUIWin32.NCCALCSIZE_PARAMS();
 			ptr = Marshal.AllocHGlobal(Marshal.SizeOf(ncp));
@@ -286,12 +286,12 @@ namespace System.Windows.Forms {
 			ncp.rgrc1.bottom = rect.Bottom;
 
 			Marshal.StructureToPtr(ncp, ptr, true);
-			NativeWindow.WndProc(hwnd.client_window, Msg.WM_NCCALCSIZE, (IntPtr)1, ptr);
+			NativeWindow.WndProc((Int32)hwnd.client_window, Msg.WM_NCCALCSIZE, 1, (Int32)ptr);
 			ncp = (XplatUIWin32.NCCALCSIZE_PARAMS)Marshal.PtrToStructure(ptr, typeof(XplatUIWin32.NCCALCSIZE_PARAMS));
 			Marshal.FreeHGlobal(ptr);
 
 
-			rect = new Rectangle(ncp.rgrc1.left, ncp.rgrc1.top, ncp.rgrc1.right - ncp.rgrc1.left, ncp.rgrc1.bottom - ncp.rgrc1.top);
+			rect = new Rectangle_(ncp.rgrc1.left, ncp.rgrc1.top, ncp.rgrc1.right - ncp.rgrc1.left, ncp.rgrc1.bottom - ncp.rgrc1.top);
 			hwnd.ClientRect = rect;
 
 			rect = TranslateClientRectangleToQuartzClientRectangle (hwnd);
@@ -314,17 +314,17 @@ namespace System.Windows.Forms {
 			point.y = (short) y;
 		}
 		
-		internal static Rectangle TranslateClientRectangleToQuartzClientRectangle (Hwnd hwnd) {
+		internal static Rectangle_ TranslateClientRectangleToQuartzClientRectangle (Hwnd hwnd) {
 			return TranslateClientRectangleToQuartzClientRectangle (hwnd, Control.FromHandle (hwnd.Handle));
 		}
 
-		internal static Rectangle TranslateClientRectangleToQuartzClientRectangle (Hwnd hwnd, Control ctrl) {
+		internal static Rectangle_ TranslateClientRectangleToQuartzClientRectangle (Hwnd hwnd, Control ctrl) {
 			/* From XplatUIX11
 			 * If this is a form with no window manager, X is handling all the border and caption painting
 			 * so remove that from the area (since the area we set of the window here is the part of the window 
 			 * we're painting in only)
 			 */
-			Rectangle rect = hwnd.ClientRect;
+			Rectangle_ rect = hwnd.ClientRect;
 			Form form = ctrl as Form;
 			CreateParams cp = null;
 
@@ -333,7 +333,7 @@ namespace System.Windows.Forms {
 
 			if (form != null && (form.window_manager == null || cp.IsSet (WindowExStyles.WS_EX_TOOLWINDOW))) {
 				Hwnd.Borders borders = Hwnd.GetBorders (cp, null);
-				Rectangle qrect = rect;
+				Rectangle_ qrect = rect;
 				
 				qrect.Y -= borders.top;
 				qrect.X -= borders.left;
@@ -353,11 +353,11 @@ namespace System.Windows.Forms {
 			return rect;
 		}
 
-		internal static Size TranslateWindowSizeToQuartzWindowSize (CreateParams cp) {
-			return TranslateWindowSizeToQuartzWindowSize (cp, new Size (cp.Width, cp.Height));
+		internal static Size_ TranslateWindowSizeToQuartzWindowSize (CreateParams cp) {
+			return TranslateWindowSizeToQuartzWindowSize (cp, new Size_ (cp.Width, cp.Height));
 		}
 
-		internal static Size TranslateWindowSizeToQuartzWindowSize (CreateParams cp, Size size) {
+		internal static Size_ TranslateWindowSizeToQuartzWindowSize (CreateParams cp, Size_ size) {
 			/* From XplatUIX11
 			 * If this is a form with no window manager, X is handling all the border and caption painting
 			 * so remove that from the area (since the area we set of the window here is the part of the window 
@@ -366,7 +366,7 @@ namespace System.Windows.Forms {
 			Form form = cp.control as Form;
 			if (form != null && (form.window_manager == null || cp.IsSet (WindowExStyles.WS_EX_TOOLWINDOW))) {
 				Hwnd.Borders borders = Hwnd.GetBorders (cp, null);
-				Size qsize = size;
+				Size_ qsize = size;
 
 				qsize.Width -= borders.left + borders.right;
 				qsize.Height -= borders.top + borders.bottom; 
@@ -381,17 +381,17 @@ namespace System.Windows.Forms {
 			return size;
 		}
 			
-		internal static Size TranslateQuartzWindowSizeToWindowSize (CreateParams cp, int width, int height) {
+		internal static Size_ TranslateQuartzWindowSizeToWindowSize (CreateParams cp, int width, int height) {
 			/* From XplatUIX11
 			 * If this is a form with no window manager, X is handling all the border and caption painting
 			 * so remove that from the area (since the area we set of the window here is the part of the window 
 			 * we're painting in only)
 			 */
-			Size size = new Size (width, height);
+			Size_ size = new Size_ (width, height);
 			Form form = cp.control as Form;
 			if (form != null && (form.window_manager == null || cp.IsSet (WindowExStyles.WS_EX_TOOLWINDOW))) {
 				Hwnd.Borders borders = Hwnd.GetBorders (cp, null);
-				Size qsize = size;
+				Size_ qsize = size;
 
 				qsize.Width += borders.left + borders.right;
 				qsize.Height += borders.top + borders.bottom;
@@ -429,8 +429,8 @@ namespace System.Windows.Forms {
 		#endregion
 		
 		#region Private Methods
-		private Point ConvertScreenPointToClient (IntPtr handle, Point point) {
-			Point converted_point = new Point ();
+		private Point_ ConvertScreenPointToClient (IntPtr handle, Point_ point) {
+			Point_ converted_point = new Point_ ();
 			Carbon.Rect window_bounds = new Carbon.Rect ();
 			Carbon.CGPoint native_point = new Carbon.CGPoint ();
 
@@ -447,8 +447,8 @@ namespace System.Windows.Forms {
 			return converted_point;
 		}
 		
-		private Point ConvertClientPointToScreen (IntPtr handle, Point point) {
-			Point converted_point = new Point ();
+		private Point_ ConvertClientPointToScreen (IntPtr handle, Point_ point) {
+			Point_ converted_point = new Point_ ();
 			Carbon.Rect window_bounds = new Carbon.Rect ();
 			Carbon.CGPoint native_point = new Carbon.CGPoint ();
 
@@ -669,7 +669,7 @@ namespace System.Windows.Forms {
 			ShowWindow (CaretWindow);
 			Graphics g = Graphics.FromHwnd (HIViewGetRoot (CaretWindow));
 
-			g.FillRectangle (new SolidBrush (Color.Black), new Rectangle (0, 0, Caret.Width, Caret.Height));
+			g.FillRectangle (new SolidBrush (Color_.Black), new Rectangle_ (0, 0, Caret.Width, Caret.Height));
 
 			g.Dispose ();
 		}
@@ -821,7 +821,7 @@ namespace System.Windows.Forms {
 			}
 		}
 		
-		internal override bool CalculateWindowRect(ref Rectangle ClientRect, CreateParams cp, Menu menu, out Rectangle WindowRect) {
+		internal override bool CalculateWindowRect(ref Rectangle_ ClientRect, CreateParams cp, Menu menu, out Rectangle_ WindowRect) {
 			WindowRect = Hwnd.GetWindowRectangle (cp, menu, ClientRect);
 			return true;
 		}
@@ -829,7 +829,7 @@ namespace System.Windows.Forms {
 		internal override void ClientToScreen(IntPtr handle, ref int x, ref int y) {
 			Hwnd hwnd = Hwnd.ObjectFromHandle (handle);
 
-			Point point = ConvertClientPointToScreen (hwnd.ClientWindow, new Point (x, y));
+			Point_ point = ConvertClientPointToScreen (hwnd.ClientWindow, new Point_ (x, y));
 
 			x = point.X;
 			y = point.Y;
@@ -838,7 +838,7 @@ namespace System.Windows.Forms {
 		internal override void MenuToScreen(IntPtr handle, ref int x, ref int y) {
 			Hwnd hwnd = Hwnd.ObjectFromHandle (handle);
 
-			Point point = ConvertClientPointToScreen (hwnd.ClientWindow, new Point (x, y));
+			Point_ point = ConvertClientPointToScreen (hwnd.ClientWindow, new Point_ (x, y));
 
 			x = point.X;
 			y = point.Y;
@@ -928,7 +928,7 @@ namespace System.Windows.Forms {
 				}
 			}
 
-			Point next;
+			Point_ next;
 			if (cp.control is Form) {
 				next = Hwnd.GetNextStackedFormLocation (cp, parent_hwnd);
 				X = next.X;
@@ -950,8 +950,8 @@ namespace System.Windows.Forms {
 
 			ClientWindow = IntPtr.Zero;
 
-			Size QWindowSize = TranslateWindowSizeToQuartzWindowSize (cp);
-			Rectangle QClientRect = TranslateClientRectangleToQuartzClientRectangle (hwnd, cp.control);
+			Size_ QWindowSize = TranslateWindowSizeToQuartzWindowSize (cp);
+			Rectangle_ QClientRect = TranslateClientRectangleToQuartzClientRectangle (hwnd, cp.control);
 
 			SetHwndStyles(hwnd, cp);
 /* FIXME */
@@ -1094,7 +1094,7 @@ namespace System.Windows.Forms {
 			return Carbon.Cursor.DefineStdCursorBitmap (id);
 		}
 
-		internal override IntPtr DefineCursor (Bitmap bitmap, Bitmap mask, Color cursor_pixel, Color mask_pixel, int xHotSpot, int yHotSpot) {
+		internal override IntPtr DefineCursor (Bitmap bitmap, Bitmap mask, Color_ cursor_pixel, Color_ mask_pixel, int xHotSpot, int yHotSpot) {
 			return Carbon.Cursor.DefineCursor (bitmap, mask, cursor_pixel, mask_pixel, xHotSpot, yHotSpot);
 		}
 		
@@ -1154,7 +1154,7 @@ namespace System.Windows.Forms {
 					// Pass to parent window first
 					while ((hwnd.parent != null) && (msg.Result == IntPtr.Zero)) {
 						hwnd = hwnd.parent;
-						msg.Result = NativeWindow.WndProc(hwnd.Handle, Msg.WM_SETCURSOR, msg.HWnd, msg.LParam);
+						msg.Result = (IntPtr)NativeWindow.WndProc((Int32)hwnd.Handle, Msg.WM_SETCURSOR, (Int32)msg.HWnd, (Int32)msg.LParam);
 					}
 
 					if (msg.Result == IntPtr.Zero) {
@@ -1260,7 +1260,7 @@ namespace System.Windows.Forms {
 		}
 
 		internal override IntPtr DispatchMessage(ref MSG msg) {
-			return NativeWindow.WndProc(msg.hwnd, msg.message, msg.wParam, msg.lParam);
+			return (IntPtr)NativeWindow.WndProc((Int32)msg.hwnd, msg.message, (Int32)msg.wParam, (Int32)msg.lParam);
 		}
 		
 		internal override void DoEvents() {
@@ -1302,9 +1302,9 @@ namespace System.Windows.Forms {
 			hotspot_y = 0;
 		}
 		
-		internal override void GetDisplaySize(out Size size) {
+		internal override void GetDisplaySize(out Size_ size) {
 			Carbon.HIRect bounds = CGDisplayBounds (CGMainDisplayID ());
-			size = new Size ((int)bounds.size.width, (int)bounds.size.height);
+			size = new Size_ ((int)bounds.size.width, (int)bounds.size.height);
 		}
 
 		internal override IntPtr GetParent(IntPtr handle) {
@@ -1340,7 +1340,7 @@ namespace System.Windows.Forms {
 			return true;
 		}
 		
-		internal override Point GetMenuOrigin(IntPtr handle) {
+		internal override Point_ GetMenuOrigin(IntPtr handle) {
 			Hwnd hwnd;
 
 			hwnd = Hwnd.ObjectFromHandle(handle);
@@ -1348,7 +1348,7 @@ namespace System.Windows.Forms {
 			if (hwnd != null) {
 				return hwnd.MenuOrigin;
 			}
-			return Point.Empty;
+			return Point_.Empty;
 		}
 
 		internal override bool GetMessage(object queue_id, ref MSG msg, IntPtr hWnd, int wFilterMin, int wFilterMax) {
@@ -1442,7 +1442,7 @@ namespace System.Windows.Forms {
 			return FormWindowState.Normal;
 		}
 		
-		internal override void GrabInfo(out IntPtr handle, out bool GrabConfined, out Rectangle GrabArea) {
+		internal override void GrabInfo(out IntPtr handle, out bool GrabConfined, out Rectangle_ GrabArea) {
 			handle = Grab.Hwnd;
 			GrabConfined = Grab.Confined;
 			GrabArea = Grab.Area;
@@ -1474,7 +1474,7 @@ namespace System.Windows.Forms {
 			Console.WriteLine("{0}{1}", e.Message, st.ToString());
 		}
 		
-		internal override void Invalidate (IntPtr handle, Rectangle rc, bool clear) {
+		internal override void Invalidate (IntPtr handle, Rectangle_ rc, bool clear) {
 			Hwnd hwnd;
 
 			hwnd = Hwnd.ObjectFromHandle(handle);
@@ -1538,11 +1538,11 @@ namespace System.Windows.Forms {
 				Region clip_region = new Region ();
 				clip_region.MakeEmpty();
 
-				foreach (Rectangle r in hwnd.ClipRectangles) {
+				foreach (Rectangle_ r in hwnd.ClipRectangles) {
 					/* Expand the region slightly.
 					 * See bug 464464.
 					 */
-					Rectangle r2 = Rectangle.FromLTRB (r.Left, r.Top, r.Right, r.Bottom + 1);
+					Rectangle_ r2 = Rectangle.FromLTRB (r.Left, r.Top, r.Right, r.Bottom + 1);
 					clip_region.Union (r2);
 				}
 
@@ -1566,7 +1566,7 @@ namespace System.Windows.Forms {
 					dc.SetClip (hwnd.nc_invalid);
 					paint_event = new PaintEventArgs(dc, hwnd.nc_invalid);
 				} else {
-					paint_event = new PaintEventArgs(dc, new Rectangle(0, 0, hwnd.width, hwnd.height));
+					paint_event = new PaintEventArgs(dc, new Rectangle_(0, 0, hwnd.width, hwnd.height));
 				}
 				hwnd.nc_expose_pending = false;
 				hwnd.ClearNcInvalidArea ();
@@ -1669,7 +1669,7 @@ namespace System.Windows.Forms {
 		internal override void ScreenToClient(IntPtr handle, ref int x, ref int y) {
 			Hwnd hwnd = Hwnd.ObjectFromHandle (handle);
 
-			Point point = ConvertScreenPointToClient (hwnd.ClientWindow, new Point (x, y));
+			Point_ point = ConvertScreenPointToClient (hwnd.ClientWindow, new Point_ (x, y));
 
 			x = point.X;
 			y = point.Y;
@@ -1678,13 +1678,13 @@ namespace System.Windows.Forms {
 		internal override void ScreenToMenu(IntPtr handle, ref int x, ref int y) {
 			Hwnd hwnd = Hwnd.ObjectFromHandle (handle);
 
-			Point point = ConvertScreenPointToClient (hwnd.WholeWindow, new Point (x, y));
+			Point_ point = ConvertScreenPointToClient (hwnd.WholeWindow, new Point_ (x, y));
 
 			x = point.X;
 			y = point.Y;
 		}
 
-		internal override void ScrollWindow(IntPtr handle, Rectangle area, int XAmount, int YAmount, bool clear) {
+		internal override void ScrollWindow(IntPtr handle, Rectangle_ area, int XAmount, int YAmount, bool clear) {
 			/*
 			 * This used to use a HIViewScrollRect but this causes issues with the fact that we dont coalesce
 			 * updates properly with our short-circuiting of the window manager.  For now we'll do a less
@@ -1692,13 +1692,13 @@ namespace System.Windows.Forms {
 			 * see bug #381084
 			 */
 			Hwnd hwnd = Hwnd.ObjectFromHandle (handle);
-			Invalidate (handle, new Rectangle (0, 0, hwnd.Width, hwnd.Height), false);
+			Invalidate (handle, new Rectangle_ (0, 0, hwnd.Width, hwnd.Height), false);
 		}
 		
 		
 		internal override void ScrollWindow(IntPtr handle, int XAmount, int YAmount, bool clear) {
 			Hwnd hwnd = Hwnd.ObjectFromHandle (handle);
-			Invalidate (handle, new Rectangle (0, 0, hwnd.Width, hwnd.Height), false);
+			Invalidate (handle, new Rectangle_ (0, 0, hwnd.Width, hwnd.Height), false);
 		}
 		
 		[MonoTODO]
@@ -1711,7 +1711,7 @@ namespace System.Windows.Forms {
 
 		[MonoTODO]
 		internal override IntPtr SendMessage (IntPtr hwnd, Msg message, IntPtr wParam, IntPtr lParam) {
-			return NativeWindow.WndProc(hwnd, message, wParam, lParam);
+			return (IntPtr)NativeWindow.WndProc((Int32)hwnd, message, (Int32)wParam, (Int32)lParam);
 		}
 		
 		internal override int SendInput(IntPtr hwnd, Queue keys) {
@@ -1724,7 +1724,7 @@ namespace System.Windows.Forms {
 				Caret.X = x;
 				Caret.Y = y;
 				ClientToScreen (hwnd, ref x, ref y);
-				SizeWindow (new Rectangle (x, y, Caret.Width, Caret.Height), CaretWindow);
+				SizeWindow (new Rectangle_ (x, y, Caret.Width, Caret.Height), CaretWindow);
 				Caret.Timer.Stop ();
 				HideCaret ();
 				if (Caret.Visible == 1) {
@@ -1895,7 +1895,7 @@ namespace System.Windows.Forms {
 			RequestNCRecalc(handle);
 		}
 		
-		internal override void SetWindowMinMax(IntPtr handle, Rectangle maximized, Size min, Size max) {
+		internal override void SetWindowMinMax(IntPtr handle, Rectangle_ maximized, Size_ min, Size_ max) {
 		}
 
 		internal override void SetWindowPos(IntPtr handle, int x, int y, int width, int height) {
@@ -1938,7 +1938,7 @@ namespace System.Windows.Forms {
 
 				Control ctrl = Control.FromHandle (handle);
 				CreateParams cp = ctrl.GetCreateParams ();
-				Size TranslatedSize = TranslateWindowSizeToQuartzWindowSize (cp, new Size (width, height));
+				Size_ TranslatedSize = TranslateWindowSizeToQuartzWindowSize (cp, new Size_ (width, height));
 				Carbon.Rect rect = new Carbon.Rect ();
 
 				if (WindowMapping [hwnd.Handle] != null) {
@@ -2019,7 +2019,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal override void SetWindowTransparency(IntPtr handle, double transparency, Color key) {
+		internal override void SetWindowTransparency(IntPtr handle, double transparency, Color_ key) {
 		}
 
 		internal override double GetWindowTransparency(IntPtr handle)
@@ -2115,7 +2115,7 @@ namespace System.Windows.Forms {
 		 *
 		 * PROBLEMS: This has some flicker / banding
 		 */
-		internal void SizeWindow (Rectangle rect, IntPtr window) {
+		internal void SizeWindow (Rectangle_ rect, IntPtr window) {
 			Carbon.Rect qrect = new Carbon.Rect ();
 
 			SetRect (ref qrect, (short)rect.X, (short)rect.Y, (short)(rect.X+rect.Width), (short)(rect.Y+rect.Height));
@@ -2123,20 +2123,20 @@ namespace System.Windows.Forms {
 			SetWindowBounds (window, 33, ref qrect);
 		}
 
-		internal override void DrawReversibleLine(Point start, Point end, Color backColor) {
+		internal override void DrawReversibleLine(Point_ start, Point_ end, Color_ backColor) {
 //			throw new NotImplementedException();
 		}
 
-		internal override void FillReversibleRectangle (Rectangle rectangle, Color backColor) {
+		internal override void FillReversibleRectangle (Rectangle_ rectangle, Color_ backColor) {
 //			throw new NotImplementedException();
 		}
 
-		internal override void DrawReversibleFrame (Rectangle rectangle, Color backColor, FrameStyle style) {
+		internal override void DrawReversibleFrame (Rectangle_ rectangle, Color_ backColor, FrameStyle style) {
 //			throw new NotImplementedException();
 		}
 
-		internal override void DrawReversibleRectangle(IntPtr handle, Rectangle rect, int line_width) {
-			Rectangle size_rect = rect;
+		internal override void DrawReversibleRectangle(IntPtr handle, Rectangle_ rect, int line_width) {
+			Rectangle_ size_rect = rect;
 			int new_x = 0;
 			int new_y = 0;
 
@@ -2160,7 +2160,7 @@ namespace System.Windows.Forms {
 				Graphics g = Graphics.FromHwnd (HIViewGetRoot (ReverseWindow));
 
 				for (int i = 0; i < line_width; i++) {
-					g.DrawRectangle (ThemeEngine.Current.ResPool.GetPen (Color.Black), rect);
+					g.DrawRectangle (ThemeEngine.Current.ResPool.GetPen (Color_.Black), rect);
 					rect.X += 1;
 					rect.Y += 1;
 					rect.Width -= 1;
@@ -2175,7 +2175,7 @@ namespace System.Windows.Forms {
 		}
 		#endregion
 
-		internal override SizeF GetAutoScaleSize(Font font) {
+		internal override SizeF_ GetAutoScaleSize(Font font) {
 			Graphics        g;
 			float           width;
 			string          magic_string = "The quick brown fox jumped over the lazy dog.";
@@ -2184,10 +2184,10 @@ namespace System.Windows.Forms {
 			g = Graphics.FromImage (new Bitmap (1, 1));
 
 			width = (float) (g.MeasureString (magic_string, font).Width / magic_number);
-			return new SizeF(width, font.Height);
+			return new SizeF_(width, font.Height);
 		}
 
-		internal override Point MousePosition {
+		internal override Point_ MousePosition {
 			get {
 				return mouse_position;
 			}
@@ -2204,32 +2204,32 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal override  Size CursorSize { get{ throw new NotImplementedException(); } }
+		internal override  Size_ CursorSize { get{ throw new NotImplementedException(); } }
 		internal override  bool DragFullWindows { get{ throw new NotImplementedException(); } }
-		internal override  Size DragSize {
+		internal override  Size_ DragSize {
 			get {
-				return new Size(4, 4);
+				return new Size_(4, 4);
 			}
 		}
 
-		internal override  Size FrameBorderSize {
+		internal override  Size_ FrameBorderSize {
 			get {
-				return new Size (2, 2);
+				return new Size_ (2, 2);
 			}
 		}
 
-		internal override  Size IconSize { get{ throw new NotImplementedException(); } }
-		internal override  Size MaxWindowTrackSize { get{ throw new NotImplementedException(); } }
+		internal override  Size_ IconSize { get{ throw new NotImplementedException(); } }
+		internal override  Size_ MaxWindowTrackSize { get{ throw new NotImplementedException(); } }
 		internal override bool MenuAccessKeysUnderlined {
 			get {
 				return false;
 			}
 		}
-		internal override Size MinimizedWindowSpacingSize { get{ throw new NotImplementedException(); } }
+		internal override Size_ MinimizedWindowSpacingSize { get{ throw new NotImplementedException(); } }
 
-		internal override Size MinimumWindowSize {
+		internal override Size_ MinimumWindowSize {
 			get {
-				return new Size(110, 22);
+				return new Size_(110, 22);
 			}
 		}
 
@@ -2238,7 +2238,7 @@ namespace System.Windows.Forms {
 				return KeyboardHandler.ModifierKeys;
 			}
 		}
-		internal override Size SmallIconSize { get{ throw new NotImplementedException(); } }
+		internal override Size_ SmallIconSize { get{ throw new NotImplementedException(); } }
 		internal override int MouseButtonCount { get{ throw new NotImplementedException(); } }
 		internal override bool MouseButtonsSwapped { get{ throw new NotImplementedException(); } }
 		internal override bool MouseWheelPresent { get{ throw new NotImplementedException(); } }
@@ -2249,16 +2249,16 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		internal override Rectangle VirtualScreen {
+		internal override Rectangle_ VirtualScreen {
 			get {
 				return WorkingArea;
 			}
 		}
 
-		internal override Rectangle WorkingArea { 
+		internal override Rectangle_ WorkingArea { 
 			get { 
 				Carbon.HIRect bounds = CGDisplayBounds (CGMainDisplayID ());
-				return new Rectangle ((int)bounds.origin.x, (int)bounds.origin.y, (int)bounds.size.width, (int)bounds.size.height);
+				return new Rectangle_ ((int)bounds.origin.x, (int)bounds.origin.y, (int)bounds.size.width, (int)bounds.size.height);
 			}
 		}
 

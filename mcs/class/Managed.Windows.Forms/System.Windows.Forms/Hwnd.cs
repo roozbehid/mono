@@ -25,9 +25,9 @@
 //
 
 // NOT COMPLETE
-
 using System;
 using System.Collections;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -61,7 +61,7 @@ namespace System.Windows.Forms {
 		internal bool		enabled;
 		internal bool		zero_sized;
 		internal ArrayList	invalid_list;
-		internal Rectangle	nc_invalid;
+		internal Rectangle_	nc_invalid;
 		internal bool		expose_pending;
 		internal bool		nc_expose_pending;
 		internal bool		configure_pending;
@@ -69,7 +69,7 @@ namespace System.Windows.Forms {
 		internal bool		reparented;
 		internal Stack          drawing_stack;
 		internal object		user_data;
-		internal Rectangle	client_rectangle;
+		internal Rectangle_	client_rectangle;
 		internal ArrayList	marshal_free_list;
 		internal int		caption_height;
 		internal int		tool_caption_height;
@@ -82,8 +82,8 @@ namespace System.Windows.Forms {
 		internal WindowExStyles	initial_ex_style;
 		internal WindowStyles	initial_style;
 		internal FormWindowState cached_window_state = (FormWindowState)(-1);  /* X11 only field */
-		internal Point		previous_child_startup_location = new Point (int.MinValue, int.MinValue);
-		static internal Point	previous_main_startup_location = new Point (int.MinValue, int.MinValue);
+		internal Point_		previous_child_startup_location = new Point_ (int.MinValue, int.MinValue);
+		static internal Point_	previous_main_startup_location = new Point_ (int.MinValue, int.MinValue);
 		internal ArrayList children;
 
 		[ThreadStatic]
@@ -115,7 +115,7 @@ namespace System.Windows.Forms {
 			nc_expose_pending = false;
 			enabled = true;
 			reparented = false;
-			client_rectangle = Rectangle.Empty;
+			client_rectangle = Rectangle_.Empty;
 			marshal_free_list = new ArrayList(2);
 			opacity = 0xffffffff;
 			fixed_size = false;
@@ -191,11 +191,11 @@ namespace System.Windows.Forms {
 		{
 			Borders border_size = new Borders ();
 
-			Size windowborder = ThemeEngine.Current.BorderSize; /*new Size (1, 1);*/ // This is the only one that can be changed from the display properties in windows.
-			Size border = ThemeEngine.Current.BorderStaticSize; /*new Size (1, 1);*/
-			Size clientedge = ThemeEngine.Current.Border3DSize; /*new Size (2, 2);*/
-			Size thickframe = new Size (2 + windowborder.Width, 2 + windowborder.Height);
-			Size dialogframe = ThemeEngine.Current.BorderSizableSize; /* new Size (3, 3);*/
+			Size_ windowborder = ThemeEngine.Current.BorderSize; /*new Size_ (1, 1);*/ // This is the only one that can be changed from the display properties in windows.
+			Size_ border = ThemeEngine.Current.BorderStaticSize; /*new Size_ (1, 1);*/
+			Size_ clientedge = ThemeEngine.Current.Border3DSize; /*new Size_ (2, 2);*/
+			Size_ thickframe = new Size_ (2 + windowborder.Width, 2 + windowborder.Height);
+			Size_ dialogframe = ThemeEngine.Current.BorderSizableSize; /* new Size_ (3, 3);*/
 			
 			if (cp.IsSet (WindowStyles.WS_CAPTION)) {
 				border_size.Inflate (dialogframe);
@@ -220,7 +220,7 @@ namespace System.Windows.Forms {
 			}
 
 			bool only_small_border;
-			Size small_border = Size.Empty;
+			Size_ small_border = Size_.Empty;
 
 			only_small_border = cp.IsSet (WindowStyles.WS_THICKFRAME) || cp.IsSet (WindowStyles.WS_DLGFRAME);
 			if (only_small_border && cp.IsSet (WindowStyles.WS_THICKFRAME) && !cp.IsSet (WindowStyles.WS_BORDER) && !cp.IsSet (WindowStyles.WS_DLGFRAME)) {
@@ -232,7 +232,7 @@ namespace System.Windows.Forms {
 			} else if (cp.IsSet (WindowExStyles.WS_EX_STATICEDGE | WindowExStyles.WS_EX_DLGMODALFRAME)) {
 				border_size.Inflate (only_small_border ? small_border : dialogframe);
 			} else if (cp.IsSet (WindowExStyles.WS_EX_STATICEDGE | WindowExStyles.WS_EX_CLIENTEDGE)) {
-				border_size.Inflate (border + (only_small_border ? Size.Empty : clientedge));
+				border_size.Inflate (border + (only_small_border ? Size_.Empty : clientedge));
 			} else {
 				if (cp.IsSet (WindowExStyles.WS_EX_CLIENTEDGE)) {
 					border_size.Inflate (clientedge);
@@ -242,7 +242,7 @@ namespace System.Windows.Forms {
 				}
 				if (cp.IsSet (WindowExStyles.WS_EX_STATICEDGE)) {
 					if (cp.IsSet (WindowStyles.WS_THICKFRAME) || cp.IsSet (WindowStyles.WS_DLGFRAME)) {
-						border_size.Inflate (new Size (-border.Width, -border.Height));
+						border_size.Inflate (new Size_ (-border.Width, -border.Height));
 					} else {
 						border_size.Inflate (border);
 					}
@@ -254,17 +254,17 @@ namespace System.Windows.Forms {
 
 		public static Rectangle	GetWindowRectangle (CreateParams cp, Menu menu)
 		{
-			return GetWindowRectangle (cp, menu, Rectangle.Empty);
+			return GetWindowRectangle (cp, menu, Rectangle_.Empty);
 		}
 
-		public static Rectangle GetWindowRectangle (CreateParams cp, Menu menu, Rectangle client_rect)
+		public static Rectangle_ GetWindowRectangle (CreateParams cp, Menu menu, Rectangle_ client_rect)
 		{
-			Rectangle rect;
+			Rectangle_ rect;
 			Borders borders;
 
 			borders = GetBorders (cp, menu);
 
-			rect = new Rectangle (Point.Empty, client_rect.Size);
+			rect = new Rectangle_ (Point_.Empty, client_rect.Size);
 			rect.Y -= borders.top;
 			rect.Height += borders.top + borders.bottom;
 			rect.X -= borders.left;
@@ -276,7 +276,7 @@ namespace System.Windows.Forms {
 			return rect;
 		}
 		
-		public Rectangle GetClientRectangle (int width, int height)
+		public Rectangle_ GetClientRectangle (int width, int height)
 		{
 			CreateParams cp = new CreateParams ();
 			cp.WindowStyle = initial_style;
@@ -291,17 +291,17 @@ namespace System.Windows.Forms {
 			ArrayList masks = new ArrayList ();
 
 			if (x < 0) {
-				masks.Add (new Rectangle (0, 0, x*-1, Height));
+				masks.Add (new Rectangle_ (0, 0, x*-1, Height));
 				if (y < 0) {
-					masks.Add (new Rectangle (x*-1, 0, Width, y*-1));
+					masks.Add (new Rectangle_ (x*-1, 0, Width, y*-1));
 				}
 			} else if (y < 0) {
-				masks.Add (new Rectangle (0, 0, Width, y*-1));
+				masks.Add (new Rectangle_ (0, 0, Width, y*-1));
 			}
 
 			foreach (Hwnd child in children) {
 				if (child.visible)
-					masks.Add (new Rectangle (child.X, child.Y, child.Width, child.Height));
+					masks.Add (new Rectangle_ (child.X, child.Y, child.Width, child.Height));
 			}
 
 			if (parent == null) {
@@ -322,9 +322,9 @@ namespace System.Windows.Forms {
 
 					if (sibling_handle == sibling.WholeWindow && sibling.visible) {
 
-						Rectangle intersect = Rectangle.Intersect (new Rectangle (X, Y, Width, Height), new Rectangle (sibling.X, sibling.Y, sibling.Width, sibling.Height));
+						Rectangle_ intersect = Rectangle.Intersect (new Rectangle_ (X, Y, Width, Height), new Rectangle_ (sibling.X, sibling.Y, sibling.Width, sibling.Height));
 				
-						if (intersect == Rectangle.Empty)
+						if (intersect == Rectangle_.Empty)
 							continue;
 					
 						intersect.X -= X;
@@ -370,13 +370,13 @@ namespace System.Windows.Forms {
 			return borders;
 		}
 
-		public static Rectangle GetClientRectangle(CreateParams cp, Menu menu, int width, int height) {
-			Rectangle rect;
+		public static Rectangle_ GetClientRectangle(CreateParams cp, Menu menu, int width, int height) {
+			Rectangle_ rect;
 			Borders borders;
 
 			borders = GetBorders (cp, menu); 
 			
-			rect = new Rectangle(0, 0, width, height);
+			rect = new Rectangle_(0, 0, width, height);
 			rect.Y += borders.top;
 			rect.Height -= borders.top + borders.bottom;
 			rect.X += borders.left;
@@ -412,9 +412,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Rectangle ClientRect {
+		public Rectangle_ ClientRect {
 			get {
-				if (client_rectangle == Rectangle.Empty) {
+				if (client_rectangle == Rectangle_.Empty) {
 					return DefaultClientRect;
 				}
 				return client_rectangle;
@@ -466,12 +466,12 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Rectangle DefaultClientRect {
+		public Rectangle_ DefaultClientRect {
 			get {
-				// We pass a Zero for the menu handle so the menu size is
+				// We pass a Zero for the menu handle so the menu Size_ is
 				// not computed this is done via an WM_NCCALC
 				CreateParams cp = new CreateParams ();
-				Rectangle rect;
+				Rectangle_ rect;
 				
 				cp.WindowStyle = initial_style;
 				cp.WindowExStyle = initial_ex_style;
@@ -575,16 +575,16 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Point MenuOrigin {
+		public Point_ MenuOrigin {
 			get {
 				Form frm = Control.FromHandle (handle) as Form;
 				if (frm != null && frm.window_manager != null)		
 					return frm.window_manager.GetMenuOrigin ();
 
-				Point	pt;
-				Size	border_3D_size = ThemeEngine.Current.Border3DSize;
+				Point_	pt;
+				Size_	border_3D_size = ThemeEngine.Current.Border3DSize;
 
-				pt = new Point(0, 0);
+				pt = new Point_(0, 0);
 
 				if (border_style == FormBorderStyle.Fixed3D) {
 					pt.X += border_3D_size.Width;
@@ -604,12 +604,12 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Rectangle Invalid {
+		public Rectangle_ Invalid {
 			get {
 				if (invalid_list.Count == 0)
-					return Rectangle.Empty;
+					return Rectangle_.Empty;
 
-				Rectangle result = (Rectangle)invalid_list[0];
+				Rectangle_ result = (Rectangle)invalid_list[0];
 				for (int i = 1; i < invalid_list.Count; i ++) {
 					result = Rectangle.Union (result, (Rectangle)invalid_list[i]);
 				}
@@ -623,7 +623,7 @@ namespace System.Windows.Forms {
  			}
  		}
 
-		public Rectangle NCInvalid {
+		public Rectangle_ NCInvalid {
 			get { return nc_invalid; }
 			set { nc_invalid = value; }
 
@@ -761,12 +761,12 @@ namespace System.Windows.Forms {
 
 		#region Methods
 		public void AddInvalidArea(int x, int y, int width, int height) {
-			AddInvalidArea(new Rectangle(x, y, width, height));
+			AddInvalidArea(new Rectangle_(x, y, width, height));
 		}
 
-		public void AddInvalidArea(Rectangle rect) {
+		public void AddInvalidArea(Rectangle_ rect) {
 			ArrayList tmp = new ArrayList ();
-			foreach (Rectangle r in invalid_list) {
+			foreach (Rectangle_ r in invalid_list) {
 				if (!rect.Contains (r)) {
 					tmp.Add (r);
 				}
@@ -781,8 +781,8 @@ namespace System.Windows.Forms {
 		}
 
 		public void AddNcInvalidArea(int x, int y, int width, int height) {
-			if (nc_invalid == Rectangle.Empty) {
-				nc_invalid = new Rectangle (x, y, width, height);
+			if (nc_invalid == Rectangle_.Empty) {
+				nc_invalid = new Rectangle_ (x, y, width, height);
 				return;
 			}
 
@@ -796,8 +796,8 @@ namespace System.Windows.Forms {
 			nc_invalid.Height = bottom - nc_invalid.Y;
 		}
 
-		public void AddNcInvalidArea(Rectangle rect) {
-			if (nc_invalid == Rectangle.Empty) {
+		public void AddNcInvalidArea(Rectangle_ rect) {
+			if (nc_invalid == Rectangle_.Empty) {
 				nc_invalid = rect;
 				return;
 			}
@@ -805,7 +805,7 @@ namespace System.Windows.Forms {
 		}
 
 		public void ClearNcInvalidArea() {
-			nc_invalid = Rectangle.Empty;
+			nc_invalid = Rectangle_.Empty;
 			nc_expose_pending = false;
 		}
 
@@ -813,20 +813,20 @@ namespace System.Windows.Forms {
 			return String.Format("Hwnd, Mapped:{3} ClientWindow:0x{0:X}, WholeWindow:0x{1:X}, Zombie={4}, Parent:[{2:X}]", client_window.ToInt32(), whole_window.ToInt32(), parent != null ? parent.ToString() : "<null>", Mapped, zombie);
 		}
 
-		public static Point GetNextStackedFormLocation  (CreateParams cp, Hwnd parent_hwnd)
+		public static Point_ GetNextStackedFormLocation  (CreateParams cp, Hwnd parent_hwnd)
 		{
 			if (cp.control == null)
-				return Point.Empty;
+				return Point_.Empty;
 		
 			int X = cp.X;
 			int Y = cp.Y;
-			Point previous, next;
-			Rectangle within;
+			Point_ previous, next;
+			Rectangle_ within;
 
 			if (parent_hwnd != null) {
 				Control parent = cp.control.Parent;
 				previous = parent_hwnd.previous_child_startup_location;
-				if (parent_hwnd.client_rectangle == Rectangle.Empty && parent != null) {
+				if (parent_hwnd.client_rectangle == Rectangle_.Empty && parent != null) {
 					within = parent.ClientRectangle;
 				} else {
 					within = parent_hwnd.client_rectangle;
@@ -837,17 +837,17 @@ namespace System.Windows.Forms {
 			}
 
 			if (previous.X == int.MinValue || previous.Y == int.MinValue) {
-				next = Point.Empty;
+				next = Point_.Empty;
 			} else {
-				next = new Point (previous.X + 22, previous.Y + 22);
+				next = new Point_ (previous.X + 22, previous.Y + 22);
 			}
 
 			if (!within.Contains (next.X * 3, next.Y * 3)) {
-				next = Point.Empty;
+				next = Point_.Empty;
 			}
 
-			if (next == Point.Empty && cp.Parent == IntPtr.Zero) {
-				next = new Point (22, 22);
+			if (next == Point_.Empty && cp.Parent == IntPtr.Zero) {
+				next = new Point_ (22, 22);
 			}
 
 			if (parent_hwnd != null) {
@@ -861,7 +861,7 @@ namespace System.Windows.Forms {
 				Y = next.Y;
 			}
 			
-			return new Point (X, Y);
+			return new Point_ (X, Y);
 		}
 
 		#endregion	// Methods
@@ -873,7 +873,7 @@ namespace System.Windows.Forms {
 			public int left;
 			public int right;
 
-			public void Inflate (Size size)
+			public void Inflate (Size_ size)
 			{
 				left += size.Width;
 				right += size.Width;

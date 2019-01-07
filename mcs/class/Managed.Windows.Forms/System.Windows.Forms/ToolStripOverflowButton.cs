@@ -25,10 +25,10 @@
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
 //
-
 using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Windows.Forms.Design;
 
@@ -72,9 +72,9 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Methods
-		public override Size GetPreferredSize (Size constrainingSize)
+		public override Size_ GetPreferredSize (Size_ constrainingSize)
 		{
-			return new Size (16, this.Parent.Height);
+			return new Size_ (16, this.Parent.Height);
 		}
 		#endregion
 
@@ -98,7 +98,7 @@ namespace System.Windows.Forms
 				this.Owner.Renderer.DrawOverflowButtonBackground (new ToolStripItemRenderEventArgs (e.Graphics, this));
 		}
 
-		protected internal override void SetBounds (Rectangle bounds)
+		protected internal override void SetBounds (Rectangle_ bounds)
 		{
 			base.SetBounds (bounds);
 		}

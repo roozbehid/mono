@@ -35,13 +35,13 @@ namespace System.Windows.Forms {
 		#endregion	// Local Variables
 
 		#region Public Constructors
-		public ContentsResizedEventArgs(Rectangle newRectangle) {
+		public ContentsResizedEventArgs(Rectangle_ newRectangle) {
 			rect = newRectangle;
 		}
 		#endregion	// Public Constructors
 
 		#region Public Instance Properties
-		public Rectangle NewRectangle {
+		public Rectangle_ NewRectangle {
 			get {
 				return rect;
 			}

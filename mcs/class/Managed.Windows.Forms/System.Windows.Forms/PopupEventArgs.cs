@@ -26,8 +26,8 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -37,10 +37,10 @@ namespace System.Windows.Forms
 		private Control associated_control;
 		private IWin32Window associated_window;
 		private bool is_balloon;
-		private Size tool_tip_size;
+		private Size_ tool_tip_size;
 
 		#region Public Constructors
-		public PopupEventArgs (IWin32Window associatedWindow, Control associatedControl, bool isBalloon, Size size) : base ()
+		public PopupEventArgs (IWin32Window associatedWindow, Control associatedControl, bool isBalloon, Size_ size) : base ()
 		{
 			this.associated_window = associatedWindow;
 			this.associated_control = associatedControl;
@@ -62,7 +62,7 @@ namespace System.Windows.Forms
 			get { return this.is_balloon; }
 		}
 		
-		public Size ToolTipSize {
+		public Size_ ToolTipSize {
 			get { return this.tool_tip_size; }
 			set { this.tool_tip_size = value; }
 		}

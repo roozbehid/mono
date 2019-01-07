@@ -28,9 +28,9 @@
 //	Daniel Carrera, dcarrera@math.toronto.edu (stubbed out)
 //	Jaak Simm (jaaksimm@firm.ee) (stubbed out)
 //
-
 using System.ComponentModel;
 using System.Collections;
+
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
@@ -62,10 +62,10 @@ namespace System.Windows.Forms
 			}
 		}
 
-		private Color active_link_color;
-		private Color disabled_link_color;
-		private Color link_color;
-		private Color visited_color;
+		private Color_ active_link_color;
+		private Color_ disabled_link_color;
+		private Color_ link_color;
+		private Color_ visited_color;
 		private LinkArea link_area;
 		private LinkBehavior link_behavior;
 		private LinkCollection link_collection;
@@ -108,10 +108,10 @@ namespace System.Windows.Forms
 
 			string_format.FormatFlags |= StringFormatFlags.NoClip;
 			
-			ActiveLinkColor = Color.Red;
+			ActiveLinkColor = Color_.Red;
 			DisabledLinkColor = ThemeEngine.Current.ColorGrayText;
-			LinkColor = Color.FromArgb (255, 0, 0, 255);
-			VisitedLinkColor = Color.FromArgb (255, 128, 0, 128);
+			LinkColor = Color_.FromArgb (255, 0, 0, 255);
+			VisitedLinkColor = Color_.FromArgb (255, 128, 0, 128);
 			SetStyle (ControlStyles.Selectable, false);
 			SetStyle (ControlStyles.ResizeRedraw | 
 				ControlStyles.UserPaint | 
@@ -125,7 +125,7 @@ namespace System.Windows.Forms
 
 		#region Public Properties
 
-		public Color ActiveLinkColor {
+		public Color_ ActiveLinkColor {
 			get { return active_link_color; }
 			set {
 				if (active_link_color == value)
@@ -136,7 +136,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color DisabledLinkColor {
+		public Color_ DisabledLinkColor {
 
 			get { return disabled_link_color; }
 			set {
@@ -148,7 +148,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color LinkColor {
+		public Color_ LinkColor {
 			get { return link_color; }
 			set {
 				if (link_color == value)
@@ -159,7 +159,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color VisitedLinkColor {
+		public Color_ VisitedLinkColor {
 			get { return visited_color;}
 			set {
 				if (visited_color == value)
@@ -428,7 +428,7 @@ namespace System.Windows.Forms
 			 * but it seems the piece regions don't
 			 * contain the area with the underline.  this
 			 * can be seen easily when you click on a link
-			 * and the focus rectangle shows up (it's too
+			 * and the focus Rectangle_ shows up (it's too
 			 * far up), and also the bottom few pixels of
 			 * a linklabel aren't active when it comes to
 			 * hovering */
@@ -874,7 +874,7 @@ namespace System.Windows.Forms
 			internal bool Contains (int x, int y)
 			{
 				foreach (Piece p in pieces) {
-					if (p.region.IsVisible (new Point (x,y)))
+					if (p.region.IsVisible (new Point_ (x,y)))
 						return true;
 				}
 				return false;

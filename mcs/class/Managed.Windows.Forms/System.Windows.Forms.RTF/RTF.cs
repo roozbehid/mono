@@ -825,7 +825,7 @@ SkipCRLF:
 					rtf.GetToken();
 				}
 				if (!rtf.CheckCM(TokenClass.Text, (Major)';')) {
-					throw new RTFException(rtf, "Malformed color entry");
+					throw new RTFException(rtf, "Malformed Color_ entry");
 				}
 			}
 			rtf.RouteToken();

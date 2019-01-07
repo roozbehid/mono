@@ -38,7 +38,7 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawArrowButton (Graphics g, Rectangle bounds, ScrollBarArrowButtonState state)
+		public static void DrawArrowButton (Graphics g, Rectangle_ bounds, ScrollBarArrowButtonState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -100,7 +100,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground(g, bounds);
 		}
 
-		public static void DrawHorizontalThumb (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawHorizontalThumb (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -126,7 +126,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawHorizontalThumbGrip (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawHorizontalThumbGrip (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -136,7 +136,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawLeftHorizontalTrack (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawLeftHorizontalTrack (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -162,7 +162,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawLowerVerticalTrack (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawLowerVerticalTrack (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -188,7 +188,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 		
-		public static void DrawRightHorizontalTrack (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawRightHorizontalTrack (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -214,7 +214,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawSizeBox (Graphics g, Rectangle bounds, ScrollBarSizeBoxState state)
+		public static void DrawSizeBox (Graphics g, Rectangle_ bounds, ScrollBarSizeBoxState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -234,7 +234,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawUpperVerticalTrack (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawUpperVerticalTrack (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -260,7 +260,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawVerticalThumb (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawVerticalThumb (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -286,7 +286,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static void DrawVerticalThumbGrip (Graphics g, Rectangle bounds, ScrollBarState state)
+		public static void DrawVerticalThumbGrip (Graphics g, Rectangle_ bounds, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -296,7 +296,7 @@ namespace System.Windows.Forms
 			vsr.DrawBackground (g, bounds);
 		}
 
-		public static Size GetSizeBoxSize (Graphics g, ScrollBarState state)
+		public static Size_ GetSizeBoxSize (Graphics g, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -306,7 +306,7 @@ namespace System.Windows.Forms
 			return vsr.GetPartSize(g, ThemeSizeType.Draw);
 		}
 
-		public static Size GetThumbGripSize (Graphics g, ScrollBarState state)
+		public static Size_ GetThumbGripSize (Graphics g, ScrollBarState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();

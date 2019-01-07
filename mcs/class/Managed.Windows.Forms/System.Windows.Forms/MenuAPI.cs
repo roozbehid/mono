@@ -24,8 +24,8 @@
 //	Mike Kestner  <mkestner@novell.com>
 //	Everaldo Canuto  <ecanuto@novell.com>
 //
-
 using System.Collections;
+
 using System.Drawing;
 using System.Threading;
 
@@ -46,7 +46,7 @@ namespace System.Windows.Forms {
 		public Menu CurrentMenu;
 		public Menu TopMenu;
 		public Control GrabControl;
-		Point last_motion = Point.Empty;
+		Point_ last_motion = Point_.Empty;
 		
 	    public MenuTracker (Menu top_menu)
 		{
@@ -68,12 +68,12 @@ namespace System.Windows.Forms {
 			get { return keynav_state != KeyNavState.Idle || active; }
 		}
 
-		internal static Point ScreenToMenu (Menu menu, Point pnt)		
+		internal static Point_ ScreenToMenu (Menu menu, Point_ pnt)		
 		{
 			int x = pnt.X;
 			int y = pnt.Y;
 			XplatUI.ScreenToMenu (menu.Wnd.window.Handle, ref x, ref y);
-			return new Point (x, y);
+			return new Point_ (x, y);
 		}	
 
 		private void UpdateCursor ()
@@ -111,7 +111,7 @@ namespace System.Windows.Forms {
 				(TopMenu as MainMenu).Draw ();			
 		}
 
-		MenuItem FindItemByCoords (Menu menu, Point pt)
+		MenuItem FindItemByCoords (Menu menu, Point_ pt)
 		{
 			if (menu is MainMenu)
 				pt = ScreenToMenu (menu, pt);
@@ -122,7 +122,7 @@ namespace System.Windows.Forms {
 				pt = menu.Wnd.PointToClient (pt);
 			}
 			foreach (MenuItem item in menu.MenuItems) {
-				Rectangle rect = item.bounds;
+				Rectangle_ rect = item.bounds;
 				if (rect.Contains (pt))
 					return item;
 			}
@@ -132,7 +132,7 @@ namespace System.Windows.Forms {
 
 		MenuItem GetItemAtXY (int x, int y)
 		{
-			Point pnt = new Point (x, y);
+			Point_ pnt = new Point_ (x, y);
 			MenuItem item = null;
 			if (TopMenu.SelectedItem != null)
 				item = FindSubItemByCoord (TopMenu.SelectedItem, Control.MousePosition);
@@ -267,7 +267,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		static public bool TrackPopupMenu (Menu menu, Point pnt)
+		static public bool TrackPopupMenu (Menu menu, Point_ pnt)
 		{
 			if (menu.MenuItems.Count <= 0)	// No submenus to track
 				return true;				
@@ -411,11 +411,11 @@ namespace System.Windows.Forms {
 			popup_active = true;
 			PopUpWindow puw = new PopUpWindow (GrabControl, item);
 			
-			Point pnt;
+			Point_ pnt;
 			if (menu is MainMenu)
-				pnt = new Point (item.X, item.Y + item.Height - 2 - menu.Height);
+				pnt = new Point_ (item.X, item.Y + item.Height - 2 - menu.Height);
 			else
-				pnt = new Point (item.X + item.Width - 3, item.Y - 3);
+				pnt = new Point_ (item.X + item.Width - 3, item.Y - 3);
 			pnt = menu.Wnd.PointToScreen (pnt);
 			puw.Location = pnt;
 			item.Wnd = puw;
@@ -443,7 +443,7 @@ namespace System.Windows.Forms {
 				((MainMenu) topmenu).OnCollapse (EventArgs.Empty);
 		}
 
-		MenuItem FindSubItemByCoord (Menu menu, Point pnt)
+		MenuItem FindSubItemByCoord (Menu menu, Point_ pnt)
 		{		
 			foreach (MenuItem item in menu.MenuItems) {
 
@@ -456,8 +456,8 @@ namespace System.Windows.Forms {
 				if (menu.Wnd == null || !menu.Wnd.Visible)
 					continue;
 
-				Rectangle rect = item.bounds;
-				Point pnt_client = menu.Wnd.PointToScreen (new Point (item.X, item.Y));
+				Rectangle_ rect = item.bounds;
+				Point_ pnt_client = menu.Wnd.PointToScreen (new Point_ (item.X, item.Y));
 				rect.X = pnt_client.X;
 				rect.Y = pnt_client.Y;
 				
@@ -879,7 +879,7 @@ namespace System.Windows.Forms {
 		// Called when the number of items has changed
 		internal void RefreshItems ()
 		{
-			Point pt = new Point (Location.X, Location.Y);
+			Point_ pt = new Point_ (Location.X, Location.Y);
 			
 			ThemeEngine.Current.CalcPopupMenuSize (DeviceContext, menu);
 

@@ -21,8 +21,8 @@
 //
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
-
 using System;
+
 using System.Drawing;
 using System.Runtime.Serialization;
 
@@ -31,16 +31,16 @@ namespace System.Windows.Forms {
 	[Serializable]
 	public class OwnerDrawPropertyBag : MarshalByRefObject, ISerializable {
 
-		private Color fore_color;
-		private Color back_color;
+		private Color_ fore_color;
+		private Color_ back_color;
 		private Font font;
 
 		internal OwnerDrawPropertyBag ()
 		{
-			fore_color = back_color = Color.Empty;
+			fore_color = back_color = Color_.Empty;
 		}
 
-		private OwnerDrawPropertyBag (Color fore_color, Color back_color, Font font)
+		private OwnerDrawPropertyBag (Color_ fore_color, Color_ back_color, Font font)
 		{
 			this.fore_color = fore_color;
 			this.back_color = back_color;
@@ -57,19 +57,19 @@ namespace System.Windows.Forms {
 				e = (SerializationEntry)en.Current;
 				switch(e.Name) {
 					case "Font": font = (Font)e.Value; break;
-					case "ForeColor": fore_color = (Color)e.Value; break;
-					case "BackColor": back_color = (Color)e.Value; break;
+					case "ForeColor": fore_color = (Color_)e.Value; break;
+					case "BackColor": back_color = (Color_)e.Value; break;
 				}
 			}
 		}
 
 
-		public Color ForeColor {
+		public Color_ ForeColor {
 			get { return fore_color; }
 			set { fore_color = value; }
 		}
 
-		public Color BackColor {
+		public Color_ BackColor {
 			get { return back_color; }
 			set { back_color = value; }
 		}

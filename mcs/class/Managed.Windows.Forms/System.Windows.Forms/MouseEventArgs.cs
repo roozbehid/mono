@@ -25,8 +25,8 @@
 
 
 // COMPLETE
-
 using System.Runtime.InteropServices;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -79,9 +79,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Point Location {
+		public Point_ Location {
 			get {
-				return new Point (this.x, this.y);
+				return new Point_ (this.x, this.y);
 			}
 		}
 		#endregion	// Public Instance Properties

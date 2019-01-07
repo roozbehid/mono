@@ -34,14 +34,14 @@ namespace System.Windows.Forms
 	{
 		private Control associated_control;
 		private IWin32Window associated_window;
-		private Color back_color;
+		private Color_ back_color;
 		private Font font;
-		private Rectangle bounds;
-		private Color fore_color;
+		private Rectangle_ bounds;
+		private Color_ fore_color;
 		private Graphics graphics;
 		private string tooltip_text;
 
-		public DrawToolTipEventArgs (Graphics graphics, IWin32Window associatedWindow, Control associatedControl, Rectangle bounds, string toolTipText, Color backColor, Color foreColor, Font font)
+		public DrawToolTipEventArgs (Graphics graphics, IWin32Window associatedWindow, Control associatedControl, Rectangle_ bounds, string toolTipText, Color_ backColor, Color_ foreColor, Font font)
 		{
 			this.graphics = graphics;
 			this.associated_window = associatedWindow;
@@ -85,7 +85,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Rectangle Bounds {
+		public Rectangle_ Bounds {
 			get {
 				return bounds;
 			}

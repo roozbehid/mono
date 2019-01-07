@@ -33,11 +33,11 @@ using System.Runtime.InteropServices;
 namespace System.Windows.Forms {
 	[ComVisible(true)]
 	public class HelpEventArgs : EventArgs {
-		private Point	mouse_position;
+		private Point_	mouse_position;
 		private bool	event_handled;
 
 		#region Public Constructors
-		public HelpEventArgs(System.Drawing.Point mousePos) {
+		public HelpEventArgs(Point_ mousePos) {
 			this.mouse_position=mousePos;
 			this.event_handled=false;
 		}
@@ -54,7 +54,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		public Point MousePos {
+		public Point_ MousePos {
 			get {
 				return this.mouse_position;
 			}

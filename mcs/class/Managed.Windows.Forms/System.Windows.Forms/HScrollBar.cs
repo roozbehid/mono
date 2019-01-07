@@ -41,7 +41,7 @@ namespace System.Windows.Forms
 			vert = false; 
 		}
 
-		protected override  Size DefaultSize {
+		protected override  Size_ DefaultSize {
 			get { return ThemeEngine.Current.HScrollBarDefaultSize;}
 		}
 

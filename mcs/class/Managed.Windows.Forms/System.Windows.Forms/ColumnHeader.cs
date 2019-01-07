@@ -26,8 +26,8 @@
 
 // COMPLETE
 
-
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -50,7 +50,7 @@ namespace System.Windows.Forms
 		private int display_index = -1;
 
 		// internal variables
-		Rectangle column_rect = Rectangle.Empty;
+		Rectangle_ column_rect = Rectangle_.Empty;
 		bool pressed = false;
 		ListView owner;
 		#endregion	// Instance Variables
@@ -116,7 +116,7 @@ namespace System.Windows.Forms
 			set { column_rect.Height = value; }
 		}
 
-		internal Rectangle Rect {
+		internal Rectangle_ Rect {
 			get { return column_rect; }
 			set { column_rect = value; }
 		}
@@ -155,7 +155,7 @@ namespace System.Windows.Forms
 			else if (Index != -1) { // automatic width, either -1 or -2
 				// try to expand if we are the last column
 				bool expand_to_right = Index == owner.Columns.Count - 1 && width == -2;
-				Rectangle visible_area = owner.ClientRectangle;
+				Rectangle_ visible_area = owner.ClientRectangle;
 
 				column_rect.Width = owner.GetChildColumnSize (Index).Width;
 				width = column_rect.Width;
@@ -358,7 +358,7 @@ namespace System.Windows.Forms
 			columnHeader.width = width;
 			columnHeader.owner = owner;
 			columnHeader.format = (StringFormat) Format.Clone ();
-			columnHeader.column_rect = Rectangle.Empty;
+			columnHeader.column_rect = Rectangle_.Empty;
 			return columnHeader;
 		}
 

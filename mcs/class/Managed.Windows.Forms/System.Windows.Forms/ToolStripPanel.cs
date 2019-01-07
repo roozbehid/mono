@@ -26,9 +26,9 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.Layout;
@@ -80,7 +80,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Size AutoScrollMargin {
+		public new Size_ AutoScrollMargin {
 			get { return base.AutoScrollMargin; }
 			set { base.AutoScrollMargin = value; }
 		}
@@ -88,7 +88,7 @@ namespace System.Windows.Forms
 		[Browsable (false)]
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public new Size AutoScrollMinSize {
+		public new Size_ AutoScrollMinSize {
 			get { return base.AutoScrollMinSize; }
 			set { base.AutoScrollMinSize = value; }
 		}
@@ -247,7 +247,7 @@ namespace System.Windows.Forms
 		}
 
 		[MonoTODO("Not implemented")]
-		public void Join (ToolStrip toolStripToDrag, Point location)
+		public void Join (ToolStrip toolStripToDrag, Point_ location)
 		{
 			Join (toolStripToDrag);
 		}
@@ -258,7 +258,7 @@ namespace System.Windows.Forms
 			Join (toolStripToDrag);
 		}
 		
-		public ToolStripPanelRow PointToRow (Point clientLocation)
+		public ToolStripPanelRow PointToRow (Point_ clientLocation)
 		{
 			foreach (ToolStripPanelRow row in this.rows)
 				if (row.Bounds.Contains (clientLocation))
@@ -325,11 +325,11 @@ namespace System.Windows.Forms
 			}
 			
 			// Lay out all the rows
-			Point position = this.DisplayRectangle.Location;
+			Point_ position = this.DisplayRectangle.Location;
 
 			if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right) {
 				foreach (ToolStripPanelRow row in this.rows) {
-					row.SetBounds (new Rectangle (position, new Size (row.Bounds.Width, this.Height)));
+					row.SetBounds (new Rectangle_ (position, new Size_ (row.Bounds.Width, this.Height)));
 
 					position.X += row.Bounds.Width;
 				}
@@ -343,7 +343,7 @@ namespace System.Windows.Forms
 				}
 			} else {
 				foreach (ToolStripPanelRow row in this.rows) {
-					row.SetBounds (new Rectangle (position, new Size (this.Width, row.Bounds.Height)));
+					row.SetBounds (new Rectangle_ (position, new Size_ (this.Width, row.Bounds.Height)));
 
 					position.Y += row.Bounds.Height;
 				}
@@ -438,9 +438,9 @@ namespace System.Windows.Forms
 			ToolStripPanelRow new_row = new ToolStripPanelRow (this);
 			
 			if (this.Dock == DockStyle.Left || this.Dock == DockStyle.Right)
-				new_row.SetBounds (new Rectangle (0, 0, 25, this.Height));
+				new_row.SetBounds (new Rectangle_ (0, 0, 25, this.Height));
 			else
-				new_row.SetBounds (new Rectangle (0, 0, this.Width, 25));
+				new_row.SetBounds (new Rectangle_ (0, 0, this.Width, 25));
 				
 			this.rows.Add (new_row);
 			new_row.OnControlAdded (control, 0);

@@ -25,10 +25,10 @@
 // Integration into MWF:
 //	Peter Bartok		<pbartok@novell.com>
 //
-
 using System;
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -338,7 +338,7 @@ namespace System.Windows.Forms
 								typed_to_index = i;
 							}
 
-							if (difference > 0) { // since it is sorted, no strings after this point will match
+							if (difference > 0) { // since it is sorted, no strings after this Point_ will match
 								break;
 							}
 						}
@@ -387,7 +387,7 @@ namespace System.Windows.Forms
 								typed_to_index = i;
 							}
 
-							if (difference <= 0) { // since it is sorted, no strings after this point will match
+							if (difference <= 0) { // since it is sorted, no strings after this Point_ will match
 								break;
 							}
 						}

@@ -40,77 +40,77 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, GroupBoxState state)
+		public static void DrawGroupBox (Graphics g, Rectangle_ bounds, GroupBoxState state)
 		{
-			DrawGroupBox (g, bounds, String.Empty, null, Color.Empty, TextFormatFlags.Default, state);
+			DrawGroupBox (g, bounds, String.Empty, null, Color_.Empty, TextFormatFlags.Default, state);
 		}
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, GroupBoxState state)
+		public static void DrawGroupBox (Graphics g, Rectangle_ bounds, string groupBoxText, Font font, GroupBoxState state)
 		{
-			DrawGroupBox (g, bounds, groupBoxText, font, Color.Empty, TextFormatFlags.Default, state);
+			DrawGroupBox (g, bounds, groupBoxText, font, Color_.Empty, TextFormatFlags.Default, state);
 		}
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, Color textColor, GroupBoxState state)
+		public static void DrawGroupBox (Graphics g, Rectangle_ bounds, string groupBoxText, Font font, Color_ textColor, GroupBoxState state)
 		{
 			DrawGroupBox (g, bounds, groupBoxText, font, textColor, TextFormatFlags.Default, state);
 		}
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, TextFormatFlags flags, GroupBoxState state)
+		public static void DrawGroupBox (Graphics g, Rectangle_ bounds, string groupBoxText, Font font, TextFormatFlags flags, GroupBoxState state)
 		{
-			DrawGroupBox (g, bounds, groupBoxText, font, Color.Empty, flags, state);
+			DrawGroupBox (g, bounds, groupBoxText, font, Color_.Empty, flags, state);
 		}
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, Color textColor, TextFormatFlags flags, GroupBoxState state)
+		public static void DrawGroupBox (Graphics g, Rectangle_ bounds, string groupBoxText, Font font, Color_ textColor, TextFormatFlags flags, GroupBoxState state)
 		{
-			Size font_size = TextRenderer.MeasureText (groupBoxText, font);
+			Size_ font_size = TextRenderer.MeasureText (groupBoxText, font);
 
 			if (Application.RenderWithVisualStyles || always_use_visual_styles == true) {
 				VisualStyleRenderer vsr;
-				Rectangle new_bounds;
+				Rectangle_ new_bounds;
 
 				switch (state) {
 					case GroupBoxState.Normal:
 					default:
 						vsr = new VisualStyleRenderer (VisualStyleElement.Button.GroupBox.Normal);
-						new_bounds = new Rectangle (bounds.Left, bounds.Top + (int)(font_size.Height / 2) - 1, bounds.Width, bounds.Height - (int)(font_size.Height / 2) + 1);
+						new_bounds = new Rectangle_ (bounds.Left, bounds.Top + (int)(font_size.Height / 2) - 1, bounds.Width, bounds.Height - (int)(font_size.Height / 2) + 1);
 						break;
 					case GroupBoxState.Disabled:
 						vsr = new VisualStyleRenderer (VisualStyleElement.Button.GroupBox.Disabled);
-						new_bounds = new Rectangle (bounds.Left, bounds.Top + (int)(font_size.Height / 2) - 2, bounds.Width, bounds.Height - (int)(font_size.Height / 2) + 2);
+						new_bounds = new Rectangle_ (bounds.Left, bounds.Top + (int)(font_size.Height / 2) - 2, bounds.Width, bounds.Height - (int)(font_size.Height / 2) + 2);
 						break;
 				}
 
 				if (groupBoxText == String.Empty)
 					vsr.DrawBackground (g, bounds);
 				else
-					vsr.DrawBackgroundExcludingArea (g, new_bounds, new Rectangle (bounds.Left + 9, bounds.Top, font_size.Width - 3, font_size.Height));
+					vsr.DrawBackgroundExcludingArea (g, new_bounds, new Rectangle_ (bounds.Left + 9, bounds.Top, font_size.Width - 3, font_size.Height));
 
-				if (textColor == Color.Empty)
+				if (textColor == Color_.Empty)
 					textColor = vsr.GetColor (ColorProperty.TextColor);
 
 				if (groupBoxText != String.Empty)
-					TextRenderer.DrawText (g, groupBoxText, font, new Point (bounds.Left + 8, bounds.Top), textColor, flags);
+					TextRenderer.DrawText (g, groupBoxText, font, new Point_ (bounds.Left + 8, bounds.Top), textColor, flags);
 			}
 			else {
 				// MS has a pretty big bug when rendering the non-visual styles group box.  Instead of using the height
 				// part of the bounds as height, they use it as the bottom, so the boxes are drawn in completely different
 				// places.  Rather than emulate this bug, we do it correctly.  After googling for a while, I don't think
 				// anyone has ever actually used this class for anything, so it should be fine.  :)
-				Rectangle new_bounds = new Rectangle (bounds.Left, bounds.Top + (int)(font_size.Height / 2), bounds.Width, bounds.Height - (int)(font_size.Height / 2));
+				Rectangle_ new_bounds = new Rectangle_ (bounds.Left, bounds.Top + (int)(font_size.Height / 2), bounds.Width, bounds.Height - (int)(font_size.Height / 2));
 				
 				// Don't paint over the background where we are going to put the text
 				Region old_clip = g.Clip;
-				g.SetClip (new Rectangle (bounds.Left + 9, bounds.Top, font_size.Width - 3, font_size.Height), System.Drawing.Drawing2D.CombineMode.Exclude);
+				g.SetClip (new Rectangle_ (bounds.Left + 9, bounds.Top, font_size.Width - 3, font_size.Height), System.Drawing.Drawing2D.CombineMode.Exclude);
 				
 				ControlPaint.DrawBorder3D (g, new_bounds, Border3DStyle.Etched);
 				
 				g.Clip = old_clip;
 
 				if (groupBoxText != String.Empty) {
-					if (textColor == Color.Empty)
+					if (textColor == Color_.Empty)
 						textColor = state == GroupBoxState.Normal ? SystemColors.ControlText :
 							SystemColors.GrayText;
-					TextRenderer.DrawText (g, groupBoxText, font, new Point (bounds.Left + 8, bounds.Top), textColor, flags);
+					TextRenderer.DrawText (g, groupBoxText, font, new Point_ (bounds.Left + 8, bounds.Top), textColor, flags);
 				}
 			}
 		}
@@ -135,7 +135,7 @@ namespace System.Windows.Forms
 			return vsr.IsBackgroundPartiallyTransparent ();
 		}
 
-		public static void DrawParentBackground (Graphics g, Rectangle bounds, Control childControl)
+		public static void DrawParentBackground (Graphics g, Rectangle_ bounds, Control childControl)
 		{
 			if (!VisualStyleRenderer.IsSupported)
 				return;

@@ -128,7 +128,7 @@ namespace System.Windows.Forms.CarbonInternal {
 							};
 			// the key modifier table is a state table of the possible modifier keys
 			// apple currently only goes up to 1 << 14 keys, we've extended this to 32
-			// bytes as thats the size that apple uses
+			// bytes as thats the Size_ that apple uses
 			key_modifier_table = new byte [32];
 		}
 
@@ -185,7 +185,7 @@ namespace System.Windows.Forms.CarbonInternal {
 			IntPtr buffer = IntPtr.Zero;
 			byte [] bdata;
 
-			// get the size of the unicode buffer
+			// get the Size_ of the unicode buffer
 			GetEventParameter (eventref, kEventParamTextInputSendText, typeUnicodeText, IntPtr.Zero, 0, ref size, IntPtr.Zero);
 
 			buffer = Marshal.AllocHGlobal ((int) size);

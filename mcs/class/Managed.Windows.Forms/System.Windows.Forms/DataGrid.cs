@@ -46,7 +46,7 @@ namespace System.Windows.Forms
 			height = 0;
 			VerticalOffset = 0;
 			RelationHeight = 0;
-			relation_area = Rectangle.Empty;
+			relation_area = Rectangle_.Empty;
 		}
 
 		public int height;
@@ -67,7 +67,7 @@ namespace System.Windows.Forms
 		public bool IsExpanded;
 		public int VerticalOffset;
 		public int RelationHeight;
-		public Rectangle relation_area; /* the Y coordinate of this rectangle is updated as needed */
+		public Rectangle_ relation_area; /* the Y coordinate of this Rectangle_ is updated as needed */
 	}
 
 	internal class DataGridDataSource
@@ -186,19 +186,19 @@ namespace System.Windows.Forms
 
 		#region	Local Variables
 		/* cached theme defaults */
-		static readonly Color	def_background_color = ThemeEngine.Current.DataGridBackgroundColor;
-		static readonly Color	def_caption_backcolor = ThemeEngine.Current.DataGridCaptionBackColor;
-		static readonly Color	def_caption_forecolor = ThemeEngine.Current.DataGridCaptionForeColor;
-		static readonly Color	def_parent_rows_backcolor = ThemeEngine.Current.DataGridParentRowsBackColor;
-		static readonly Color	def_parent_rows_forecolor = ThemeEngine.Current.DataGridParentRowsForeColor;
+		static readonly Color_	def_background_color = ThemeEngine.Current.DataGridBackgroundColor;
+		static readonly Color_	def_caption_backcolor = ThemeEngine.Current.DataGridCaptionBackColor;
+		static readonly Color_	def_caption_forecolor = ThemeEngine.Current.DataGridCaptionForeColor;
+		static readonly Color_	def_parent_rows_backcolor = ThemeEngine.Current.DataGridParentRowsBackColor;
+		static readonly Color_	def_parent_rows_forecolor = ThemeEngine.Current.DataGridParentRowsForeColor;
 
 		/* colors */
 		// XXX this needs addressing. Control.background_color should not be internal.
-		new Color background_color;
-		Color caption_backcolor;
-		Color caption_forecolor;
-		Color parent_rows_backcolor;
-		Color parent_rows_forecolor;
+		new Color_ background_color;
+		Color_ caption_backcolor;
+		Color_ caption_forecolor;
+		Color_ parent_rows_backcolor;
+		Color_ parent_rows_forecolor;
 
 		/* flags to determine which areas of the datagrid are shown */
 		bool caption_visible;
@@ -229,11 +229,11 @@ namespace System.Windows.Forms
 		int horiz_pixeloffset;
 
 		internal Bitmap back_button_image;
-		internal Rectangle back_button_rect;
+		internal Rectangle_ back_button_rect;
 		internal bool back_button_mouseover;
 		internal bool back_button_active;
 		internal Bitmap parent_rows_button_image;
-		internal Rectangle parent_rows_button_rect;
+		internal Rectangle_ parent_rows_button_rect;
 		internal bool parent_rows_button_mouseover;
 		internal bool parent_rows_button_active;
 
@@ -314,9 +314,9 @@ namespace System.Windows.Forms
 			data_source_stack = new Stack ();
 
 			back_button_image = ResourceImageLoader.Get ("go-previous.png");
-			back_button_image.MakeTransparent (Color.Transparent);
+			back_button_image.MakeTransparent (Color_.Transparent);
 			parent_rows_button_image = ResourceImageLoader.Get ("go-top.png");
-			parent_rows_button_image.MakeTransparent (Color.Transparent);
+			parent_rows_button_image.MakeTransparent (Color_.Transparent);
 		}
 
 		#endregion	// Public Constructor
@@ -340,17 +340,17 @@ namespace System.Windows.Forms
 			set { grid_style.AllowSorting = value; }
 		}
 
-		public Color AlternatingBackColor {
+		public Color_ AlternatingBackColor {
 			get { return grid_style.AlternatingBackColor; }
 			set { grid_style.AlternatingBackColor = value; }
 		}
 
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return grid_style.BackColor; }
 			set { grid_style.BackColor = value; }
 		}
 
-		public Color BackgroundColor {
+		public Color_ BackgroundColor {
 			get { return background_color; }
 			set {
 				 if (background_color != value) {
@@ -392,7 +392,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color CaptionBackColor {
+		public Color_ CaptionBackColor {
 			get { return caption_backcolor; }
 			set {
 				if (caption_backcolor != value) {
@@ -420,7 +420,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color CaptionForeColor {
+		public Color_ CaptionForeColor {
 			get { return caption_forecolor; }
 			set {
 				if (caption_forecolor != value) {
@@ -649,8 +649,8 @@ namespace System.Windows.Forms
 			}
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (130, 80); }
+		protected override Size_ DefaultSize {
+			get { return new Size_ (130, 80); }
 		}
 
 		[Browsable(false)]
@@ -670,16 +670,16 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return grid_style.ForeColor; }
 			set { grid_style.ForeColor = value; }
 		}
 
-		public Color GridLineColor {
+		public Color_ GridLineColor {
 			get { return grid_style.GridLineColor; }
 			set {
-				if (value == Color.Empty)
-					throw new ArgumentException ("Color.Empty value is invalid.");
+				if (value == Color_.Empty)
+					throw new ArgumentException ("Color_.Empty value is invalid.");
 
 				grid_style.GridLineColor = value;
 			}
@@ -691,11 +691,11 @@ namespace System.Windows.Forms
 			set { grid_style.GridLineStyle = value; }
 		}
 
-		public Color HeaderBackColor {
+		public Color_ HeaderBackColor {
 			get { return grid_style.HeaderBackColor; }
 			set {
-				if (value == Color.Empty)
-					throw new ArgumentException ("Color.Empty value is invalid.");
+				if (value == Color_.Empty)
+					throw new ArgumentException ("Color_.Empty value is invalid.");
 
 				grid_style.HeaderBackColor = value;
 			}
@@ -706,7 +706,7 @@ namespace System.Windows.Forms
 			set { grid_style.HeaderFont = value; }
 		}
 
-		public Color HeaderForeColor {
+		public Color_ HeaderForeColor {
 			get { return grid_style.HeaderForeColor; }
 			set { grid_style.HeaderForeColor = value; }
 		}
@@ -745,7 +745,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color LinkColor {
+		public Color_ LinkColor {
 			get { return grid_style.LinkColor; }
 			set { grid_style.LinkColor = value; }
 		}
@@ -756,7 +756,7 @@ namespace System.Windows.Forms
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public Color LinkHoverColor {
+		public Color_ LinkHoverColor {
 			get { return grid_style.LinkHoverColor; }
 			set { grid_style.LinkHoverColor = value; }
 		}
@@ -775,7 +775,7 @@ namespace System.Windows.Forms
 			set { throw new NotSupportedException ("Operation is not supported."); }
 		}
 
-		public Color ParentRowsBackColor {
+		public Color_ ParentRowsBackColor {
 			get { return parent_rows_backcolor; }
 			set {
 				if (parent_rows_backcolor != value) {
@@ -787,7 +787,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color ParentRowsForeColor {
+		public Color_ ParentRowsForeColor {
 			get { return parent_rows_forecolor; }
 			set {
 				if (parent_rows_forecolor != value) {
@@ -869,12 +869,12 @@ namespace System.Windows.Forms
 		}
 
 
-		public Color SelectionBackColor {
+		public Color_ SelectionBackColor {
 			get { return grid_style.SelectionBackColor; }
 			set { grid_style.SelectionBackColor = value; }
 		}
 
-		public Color SelectionForeColor {
+		public Color_ SelectionForeColor {
 			get { return grid_style.SelectionForeColor; }
 			set { grid_style.SelectionForeColor = value; }
 		}
@@ -1059,7 +1059,7 @@ namespace System.Windows.Forms
 			ColumnStartedEditing (editingControl.Bounds);
 		}
 
-		protected internal virtual void ColumnStartedEditing (Rectangle bounds)
+		protected internal virtual void ColumnStartedEditing (Rectangle_ bounds)
 		{
 			bool need_invalidate = is_changing == false;
 			// XXX calculate the row header to invalidate
@@ -1137,9 +1137,9 @@ namespace System.Windows.Forms
 			}
 			string relation_text = relation_builder.ToString ();
 
-			SizeF measured_area = TextRenderer.MeasureString (relation_text, LinkFont);
+			SizeF_ measured_area = TextRenderer.MeasureString (relation_text, LinkFont);
 
-			rows[row].relation_area = new Rectangle (cells_area.X + 1,
+			rows[row].relation_area = new Rectangle_ (cells_area.X + 1,
 								 0, /* updated as needed at the usage sites for relation_area */
 								 (int)measured_area.Width + 4,
 								 Font.Height * relations.Length);
@@ -1153,14 +1153,14 @@ namespace System.Windows.Forms
 			CalcAreasAndInvalidate ();
 		}
 
-		public Rectangle GetCellBounds (DataGridCell dgc)
+		public Rectangle_ GetCellBounds (DataGridCell dgc)
 		{
 			return GetCellBounds (dgc.RowNumber, dgc.ColumnNumber);
 		}
 
-		public Rectangle GetCellBounds (int row, int col)
+		public Rectangle_ GetCellBounds (int row, int col)
 		{
-			Rectangle bounds = new Rectangle ();
+			Rectangle_ bounds = new Rectangle_ ();
 			int col_pixel;
 
 			bounds.Width = CurrentTableStyle.GridColumnStyles[col].Width;
@@ -1171,7 +1171,7 @@ namespace System.Windows.Forms
 			return bounds;
 		}
 
-		public Rectangle GetCurrentCellBounds ()
+		public Rectangle_ GetCurrentCellBounds ()
 		{
 			return GetCellBounds (current_cell.RowNumber, current_cell.ColumnNumber);
 		}
@@ -1207,7 +1207,7 @@ namespace System.Windows.Forms
 			ScrollToRow (old_first_visible_row, first_visible_row);
 		}
 
-		public HitTestInfo HitTest (Point position)
+		public HitTestInfo HitTest (Point_ position)
 		{
 			return HitTest (position.X, position.Y);
 		}
@@ -1215,7 +1215,7 @@ namespace System.Windows.Forms
 		const int RESIZE_HANDLE_HORIZ_SIZE = 5;
 		const int RESIZE_HANDLE_VERT_SIZE = 3;
 
-		// From Point to Cell
+		// From Point_ to Cell
 		public HitTestInfo HitTest (int x, int y)
 		{
 			if (column_headers_area.Contains (x, y)) {
@@ -1505,7 +1505,7 @@ namespace System.Windows.Forms
 					break;
 
 				if (rows[testinfo.Row].IsExpanded) {
-					Rectangle relation_area = rows[testinfo.Row].relation_area;
+					Rectangle_ relation_area = rows[testinfo.Row].relation_area;
 					relation_area.Y = rows[testinfo.Row].VerticalOffset + cells_area.Y + rows[testinfo.Row].Height - rows[testinfo.Row].RelationHeight;
 					if (relation_area.Contains (e.X, e.Y)) {
 						/* the click happened in the relation area, navigate to the new table */
@@ -1705,7 +1705,7 @@ namespace System.Windows.Forms
 					break;
 				case HitTestType.Cell:
 					if (rows[testinfo.Row].IsExpanded) {
-						Rectangle relation_area = rows[testinfo.Row].relation_area;
+						Rectangle_ relation_area = rows[testinfo.Row].relation_area;
 						relation_area.Y = rows[testinfo.Row].VerticalOffset + cells_area.Y + rows[testinfo.Row].Height - rows[testinfo.Row].RelationHeight;
 						if (relation_area.Contains (e.X, e.Y)) {
 							Cursor = Cursors.Hand;
@@ -2659,7 +2659,7 @@ namespace System.Windows.Forms
 			else
 				pixels = horiz_pixeloffset - pixel;
 
-			Rectangle area = cells_area;
+			Rectangle_ area = cells_area;
 
 			if (ColumnHeadersVisible) {
 				area.Y -= ColumnHeadersArea.Height;
@@ -2702,7 +2702,7 @@ namespace System.Windows.Forms
 			if (pixels == 0)
 				return;
 
-			Rectangle rows_area = cells_area; // Cells area - partial rows space
+			Rectangle_ rows_area = cells_area; // Cells area - partial rows space
 
 			if (RowHeadersVisible) {
 				rows_area.X -= RowHeaderWidth;
@@ -2881,14 +2881,14 @@ namespace System.Windows.Forms
 		#region	Local Variables
 
 		// Areas
-		Rectangle parent_rows;
+		Rectangle_ parent_rows;
 		int width_of_all_columns;
 
-		internal Rectangle caption_area;
-		internal Rectangle column_headers_area;	// Used columns header area
+		internal Rectangle_ caption_area;
+		internal Rectangle_ column_headers_area;	// Used columns header area
 		internal int column_headers_max_width; 	// Total width (max width) for columns headrs
-		internal Rectangle row_headers_area;	// Used Headers rows area
-		internal Rectangle cells_area;
+		internal Rectangle_ row_headers_area;	// Used Headers rows area
+		internal Rectangle_ cells_area;
 		#endregion // Local Variables
 
 		#region Public Instance Methods
@@ -3062,7 +3062,7 @@ namespace System.Windows.Forms
 					row_headers_area.Height -= horiz_scrollbar.Height;
 				}
 
-				vert_scrollbar.Size = new Size (vert_scrollbar.Width,
+				vert_scrollbar.Size = new Size_ (vert_scrollbar.Width,
 								vert_scrollbar_height);
 
 				vert_scrollbar.Maximum = vert_scrollbar_maximum;
@@ -3074,7 +3074,7 @@ namespace System.Windows.Forms
 			}
 
 			if (needHoriz) {
-				horiz_scrollbar.Size = new Size (horiz_scrollbar_width,
+				horiz_scrollbar.Size = new Size_ (horiz_scrollbar_width,
 					horiz_scrollbar.Height);
 
 				horiz_scrollbar.Maximum = horiz_scrollbar_maximum;
@@ -3160,14 +3160,14 @@ namespace System.Windows.Forms
 		void CalcParentButtons ()
 		{
 			if (data_source_stack.Count > 0 && CaptionVisible) {
-				back_button_rect = new Rectangle (ClientRectangle.X + ClientRectangle.Width - 2 * (caption_area.Height - 2) - 8,
+				back_button_rect = new Rectangle_ (ClientRectangle.X + ClientRectangle.Width - 2 * (caption_area.Height - 2) - 8,
 								  caption_area.Height / 2 - back_button_image.Height / 2,
 								  back_button_image.Width, back_button_image.Height);
-				parent_rows_button_rect = new Rectangle (ClientRectangle.X + ClientRectangle.Width - (caption_area.Height - 2) - 4,
+				parent_rows_button_rect = new Rectangle_ (ClientRectangle.X + ClientRectangle.Width - (caption_area.Height - 2) - 4,
 									 caption_area.Height / 2 - parent_rows_button_image.Height / 2,
 									 parent_rows_button_image.Width, parent_rows_button_image.Height);
 			} else {
-				back_button_rect = parent_rows_button_rect = Rectangle.Empty;
+				back_button_rect = parent_rows_button_rect = Rectangle_.Empty;
 			}
 		}
 
@@ -3249,7 +3249,7 @@ namespace System.Windows.Forms
 			if (row < FirstVisibleRow || row > FirstVisibleRow + VisibleRowCount)
 				return;
 
-			Rectangle rect_row = new Rectangle ();
+			Rectangle_ rect_row = new Rectangle_ ();
 
 			rect_row.X = cells_area.X;
 			rect_row.Width = width_of_all_columns;
@@ -3262,7 +3262,7 @@ namespace System.Windows.Forms
 
 		void InvalidateRowHeader (int row)
 		{
-			Rectangle rect_rowhdr = new Rectangle ();
+			Rectangle_ rect_rowhdr = new Rectangle_ ();
 			rect_rowhdr.X = row_headers_area.X;
 			rect_rowhdr.Width = row_headers_area.Width;
 			rect_rowhdr.Height = rows[row].Height;
@@ -3272,7 +3272,7 @@ namespace System.Windows.Forms
 
 		internal void InvalidateColumn (DataGridColumnStyle column)
 		{
-			Rectangle rect_col = new Rectangle ();
+			Rectangle_ rect_col = new Rectangle_ ();
 			int col_pixel;
 			int col = -1;
 
@@ -3292,14 +3292,14 @@ namespace System.Windows.Forms
 		void DrawResizeLineVert (int x)
 		{
 			XplatUI.DrawReversibleRectangle (Handle,
-							 new Rectangle (x, cells_area.Y, 1, cells_area.Height - 3),
+							 new Rectangle_ (x, cells_area.Y, 1, cells_area.Height - 3),
 							 2);
 		}
 
 		void DrawResizeLineHoriz (int y)
 		{
 			XplatUI.DrawReversibleRectangle (Handle,
-							 new Rectangle (cells_area.X, y, cells_area.Width - 3, 1),
+							 new Rectangle_ (cells_area.X, y, cells_area.Width - 3, 1),
 							 2);
 		}
 
@@ -3307,7 +3307,7 @@ namespace System.Windows.Forms
 		{
 			maximum = width_of_all_columns;
 
-			horiz_scrollbar.Location = new Point (ClientRectangle.X, ClientRectangle.Y +
+			horiz_scrollbar.Location = new Point_ (ClientRectangle.X, ClientRectangle.Y +
 				ClientRectangle.Height - horiz_scrollbar.Height);
 
 			horiz_scrollbar.LargeChange = cells_area.Width;
@@ -3320,7 +3320,7 @@ namespace System.Windows.Forms
 			y = ClientRectangle.Y + parent_rows.Y + parent_rows.Height;
 			height = ClientRectangle.Height - parent_rows.Y - parent_rows.Height;
 
-			vert_scrollbar.Location = new Point (ClientRectangle.X +
+			vert_scrollbar.Location = new Point_ (ClientRectangle.X +
 							     ClientRectangle.Width - vert_scrollbar.Width, y);
 
 			maximum = RowsCount;
@@ -3335,10 +3335,10 @@ namespace System.Windows.Forms
 		#endregion // Public Instance Methods
 
 		#region Instance Properties
-		// Returns the ColumnHeaders area excluding the rectangle shared with RowHeaders
-		internal Rectangle ColumnHeadersArea {
+		// Returns the ColumnHeaders area excluding the Rectangle_ shared with RowHeaders
+		internal Rectangle_ ColumnHeadersArea {
 			get {
-				Rectangle columns_area = column_headers_area;
+				Rectangle_ columns_area = column_headers_area;
 
 				if (CurrentTableStyle.CurrentRowHeadersVisible) {
 					columns_area.X += RowHeaderWidth;
@@ -3348,11 +3348,11 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Rectangle RowHeadersArea {
+		internal Rectangle_ RowHeadersArea {
 			get { return row_headers_area; }
 		}
 
-		internal Rectangle ParentRowsArea {
+		internal Rectangle_ ParentRowsArea {
 			get { return parent_rows; }
 		}
 
@@ -3389,15 +3389,15 @@ namespace System.Windows.Forms
 			get { return selected_rows.Count; }
 		}
 
-		internal Rectangle UIAColumnHeadersArea {
+		internal Rectangle_ UIAColumnHeadersArea {
 			get { return ColumnHeadersArea; }
 		}
 
-		internal Rectangle UIACaptionArea {
+		internal Rectangle_ UIACaptionArea {
 			get { return caption_area; }
 		}
 
-		internal Rectangle UIACellsArea {
+		internal Rectangle_ UIACellsArea {
 			get { return cells_area; }
 		}
 

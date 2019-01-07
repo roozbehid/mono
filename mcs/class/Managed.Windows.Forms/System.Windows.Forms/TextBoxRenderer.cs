@@ -38,27 +38,27 @@ namespace System.Windows.Forms
 		#endregion
 
 		#region Public Static Methods
-		public static void DrawTextBox (Graphics g, Rectangle bounds, TextBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, TextBoxState state)
 		{
-			DrawTextBox (g, bounds, String.Empty, null, Rectangle.Empty, TextFormatFlags.Default, state);
+			DrawTextBox (g, bounds, String.Empty, null, Rectangle_.Empty, TextFormatFlags.Default, state);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string textBoxText, Font font, TextBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string textBoxText, Font font, TextBoxState state)
 		{
-			DrawTextBox (g, bounds, textBoxText, font, Rectangle.Empty, TextFormatFlags.Default, state);
+			DrawTextBox (g, bounds, textBoxText, font, Rectangle_.Empty, TextFormatFlags.Default, state);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string textBoxText, Font font, Rectangle textBounds, TextBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string textBoxText, Font font, Rectangle_ textBounds, TextBoxState state)
 		{
 			DrawTextBox (g, bounds, textBoxText, font, textBounds, TextFormatFlags.Default, state);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string textBoxText, Font font, TextFormatFlags flags, TextBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string textBoxText, Font font, TextFormatFlags flags, TextBoxState state)
 		{
-			DrawTextBox (g, bounds, textBoxText, font, Rectangle.Empty, flags, state);
+			DrawTextBox (g, bounds, textBoxText, font, Rectangle_.Empty, flags, state);
 		}
 
-		public static void DrawTextBox (Graphics g, Rectangle bounds, string textBoxText, Font font, Rectangle textBounds, TextFormatFlags flags, TextBoxState state)
+		public static void DrawTextBox (Graphics g, Rectangle_ bounds, string textBoxText, Font font, Rectangle_ textBounds, TextFormatFlags flags, TextBoxState state)
 		{
 			if (!IsSupported)
 				throw new InvalidOperationException ();
@@ -87,8 +87,8 @@ namespace System.Windows.Forms
 
 			vsr.DrawBackground (g, bounds);
 
-			if (textBounds == Rectangle.Empty)
-				textBounds = new Rectangle (bounds.Left + 3, bounds.Top + 3, bounds.Width - 6, bounds.Height - 6);
+			if (textBounds == Rectangle_.Empty)
+				textBounds = new Rectangle_ (bounds.Left + 3, bounds.Top + 3, bounds.Width - 6, bounds.Height - 6);
 
 			if (textBoxText != String.Empty)
 				if (state == TextBoxState.Disabled)

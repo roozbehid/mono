@@ -61,7 +61,7 @@ namespace System.Windows.Forms.VisualStyles
 		}
 
 		[MonoTODO(@"Cannot get this to return the same as MS's...")]
-		public static Color ControlHighlightHot {
+		public static Color_ ControlHighlightHot {
 			get {
 				if (!VisualStyleRenderer.IsSupported)
 					return SystemColors.ButtonHighlight;
@@ -121,7 +121,7 @@ namespace System.Windows.Forms.VisualStyles
 			}
 		}
 
-		public static string Size {
+		public static string Size_ {
 			get {
 				if (!VisualStyleRenderer.IsSupported)
 					return string.Empty;
@@ -140,7 +140,7 @@ namespace System.Windows.Forms.VisualStyles
 		}
 
 		[MonoTODO(@"Cannot get this to return the same as MS's...")]
-		public static Color TextControlBorder {
+		public static Color_ TextControlBorder {
 			get {
 				if (!VisualStyleRenderer.IsSupported)
 					return SystemColors.ControlDarkDark;

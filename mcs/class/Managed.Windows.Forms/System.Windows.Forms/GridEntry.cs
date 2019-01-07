@@ -25,9 +25,9 @@
 //
 
 // NOT COMPLETE
-
 using System;
 using System.Collections;
+
 using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms;
@@ -48,7 +48,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 		private GridItem parent;
 		private PropertyDescriptor[] property_descriptors;
 		private int top;
-		private Rectangle plus_minus_bounds;
+		private Rectangle_ plus_minus_bounds;
 		private GridItemCollection child_griditems_cache;
 		#endregion	// Local Variables
 
@@ -58,7 +58,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 			if (propertyGrid == null)
 				throw new ArgumentNullException ("propertyGrid");
 			property_grid = propertyGrid;
-			plus_minus_bounds = new Rectangle (0,0,0,0);
+			plus_minus_bounds = new Rectangle_ (0,0,0,0);
 			top = -1;
 			grid_items = new GridItemCollection ();
 			expanded = false;
@@ -307,7 +307,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 			}
 		}
 
-		internal Rectangle PlusMinusBounds {
+		internal Rectangle_ PlusMinusBounds {
 			get { return plus_minus_bounds; }
 			set { plus_minus_bounds = value; }
 		}
@@ -707,7 +707,7 @@ namespace System.Windows.Forms.PropertyGridInternal
 			}
 		}
 
-		public virtual void PaintValue (Graphics gfx, Rectangle rect)
+		public virtual void PaintValue (Graphics gfx, Rectangle_ rect)
 		{
 			UITypeEditor editor = GetEditor ();
 			if (editor != null) {

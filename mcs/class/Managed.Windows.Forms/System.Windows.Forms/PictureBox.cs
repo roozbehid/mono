@@ -24,10 +24,10 @@
 //
 
 // COMPLETE
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -215,7 +215,7 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set { base.ForeColor = value; }
 		}
@@ -229,7 +229,7 @@ namespace System.Windows.Forms {
 		#endregion	// Public Properties
 
 		#region	Protected Instance Methods
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.PictureBoxDefaultSize; }
 		}
 
@@ -305,7 +305,7 @@ namespace System.Windows.Forms {
 			Invalidate ();
 		}
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
 			if (image == null)
 				return base.GetPreferredSizeCore (proposedSize);

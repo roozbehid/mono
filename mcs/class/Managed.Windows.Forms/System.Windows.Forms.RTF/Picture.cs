@@ -23,9 +23,9 @@
 //	Jackson Harper (jackson@ximian.com)
 //
 
-
 using System;
 using System.IO;
+
 using System.Drawing;
 
 namespace System.Windows.Forms.RTF {
@@ -88,9 +88,9 @@ namespace System.Windows.Forms.RTF {
 			}
 		}
 
-		public SizeF Size {
+		public SizeF_ Size {
 			get {	
-				return new SizeF (Width, Height);
+				return new SizeF_ (Width, Height);
 			}
 		}
 

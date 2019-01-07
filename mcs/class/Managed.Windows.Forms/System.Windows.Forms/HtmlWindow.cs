@@ -23,8 +23,8 @@
 //	Andreia Gaita (avidigal@novell.com)
 //
 
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 
@@ -99,11 +99,11 @@ namespace System.Windows.Forms
 			get { return new HtmlWindow (owner, webHost, this.window.Parent); }
 		}
 
-		public Point Position {
+		public Point_ position {
 			get { return owner.Location; }
 		}
 
-		public Size Size {
+		public Size_ Size {
 			get { return owner.Size; }
 			set { }
 		}
@@ -153,7 +153,7 @@ namespace System.Windows.Forms
 			webHost.Navigation.Go (url.ToString ());
 		}
 		
-		public void ScrollTo (Point point)
+		public void ScrollTo (Point_ point)
 		{
 			ScrollTo (point.X, point.Y);
 		}
@@ -225,7 +225,7 @@ namespace System.Windows.Forms
 			this.window.Focus ();
 		}
 		
-		public void MoveTo (Point point)
+		public void MoveTo (Point_ point)
 		{
 			throw new NotImplementedException ();
 		}
@@ -240,7 +240,7 @@ namespace System.Windows.Forms
 			webHost.FocusOut ();
 		}
 		
-		public void ResizeTo (Size size)
+		public void ResizeTo (Size_ size)
 		{
 			throw new NotImplementedException ();
 		}

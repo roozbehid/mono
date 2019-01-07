@@ -28,9 +28,9 @@
 // COMPLETE
 
 #undef Debug
-
 using System;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -51,12 +51,12 @@ namespace System.Windows.Forms {
 		private int			min_extra;
 		private int			min_size;
 		private int                     max_size;
-		private int			splitter_size;		// Size (width or height) of our splitter control
+		private int			splitter_size;		// Size_ (width or height) of our splitter control
 		private bool			horizontal;		// true if we've got a horizontal splitter
 		private Control			affected;		// The control that the splitter resizes
 		private int			split_requested;	// If the user requests a position before we have ever laid out the doc
 		private int 			splitter_prev_move;
-		private Rectangle 		splitter_rectangle_moving;
+		private Rectangle_ 		splitter_rectangle_moving;
 		private int			moving_offset;
 		#endregion	// Local Variables
 
@@ -200,7 +200,7 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get {
 				return base.ForeColor;
 			}
@@ -224,7 +224,7 @@ namespace System.Windows.Forms {
 
 		[DefaultValue(25)]
 		[Localizable(true)]
-		[MWFDescription("Sets minimum size of undocked window")]
+		[MWFDescription("Sets minimum Size_ of undocked window")]
 		[MWFCategory("Behaviour")]
 		public int MinExtra {
 			get {
@@ -238,7 +238,7 @@ namespace System.Windows.Forms {
 
 		[DefaultValue(25)]
 		[Localizable(true)]
-		[MWFDescription("Sets minimum size of the resized control")]
+		[MWFDescription("Sets minimum Size_ of the resized control")]
 		[MWFCategory("Behaviour")]
 		public int MinSize {
 			get {
@@ -376,9 +376,9 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get {
-				return new Size (3, 3);
+				return new Size_ (3, 3);
 			}
 		}
 		#endregion	// Protected Instance Properties
@@ -394,7 +394,7 @@ namespace System.Windows.Forms {
 			base.OnKeyDown (e);
 			if (Capture && (e.KeyCode == Keys.Escape)) {
 				Capture = false;
-				SplitterEndMove (Point.Empty, true);
+				SplitterEndMove (Point_.Empty, true);
 			}
 		}
 
@@ -410,7 +410,7 @@ namespace System.Windows.Forms {
 				return;
 
 			Capture = true;
-			SplitterBeginMove (Parent.PointToClient (PointToScreen (new Point (e.X, e.Y))));
+			SplitterBeginMove (Parent.PointToClient (PointToScreen (new Point_ (e.X, e.Y))));
 		}
 
 		protected override void OnMouseMove (MouseEventArgs e)
@@ -434,18 +434,18 @@ namespace System.Windows.Forms {
 			Capture = false;
 		}
 
-		private void SplitterBeginMove (Point location)
+		private void SplitterBeginMove (Point_ location)
 		{
-			splitter_rectangle_moving = new Rectangle (Bounds.X, Bounds.Y,
+			splitter_rectangle_moving = new Rectangle_ (Bounds.X, Bounds.Y,
 								   Width, Height);
 			splitter_prev_move = horizontal ? location.Y : location.X;
 		}
 
-		private void SplitterMove (Point location)
+		private void SplitterMove (Point_ location)
 		{
 			int currentMove = horizontal ? location.Y : location.X;
 			int delta = currentMove - splitter_prev_move;
-			Rectangle prev_location = splitter_rectangle_moving;
+			Rectangle_ prev_location = splitter_rectangle_moving;
 			bool moved = false;
 			int min = this.MinSize + moving_offset;
 			int max = max_size + moving_offset;
@@ -494,7 +494,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		private void SplitterEndMove (Point location, bool cancel)
+		private void SplitterEndMove (Point_ location, bool cancel)
 		{
 			if (!cancel) {
 				// Resize the affected window

@@ -23,8 +23,8 @@
 //	Geoff Norton  <gnorton@novell.com>
 //
 //
-
 using System;
+
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -140,7 +140,7 @@ namespace System.Windows.Forms.CarbonInternal {
 						msg.message = Msg.WM_ENTERSIZEMOVE;
 						return true;
 					case kEventWindowExpanded:
-						NativeWindow.WndProc (hwnd.Handle, Msg.WM_WINDOWPOSCHANGED, IntPtr.Zero, IntPtr.Zero);
+						NativeWindow.WndProc ((Int32)hwnd.Handle, Msg.WM_WINDOWPOSCHANGED, 0, 0);
 						msg.hwnd = hwnd.Handle;
 						msg.message = Msg.WM_EXITSIZEMOVE;
 						return true;
@@ -168,12 +168,12 @@ namespace System.Windows.Forms.CarbonInternal {
 						msg.message = Msg.WM_ENTERSIZEMOVE;
 						return true;
 					case kEventWindowCollapsed:
-						NativeWindow.WndProc (hwnd.Handle, Msg.WM_WINDOWPOSCHANGED, IntPtr.Zero, IntPtr.Zero);
+						NativeWindow.WndProc ((Int32)hwnd.Handle, Msg.WM_WINDOWPOSCHANGED, 0, 0);
 						msg.hwnd = hwnd.Handle;
 						msg.message = Msg.WM_EXITSIZEMOVE;
 						return true;
 					case kEventWindowClose:
-						NativeWindow.WndProc (hwnd.Handle, Msg.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+						NativeWindow.WndProc ((Int32)hwnd.Handle, Msg.WM_CLOSE, 0, 0);
 						return false;
 					case kEventWindowShown: { 
 						msg.message = Msg.WM_SHOWWINDOW;
@@ -197,7 +197,7 @@ namespace System.Windows.Forms.CarbonInternal {
 					case kEventWindowBoundsChanged: {
 						Rect window_bounds = new Rect ();
 						HIRect view_bounds = new HIRect ();
-						Size size;
+						Size_ size;
 
 						GetWindowBounds (handle, 33, ref window_bounds);
 						

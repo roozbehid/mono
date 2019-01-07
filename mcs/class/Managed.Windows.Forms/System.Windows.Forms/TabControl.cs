@@ -46,9 +46,9 @@ namespace System.Windows.Forms {
 		private TabDrawMode draw_mode;
 		private bool multiline;
 		private ImageList image_list;
-		private Size item_size = Size.Empty;
+		private Size_ item_size = Size_.Empty;
 		private bool item_size_manual;
-		private Point padding;
+		private Point_ padding;
 		private int row_count = 0;
 		private bool hottrack;
 		private TabPageCollection tab_pages;
@@ -151,7 +151,7 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return ThemeEngine.Current.ColorControl; }
 			set { /* nothing happens on set on MS */ }
 		}
@@ -170,7 +170,7 @@ namespace System.Windows.Forms {
 			set { base.BackgroundImageLayout = value; }
 		}
 		
-		public override Rectangle DisplayRectangle {
+		public override Rectangle_ DisplayRectangle {
 			get {
 				return ThemeEngine.Current.TabControlGetDisplayRectangle (this);
 			}
@@ -195,7 +195,7 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set { base.ForeColor = value; }
 		}
@@ -222,15 +222,15 @@ namespace System.Windows.Forms {
 		}
 
 		[Localizable(true)]
-		public Size ItemSize {
+		public Size_ ItemSize {
 			get {
 				if (item_size_manual)
 					return item_size;
 
 				if (!IsHandleCreated)
-					return Size.Empty;
+					return Size_.Empty;
 
-				Size size = item_size;
+				Size_ size = item_size;
 				if (SizeMode != TabSizeMode.Fixed) {
 					size.Width += padding.X * 2;
 					size.Height += padding.Y * 2;
@@ -266,7 +266,7 @@ namespace System.Windows.Forms {
 		[Localizable(true)]
 		public
 		new
-		Point Padding {
+		Point_ Padding {
 			get { return padding; }
 			set {
 				if (value.X < 0 || value.Y < 0)
@@ -347,7 +347,7 @@ namespace System.Windows.Forms {
 
 				SuspendLayout ();
 
-				Rectangle invalid = Rectangle.Empty;
+				Rectangle_ invalid = Rectangle_.Empty;
 				bool refresh = false;
 
 				if (new_index != -1 && show_slider && new_index < slider_pos) {
@@ -559,14 +559,14 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		protected override Size DefaultSize {
-			get { return new Size (200, 100); }  
+		protected override Size_ DefaultSize {
+			get { return new Size_ (200, 100); }  
 		}
 
 		#endregion	// Protected Instance Properties
 
 		#region Public Instance Methods
-		public Rectangle GetTabRect (int index)
+		public Rectangle_ GetTabRect (int index)
 		{
 			TabPage page = GetTab (index);
 			return page.TabBounds;
@@ -952,8 +952,8 @@ namespace System.Windows.Forms {
 				return;
 
 			if (ShowSlider) {
-				Rectangle right = RightScrollButtonArea;
-				Rectangle left = LeftScrollButtonArea;
+				Rectangle_ right = RightScrollButtonArea;
+				Rectangle_ left = LeftScrollButtonArea;
 				if (right.Contains (e.X, e.Y)) {
 					right_slider_state = PushButtonState.Pressed;
 					if (CanScrollRight) {
@@ -965,16 +965,16 @@ namespace System.Windows.Forms {
 
 						switch (this.Alignment) {
 							case TabAlignment.Top:
-								Invalidate (new Rectangle (0, 0, Width, ItemSize.Height));
+								Invalidate (new Rectangle_ (0, 0, Width, ItemSize.Height));
 								break;
 							case TabAlignment.Bottom:
-								Invalidate (new Rectangle (0, DisplayRectangle.Bottom, Width, Height - DisplayRectangle.Bottom));
+								Invalidate (new Rectangle_ (0, DisplayRectangle.Bottom, Width, Height - DisplayRectangle.Bottom));
 								break;
 							case TabAlignment.Left:
-								Invalidate (new Rectangle (0, 0, DisplayRectangle.Left, Height));
+								Invalidate (new Rectangle_ (0, 0, DisplayRectangle.Left, Height));
 								break;
 							case TabAlignment.Right:
-								Invalidate (new Rectangle (DisplayRectangle.Right, 0, Width - DisplayRectangle.Right, Height));
+								Invalidate (new Rectangle_ (DisplayRectangle.Right, 0, Width - DisplayRectangle.Right, Height));
 								break;
 						}
 						
@@ -993,16 +993,16 @@ namespace System.Windows.Forms {
 
 						switch (this.Alignment) {
 							case TabAlignment.Top:
-								Invalidate (new Rectangle (0, 0, Width, ItemSize.Height));
+								Invalidate (new Rectangle_ (0, 0, Width, ItemSize.Height));
 								break;
 							case TabAlignment.Bottom:
-								Invalidate (new Rectangle (0, DisplayRectangle.Bottom, Width, Height - DisplayRectangle.Bottom));
+								Invalidate (new Rectangle_ (0, DisplayRectangle.Bottom, Width, Height - DisplayRectangle.Bottom));
 								break;
 							case TabAlignment.Left:
-								Invalidate (new Rectangle (0, 0, DisplayRectangle.Left, Height));
+								Invalidate (new Rectangle_ (0, 0, DisplayRectangle.Left, Height));
 								break;
 							case TabAlignment.Right:
-								Invalidate (new Rectangle (DisplayRectangle.Right, 0, Width - DisplayRectangle.Right, Height));
+								Invalidate (new Rectangle_ (DisplayRectangle.Right, 0, Width - DisplayRectangle.Right, Height));
 								break;
 						}
 					} else {
@@ -1026,7 +1026,7 @@ namespace System.Windows.Forms {
 		{
 			mouse_down_on_a_tab_page = false;
 			if (ShowSlider && (left_slider_state == PushButtonState.Pressed || right_slider_state == PushButtonState.Pressed)) {
-				Rectangle invalid;
+				Rectangle_ invalid;
 				if (left_slider_state == PushButtonState.Pressed) {
 					invalid = LeftScrollButtonArea;
 					left_slider_state = GetScrollButtonState (invalid, e.Location);
@@ -1044,19 +1044,19 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		Rectangle LeftScrollButtonArea {
+		Rectangle_ LeftScrollButtonArea {
 			get {
 				return ThemeElements.CurrentTheme.TabControlPainter.GetLeftScrollRect (this);
 			}
 		}
 
-		Rectangle RightScrollButtonArea {
+		Rectangle_ RightScrollButtonArea {
 			get {
 				return ThemeElements.CurrentTheme.TabControlPainter.GetRightScrollRect (this);
 			}
 		}
 
-		static PushButtonState GetScrollButtonState (Rectangle scrollButtonArea, Point cursorLocation)
+		static PushButtonState GetScrollButtonState (Rectangle_ scrollButtonArea, Point_ cursorLocation)
 		{
 			return scrollButtonArea.Contains (cursorLocation) ? PushButtonState.Hot : PushButtonState.Normal;
 		}
@@ -1079,7 +1079,7 @@ namespace System.Windows.Forms {
 		{
 			CalcTabRows ();
 			SizeTabs ();
-			Rectangle r = DisplayRectangle;
+			Rectangle_ r = DisplayRectangle;
 			foreach (TabPage page in Controls) {
 				page.Bounds = r;
 			}
@@ -1091,7 +1091,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		private Size TabSpacing {
+		private Size_ TabSpacing {
 			get {
 				return ThemeEngine.Current.TabControlGetSpacing (this);
 			}
@@ -1114,7 +1114,7 @@ namespace System.Windows.Forms {
 		{
 			int xpos = 0;
 			int ypos = 0;
-			Size spacing = TabSpacing;
+			Size_ spacing = TabSpacing;
 
 			if (TabPages.Count > 0)
 				row_count = 1;
@@ -1140,7 +1140,7 @@ namespace System.Windows.Forms {
 			if (item_size_manual)
 				return;
 
-			SizeF size;
+			SizeF_ size;
 			if (tab_pages.Count > 0) {
 				// .Net uses the first tab page if available.
 				size = TextRenderer.MeasureString (tab_pages [0].Text, Font);
@@ -1231,7 +1231,7 @@ namespace System.Windows.Forms {
 			int ypos = 0;
 			int xpos = 0;
 			int prev_row = 1;
-			Size spacing = TabSpacing;
+			Size_ spacing = TabSpacing;
 			int begin_prev = 0;
 
 			if (TabPages.Count == 0)
@@ -1240,14 +1240,14 @@ namespace System.Windows.Forms {
 			prev_row = TabPages [0].Row;
 
 			// Reset the slider position if the slider isn't needed
-			// anymore (ie window size was increased so all tabs are visible)
+			// anymore (ie window Size_ was increased so all tabs are visible)
 			if (!show_slider)
 				slider_pos = 0;
 			else {
 				// set X = -1 for marking tabs that are not visible due to scrolling
 				for (int i = 0; i < slider_pos; i++) {
 					TabPage page = TabPages[i];
-					Rectangle x = page.TabBounds;
+					Rectangle_ x = page.TabBounds;
 					x.X = -1;
 					page.TabBounds = x;
 				}
@@ -1271,7 +1271,7 @@ namespace System.Windows.Forms {
 		}
 		
 		private void SizeTab (TabPage page, int i, int row_width, ref int xpos, ref int ypos, 
-								Size spacing, int prev_row, ref int begin_prev, bool widthOnly) 
+								Size_ spacing, int prev_row, ref int begin_prev, bool widthOnly) 
 		{				
 			int width, height = 0;
 
@@ -1300,7 +1300,7 @@ namespace System.Windows.Forms {
 				width += ThemeEngine.Current.TabControlSelectedSpacing;
 			
 			if (widthOnly) {
-				page.TabBounds = new Rectangle (xpos, 0, width, 0);
+				page.TabBounds = new Rectangle_ (xpos, 0, width, 0);
 				page.Row = row_count;
 				if (xpos + width > row_width && multiline) {
 					xpos = 0;
@@ -1324,7 +1324,7 @@ namespace System.Windows.Forms {
 				switch (Alignment) {
 					case TabAlignment.Top:
 					case TabAlignment.Bottom:
-						page.TabBounds = new Rectangle (
+						page.TabBounds = new Rectangle_ (
 							xpos + CalcXPos (),
 							ypos + (height + spacing.Height) * (row_count - page.Row) + CalcYPos (),
 							width, 
@@ -1333,14 +1333,14 @@ namespace System.Windows.Forms {
 					case TabAlignment.Left:
 						if (Appearance == TabAppearance.Normal) {
 							// tab rows are positioned right to left
-							page.TabBounds = new Rectangle (
+							page.TabBounds = new Rectangle_ (
 								ypos + (height + spacing.Height) * (row_count - page.Row) + CalcXPos (),
 								xpos,
 								height, 
 								width);
 						} else {
 							// tab rows are positioned left to right
-							page.TabBounds = new Rectangle (
+							page.TabBounds = new Rectangle_ (
 								ypos + (height + spacing.Height) * (page.Row - 1) + CalcXPos (),
 								xpos,
 								height, 
@@ -1351,14 +1351,14 @@ namespace System.Windows.Forms {
 					case TabAlignment.Right:
 						if (Appearance == TabAppearance.Normal) {
 							// tab rows are positioned left to right
-							page.TabBounds = new Rectangle (
+							page.TabBounds = new Rectangle_ (
 								ypos + (height + spacing.Height) * (page.Row - 1) + CalcXPos (),
 								xpos,
 								height, 
 								width);
 						} else {
 							// tab rows are positioned right to left
-							page.TabBounds = new Rectangle (
+							page.TabBounds = new Rectangle_ (
 								ypos + (height + spacing.Height) * (row_count - page.Row) + CalcXPos (),
 								xpos,
 								height, 
@@ -1382,7 +1382,7 @@ namespace System.Windows.Forms {
 			xpos += width + spacing.Width + ThemeEngine.Current.TabControlColSpacing;
 		}
 
-		private void FillRow (int start, int end, int amount, Size spacing, bool vertical) 
+		private void FillRow (int start, int end, int amount, Size_ spacing, bool vertical) 
 		{
 			if (vertical)
 				FillRowV (start, end, amount, spacing);
@@ -1390,7 +1390,7 @@ namespace System.Windows.Forms {
 				FillRow (start, end, amount, spacing);
 		}
 
-		private void FillRow (int start, int end, int amount, Size spacing)
+		private void FillRow (int start, int end, int amount, Size_ spacing)
 		{
 			int xpos = TabPages [start].TabBounds.Left;
 			for (int i = start; i <= end; i++) {
@@ -1398,13 +1398,13 @@ namespace System.Windows.Forms {
 				int left = xpos;
 				int width = (i == end ? Width - left - 3 : page.TabBounds.Width + amount);
 
-				page.TabBounds = new Rectangle (left, page.TabBounds.Top,
+				page.TabBounds = new Rectangle_ (left, page.TabBounds.Top,
 						width, page.TabBounds.Height);
 				xpos = page.TabBounds.Right + 1 + spacing.Width;
 			}
 		}
 
-		private void FillRowV (int start, int end, int amount, Size spacing)
+		private void FillRowV (int start, int end, int amount, Size_ spacing)
 		{
 			int ypos = TabPages [start].TabBounds.Top;
 			for (int i = start; i <= end; i++) {
@@ -1412,7 +1412,7 @@ namespace System.Windows.Forms {
 				int top = ypos;
 				int height = (i == end ? Height - top - 5 : page.TabBounds.Height + amount);
 
-				page.TabBounds = new Rectangle (page.TabBounds.Left, top,
+				page.TabBounds = new Rectangle_ (page.TabBounds.Left, top,
 						page.TabBounds.Width, height);
 				ypos = page.TabBounds.Bottom + 1;
 			}
@@ -1423,7 +1423,7 @@ namespace System.Windows.Forms {
 			if (Appearance != TabAppearance.Normal)
 				return;
 
-			Rectangle r = page.TabBounds;
+			Rectangle_ r = page.TabBounds;
 			r.Y -= ThemeEngine.Current.TabControlSelectedDelta.Y;
 			r.X -= ThemeEngine.Current.TabControlSelectedDelta.X;
 
@@ -1439,7 +1439,7 @@ namespace System.Windows.Forms {
 			page.TabBounds = r;
 		}
 
-		private void Draw (Graphics dc, Rectangle clip)
+		private void Draw (Graphics dc, Rectangle_ clip)
 		{
 			ThemeEngine.Current.DrawTabControl (dc, clip, this);
 		}

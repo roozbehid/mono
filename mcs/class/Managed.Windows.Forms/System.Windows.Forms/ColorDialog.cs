@@ -37,7 +37,7 @@ namespace System.Windows.Forms {
 		#region Local Variables
 		private bool allowFullOpen = true;
 		private bool anyColor = false;
-		private Color color;
+		private Color_ color;
 		private int[] customColors = null;
 		private bool fullOpen = false;
 		private bool showHelp = false;
@@ -112,144 +112,144 @@ namespace System.Windows.Forms {
 			selectedColorPanel = new Panel ();
 			
 			// hueTextBox
-			hueTextBox.Location = new Point (324, 203);
-			hueTextBox.Size = new Size (27, 21);
+			hueTextBox.Location = new Point_ (324, 203);
+			hueTextBox.Size = new Size_ (27, 21);
 			hueTextBox.TabIndex = 11;
 			hueTextBox.MaxLength = 3;
 			// satTextBox
-			satTextBox.Location = new Point (324, 225);
-			satTextBox.Size = new Size (27, 21);
+			satTextBox.Location = new Point_ (324, 225);
+			satTextBox.Size = new Size_ (27, 21);
 			satTextBox.TabIndex = 15;
 			satTextBox.MaxLength = 3;
 			// greenTextBox
-			greenTextBox.Location = new Point (404, 225);
-			greenTextBox.Size = new Size (27, 21);
+			greenTextBox.Location = new Point_ (404, 225);
+			greenTextBox.Size = new Size_ (27, 21);
 			greenTextBox.TabIndex = 18;
 			greenTextBox.MaxLength = 3;
 			// briTextBox
-			briTextBox.Location = new Point (324, 247);
-			briTextBox.Size = new Size (27, 21);
+			briTextBox.Location = new Point_ (324, 247);
+			briTextBox.Size = new Size_ (27, 21);
 			briTextBox.TabIndex = 16;
 			briTextBox.MaxLength = 3;
 			// blueTextBox
-			blueTextBox.Location = new Point (404, 247);
-			blueTextBox.Size = new Size (27, 21);
+			blueTextBox.Location = new Point_ (404, 247);
+			blueTextBox.Size = new Size_ (27, 21);
 			blueTextBox.TabIndex = 19;
 			blueTextBox.MaxLength = 3;
 			// redTextBox
-			redTextBox.Location = new Point (404, 203);
-			redTextBox.Size = new Size (27, 21);
+			redTextBox.Location = new Point_ (404, 203);
+			redTextBox.Size = new Size_ (27, 21);
 			redTextBox.TabIndex = 17;
 			redTextBox.MaxLength = 3;
 			
 			// redLabel
 			redLabel.FlatStyle = FlatStyle.System;
-			redLabel.Location = new Point (361, 206);
-			redLabel.Size = new Size (40, 16);
+			redLabel.Location = new Point_ (361, 206);
+			redLabel.Size = new Size_ (40, 16);
 			redLabel.TabIndex = 25;
 			redLabel.Text = Locale.GetText ("Red") + ":";
 			redLabel.TextAlign = ContentAlignment.MiddleRight;
 			// blueLabel
 			blueLabel.FlatStyle = FlatStyle.System;
-			blueLabel.Location = new Point (361, 250);
-			blueLabel.Size = new Size (40, 16);
+			blueLabel.Location = new Point_ (361, 250);
+			blueLabel.Size = new Size_ (40, 16);
 			blueLabel.TabIndex = 26;
 			blueLabel.Text = Locale.GetText ("Blue") + ":";
 			blueLabel.TextAlign = ContentAlignment.MiddleRight;
 			// greenLabel
 			greenLabel.FlatStyle = FlatStyle.System;
-			greenLabel.Location = new Point (361, 228);
-			greenLabel.Size = new Size (40, 16);
+			greenLabel.Location = new Point_ (361, 228);
+			greenLabel.Size = new Size_ (40, 16);
 			greenLabel.TabIndex = 27;
 			greenLabel.Text = Locale.GetText ("Green") + ":";
 			greenLabel.TextAlign = ContentAlignment.MiddleRight;
 			// colorBaseLabel
-			colorBaseLabel.Location = new Point (228, 247);
-			colorBaseLabel.Size = new Size (60, 25);
+			colorBaseLabel.Location = new Point_ (228, 247);
+			colorBaseLabel.Size = new Size_ (60, 25);
 			colorBaseLabel.TabIndex = 28;
 			colorBaseLabel.Text = Locale.GetText ("Color");
 			colorBaseLabel.TextAlign = ContentAlignment.MiddleCenter;
 			// hueLabel
 			hueLabel.FlatStyle = FlatStyle.System;
-			hueLabel.Location = new Point (287, 206);
-			hueLabel.Size = new Size (36, 16);
+			hueLabel.Location = new Point_ (287, 206);
+			hueLabel.Size = new Size_ (36, 16);
 			hueLabel.TabIndex = 23;
 			hueLabel.Text = Locale.GetText ("Hue") + ":";
 			hueLabel.TextAlign = ContentAlignment.MiddleRight;
 			// satLabel
 			satLabel.FlatStyle = FlatStyle.System;
-			satLabel.Location = new Point (287, 228);
-			satLabel.Size = new Size (36, 16);
+			satLabel.Location = new Point_ (287, 228);
+			satLabel.Size = new Size_ (36, 16);
 			satLabel.TabIndex = 22;
 			satLabel.Text = Locale.GetText ("Sat") + ":";
 			satLabel.TextAlign = ContentAlignment.MiddleRight;
 			// briLabel
 			briLabel.FlatStyle = FlatStyle.System;
-			briLabel.Location = new Point (287, 250);
-			briLabel.Size = new Size (36, 16);
+			briLabel.Location = new Point_ (287, 250);
+			briLabel.Size = new Size_ (36, 16);
 			briLabel.TabIndex = 24;
 			briLabel.Text = Locale.GetText ("Bri") + ":";
 			briLabel.TextAlign = ContentAlignment.MiddleRight;
 			
 			// defineColoursButton
 			defineColoursButton.FlatStyle = FlatStyle.System;
-			defineColoursButton.Location = new Point (5, 244);
-			defineColoursButton.Size = new Size (210, 22);
+			defineColoursButton.Location = new Point_ (5, 244);
+			defineColoursButton.Size = new Size_ (210, 22);
 			defineColoursButton.TabIndex = 6;
 			// FIXME: update resource files
 			defineColoursButton.Text = "Define Custom Colors >>";
 			//defineColoursButton.Text = Locale.GetText ("Define Custom Colors >>");
 			// okButton
 			okButton.FlatStyle = FlatStyle.System;
-			okButton.Location = new Point (5, 271);
-			okButton.Size = new Size (66, 22);
+			okButton.Location = new Point_ (5, 271);
+			okButton.Size = new Size_ (66, 22);
 			okButton.TabIndex = 0;
 			okButton.Text = Locale.GetText ("OK");
 			// cancelButton
 			cancelButton.FlatStyle = FlatStyle.System;
-			cancelButton.Location = new Point (78, 271);
-			cancelButton.Size = new Size (66, 22);
+			cancelButton.Location = new Point_ (78, 271);
+			cancelButton.Size = new Size_ (66, 22);
 			cancelButton.TabIndex = 1;
 			cancelButton.Text = Locale.GetText ("Cancel");
 			// helpButton
 			helpButton.FlatStyle = FlatStyle.System;
-			helpButton.Location = new Point (149, 271);
-			helpButton.Size = new Size (66, 22);
+			helpButton.Location = new Point_ (149, 271);
+			helpButton.Size = new Size_ (66, 22);
 			helpButton.TabIndex = 5;
 			helpButton.Text = Locale.GetText ("Help");
 			helpButton.Hide ();
 			
 			// addColoursButton
 			addColoursButton.FlatStyle = FlatStyle.System;
-			addColoursButton.Location = new Point (227, 271);
-			addColoursButton.Size = new Size (213, 22);
+			addColoursButton.Location = new Point_ (227, 271);
+			addColoursButton.Size = new Size_ (213, 22);
 			addColoursButton.TabIndex = 7;
 			// FIXME: update resource files
 			addColoursButton.Text =  "Add To Custom Colors";
 			//addColoursButton.Text =  Locale.GetText ("Add To Custom Colors");
 			
 			// baseColorControl
-			baseColorControl.Location = new Point (3, 6);
-			baseColorControl.Size = new Size (212, 231);
+			baseColorControl.Location = new Point_ (3, 6);
+			baseColorControl.Size = new Size_ (212, 231);
 			baseColorControl.TabIndex = 13;
 			// colorMatrixControl
-			colorMatrixControl.Location = new Point (227, 7);
-			colorMatrixControl.Size = new Size (179, 190);
+			colorMatrixControl.Location = new Point_ (227, 7);
+			colorMatrixControl.Size = new Size_ (179, 190);
 			colorMatrixControl.TabIndex = 14;
 			// triangleControl
-			triangleControl.Location = new Point (432, 0);
-			triangleControl.Size = new Size (16, 204);
+			triangleControl.Location = new Point_ (432, 0);
+			triangleControl.Size = new Size_ (16, 204);
 			triangleControl.TabIndex = 12;
 			// brightnessControl
-			brightnessControl.Location = new Point (415, 7);
-			brightnessControl.Size = new Size (14, 190);
+			brightnessControl.Location = new Point_ (415, 7);
+			brightnessControl.Size = new Size_ (14, 190);
 			brightnessControl.TabIndex = 20;
 			
 			// selectedColorPanel
 			selectedColorPanel.BackColor = SystemColors.Desktop;
 			selectedColorPanel.BorderStyle = BorderStyle.Fixed3D;
-			selectedColorPanel.Location = new Point (227, 202);
-			selectedColorPanel.Size = new Size (60, 42);
+			selectedColorPanel.Location = new Point_ (227, 202);
+			selectedColorPanel.Size = new Size_ (60, 42);
 			selectedColorPanel.TabIndex = 10;
 			
 			form.Controls.Add (hueTextBox);
@@ -282,7 +282,7 @@ namespace System.Windows.Forms {
 			
 			form.ResumeLayout (false);
 			
-			Color = Color.Black;
+            color = Color_.Black;
 			
 			defineColoursButton.Click += new EventHandler (OnClickButtonDefineColours);
 			addColoursButton.Click += new EventHandler (OnClickButtonAddColours);
@@ -323,14 +323,14 @@ namespace System.Windows.Forms {
 		#endregion	// Public Constructors
 		
 		#region Public Instance Properties
-		public Color Color {
+		public Color_ Color {
 			get {
 				return selectedColorPanel.BackColor;
 			}
 			
 			set {
 				if (value.IsEmpty) {
-					color = Color.Black;
+                    color = Color_.Black;
 					baseColorControl.SetColor (color);
 				} else if (color != value) {
 					color = value;
@@ -448,7 +448,7 @@ namespace System.Windows.Forms {
 		{
 			AllowFullOpen = true;
 			anyColor = false;
-			Color = Color.Black;
+            color = Color_.Black;
 			CustomColors = null;
 			FullOpen = false;
 			ShowHelp = false;
@@ -493,12 +493,12 @@ namespace System.Windows.Forms {
 		
 		#region Private Methods
 
-		Size GetFormSize (bool fullOpen)
+		Size_ GetFormSize (bool fullOpen)
 		{
 			if (fullOpen)
-				return new Size (448, 332);
+				return new Size_ (448, 332);
 			else
-				return new Size (221, 332); // 300
+				return new Size_ (221, 332); // 300
 		}
 
 		void OnClickCancelButton (object sender, EventArgs e)
@@ -678,7 +678,7 @@ namespace System.Windows.Forms {
 			edit_textbox = null;
 		}
 		
-		internal void UpdateControls (Color acolor)
+		internal void UpdateControls (Color_ acolor)
 		{
 			selectedColorPanel.BackColor = acolor;
 			colorMatrixControl.ColorToShow = acolor;
@@ -686,7 +686,7 @@ namespace System.Windows.Forms {
 			triangleControl.ColorToShow = acolor;
 		}
 		
-		internal void UpdateRGBTextBoxes (Color acolor)
+		internal void UpdateRGBTextBoxes (Color_ acolor)
 		{
 			if (edit_textbox != redTextBox)
 				redTextBox.Text = acolor.R.ToString ();
@@ -696,7 +696,7 @@ namespace System.Windows.Forms {
 				blueTextBox.Text = acolor.B.ToString ();
 		}
 		
-		internal void UpdateHSBTextBoxes (Color acolor)
+		internal void UpdateHSBTextBoxes (Color_ acolor)
 		{
 			HSB hsb = HSB.RGB2HSB (acolor);
 			
@@ -710,7 +710,7 @@ namespace System.Windows.Forms {
 		
 		internal void UpdateFromHSBTextBoxes ()
 		{
-			Color col = HSB.HSB2RGB (System.Convert.ToInt32 (hueTextBox.Text),
+			Color_ col = HSB.HSB2RGB (System.Convert.ToInt32 (hueTextBox.Text),
 						 System.Convert.ToInt32 (satTextBox.Text),
 						 System.Convert.ToInt32 (briTextBox.Text));
 			
@@ -720,7 +720,7 @@ namespace System.Windows.Forms {
 		
 		internal void UpdateFromRGBTextBoxes ()
 		{
-			Color col = Color.FromArgb (System.Convert.ToInt32 (redTextBox.Text),
+			Color_ col = Color_.FromArgb (System.Convert.ToInt32 (redTextBox.Text),
 						    System.Convert.ToInt32 (greenTextBox.Text),
 						    System.Convert.ToInt32 (blueTextBox.Text));
 			
@@ -737,7 +737,7 @@ namespace System.Windows.Forms {
 			if (customColors == null)
 				customColors = new int [16];
 			
-			int default_color = Color.FromArgb(0, 255, 255, 255).ToArgb ();
+			int default_color = Color_.FromArgb(0, 255, 255, 255).ToArgb ();
 				
 			for (int i = 0; i < customColors.Length; i++)
 				customColors [i] = default_color;
@@ -750,7 +750,7 @@ namespace System.Windows.Forms {
 			public int sat;
 			public int bri;
 			
-			public static HSB RGB2HSB (Color color)
+			public static HSB RGB2HSB (Color_ color)
 			{
 				HSB hsb = new HSB ();
 				
@@ -766,7 +766,7 @@ namespace System.Windows.Forms {
 			}
 			
 			// not using ControlPaint HBS2Color, this algo is more precise
-			public static Color HSB2RGB (int hue, int saturation, int brightness)
+			public static Color_ HSB2RGB (int hue, int saturation, int brightness)
 			{
 				if (hue > 239)
 					hue = 239;
@@ -851,15 +851,15 @@ namespace System.Windows.Forms {
 				if (b > 255.0f)
 					b = 255.0f;
 				
-				return Color.FromArgb ((int)r, (int)g, (int)b);
+				return Color_.FromArgb ((int)r, (int)g, (int)b);
 			}
 			
-			public static int Brightness (Color color)
+			public static int Brightness (Color_ color)
 			{
 				return (int)(color.GetBrightness () * 241);
 			}
 			
-			public static void GetHueSaturation (Color color, out int hue, out int sat)
+			public static void GetHueSaturation (Color_ color, out int hue, out int sat)
 			{
 				hue = (int)((color.GetHue () / 360.0f) * 240);
 				sat = (int)(color.GetSaturation () * 241);
@@ -867,7 +867,7 @@ namespace System.Windows.Forms {
 			
 			// only for testing
 			// there are some small glitches, but it is still better than ControlPaint implementation
-			public static void TestColor (Color color)
+			public static void TestColor (Color_ color)
 			{
 				Console.WriteLine ("Color: " + color);
 				HSB hsb = HSB.RGB2HSB (color);
@@ -879,17 +879,17 @@ namespace System.Windows.Forms {
 		
 		internal class BaseColorControl : Control {
 			internal class SmallColorControl : Control {
-				private Color internalcolor;
+				private Color_ internalcolor;
 				
 				private bool isSelected = false;
 				
-				public SmallColorControl (Color color)
+				public SmallColorControl (Color_ color)
 				{
 					SuspendLayout ();
 					
 					this.internalcolor = color;
 					
-					Size = new Size (25, 23);
+					Size = new Size_ (25, 23);
 					
 					ResumeLayout (false);
 					
@@ -910,7 +910,7 @@ namespace System.Windows.Forms {
 					}
 				}
 				
-				public Color InternalColor {
+				public Color_ InternalColor {
 					set {
 						internalcolor = value;
 						Invalidate ();
@@ -926,18 +926,18 @@ namespace System.Windows.Forms {
 					base.OnPaint (pe);
 					
 					pe.Graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (internalcolor),
-								   new Rectangle (4, 4, 17, 15));
+								   new Rectangle_ (4, 4, 17, 15));
 					
 					ControlPaint.DrawBorder3D (pe.Graphics, 3, 3, 19, 17, Border3DStyle.Sunken);
 					
 					if (isSelected) {
-						pe.Graphics.DrawRectangle (ThemeEngine.Current.ResPool.GetPen (Color.Black),
-									   new Rectangle (2, 2, 20, 18));
+						pe.Graphics.DrawRectangle (ThemeEngine.Current.ResPool.GetPen (Color_.Black),
+									   new Rectangle_ (2, 2, 20, 18));
 					}
 					
 					if (Focused) {
 						ControlPaint.DrawFocusRectangle (
-							pe.Graphics, new Rectangle (0, 0, 25, 23)
+							pe.Graphics, new Rectangle_ (0, 0, 25, 23)
 						);
 					}
 				}
@@ -991,72 +991,72 @@ namespace System.Windows.Forms {
 				this.colorDialog = colorDialog;
 				
 				userSmallColorControl = new SmallColorControl [16];
-				userSmallColorControl [0] = new SmallColorControl (Color.White);
-				userSmallColorControl [1] = new SmallColorControl (Color.White);
-				userSmallColorControl [2] = new SmallColorControl (Color.White);
-				userSmallColorControl [3] = new SmallColorControl (Color.White);
-				userSmallColorControl [4] = new SmallColorControl (Color.White);
-				userSmallColorControl [5] = new SmallColorControl (Color.White);
-				userSmallColorControl [6] = new SmallColorControl (Color.White);
-				userSmallColorControl [7] = new SmallColorControl (Color.White);
-				userSmallColorControl [8] = new SmallColorControl (Color.White);
-				userSmallColorControl [9] = new SmallColorControl (Color.White);
-				userSmallColorControl [10] = new SmallColorControl (Color.White);
-				userSmallColorControl [11] = new SmallColorControl (Color.White);
-				userSmallColorControl [12] = new SmallColorControl (Color.White);
-				userSmallColorControl [13] = new SmallColorControl (Color.White);
-				userSmallColorControl [14] = new SmallColorControl (Color.White);
-				userSmallColorControl [15] = new SmallColorControl (Color.White);
+				userSmallColorControl [0] = new SmallColorControl (Color_.White);
+				userSmallColorControl [1] = new SmallColorControl (Color_.White);
+				userSmallColorControl [2] = new SmallColorControl (Color_.White);
+				userSmallColorControl [3] = new SmallColorControl (Color_.White);
+				userSmallColorControl [4] = new SmallColorControl (Color_.White);
+				userSmallColorControl [5] = new SmallColorControl (Color_.White);
+				userSmallColorControl [6] = new SmallColorControl (Color_.White);
+				userSmallColorControl [7] = new SmallColorControl (Color_.White);
+				userSmallColorControl [8] = new SmallColorControl (Color_.White);
+				userSmallColorControl [9] = new SmallColorControl (Color_.White);
+				userSmallColorControl [10] = new SmallColorControl (Color_.White);
+				userSmallColorControl [11] = new SmallColorControl (Color_.White);
+				userSmallColorControl [12] = new SmallColorControl (Color_.White);
+				userSmallColorControl [13] = new SmallColorControl (Color_.White);
+				userSmallColorControl [14] = new SmallColorControl (Color_.White);
+				userSmallColorControl [15] = new SmallColorControl (Color_.White);
 				
 				smallColorControl = new SmallColorControl [48];
-				smallColorControl [0] = new SmallColorControl (Color.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(128))));
-				smallColorControl [1] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(128)), ((Byte)(64))));
-				smallColorControl [2] = new SmallColorControl (Color.Gray);
-				smallColorControl [3] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(0)), ((Byte)(255))));
-				smallColorControl [4] = new SmallColorControl (Color.Silver);
-				smallColorControl [5] = new SmallColorControl (Color.FromArgb (((Byte)(64)), ((Byte)(128)), ((Byte)(128))));
-				smallColorControl [6] = new SmallColorControl (Color.White);
-				smallColorControl [7] = new SmallColorControl (Color.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(64))));
-				smallColorControl [8] = new SmallColorControl (Color.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(64))));
-				smallColorControl [9] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(64)), ((Byte)(64))));
-				smallColorControl [10] = new SmallColorControl (Color.Teal);
-				smallColorControl [11] = new SmallColorControl (Color.Lime);
-				smallColorControl [12] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(128)), ((Byte)(255))));
-				smallColorControl [13] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(64)), ((Byte)(128))));
-				smallColorControl [14] = new SmallColorControl (Color.FromArgb (((Byte)(255)), ((Byte)(0)), ((Byte)(128))));
-				smallColorControl [15] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(255)), ((Byte)(0))));
-				smallColorControl [16] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(255)), ((Byte)(64))));
-				smallColorControl [17] = new SmallColorControl (Color.Red);
-				smallColorControl [18] = new SmallColorControl (Color.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(0))));
-				smallColorControl [19] = new SmallColorControl (Color.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(255))));
-				smallColorControl [20] = new SmallColorControl (Color.Fuchsia);
-				smallColorControl [21] = new SmallColorControl (Color.Aqua);
-				smallColorControl [22] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(255)), ((Byte)(128))));
-				smallColorControl [23] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(255)), ((Byte)(255))));
-				smallColorControl [24] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(128)), ((Byte)(255))));
-				smallColorControl [25] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(64)), ((Byte)(0))));
-				smallColorControl [26] = new SmallColorControl (Color.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(0))));
-				smallColorControl [27] = new SmallColorControl (Color.Maroon);
-				smallColorControl [28] = new SmallColorControl (Color.Purple);
-				smallColorControl [29] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(0)), ((Byte)(160))));
-				smallColorControl [30] = new SmallColorControl (Color.Blue);
-				smallColorControl [31] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(128)), ((Byte)(64))));
-				smallColorControl [32] = new SmallColorControl (Color.Green);
-				smallColorControl [33] = new SmallColorControl (Color.Yellow);
-				smallColorControl [34] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(128)), ((Byte)(192))));
-				smallColorControl [35] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(128)), ((Byte)(192))));
-				smallColorControl [36] = new SmallColorControl (Color.FromArgb (((Byte)(128)), ((Byte)(0)), ((Byte)(64))));
-				smallColorControl [37] = new SmallColorControl (Color.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(192))));
-				smallColorControl [38] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(255)), ((Byte)(128))));
-				smallColorControl [39] = new SmallColorControl (Color.FromArgb (((Byte)(255)), ((Byte)(255)), ((Byte)(128))));
-				smallColorControl [40] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(64)), ((Byte)(0))));
-				smallColorControl [41] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(64)), ((Byte)(64))));
-				smallColorControl [42] = new SmallColorControl (Color.Navy);
-				smallColorControl [43] = new SmallColorControl (Color.FromArgb (((Byte)(0)), ((Byte)(0)), ((Byte)(64))));
-				smallColorControl [44] = new SmallColorControl (Color.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(64))));
-				smallColorControl [45] = new SmallColorControl (Color.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(128))));
-				smallColorControl [46] = new SmallColorControl (Color.Black); //Black
-				smallColorControl [47] = new SmallColorControl (Color.Olive);
+				smallColorControl [0] = new SmallColorControl (Color_.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(128))));
+				smallColorControl [1] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(128)), ((Byte)(64))));
+				smallColorControl [2] = new SmallColorControl (Color_.Gray);
+				smallColorControl [3] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(0)), ((Byte)(255))));
+				smallColorControl [4] = new SmallColorControl (Color_.Silver);
+				smallColorControl [5] = new SmallColorControl (Color_.FromArgb (((Byte)(64)), ((Byte)(128)), ((Byte)(128))));
+				smallColorControl [6] = new SmallColorControl (Color_.White);
+				smallColorControl [7] = new SmallColorControl (Color_.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(64))));
+				smallColorControl [8] = new SmallColorControl (Color_.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(64))));
+				smallColorControl [9] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(64)), ((Byte)(64))));
+				smallColorControl [10] = new SmallColorControl (Color_.Teal);
+				smallColorControl [11] = new SmallColorControl (Color_.Lime);
+				smallColorControl [12] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(128)), ((Byte)(255))));
+				smallColorControl [13] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(64)), ((Byte)(128))));
+				smallColorControl [14] = new SmallColorControl (Color_.FromArgb (((Byte)(255)), ((Byte)(0)), ((Byte)(128))));
+				smallColorControl [15] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(255)), ((Byte)(0))));
+				smallColorControl [16] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(255)), ((Byte)(64))));
+				smallColorControl [17] = new SmallColorControl (Color_.Red);
+				smallColorControl [18] = new SmallColorControl (Color_.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(0))));
+				smallColorControl [19] = new SmallColorControl (Color_.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(255))));
+				smallColorControl [20] = new SmallColorControl (Color_.Fuchsia);
+				smallColorControl [21] = new SmallColorControl (Color_.Aqua);
+				smallColorControl [22] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(255)), ((Byte)(128))));
+				smallColorControl [23] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(255)), ((Byte)(255))));
+				smallColorControl [24] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(128)), ((Byte)(255))));
+				smallColorControl [25] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(64)), ((Byte)(0))));
+				smallColorControl [26] = new SmallColorControl (Color_.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(0))));
+				smallColorControl [27] = new SmallColorControl (Color_.Maroon);
+				smallColorControl [28] = new SmallColorControl (Color_.Purple);
+				smallColorControl [29] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(0)), ((Byte)(160))));
+				smallColorControl [30] = new SmallColorControl (Color_.Blue);
+				smallColorControl [31] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(128)), ((Byte)(64))));
+				smallColorControl [32] = new SmallColorControl (Color_.Green);
+				smallColorControl [33] = new SmallColorControl (Color_.Yellow);
+				smallColorControl [34] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(128)), ((Byte)(192))));
+				smallColorControl [35] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(128)), ((Byte)(192))));
+				smallColorControl [36] = new SmallColorControl (Color_.FromArgb (((Byte)(128)), ((Byte)(0)), ((Byte)(64))));
+				smallColorControl [37] = new SmallColorControl (Color_.FromArgb (((Byte)(255)), ((Byte)(128)), ((Byte)(192))));
+				smallColorControl [38] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(255)), ((Byte)(128))));
+				smallColorControl [39] = new SmallColorControl (Color_.FromArgb (((Byte)(255)), ((Byte)(255)), ((Byte)(128))));
+				smallColorControl [40] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(64)), ((Byte)(0))));
+				smallColorControl [41] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(64)), ((Byte)(64))));
+				smallColorControl [42] = new SmallColorControl (Color_.Navy);
+				smallColorControl [43] = new SmallColorControl (Color_.FromArgb (((Byte)(0)), ((Byte)(0)), ((Byte)(64))));
+				smallColorControl [44] = new SmallColorControl (Color_.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(64))));
+				smallColorControl [45] = new SmallColorControl (Color_.FromArgb (((Byte)(64)), ((Byte)(0)), ((Byte)(128))));
+				smallColorControl [46] = new SmallColorControl (Color_.Black); //Black
+				smallColorControl [47] = new SmallColorControl (Color_.Olive);
 				
 				baseColorLabel = new Label ();
 				userColorLabel = new Label ();
@@ -1064,272 +1064,272 @@ namespace System.Windows.Forms {
 				SuspendLayout ();
 				
 				// colorPanel1
-				smallColorControl [0].Location = new Point (0, 15);
+				smallColorControl [0].Location = new Point_ (0, 15);
 				smallColorControl [0].TabIndex = 51;
 				smallColorControl [0].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel2
-				smallColorControl [1].Location = new Point (50, 130);
+				smallColorControl [1].Location = new Point_ (50, 130);
 				smallColorControl [1].TabIndex = 92;
 				smallColorControl [1].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel3
-				smallColorControl [2].Location = new Point (75, 130);
+				smallColorControl [2].Location = new Point_ (75, 130);
 				smallColorControl [2].TabIndex = 93;
 				smallColorControl [2].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel4
-				smallColorControl [3].Location = new Point (175, 84);
+				smallColorControl [3].Location = new Point_ (175, 84);
 				smallColorControl [3].TabIndex = 98;
 				smallColorControl [3].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel5
-				smallColorControl [4].Location = new Point (125, 130);
+				smallColorControl [4].Location = new Point_ (125, 130);
 				smallColorControl [4].TabIndex = 95;
 				smallColorControl [4].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel6
-				smallColorControl [5].Location = new Point (100, 130);
+				smallColorControl [5].Location = new Point_ (100, 130);
 				smallColorControl [5].TabIndex = 94;
 				smallColorControl [5].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel7
-				smallColorControl [6].Location = new Point (175, 130);
+				smallColorControl [6].Location = new Point_ (175, 130);
 				smallColorControl [6].TabIndex = 97;
 				smallColorControl [6].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel8
-				smallColorControl [7].Location = new Point (150, 130);
+				smallColorControl [7].Location = new Point_ (150, 130);
 				smallColorControl [7].TabIndex = 96;
 				smallColorControl [7].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel9
-				smallColorControl [8].Location = new Point (25, 61);
+				smallColorControl [8].Location = new Point_ (25, 61);
 				smallColorControl [8].TabIndex = 68;
 				smallColorControl [8].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel10
-				smallColorControl [9].Location = new Point (0, 61);
+				smallColorControl [9].Location = new Point_ (0, 61);
 				smallColorControl [9].TabIndex = 67;
 				smallColorControl [9].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel11
-				smallColorControl [10].Location = new Point (75, 61);
+				smallColorControl [10].Location = new Point_ (75, 61);
 				smallColorControl [10].TabIndex = 70;
 				smallColorControl [10].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel12
-				smallColorControl [11].Location = new Point (50, 61);
+				smallColorControl [11].Location = new Point_ (50, 61);
 				smallColorControl [11].TabIndex = 69;
 				smallColorControl [11].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel13
-				smallColorControl [12].Location = new Point (125, 61);
+				smallColorControl [12].Location = new Point_ (125, 61);
 				smallColorControl [12].TabIndex = 72;
 				smallColorControl [12].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel14
-				smallColorControl [13].Location = new Point (100, 61);
+				smallColorControl [13].Location = new Point_ (100, 61);
 				smallColorControl [13].TabIndex = 71;
 				smallColorControl [13].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel15
-				smallColorControl [14].Location = new Point (175, 61);
+				smallColorControl [14].Location = new Point_ (175, 61);
 				smallColorControl [14].TabIndex = 74;
 				smallColorControl [14].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel16
-				smallColorControl [15].Location = new Point (50, 38);
+				smallColorControl [15].Location = new Point_ (50, 38);
 				smallColorControl [15].TabIndex = 61;
 				smallColorControl [15].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel17
-				smallColorControl [16].Location = new Point (75, 38);
+				smallColorControl [16].Location = new Point_ (75, 38);
 				smallColorControl [16].TabIndex = 62;
 				smallColorControl [16].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel18
-				smallColorControl [17].Location = new Point (0, 38);
+				smallColorControl [17].Location = new Point_ (0, 38);
 				smallColorControl [17].TabIndex = 59;
 				smallColorControl [17].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel19
-				smallColorControl [18].Location = new Point (25, 84);
+				smallColorControl [18].Location = new Point_ (25, 84);
 				smallColorControl [18].TabIndex = 75;
 				smallColorControl [18].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel20
-				smallColorControl [19].Location = new Point (175, 15);
+				smallColorControl [19].Location = new Point_ (175, 15);
 				smallColorControl [19].TabIndex = 58;
 				smallColorControl [19].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel21
-				smallColorControl [20].Location = new Point (175, 38);
+				smallColorControl [20].Location = new Point_ (175, 38);
 				smallColorControl [20].TabIndex = 66;
 				smallColorControl [20].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel22
-				smallColorControl [21].Location = new Point (100, 38);
+				smallColorControl [21].Location = new Point_ (100, 38);
 				smallColorControl [21].TabIndex = 63;
 				smallColorControl [21].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel23
-				smallColorControl [22].Location = new Point (50, 15);
+				smallColorControl [22].Location = new Point_ (50, 15);
 				smallColorControl [22].TabIndex = 53;
 				smallColorControl [22].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel24
-				smallColorControl [23].Location = new Point (100, 15);
+				smallColorControl [23].Location = new Point_ (100, 15);
 				smallColorControl [23].TabIndex = 55;
 				smallColorControl [23].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel25
-				smallColorControl [24].Location = new Point (125, 15);
+				smallColorControl [24].Location = new Point_ (125, 15);
 				smallColorControl [24].TabIndex = 56;
 				smallColorControl [24].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel26
-				smallColorControl [25].Location = new Point (25, 107);
+				smallColorControl [25].Location = new Point_ (25, 107);
 				smallColorControl [25].TabIndex = 83;
 				smallColorControl [25].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel27
-				smallColorControl [26].Location = new Point (0, 107);
+				smallColorControl [26].Location = new Point_ (0, 107);
 				smallColorControl [26].TabIndex = 82;
 				smallColorControl [26].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel28
-				smallColorControl [27].Location = new Point (0, 84);
+				smallColorControl [27].Location = new Point_ (0, 84);
 				smallColorControl [27].TabIndex = 81;
 				smallColorControl [27].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel29
-				smallColorControl [28].Location = new Point (150, 84);
+				smallColorControl [28].Location = new Point_ (150, 84);
 				smallColorControl [28].TabIndex = 80;
 				smallColorControl [28].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel30
-				smallColorControl [29].Location = new Point (125, 84);
+				smallColorControl [29].Location = new Point_ (125, 84);
 				smallColorControl [29].TabIndex = 79;
 				smallColorControl [29].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel31
-				smallColorControl [30].Location  = new Point (100, 84);
+				smallColorControl [30].Location  = new Point_ (100, 84);
 				smallColorControl [30].TabIndex = 78;
 				smallColorControl [30].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel32
-				smallColorControl [31].Location = new Point (75, 84);
+				smallColorControl [31].Location = new Point_ (75, 84);
 				smallColorControl [31].TabIndex = 77;
 				smallColorControl [31].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel33
-				smallColorControl [32].Location = new Point (50, 84);
+				smallColorControl [32].Location = new Point_ (50, 84);
 				smallColorControl [32].TabIndex = 76;
 				smallColorControl [32].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel34
-				smallColorControl [33].Location = new Point (25, 38);
+				smallColorControl [33].Location = new Point_ (25, 38);
 				smallColorControl [33].TabIndex = 60;
 				smallColorControl [33].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel35
-				smallColorControl [34].Location = new Point (150, 38);
+				smallColorControl [34].Location = new Point_ (150, 38);
 				smallColorControl [34].TabIndex = 65;
 				smallColorControl [34].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel36
-				smallColorControl [35].Location = new Point (125, 38);
+				smallColorControl [35].Location = new Point_ (125, 38);
 				smallColorControl [35].TabIndex = 64;
 				smallColorControl [35].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel37
-				smallColorControl [36].Location = new Point (150, 61);
+				smallColorControl [36].Location = new Point_ (150, 61);
 				smallColorControl [36].TabIndex = 73;
 				smallColorControl [36].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel38
-				smallColorControl [37].Location = new Point (150, 15);
+				smallColorControl [37].Location = new Point_ (150, 15);
 				smallColorControl [37].TabIndex = 57;
 				smallColorControl [37].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel39
-				smallColorControl [38].Location = new Point (75, 15);
+				smallColorControl [38].Location = new Point_ (75, 15);
 				smallColorControl [38].TabIndex = 54;
 				smallColorControl [38].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel40
-				smallColorControl [39].Location = new Point (25, 15);
+				smallColorControl [39].Location = new Point_ (25, 15);
 				smallColorControl [39].TabIndex = 52;
 				smallColorControl [39].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel41
-				smallColorControl [40].Location = new Point (50, 107);
+				smallColorControl [40].Location = new Point_ (50, 107);
 				smallColorControl [40].TabIndex = 84;
 				smallColorControl [40].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel42
-				smallColorControl [41].Location = new Point (75, 107);
+				smallColorControl [41].Location = new Point_ (75, 107);
 				smallColorControl [41].TabIndex = 85;
 				smallColorControl [41].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel43
-				smallColorControl [42].Location = new Point (100, 107);
+				smallColorControl [42].Location = new Point_ (100, 107);
 				smallColorControl [42].TabIndex = 86;
 				smallColorControl [42].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel44
-				smallColorControl [43].Location = new Point (125, 107);
+				smallColorControl [43].Location = new Point_ (125, 107);
 				smallColorControl [43].TabIndex = 87;
 				smallColorControl [43].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel45
-				smallColorControl [44].Location = new Point (150, 107);
+				smallColorControl [44].Location = new Point_ (150, 107);
 				smallColorControl [44].TabIndex = 88;
 				smallColorControl [44].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel46
-				smallColorControl [45].Location = new Point (175, 107);
+				smallColorControl [45].Location = new Point_ (175, 107);
 				smallColorControl [45].TabIndex = 89;
 				smallColorControl [45].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel47
-				smallColorControl [46].Location = new Point (0, 130);
+				smallColorControl [46].Location = new Point_ (0, 130);
 				smallColorControl [46].TabIndex = 90;
 				smallColorControl [46].Click += new EventHandler (OnSmallColorControlClick);
 				// colorPanel48
-				smallColorControl [47].Location = new Point (25, 130);
+				smallColorControl [47].Location = new Point_ (25, 130);
 				smallColorControl [47].TabIndex = 91;
 				smallColorControl [47].Click += new EventHandler (OnSmallColorControlClick);
 				
 				// userColorPane1
-				userSmallColorControl [0].Location = new Point (0, 180);
+				userSmallColorControl [0].Location = new Point_ (0, 180);
 				userSmallColorControl [0].TabIndex = 99;
 				userSmallColorControl [0].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel2
-				userSmallColorControl [1].Location = new Point (0, 203);
+				userSmallColorControl [1].Location = new Point_ (0, 203);
 				userSmallColorControl [1].TabIndex = 108;
 				userSmallColorControl [1].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel13
-				userSmallColorControl [2].Location = new Point (25, 180);
+				userSmallColorControl [2].Location = new Point_ (25, 180);
 				userSmallColorControl [2].TabIndex = 100;
 				userSmallColorControl [2].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel4
-				userSmallColorControl [3].Location = new Point (25, 203);
+				userSmallColorControl [3].Location = new Point_ (25, 203);
 				userSmallColorControl [3].TabIndex = 109;
 				userSmallColorControl [3].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel5
-				userSmallColorControl [4].Location = new Point (50, 180);
+				userSmallColorControl [4].Location = new Point_ (50, 180);
 				userSmallColorControl [4].TabIndex = 101;
 				userSmallColorControl [4].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel6
-				userSmallColorControl [5].Location = new Point (50, 203);
+				userSmallColorControl [5].Location = new Point_ (50, 203);
 				userSmallColorControl [5].TabIndex = 110;
 				userSmallColorControl [5].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel7
-				userSmallColorControl [6].Location = new Point (75, 180);
+				userSmallColorControl [6].Location = new Point_ (75, 180);
 				userSmallColorControl [6].TabIndex = 102;
 				userSmallColorControl [6].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel8
-				userSmallColorControl [7].Location = new Point (75, 203);
+				userSmallColorControl [7].Location = new Point_ (75, 203);
 				userSmallColorControl [7].TabIndex = 111;
 				userSmallColorControl [7].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel9
-				userSmallColorControl [8].Location = new Point (100, 180);
+				userSmallColorControl [8].Location = new Point_ (100, 180);
 				userSmallColorControl [8].TabIndex = 103;
 				userSmallColorControl [8].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel10
-				userSmallColorControl [9].Location = new Point (100, 203);
+				userSmallColorControl [9].Location = new Point_ (100, 203);
 				userSmallColorControl [9].TabIndex = 112;
 				userSmallColorControl [9].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel11
-				userSmallColorControl [10].Location = new Point (125, 180);
+				userSmallColorControl [10].Location = new Point_ (125, 180);
 				userSmallColorControl [10].TabIndex = 105;
 				userSmallColorControl [10].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel2
-				userSmallColorControl [11].Location = new Point (125, 203);
+				userSmallColorControl [11].Location = new Point_ (125, 203);
 				userSmallColorControl [11].TabIndex = 113;
 				userSmallColorControl [11].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel13
-				userSmallColorControl [12].Location = new Point (150, 180);
+				userSmallColorControl [12].Location = new Point_ (150, 180);
 				userSmallColorControl [12].TabIndex = 106;
 				userSmallColorControl [12].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel4
-				userSmallColorControl [13].Location = new Point (150, 203);
+				userSmallColorControl [13].Location = new Point_ (150, 203);
 				userSmallColorControl [13].TabIndex = 114;
 				userSmallColorControl [13].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel15
-				userSmallColorControl [14].Location = new Point (175, 180);
+				userSmallColorControl [14].Location = new Point_ (175, 180);
 				userSmallColorControl [14].TabIndex = 107;
 				userSmallColorControl [14].Click += new EventHandler (OnSmallColorControlClick);
 				// userColorPanel16
-				userSmallColorControl [15].Location = new Point (175, 203);
+				userSmallColorControl [15].Location = new Point_ (175, 203);
 				userSmallColorControl [15].TabIndex = 115;
 				userSmallColorControl [15].Click += new EventHandler (OnSmallColorControlClick);
 				
 				// baseColorLabel
-				baseColorLabel.Location = new Point (2, 0);
-				baseColorLabel.Size = new Size (200, 12);
+				baseColorLabel.Location = new Point_ (2, 0);
+				baseColorLabel.Size = new Size_ (200, 12);
 				baseColorLabel.TabIndex = 5;
 				baseColorLabel.Text = Locale.GetText ("Base Colors") + ":";
 				// userColorLabel
 				userColorLabel.FlatStyle = FlatStyle.System;
-				userColorLabel.Location = new Point (2, 164);
-				userColorLabel.Size = new Size (200, 14);
+				userColorLabel.Location = new Point_ (2, 164);
+				userColorLabel.Size = new Size_ (200, 14);
 				userColorLabel.TabIndex = 104;
 				userColorLabel.Text = Locale.GetText ("User Colors") + ":";
 				
@@ -1402,12 +1402,12 @@ namespace System.Windows.Forms {
 				Controls.Add (userColorLabel);
 				Controls.Add (baseColorLabel);
 				
-				Size = new Size (212, 238);
+				Size = new Size_ (212, 238);
 				
 				ResumeLayout (false);
 			}
 			
-			private void CheckIfColorIsInPanel (Color color)
+			private void CheckIfColorIsInPanel (Color_ color)
 			{
 				// check if we have a panel with a BackColor = color...
 				for (int i = 0; i < smallColorControl.Length; i++) {
@@ -1434,14 +1434,14 @@ namespace System.Windows.Forms {
 				colorDialog.UpdateHSBTextBoxes (selectedSmallColorControl.InternalColor);
 			}
 			
-			public Color ColorToShow {
+			public Color_ ColorToShow {
 				get {
 					return selectedSmallColorControl.InternalColor;
 				}
 			}
 			
 			
-			public void SetColor (Color acolor)
+			public void SetColor (Color_ acolor)
 			{
 				if (selectedSmallColorControl != null)
 					selectedSmallColorControl.IsSelected = false;
@@ -1455,7 +1455,7 @@ namespace System.Windows.Forms {
 				colorDialog.UpdateHSBTextBoxes (acolor);
 			}
 			
-			public void SetUserColor (Color col)
+			public void SetUserColor (Color_ col)
 			{
 				userSmallColorControl [currentlyUsedUserSmallColorControl].InternalColor = col;
 				
@@ -1469,7 +1469,7 @@ namespace System.Windows.Forms {
 			public void SetCustomColors ()
 			{
 				for (int i = 0; i < colorDialog.customColors.Length; i++) {
-					userSmallColorControl [i].InternalColor = Color.FromArgb (colorDialog.customColors [i]);
+					userSmallColorControl [i].InternalColor = Color_.FromArgb (colorDialog.customColors [i]);
 				}
 			}
 		}
@@ -1478,7 +1478,7 @@ namespace System.Windows.Forms {
 			internal class DrawingBitmap {
 				private Bitmap bitmap;
 				
-				public DrawingBitmap (Size size)
+				public DrawingBitmap (Size_ size)
 				{
 					bitmap = new Bitmap (size.Width, size.Height);
 					
@@ -1520,13 +1520,13 @@ namespace System.Windows.Forms {
 			internal class CrossCursor {
 				private Bitmap bitmap;
 				
-				private Color cursorColor;
+				private Color_ cursorColor;
 				
 				public CrossCursor ()
 				{
 					bitmap = new Bitmap (22, 22);
 					
-					cursorColor = Color.Black;
+					cursorColor = Color_.Black;
 					
 					Draw ();
 				}
@@ -1553,7 +1553,7 @@ namespace System.Windows.Forms {
 					}
 				}
 				
-				public Color CursorColor {
+				public Color_ CursorColor {
 					set {
 						cursorColor = value;
 					}
@@ -1572,7 +1572,7 @@ namespace System.Windows.Forms {
 			
 			private bool drawCross = true;
 			
-			private Color color;
+			private Color_ color;
 			
 			private int currentXPos;
 			private int currentYPos;
@@ -1589,8 +1589,8 @@ namespace System.Windows.Forms {
 				SuspendLayout ();
 				
 				BorderStyle = BorderStyle.Fixed3D;
-				Location = new Point (0, 0);
-				Size = new Size (179, 190);
+				Location = new Point_ (0, 0);
+				Size = new Size_ (179, 190);
 				TabIndex = 0;
 				TabStop = false;
 				
@@ -1662,13 +1662,13 @@ namespace System.Windows.Forms {
 				Update ();
 			}
 			
-			public Color ColorToShow {
+			public Color_ ColorToShow {
 				set {
 					ComputePos (value);
 				}
 			}
 			
-			private void ComputePos (Color acolor)
+			private void ComputePos (Color_ acolor)
 			{
 				if (acolor != color) {
 					color = acolor;
@@ -1688,7 +1688,7 @@ namespace System.Windows.Forms {
 				}
 			}
 			
-			private Color GetColorFromHSB ()
+			private Color_ GetColorFromHSB ()
 			{
 				int hue = (int)((float)currentXPos * xstep);
 				int sat = 240 - ((int)((float)currentYPos * ystep));
@@ -1699,7 +1699,7 @@ namespace System.Windows.Forms {
 			
 			private void UpdateControls ()
 			{
-				Color tmpColor = GetColorFromHSB ();
+				Color_ tmpColor = GetColorFromHSB ();
 				
 				// update the brightness control
 				colorDialog.brightnessControl.ShowColor ((int)((float)currentXPos * xstep), 240 - ((int)((float)currentYPos * ystep)));
@@ -1714,7 +1714,7 @@ namespace System.Windows.Forms {
 					huevalue = 239;
 				colorDialog.hueTextBox.Text = huevalue.ToString ();
 				
-				// update the main selected color panel
+				// update the main selected Color_ panel
 				colorDialog.selectedColorPanel.BackColor = tmpColor;
 				
 				// and finally the rgb text boxes
@@ -1743,7 +1743,7 @@ namespace System.Windows.Forms {
 				}
 				
 				// only hue and saturation are needed.
-				// color will be computed with an iteration
+				// Color_ will be computed with an iteration
 				public void Draw (int hue, int sat)
 				{
 					float brisub = 241.0f / 190.0f;
@@ -1751,7 +1751,7 @@ namespace System.Windows.Forms {
 					
 					for (int height = 0; height < 190; height++) {
 						for (int width = 0; width < 14; width++) {
-							Color pixcolor = HSB.HSB2RGB (hue, sat, (int)bri);
+							Color_ pixcolor = HSB.HSB2RGB (hue, sat, (int)bri);
 							bitmap.SetPixel (width, height, pixcolor);
 						}
 						bri = bri - brisub;
@@ -1774,11 +1774,10 @@ namespace System.Windows.Forms {
 				SuspendLayout ();
 				
 				BorderStyle = BorderStyle.Fixed3D;
-				Location = new Point (0, 0);
-				Size = new Size (14, 190);
+				Location = new Point_ (0, 0);
+				Size = new Size_ (14, 190);
 				TabIndex = 0;
 				TabStop = false;
-				Size = new Size (14, 190);
 				
 				ResumeLayout (false);
 				
@@ -1811,7 +1810,7 @@ namespace System.Windows.Forms {
 			}
 			
 			// this one for the other controls
-			public Color ColorToShow {
+			public Color_ ColorToShow {
 				set {
 					int hue, sat;
 					HSB.GetHueSaturation (value, out hue, out sat);
@@ -1827,7 +1826,7 @@ namespace System.Windows.Forms {
 			private bool mouseButtonDown = false;
 			
 			private int currentTrianglePosition = 195;
-//			private Rectangle clipRectangle;
+//			private Rectangle_ clipRectangle;
 			
 			private const float briStep = 241.0f/186.0f;
 			
@@ -1841,7 +1840,7 @@ namespace System.Windows.Forms {
 				
 				SuspendLayout ();
 				
-				Size = new Size (16, 203);
+				Size = new Size_ (16, 203);
 				
 				ResumeLayout (false);
 				
@@ -1869,16 +1868,16 @@ namespace System.Windows.Forms {
 			
 			private void Draw (PaintEventArgs e)
 			{
-				e.Graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (BackColor), new Rectangle (0, 0, 16, 203));
+				e.Graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (BackColor), new Rectangle_ (0, 0, 16, 203));
 				
-				Point[] trianglePoints = new Point [3]
+				Point_[] trianglePoints = new Point_ [3]
 				{
-					new Point (0, currentTrianglePosition),
-					new Point (8, currentTrianglePosition - 8),
-					new Point (8, currentTrianglePosition + 8)
+					new Point_ (0, currentTrianglePosition),
+					new Point_ (8, currentTrianglePosition - 8),
+					new Point_ (8, currentTrianglePosition + 8)
 				};
 				
-				e.Graphics.FillPolygon (ThemeEngine.Current.ResPool.GetSolidBrush (Color.Black), trianglePoints);
+				e.Graphics.FillPolygon (ThemeEngine.Current.ResPool.GetSolidBrush (Color_.Black), trianglePoints);
 			}
 			
 			protected override void OnMouseDown (MouseEventArgs e)
@@ -1890,12 +1889,12 @@ namespace System.Windows.Forms {
 				
 				// Cursor.Clip doesn't yet work in Managed.Windows.Forms
 //				clipRectangle = Cursor.Clip;
-//				Point p = Location;
+//				Point_ p = Location;
 //				p.Y += 8;
 //				Size s = Size;
 //				s.Width -= 5;
 //				s.Height -= 16;
-//				Cursor.Clip = new Rectangle( Parent.PointToScreen( p ), s );
+//				Cursor.Clip = new Rectangle_( Parent.PointToScreen( p ), s );
 				
 				colorDialog.briTextBox.Text = TrianglePosition.ToString ();
 				colorDialog.UpdateFromHSBTextBoxes ();
@@ -1955,13 +1954,13 @@ namespace System.Windows.Forms {
 				}
 			}
 			
-			public Color ColorToShow {
+			public Color_ ColorToShow {
 				set {
 					SetColor (value);
 				}
 			}
 			
-			public void SetColor (Color color)
+			public void SetColor (Color_ color)
 			{
 				int pos_raw = HSB.Brightness (color);
 				

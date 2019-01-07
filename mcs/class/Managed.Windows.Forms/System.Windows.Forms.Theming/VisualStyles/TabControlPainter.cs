@@ -33,7 +33,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
 				tabControl.Alignment == TabAlignment.Top &&
 				tabControl.DrawMode == TabDrawMode.Normal;
 		}
-		protected override void DrawBackground (Graphics dc, Rectangle area, TabControl tab)
+		protected override void DrawBackground (Graphics dc, Rectangle_ area, TabControl tab)
 		{
 			if (!ShouldPaint (tab)) {
 				base.DrawBackground (dc, area, tab);
@@ -45,11 +45,11 @@ namespace System.Windows.Forms.Theming.VisualStyles
 				base.DrawBackground (dc, area, tab);
 				return;
 			}
-			Rectangle panel_rectangle = GetTabPanelRect (tab);
+			Rectangle_ panel_rectangle = GetTabPanelRect (tab);
 			if (panel_rectangle.IntersectsWith (area))
 				new VisualStyleRenderer (element).DrawBackground (dc, panel_rectangle, area);
 		}
-		protected override int DrawTab (Graphics dc, TabPage page, TabControl tab, Rectangle bounds, bool is_selected)
+		protected override int DrawTab (Graphics dc, TabPage page, TabControl tab, Rectangle_ bounds, bool is_selected)
 		{
 			if (!ShouldPaint (tab))
 				return base.DrawTab (dc, page, tab, bounds, is_selected);
@@ -60,10 +60,10 @@ namespace System.Windows.Forms.Theming.VisualStyles
 			bounds.Inflate (
 				-(tab.Padding.X),
 				-(tab.Padding.Y));
-			Rectangle text_area = bounds;
+			Rectangle_ text_area = bounds;
 			if (tab.ImageList != null && page.ImageIndex >= 0 && page.ImageIndex < tab.ImageList.Images.Count) {
 				int image_y = bounds.Y + (bounds.Height - tab.ImageList.ImageSize.Height) / 2;
-				tab.ImageList.Draw (dc, new Point (bounds.X, image_y), page.ImageIndex);
+				tab.ImageList.Draw (dc, new Point_ (bounds.X, image_y), page.ImageIndex);
 				int image_occupied_space = tab.ImageList.ImageSize.Width + 2;
 				text_area.X += image_occupied_space;
 				text_area.Width -= image_occupied_space;
@@ -198,7 +198,7 @@ namespace System.Windows.Forms.Theming.VisualStyles
 				return base.HasHotElementStyles (tabControl);
 			return true;
 		}
-		protected override void DrawScrollButton (Graphics dc, Rectangle bounds, Rectangle clippingArea, ScrollButton button, PushButtonState state)
+		protected override void DrawScrollButton (Graphics dc, Rectangle_ bounds, Rectangle_ clippingArea, ScrollButton button, PushButtonState state)
 		{
 			if (!ThemeVisualStyles.RenderClientAreas) {
 				base.DrawScrollButton (dc, bounds, clippingArea, button, state);

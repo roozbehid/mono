@@ -32,7 +32,7 @@ namespace System.Windows.Forms
     {
         #region Private Fields
 
-        private Rectangle bounds;
+        private Rectangle_ bounds;
         private bool drawDefault;
         private Graphics graphics;
         private ListViewItem item;
@@ -49,7 +49,7 @@ namespace System.Windows.Forms
             set { drawDefault = value; }
         }
 
-        public Rectangle Bounds {
+        public Rectangle_ Bounds {
             get { return bounds; }
         }
 
@@ -75,7 +75,7 @@ namespace System.Windows.Forms
         #region Constructors
 
         public DrawListViewItemEventArgs (Graphics graphics, ListViewItem item,
-                                        Rectangle bounds, int itemIndex, ListViewItemStates state)
+                                        Rectangle_ bounds, int itemIndex, ListViewItemStates state)
         {
             this.graphics = graphics;
             this.item = item;

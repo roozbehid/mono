@@ -26,13 +26,13 @@
 //		- FindMenuItem
 //		- MdiListItem
 //
-
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -44,7 +44,7 @@ namespace System.Windows.Forms
 		internal MenuItemCollection menu_items;
 		internal IntPtr menu_handle = IntPtr.Zero;
 		internal Menu parent_menu = null;
-		System.Drawing.Rectangle rect = new Rectangle ();
+		Rectangle_ rect = new Rectangle_ ();
 		// UIA Framework Note: Used to keep track of expanded menus
 		internal Control Wnd;
 		internal MenuTracker tracker;
@@ -125,7 +125,7 @@ namespace System.Windows.Forms
 		#region Private Properties
 
 		// UIA Framework Note: Used to obtain menu bounds
-		internal Rectangle Rect {
+		internal Rectangle_ Rect {
 			get { return rect; }
 		}
 

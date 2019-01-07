@@ -24,11 +24,11 @@
 //
 // Author:
 //	Daniel Nauck		(dna(at)mono-project(dot)de)
-
 using System;
 using System.Text;
 using System.Runtime.Serialization;
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms
@@ -46,12 +46,12 @@ namespace System.Windows.Forms
 		private ListView list_view_owner = null;
 		private ListView.ListViewItemCollection items = null;
 		private object tag = null;
-		private Rectangle header_bounds = Rectangle.Empty;
+		private Rectangle_ header_bounds = Rectangle_.Empty;
 		internal int starting_row;	// At which row the group starts
 		internal int starting_item; 	// The first display item in group
 		internal int rows;
 		internal int current_item;	// Current item when doing layout
-		internal Point items_area_location;
+		internal Point_ items_area_location;
 		bool is_default_group;
 		int item_count; // Used by default group to store item count
 
@@ -151,9 +151,9 @@ namespace System.Windows.Forms
 			}
 		}
 
-		internal Rectangle HeaderBounds {
+		internal Rectangle_ HeaderBounds {
 			get {
-				Rectangle retval = header_bounds;
+				Rectangle_ retval = header_bounds;
 				retval.X -= list_view_owner.h_marker;
 				retval.Y -= list_view_owner.v_marker;
 				return retval;

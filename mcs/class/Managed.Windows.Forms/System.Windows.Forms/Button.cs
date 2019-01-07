@@ -172,8 +172,8 @@ namespace System.Windows.Forms {
 			// is changed, not every paint.  Can only change so many things at a time.
 
 			// Figure out where our text and image should go
-			Rectangle text_rectangle;
-			Rectangle image_rectangle;
+			Rectangle_ text_rectangle;
+			Rectangle_ image_rectangle;
 
 			ThemeEngine.Current.CalculateButtonTextAndImageLayout (pevent.Graphics, this, out text_rectangle, out image_rectangle);
 
@@ -186,7 +186,7 @@ namespace System.Windows.Forms {
 				ThemeEngine.Current.DrawPopupButton (pevent.Graphics, this, text_rectangle, image_rectangle, pevent.ClipRectangle);
 		}
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
+		internal override Size_ GetPreferredSizeCore (Size_ proposedSize)
 		{
 			if (this.AutoSize)
 				return ThemeEngine.Current.CalculateButtonAutoSize (this);

@@ -26,10 +26,10 @@
 //	Rolf Bjarne Kvinge (RKvinge@novell.com)
 //
 
-
 using System;
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Drawing.Design;
 using System.Globalization;
@@ -161,18 +161,18 @@ namespace System.Windows.Forms
 		}
 		
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		[UIPermission (SecurityAction.InheritanceDemand, Window = UIPermissionWindow.AllWindows)]
+		
 		protected override void CreateHandle ()
 		{
 			base.CreateHandle ();
 		}
 
-		public override char GetCharFromPosition (Point pt)
+		public override char GetCharFromPosition (Point_ pt)
 		{
 			return base.GetCharFromPosition (pt);
 		}
 
-		public override int GetCharIndexFromPosition (Point pt)
+		public override int GetCharIndexFromPosition (Point_ pt)
 		{
 			return base.GetCharIndexFromPosition (pt);
 		}
@@ -195,7 +195,7 @@ namespace System.Windows.Forms
 			return 0;
 		}
 
-		public override Point GetPositionFromCharIndex (int index)
+		public override Point_ GetPositionFromCharIndex (int index)
 		{
 			return base.GetPositionFromCharIndex (index);
 		}
@@ -852,7 +852,7 @@ namespace System.Windows.Forms
 			//pevent.Handled = true;
 		}
 		
-		internal override Color ChangeBackColor (Color backColor)
+		internal override Color_ ChangeBackColor (Color_ backColor)
 		{
 			return backColor;
 		}

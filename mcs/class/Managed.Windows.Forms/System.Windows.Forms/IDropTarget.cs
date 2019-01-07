@@ -19,8 +19,8 @@
 //
 // Copyright (c) 2006 Novell, Inc.
 //
-
 using System;
+
 using System.Drawing;
 using System.ComponentModel;
 

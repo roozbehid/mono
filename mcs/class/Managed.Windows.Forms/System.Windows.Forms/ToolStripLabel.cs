@@ -35,12 +35,12 @@ namespace System.Windows.Forms
 	[ToolStripItemDesignerAvailability (ToolStripItemDesignerAvailability.ToolStrip)]
 	public class ToolStripLabel : ToolStripItem
 	{
-		private Color active_link_color;
+		private Color_ active_link_color;
 		private bool is_link;
 		private LinkBehavior link_behavior;
-		private Color link_color;
+		private Color_ link_color;
 		private bool link_visited;
-		private Color visited_link_color;
+		private Color_ visited_link_color;
 
 		#region UIA FrameWork Events
 		static object UIAIsLinkChangedEvent = new object ();
@@ -92,17 +92,17 @@ namespace System.Windows.Forms
 		public ToolStripLabel (string text, Image image, bool isLink, EventHandler onClick, string name)
 			: base (text, image, onClick, name)
 		{
-			this.active_link_color = Color.Red;
+			this.active_link_color = Color_.Red;
 			this.is_link = isLink;
 			this.link_behavior = LinkBehavior.SystemDefault;
-			this.link_color = Color.FromArgb (0, 0, 255);
+			this.link_color = Color_.FromArgb (0, 0, 255);
 			this.link_visited = false;
-			this.visited_link_color = Color.FromArgb (128, 0, 128);
+			this.visited_link_color = Color_.FromArgb (128, 0, 128);
 		}
 		#endregion
 
 		#region Public Properties
-		public Color ActiveLinkColor {
+		public Color_ ActiveLinkColor {
 			get { return this.active_link_color; }
 			set {
 				this.active_link_color = value; 
@@ -133,7 +133,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color LinkColor {
+		public Color_ LinkColor {
 			get { return this.link_color; }
 			set {
 				this.link_color = value; 
@@ -150,7 +150,7 @@ namespace System.Windows.Forms
 			}
 		}
 
-		public Color VisitedLinkColor
+		public Color_ VisitedLinkColor
 		{
 			get { return this.visited_link_color; }
 			set {
@@ -190,28 +190,28 @@ namespace System.Windows.Forms
 		protected override void OnPaint (System.Windows.Forms.PaintEventArgs e)
 		{
 			if (this.Owner != null) {
-				Color font_color = this.Enabled ? this.ForeColor : SystemColors.GrayText;
+				Color_ font_color = this.Enabled ? this.ForeColor : SystemColors.GrayText;
 				Image draw_image = this.Enabled ? this.Image : ToolStripRenderer.CreateDisabledImage (this.Image);
 
 				this.Owner.Renderer.DrawLabelBackground (new System.Windows.Forms.ToolStripItemRenderEventArgs (e.Graphics, this));
 
-				Rectangle text_layout_rect;
-				Rectangle image_layout_rect;
+				Rectangle_ text_layout_rect;
+				Rectangle_ image_layout_rect;
 
 				this.CalculateTextAndImageRectangles (out text_layout_rect, out image_layout_rect);
 
 				if (this.IsOnDropDown) {
 					if (this.ShowMargin)
-						text_layout_rect = new Rectangle (35, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
+						text_layout_rect = new Rectangle_ (35, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
 					else
-						text_layout_rect = new Rectangle (7, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
-					if (image_layout_rect != Rectangle.Empty)
-						image_layout_rect = new Rectangle (new Point (4, 3), base.GetImageSize ());
+						text_layout_rect = new Rectangle_ (7, text_layout_rect.Top, text_layout_rect.Width, text_layout_rect.Height);
+					if (image_layout_rect != Rectangle_.Empty)
+						image_layout_rect = new Rectangle_ (new Point_ (4, 3), base.GetImageSize ());
 				}
 
-				if (image_layout_rect != Rectangle.Empty)
+				if (image_layout_rect != Rectangle_.Empty)
 					this.Owner.Renderer.DrawItemImage (new System.Windows.Forms.ToolStripItemImageRenderEventArgs (e.Graphics, this, draw_image, image_layout_rect));
-				if (text_layout_rect != Rectangle.Empty)
+				if (text_layout_rect != Rectangle_.Empty)
 					if (this.is_link) {
 						if (this.Pressed)		// Mouse Down
 						{

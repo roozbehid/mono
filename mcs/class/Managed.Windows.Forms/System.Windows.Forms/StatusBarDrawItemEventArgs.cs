@@ -33,7 +33,7 @@ namespace System.Windows.Forms {
 
 		private StatusBarPanel panel;
 
-		public StatusBarDrawItemEventArgs (Graphics g, Font font, Rectangle r,
+		public StatusBarDrawItemEventArgs (Graphics g, Font font, Rectangle_ r,
 				int itemId, DrawItemState itemState, StatusBarPanel panel) :
 			this (g, font, r, itemId, itemState, panel, Control.DefaultForeColor,
 				Control.DefaultBackColor)
@@ -41,9 +41,9 @@ namespace System.Windows.Forms {
 		{
 		}
 
-		public StatusBarDrawItemEventArgs (Graphics g, Font font, Rectangle r,
+		public StatusBarDrawItemEventArgs (Graphics g, Font font, Rectangle_ r,
 				int itemId, DrawItemState itemState, StatusBarPanel panel,
-				Color foreColor, Color backColor) : base (g, font, r,
+				Color_ foreColor, Color_ backColor) : base (g, font, r,
 						itemId, itemState)
 		{
 			this.panel = panel;

@@ -30,7 +30,7 @@ namespace System.Windows.Forms.VisualStyles
 {
 	public enum BorderType
 	{
-		Rectangle = 0,
+		Rectangle_ = 0,
 		RoundedRectangle = 1,
 		Ellipse = 2
 	}

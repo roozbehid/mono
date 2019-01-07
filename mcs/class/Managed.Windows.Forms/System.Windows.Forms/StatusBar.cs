@@ -26,10 +26,10 @@
 // TODO:
 //  - Change cursor when mouse is over grip
 //
-
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Text;
 using System.Drawing.Imaging;
@@ -70,7 +70,7 @@ namespace System.Windows.Forms {
 		#region	Public Instance Properties
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color BackColor {
+		public override Color_ BackColor {
 			get { return base.BackColor; }
 			set { base.BackColor = value; }
 		}
@@ -123,7 +123,7 @@ namespace System.Windows.Forms {
 
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public override Color ForeColor {
+		public override Color_ ForeColor {
 			get { return base.ForeColor; }
 			set { base.ForeColor = value; }
 		}
@@ -199,7 +199,7 @@ namespace System.Windows.Forms {
 			get { return ImeMode.Disable; }
 		}
 
-		protected override Size DefaultSize {
+		protected override Size_ DefaultSize {
 			get { return ThemeEngine.Current.StatusBarDefaultSize; }
 		}
 
@@ -308,7 +308,7 @@ namespace System.Windows.Forms {
 				return;
 			}
 
-			Invalidate (new Rectangle (panel.X + 2, 2, panel.Width - 4, bounds.Height - 4));
+			Invalidate (new Rectangle_ (panel.X + 2, 2, panel.Width - 4, bounds.Height - 4));
 		}
 
 		void UpdateStatusBar ()
@@ -381,7 +381,7 @@ namespace System.Windows.Forms {
 			}
 		}
 
-		private void Draw (Graphics dc, Rectangle clip)
+		private void Draw (Graphics dc, Rectangle_ clip)
 		{
 			ThemeEngine.Current.DrawStatusBar (dc, clip, this);
 			
@@ -409,7 +409,7 @@ namespace System.Windows.Forms {
 				MouseLeftPanel (tooltip_currently_showing);
 		}
 
-		private StatusBarPanel GetPanelAtPoint (Point point)
+		private StatusBarPanel GetPanelAtPoint (Point_ point)
 		{
 			foreach (StatusBarPanel p in Panels)
 				if (point.X >= p.X && point.X <= (p.X + p.Width))

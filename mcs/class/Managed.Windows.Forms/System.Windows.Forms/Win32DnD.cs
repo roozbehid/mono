@@ -25,9 +25,9 @@
 // 
 
 // NOT COMPLETE
-
 using System;
 using System.Collections;
+
 using System.Drawing;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -172,7 +172,7 @@ namespace System.Windows.Forms {
 		static Win32DnD()
 		{
 			// Required for all other OLE functions to work
-			Win32OleInitialize(IntPtr.Zero);
+			////Win32OleInitialize(IntPtr.Zero);
 
 			// We reuse those
 			DragDropEventArgs = new DragEventArgs(new DataObject(DataFormats.FileDrop, new string[0]), 0, 0, 0, DragDropEffects.None, DragDropEffects.None);
@@ -990,7 +990,7 @@ namespace System.Windows.Forms {
 		}
 
 		internal static bool UnregisterDropTarget(IntPtr Window) {
-			Win32RevokeDragDrop(Window);
+			////Win32RevokeDragDrop(Window);
 			return true;
 		}
 

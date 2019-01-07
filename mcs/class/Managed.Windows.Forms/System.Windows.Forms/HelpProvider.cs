@@ -26,10 +26,10 @@
 
 // NOT COMPLETE
 // Still missing: Tie-in to HTML help when the user presses F1 on the control
-
 using System;
 using System.Collections;
 using System.ComponentModel;
+
 using System.Drawing;
 
 namespace System.Windows.Forms {
@@ -252,8 +252,8 @@ namespace System.Windows.Forms {
 
 		// This is called when the user does a "what's this" style lookup. It uses the 'text' property
 		private void HelpRequested(object sender, HelpEventArgs e) {
-			Size	size;
-			Point	pt;
+			Size_	size;
+			Point_	pt;
 			Control	control;
 
 			control = (Control)sender;
@@ -310,7 +310,7 @@ namespace System.Windows.Forms {
 		internal static event ControlEventHandler UIAHelpRequested;
 		internal static event ControlEventHandler UIAHelpUnRequested;
 
-		internal Rectangle UIAToolTipRectangle {
+		internal Rectangle_ UIAToolTipRectangle {
 			get { return tooltip.Bounds; }
 		}
 

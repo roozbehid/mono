@@ -24,8 +24,8 @@
 //	Mike Kestner  <mkestner@novell.com>
 //
 //
-
 using System;
+
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -378,7 +378,7 @@ namespace System.Windows.Forms
 
 		private void InvalidateCheckbox (int index)
 		{
-			Rectangle area = GetItemDisplayRectangle (index, TopIndex);
+			Rectangle_ area = GetItemDisplayRectangle (index, TopIndex);
 			area.X += 2;
 			area.Y += (area.Height - 11) / 2;
 			area.Width = 11;

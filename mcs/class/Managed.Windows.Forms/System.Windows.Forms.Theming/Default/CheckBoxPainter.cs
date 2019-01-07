@@ -21,7 +21,6 @@
 //
 // Authors:
 //	Jonathan Pobst (monkey@jpobst.com)
-
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -39,7 +38,7 @@ namespace System.Windows.Forms.Theming.Default
 
 		protected SystemResPool ResPool { get { return ThemeEngine.Current.ResPool; } }
 
-		public void PaintCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, ElementState state, FlatStyle style, CheckState checkState)
+		public void PaintCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, ElementState state, FlatStyle style, CheckState checkState)
 		{
 			switch (style) {
 				case FlatStyle.Standard:
@@ -95,13 +94,13 @@ namespace System.Windows.Forms.Theming.Default
 		}
 
 		#region Standard
-		public virtual void DrawNormalCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawNormalCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			int check_box_visible_size = (bounds.Height > bounds.Width) ? bounds.Width : bounds.Height;
 			int x_pos = Math.Max (0, bounds.X + (bounds.Width / 2) - check_box_visible_size / 2);
 			int y_pos = Math.Max (0, bounds.Y + (bounds.Height / 2) - check_box_visible_size / 2);
 
-			Rectangle rect = new Rectangle (x_pos, y_pos, check_box_visible_size, check_box_visible_size);
+			Rectangle_ rect = new Rectangle_ (x_pos, y_pos, check_box_visible_size, check_box_visible_size);
 
 			g.FillRectangle (SystemBrushes.ControlLightLight, rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3);
 
@@ -119,33 +118,33 @@ namespace System.Windows.Forms.Theming.Default
 
 			// oh boy, matching ms is like fighting against windmills
 			using (Pen h_pen = new Pen (ResPool.GetHatchBrush (HatchStyle.Percent50,
-									   Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
+									   Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
 											   ColorControl.G, ColorControl.B), ColorControl))) {
 				g.DrawLine (h_pen, rect.X + 1, rect.Bottom - 2, rect.Right - 2, rect.Bottom - 2);
 				g.DrawLine (h_pen, rect.Right - 2, rect.Y + 1, rect.Right - 2, rect.Bottom - 2);
 			}
 			
 			if (state == CheckState.Checked)
-				DrawCheck (g, bounds, Color.Black);
+				DrawCheck (g, bounds, Color_.Black);
 			else if (state == CheckState.Indeterminate)
 				DrawCheck (g, bounds, SystemColors.ControlDark);
 		}
 		
-		public virtual void DrawHotCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawHotCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			DrawNormalCheckBox (g, bounds, backColor, foreColor, state);
 		}
 
-		public virtual void DrawPressedCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawPressedCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			int check_box_visible_size = (bounds.Height > bounds.Width) ? bounds.Width : bounds.Height;
 			int x_pos = Math.Max (0, bounds.X + (bounds.Width / 2) - check_box_visible_size / 2);
 			int y_pos = Math.Max (0, bounds.Y + (bounds.Height / 2) - check_box_visible_size / 2);
 
-			Rectangle rect = new Rectangle (x_pos, y_pos, check_box_visible_size, check_box_visible_size);
+			Rectangle_ rect = new Rectangle_ (x_pos, y_pos, check_box_visible_size, check_box_visible_size);
 
 			g.FillRectangle (ResPool.GetHatchBrush (HatchStyle.Percent50,
-								 Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
+								 Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
 										 ColorControl.G, ColorControl.B),
 								 ColorControl), rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3);
 
@@ -163,19 +162,19 @@ namespace System.Windows.Forms.Theming.Default
 
 			// oh boy, matching ms is like fighting against windmills
 			using (Pen h_pen = new Pen (ResPool.GetHatchBrush (HatchStyle.Percent50,
-									   Color.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
+									   Color_.FromArgb (Clamp (ColorControl.R + 3, 0, 255),
 											   ColorControl.G, ColorControl.B), ColorControl))) {
 				g.DrawLine (h_pen, rect.X + 1, rect.Bottom - 2, rect.Right - 2, rect.Bottom - 2);
 				g.DrawLine (h_pen, rect.Right - 2, rect.Y + 1, rect.Right - 2, rect.Bottom - 2);
 			}
 
 			if (state == CheckState.Checked)
-				DrawCheck (g, bounds, Color.Black);
+				DrawCheck (g, bounds, Color_.Black);
 			else if (state == CheckState.Indeterminate)
 				DrawCheck (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawDisabledCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawDisabledCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			DrawPressedCheckBox (g, bounds, backColor, foreColor, CheckState.Unchecked);
 
@@ -185,15 +184,15 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 
 		#region FlatStyle
-		public virtual void DrawFlatNormalCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawFlatNormalCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
-			Rectangle checkbox_rectangle;
-			Rectangle fill_rectangle;
+			Rectangle_ checkbox_rectangle;
+			Rectangle_ fill_rectangle;
 
 			// set up our rectangles first
 			// clip two pixels from bottom right for non popup rendered checkboxes
-			checkbox_rectangle = new Rectangle (bounds.X, bounds.Y, Math.Max (bounds.Width - 2, 0), Math.Max (bounds.Height - 2, 0));
-			fill_rectangle = new Rectangle (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 2, 0), Math.Max (checkbox_rectangle.Height - 2, 0));
+			checkbox_rectangle = new Rectangle_ (bounds.X, bounds.Y, Math.Max (bounds.Width - 2, 0), Math.Max (bounds.Height - 2, 0));
+			fill_rectangle = new Rectangle_ (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 2, 0), Math.Max (checkbox_rectangle.Height - 2, 0));
 
 			g.FillRectangle (ResPool.GetSolidBrush (ControlPaint.LightLight (backColor)), fill_rectangle);
 			ControlPaint.DrawBorder (g, checkbox_rectangle, foreColor, ButtonBorderStyle.Solid);
@@ -201,20 +200,20 @@ namespace System.Windows.Forms.Theming.Default
 			bounds.Offset (-1, 0);
 			
 			if (state == CheckState.Checked)
-				DrawCheck (g, bounds, Color.Black);
+				DrawCheck (g, bounds, Color_.Black);
 			else if (state == CheckState.Indeterminate)
 				DrawCheck (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawFlatHotCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawFlatHotCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
-			Rectangle checkbox_rectangle;
-			Rectangle fill_rectangle;
+			Rectangle_ checkbox_rectangle;
+			Rectangle_ fill_rectangle;
 
 			// set up our rectangles first
 			// clip two pixels from bottom right for non popup rendered checkboxes
-			checkbox_rectangle = new Rectangle (bounds.X, bounds.Y, Math.Max (bounds.Width - 2, 0), Math.Max (bounds.Height - 2, 0));
-			fill_rectangle = new Rectangle (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 2, 0), Math.Max (checkbox_rectangle.Height - 2, 0));
+			checkbox_rectangle = new Rectangle_ (bounds.X, bounds.Y, Math.Max (bounds.Width - 2, 0), Math.Max (bounds.Height - 2, 0));
+			fill_rectangle = new Rectangle_ (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 2, 0), Math.Max (checkbox_rectangle.Height - 2, 0));
 
 			g.FillRectangle (ResPool.GetSolidBrush (backColor), fill_rectangle);
 			ControlPaint.DrawBorder (g, checkbox_rectangle, foreColor, ButtonBorderStyle.Solid);
@@ -222,21 +221,21 @@ namespace System.Windows.Forms.Theming.Default
 			bounds.Offset (-1, 0);
 
 			if (state == CheckState.Checked)
-				DrawCheck (g, bounds, Color.Black);
+				DrawCheck (g, bounds, Color_.Black);
 			else if (state == CheckState.Indeterminate)
 				DrawCheck (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawFlatPressedCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawFlatPressedCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			DrawFlatNormalCheckBox (g, bounds, backColor, foreColor, state);
 		}
 
-		public virtual void DrawFlatDisabledCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawFlatDisabledCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
-			Rectangle checkbox_rectangle;
+			Rectangle_ checkbox_rectangle;
 
-			checkbox_rectangle = new Rectangle (bounds.X, bounds.Y, Math.Max (bounds.Width - 2, 0), Math.Max (bounds.Height - 2, 0));
+			checkbox_rectangle = new Rectangle_ (bounds.X, bounds.Y, Math.Max (bounds.Width - 2, 0), Math.Max (bounds.Height - 2, 0));
 
 			ControlPaint.DrawBorder (g, checkbox_rectangle, foreColor, ButtonBorderStyle.Solid);
 
@@ -248,19 +247,19 @@ namespace System.Windows.Forms.Theming.Default
 		#endregion
 
 		#region Popup
-		public virtual void DrawPopupNormalCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawPopupNormalCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			DrawFlatNormalCheckBox (g, bounds, backColor, foreColor, state);
 		}
 
-		public virtual void DrawPopupHotCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawPopupHotCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
-			Rectangle checkbox_rectangle;
-			Rectangle fill_rectangle;
+			Rectangle_ checkbox_rectangle;
+			Rectangle_ fill_rectangle;
 
 			// clip one pixel from bottom right for non popup rendered checkboxes
-			checkbox_rectangle = new Rectangle (bounds.X, bounds.Y, Math.Max (bounds.Width - 1, 0), Math.Max (bounds.Height - 1, 0));
-			fill_rectangle = new Rectangle (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 3, 0), Math.Max (checkbox_rectangle.Height - 3, 0));
+			checkbox_rectangle = new Rectangle_ (bounds.X, bounds.Y, Math.Max (bounds.Width - 1, 0), Math.Max (bounds.Height - 1, 0));
+			fill_rectangle = new Rectangle_ (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 3, 0), Math.Max (checkbox_rectangle.Height - 3, 0));
 
 			g.FillRectangle (ResPool.GetSolidBrush (ControlPaint.LightLight (backColor)), fill_rectangle);
 			
@@ -270,19 +269,19 @@ namespace System.Windows.Forms.Theming.Default
 			bounds.Offset (-1, 0);
 			
 			if (state == CheckState.Checked)
-				DrawCheck (g, bounds, Color.Black);
+				DrawCheck (g, bounds, Color_.Black);
 			else if (state == CheckState.Indeterminate)
 				DrawCheck (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawPopupPressedCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawPopupPressedCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
-			Rectangle checkbox_rectangle;
-			Rectangle fill_rectangle;
+			Rectangle_ checkbox_rectangle;
+			Rectangle_ fill_rectangle;
 
 			// clip one pixel from bottom right for non popup rendered checkboxes
-			checkbox_rectangle = new Rectangle (bounds.X, bounds.Y, Math.Max (bounds.Width - 1, 0), Math.Max (bounds.Height - 1, 0));
-			fill_rectangle = new Rectangle (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 3, 0), Math.Max (checkbox_rectangle.Height - 3, 0));
+			checkbox_rectangle = new Rectangle_ (bounds.X, bounds.Y, Math.Max (bounds.Width - 1, 0), Math.Max (bounds.Height - 1, 0));
+			fill_rectangle = new Rectangle_ (checkbox_rectangle.X + 1, checkbox_rectangle.Y + 1, Math.Max (checkbox_rectangle.Width - 3, 0), Math.Max (checkbox_rectangle.Height - 3, 0));
 
 			g.FillRectangle (ResPool.GetSolidBrush (backColor), fill_rectangle);
 
@@ -292,19 +291,19 @@ namespace System.Windows.Forms.Theming.Default
 			bounds.Offset (-1, 0);
 
 			if (state == CheckState.Checked)
-				DrawCheck (g, bounds, Color.Black);
+				DrawCheck (g, bounds, Color_.Black);
 			else if (state == CheckState.Indeterminate)
 				DrawCheck (g, bounds, SystemColors.ControlDarkDark);
 		}
 
-		public virtual void DrawPopupDisabledCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
+		public virtual void DrawPopupDisabledCheckBox (Graphics g, Rectangle_ bounds, Color_ backColor, Color_ foreColor, CheckState state)
 		{
 			DrawFlatDisabledCheckBox (g, bounds, backColor, foreColor, state);
 		}
 		#endregion
 
 		#region Check
-		public virtual void DrawCheck (Graphics g, Rectangle bounds, Color checkColor)
+		public virtual void DrawCheck (Graphics g, Rectangle_ bounds, Color_ checkColor)
 		{
 			int check_size = (bounds.Height > bounds.Width) ? bounds.Width / 2 : bounds.Height / 2;
 
@@ -314,7 +313,7 @@ namespace System.Windows.Forms.Theming.Default
 				int lineWidth = Math.Max (3, check_size / 3);
 				int Scale = Math.Max (1, check_size / 9);
 
-				Rectangle rect = new Rectangle (bounds.X + (bounds.Width / 2) - (check_size / 2) - 1, bounds.Y + (bounds.Height / 2) - (check_size / 2) - 1,
+				Rectangle_ rect = new Rectangle_ (bounds.X + (bounds.Width / 2) - (check_size / 2) - 1, bounds.Y + (bounds.Height / 2) - (check_size / 2) - 1,
 								check_size, check_size);
 
 				for (int i = 0; i < lineWidth; i++) {
@@ -327,7 +326,7 @@ namespace System.Windows.Forms.Theming.Default
 				int x_half = bounds.Width / 2;
 				int y_half = bounds.Height / 2;
 
-				Rectangle rect = new Rectangle (bounds.X + x_half - (check_size / 2) - 1, bounds.Y + y_half - (check_size / 2),
+				Rectangle_ rect = new Rectangle_ (bounds.X + x_half - (check_size / 2) - 1, bounds.Y + y_half - (check_size / 2),
 								check_size, check_size);
 
 				int gradient_left = check_size / 3;
@@ -349,7 +348,7 @@ namespace System.Windows.Forms.Theming.Default
 			else return value;
 		}
 
-		private Color ColorControl {
+		private Color_ ColorControl {
 			get { return SystemColors.Control; }
 		}
 		#endregion

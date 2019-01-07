@@ -25,10 +25,10 @@
 //
 
 // NOT COMPLETE
-
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+
 using System.Drawing;
 using System.Drawing.Text;
 
@@ -66,7 +66,7 @@ namespace System.Windows.Forms
 		private bool menubar;
 		private MenuMerge mergetype;
 		// UIA Framework Note: Used to obtain item bounds
-		internal Rectangle bounds;
+		internal Rectangle_ bounds;
 		
 		public MenuItem (): base (null)
 		{	

@@ -22,8 +22,8 @@
 // Authors:
 //	Andreas Nahr	(ClassDevelopment@A-SoftTech.com)
 //
-
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Runtime.InteropServices;
 

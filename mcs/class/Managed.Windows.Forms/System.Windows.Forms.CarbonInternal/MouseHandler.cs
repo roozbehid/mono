@@ -57,7 +57,7 @@ namespace System.Windows.Forms.CarbonInternal {
 
 		public bool ProcessEvent (IntPtr callref, IntPtr eventref, IntPtr handle, uint kind, ref MSG msg) {
 			QDPoint qdpoint = new QDPoint ();
-			CGPoint point = new CGPoint ();
+			CGPoint Point = new CGPoint ();
 			Rect window_bounds = new Rect ();
 			IntPtr view_handle = IntPtr.Zero;
 			IntPtr window_handle = IntPtr.Zero;
@@ -71,8 +71,8 @@ namespace System.Windows.Forms.CarbonInternal {
 			if (button == 1 && ((Driver.ModifierKeys & Keys.Control) != 0))
 				button = 2;
 
-			point.x = qdpoint.x;
-			point.y = qdpoint.y;
+            Point.x = qdpoint.x;
+            Point.y = qdpoint.y;
 
 			if (FindWindow (qdpoint, ref window_handle) == 5)
 				return true;
@@ -80,11 +80,11 @@ namespace System.Windows.Forms.CarbonInternal {
 			GetWindowBounds (handle, 33, ref window_bounds);
 			HIViewFindByID (HIViewGetRoot (handle), new HIViewID (EventHandler.kEventClassWindow, 1), ref window_handle);
 
-			point.x -= window_bounds.left;
-			point.y -= window_bounds.top;
+            Point.x -= window_bounds.left;
+            Point.y -= window_bounds.top;
 
-			HIViewGetSubviewHit (window_handle, ref point, true, ref view_handle);
-			HIViewConvertPoint (ref point, window_handle, view_handle);
+			HIViewGetSubviewHit (window_handle, ref Point, true, ref view_handle);
+			HIViewConvertPoint (ref Point, window_handle, view_handle);
 
 			hwnd = Hwnd.ObjectFromHandle (view_handle);
 
@@ -99,17 +99,17 @@ namespace System.Windows.Forms.CarbonInternal {
 				return true;
 			
 			if (client) {
-				qdpoint.x = (short) point.x;
-				qdpoint.y = (short) point.y;
+				qdpoint.x = (short)Point.x;
+				qdpoint.y = (short)Point.y;
 
 				Driver.ScreenToClient (hwnd.Handle, ref qdpoint);
 			} else {
-				point.x = qdpoint.x;
-				point.y = qdpoint.y;
+                Point.x = qdpoint.x;
+                Point.y = qdpoint.y;
 			}
 
 			msg.hwnd = hwnd.Handle;
-			msg.lParam = (IntPtr) ((ushort) point.y << 16 | (ushort) point.x);
+			msg.lParam = (IntPtr) ((ushort)Point.y << 16 | (ushort)Point.x);
 
 			switch (kind) {
 				case kEventMouseDown:
@@ -139,10 +139,10 @@ namespace System.Windows.Forms.CarbonInternal {
 						IntPtr ht = IntPtr.Zero;
 						if (client) {
 							ht = (IntPtr) HitTest.HTCLIENT;
-							NativeWindow.WndProc(msg.hwnd, Msg.WM_SETCURSOR, msg.hwnd, (IntPtr)HitTest.HTCLIENT);
+							NativeWindow.WndProc((Int32)msg.hwnd, Msg.WM_SETCURSOR, (Int32)msg.hwnd, (Int32)HitTest.HTCLIENT);
 						} else {
-	                                                ht = (IntPtr) NativeWindow.WndProc (hwnd.client_window, Msg.WM_NCHITTEST, IntPtr.Zero, msg.lParam).ToInt32 ();
-							NativeWindow.WndProc(hwnd.client_window, Msg.WM_SETCURSOR, msg.hwnd, ht);
+                            ht = (IntPtr)NativeWindow.WndProc((Int32)hwnd.client_window, Msg.WM_NCHITTEST, 0, (Int32)msg.lParam);
+							NativeWindow.WndProc((Int32)hwnd.client_window, Msg.WM_SETCURSOR, (Int32)msg.hwnd, (Int32)ht);
 						}
 					}
 					msg.message = (client ? Msg.WM_MOUSEMOVE : Msg.WM_NCMOUSEMOVE);
@@ -166,8 +166,8 @@ namespace System.Windows.Forms.CarbonInternal {
 				default:
 					return false;
 			}
-			Driver.mouse_position.X = (int) point.x;
-			Driver.mouse_position.Y = (int) point.y;
+			Driver.mouse_position.X = (int)Point.x;
+			Driver.mouse_position.Y = (int)Point.y;
 			return true;
 		}
 		

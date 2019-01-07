@@ -32,14 +32,14 @@ namespace System.Windows.Forms
 {
 	public class ToolStripArrowRenderEventArgs : EventArgs
 	{
-		private Color arrow_color;
-		private Rectangle arrow_rectangle;
+		private Color_ arrow_color;
+		private Rectangle_ arrow_rectangle;
 		private ArrowDirection arrow_direction;
 		private Graphics graphics;
 		private ToolStripItem tool_strip_item;
 
 		#region Public Constructors
-		public ToolStripArrowRenderEventArgs (Graphics g, ToolStripItem toolStripItem, Rectangle arrowRectangle, Color arrowColor, ArrowDirection arrowDirection)
+		public ToolStripArrowRenderEventArgs (Graphics g, ToolStripItem toolStripItem, Rectangle_ arrowRectangle, Color_ arrowColor, ArrowDirection arrowDirection)
 			: base ()
 		{
 			this.graphics = g;
@@ -51,12 +51,12 @@ namespace System.Windows.Forms
 		#endregion	// Public Constructors
 
 		#region Public Instance Properties
-		public Color ArrowColor {
+		public Color_ ArrowColor {
 			get { return this.arrow_color; }
 			set { this.arrow_color = value; }
 		}
 
-		public Rectangle ArrowRectangle {
+		public Rectangle_ ArrowRectangle {
 			get { return this.arrow_rectangle; }
 			set { this.arrow_rectangle = value; }
 		}

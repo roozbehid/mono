@@ -23,8 +23,8 @@
 //	Jordi Mas i Hernandez <jordi@ximian.com>
 //
 //
-
 using System.ComponentModel;
+
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -123,7 +123,7 @@ namespace System.Windows.Forms
 		
 		protected internal override bool Commit (CurrencyManager dataSource, int rowNum)
 		{
-			textbox.Bounds = Rectangle.Empty;
+			textbox.Bounds = Rectangle_.Empty;
 
 			/* Do not write data if not editing. */
 			if (textbox.IsInEditOrNavigateMode)
@@ -164,7 +164,7 @@ namespace System.Windows.Forms
 			HideEditBox ();
 		}
 
-		protected internal override void Edit (CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string displayText, bool cellIsVisible)
+		protected internal override void Edit (CurrencyManager source, int rowNum, Rectangle_ bounds, bool readOnly, string displayText, bool cellIsVisible)
 		{
 			string instantText = displayText;
 			grid.SuspendLayout ();
@@ -187,8 +187,8 @@ namespace System.Windows.Forms
 			textbox.TextChanged += new EventHandler (textbox_TextChanged);
 
 			textbox.ReadOnly = ro;
-			textbox.Bounds = new Rectangle (new Point (bounds.X + offset_x, bounds.Y + offset_y),
-							new Size (bounds.Width - offset_x - 1, bounds.Height - offset_y - 1));
+			textbox.Bounds = new Rectangle_ (new Point_ (bounds.X + offset_x, bounds.Y + offset_y),
+							new Size_ (bounds.Width - offset_x - 1, bounds.Height - offset_y - 1));
 
 			textbox.Visible = cellIsVisible;
 			textbox.SelectAll ();
@@ -227,10 +227,10 @@ namespace System.Windows.Forms
 			return this.DataGridTableStyle.DataGrid.Font.Height * (lines+1) + 1;
 		}
 
-		protected internal override Size GetPreferredSize (Graphics g, object value)
+		protected internal override Size_ GetPreferredSize (Graphics g, object value)
 		{
 			string text = GetFormattedValue (value);
-			Size s = Size.Ceiling (g.MeasureString (text, this.DataGridTableStyle.DataGrid.Font));
+			Size_ s = Size_.Ceiling (g.MeasureString (text, this.DataGridTableStyle.DataGrid.Font));
 			s.Width += 4;
 			return s;
 		}
@@ -241,35 +241,35 @@ namespace System.Windows.Forms
 				return;
 
 			grid.SuspendLayout ();
-			textbox.Bounds = Rectangle.Empty;
+			textbox.Bounds = Rectangle_.Empty;
 			textbox.Visible = false;
 			textbox.IsInEditOrNavigateMode = true;
 			grid.ResumeLayout (false);
 		}
 
-		protected internal override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum)
+		protected internal override void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum)
 		{
 			Paint (g, bounds, source, rowNum, false);
 		}
 
-		protected internal override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, bool alignToRight)
+		protected internal override void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum, bool alignToRight)
 		{
 			Paint (g, bounds, source, rowNum, ThemeEngine.Current.ResPool.GetSolidBrush (DataGridTableStyle.BackColor),
 				ThemeEngine.Current.ResPool.GetSolidBrush (DataGridTableStyle.ForeColor), alignToRight);
 		}
 
-		protected internal override void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, Brush backBrush, Brush foreBrush, bool alignToRight)
+		protected internal override void Paint (Graphics g, Rectangle_ bounds, CurrencyManager source, int rowNum, Brush backBrush, Brush foreBrush, bool alignToRight)
 		{
 			PaintText (g, bounds, GetFormattedValue (source, rowNum),  backBrush, foreBrush, alignToRight);
 		}
 
-		protected void PaintText (Graphics g, Rectangle bounds, string text, bool alignToRight)
+		protected void PaintText (Graphics g, Rectangle_ bounds, string text, bool alignToRight)
 		{
 			PaintText (g, bounds, text,  ThemeEngine.Current.ResPool.GetSolidBrush (DataGridTableStyle.BackColor),
 				ThemeEngine.Current.ResPool.GetSolidBrush (DataGridTableStyle.ForeColor), alignToRight);
 		}
 
-		protected void PaintText (Graphics g, Rectangle textBounds, string text, Brush backBrush, Brush foreBrush, bool alignToRight)
+		protected void PaintText (Graphics g, Rectangle_ textBounds, string text, Brush backBrush, Brush foreBrush, bool alignToRight)
 		{
 			if (alignToRight == true) {
 				string_format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
@@ -310,7 +310,7 @@ namespace System.Windows.Forms
 
 			grid.SuspendLayout ();
 			grid.Controls.Remove (textbox);
-			grid.Invalidate (new Rectangle (textbox.Location, textbox.Size));
+			grid.Invalidate (new Rectangle_ (textbox.Location, textbox.Size));
 			textbox.Dispose ();
 			textbox = null;
 			grid.ResumeLayout (false);
